@@ -292,13 +292,7 @@
                             <div class="biografia col-md-7">
                                 <div class="row">
 
-                                    <div class="col-md-6 mt-2">
 
-                                        <label style="font-weight: bold">{{ __('biografia') }}:</label>
-                                        <div class="m-scrollable" data-scrollable="true" style="">
-                                            <p style="text-align: justify">{{ $artist->artists[0]->biography }}</p>
-                                        </div>
-                                    </div>
                                     <div class="col-md-6 mt-2">
                                         <label style="font-weight: bold">Identificación:</label>
                                         <div class="m-scrollable" data-scrollable="true" style="">
@@ -349,6 +343,14 @@
                                             <p>{{ $artist->artists[0]->users->phone_1}}</p>
                                         </div>
                                     </div>
+                                    @if($artist->artists[0]->users->phone_2)
+                                        <div class="col-md-6 mt-2">
+                                            <label style="font-weight: bold">Otro teléfono:</label>
+                                            <div class="m-scrollable" data-scrollable="true" style="">
+                                                <p>{{$artist->artists[0]->users->phone_2 }}</p>
+                                            </div>
+                                        </div>
+                                    @endif
                                     <div class="col-md-6 mt-2">
                                         <label style="font-weight: bold">Linea de convocatoria:</label>
                                         <div class="m-scrollable" data-scrollable="true" style="">
@@ -361,13 +363,7 @@
                                             <p>{{ $artist->artists[0]->artistType->name}}</p>
                                         </div>
                                     </div>
-                                    <div class="col-md-6 mt-2">
-                                        <label style="font-weight: bold">Documento de identificación:</label>
-                                        <button type="button" class="btn btn-primary" data-toggle="modal"
-                                                data-target="#verpdfidentificacion">
-                                            Ver documento de identidad
-                                        </button>
-                                    </div>
+
                                     <div class="col-md-6 mt-2">
                                         <label style="font-weight: bold">Departamento de Expedición:</label>
                                         <div class="m-scrollable" data-scrollable="true" style="">
@@ -375,7 +371,7 @@
                                         </div>
 
                                     </div>
-                                    <div class="col-md-6 mt-3">
+                                    <div class="col-md-6 mt-2">
                                         <label style="font-weight: bold">Ciudad de Expedición:</label>
                                         <div class="m-scrollable" data-scrollable="true" style="">
                                             <p>{{$artist->artists[0]->expeditionPlace->descripcion}}</p>
@@ -383,16 +379,24 @@
 
                                     </div>
 
-                                    @if($artist->artists[0]->users->phone_2)
-                                        <div class="col-md-6 mt-2">
-                                            <label style="font-weight: bold">Otro teléfono:</label>
-                                            <div class="m-scrollable" data-scrollable="true" style="">
-                                                <p>{{$artist->artists[0]->users->phone_2 }}</p>
-                                            </div>
+
+
+                                    <div class="col-md-6 mt-2">
+                                        <label style="font-weight: bold">Documento de identificación:</label>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                data-target="#verpdfidentificacion">
+                                            Ver documento de identidad
+                                        </button>
+                                    </div>
+
+
+                                    <div class="col-md-12 mt-2">
+
+                                        <label style="font-weight: bold">{{ __('biografia') }}:</label>
+                                        <div class="m-scrollable" data-scrollable="true" style="">
+                                            <p style="text-align: justify">{{ $artist->artists[0]->biography }}</p>
                                         </div>
-                                    @endif
-
-
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -490,31 +494,11 @@
                                                 <p>{{ $artist->artists[0]->beneficiary[0]->phone}}</p>
                                             </div>
                                         </div>
-                                        <div class="col-md-4 mt-2">
 
-                                            <label style="font-weight: bold">{{ __('biografia') }}:</label>
-                                            <div class="m-scrollable" data-scrollable="true" style="">
-                                                <p style="text-align: justify">{{ $artist->artists[0]->beneficiary[0]->biography}}</p>
-                                            </div>
-                                        </div>
 
-                                        @if ($artist->artists[0]->beneficiary[0]->picture)
 
-                                        <div class="col-md-4 mt-2">
-                                            <div class="m-scrollable" data-scrollable="true" style="">
-                                                <img style="border-radius:8rem; width:7rem" src="{{$artist->artists[0]->beneficiary[0]->picture}}" >
-                                            </div>
 
-                                        </div>
-                                        @endif
 
-                                        <div class="col-md-4 mt-2">
-                                            <label style="font-weight: bold">Documento de identificación:</label>
-                                            <button type="button" class="btn btn-primary" data-toggle="modal"
-                                                    data-target="#pdfidentificacionBeneficiario">
-                                                Ver documento de identidad
-                                            </button>
-                                        </div>
 
                                         <div class="col-md-4 mt-2">
 
@@ -528,6 +512,30 @@
                                             <label style="font-weight: bold">{{ __('Ciudad de expedición') }}:</label>
                                             <div class="m-scrollable" data-scrollable="true" style="">
                                                 <p style="text-align: justify">{{ $artist->artists[0]->beneficiary[0]->expeditionPlace->descripcion}}</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 mt-2">
+                                            <label style="font-weight: bold">Documento de identificación:</label>
+                                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                    data-target="#pdfidentificacionBeneficiario">
+                                                Ver documento de identidad
+                                            </button>
+                                        </div>
+                                        @if ($artist->artists[0]->beneficiary[0]->picture)
+
+                                        <div class="col-md-4 mt-2">
+                                            <div class="m-scrollable" data-scrollable="true" style="">
+                                                <img style="border-radius:8rem; width:7rem" src="{{$artist->artists[0]->beneficiary[0]->picture}}" >
+                                            </div>
+
+                                        </div>
+                                        @endif
+                                        <div class="col-md-12 mt-2">
+
+                                            <label style="font-weight: bold">{{ __('biografia') }}:</label>
+                                            <div class="m-scrollable" data-scrollable="true" style="">
+                                                <p style="text-align: justify">{{ $artist->artists[0]->beneficiary[0]->biography}}</p>
                                             </div>
                                         </div>
 
@@ -684,15 +692,6 @@
                                                         </div>
 
                                                         <div class="col-md-4 mt-2">
-                                                            <label style="font-weight: bold">Documento de
-                                                                identificación:</label>
-                                                            <button type="button" class="btn btn-primary"
-                                                                    data-toggle="modal"
-                                                                    data-target="#pdfidentificacion{{$loop->iteration}}">
-                                                                Ver documento de identidad
-                                                            </button>
-                                                        </div>
-                                                        <div class="col-md-4 mt-2">
                                                             <label style="font-weight: bold">Departamento de
                                                                 expedición:</label>
                                                             <div class="m-scrollable" data-scrollable="true" style="">
@@ -707,6 +706,15 @@
                                                                 <p>{{ $team->expeditionPlace->descripcion}}</p>
                                                             </div>
 
+                                                        </div>
+                                                        <div class="col-md-4 mt-2">
+                                                            <label style="font-weight: bold">Documento de
+                                                                identificación:</label>
+                                                            <button type="button" class="btn btn-primary"
+                                                                    data-toggle="modal"
+                                                                    data-target="#pdfidentificacion{{$loop->iteration}}">
+                                                                Ver documento de identidad
+                                                            </button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1030,7 +1038,7 @@
                     "hideMethod": "fadeOut"
                 };
 
-              toastr.info("El audio se actualizo correctamente", "Información");
+              toastr.success("El audio se actualizo correctamente", "Información");
               window.location.reload();
             },
             error: function (file, e, i, o, u) {

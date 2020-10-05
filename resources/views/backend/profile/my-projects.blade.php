@@ -43,7 +43,7 @@
             </div>
             <div class="col-xl-9 col-lg-8">
                 <div class="m-portlet m-portlet--full-height ">
-                    <div class="m-portlet__head">
+                    {{-- <div class="m-portlet__head">
                         <div class="m-portlet__head-caption">
                             <div class="m-portlet__head-title">
                                 <h3 class="m-portlet__head-text">
@@ -81,7 +81,7 @@
                             </ul>
                         </div>
                         @include('backend.profile.partials.actions-perfil')
-                    </div>
+                    </div> --}}
                     <div class="m-portlet__body">
 
                         <!--begin::Content-->
@@ -113,7 +113,7 @@
                                         @endif
                                         <div class="m-widget5__item">
                                             <div class="m-widget5__content">
-                                                <div class="m-widget5__pic">
+                                                {{-- <div class="m-widget5__pic">
                                                     @if(Storage::disk('public')->exists('projects/'.$projects->project_picture))
                                                         <img src="{{ auth()->user()->pathAttachment() }}" alt=""/>
                                                     @else
@@ -121,7 +121,7 @@
                                                              alt="">
                                                     @endif
 
-                                                </div>
+                                                </div> --}}
                                                 <div class="m-widget5__section">
                                                     <h4 class="m-widget5__title">
                                                         {{ str_limit($projects->title,55) }}

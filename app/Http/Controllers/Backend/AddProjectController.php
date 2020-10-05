@@ -53,34 +53,38 @@ class AddProjectController extends Controller
        Storage::disk('s3')->setVisibility($image,'public');
        $urlS3 = Storage::disk('s3')->url($image);
 
-       dd($urlS3);
+    //    dd($urlS3);
 
         /* $url_go_input = Storage::url($image);
         $url = str_ireplace($request->root(),'',$url_go_input); */
 
-        return '/storage/' . $image;
+        return $urlS3;
     }
     public function audio_one(Request $request)
     {
 
-        $image = $request->file('image')->store('audio');
+        $image = $request->file('image')->store('audio_one','s3');
+        Storage::disk('s3')->setVisibility($image,'public');
+       $urlS3 = Storage::disk('s3')->url($image);
         /*$image = Storage::disk('s3')->put('audio', $request->file('image'));*/
 
         /* $url_go_input = Storage::url($image);
         $url = str_ireplace($request->root(),'',$url_go_input); */
 
-        return '/storage/' . $image;
+        return $urlS3;
     }
     public function audio_two(Request $request)
     {
 
-        $image = $request->file('image')->store('audio');
+        $image = $request->file('image')->store('audio_two','s3');
+        Storage::disk('s3')->setVisibility($image,'public');
+        $urlS3 = Storage::disk('s3')->url($image);
         /*$image = Storage::disk('s3')->put('audio', $request->file('image'));*/
 
         /* $url_go_input = Storage::url($image);
         $url = str_ireplace($request->root(),'',$url_go_input); */
 
-        return '/storage/' . $image;
+        return $urlS3;
     }
 
     public function store(Request $request)
