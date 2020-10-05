@@ -50,7 +50,10 @@ class AddProjectController extends Controller
     {
         /*$image = $request->file('image')->store('audio');*/
        $image = $request->file('image')->store('audio', 's3');
-       dd($image);
+       Storage::disk('s3')->setVisibility($image,'public');
+       $urlS3 = Storage::disk('s3')->url($image);
+
+       dd($urlS3);
 
         /* $url_go_input = Storage::url($image);
         $url = str_ireplace($request->root(),'',$url_go_input); */

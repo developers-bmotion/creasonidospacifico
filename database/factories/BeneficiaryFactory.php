@@ -15,7 +15,7 @@ $factory->define(App\Beneficiary::class, function (Faker $faker) {
         'phone' => '312 312312312',
         'adress' => $faker->address,
         'biography' => $faker->text,
-        'picture' => \Faker\Provider\Image::image(storage_path() . '/app/public/users', 200, 200, 'people', false),
+        'picture' => \Faker\Provider\Image::image(storage_path() . '/app/public/beneficiary', 200, 200, 'people', false),
         'birthday' => $faker->date($format = 'Y-m-d', $max = 'now'),
         'cities_id' => \App\City::all()->random()->id,
         'township' => $faker->city,
