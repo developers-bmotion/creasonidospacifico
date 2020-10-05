@@ -1,0 +1,11 @@
+.yellow-rating {
+    color: #FFAE3C;
+}
+
+.select2-container--default {
+    width: 100% !important;
+}
+
+.m-wizard.m-wizard--2 .m-wizard__head .m-wizard__nav .m-wizard__steps .m-wizard__step .m-wizard__step-info .m-wizard__step-title {
+    font-size: 1.2rem;
+}

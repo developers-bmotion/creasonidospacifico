@@ -1,0 +1,12 @@
+.ultimos__proyectos--text,
+#contenedorProyectos.empty #char_ultimos_proyectos,
+.top__country--text,
+#contenedorTopCountry.empty #char_top_country{
+    display: none;
+}
+
+#contenedorProyectos.empty .ultimos__proyectos--text,
+#contenedorTopCountry.empty .top__country--text{
+    display: block;
+    font-weight: bold;
+}
