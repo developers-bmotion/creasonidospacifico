@@ -1,3 +1,4 @@
+/*
 function  guardarDatos(){
     console.log('hola bebe');
     var data = {
@@ -8,6 +9,7 @@ function  guardarDatos(){
 
     localStorage.setItem('datos', JSON.stringify(data));
 }
+*/
 
 
 
