@@ -136,6 +136,8 @@ Route::group(['namespace'=>'Backend','prefix' => 'dashboard','middleware' => 'au
        NUEVAS RUTAS PARA EL REGISTRO
     =============================================*/
     Route::get('/form-register','ProfileController@index')->name('form.register');
+    Route::post('/upload-image-document','ProfileController@uploadImageDocument')->name('upload.image.document');
+    Route::post('/upload-pdf-document','ProfileController@uploadPDFDocument')->name('upload.pdf.document');
 
     //RUTAS PARA EL PERFIL
     //Perfil Artista

@@ -70,7 +70,7 @@
         <li class="m-nav__item" {!! request()->is('dashboard/my-projects') ? 'style="background-color:#f2f4f9"' : ''
             !!}>
             <a href="{{ route('myprojects.artist') }}" class="m-nav__link">
-                <i class="m-nav__link-icon flaticon-share" {!! request()->is('dashboard/my-projects') ?
+                <i class="m-nav__link-icon flaticon-music" {!! request()->is('dashboard/my-projects') ?
                     'style="color:#716aca !important"' : '' !!}></i>
                 <span class="m-nav__link-text" {!! request()->is('dashboard/my-projects') ? 'style="color:#716aca
                     !important"' : '' !!}>{{ __('Mi propuesta musical') }}</span>
