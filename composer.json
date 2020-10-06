@@ -20,6 +20,7 @@
         "league/flysystem-aws-s3-v3": "^1.0",
         "nesbot/carbon": "^2.40",
         "overtrue/laravel-socialite": "~2.0",
+        "silviolleite/laravelpwa": "^2.0",
         "uxweb/sweet-alert": "^2.0",
         "yajra/laravel-datatables-oracle": "~9.0"
     },

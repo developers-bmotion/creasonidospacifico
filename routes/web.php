@@ -33,6 +33,10 @@ Route::get('/represtante-menor-edad/{id}', function($id){
     return $artist;
 });
 
+Route::get('/offline', function (){
+    return view('vendor.laravelpwa.offline');
+});
+
     // Artisan::call('projects:close');
     // dd(\App\Category::where('typeCategory_id', $id_category)->get());
 
