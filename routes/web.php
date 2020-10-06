@@ -37,6 +37,10 @@ Route::get('/offline', function (){
     return view('vendor.laravelpwa.offline');
 });
 
+Route::get('/prueba-offline', function (){
+   return view('pruebaoffline');
+});
+
     // Artisan::call('projects:close');
     // dd(\App\Category::where('typeCategory_id', $id_category)->get());
 

@@ -193,7 +193,7 @@ License: You must have a valid license purchased only from themeforest(the above
         </div>
         <div class="m-grid__item m-grid__item--fluid m-wrapper">
 
-            <div class="m-subheader ">
+            <div class="m-subheader">
                 @if($errors->any())
 
                     <ul class="list-group">
