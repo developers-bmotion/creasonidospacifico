@@ -1,3 +1,4 @@
+{{--
 @extends('backend.layout')
 
 @section('header')
@@ -65,3 +66,4 @@
 @push('js')
     <script src="/backend/assets/js/pwa-local-storage.js"></script>
 @endpush
+--}}
