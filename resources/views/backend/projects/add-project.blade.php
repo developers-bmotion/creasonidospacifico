@@ -365,16 +365,22 @@
                 text: "{{ __('¿ Esta seguro de guardar los datos ?') }}",
                 icon: "success",
 
+
+                cancelButtonText: "<span>{{ __('cancelar') }}</span>",
+                cancelButtonClass: "btn btn-danger m-btn m-btn--pill m-btn--icon",
                 confirmButtonText: "<span>{{ __('Aceptar') }}</span>",
-                confirmButtonClass: "btn btn-danger m-btn m-btn--pill m-btn--air m-btn--icon",
+                confirmButtonClass: "btn btn-success m-btn m-btn--pill m-btn--air m-btn--icon",
+
+
 
                 showCancelButton: true,
-                cancelButtonText: "<span>{{ __('cancelar') }}</span>",
-                cancelButtonClass: "btn btn-secondary m-btn m-btn--pill m-btn--icon"
+
+
+
             }).then(function (result) {
-                // if (result.value) {
+                if (result.value) {
                     $('#form_add_project').submit();
-                // }
+                }
             })
         });
     </script>
