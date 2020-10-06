@@ -198,6 +198,16 @@ License: You must have a valid license purchased only from themeforest(the above
                                         @endif
                                     </div>
 
+                                    <div class="pt-5">
+                                        {!! NoCaptcha::display() !!}
+                                    </div>
+
+                                    @error ('g-recaptcha-response')
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
+                                    </span>
+                                    @enderror
+
                                     <p class="text-justify pt-3 pb-3">Confirma que tu dirección de correo eléctronico es
                                         correcta, por que a esta dirección enviaremos información de tu registro.</p>
 

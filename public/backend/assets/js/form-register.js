@@ -87,6 +87,27 @@ function onSelectMunicipiosChange(element) {
     validateFormSelect(arrayTags[0], nameTag); // realizar validacion
 }
 
+/* evento click para los radio button de subir docuemntos */
+$("input[name='aspirante[identificacionDoc]']").click( () => {
+    if ($('input:radio[name="aspirante[identificacionDoc]"]:checked').val() === '1') {
+        $("#image-docuemnt-aspirante").show(); 
+        $("#pdf-docuemnt-aspirante").hide(); 
+    } else {
+        $("#image-docuemnt-aspirante").hide(); 
+        $("#pdf-docuemnt-aspirante").show(); 
+    }
+});
+
+$("input[name='beneficiario[identificacionDoc]']").click( () => {
+    if ($('input:radio[name="beneficiario[identificacionDoc]"]:checked').val() === '1') {
+        $("#image-docuemnt-beneficiario").show(); 
+        $("#pdf-docuemnt-beneficiario").hide(); 
+    } else {
+        $("#image-docuemnt-beneficiario").hide(); 
+        $("#pdf-docuemnt-beneficiario").show(); 
+    }
+});
+
 
 /*  funciones para agragar un nuevo integrante  */
 var currentMembers = 0;
@@ -362,7 +383,11 @@ function validationForm() {
     }
     
     console.log('antes::: ', validate)    
-    if (validateTermsCondition() && validate) validate = true;
+    if (validateTermsCondition() && validate) {
+        validate = true
+    } else {
+        validate = false;
+    }
     console.log('despues::: ', validate)
 
     //return validate;

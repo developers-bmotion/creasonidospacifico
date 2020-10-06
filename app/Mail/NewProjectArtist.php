@@ -35,7 +35,7 @@ class NewProjectArtist extends Mailable
     public function build()
     {
         return $this
-            ->subject(__('Un nuevo proyecto ha sido registrado'))
+            ->subject(__('Tu propuesta musical ha sido registrada'))
             ->markdown('emails.new-project-artist')
             ->with('project',$this->project)
             ->with('artist',$this->artist_name);
