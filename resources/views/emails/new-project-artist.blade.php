@@ -1,13 +1,14 @@
 @component('mail::message')
-# {{ __("¡Nuevo proyecto ha sido registrado!") }}
+# {{ __("¡Tu proyecto ha sido registrado!") }}
 
-{{ __("El artista :artist ha enviado una nueva canción: ", ['artist' => $artist]) }}
+{{ __("Sr/Sra :artist tu propuesta musical con la canción ", ['artist' => $artist]) }}
 ## {{ __(":project ", ['artist' => $artist, 'project' => $project->title]) }}
+{{ __('ha sido registrada.') }}
 
-@component('mail::button', ['url' => route('show.backend.project', $project->slug)])
+{{--@component('mail::button', ['url' => route('show.backend.project', $project->slug)])
  {{ __('Ir a la canción') }}
-@endcomponent
+@endcomponent--}}
 
-{{ __('Gracias') }},<br>
+{{ __('Pronto nos pondremos en contacto con usted. Gracias') }},<br>
 {{ config('app.name') }}
 @endcomponent
