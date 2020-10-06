@@ -425,6 +425,27 @@
 
                                 <div class="biografia col-md-12">
                                     <div class="row">
+                                        @if ($artist->artists[0]->beneficiary[0]->picture)
+
+                                        <div class="col-md-4 mb-5" >
+                                            <div class="m-scrollable" data-scrollable="true" style="">
+                                                <img style="border-radius:8rem; width:7rem" src="{{$artist->artists[0]->beneficiary[0]->picture}}" >
+                                            </div>
+
+                                        </div>
+                                        @endif
+                                        <div class="col-md-4 mt-5">
+                                            <label style="font-weight: bold">Nombre:</label>
+                                            <div class="m-scrollable" data-scrollable="true" style="">
+                                                <p>{{ $artist->artists[0]->beneficiary[0]->name}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mt-5">
+                                            <label style="font-weight: bold">Apellidos:</label>
+                                            <div class="m-scrollable" data-scrollable="true" style="">
+                                                <p>{{ $artist->artists[0]->beneficiary[0]->last_name}} {{ $artist->artists[0]->beneficiary[0]->second_last_name}}</p>
+                                            </div>
+                                        </div>
 
 
                                         <div class="col-md-4 mt-2">
@@ -439,18 +460,7 @@
                                                 <p>{{ $artist->artists[0]->beneficiary[0]->identification}}</p>
                                             </div>
                                         </div>
-                                        <div class="col-md-4 mt-2">
-                                            <label style="font-weight: bold">Nombre:</label>
-                                            <div class="m-scrollable" data-scrollable="true" style="">
-                                                <p>{{ $artist->artists[0]->beneficiary[0]->name}}</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4 mt-2">
-                                            <label style="font-weight: bold">Apellidos:</label>
-                                            <div class="m-scrollable" data-scrollable="true" style="">
-                                                <p>{{ $artist->artists[0]->beneficiary[0]->last_name}} {{ $artist->artists[0]->beneficiary[0]->second_last_name}}</p>
-                                            </div>
-                                        </div>
+
                                         <div class="col-md-4 mt-2">
                                             <label style="font-weight: bold">Direccion:</label>
                                             <div class="m-scrollable" data-scrollable="true" style="">
@@ -515,22 +525,14 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-4 mt-2">
+                                        <div class="col-md-4 mt-2" style="margin-right: -1rem;">
                                             <label style="font-weight: bold">Documento de identificación:</label>
                                             <button type="button" class="btn btn-primary" data-toggle="modal"
                                                     data-target="#pdfidentificacionBeneficiario">
                                                 Ver documento de identidad
                                             </button>
                                         </div>
-                                        @if ($artist->artists[0]->beneficiary[0]->picture)
 
-                                        <div class="col-md-4 mt-2">
-                                            <div class="m-scrollable" data-scrollable="true" style="">
-                                                <img style="border-radius:8rem; width:7rem" src="{{$artist->artists[0]->beneficiary[0]->picture}}" >
-                                            </div>
-
-                                        </div>
-                                        @endif
                                         <div class="col-md-12 mt-2">
 
                                             <label style="font-weight: bold">{{ __('biografia') }}:</label>
