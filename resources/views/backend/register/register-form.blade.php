@@ -248,21 +248,69 @@
                                             id="datepicker_fecha_nacimiento" readonly placeholder="{{ __('fecha_nacimiento') }}" />
                                         <div id="error-aspirante_birthdate" class="form-control-feedback" style="display: none"></div>
                                     </div>
-                                </div>    
-
-                                <div class="form-group m-form__group row">                                                                       
+                                </div>  
+                                
+                                <div class="m-form__group form-group">
                                     <div class="col-lg-6 m-form__group-sub">
-                                        <label for="">Pdf Cédula</label>
-                                        <div class="m-dropzone pdf_cedula_dropzone m-dropzone--success"
-                                             action="inc/api/dropzone/upload.php" id="m-dropzone-three">
-                                            <div class="m-dropzone__msg dz-message needsclick">
-                                                <h3 class="m-dropzone__msg-title">Subir documento de identificación</h3>
-                                                <span class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                        <label for="">Documento de identificación</label>
+                                        <div class="m-radio-inline">
+                                            <label class="m-radio">
+                                                <input type="radio" name="aspirante[identificacionDoc]" value="1" checked="checked"> Imagen
+                                                <span></span>
+                                            </label>
+                                            <label class="m-radio">
+                                                <input type="radio" name="aspirante[identificacionDoc]" value="2"> PDF
+                                                <span></span>
+                                            </label>                                    
+                                        </div>
+                                    </div>
+                                    
+                                    <div id="image-docuemnt-aspirante" class="form-group m-form__group row">                                                                       
+                                        <div class="col-lg-6 m-form__group-sub">
+                                            <label for="">Imagen documento identificación frente</label>
+                                            <div class="m-dropzone file-image-document-aspirante-frente m-dropzone--success"
+                                                action="inc/api/dropzone/upload.php" id="m-dropzone-three">
+                                                <div class="m-dropzone__msg dz-message needsclick">
+                                                    <h3 class="m-dropzone__msg-title">Subir documento de identificación</h3>
+                                                    <span class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 m-form__group-sub">
+                                            <label for="">Imagen documento identificación atras</label>
+                                            <div class="m-dropzone file-image-document-aspirante-atras m-dropzone--success"
+                                                action="inc/api/dropzone/upload.php" id="m-dropzone-three">
+                                                <div class="m-dropzone__msg dz-message needsclick">
+                                                    <h3 class="m-dropzone__msg-title">Subir documento de identificación</h3>
+                                                    <span class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>                                
+    
+                                    <div id="pdf-docuemnt-aspirante" style="display: none" class="form-group m-form__group row">                                                                       
+                                        <div class="col-lg-6 m-form__group-sub">
+                                            <label for="">PDF documento identificación </label>
+                                            <div class="m-dropzone file-pdf-document-aspirante m-dropzone--success"
+                                                 action="inc/api/dropzone/upload.php" id="m-dropzone-three">
+                                                <div class="m-dropzone__msg dz-message needsclick">
+                                                    <h3 class="m-dropzone__msg-title">Subir documento de identificación</h3>
+                                                    <span class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>  
+                                
+                                <!--=====================================
+                                    Campos input type hidden
+                                ======================================-->
+                                <input type="hidden" name="aspirante[urlImageDocumentFrente]" class="form-control m-input" value="">
+                                <input type="hidden" name="aspirante[urlImageDocumentAtras]" class="form-control m-input" value="">
+                                <input type="hidden" name="aspirante[urlPdfDocument]" class="form-control m-input" value="">                                    
                             </div>
+
+                            
                            
                             <div class="m-separator m-separator--dashed m-separator--lg"></div>
 
@@ -462,19 +510,68 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group m-form__group row">
+                                <!--=====================================
+                                    CARGAR DOCUMENTO DE IDENTIFICACION
+                                ======================================-->
+                                <div class="m-form__group form-group">
                                     <div class="col-lg-6 m-form__group-sub">
-                                        <label for="">PDF documento de identidad</label>
-                                        <div class="m-dropzone pdf_cedula_dropzone m-dropzone--success"
-                                            action="inc/api/dropzone/upload.php" id="m-dropzone-three">
-                                            <div class="m-dropzone__msg dz-message needsclick">
-                                                <h3 class="m-dropzone__msg-title">Subir documento de identificación</h3>
-                                                <span class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                        <label for="">Documento de identificación</label>
+                                        <div class="m-radio-inline">
+                                            <label class="m-radio">
+                                                <input type="radio" name="beneficiario[identificacionDoc]" value="1" checked="checked"> Imagen
+                                                <span></span>
+                                            </label>
+                                            <label class="m-radio">
+                                                <input type="radio" name="beneficiario[identificacionDoc]" value="2"> PDF
+                                                <span></span>
+                                            </label>                                    
+                                        </div>
+                                    </div>
+    
+                                    <div id="image-docuemnt-beneficiario" class="form-group m-form__group row">                                                                       
+                                        <div class="col-lg-6 m-form__group-sub">
+                                            <label for="">Imagen documento identificación frente</label>
+                                            <div class="m-dropzone file-image-document-beneficiario-frente m-dropzone--success"
+                                                action="inc/api/dropzone/upload.php" id="m-dropzone-three">
+                                                <div class="m-dropzone__msg dz-message needsclick">
+                                                    <h3 class="m-dropzone__msg-title">Subir documento de identificación</h3>
+                                                    <span class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 m-form__group-sub">
+                                            <label for="">Imagen documento identificación atras</label>
+                                            <div class="m-dropzone file-image-document-beneficiario-atras m-dropzone--success"
+                                                action="inc/api/dropzone/upload.php" id="m-dropzone-three">
+                                                <div class="m-dropzone__msg dz-message needsclick">
+                                                    <h3 class="m-dropzone__msg-title">Subir documento de identificación</h3>
+                                                    <span class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+    
+                                    <div id="pdf-docuemnt-beneficiario" style="display: none" class="form-group m-form__group row">                                                                       
+                                        <div class="col-lg-6 m-form__group-sub">
+                                            <label for="">PDF documento identificación</label>
+                                            <div class="m-dropzone file-pdf-document-beneficiario m-dropzone--success"
+                                                 action="inc/api/dropzone/upload.php" id="m-dropzone-three">
+                                                <div class="m-dropzone__msg dz-message needsclick">
+                                                    <h3 class="m-dropzone__msg-title">Subir documento de identificación</h3>
+                                                    <span class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>  
                                 
+                                <!--=====================================
+                                    Campos input type hidden
+                                ======================================-->
+                                <input type="hidden" name="beneficiario[urlImageDocumentFrente]" class="form-control m-input" value="">
+                                <input type="hidden" name="beneficiario[urlImageDocumentAtras]" class="form-control m-input" value="">
+                                <input type="hidden" name="beneficiario[urlPdfDocument]" class="form-control m-input" value="">
+                                                                    
                                 <div class="m-separator m-separator--dashed m-separator--lg"></div>
                                 
                                 <!--=====================================
@@ -692,55 +789,85 @@
             BootstrapDatepicker.init();
         });
 
-        new Dropzone('.dropzone', {
-            url: '{{ route('profile.photo.artist') }}',
-            acceptedFiles: 'image/*',
+        /* eventos para subir la imagen o pdf del aspirante */
+        new Dropzone('.file-image-document-aspirante-frente', {            
+            url: '{{ route('upload.image.document') }}',
+            acceptedFiles: "image/*",
             maxFiles: 1,
-            paramName: 'photo',
+            paramName: 'file',
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
             success: function (file, response) {
-                $('#inputImagenesPostPlan').val(response);
-                location.reload();
+                $("input[name='aspirante[urlImageDocumentFrente]']").val(response);
+            }
+        }); 
+        new Dropzone('.file-image-document-aspirante-atras', {            
+            url: '{{ route('upload.image.document') }}',
+            acceptedFiles: "image/*",
+            maxFiles: 1,
+            paramName: 'file',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            success: function (file, response) {
+                $("input[name='aspirante[urlImageDocumentAtras]']").val(response);
             }
         });
-
-        /* Dropzone.autoDiscover = false; */
-        /* {{-- new Dropzone('.front_dropzone', {
-            url: '{{ route('front.photo.artist') }}',
-            acceptedFiles: 'image/*',
+        new Dropzone('.file-pdf-document-aspirante', {            
+            url: '{{ route('upload.pdf.document') }}',
+            acceptedFiles: "application/pdf",
             maxFiles: 1,
-            paramName: 'front_photo',
+            paramName: 'file',
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
             success: function (file, response) {
-
-                $('#inputImagenesPostPlan').val(response);
-                location.reload();
+                $("input[name='aspirante[urlPdfDocument]']").val(response);
             }
+        }); 
 
-        }); --}} */
-
-        new Dropzone('.pdf_cedula_dropzone', {
-            url: '{{ route('cedula.pdf.aspirante') }}',
-            acceptedFiles: '.pdf',
+        /* eventos para subir la imagen o pdf del beneficiario */
+        new Dropzone('.file-image-document-beneficiario-frente', {            
+            url: '{{ route('upload.image.document') }}',
+            acceptedFiles: "image/*",
             maxFiles: 1,
-            paramName: 'pdf_cedula_name',
+            paramName: 'file',
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
             success: function (file, response) {
-                $('#inputImagenesPostPlan').val(response);
-                /* {{-- location.reload(); --}} */
+                $("input[name='beneficiario[urlImageDocumentFrente]']").val(response);
             }
         });
-
+        new Dropzone('.file-image-document-beneficiario-atras', {            
+            url: '{{ route('upload.image.document') }}',
+            acceptedFiles: "image/*",
+            maxFiles: 1,
+            paramName: 'file',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            success: function (file, response) {
+                $("input[name='beneficiario[urlImageDocumentAtras]']").val(response);
+            }
+        });
+        new Dropzone('.file-pdf-document-beneficiario', {            
+            url: '{{ route('upload.pdf.document') }}',
+            acceptedFiles: "application/pdf",
+            maxFiles: 1,
+            paramName: 'file',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            success: function (file, response) {
+                $("input[name='beneficiario[urlDocument]']").val(response);
+            }
+        }); 
 
         Dropzone.autoDiscover = false;
 
-        var input = document.querySelector("#phone");
+        /* var input = document.querySelector("#phone");
         window.intlTelInput(input, {
             // allowDropdown: false,
             // autoHideDialCode: false,
@@ -763,6 +890,6 @@
             // preferredCountries: ['cn', 'jp'],
             // separateDialCode: true,
             utilsScript: "/backend/build/js/utils.js",
-        });
+        }); */
     </script>
 @endsection

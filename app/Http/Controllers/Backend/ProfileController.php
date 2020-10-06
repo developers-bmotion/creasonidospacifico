@@ -70,6 +70,8 @@ class ProfileController extends Controller
     {
         $aspirante = (object) $request->aspirante;
 
+        dd($request);
+
         if ($request->lineaConvocatoria == '1') {
             /* Este caso es para solistas */ // $date = new Carbon( $request->input('currentDate', Carbon::now()) );
 
@@ -325,6 +327,24 @@ class ProfileController extends Controller
 
             return back()->with('eliminar', 'Ningún Cambio');
         }
+    }
+
+    public function uploadImageDocument(Request $request)
+    {        
+        $image = $request->file('file')->store('imagendoc', 's3');
+        Storage::disk('s3')->setVisibility($image, 'public');
+        $urlS3 = Storage::disk('s3')->url($image);
+
+        return $urlS3;
+    }
+
+    public function uploadPDFDocument(Request $request)
+    {        
+        $image = $request->file('file')->store('pdfdoc', 's3');
+        Storage::disk('s3')->setVisibility($image, 'public');
+        $urlS3 = Storage::disk('s3')->url($image);
+
+        return $urlS3;
     }
 
     public function photo(Request $request)
