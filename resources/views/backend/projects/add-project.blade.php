@@ -65,7 +65,7 @@
                 </div>
 
             </div>
-            <form method="post" action="{{ route('add.store.project') }}"
+            <form  method="post" action="{{ route('add.store.project') }}"
                   class="m-form m-form--label-align-left- m-form--state-" id="form_add_project">
                 @csrf
                 <input type="hidden" name="artist_id" value="{{ $artist_id->id }}">
@@ -237,7 +237,7 @@
                 </div>
                 <div class="m-portlet__foot m-portlet__foot--fit">
                     <div class="m-form__actions">
-                        <button type="submit" class="btn btn-primary pull-right">Enviar información</button>
+                        <button id="btn_add_project" class="btn btn-primary pull-right">Enviar información</button>
                     </div>
                 </div>
             </form>
@@ -356,5 +356,26 @@
         });
 
 
+    </script>
+    <script>
+        $('#btn_add_project').click(function (e) {
+            e.preventDefault();
+            swal({
+                title: "{{__('Anuncio')}}",
+                text: "{{ __('¿ Esta seguro de guardar los datos ?') }}",
+                icon: "success",
+
+                confirmButtonText: "<span>{{ __('Aceptar') }}</span>",
+                confirmButtonClass: "btn btn-danger m-btn m-btn--pill m-btn--air m-btn--icon",
+
+                showCancelButton: true,
+                cancelButtonText: "<span>{{ __('cancelar') }}</span>",
+                cancelButtonClass: "btn btn-secondary m-btn m-btn--pill m-btn--icon"
+            }).then(function (result) {
+                // if (result.value) {
+                    $('#form_add_project').submit();
+                // }
+            })
+        });
     </script>
 @endsection

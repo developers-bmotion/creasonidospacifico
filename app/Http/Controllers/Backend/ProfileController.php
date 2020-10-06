@@ -93,7 +93,7 @@ class ProfileController extends Controller
                     //'age' => $request->get('age')
                     'township' => $aspirante->vereda,
                 ]);
-        
+
                 User::where('id', '=', $id_artis)->update([
                     'name' => $aspirante->name,
                     'last_name' => $aspirante->lastname,
@@ -418,19 +418,28 @@ class ProfileController extends Controller
         $idproject=$request->headers->get('idproject');
         // $user = User::where('id', auth()->user()->id)->first();
         // $artist = Artist::where('user_id', auth()->user()->id)->first();
-        $project = Project::where('id', $idproject)->first();
+        // $project = Project::where('id', $idproject)->first();
         // dd($beneficiario);
-        $audio =  str_replace('storage', '', $project->audio);
+        // $audio =  str_replace('storage', '', $project->audio);
         //Elimnar pdf de cédula o tarjeta
-        Storage::delete($audio);
+        // Storage::delete($audio);
         //Agregar cedula o tarjeta de identidad
         // $pdf_cedula_save = $request->file('pdf_cedula_name')->store('pdfidentificacion');
-        $audio = $request->file('audio')->store('audio');
+
+    //     $image = $request->file('image')->store('audio_one','s3');
+    //     Storage::disk('s3')->setVisibility($image,'public');
+    //    $urlS3 = Storage::disk('s3')->url($image);
+
+    //     return $urlS3;
+        // -------------
+        $audio = $request->file('audio')->store('audio','s3');
+        Storage::disk('s3')->setVisibility($audio,'public');
+        $urlS3 = Storage::disk('s3')->url($audio);
         Project::where('id',$idproject)->update([
-            'audio' => '/storage/' . $audio
+            'audio' => $urlS3
         ]);
 
-        return $audio;
+        return $urlS3;
     }
 
     public function pdf_cedula_team(Request $request)
