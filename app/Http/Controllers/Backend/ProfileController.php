@@ -69,9 +69,9 @@ class ProfileController extends Controller
     /* metodo para actualizar datos del aspirante */
     public function profile_update_artist(Request $request, $id_artis)
     {
-        //dd($request);
+        dd($request);
         if ($request->lineaConvocatoria == '1') {
-            /* Este caso es para solistas */ // $date = new Carbon( $request->input('currentDate', Carbon::now()) );
+            /* Este caso es para solistas */ 
 
             if ($request->actuaraComo == '1'){
                 /* solo se guarda el aspirante */
@@ -96,13 +96,19 @@ class ProfileController extends Controller
                 return redirect()->route('profile.artist');
             }
         } else {
-            /* Para este caso se debe guardar el representante y los integrantes del grupo */ // gettype($request->integrantes)
-            //$this->insertAspirante($id_artis, $request);
-            dd($request);
+            /* Para este caso se debe guardar el representante */ 
+            $this->insertAspirante($id_artis, $request);
+            
+            $artist = Artist::select('id')->where('user_id', $id_artis)->first();  
+            $existTeam = null;
+            $existTeam = Team::where('artist_id', $artist->id)->first();
 
-            foreach ($request->integrantes as $integrante) {
-                dd( $integrante['nameMember'] ); // aceder a los datos
-            }
+            /* se guardan los datos del los integrantes del grupo */
+            if ($existTeam == null) {
+                $this->insertGroupMembers($request, $artist);                
+            } 
+
+            return redirect()->route('profile.artist');
         }
     }
 
@@ -182,6 +188,28 @@ class ProfileController extends Controller
             'expedition_place' => $request->municipioExpedida,
             //'artist_id' =>  $idArtst        
         ]);
+    }
+
+    /* metodo para insertar los integrantes del grupo */
+    public function insertGroupMembers($request, $artist) {
+        foreach ($request->integrantes as $integrante) {
+            $member = new Team();
+            $member->name = $integrante['nameMember'];
+            $member->last_name = $integrante['lastnameMember'];
+            $member->second_last_name = $integrante['secondLastnameMember'];
+            $member->type_document = $integrante['documentTypeMember'];
+            $member->identification = $integrante['identificationMember'];
+            $member->place_expedition = $integrante['municipio_expedición_member'];
+            $member->place_birth = $integrante['municipio_nacimiento_member'];
+            $member->addres = $integrante['addressMember'];
+            $member->phone1 = $integrante['phoneMember'];
+            //$member->pdf_identificacion = $integrante['nameMember'];
+            //$member->img_document_front = $integrante['nameMember'];
+            //$member->img_document_back = $integrante['nameMember'];
+            $member->role = $integrante['rolMember'];
+            $member->artist_id = $artist->id;
+            $member->save();
+        }
     }
 
 

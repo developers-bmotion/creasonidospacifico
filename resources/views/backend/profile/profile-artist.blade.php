@@ -650,7 +650,7 @@
                                                                  <div class="col-md-4 mt-2">
                                                                     <label style="font-weight: bold">Departamento de expedición:</label>
                                                                     <div class="m-scrollable" data-scrollable="true" style="">
-                                                                      <p>{{ $team->expeditionPlace->departaments->descripcion}}</p>
+                                                                    <p>{{ $team->expeditionPlace->departaments->descripcion}}</p>
                                                                     </div>
 
                                                                </div>
@@ -796,7 +796,7 @@
                             <div class="col-md-4 mt-2">
                                 <label style="font-weight: bold">Departamento de nacimiento:</label>
                                 <div class="m-scrollable" data-scrollable="true" style="">
-                         <p>{{ $artist->beneficiary[0]->city->departaments->descripcion}}</p>
+                                <p>{{ $artist->beneficiary[0]->city->departaments->descripcion}}</p>
                                 </div>
 
                      </div>
@@ -835,7 +835,7 @@
 
                                     <label style="font-weight: bold">{{ __('Departamento de expedición') }}:</label>
                                     <div class="m-scrollable" data-scrollable="true" style="">
-                                        <p style="text-align: justify">{{ $artist->beneficiary[0]->expeditionPlace->departaments->descripcion}}</p>
+                                    <p style="text-align: justify">{{ $artist->beneficiary[0]->expeditionPlace->departaments->descripcion}}</p>
                                     </div>
                                 </div>
                                 <div class="col-md-4 mt-2">
