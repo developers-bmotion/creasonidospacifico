@@ -62,7 +62,7 @@
                                             </div>
                                             {!! $errors->first('subir_cancion','<div class="form-control-feedback">*:message
                                                        </div>')!!}
-                                            <span class="m-form__help">Cargue aquí el audio de la canción en formato Mp3, que no exceda 4 minutos de duración.</span>
+                                            <span class="m-form__help">Cargue aquí el audio de la canción en formato Mp3.</span>
                                             <input type="hidden" id="inputDBAudioAddProject"
                                                    name="subir_cancion" value="">
                                             <div id="erroresImagen" style="color: var(--danger)"

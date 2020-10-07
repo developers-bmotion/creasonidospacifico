@@ -6,6 +6,7 @@
     "type": "project",
     "require": {
         "php": "^7.2",
+        "anhskohbo/no-captcha": "^3.3",
         "barryvdh/laravel-ide-helper": "^2.5",
         "caouecs/laravel-lang": "~3.0",
         "doctrine/dbal": "^2.8",
@@ -19,6 +20,7 @@
         "league/flysystem-aws-s3-v3": "^1.0",
         "nesbot/carbon": "^2.40",
         "overtrue/laravel-socialite": "~2.0",
+        "silviolleite/laravelpwa": "^2.0",
         "uxweb/sweet-alert": "^2.0",
         "yajra/laravel-datatables-oracle": "~9.0"
     },
