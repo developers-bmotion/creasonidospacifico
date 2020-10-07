@@ -293,7 +293,73 @@ function addViewUploadArchiveMember(member) {
                     <span class="m-form__help">Ingrese el rol que desempeña dentro del grupo (Guitarrista, Bocalista, Pianosta, etc.)</span>
                 </div>
             </div>`;
+
+            /* <div class="m-form__group form-group">
+                                    <div class="col-lg-6 m-form__group-sub">
+                                        <label for="">Documento de identificación</label>
+                                        <div class="m-radio-inline">
+                                            <label class="m-radio">
+                                                <input type="radio" name="aspirante[identificacionDoc]" value="1" checked="checked"> Imagen
+                                                <span></span>
+                                            </label>
+                                            <label class="m-radio">
+                                                <input type="radio" name="aspirante[identificacionDoc]" value="2"> PDF
+                                                <span></span>
+                                            </label>                                    
+                                        </div>
+                                    </div>
+                                    
+                                    <div id="image-docuemnt-aspirante" class="form-group m-form__group row">                                                                       
+                                        <div class="col-lg-6 m-form__group-sub">
+                                            <label for="">Imagen documento identificación frente</label>
+                                            <div class="m-dropzone file-image-document-aspirante-frente m-dropzone--success"
+                                                action="inc/api/dropzone/upload.php" id="m-dropzone-three">
+                                                <div class="m-dropzone__msg dz-message needsclick">
+                                                    <h3 class="m-dropzone__msg-title">Subir documento de identificación</h3>
+                                                    <span class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 m-form__group-sub">
+                                            <label for="">Imagen documento identificación atras</label>
+                                            <div class="m-dropzone file-image-document-aspirante-atras m-dropzone--success"
+                                                action="inc/api/dropzone/upload.php" id="m-dropzone-three">
+                                                <div class="m-dropzone__msg dz-message needsclick">
+                                                    <h3 class="m-dropzone__msg-title">Subir documento de identificación</h3>
+                                                    <span class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+    
+                                    <div id="pdf-docuemnt-aspirante" style="display: none" class="form-group m-form__group row">                                                                       
+                                        <div class="col-lg-6 m-form__group-sub">
+                                            <label for="">PDF documento identificación </label>
+                                            <div class="m-dropzone file-pdf-document-aspirante m-dropzone--success"
+                                                 action="inc/api/dropzone/upload.php" id="m-dropzone-three">
+                                                <div class="m-dropzone__msg dz-message needsclick">
+                                                    <h3 class="m-dropzone__msg-title">Subir documento de identificación</h3>
+                                                    <span class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>   */
 }
+
+var dropMember = new Dropzone('.pdf_cedula_dropzone', {      
+    url: '/upload-pdf-document',
+    acceptedFiles: "application/pdf",
+    maxFiles: 1,
+    paramName: 'file',
+    headers: {
+        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+    },
+    success: function (file, response) {
+        console.log('ingreso');
+        //$("input[name='aspirante[urlPdfDocument]']").val(response);
+    }
+}); 
 
 
 /* contenido para validar el formulario */
