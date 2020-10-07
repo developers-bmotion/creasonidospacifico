@@ -390,8 +390,8 @@ function validationForm() {
     }
     console.log('despues::: ', validate)
 
-    //return validate;
-    return false;
+    return validate;
+    //return false;
 }
 
 const validateAspirante = () => {

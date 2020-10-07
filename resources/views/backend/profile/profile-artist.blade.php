@@ -142,7 +142,7 @@
                                         </div>
                                         <div class="col-md-6 mt-2">
                                             <label style="font-weight: bold">Departamento de nacimiento:</label>
-                                            <div class="m-scrollable" data-scrollable="true" style="">
+                                            <div class="m-scrollable" data-scrollable="true" style="">                                                
                                                 {{$artist->city->departaments->descripcion}}</p>
                                             </div>
 
