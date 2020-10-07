@@ -62,6 +62,7 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'admin_permisos' => \App\Http\Middleware\AdminPermisos::class,
         'home' => \App\Http\Middleware\HomeMiddleware::class,
+        'register_artist' => \App\Http\Middleware\RegisterArtist::class,
         'manage_permisos' => \App\Http\Middleware\ManagePermisos::class,
         'verifyProjectUser' => \App\Http\Middleware\VerifyProjectForUser::class,
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
