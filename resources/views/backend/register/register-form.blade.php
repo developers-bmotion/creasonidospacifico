@@ -861,7 +861,7 @@
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
             success: function (file, response) {
-                $("input[name='beneficiario[urlDocument]']").val(response);
+                $("input[name='beneficiario[urlPdfDocument]']").val(response);
             }
         }); 
 

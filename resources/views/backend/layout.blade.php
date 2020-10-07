@@ -218,6 +218,14 @@ License: You must have a valid license purchased only from themeforest(the above
                     </div>
 
                 @endif
+                @if(session()->has('registro'))
+                    <div class="container">
+                        <div class="alert alert-danger" role="alert">
+                            <strong>Oh!</strong> {{session('registro')}}
+                        </div>
+                    </div>
+
+                @endif
                 @yield('header')
             </div>
             @yield('content')
