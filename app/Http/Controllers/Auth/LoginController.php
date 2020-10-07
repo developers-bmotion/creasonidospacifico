@@ -78,7 +78,7 @@ class LoginController extends Controller
 
             $artist = Artist::where('user_id', auth()->user()->id)->first();
 
-            if ($artist->documentType == null) {
+            if ($artist->identification == null) {
                 return redirect('/dashboard/form-register');
             } else {
 
@@ -168,9 +168,13 @@ class LoginController extends Controller
 
     protected function validateLogin(Request $request)
     {
+        // $request->validate([
+        //     $this->username() => 'required|string',
+        //     'g-recaptcha-response' => 'required|captcha',
+        //     'password' => 'required|string'
+        // ]);
         $request->validate([
             $this->username() => 'required|string',
-            'g-recaptcha-response' => 'required|captcha',
             'password' => 'required|string'
         ]);
     }

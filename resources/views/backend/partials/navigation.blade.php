@@ -101,6 +101,7 @@
                     </div>
                 </li>--}}
                 @if(auth()->user()->roles[0]->rol == "Artist")
+                @if(auth()->user()->name !== "")
                     <li class="m-menu__item ">
                         <a href="{{ route('add.project') }}" class="m-menu__link"><i
                                 class="m-menu__link-icon la la-music"></i><span
@@ -115,6 +116,7 @@
                     </li>
                 @endif
             </ul>
+            @endif
         @endif
         @if(\App\User::navigation() === "Subsanador")
             <ul class="m-menu__nav  m-menu__nav--submenu-arrow ">

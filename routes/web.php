@@ -149,7 +149,7 @@ Route::group(['namespace'=>'Backend','prefix' => 'dashboard','middleware' => 'au
 
     //RUTAS PARA EL PERFIL
     //Perfil Artista
-    Route::get('/profile','ProfileController@index_artist')->name('profile.artist');
+    Route::get('/profile','ProfileController@index_artist')->name('profile.artist')->middleware('register_artist');
     Route::post('/profile-photo-artist','ProfileController@photo')->name('profile.photo.artist');
 
     Route::post('/front-photo-artist','ProfileController@front_photo')->name('front.photo.artist');
@@ -171,13 +171,15 @@ Route::group(['namespace'=>'Backend','prefix' => 'dashboard','middleware' => 'au
 
     Route::post('/update-password-artist','ProfileController@update_password')->name('update.password.artist');
     //Proyectos del Artista
-    Route::get('/my-projects','MyProjectsController@index_artist')->name('myprojects.artist');
-    Route::get('/config-profile-artist','MyProjectsController@config_profile_artist')->name('config.profile.artist');
+    Route::get('/my-projects','MyProjectsController@index_artist')->name('myprojects.artist')->middleware('register_artist');
+    Route::get('/config-profile-artist','MyProjectsController@config_profile_artist')->name('config.profile.artist')->middleware('register_artist');
     //Apoyos hechos
     Route::get('/backings-made','BackingsMadeController@index_artist')->name('backings.made.artist');
 
     //RUTAS PARA AGREGAR PROYECTOS
-    Route::get('/new-project','AddProjectController@index')->name('add.project');
+
+    Route::get('/new-project','AddProjectController@index')->name('add.project')->middleware('register_artist');
+
     Route::post('/add-project-audio','AddProjectController@upload_image')->name('add.project.audio');
     Route::post('/add-audio-one','AddProjectController@audio_one')->name('add.audio.one');
     Route::post('/add-audio-two','AddProjectController@audio_two')->name('add.audio.two');
@@ -185,7 +187,7 @@ Route::group(['namespace'=>'Backend','prefix' => 'dashboard','middleware' => 'au
     Route::get('/categories_by_id/{id_category}' , 'AddProjectController@categoryById');
 
     //RUTAS PARA VER EL PROJECT
-    Route::get('/project/{project}','ShowProjectController@index')->name('show.backend.project');
+    Route::get('/project/{project}','ShowProjectController@index')->name('show.backend.project')->middleware('register_artist');
     Route::get('/team-all/{id}',function ($id){
         $teams = \App\Project::where('id',$id)->with('teams')->get()[0]->teams;
         return datatables()->of($teams)->toJson();
