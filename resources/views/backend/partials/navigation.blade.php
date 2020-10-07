@@ -294,13 +294,14 @@
                     <a href="#" class="m-nav__link m-dropdown__toggle">
 												<span class="m-topbar__userpic">
 
-                                                                @if(Storage::disk('public')->exists('users/'.auth()->user()->picture))
-                                                        <img src="{{ auth()->user()->pathAttachment() }}"
-                                                             class="m--img-rounded m--marginless" alt=""/>
+                                                    @if(auth()->user()->picture)
+                                                    <img src="{{ auth()->user()->picture}}"
+                                                    class="m--img-rounded m--marginless dos"
+                                                    alt=""/>
+
                                                     @else
-                                                        <img src="{{ auth()->user()->picture}}"
-                                                             class="m--img-rounded m--marginless"
-                                                             alt=""/>
+                                                    <img src="/default/user.png"
+                                                    class="m--img-rounded m--marginless uno" alt=""/>
 
                                                     @endif
 
@@ -316,12 +317,13 @@
                                 <div class="m-card-user m-card-user--skin-dark">
                                     <div class="m-card-user__pic">
 
-                                        @if(Storage::disk('public')->exists('users/'.auth()->user()->picture))
-                                            <img src="{{ auth()->user()->pathAttachment()}}"
-                                                 class="m--img-rounded m--marginless" alt=""/>
-                                        @else
-                                            <img src="{{ auth()->user()->picture}}" class="m--img-rounded m--marginless"
+                                        @if(auth()->user()->picture)
+                                        <img src="{{ auth()->user()->picture}}" class="m--img-rounded m--marginless"
                                                  alt=""/>
+
+                                        @else
+                                        <img src="/default/user.png"
+                                        class="m--img-rounded m--marginless" alt=""/>
 
                                         @endif
                                     </div>

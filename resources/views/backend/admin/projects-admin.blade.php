@@ -209,13 +209,13 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                         defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
                     },
                     {
-                        data: 'artists.nickname',
+                        data: 'artists.users.name',
                         defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>',
                         render : function (data, type, JsonResultRow, meta){
                             let artista = JsonResultRow.artists[0];
                             //console.log(JsonResultRow);
                             //if (JsonResultRow.status+"" === 4+""){
-                                return `<a href="${artista.users.url_artist}" target="_blank">${artista.nickname}</a>`;
+                                return `<span target="_blank">${artista.users.name} ${artista.users.last_name}</span>`;
                             //}
                             //return artista.nickname;
                         }
