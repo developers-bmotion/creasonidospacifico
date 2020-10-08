@@ -19,6 +19,7 @@ use App\PersonType;
 use App\Project;
 use App\Team;
 use App\typeCategories;
+use DateTime;
 use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
@@ -107,7 +108,9 @@ class ProfileController extends Controller
     /* metodo para actualizar un aspirante en la base de datos */
     public function insertAspirante($id_artis, $request) {
         $aspirante = (object) $request->aspirante;
-        //dd($aspirante );
+        //$carbon_date = Carbon::parse($aspirante->birthdate)->toDateTimeString(); 
+        //dd($carbon_date); 
+
         Artist::where('user_id', '=', $id_artis)->update([
             'nickname' => $aspirante->name,
             'biography' => $aspirante->biografia,
@@ -120,8 +123,11 @@ class ProfileController extends Controller
             'artist_types_id' => $request->actuaraComo,
             'expedition_place' => $aspirante->municipioExpedida,
             'byrthdate' => Carbon::parse($aspirante->birthdate),
+            'byrthdate' => $aspirante->birthdate,
             'township' => $aspirante->vereda,
         ]);
+
+        dd('paso');
 
         User::where('id', '=', $id_artis)->update([
             'name' => $aspirante->name,

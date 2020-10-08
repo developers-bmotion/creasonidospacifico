@@ -70,7 +70,6 @@ function onSelectDepartamentosChange(element, component ) {
         html_select += data.map( municipio => { return `<option value="${ municipio.id }">${ municipio.descripcion }</option>`; } ).join(' ');        
         $( `.${ component }` ).html(html_select);  
     });
-    console.log('tagname: ', $(element).attr('name'));
 
     let tags = $(element).attr('name');
     let arrayTags = tags.split('[')
@@ -83,7 +82,6 @@ function onSelectMunicipiosChange(element) {
     let tags = $(element).attr('name');
     let arrayTags = tags.split('[')
     let nameTag = '[' + arrayTags[1];
-    console.log('name tag:  ', arrayTags, nameTag);
     validateFormSelect(arrayTags[0], nameTag); // realizar validacion
 }
 
@@ -379,7 +377,8 @@ function validationForm() {
     validateFormInputs('aspirante', 'phone'); 
     validateFormInputs('aspirante', 'identificacion'); 
     validateFormInputs('aspirante', 'address'); 
-    validateFormInputs('aspirante', 'birthdate'); 
+    validateFormInputs('aspirante', 'birthdate');
+    formatDateSend($('input[name="aspirante[birthdate]"]'))
 
     /* validar selects  */
     //validateFormSelect('aspirante', 'documentType'); 
@@ -389,9 +388,8 @@ function validationForm() {
     validateFormSelect('aspirante', '[municipioNacimiento]');
 
     if (lineaConvocatoria === '1' &&  actuaraComo === '1') {
-        validate = validateAspirante();
+        validate = validateAspirante();        
     } else if (lineaConvocatoria === '1' &&  actuaraComo === '2') {
-        console.log('validar con beneficiario');
         /* validar inputs */
         validateFormInputs('beneficiario', 'name');
         validateFormInputs('beneficiario', 'lastname');
@@ -400,6 +398,7 @@ function validationForm() {
         validateFormInputs('beneficiario', 'identificacion'); 
         validateFormInputs('beneficiario', 'address'); 
         validateFormInputs('beneficiario', 'birthdate'); 
+        formatDateSend($('input[name="beneficiario[birthdate]"]'))
 
         /* validar selects  */
         //validateFormSelect('beneficiario', 'documentType');   
@@ -408,7 +407,7 @@ function validationForm() {
         validateFormSelect('beneficiario', '[departamentoNacimiento]');
         validateFormSelect('beneficiario', '[municipioNacimiento]');
 
-        if (validateAspirante() && validateBeneficiario()) validate = true;
+        if (validateAspirante() && validateBeneficiario()) validate = true;        
     } else {
         validate = validateAspirante();
         // falata validar el grupo
@@ -426,6 +425,16 @@ function validationForm() {
     //return false;
 }
 
+/* funcion para formatear la fecha */
+function formatDateSend(element) {
+    if ($(element).val()) {
+        let arrayDate = $(element).val().split('/');
+        arrayDate.reverse();
+        $(element).val(arrayDate.map( date => { return date }).join('-'))
+    }
+}
+
+/* funcion para validar los datos requeridos del aspirante */
 const validateAspirante = () => {
     if (fieldsInputs.aspirante_name && fieldsInputs.aspirante_lastname && fieldsInputs.aspirante_secondLastname
         && fieldsInputs.aspirante_phone && fieldsInputs.aspirante_identificacion && fieldsInputs.aspirante_address
@@ -438,11 +447,13 @@ const validateAspirante = () => {
     return false;
 }
 
+/* funcion para validar los datos requeridos del beneficiario */
 const validateBeneficiario = () => {
     if (fieldsInputs.beneficiario_name && fieldsInputs.beneficiario_lastname && fieldsInputs.beneficiario_secondLastname
         && fieldsInputs.beneficiario_phone && fieldsInputs.beneficiario_identificacion && fieldsInputs.beneficiario_address 
         && fieldsInputs.beneficiario_departamentoExpedida && fieldsInputs.beneficiario_municipioExpedida 
-        && fieldsInputs.beneficiario_departamentoNacimiento && fieldsInputs.beneficiario_municipioNacimiento) {
+        && fieldsInputs.beneficiario_departamentoNacimiento && fieldsInputs.beneficiario_municipioNacimiento
+        && fieldsInputs.beneficiario_birthdate) {
         return true;
     }
     
@@ -513,16 +524,13 @@ const validateFields = (type, input, campo) => {
 
 /* funcion que realiza la accion de poner o quitar el error al campo select */
 const validateFieldsSelect = (input, campo) => {
-    console.log('llega:: ', input, campo)
     if ($(`select[name='${ input }']`).val() == null || $(`select[name='${ input }']`).val() === '-1' 
         || $(`select[name='${ input }']`).val() === '' || $(`select[name='${ input }']`).val() === 'undefined'){  
-            console.log('llega:: if')
         $(`#content-${ campo }`).addClass('has-danger');
         $(`#error-${ campo }`).show();
         $(`#error-${ campo }`).html(messages.required);
         fieldsInputs[campo] = false;
     } else {
-        console.log('llega:: else')
         $(`#content-${ campo }`).removeClass('has-danger');
         $(`#error-${ campo }`).hide();
         fieldsInputs[campo] = true;
