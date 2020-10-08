@@ -44,7 +44,7 @@
             </div>
         @endif
 
-        <form method="post" action="{{ route('update.profile.artist', auth()->user()->id) }}"
+        <form method="post" action="{{ route('update.profile.artist', auth()->user()->id) }}" enctype="multipart/form-data"
             onsubmit="return validationForm()" class="m-form m-form--label-align-left- m-form--state-" id="m_form_new_register">
             @csrf {{method_field('PUT')}}
 
