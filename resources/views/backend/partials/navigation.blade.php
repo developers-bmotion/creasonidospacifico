@@ -120,25 +120,11 @@
         @endif
         @if(\App\User::navigation() === "Subsanador")
             <ul class="m-menu__nav  m-menu__nav--submenu-arrow ">
-                <li class="m-menu__item  m-menu__item--submenu m-menu__item--rel" m-menu-submenu-toggle="click"
-                    m-menu-link-redirect="1" aria-haspopup="true"><a href="javascript:;"
-                                                                     class="m-menu__link m-menu__toggle"
-                                                                     title="Non functional dummy link"><i
-                            class="m-menu__link-icon la la-desktop"></i><span
-                            class="m-menu__link-text">{{ __('ir_web') }}</span><i
-                            class="m-menu__hor-arrow la la-angle-down"></i><i
-                            class="m-menu__ver-arrow la la-angle-right"></i></a>
-                    <div class="m-menu__submenu m-menu__submenu--classic m-menu__submenu--left"><span
-                            class="m-menu__arrow m-menu__arrow--adjust"></span>
-                        <ul class="m-menu__subnav">
-                            <li class="m-menu__item " aria-haspopup="true"><a href="{{ route('home') }}/dashboard"
-                                                                              class="m-menu__link "><i
-                                        class="m-menu__link-icon la la-home"></i><span
-                                        class="m-menu__link-text">{{ __('inicio') }}</span></a>
-                            </li>
-
-                        </ul>
-                    </div>
+                <li class="m-menu__item ">
+                    <a href="/dashboard" class="m-menu__link"><i
+                            class="m-menu__link-icon la la-music"></i><span
+                            class="m-menu__link-text">Ver todas las canciones</span>
+                    </a>
                 </li>
             </ul>
         @endif
