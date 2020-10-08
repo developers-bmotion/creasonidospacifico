@@ -6,3 +6,11 @@
 .m-login__form-action{
     margin: 2rem 0 !important;
 }
+
+/* div#app {
+    flex: 0.1 !important;
+}
+
+.m-grid__item.m-grid__item--fluid.m-grid.m-grid--ver-desktop.m-grid--desktop.m-body {
+    flex: 1 !important;
+} */

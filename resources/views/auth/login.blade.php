@@ -168,7 +168,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 @enderror
                                 <div class="m-login__form-action">
                                     <button type="submit"
-                                            class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air">Iniciar a
+                                            class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air">Ingresar a
                                         tu perfil
                                     </button>
                                 </div>
@@ -182,8 +182,8 @@ License: You must have a valid license purchased only from themeforest(the above
                 <div>
                     <div class="m-login__account">
                             <span class="m-login__account-msg">
-                                Para registrarte como aspirante al concurso
-                            </span>&nbsp;&nbsp;
+                                Para registrarte como aspirante al concurso has
+                            </span>
                         <a href="/register" class="m-link m-link--focus m-login__account-link">Clic aquí</a>
                     </div>
                 </div>
