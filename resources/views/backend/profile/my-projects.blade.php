@@ -105,7 +105,7 @@
                                         @elseif($projects->status == 5)
                                             <span class="m-badge m-badge--danger m-badge--wide pull-right">{{ __('rechazado') }}</span>
                                         @elseif($projects->status == 6)
-                                            <span class="m-badge m-badge--brand m-badge--wide pull-right">{{ __('Nuevo revisión') }}</span>
+                                            <span class="m-badge m-badge--brand m-badge--wide pull-right">{{ __('Nueva revisión') }}</span>
                                         @elseif($projects->status == 7)
                                             <span class="m-badge m-badge--success m-badge--wide pull-right">{{ __('Aceptado') }}</span>
                                         @else
@@ -147,13 +147,6 @@
                                                     <span><i class="la la-info-circle"></i>
                                                     <span>{{ __('mas_informacion') }}</span></span>
                                                     </a>
-                                                    @if($projects->status == 4)
-                                                        <a href="{{ route('projects.show',$projects->slug) }}"
-                                                           class="btn btn-secondary m-btn m-btn--icon m-btn--pill">
-                                                    <span><i class="la la-eye"></i>
-                                                    <span>{{ __('ver_online') }}</span></span>
-                                                        </a>
-                                                    @endif
                                                 </div>
 
                                             </div>

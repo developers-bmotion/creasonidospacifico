@@ -37,6 +37,7 @@
                     <div class="m-section">
                         <div class="row">
                             <div class="col-11 player">
+
                                 <audio preload="auto" controls>
                                     <source src="{{ $project->audio }}">
                                     {{-- <input name="project_id" id="project_id" type="hidden" value="{{ $project->id }}"> --}}
@@ -259,11 +260,12 @@
                                             </div>
                                             <div class="m-card-profile__pic">
                                                 <div class="m-card-profile__pic-wrapper">
-                                                    @if(Storage::disk('public')->exists('users/'.$artist->artists[0]->users->picture))
-                                                        <img src="{{ $artist->artists[0]->users->pathAttachment()}}"
-                                                             alt=""/>
+                                                    @if($artist->artists[0]->users->picture)
+                                                    <img src="{{ $artist->artists[0]->users->picture }}" alt="">
+
                                                     @else
-                                                        <img src="{{ $artist->artists[0]->users->picture }}" alt="">
+                                                    <img src="/default/user.png"
+                                                    alt=""/>
                                                     @endif
                                                 </div>
                                             </div>
@@ -425,14 +427,26 @@
 
                                 <div class="biografia col-md-12">
                                     <div class="row">
-                                        @if ($artist->artists[0]->beneficiary[0]->picture)
+                                        {{-- @if ($artist->artists[0]->beneficiary[0]->picture) --}}
+                                        {{-- @dd(Storage::disk('public')->exists($artist->artists[0]->beneficiary[0]->picture)) --}}
 
+                                        @if ($artist->artists[0]->beneficiary[0]->picture)
                                         <div class="col-md-4 mb-5" >
                                             <div class="m-scrollable" data-scrollable="true" style="">
                                                 <img style="border-radius:8rem; width:7rem" src="{{$artist->artists[0]->beneficiary[0]->picture}}" >
                                             </div>
 
                                         </div>
+                                        @else
+
+
+                                        <div class="col-md-4 mb-5" >
+                                            <div class="m-scrollable" data-scrollable="true" style="">
+                                                <img style="border-radius:8rem; width:7rem" src="/default/user.png" >
+                                            </div>
+
+                                        </div>
+
                                         @endif
                                         <div class="col-md-4 mt-5">
                                             <label style="font-weight: bold">Nombre:</label>

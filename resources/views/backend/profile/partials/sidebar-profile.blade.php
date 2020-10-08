@@ -18,7 +18,37 @@
 
                 <a href="" class="m-card-profile__email m-link"
                     style="margin-left: -15px;width: 80%; word-wrap: break-word;">{{ auth()->user()->email }}</a>
-
+                <div class="form-group pt-5">
+                    <h5 style="font-weight: bold">Estado de tu propuesta musical:</h5>
+                </div>
+                <div class="form-group">
+                    @if($artist->projects[0]->status == 1)
+                        <span
+                            class="m-badge m-badge--metal m-badge--wide m-badge--rounded">{{ __('Revision') }}</span>
+                    @endif
+                    @if($artist->projects[0]->status == 2)
+                        <span class="m-badge m-badge--brand m-badge--wide m-badge--rounded"
+                              style="background-color: #9816f4 !important;">Pre aprobado</span>
+                    @endif
+                    @if($artist->projects[0]->status == 3)
+                        <span class="m-badge m-badge--success m-badge--wide m-badge--rounded">Aprobado</span>
+                    @endif
+                    @if($artist->projects[0]->status == 4)
+                        <span class="m-badge m-badge--warning m-badge--wide"
+                              style="color:#fff">{{ __('Pendiente') }}</span>
+                    @endif
+                    @if($artist->projects[0]->status == 5)
+                        <span
+                            class="m-badge m-badge--danger m-badge--wide m-badge--rounded">{{ __('Rechazado') }}</span>
+                    @endif
+                    @if($artist->projects[0]->status == 6)
+                        <span
+                            class="m-badge m-badge--metal m-badge--wide m-badge--rounded">De nuevo en revisión</span>
+                    @endif
+                    @if($artist->projects[0]->status == 7)
+                        <span class="m-badge m-badge--success m-badge--wide m-badge--rounded">Aceptado</span>
+                    @endif
+                </div>
             </div>
 
             <!--=====================================
@@ -67,7 +97,7 @@
                 </span>
             </a>
         </li>
-        <li class="m-nav__item" {!! request()->is('dashboard/my-projects') ? 'style="background-color:#f2f4f9"' : ''
+        <li style="display: none" class="m-nav__item" {!! request()->is('dashboard/my-projects') ? 'style="background-color:#f2f4f9"' : ''
             !!}>
             <a href="{{ route('myprojects.artist') }}" class="m-nav__link">
                 <i class="m-nav__link-icon flaticon-music" {!! request()->is('dashboard/my-projects') ?
