@@ -79,6 +79,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
     <!--begin::Global Theme Styles -->
     <link href="/backend/assets/demo/base/style.bundle.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/main-custom.css" rel="stylesheet" type="text/css"/>
 
     <!--RTL version:<link href="/backend/assets/demo/base/style.bundle.rtl.css" rel="stylesheet" type="text/css" />-->
 
@@ -91,17 +92,17 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- begin::Body -->
 
 <body
-    class="m--skin- m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default">
+    class="my-body m--skin- m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default">
 
 <!-- begin:: Page -->
-<div class="m-grid m-grid--hor m-grid--root m-page">
+<div class=" m-grid m-grid--hor m-grid--root m-page">
     <div
         class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-grid--tablet-and-mobile m-grid--hor-tablet-and-mobile m-login m-login--1 m-login--signin"
         id="m_login">
         <div class="m-grid__item m-grid__item--order-tablet-and-mobile-2 m-login__aside">
             <div class="m-stack m-stack--hor m-stack--desktop">
                 <div class="m-stack__item m-stack__item--fluid">
-                    <div class="m-login__wrapper">
+                    <div class="m-login__wrapper login-top">
                         <div class="m-login__logo">
                             <a href="#">
                                 <img src="/backend/assets/app/media/img/logos/logo-2.png">
@@ -177,7 +178,8 @@ License: You must have a valid license purchased only from themeforest(the above
 
                     </div>
                 </div>
-                <div class="m-stack__item m-stack__item--center">
+                {{-- <div class="m-stack__item m-stack__item--center"> --}}
+                <div>
                     <div class="m-login__account">
                             <span class="m-login__account-msg">
                                 Para registrarte como aspirante al concurso
