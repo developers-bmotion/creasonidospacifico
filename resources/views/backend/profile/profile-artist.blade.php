@@ -12,8 +12,9 @@
     </div>
     <div class="row pt-4">
         <div class="col-12">
-
         @if(count($artist->projects) !== 0)
+{{-- @dd('kjkj') --}}
+
             @if($artist->projects[0]->status == 4)
                 <!--=====================================
 		        ALERTA PARA MOSTRAR EL ESTADO PENDIENTE
