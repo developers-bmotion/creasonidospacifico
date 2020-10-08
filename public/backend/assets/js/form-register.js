@@ -285,14 +285,14 @@ function eventOnChangeDepartamentos(element, tipo, member) {
 function addViewUploadArchiveMember(member) {
     return `<div class="form-group m-form__group row">
                 <div class="col-lg-12 m-form__group-sub">
-                    <label for="">Documento de identificación</label>
+                    <label for="">Seleccione el tipo de formato para subir el documento de identificación</label>
                     <div class="m-radio-inline">
                         <label class="m-radio">
-                            <input type="radio" onClick="changeOptionDocument(this, ${ member })" name="integrantes_identificacionDoc_${ member }" value="1" checked="checked"> Imagen
+                            <input type="radio" onClick="changeOptionDocument(this, ${ member })" name="integrantes[${member}][fileType]" value="1" checked="checked"> Imagen
                             <span></span>
                         </label>
                         <label class="m-radio">
-                            <input type="radio" onClick="changeOptionDocument(this, ${ member })" name="integrantes_identificacionDoc_${ member }" value="2"> PDF
+                            <input type="radio" onClick="changeOptionDocument(this, ${ member })" name="integrantes[${member}][fileType]" value="2"> PDF
                             <span></span>
                         </label>                                    
                     </div>
@@ -318,8 +318,6 @@ function addViewUploadArchiveMember(member) {
 }
 
 function changeOptionDocument(element, member) {
-    console.log('element:: ', $(element).val());
-    console.log('integrante:: ', member);
     if ($(element).val() === '1'){
         $(`#image-docuemnt-integrantes-${ member }`).show(); 
         $(`#pdf-docuemnt-integrantes-${ member }`).hide(); 

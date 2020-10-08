@@ -66,20 +66,15 @@ class ProfileController extends Controller
         return response()->json($municipios);
     }
 
-    /* metodo para actualizar datos del aspirante */
-    public function profile_update_artist(Request $request, $id_artis)
-    {
-        dd($request);
-        if ($request->lineaConvocatoria == '1') {
-            /* Este caso es para solistas */
 
+    /* metodo para actualizar datos del aspirante */
+    public function profile_update_artist(Request $request, $id_artis) {
+        if ($request->lineaConvocatoria == '1') { // Este caso es para solistas   
             if ($request->actuaraComo == '1'){
                 /* solo se guarda el aspirante */
                 $this->insertAspirante($id_artis, $request);
-
-                return redirect()->route('profile.artist');
-            } else {
-                /* se debe guardar los datos del representante */
+                return redirect()->route('profile.artist');                
+            } else { // se debe guardar los datos del representante                 
                 $this->insertAspirante($id_artis, $request);
 
                 $artist = Artist::select('id')->where('user_id', $id_artis)->first();
@@ -95,8 +90,7 @@ class ProfileController extends Controller
 
                 return redirect()->route('profile.artist');
             }
-        } else {
-            /* Para este caso se debe guardar el representante */
+        } else { // Para este caso se debe guardar el representante             
             $this->insertAspirante($id_artis, $request);
 
             $artist = Artist::select('id')->where('user_id', $id_artis)->first();
@@ -104,10 +98,8 @@ class ProfileController extends Controller
             $existTeam = Team::where('artist_id', $artist->id)->first();
 
             /* se guardan los datos del los integrantes del grupo */
-            if ($existTeam == null) {
-                $this->insertGroupMembers($request, $artist);
-            }
-
+            if ($existTeam == null) $this->insertGroupMembers($request, $artist);
+            
             return redirect()->route('profile.artist');
         }
     }
@@ -115,7 +107,7 @@ class ProfileController extends Controller
     /* metodo para actualizar un aspirante en la base de datos */
     public function insertAspirante($id_artis, $request) {
         $aspirante = (object) $request->aspirante;
-
+        //dd($aspirante );
         Artist::where('user_id', '=', $id_artis)->update([
             'nickname' => $aspirante->name,
             'biography' => $aspirante->biografia,
@@ -203,13 +195,30 @@ class ProfileController extends Controller
             $member->place_birth = $integrante['municipio_nacimiento_member'];
             $member->addres = $integrante['addressMember'];
             $member->phone1 = $integrante['phoneMember'];
-            //$member->pdf_identificacion = $integrante['nameMember'];
-            //$member->img_document_front = $integrante['nameMember'];
-            //$member->img_document_back = $integrante['nameMember'];
             $member->role = $integrante['rolMember'];
             $member->artist_id = $artist->id;
+
+            /* Guardar archivos del documento de los integrantes */
+            if ($integrante['fileType'] == '1') { // guardar imagenes                
+                $urlS3 = $this->uploadFile($integrante['imgDocfrente']);
+                if ($urlS3) $member->img_document_front = $urlS3;
+
+                $urlS3 = $this->uploadFile($integrante['imgDocAtras']);
+                if ($urlS3) $member->img_document_back = $urlS3;
+            } else { // guradar PDF                
+                $urlS3 = $this->uploadFile($integrante['pdfDocument']);
+                if ($urlS3) $member->pdf_identificacion = $urlS3;
+            }
             $member->save();
         }
+    }
+
+    /* funcion para subir los archivos al servidor s3 de amazon */
+    public function uploadFile($file) {
+        $currentFile = $file->store('pdfdoc', 's3');
+        Storage::disk('s3')->setVisibility($currentFile, 'public');
+        $urlS3 = Storage::disk('s3')->url($currentFile);
+        return $urlS3;
     }
 
 

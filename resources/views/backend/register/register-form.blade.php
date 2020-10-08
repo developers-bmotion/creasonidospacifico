@@ -252,7 +252,7 @@
                                 
                                 <div class="m-form__group form-group">
                                     <div class="col-lg-6 m-form__group-sub">
-                                        <label for="">Documento de identificación</label>
+                                        <label for="">Seleccione el tipo de formato para subir el documento de identificación</label>
                                         <div class="m-radio-inline">
                                             <label class="m-radio">
                                                 <input type="radio" name="aspirante[identificacionDoc]" value="1" checked="checked"> Imagen
@@ -515,7 +515,7 @@
                                 ======================================-->
                                 <div class="m-form__group form-group">
                                     <div class="col-lg-6 m-form__group-sub">
-                                        <label for="">Documento de identificación</label>
+                                        <label for="">Seleccione el tipo de formato para subir el documento de identificación</label>
                                         <div class="m-radio-inline">
                                             <label class="m-radio">
                                                 <input type="radio" name="beneficiario[identificacionDoc]" value="1" checked="checked"> Imagen
