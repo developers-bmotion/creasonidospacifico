@@ -12169,10 +12169,15 @@ strong {
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column; }
+    /*Inicio Edicion de flex */
 .m-grid.m-grid--hor:not(.m-grid--desktop):not(.m-grid--desktop-and-tablet):not(.m-grid--tablet):not(.m-grid--tablet-and-mobile):not(.m-grid--mobile).m-grid--root {
     -webkit-box-flex: 1;
-    flex: 1;
+    flex: 0.02;
     -ms-flex: 1 0 0px; }
+    .m-body {
+        flex: 1;
+    }
+    /* Fin edicion flex*/
 .m-grid.m-grid--hor:not(.m-grid--desktop):not(.m-grid--desktop-and-tablet):not(.m-grid--tablet):not(.m-grid--tablet-and-mobile):not(.m-grid--mobile) > .m-grid__item {
     -webkit-box-flex: 0;
     -ms-flex: none;

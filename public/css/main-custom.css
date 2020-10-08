@@ -1,0 +1,16 @@
+/* quita un poco de margen al formulario */
+.login-top{
+    padding: 20% 2rem 0 2rem !important;
+}
+/* Quita un poco de margen al boton de submit */
+.m-login__form-action{
+    margin: 2rem 0 !important;
+}
+
+/* div#app {
+    flex: 0.1 !important;
+}
+
+.m-grid__item.m-grid__item--fluid.m-grid.m-grid--ver-desktop.m-grid--desktop.m-body {
+    flex: 1 !important;
+} */

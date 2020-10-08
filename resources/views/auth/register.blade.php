@@ -209,7 +209,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     @enderror
 
                                     <p class="text-justify pt-3 pb-3">Confirma que tu dirección de correo eléctronico es
-                                        correcta, por que a esta dirección enviaremos información de tu registro.</p>
+                                        correcta, porque a esta dirección enviaremos información de tu registro.</p>
 
                                     <div class="row form-group m-form__group m-login__form-sub">
                                         <div class="col m--align-left">
