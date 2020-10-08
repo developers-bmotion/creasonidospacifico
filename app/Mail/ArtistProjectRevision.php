@@ -30,7 +30,7 @@ class ArtistProjectRevision extends Mailable
     public function build()
     {
         return $this
-            ->subject(__('Debes revisar tus datos'))
+            ->subject(__('CREA SONIDOS PACIFICO - DEBES ACTUALIZAR TUS DATOS'))
             ->markdown('emails.artist-project-revision')
             ->with('project',$this->project)
             ->with('artist',$this->artist_name)
