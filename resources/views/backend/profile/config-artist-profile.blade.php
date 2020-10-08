@@ -1,32 +1,41 @@
 @extends('backend.layout')
 
 @section('header')
-        <div class="d-flex align-items-center">
-            <div class="mr-auto">
-                <h3 class="m-subheader__title m-subheader__title--separator">{{ __('bienvenido') }}</h3>
-                <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
-                    <li class="m-nav__item m-nav__item--home">
-                        <a href="#" class="m-nav__link m-nav__link--icon">
-                            <i class="m-nav__link-icon la la-user"></i>
-                        </a>
-                    </li>
-                    <li class="m-nav__separator">-</li>
-                    <li class="m-nav__item">
-                        <a href="" class="m-nav__link">
-                            <span class="m-nav__link-text">{{__('perfil')}} {{ __('artista') }}</span>
-                        </a>
-                    </li>
-                    <li class="m-nav__separator">-</li>
-                    <li class="m-nav__item">
-                        <a href="" class="m-nav__link">
-                            <span class="m-nav__link-text"></span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div>
+    <div class="row">
+        <div class="col-md-4 col-lg-4 col-12">
+            <div class="d-flex align-items-center">
+                <div class="mr-auto">
+                    <h1 class="m-subheader__title--separator">Perfil del aspirante</h1>
+                </div>
+
             </div>
         </div>
+    </div>
+    <div class="row pt-4">
+        <div class="col-12">
+        @if($artist->projects[0]->status == 4)
+            <!--=====================================
+		        ALERTA PARA MOSTRAR EL ESTADO PENDIENTE
+            ======================================-->
+                <div class="m-alert m-alert--icon m-alert--outline alert alert-warning" role="alert">
+                    <div class="m-alert__icon">
+                        <i class="la la-warning"></i>
+                    </div>
+                    <div class="m-alert__text">
+                        Tu propuesta musical esta en estado <strong>Pendiente</strong>, click
+                        <strong data-toggle="modal" data-target="#verObservaciones"
+                                style="cursor: pointer">aquí</strong> para ver los detalles que debes ajustar.
+                        Al terminar y estar seguro que todo esta bien, volver a enviar.
+                    </div>
+                    <div class="m-alert__actions" style="width: 200px;">
+                        <button type="button" class="btn btn-warning btn-sm m-btn m-btn--pill m-btn--wide"
+                                style="color:#fff">Enviar propuesta musical nuevamente
+                        </button>
+                    </div>
+                </div>
+            @endif
+        </div>
+    </div>
 @stop
 @section('content')
     <div class="m-content">
@@ -38,10 +47,10 @@
             </div>
         @endif
         <div class="row">
-            <div class="col-xl-3 col-lg-4">
+            <div class="col-xl-3 col-lg-3">
                 @include('backend.profile.partials.sidebar-profile')
             </div>
-            <div class=" col-lg-8">
+            <div class=" col-lg-9">
                 <div class="m-portlet m-portlet--full-height">
 
                 <div class="m-portlet__body">
@@ -118,6 +127,34 @@
 
 
                         <!--end::Content-->
+
+    <div class="modal fade" id="verObservaciones" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">
+                        Observaciones </h5>
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        @foreach($artist->projects[0]->observations as $observations)
+                            <div class="col-12">
+                                {{ $observations->description }}
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+                <div class="modal-footer">
+
+                </div>
+            </div>
+        </div>
+    </div>
 
 @stop
 
