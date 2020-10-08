@@ -136,6 +136,9 @@
                                     @elseif($project->status == 7)
                                         <span
                                             class="m-badge m-badge--success m-badge--wide m-badge--rounded">Aceptado</span>
+                                    @elseif($project->status == 8)
+                                        <span
+                                            class="m-badge m-badge--warning m-badge--wide m-badge--rounded">No subsanado</span>
                                     @endif
                                 </div>
                             </div>

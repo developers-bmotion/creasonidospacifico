@@ -97,7 +97,7 @@ class ProjectsAdminController extends Controller
     public function rejected_project(Request $request){
         $id = $request->get('rejected');
         $rejected_project = Project::where('id',$id)->update([
-            'status' => 5
+            'status' => 8
         ]);
         $project = Project::where('id',$id)->with('artists.users')->first();
 

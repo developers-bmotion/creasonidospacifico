@@ -70,12 +70,12 @@ class ProfileController extends Controller
 
     /* metodo para actualizar datos del aspirante */
     public function profile_update_artist(Request $request, $id_artis) {
-        if ($request->lineaConvocatoria == '1') { // Este caso es para solistas   
+        if ($request->lineaConvocatoria == '1') { // Este caso es para solistas
             if ($request->actuaraComo == '1'){
                 /* solo se guarda el aspirante */
                 $this->insertAspirante($id_artis, $request);
-                return redirect()->route('profile.artist');                
-            } else { // se debe guardar los datos del representante                 
+                return redirect()->route('profile.artist');
+            } else { // se debe guardar los datos del representante
                 $this->insertAspirante($id_artis, $request);
 
                 $artist = Artist::select('id')->where('user_id', $id_artis)->first();
@@ -91,7 +91,7 @@ class ProfileController extends Controller
 
                 return redirect()->route('profile.artist');
             }
-        } else { // Para este caso se debe guardar el representante             
+        } else { // Para este caso se debe guardar el representante
             $this->insertAspirante($id_artis, $request);
 
             $artist = Artist::select('id')->where('user_id', $id_artis)->first();
@@ -100,7 +100,7 @@ class ProfileController extends Controller
 
             /* se guardan los datos del los integrantes del grupo */
             if ($existTeam == null) $this->insertGroupMembers($request, $artist);
-            
+
             return redirect()->route('profile.artist');
         }
     }
@@ -205,13 +205,13 @@ class ProfileController extends Controller
             $member->artist_id = $artist->id;
 
             /* Guardar archivos del documento de los integrantes */
-            if ($integrante['fileType'] == '1') { // guardar imagenes                
+            if ($integrante['fileType'] == '1') { // guardar imagenes
                 $urlS3 = $this->uploadFile($integrante['imgDocfrente']);
                 if ($urlS3) $member->img_document_front = $urlS3;
 
                 $urlS3 = $this->uploadFile($integrante['imgDocAtras']);
                 if ($urlS3) $member->img_document_back = $urlS3;
-            } else { // guradar PDF                
+            } else { // guradar PDF
                 $urlS3 = $this->uploadFile($integrante['pdfDocument']);
                 if ($urlS3) $member->pdf_identificacion = $urlS3;
             }
@@ -406,16 +406,18 @@ class ProfileController extends Controller
     {
 
         $user = User::where('id', auth()->user()->id)->first();
-        $pdf_cedula =  str_replace('storage', '', $user->pdf_cedula);
+        // $pdf_cedula =  str_replace('storage', '', $user->pdf_cedula);
         //Elimnar pdf de cédula o tarjeta
-        Storage::delete($pdf_cedula);
+        Storage::disk('s3')->delete($user->pdf_cedula);
         //Agregar cedula o tarjeta de identidad
-        $pdf_cedula_save = $request->file('pdf_cedula_name')->store('pdfidentificacion');
+        $pdf_cedula_save = $request->file('pdf_cedula_name')->store('pdfdoc','s3');
+        Storage::disk('s3')->setVisibility($pdf_cedula_save, 'public');
+        $urlS3 = Storage::disk('s3')->url($pdf_cedula_save);
         User::where('id', auth()->user()->id)->update([
-            'pdf_cedula' => '/storage/' . $pdf_cedula_save
+            'pdf_cedula' => $urlS3
         ]);
 
-        return $pdf_cedula;
+        return $urlS3;
     }
 
     public function pdf_cedula_beneficiario(Request $request)
@@ -425,16 +427,18 @@ class ProfileController extends Controller
         $artist = Artist::where('user_id', auth()->user()->id)->first();
         $beneficiario = Beneficiary::where('artist_id', $artist->id)->first();
         // dd($beneficiario);
-        $pdf_cedula =  str_replace('storage', '', $beneficiario->pdf_documento);
+        // $pdf_cedula =  str_replace('storage', '', $beneficiario->pdf_documento);
         //Elimnar pdf de cédula o tarjeta
-        Storage::delete($pdf_cedula);
+        Storage::disk('s3')->delete($beneficiario->pdf_documento);
         //Agregar cedula o tarjeta de identidad
-        $pdf_cedula_save = $request->file('pdf_cedula_name')->store('pdfidentificacion');
+        $pdf_cedula_save = $request->file('pdf_cedula_name')->store('pdfdoc','s3');
+        Storage::disk('s3')->setVisibility($pdf_cedula_save, 'public');
+        $urlS3 = Storage::disk('s3')->url($pdf_cedula_save);
         Beneficiary::where('id', $beneficiario->id)->update([
-            'pdf_documento' => '/storage/' . $pdf_cedula_save
+            'pdf_documento' => $urlS3
         ]);
 
-        return $pdf_cedula;
+        return $urlS3;
     }
     public function update_audio(Request $request)
     {
@@ -475,16 +479,18 @@ class ProfileController extends Controller
         // $artist = Artist::where('user_id', auth()->user()->id)->first();
         $team = Team::where('id',$teamid)->first();
         //  dd($team);
-        $pdf_cedula =  str_replace('storage', '', $team->pdf_identificacion);
+        // $pdf_cedula =  str_replace('storage', '', $team->pdf_identificacion);
         //Elimnar pdf de cédula o tarjeta
-        Storage::delete($pdf_cedula);
+        Storage::disk('s3')->delete($team->pdf_identificacion);
         //Agregar cedula o tarjeta de identidad
-        $pdf_cedula_save = $request->file('pdf_cedula_name')->store('pdfidentificacion');
+        $pdf_cedula_save = $request->file('pdf_cedula_name')->store('pdfdoc','s3');
+        Storage::disk('s3')->setVisibility($pdf_cedula_save, 'public');
+        $urlS3 = Storage::disk('s3')->url($pdf_cedula_save);
         Team::where('id', $teamid)->update([
-            'pdf_identificacion' => '/storage/' . $pdf_cedula_save
+            'pdf_identificacion' => $urlS3
         ]);
 
-        return $pdf_cedula;
+        return $urlS3;
     }
 
 

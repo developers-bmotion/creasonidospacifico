@@ -21,7 +21,7 @@
             <button id="btn_rejected_admin" class="btn btn-danger m-btn m-btn--icon">
         <span>
             <i class="la la-close"></i>
-            <span>{{ __('rechazar') }}</span>
+            <span>{{ __('No subsanado') }}</span>
         </span>
             </button>
             <input type="hidden" name="rejected" value="{{ $project->id }}">
