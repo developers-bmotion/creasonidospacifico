@@ -37,6 +37,7 @@
                     <div class="m-section">
                         <div class="row">
                             <div class="col-11 player">
+
                                 <audio preload="auto" controls>
                                     <source src="{{ $project->audio }}">
                                     {{-- <input name="project_id" id="project_id" type="hidden" value="{{ $project->id }}"> --}}

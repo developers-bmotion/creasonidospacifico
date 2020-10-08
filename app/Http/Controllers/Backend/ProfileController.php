@@ -35,7 +35,7 @@ class ProfileController extends Controller
 
 
         /*   dd($departamentos); */
-        $artist = Artist::where('user_id', auth()->user()->id)->with('city.departaments','users','teams','artistType','personType','beneficiary.documentType','beneficiary.city.departaments','beneficiary.expeditionPlace.departaments','teams.expeditionPlace.departaments','expeditionPlace.departaments')->first();
+        $artist = Artist::where('user_id', auth()->user()->id)->with('projects.category','projects.observations', 'city.departaments','users','teams','artistType','personType','beneficiary.documentType','beneficiary.city.departaments','beneficiary.expeditionPlace.departaments','teams.expeditionPlace.departaments','expeditionPlace.departaments')->first();
         return view('backend.profile.profile-artist', compact('documenttype', 'artist', 'departamentos', 'persontypes', 'artisttypes', 'leveltypes'));
     }
 
@@ -71,7 +71,7 @@ class ProfileController extends Controller
     {
         dd($request);
         if ($request->lineaConvocatoria == '1') {
-            /* Este caso es para solistas */ 
+            /* Este caso es para solistas */
 
             if ($request->actuaraComo == '1'){
                 /* solo se guarda el aspirante */
@@ -82,31 +82,31 @@ class ProfileController extends Controller
                 /* se debe guardar los datos del representante */
                 $this->insertAspirante($id_artis, $request);
 
-                $artist = Artist::select('id')->where('user_id', $id_artis)->first();                
+                $artist = Artist::select('id')->where('user_id', $id_artis)->first();
                 $sitieneartist = null;
                 $sitieneartist = Beneficiary::where('artist_id', $artist->id)->first();
 
                 /* se debe guardar los datos del aspirante */
                 if ($sitieneartist) {
-                    $this->updateBeneficiario($request, $artist->id);  
+                    $this->updateBeneficiario($request, $artist->id);
                 } else {
-                    $this->createBeneficiario($request, $artist->id);  
+                    $this->createBeneficiario($request, $artist->id);
                 }
 
                 return redirect()->route('profile.artist');
             }
         } else {
-            /* Para este caso se debe guardar el representante */ 
+            /* Para este caso se debe guardar el representante */
             $this->insertAspirante($id_artis, $request);
-            
-            $artist = Artist::select('id')->where('user_id', $id_artis)->first();  
+
+            $artist = Artist::select('id')->where('user_id', $id_artis)->first();
             $existTeam = null;
             $existTeam = Team::where('artist_id', $artist->id)->first();
 
             /* se guardan los datos del los integrantes del grupo */
             if ($existTeam == null) {
-                $this->insertGroupMembers($request, $artist);                
-            } 
+                $this->insertGroupMembers($request, $artist);
+            }
 
             return redirect()->route('profile.artist');
         }
@@ -146,7 +146,7 @@ class ProfileController extends Controller
     public function createBeneficiario($request, $idArtst) {
         $beneficiario = (object) $request->beneficiario;
 
-        Beneficiary::create([        
+        Beneficiary::create([
             'document_type' => $beneficiario->documentType,
             'identification' => $beneficiario->identificacion,
             'name' => $beneficiario->name,
@@ -162,7 +162,7 @@ class ProfileController extends Controller
             'cities_id' => $beneficiario->municipioNacimiento,
             'township' => $request->vereda,
             'expedition_place' => $request->municipioExpedida,
-            'artist_id' =>  $idArtst        
+            'artist_id' =>  $idArtst
         ]);
     }
 
@@ -170,7 +170,7 @@ class ProfileController extends Controller
     public function updateBeneficiario($request, $idArtst) {
         $beneficiario = (object) $request->beneficiario;
 
-        Beneficiary::where('artist_id', '=', $idArtst)->update([        
+        Beneficiary::where('artist_id', '=', $idArtst)->update([
             'document_type' => $beneficiario->documentType,
             'identification' => $beneficiario->identificacion,
             'name' => $beneficiario->name,
@@ -186,7 +186,7 @@ class ProfileController extends Controller
             'cities_id' => $beneficiario->municipioNacimiento,
             'township' => $request->vereda,
             'expedition_place' => $request->municipioExpedida,
-            //'artist_id' =>  $idArtst        
+            //'artist_id' =>  $idArtst
         ]);
     }
 
@@ -340,7 +340,7 @@ class ProfileController extends Controller
     }
 
     public function uploadImageDocument(Request $request)
-    {        
+    {
         $image = $request->file('file')->store('imagendoc', 's3');
         Storage::disk('s3')->setVisibility($image, 'public');
         $urlS3 = Storage::disk('s3')->url($image);
@@ -349,7 +349,7 @@ class ProfileController extends Controller
     }
 
     public function uploadPDFDocument(Request $request)
-    {        
+    {
         $image = $request->file('file')->store('pdfdoc', 's3');
         Storage::disk('s3')->setVisibility($image, 'public');
         $urlS3 = Storage::disk('s3')->url($image);

@@ -151,6 +151,10 @@ class Project extends Model
         return $this->hasMany(Reward::class)->select('id','title','description','price','shipments','estimated','project_id','created_at');
     }
 
+    public function observations(){
+        return $this->hasMany(ProjectObservation::class);
+    }
+
     public function artists(){
         return $this->belongsToMany(Artist::class,'artist_projects','project_id','artist_id');
     }
