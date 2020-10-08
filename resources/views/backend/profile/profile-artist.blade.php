@@ -12,28 +12,33 @@
     </div>
     <div class="row pt-4">
         <div class="col-12">
-        @if($artist->projects[0]->status == 4)
-            <!--=====================================
+
+        @if(count($artist->projects) !== 0)
+            @if($artist->projects[0]->status == 4)
+                <!--=====================================
 		        ALERTA PARA MOSTRAR EL ESTADO PENDIENTE
             ======================================-->
-                <div class="m-alert m-alert--icon m-alert--outline alert alert-warning" role="alert">
-                    <div class="m-alert__icon">
-                        <i class="la la-warning"></i>
+                    <div class="m-alert m-alert--icon m-alert--outline alert alert-warning" role="alert">
+                        <div class="m-alert__icon">
+                            <i class="la la-warning"></i>
+                        </div>
+                        <div class="m-alert__text">
+                            Tu propuesta musical esta en estado <strong>Pendiente</strong>, click
+                            <strong data-toggle="modal" data-target="#verObservaciones"
+                                    style="cursor: pointer">aquí</strong> para ver los detalles que debes ajustar.
+                            Al terminar y estar seguro que todo esta bien, volver a enviar.
+                        </div>
+                        <div class="m-alert__actions" style="width: 200px;">
+                            <button type="button" class="btn btn-warning btn-sm m-btn m-btn--pill m-btn--wide"
+                                    style="color:#fff">Enviar propuesta musical nuevamente
+                            </button>
+                        </div>
                     </div>
-                    <div class="m-alert__text">
-                        Tu propuesta musical esta en estado <strong>Pendiente</strong>, click
-                        <strong data-toggle="modal" data-target="#verObservaciones"
-                                style="cursor: pointer">aquí</strong> para ver los detalles que debes ajustar.
-                        Al terminar y estar seguro que todo esta bien, volver a enviar.
-                    </div>
-                    <div class="m-alert__actions" style="width: 200px;">
-                        <button type="button" class="btn btn-warning btn-sm m-btn m-btn--pill m-btn--wide"
-                                style="color:#fff">Enviar propuesta musical nuevamente
-                        </button>
-                    </div>
-                </div>
+                @endif
             @endif
+
         </div>
+
     </div>
 @stop
 @section('content')
@@ -89,12 +94,15 @@
                                         Información del aspirante o representante
                                     </a>
                                 </li>
-                                <li class="nav-item m-tabs__item">
-                                    <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_2"
-                                       role="tab">
-                                        Propuesta Musical
-                                    </a>
-                                </li>
+
+                                @if(count($artist->projects) !== 0)
+                                    <li class="nav-item m-tabs__item">
+                                        <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_2"
+                                           role="tab">
+                                            Propuesta Musical
+                                        </a>
+                                    </li>
+                                @endif
                                 @if(count($artist->beneficiary) !== 0)
                                     <li class="nav-item m-tabs__item">
                                         <a class="nav-link m-tabs__link" data-toggle="tab"
@@ -267,94 +275,96 @@
                             </div>
 
                         </div>
-                        <!--=====================================
-                                       MENSAJES
-                                        ======================================-->
-                        <div class="tab-pane " id="m_user_profile_tab_2">
-                            <div class="m-portlet__body">
-                                <div class="row">
-                                    <div class="col-12 player">
-                                        <div class="form-group">
-                                            <h5 style="font-weight: bold">Tu canción:</h5>
-                                        </div>
-                                        <audio preload="auto" controls>
-                                            <source src="{{ $artist->projects[0]->audio }}">
-                                        </audio>
 
-                                    </div>
-                                </div>
-                                <div class="row pt-4">
-                                    <div class="col-md-2 col-lg-2 col-12">
-                                        <div class="form-group">
-                                            <h5 style="font-weight: bold">Estado:</h5>
-                                        </div>
-                                        <div class="form-group">
-                                            @if($artist->projects[0]->status == 1)
-                                                <span
-                                                    class="m-badge m-badge--metal m-badge--wide m-badge--rounded">{{ __('Revision') }}</span>
-                                            @endif
-                                            @if($artist->projects[0]->status == 2)
-                                                <span class="m-badge m-badge--brand m-badge--wide m-badge--rounded"
-                                                      style="background-color: #9816f4 !important;">Pre aprobado</span>
-                                            @endif
-                                            @if($artist->projects[0]->status == 3)
-                                                <span class="m-badge m-badge--success m-badge--wide m-badge--rounded">Aprobado</span>
-                                            @endif
-                                            @if($artist->projects[0]->status == 4)
-                                                <span class="m-badge m-badge--warning m-badge--wide"
-                                                      style="color:#fff">{{ __('Pendiente') }}</span>
-                                            @endif
-                                            @if($artist->projects[0]->status == 5)
-                                                <span
-                                                    class="m-badge m-badge--danger m-badge--wide m-badge--rounded">{{ __('Rechazado') }}</span>
-                                            @endif
-                                            @if($artist->projects[0]->status == 6)
-                                                <span
-                                                    class="m-badge m-badge--metal m-badge--wide m-badge--rounded">De nuevo en revisión</span>
-                                            @endif
-                                            @if($artist->projects[0]->status == 7)
-                                                <span class="m-badge m-badge--success m-badge--wide m-badge--rounded">Aceptado</span>
-                                            @endif
+                        @if(count($artist->projects) !== 0)
+                            <div class="tab-pane " id="m_user_profile_tab_2">
+                                <div class="m-portlet__body">
+                                    <div class="row">
+                                        <div class="col-12 player">
+                                            <div class="form-group">
+                                                <h5 style="font-weight: bold">Tu canción:</h5>
+                                            </div>
+                                            <audio preload="auto" controls>
+                                                <source src="{{ $artist->projects[0]->audio }}">
+                                            </audio>
+
                                         </div>
                                     </div>
-                                    <div class="col-md-3 col-lg-3 col-12">
-                                        <div class="form-group">
-                                            <h5 style="font-weight: bold">Nombre de la canción:</h5>
+                                    <div class="row pt-4">
+                                        <div class="col-md-2 col-lg-2 col-12">
+                                            <div class="form-group">
+                                                <h5 style="font-weight: bold">Estado:</h5>
+                                            </div>
+                                            <div class="form-group">
+                                                @if($artist->projects[0]->status == 1)
+                                                    <span
+                                                        class="m-badge m-badge--metal m-badge--wide m-badge--rounded">{{ __('Revision') }}</span>
+                                                @endif
+                                                @if($artist->projects[0]->status == 2)
+                                                    <span class="m-badge m-badge--brand m-badge--wide m-badge--rounded"
+                                                          style="background-color: #9816f4 !important;">Pre aprobado</span>
+                                                @endif
+                                                @if($artist->projects[0]->status == 3)
+                                                    <span
+                                                        class="m-badge m-badge--success m-badge--wide m-badge--rounded">Aprobado</span>
+                                                @endif
+                                                @if($artist->projects[0]->status == 4)
+                                                    <span class="m-badge m-badge--warning m-badge--wide"
+                                                          style="color:#fff">{{ __('Pendiente') }}</span>
+                                                @endif
+                                                @if($artist->projects[0]->status == 5)
+                                                    <span
+                                                        class="m-badge m-badge--danger m-badge--wide m-badge--rounded">{{ __('Rechazado') }}</span>
+                                                @endif
+                                                @if($artist->projects[0]->status == 6)
+                                                    <span
+                                                        class="m-badge m-badge--metal m-badge--wide m-badge--rounded">De nuevo en revisión</span>
+                                                @endif
+                                                @if($artist->projects[0]->status == 7)
+                                                    <span
+                                                        class="m-badge m-badge--success m-badge--wide m-badge--rounded">Aceptado</span>
+                                                @endif
+                                            </div>
                                         </div>
-                                        <div class="form-group">
-                                            {{ $artist->projects[0]->title }}
+                                        <div class="col-md-3 col-lg-3 col-12">
+                                            <div class="form-group">
+                                                <h5 style="font-weight: bold">Nombre de la canción:</h5>
+                                            </div>
+                                            <div class="form-group">
+                                                {{ $artist->projects[0]->title }}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 col-lg-3 col-12">
+                                            <div class="form-group">
+                                                <h5 style="font-weight: bold">Autor:</h5>
+                                            </div>
+                                            <div class="form-group">
+                                                {{ $artist->projects[0]->author }}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-lg-4 col-12">
+                                            <div class="form-group">
+                                                <h5 style="font-weight: bold">{{ __('genero') }}:</h5>
+                                            </div>
+                                            <div class="form-group">
+                                                {{ $artist->projects[0]->category->category}}
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-3 col-lg-3 col-12">
-                                        <div class="form-group">
-                                            <h5 style="font-weight: bold">Autor:</h5>
-                                        </div>
-                                        <div class="form-group">
-                                            {{ $artist->projects[0]->author }}
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 col-lg-4 col-12">
-                                        <div class="form-group">
-                                            <h5 style="font-weight: bold">{{ __('genero') }}:</h5>
-                                        </div>
-                                        <div class="form-group">
-                                            {{ $artist->projects[0]->category->category}}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row pt-4">
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <h5 style="font-weight: bold">Descripción o reseña:</h5>
-                                        </div>
-                                        <div class="form-group" style="text-align: justify">
-                                            {{ $artist->projects[0]->description }}
+                                    <div class="row pt-4">
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <h5 style="font-weight: bold">Descripción o reseña:</h5>
+                                            </div>
+                                            <div class="form-group" style="text-align: justify">
+                                                {{ $artist->projects[0]->description }}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <!--=====================================
+                        @endif
+                    <!--=====================================
                                        CONFIGURACIONES
                                         ======================================-->
                         @if(count($artist->teams) !== 0)
@@ -984,11 +994,13 @@
                         </div>
                         <div class="modal-body">
                             <div class="row">
-                                @foreach($artist->projects[0]->observations as $observations)
-                                    <div class="col-12">
-                                        {{ $observations->description }}
-                                    </div>
-                                @endforeach
+                                @if(count($artist->projects) !== 0)
+                                    @foreach($artist->projects[0]->observations as $observations)
+                                        <div class="col-12">
+                                            {{ $observations->description }}
+                                        </div>
+                                    @endforeach
+                                @endif
                             </div>
                         </div>
                         <div class="modal-footer">

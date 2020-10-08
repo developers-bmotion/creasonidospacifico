@@ -13,26 +13,28 @@
     </div>
     <div class="row pt-4">
         <div class="col-12">
-        @if($artist->projects[0]->status == 4)
-            <!--=====================================
+        @if(count($artist->projects) !== 0)
+            @if($artist->projects[0]->status == 4)
+                <!--=====================================
 		        ALERTA PARA MOSTRAR EL ESTADO PENDIENTE
             ======================================-->
-                <div class="m-alert m-alert--icon m-alert--outline alert alert-warning" role="alert">
-                    <div class="m-alert__icon">
-                        <i class="la la-warning"></i>
+                    <div class="m-alert m-alert--icon m-alert--outline alert alert-warning" role="alert">
+                        <div class="m-alert__icon">
+                            <i class="la la-warning"></i>
+                        </div>
+                        <div class="m-alert__text">
+                            Tu propuesta musical esta en estado <strong>Pendiente</strong>, click
+                            <strong data-toggle="modal" data-target="#verObservaciones"
+                                    style="cursor: pointer">aquí</strong> para ver los detalles que debes ajustar.
+                            Al terminar y estar seguro que todo esta bien, volver a enviar.
+                        </div>
+                        <div class="m-alert__actions" style="width: 200px;">
+                            <button type="button" class="btn btn-warning btn-sm m-btn m-btn--pill m-btn--wide"
+                                    style="color:#fff">Enviar propuesta musical nuevamente
+                            </button>
+                        </div>
                     </div>
-                    <div class="m-alert__text">
-                        Tu propuesta musical esta en estado <strong>Pendiente</strong>, click
-                        <strong data-toggle="modal" data-target="#verObservaciones"
-                                style="cursor: pointer">aquí</strong> para ver los detalles que debes ajustar.
-                        Al terminar y estar seguro que todo esta bien, volver a enviar.
-                    </div>
-                    <div class="m-alert__actions" style="width: 200px;">
-                        <button type="button" class="btn btn-warning btn-sm m-btn m-btn--pill m-btn--wide"
-                                style="color:#fff">Enviar propuesta musical nuevamente
-                        </button>
-                    </div>
-                </div>
+                @endif
             @endif
         </div>
     </div>
@@ -53,80 +55,80 @@
             <div class=" col-lg-9">
                 <div class="m-portlet m-portlet--full-height">
 
-                <div class="m-portlet__body">
-                    <div class="">
-                        <div class="" data-code-preview="true" data-code-html="true"
-                             data-code-js="false">
-                            <div class="m-demo__preview">
-                                <!-- CAMBIAR LA CONTRASEÑA DEL USUARIO, PERO PRIMERO SE VALIDA SI EL USUARIO ES NO ES DE ALGUNA RED SOCIAL -->
-                                @if(!$artist->users->socialAcounts)
-                                    <form method="post"
-                                          action="{{ route('update.password.artist') }}">
-                                        @csrf
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <div
-                                                    class="form-group m-form__group {{$errors->has('password')? 'has-danger':''}}">
-                                                    <label
-                                                        for="exampleInputPassword1">{{ __('actualizar_contraseña') }}</label>
-                                                    <input type="password" name="password"
-                                                           class="form-control m-input"
-                                                           id="exampleInputPassword1"
-                                                           placeholder="{{ __('actualizar_contraseña') }}">
-                                                    {!! $errors->first('password','<div class="form-control-feedback">*:message</div>')!!}
+                    <div class="m-portlet__body">
+                        <div class="">
+                            <div class="" data-code-preview="true" data-code-html="true"
+                                 data-code-js="false">
+                                <div class="m-demo__preview">
+                                    <!-- CAMBIAR LA CONTRASEÑA DEL USUARIO, PERO PRIMERO SE VALIDA SI EL USUARIO ES NO ES DE ALGUNA RED SOCIAL -->
+                                    @if(!$artist->users->socialAcounts)
+                                        <form method="post"
+                                              action="{{ route('update.password.artist') }}">
+                                            @csrf
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div
+                                                        class="form-group m-form__group {{$errors->has('password')? 'has-danger':''}}">
+                                                        <label
+                                                            for="exampleInputPassword1">{{ __('actualizar_contraseña') }}</label>
+                                                        <input type="password" name="password"
+                                                               class="form-control m-input"
+                                                               id="exampleInputPassword1"
+                                                               placeholder="{{ __('actualizar_contraseña') }}">
+                                                        {!! $errors->first('password','<div class="form-control-feedback">*:message</div>')!!}
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div
+                                                        class="form-group m-form__group {{$errors->has('password_confirmation')? 'has-danger':''}}">
+                                                        <label
+                                                            for="exampleInputPassword1">{{ __('confirmar_contraseña') }}</label>
+                                                        <input type="password"
+                                                               name="password_confirmation"
+                                                               class="form-control m-input"
+                                                               id="exampleInputPassword1"
+                                                               placeholder="{{ __('confirmar_contraseña') }}">
+                                                        {!! $errors->first('password_confirmation','<div class="form-control-feedback">*:message</div>')!!}
+                                                    </div>
+                                                    <button type="submit"
+                                                            class="btn btn-outline-success btn-sm m-btn m-btn--custom pull-right">{{ __('actualizar') }}</button>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6">
-                                                <div
-                                                    class="form-group m-form__group {{$errors->has('password_confirmation')? 'has-danger':''}}">
-                                                    <label
-                                                        for="exampleInputPassword1">{{ __('confirmar_contraseña') }}</label>
-                                                    <input type="password"
-                                                           name="password_confirmation"
-                                                           class="form-control m-input"
-                                                           id="exampleInputPassword1"
-                                                           placeholder="{{ __('confirmar_contraseña') }}">
-                                                    {!! $errors->first('password_confirmation','<div class="form-control-feedback">*:message</div>')!!}
+                                        </form>
+                                    @endif
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group m-form__group ">
+                                                <label for="">Imagén de Perfil</label>
+                                                <div class="m-dropzone dropzone m-dropzone--success"
+                                                     action="inc/api/dropzone/upload.php"
+                                                     id="m-dropzone-three">
+                                                    <div
+                                                        class="m-dropzone__msg dz-message needsclick">
+                                                        <h3 class="m-dropzone__msg-title">{{ __('actualizar_foto_perfil') }}</h3>
+                                                        <span
+                                                            class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                                    </div>
                                                 </div>
-                                                <button type="submit"
-                                                        class="btn btn-outline-success btn-sm m-btn m-btn--custom pull-right">{{ __('actualizar') }}</button>
                                             </div>
                                         </div>
-                                    </form>
-                                @endif
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="form-group m-form__group ">
-                                            <label for="">Imagén de Perfil</label>
-                                            <div class="m-dropzone dropzone m-dropzone--success"
-                                                 action="inc/api/dropzone/upload.php"
-                                                 id="m-dropzone-three">
-                                                <div
-                                                    class="m-dropzone__msg dz-message needsclick">
-                                                    <h3 class="m-dropzone__msg-title">{{ __('actualizar_foto_perfil') }}</h3>
-                                                    <span
-                                                        class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
 
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 </div>
             </div>
 
         </div>
 
 
-                                <!--end::m-widget5-->
+        <!--end::m-widget5-->
     </div>
 
 
-                        <!--end::Content-->
+    <!--end::Content-->
 
     <div class="modal fade" id="verObservaciones" tabindex="-1" role="dialog"
          aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -142,11 +144,14 @@
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        @foreach($artist->projects[0]->observations as $observations)
-                            <div class="col-12">
-                                {{ $observations->description }}
-                            </div>
-                        @endforeach
+                        @if(count($artist->projects) !== 0)
+                            @foreach($artist->projects[0]->observations as $observations)
+                                <div class="col-12">
+                                    {{ $observations->description }}
+                                </div>
+                            @endforeach
+                        @endif
+
                     </div>
                 </div>
                 <div class="modal-footer">

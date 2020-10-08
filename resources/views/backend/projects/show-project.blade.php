@@ -36,14 +36,39 @@
                 <div class="m-portlet__body">
                     <div class="m-section">
                         <div class="row">
-                            <div class="col-11 player">
-
+                            <div class="col-12 player" style="padding-right: 3rem;">
+                                <label class="form-control-label" form="nombreProyecto">
+                                    Canción principal:</label>
                                 <audio preload="auto" controls>
                                     <source src="{{ $project->audio }}">
                                     {{-- <input name="project_id" id="project_id" type="hidden" value="{{ $project->id }}"> --}}
                                 </audio>
 
                             </div>
+                            <div class="secondary_audios col-md-12 row mt-5">
+                            @if($project->audio_secundary_two)
+                            <div class="col-6 player">
+                                <label class="form-control-label" form="nombreProyecto">
+                                    Canción extra uno(no participa en el concurso):</label>
+                                <audio preload="auto" controls>
+                                    <source src="{{ $project->audio_secundary_two}}">
+                                    {{-- <input name="project_id" id="project_id" type="hidden" value="{{ $project->id }}"> --}}
+                                </audio>
+
+                            </div>
+                            @endif
+                            @if($project->audio_secundary_one)
+                            <div class="col-6 player">
+                                <label class="form-control-label" form="nombreProyecto">
+                                    Canción extra dos(no participa en el concurso):</label>
+                                <audio preload="auto" controls>
+                                    <source src="{{ $project->audio_secundary_one }}">
+                                    {{-- <input name="project_id" id="project_id" type="hidden" value="{{ $project->id }}"> --}}
+                                </audio>
+
+                            </div>
+                            @endif
+                        </div>
                             {{-- @dd(\App\User::navigation()); --}}
                             @if(\App\User::navigation() == "Artist")
                             <div class="row drop_audio col-12" style="display: none">

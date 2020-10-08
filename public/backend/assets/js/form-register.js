@@ -163,6 +163,14 @@ function addViewFormMembers(member) {
                 <!-- CARGAR DOCUMENTO -->
                 ${ addViewUploadArchiveMember(member) }
 
+                <div class="form-group m-form__group row">
+                    <div class="col-lg-6 m-form__group-sub">
+                        <label class="form-control-label">Rol artistico</label>
+                        <input type="num" name="integrantes[${member}][rolMember]" class="form-control m-input" placeholder="" value="">                        
+                        <span class="m-form__help">Ingrese el rol que desempeña dentro del grupo (Guitarrista, Bocalista, Pianosta, etc.)</span>
+                    </div>
+                </div>
+
                 <div class="m-separator m-separator--dashed m-separator--lg"></div>
 
                 <div class="m-form__section">
@@ -276,90 +284,50 @@ function eventOnChangeDepartamentos(element, tipo, member) {
 
 function addViewUploadArchiveMember(member) {
     return `<div class="form-group m-form__group row">
-                <div class="col-lg-6 m-form__group-sub">
-                    <label for="">Pdf Cédula</label>
-                    <div class="m-dropzone pdf_cedula_dropzone m-dropzone--success"
-                        action="inc/api/dropzone/upload.php" id="m-dropzone-three">
-                        <div class="m-dropzone__msg dz-message needsclick">
-                            <h3 class="m-dropzone__msg-title">Subir documento de identificación</h3>
-                            <span class="m-dropzone__msg-desc">Arrastra, o has click aqui para subir</span>
-                        </div>
+                <div class="col-lg-12 m-form__group-sub">
+                    <label for="">Documento de identificación</label>
+                    <div class="m-radio-inline">
+                        <label class="m-radio">
+                            <input type="radio" onClick="changeOptionDocument(this, ${ member })" name="integrantes_identificacionDoc_${ member }" value="1" checked="checked"> Imagen
+                            <span></span>
+                        </label>
+                        <label class="m-radio">
+                            <input type="radio" onClick="changeOptionDocument(this, ${ member })" name="integrantes_identificacionDoc_${ member }" value="2"> PDF
+                            <span></span>
+                        </label>                                    
                     </div>
                 </div>
 
-                <div class="col-lg-6 m-form__group-sub">
-                    <label class="form-control-label">Rol artistico</label>
-                    <input type="num" name="integrantes[${member}][rolMember]" class="form-control m-input" placeholder="" value="">                        
-                    <span class="m-form__help">Ingrese el rol que desempeña dentro del grupo (Guitarrista, Bocalista, Pianosta, etc.)</span>
+                <div id="image-docuemnt-integrantes-${ member }" class="col-lg-12 form-group m-form__group row">                                                                       
+                    <div class="col-lg-6 m-form__group-sub">
+                        <label for="">Imagen documento identificación frente</label>
+                        <input type="file" name="integrantes[${member}][imgDocfrente]" class="form-control-file" style="border: none;" />
+                    </div>
+                    <div class="col-lg-6 m-form__group-sub">
+                        <label for="">Imagen documento identificación atras</label>
+                        <input type="file" name="integrantes[${member}][imgDocAtras]" class="form-control-file" style="border: none;" />
+                    </div>
                 </div>
-            </div>`;
 
-            /* <div class="m-form__group form-group">
-                                    <div class="col-lg-6 m-form__group-sub">
-                                        <label for="">Documento de identificación</label>
-                                        <div class="m-radio-inline">
-                                            <label class="m-radio">
-                                                <input type="radio" name="aspirante[identificacionDoc]" value="1" checked="checked"> Imagen
-                                                <span></span>
-                                            </label>
-                                            <label class="m-radio">
-                                                <input type="radio" name="aspirante[identificacionDoc]" value="2"> PDF
-                                                <span></span>
-                                            </label>                                    
-                                        </div>
-                                    </div>
-                                    
-                                    <div id="image-docuemnt-aspirante" class="form-group m-form__group row">                                                                       
-                                        <div class="col-lg-6 m-form__group-sub">
-                                            <label for="">Imagen documento identificación frente</label>
-                                            <div class="m-dropzone file-image-document-aspirante-frente m-dropzone--success"
-                                                action="inc/api/dropzone/upload.php" id="m-dropzone-three">
-                                                <div class="m-dropzone__msg dz-message needsclick">
-                                                    <h3 class="m-dropzone__msg-title">Subir documento de identificación</h3>
-                                                    <span class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 m-form__group-sub">
-                                            <label for="">Imagen documento identificación atras</label>
-                                            <div class="m-dropzone file-image-document-aspirante-atras m-dropzone--success"
-                                                action="inc/api/dropzone/upload.php" id="m-dropzone-three">
-                                                <div class="m-dropzone__msg dz-message needsclick">
-                                                    <h3 class="m-dropzone__msg-title">Subir documento de identificación</h3>
-                                                    <span class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-    
-                                    <div id="pdf-docuemnt-aspirante" style="display: none" class="form-group m-form__group row">                                                                       
-                                        <div class="col-lg-6 m-form__group-sub">
-                                            <label for="">PDF documento identificación </label>
-                                            <div class="m-dropzone file-pdf-document-aspirante m-dropzone--success"
-                                                 action="inc/api/dropzone/upload.php" id="m-dropzone-three">
-                                                <div class="m-dropzone__msg dz-message needsclick">
-                                                    <h3 class="m-dropzone__msg-title">Subir documento de identificación</h3>
-                                                    <span class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>   */
+                <div id="pdf-docuemnt-integrantes-${ member }" style="display: none" class="col-lg-12 m-form__group-sub">
+                    <label for="">PDF documento identificación </label>
+                    <input type="file" name="integrantes[${member}][pdfDocument]" class="form-control-file" style="border: none;" />
+                </div>
+            </div>
+        </div>`;            
 }
 
-var dropMember = new Dropzone('.pdf_cedula_dropzone', {      
-    url: '/upload-pdf-document',
-    acceptedFiles: "application/pdf",
-    maxFiles: 1,
-    paramName: 'file',
-    headers: {
-        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-    },
-    success: function (file, response) {
-        console.log('ingreso');
-        //$("input[name='aspirante[urlPdfDocument]']").val(response);
+function changeOptionDocument(element, member) {
+    console.log('element:: ', $(element).val());
+    console.log('integrante:: ', member);
+    if ($(element).val() === '1'){
+        $(`#image-docuemnt-integrantes-${ member }`).show(); 
+        $(`#pdf-docuemnt-integrantes-${ member }`).hide(); 
+    } else {
+        $(`#image-docuemnt-integrantes-${ member }`).hide(); 
+        $(`#pdf-docuemnt-integrantes-${ member }`).show(); 
     }
-}); 
+}
 
 
 /* contenido para validar el formulario */
