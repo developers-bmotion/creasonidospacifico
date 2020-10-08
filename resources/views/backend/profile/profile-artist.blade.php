@@ -321,6 +321,30 @@
                                            <button type="button" class="btn btn-primary cancel_audio" style="display:none">Cancelar</button>
 
                                         </div>
+                                        <div class="secondary_audios col-md-12 row mt-5">
+                                            @if($artist->projects[0]->audio_secundary_two)
+                                            <div class="col-6 player">
+                                                <label style="font-weight: bold" class="form-control-label" form="nombreProyecto">
+                                                    Canción extra uno(no participa en el concurso):</label>
+                                                <audio preload="auto" controls>
+                                                    <source src="{{ $artist->projects[0]->audio_secundary_two}}">
+                                                    {{-- <input name="project_id" id="project_id" type="hidden" value="{{ $project->id }}"> --}}
+                                                </audio>
+
+                                            </div>
+                                            @endif
+                                            @if($artist->projects[0]->audio_secundary_one)
+                                            <div class="col-6 player">
+                                                <label style="font-weight: bold" class="form-control-label" form="nombreProyecto">
+                                                    Canción extra dos(no participa en el concurso):</label>
+                                                <audio preload="auto" controls>
+                                                    <source src="{{ $artist->projects[0]->audio_secundary_one }}">
+                                                    {{-- <input name="project_id" id="project_id" type="hidden" value="{{ $project->id }}"> --}}
+                                                </audio>
+
+                                            </div>
+                                            @endif
+                                        </div>
                                     </div>
                                     <div class="row pt-4">
                                         <div class="col-md-2 col-lg-2 col-12">

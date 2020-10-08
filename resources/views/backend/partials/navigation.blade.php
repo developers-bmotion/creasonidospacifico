@@ -102,6 +102,7 @@
                  </li>--}}
                 @if(auth()->user()->roles[0]->rol == "Artist")
                     @if(auth()->user()->name !== "")
+                    @if(count(\App\Artist::projects_artist(auth()->user()->id)) === 0)
                         <li class="m-menu__item ">
                             <a href="{{ route('add.project') }}" class="m-menu__link"><i
                                     class="m-menu__link-icon la la-music"></i><span
@@ -114,6 +115,7 @@
                                     class="m-menu__link-text">Ir a tu perfil</span>
                             </a>
                         </li>
+                        @endif
                     @endif
             </ul>
         @endif

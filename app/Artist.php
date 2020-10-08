@@ -111,6 +111,14 @@ class Artist extends Model
     public function expeditionPlace(){
         return $this->belongsTo(City::class, 'expedition_place');
     }
+
+
+    public static function projects_artist($id){
+
+        $artist=Artist::where('user_id','=',$id)->with('projects')->first();
+
+        return $artist->projects;
+    }
     /**
      * Consultas $
      */
