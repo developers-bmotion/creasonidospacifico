@@ -21,245 +21,250 @@
             </div>
         </div>
     </div> --}}
-    <div class="row">
-        <div class="col-xl-12 col-lg-8">
-            <div class="m-portlet m-portlet--full-height ">
-                <div class="m-portlet__head">
-                    <div class="m-portlet__head-caption">
-                        <div class="m-portlet__head-title">
-                            <h3 class="m-portlet__head-text">
-                                Información de la canción
-                            </h3>
+        <div class="row">
+            <div class="col-xl-12 col-lg-8">
+                <div class="m-portlet m-portlet--full-height ">
+                    <div class="m-portlet__head">
+                        <div class="m-portlet__head-caption">
+                            <div class="m-portlet__head-title">
+                                <h3 class="m-portlet__head-text">
+                                    Información de la canción
+                                </h3>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="m-portlet__body">
-                    <div class="m-section">
-                        <div class="row">
-                            <div class="col-12 player" style="padding-right: 3rem;">
-                                <label class="form-control-label" form="nombreProyecto">
-                                    Canción principal:</label>
-                                <audio preload="auto" controls>
-                                    <source src="{{ $project->audio }}">
-                                    {{-- <input name="project_id" id="project_id" type="hidden" value="{{ $project->id }}"> --}}
-                                </audio>
-
-                            </div>
-                            <div class="secondary_audios col-md-12 row mt-5">
-                            @if($project->audio_secundary_two)
-                            <div class="col-6 player">
-                                <label class="form-control-label" form="nombreProyecto">
-                                    Canción extra uno(no participa en el concurso):</label>
-                                <audio preload="auto" controls>
-                                    <source src="{{ $project->audio_secundary_two}}">
-                                    {{-- <input name="project_id" id="project_id" type="hidden" value="{{ $project->id }}"> --}}
-                                </audio>
-
-                            </div>
-                            @endif
-                            @if($project->audio_secundary_one)
-                            <div class="col-6 player">
-                                <label class="form-control-label" form="nombreProyecto">
-                                    Canción extra dos(no participa en el concurso):</label>
-                                <audio preload="auto" controls>
-                                    <source src="{{ $project->audio_secundary_one }}">
-                                    {{-- <input name="project_id" id="project_id" type="hidden" value="{{ $project->id }}"> --}}
-                                </audio>
-
-                            </div>
-                            @endif
-                        </div>
-                            {{-- @dd(\App\User::navigation()); --}}
-                            @if(\App\User::navigation() == "Artist")
-                            <div class="row drop_audio col-12" style="display: none">
-                                <div class="col-lg-12 m-form__group-sub {{$errors->has('subir_cancion')? 'has-danger':''}}">
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-lg-12">
-                                            <label class="form-control-label" form="nombreProyecto"><span class="text-danger">*</span>
-                                                Subir canción:</label>
-                                            <div class="m-dropzone dropzone m-dropzone--success" action=""
-                                                 id="m-dropzone-three">
-                                                <div class="m-dropzone__msg dz-message needsclick">
-                                                    <h3 class="m-dropzone__msg-title">
-                                                        Agregue su canción en formato MP3</h3>
-                                                    <span
-                                                        class="m-dropzone__msg-desc">Arrastra o has clic a aquí para subir</span>
-                                                </div>
-                                            </div>
-                                            {!! $errors->first('subir_cancion','<div class="form-control-feedback">*:message
-                                                       </div>')!!}
-                                            <span class="m-form__help">Cargue aquí el audio de la canción en formato Mp3.</span>
-                                            <input type="hidden" id="inputDBAudioAddProject"
-                                                   name="subir_cancion" value="">
-                                            <div id="erroresImagen" style="color: var(--danger)"
-                                                 class="form-control-feedback"></div>
-                                        </div>
+                    <div class="m-portlet__body">
+                        <div class="m-section">
+                            <div class="row">
+                                <div class="col-12 player" style="padding-right: 3rem;">
+                                    <div class="form-group">
+                                        <h5 style="font-weight: bold">Canción principal:</h5>
                                     </div>
+                                    <audio preload="auto" controls>
+                                        <source src="{{ $project->audio }}">
+                                        {{-- <input name="project_id" id="project_id" type="hidden" value="{{ $project->id }}"> --}}
+                                    </audio>
+
                                 </div>
+                                <div class="secondary_audios col-md-12 row mt-5">
+                                    @if($project->audio_secundary_two)
+                                        <div class="col-6 player">
+                                            <div class="form-group">
+                                                <h5 style="font-weight: bold">Canción extra uno(no participa en el concurso):</h5>
+                                            </div>
+                                            <audio preload="auto" controls>
+                                                <source src="{{ $project->audio_secundary_two}}">
+                                                {{-- <input name="project_id" id="project_id" type="hidden" value="{{ $project->id }}"> --}}
+                                            </audio>
 
-                            </div>
-                            <div class="col-md-1 pt-5">
-                                <i class="flaticon-edit ml-3 update_audio" style="color:#716aca; cursor:pointer;"></i>
-                               <button type="button" class="btn btn-primary cancel_audio" style="display:none">Cancelar</button>
-
-                            </div>
-
-
-                            @endif
-                        </div>
-                        <div class="row p-5">
-                            {{-- reproductor --}}
-
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <h5 style="font-weight: bold">{{ __('estado') }}:</h5>
-                                </div>
-                                <div class="form-group">
-                                    @if($project->status == 1)
-                                        <span
-                                            class="m-badge m-badge--metal m-badge--wide m-badge--rounded">{{ __('revision') }}</span>
-                                    @elseif($project->status == 2)
-                                        <span class="m-badge m-badge--brand m-badge--wide m-badge--rounded"
-                                              style="background-color: #9816f4 !important;">{{ __('pre_aprobado') }}</span>
-                                        {{-- @elseif($project->status == 3)
-                                            <span
-                                                class="m-badge m-badge--success m-badge--wide m-badge--rounded">{{ __('aprobado') }}</span> --}}
-                                    @elseif($project->status == 4)
-                                        <span
-                                            class="m-badge m-badge--warning m-badge--wide m-badge--rounded">Pendiente</span>
-                                    @elseif($project->status == 5)
-                                        <span
-                                            class="m-badge m-badge--danger m-badge--wide m-badge--rounded">{{ __('rechazado') }}</span>
-                                    @elseif($project->status == 6)
-                                        <span
-                                            class="m-badge m-badge--brand m-badge--wide m-badge--rounded">Nueva revision</span>
-                                    @elseif($project->status == 7)
-                                        <span
-                                            class="m-badge m-badge--success m-badge--wide m-badge--rounded">Aceptado</span>
-                                    @elseif($project->status == 8)
-                                        <span
-                                            class="m-badge m-badge--warning m-badge--wide m-badge--rounded">No subsanado</span>
+                                        </div>
+                                    @endif
+                                    @if($project->audio_secundary_one)
+                                        <div class="col-6 player">
+                                            <div class="form-group">
+                                                <h5 style="font-weight: bold">Canción extra dos(no participa en el concurso):</h5>
+                                            </div>
+                                            <audio preload="auto" controls>
+                                                <source src="{{ $project->audio_secundary_one }}">
+                                                {{-- <input name="project_id" id="project_id" type="hidden" value="{{ $project->id }}"> --}}
+                                            </audio>
+                                        </div>
                                     @endif
                                 </div>
+                                {{-- @dd(\App\User::navigation()); --}}
+                                @if(\App\User::navigation() == "Artist")
+                                    <div class="row drop_audio col-12" style="display: none">
+                                        <div
+                                            class="col-lg-12 m-form__group-sub {{$errors->has('subir_cancion')? 'has-danger':''}}">
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-lg-12">
+                                                    <label class="form-control-label" form="nombreProyecto"><span
+                                                            class="text-danger">*</span>
+                                                        Subir canción:</label>
+                                                    <div class="m-dropzone dropzone m-dropzone--success" action=""
+                                                         id="m-dropzone-three">
+                                                        <div class="m-dropzone__msg dz-message needsclick">
+                                                            <h3 class="m-dropzone__msg-title">
+                                                                Agregue su canción en formato MP3</h3>
+                                                            <span
+                                                                class="m-dropzone__msg-desc">Arrastra o has clic a aquí para subir</span>
+                                                        </div>
+                                                    </div>
+                                                    {!! $errors->first('subir_cancion','<div class="form-control-feedback">*:message
+                                                               </div>')!!}
+                                                    <span class="m-form__help">Cargue aquí el audio de la canción en formato Mp3.</span>
+                                                    <input type="hidden" id="inputDBAudioAddProject"
+                                                           name="subir_cancion" value="">
+                                                    <div id="erroresImagen" style="color: var(--danger)"
+                                                         class="form-control-feedback"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-1 pt-5">
+                                        <i class="flaticon-edit ml-3 update_audio"
+                                           style="color:#716aca; cursor:pointer;"></i>
+                                        <button type="button" class="btn btn-primary cancel_audio" style="display:none">
+                                            Cancelar
+                                        </button>
+
+                                    </div>
+
+
+                                @endif
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <h5 style="font-weight: bold">Nombre de la canción:</h5>
-                                </div>
-                                <div class="form-group">
+                            <div class="row p-5">
+                                {{-- reproductor --}}
 
-                                    {{ $project->title }}
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <h5 style="font-weight: bold">{{ __('estado') }}:</h5>
+                                    </div>
+                                    <div class="form-group">
+                                        @if($project->status == 1)
+                                            <span
+                                                class="m-badge m-badge--metal m-badge--wide m-badge--rounded">{{ __('revision') }}</span>
+                                        @elseif($project->status == 2)
+                                            <span class="m-badge m-badge--brand m-badge--wide m-badge--rounded"
+                                                  style="background-color: #9816f4 !important;">{{ __('pre_aprobado') }}</span>
+                                            {{-- @elseif($project->status == 3)
+                                                <span
+                                                    class="m-badge m-badge--success m-badge--wide m-badge--rounded">{{ __('aprobado') }}</span> --}}
+                                        @elseif($project->status == 4)
+                                            <span
+                                                class="m-badge m-badge--warning m-badge--wide m-badge--rounded">Pendiente</span>
+                                        @elseif($project->status == 5)
+                                            <span
+                                                class="m-badge m-badge--danger m-badge--wide m-badge--rounded">{{ __('rechazado') }}</span>
+                                        @elseif($project->status == 6)
+                                            <span
+                                                class="m-badge m-badge--brand m-badge--wide m-badge--rounded">Nueva revision</span>
+                                        @elseif($project->status == 7)
+                                            <span
+                                                class="m-badge m-badge--success m-badge--wide m-badge--rounded">Aceptado</span>
+                                        @elseif($project->status == 8)
+                                            <span
+                                                class="m-badge m-badge--warning m-badge--wide m-badge--rounded">No subsanado</span>
+                                        @endif
+                                    </div>
                                 </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <h5 style="font-weight: bold">Nombre de la canción:</h5>
+                                    </div>
+                                    <div class="form-group">
+
+                                        {{ $project->title }}
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <h5 style="font-weight: bold">Autor:</h5>
+                                    </div>
+                                    <div class="form-group">
+
+                                        {{ $project->author }}
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <h5 style="font-weight: bold">{{ __('genero') }}:</h5>
+                                    </div>
+                                    <div class="form-group">
+                                        {{ $project->category->category }}
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 mt-5">
+
+                                    <div class="form-group">
+                                        <h5 style="font-weight: bold">Descripción:</h5>
+                                    </div>
+                                    <div class="form-group" style="text-align: justify">
+
+                                        {{ $project->description }}
+                                    </div>
+                                </div>
+
+
+                                <!-- ------------------------- ACCIONES SEGUN LOS ROLES----------------------------- -->
+
+                                @include('backend.partials.rating.' .\App\User::rating_proyect())
+
+                            <!-- ------------------------- CALIFICACION DEL PROYECTO CUANDO ESTA PUBLICADO Y APROBADO----------------------------- -->
+                                {{-- @if($project->status == 3 || $project->status == 4 || $project->status == 5)
+                                    <div class="form-group">
+                                        <h5 style="font-weight: bold">{{ __('valoracion') }}:</h5>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <ul id="list_rating_project" class="list-inline" style="font-size: 20px">
+                                            <li class="list-inline-item star"><i
+                                                    class="fa fa-star fa-1x{{ $project->rating >= 1 ? ' yellow-rating' : '' }}"></i>
+                                            </li>
+                                            <li class="list-inline-item star"><i
+                                                    class="fa fa-star fa-1x{{ $project->rating >= 2 ? ' yellow-rating' : '' }}"></i>
+                                            </li>
+                                            <li class="list-inline-item star"><i
+                                                    class="fa fa-star fa-1x{{ $project->rating >= 3 ? ' yellow-rating' : '' }}"></i>
+                                            </li>
+                                            <li class="list-inline-item star"><i
+                                                    class="fa fa-star fa-1x{{ $project->rating >= 4 ? ' yellow-rating' : '' }}"></i>
+                                            </li>
+                                            <li class="list-inline-item star"><i
+                                                    class="fa fa-star fa-1x{{ $project->rating >= 5 ? ' yellow-rating' : '' }}"></i>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                @endif --}}
+
+
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <h5 style="font-weight: bold">Autor:</h5>
-                                </div>
-                                <div class="form-group">
-
-                                    {{ $project->author }}
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <h5 style="font-weight: bold">{{ __('genero') }}:</h5>
-                                </div>
-                                <div class="form-group">
-                                    <button
-                                        class="btn btn-secondary btn-md">{{ $project->category->category }}</button>
-                                </div>
-                            </div>
-
-                            <div class="col-md-12 mt-5">
-
-                                <div class="form-group">
-                                    <h5 style="font-weight: bold">Descripción:</h5>
-                                </div>
-                                <div class="form-group" style="text-align: justify">
-
-                                    {{ $project->description }}
-                                </div>
-                            </div>
-
-
-
-                            <!-- ------------------------- ACCIONES SEGUN LOS ROLES----------------------------- -->
-
-                            @include('backend.partials.rating.' .\App\User::rating_proyect())
-
-                        <!-- ------------------------- CALIFICACION DEL PROYECTO CUANDO ESTA PUBLICADO Y APROBADO----------------------------- -->
-                            {{-- @if($project->status == 3 || $project->status == 4 || $project->status == 5)
-                                <div class="form-group">
-                                    <h5 style="font-weight: bold">{{ __('valoracion') }}:</h5>
-                                </div>
-
-                                <div class="form-group">
-                                    <ul id="list_rating_project" class="list-inline" style="font-size: 20px">
-                                        <li class="list-inline-item star"><i
-                                                class="fa fa-star fa-1x{{ $project->rating >= 1 ? ' yellow-rating' : '' }}"></i>
-                                        </li>
-                                        <li class="list-inline-item star"><i
-                                                class="fa fa-star fa-1x{{ $project->rating >= 2 ? ' yellow-rating' : '' }}"></i>
-                                        </li>
-                                        <li class="list-inline-item star"><i
-                                                class="fa fa-star fa-1x{{ $project->rating >= 3 ? ' yellow-rating' : '' }}"></i>
-                                        </li>
-                                        <li class="list-inline-item star"><i
-                                                class="fa fa-star fa-1x{{ $project->rating >= 4 ? ' yellow-rating' : '' }}"></i>
-                                        </li>
-                                        <li class="list-inline-item star"><i
-                                                class="fa fa-star fa-1x{{ $project->rating >= 5 ? ' yellow-rating' : '' }}"></i>
-                                        </li>
-                                    </ul>
-                                </div>
-                            @endif --}}
-
 
                         </div>
-
-                    </div>
-                    @if(\App\User::rating_proyect())
-                        {{-- <div id="show_assign_list_management" style="display: none">
-                            <div class="m-portlet__head">
-                                <div class="m-portlet__head-caption">
-                                    <div class="m-portlet__head-title">
-                                        <h3 class="m-portlet__head-text">
-                                            {{ __('lista_managements') }}
-                                        </h3>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="m-section">
-                                <br>
-                                <div class="row">
-                                    <div class="col-xs-4 col-lg-12">
-                                        <div class="box-body table-responsive text-center">
-                                            <table class="table table-striped- table-bordered table-hover"
-                                                   id="table_assign_management">
-                                                <thead>
-                                                <tr>
-                                                    <th>Curador</th>
-                                                    <th>{{ __('nombre') }}</th>
-                                                    <th>{{ __('compañia') }}</th>
-                                                    <th>{{ __('email') }}</th>
-                                                    <th>{{ __('calificacion') }}</th>
-                                                    <th>{{ __('comentario') }}</th>
-                                                    <th>{{ __('acciones') }}</th>
-                                                </tr>
-                                                </thead>
-                                            </table>
+                        @if(\App\User::rating_proyect())
+                            {{-- <div id="show_assign_list_management" style="display: none">
+                                <div class="m-portlet__head">
+                                    <div class="m-portlet__head-caption">
+                                        <div class="m-portlet__head-title">
+                                            <h3 class="m-portlet__head-text">
+                                                {{ __('lista_managements') }}
+                                            </h3>
                                         </div>
                                     </div>
-                                    <div class="col-xs-4 col-lg-4">
+                                </div>
+                                <div class="m-section">
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-xs-4 col-lg-12">
+                                            <div class="box-body table-responsive text-center">
+                                                <table class="table table-striped- table-bordered table-hover"
+                                                       id="table_assign_management">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>Curador</th>
+                                                        <th>{{ __('nombre') }}</th>
+                                                        <th>{{ __('compañia') }}</th>
+                                                        <th>{{ __('email') }}</th>
+                                                        <th>{{ __('calificacion') }}</th>
+                                                        <th>{{ __('comentario') }}</th>
+                                                        <th>{{ __('acciones') }}</th>
+                                                    </tr>
+                                                    </thead>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-4 col-lg-4">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div> --}}
-                    @endif
+                            </div> --}}
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
         <br>
         <br>
         <div class="row">
@@ -289,32 +294,55 @@
                                             <div class="m-card-profile__pic">
                                                 <div class="m-card-profile__pic-wrapper">
                                                     @if($artist->artists[0]->users->picture)
-                                                    <img src="{{ $artist->artists[0]->users->picture }}" alt="">
+                                                        <img src="{{ $artist->artists[0]->users->picture }}" alt="">
 
                                                     @else
-                                                    <img src="/default/user.png"
-                                                    alt=""/>
+                                                        <img src="/default/user.png"
+                                                             alt=""/>
                                                     @endif
                                                 </div>
                                             </div>
                                             <div class="m-card-profile__details">
-                                        <span
-                                            class="m-card-profile__name">{{ $artist->artists[0]->users->name }} {{ $artist->artists[0]->users->last_name }}</span>
+                                            <span
+                                                class="m-card-profile__name">{{ $artist->artists[0]->users->name }} {{ $artist->artists[0]->users->last_name }}</span>
 
                                                 <a href="" class="m-card-profile__email m-link"
                                                    style="margin-left: -15px; width: 80%; word-wrap: break-word;">{{ $artist->artists[0]->users->email }}</a>
 
                                             </div>
-                                            {{-- <div class="form-group m-form__group row" style="margin-left: 5.79rem;">
-                                                <label for="example-text-input"
-                                                       class="col-3 col-form-label mt-1">{{ __('Origen') }}:</label>
-                                                <div class="col-4 pull-right mt-3">
-                                                    <span>{{$country->descripcion}}</span>
 
+
+                                                <div class="form-group pt-5 text-center">
+                                                    <h5 style="font-weight: bold">Estado de tu propuesta musical:</h5>
                                                 </div>
-                                            </div> --}}
-
-
+                                                <div class="form-group text-center">
+                                                    @if($project->status == 1)
+                                                        <span
+                                                            class="m-badge m-badge--metal m-badge--wide m-badge--rounded">{{ __('Revision') }}</span>
+                                                    @endif
+                                                    @if($project->status == 2)
+                                                        <span class="m-badge m-badge--brand m-badge--wide m-badge--rounded"
+                                                              style="background-color: #9816f4 !important;">Pre aprobado</span>
+                                                    @endif
+                                                    @if($project->status == 3)
+                                                        <span class="m-badge m-badge--success m-badge--wide m-badge--rounded">Aprobado</span>
+                                                    @endif
+                                                    @if($project->status == 4)
+                                                        <span class="m-badge m-badge--warning m-badge--wide"
+                                                              style="color:#fff">{{ __('Pendiente') }}</span>
+                                                    @endif
+                                                    @if($project->status == 5)
+                                                        <span
+                                                            class="m-badge m-badge--danger m-badge--wide m-badge--rounded">{{ __('Rechazado') }}</span>
+                                                    @endif
+                                                    @if($project->status == 6)
+                                                        <span
+                                                            class="m-badge m-badge--metal m-badge--wide m-badge--rounded">De nuevo en revisión</span>
+                                                    @endif
+                                                    @if($project->status == 7)
+                                                        <span class="m-badge m-badge--success m-badge--wide m-badge--rounded">Aceptado</span>
+                                                    @endif
+                                                </div>
                                         </div>
                                     </div>
                                 </div>
@@ -410,7 +438,6 @@
                                     </div>
 
 
-
                                     <div class="col-md-6 mt-2">
                                         <label style="font-weight: bold">Documento de identificación:</label>
                                         <button type="button" class="btn btn-primary" data-toggle="modal"
@@ -459,21 +486,22 @@
                                         {{-- @dd(Storage::disk('public')->exists($artist->artists[0]->beneficiary[0]->picture)) --}}
 
                                         @if ($artist->artists[0]->beneficiary[0]->picture)
-                                        <div class="col-md-4 mb-5" >
-                                            <div class="m-scrollable" data-scrollable="true" style="">
-                                                <img style="border-radius:8rem; width:7rem" src="{{$artist->artists[0]->beneficiary[0]->picture}}" >
-                                            </div>
+                                            <div class="col-md-4 mb-5">
+                                                <div class="m-scrollable" data-scrollable="true" style="">
+                                                    <img style="border-radius:8rem; width:7rem"
+                                                         src="{{$artist->artists[0]->beneficiary[0]->picture}}">
+                                                </div>
 
-                                        </div>
+                                            </div>
                                         @else
 
 
-                                        <div class="col-md-4 mb-5" >
-                                            <div class="m-scrollable" data-scrollable="true" style="">
-                                                <img style="border-radius:8rem; width:7rem" src="/default/user.png" >
-                                            </div>
+                                            <div class="col-md-4 mb-5">
+                                                <div class="m-scrollable" data-scrollable="true" style="">
+                                                    <img style="border-radius:8rem; width:7rem" src="/default/user.png">
+                                                </div>
 
-                                        </div>
+                                            </div>
 
                                         @endif
                                         <div class="col-md-4 mt-5">
@@ -531,7 +559,6 @@
                                         </div>
 
 
-
                                         @if($artist->artists[0]->township)
                                             <div class="col-md-4 mt-2">
                                                 <label style="font-weight: bold">Vereda/Corregimiento:</label>
@@ -548,13 +575,10 @@
                                         </div>
 
 
-
-
-
-
                                         <div class="col-md-4 mt-2">
 
-                                            <label style="font-weight: bold">{{ __('Departamento de expedición') }}:</label>
+                                            <label style="font-weight: bold">{{ __('Departamento de expedición') }}
+                                                :</label>
                                             <div class="m-scrollable" data-scrollable="true" style="">
                                                 <p style="text-align: justify">{{ $artist->artists[0]->beneficiary[0]->expeditionPlace->departaments->descripcion}}</p>
                                             </div>
@@ -582,8 +606,6 @@
                                                 <p style="text-align: justify">{{ $artist->artists[0]->beneficiary[0]->biography}}</p>
                                             </div>
                                         </div>
-
-
 
 
                                     </div>
@@ -706,7 +728,6 @@
                                                         </div>
 
 
-
                                                         {{-- @if($artist->artists[0]->township)
                                                         <div class="col-md-4 mt-2">
                                                         <label style="font-weight: bold">Vereda/Corregimiento:</label>
@@ -806,7 +827,6 @@
 
             <!--end::Portlet-->
         @endif
-
 
 
     </div>
@@ -1021,7 +1041,7 @@
         });
     </script>
     <script>
-        $('.update_audio').click(function(){
+        $('.update_audio').click(function () {
 
             $(this).hide();
             $('.cancel_audio').show();
@@ -1031,7 +1051,7 @@
 
 
         });
-        $('.cancel_audio').click(function(){
+        $('.cancel_audio').click(function () {
             $(this).hide();
             $('.update_audio').show();
             $('.drop_audio').hide();
@@ -1082,8 +1102,8 @@
                     "hideMethod": "fadeOut"
                 };
 
-              toastr.success("El audio se actualizo correctamente", "Información");
-              window.location.reload();
+                toastr.success("El audio se actualizo correctamente", "Información");
+                window.location.reload();
             },
             error: function (file, e, i, o, u) {
                 $("#erroresImagen").text('');

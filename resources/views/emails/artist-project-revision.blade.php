@@ -9,10 +9,10 @@
 }}
 {{ __("**Estas son tus observaciones:** ") }}<br>
 {{ __(":mesage", ['mesage' => $mesage]) }}
-@component('mail::button', ['url' => route('show.backend.project', $project->slug)])
-{{ __('Ir a la canción') }}
-@endcomponent
+{{--@component('mail::button', ['url' => route('show.backend.project', $project->slug)])--}}
+{{--{{ __('Ir a la canción') }}--}}
+{{--@endcomponent--}}
 
-{{ __('Gracias') }},<br>
+{{ __('Gracias') }}.<br>
 {{ config('app.name') }}
 @endcomponent

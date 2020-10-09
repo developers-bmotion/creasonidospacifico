@@ -99,14 +99,17 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                 <div class="m-portlet__head-caption">
                     <div class="m-portlet__head-title">
                         <h3 class="m-portlet__head-text">
-                            {{ __('todos_proyectos') }}
+                            Todos los proyectos
                         </h3>
                     </div>
                 </div>
                 <div class="m-portlet__head-tools">
                     <ul class="m-portlet__nav">
 
-                        <li class="m-portlet__nav-item"></li>
+                        <li class="m-portlet__nav-item">
+                            <h5 class="mr-2">Mostrando todos los: </h5>
+                            <span id="current_status" class="m-badge m-badge--metal m-badge--wide m-badge--rounded">{{ __('revision') }}</span>
+                        </li>
                         <div class="m-dropdown m-dropdown--inline  m-dropdown--arrow m-dropdown--align-right"
                              m-dropdown-toggle="hover">
                             <a href="#" class="m-dropdown__toggle btn btn-warning dropdown-toggle">
@@ -169,8 +172,8 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                     <tr>
                         <th>#</th>
                         <th>{{ __('artista') }}</th>
-                        <th>{{ __('titulo') }}</th>
-                        <th>{{ __('categoria') }}</th>
+                        <th>Nombre de la canción</th>
+                        <th>Género musical</th>
                         <th>{{ __('estado') }}</th>
                         <th>{{ __('acciones') }}</th>
                     </tr>
@@ -187,6 +190,9 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
     <script src="/backend/assets/demo/custom/crud/datatables/basic/headers.js" type="text/javascript"></script>
 
     <script>
+       var estado = getStorage('storeTipoProyecto');
+       (estado) ? $('#current_status').html('hola') : $('#current_status').html('Roro')
+       console.log(estado);
         var storeTipoProyecto = "storeTipoProyecto";
         var tipoProyecto = getStorage(storeTipoProyecto);
         var table = null;
@@ -294,7 +300,15 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                 }
             });
         };
+
+
+        var prueba = {
+            one: {name: 'hola', color: '#fff'},
+            two: {name: 'bebe', color: '#000'}
+        }
+
         $(".selectType").on('click', '.changeType', function(){
+            console.log('objet: ', prueba)
             let tipo = parseInt($(this).attr("data-type"));
             if (!(tipo >  0)){
                 tipo = null;
@@ -302,6 +316,19 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
             tipoProyecto = tipo;
             setStorage(storeTipoProyecto, tipoProyecto)
             loadTable();
+
+            switch (tipoProyecto) {
+                    case 0:
+                        $("#current_status").css("background", prueba.two.color);
+                        $('#current_status').html(prueba.two.name)
+                    break;
+                    case 3:
+                        console.log(prueba.two.color)
+                        $("#current_status").css("background", prueba.two.color);
+                        $('#current_status').html(prueba.two.name)
+                    break;
+                default: console.log('no entro')
+            }
         });
         loadTable();
     </script>
