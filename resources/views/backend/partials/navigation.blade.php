@@ -339,12 +339,12 @@
                                                                     @endif
                                                                     <i class="m-nav__link-icon flaticon-profile-1"></i>
                                                                     <span class="m-nav__link-title">
-																			<span class="m-nav__link-wrap">
-																				<span
-                                                                                    class="m-nav__link-text">Perfil</span>
-																				{{-- <span class="m-nav__link-badge"><span
-                                                                                        class="m-badge m-badge--success">2</span></span> --}}
-																			</span>
+{{--																			<span class="m-nav__link-wrap">--}}
+{{--																				<span--}}
+{{--                                                                                    class="m-nav__link-text">Perfil</span>--}}
+{{--																				 <span class="m-nav__link-badge"><span--}}
+{{--                                                                                        class="m-badge m-badge--success">2</span></span> --}}
+{{--																			</span>--}}
 																		</span>
                                                                 </a>
                                         </li>
