@@ -108,8 +108,8 @@ class ProfileController extends Controller
     /* metodo para actualizar un aspirante en la base de datos */
     public function insertAspirante($id_artis, $request) {
         $aspirante = (object) $request->aspirante;
-        //$carbon_date = Carbon::parse($aspirante->birthdate)->toDateTimeString(); 
-        //dd($carbon_date); 
+        //$carbon_date = Carbon::parse($aspirante->birthdate)->toDateTimeString();
+        //dd($carbon_date);
 
         Artist::where('user_id', '=', $id_artis)->update([
             'nickname' => $aspirante->name,
@@ -443,28 +443,17 @@ class ProfileController extends Controller
 
         // dd($request->headers->get('idproject'));
         $idproject=$request->headers->get('idproject');
-        // $user = User::where('id', auth()->user()->id)->first();
-        // $artist = Artist::where('user_id', auth()->user()->id)->first();
-        // $project = Project::where('id', $idproject)->first();
-        // dd($beneficiario);
-        // $audio =  str_replace('storage', '', $project->audio);
-        //Elimnar pdf de cédula o tarjeta
-        // Storage::delete($audio);
-        //Agregar cedula o tarjeta de identidad
-        // $pdf_cedula_save = $request->file('pdf_cedula_name')->store('pdfidentificacion');
+        $urlS3="";
+        // dd($idproject);
+        if($idproject != '-1'){
 
-    //     $image = $request->file('image')->store('audio_one','s3');
-    //     Storage::disk('s3')->setVisibility($image,'public');
-    //    $urlS3 = Storage::disk('s3')->url($image);
-
-    //     return $urlS3;
-        // -------------
-        $audio = $request->file('audio')->store('audio','s3');
-        Storage::disk('s3')->setVisibility($audio,'public');
-        $urlS3 = Storage::disk('s3')->url($audio);
-        Project::where('id',$idproject)->update([
-            'audio' => $urlS3
-        ]);
+            $audio = $request->file('audio')->store('audio','s3');
+            Storage::disk('s3')->setVisibility($audio,'public');
+            $urlS3 = Storage::disk('s3')->url($audio);
+            Project::where('id',$idproject)->update([
+                'audio' => $urlS3
+            ]);
+        }
 
         return $urlS3;
     }

@@ -12,8 +12,8 @@
     </div>
     <div class="row pt-4">
         <div class="col-12">
-        @if(count($artist->projects) !== 0)
-{{-- @dd('kjkj') --}}
+
+            @if(count($artist->projects) !== 0)
 
             @if($artist->projects[0]->status == 4)
                 <!--=====================================
@@ -943,6 +943,7 @@
                                                                     id="m-dropzone-three">
                                                                     <div
                                                                         class="m-dropzone__msg dz-message needsclick">
+
                                                                         <h3 class="m-dropzone__msg-title">{{ __('Actualizar documento de identidad') }}</h3>
                                                                         <span
                                                                             class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
@@ -1368,13 +1369,19 @@
 @section('js.add-project')
 
     <script>
+        var id =@json($artist->projects);
+        var idProject = -1;
+        if(id.length != 0){
+            idProject= id[0].id;
+        }
+
         var dropzone = new Dropzone('.dropzone-audio', {
             url: '{{route('update.audio')}}',
             acceptedFiles: 'audio/*',
             maxFiles: 1,
             paramName: 'audio',
             headers: {
-                'idproject':@json($artist->projects[0]->id),
+                'idproject': idProject,
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
             success: function (file, response) {
