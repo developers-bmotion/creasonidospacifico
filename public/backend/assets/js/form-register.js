@@ -70,7 +70,6 @@ function onSelectDepartamentosChange(element, component ) {
         html_select += data.map( municipio => { return `<option value="${ municipio.id }">${ municipio.descripcion }</option>`; } ).join(' ');        
         $( `.${ component }` ).html(html_select);  
     });
-    console.log('tagname: ', $(element).attr('name'));
 
     let tags = $(element).attr('name');
     let arrayTags = tags.split('[')
@@ -83,7 +82,6 @@ function onSelectMunicipiosChange(element) {
     let tags = $(element).attr('name');
     let arrayTags = tags.split('[')
     let nameTag = '[' + arrayTags[1];
-    console.log('name tag:  ', arrayTags, nameTag);
     validateFormSelect(arrayTags[0], nameTag); // realizar validacion
 }
 
@@ -165,7 +163,7 @@ function addViewFormMembers(member) {
 
                 <div class="form-group m-form__group row">
                     <div class="col-lg-6 m-form__group-sub">
-                        <label class="form-control-label">Rol artistico</label>
+                        <label class="form-control-label">Instrumento que interpreta</label>
                         <input type="num" name="integrantes[${member}][rolMember]" class="form-control m-input" placeholder="" value="">                        
                         <span class="m-form__help">Ingrese el rol que desempeña dentro del grupo (Guitarrista, Bocalista, Pianosta, etc.)</span>
                     </div>
@@ -285,14 +283,14 @@ function eventOnChangeDepartamentos(element, tipo, member) {
 function addViewUploadArchiveMember(member) {
     return `<div class="form-group m-form__group row">
                 <div class="col-lg-12 m-form__group-sub">
-                    <label for="">Documento de identificación</label>
+                    <label for="">Seleccione el tipo de formato para subir el documento de identificación</label>
                     <div class="m-radio-inline">
                         <label class="m-radio">
-                            <input type="radio" onClick="changeOptionDocument(this, ${ member })" name="integrantes_identificacionDoc_${ member }" value="1" checked="checked"> Imagen
+                            <input type="radio" onClick="changeOptionDocument(this, ${ member })" name="integrantes[${member}][fileType]" value="1" checked="checked"> Imagen
                             <span></span>
                         </label>
                         <label class="m-radio">
-                            <input type="radio" onClick="changeOptionDocument(this, ${ member })" name="integrantes_identificacionDoc_${ member }" value="2"> PDF
+                            <input type="radio" onClick="changeOptionDocument(this, ${ member })" name="integrantes[${member}][fileType]" value="2"> PDF
                             <span></span>
                         </label>                                    
                     </div>
@@ -318,8 +316,6 @@ function addViewUploadArchiveMember(member) {
 }
 
 function changeOptionDocument(element, member) {
-    console.log('element:: ', $(element).val());
-    console.log('integrante:: ', member);
     if ($(element).val() === '1'){
         $(`#image-docuemnt-integrantes-${ member }`).show(); 
         $(`#pdf-docuemnt-integrantes-${ member }`).hide(); 
@@ -381,7 +377,8 @@ function validationForm() {
     validateFormInputs('aspirante', 'phone'); 
     validateFormInputs('aspirante', 'identificacion'); 
     validateFormInputs('aspirante', 'address'); 
-    validateFormInputs('aspirante', 'birthdate'); 
+    validateFormInputs('aspirante', 'birthdate');
+    formatDateSend($('input[name="aspirante[birthdate]"]'))
 
     /* validar selects  */
     //validateFormSelect('aspirante', 'documentType'); 
@@ -391,9 +388,8 @@ function validationForm() {
     validateFormSelect('aspirante', '[municipioNacimiento]');
 
     if (lineaConvocatoria === '1' &&  actuaraComo === '1') {
-        validate = validateAspirante();
+        validate = validateAspirante();        
     } else if (lineaConvocatoria === '1' &&  actuaraComo === '2') {
-        console.log('validar con beneficiario');
         /* validar inputs */
         validateFormInputs('beneficiario', 'name');
         validateFormInputs('beneficiario', 'lastname');
@@ -402,6 +398,7 @@ function validationForm() {
         validateFormInputs('beneficiario', 'identificacion'); 
         validateFormInputs('beneficiario', 'address'); 
         validateFormInputs('beneficiario', 'birthdate'); 
+        formatDateSend($('input[name="beneficiario[birthdate]"]'))
 
         /* validar selects  */
         //validateFormSelect('beneficiario', 'documentType');   
@@ -410,7 +407,7 @@ function validationForm() {
         validateFormSelect('beneficiario', '[departamentoNacimiento]');
         validateFormSelect('beneficiario', '[municipioNacimiento]');
 
-        if (validateAspirante() && validateBeneficiario()) validate = true;
+        if (validateAspirante() && validateBeneficiario()) validate = true;        
     } else {
         validate = validateAspirante();
         // falata validar el grupo
@@ -428,6 +425,16 @@ function validationForm() {
     //return false;
 }
 
+/* funcion para formatear la fecha */
+function formatDateSend(element) {
+    if ($(element).val()) {
+        let arrayDate = $(element).val().split('/');
+        arrayDate.reverse();
+        $(element).val(arrayDate.map( date => { return date }).join('-'))
+    }
+}
+
+/* funcion para validar los datos requeridos del aspirante */
 const validateAspirante = () => {
     if (fieldsInputs.aspirante_name && fieldsInputs.aspirante_lastname && fieldsInputs.aspirante_secondLastname
         && fieldsInputs.aspirante_phone && fieldsInputs.aspirante_identificacion && fieldsInputs.aspirante_address
@@ -440,11 +447,13 @@ const validateAspirante = () => {
     return false;
 }
 
+/* funcion para validar los datos requeridos del beneficiario */
 const validateBeneficiario = () => {
     if (fieldsInputs.beneficiario_name && fieldsInputs.beneficiario_lastname && fieldsInputs.beneficiario_secondLastname
         && fieldsInputs.beneficiario_phone && fieldsInputs.beneficiario_identificacion && fieldsInputs.beneficiario_address 
         && fieldsInputs.beneficiario_departamentoExpedida && fieldsInputs.beneficiario_municipioExpedida 
-        && fieldsInputs.beneficiario_departamentoNacimiento && fieldsInputs.beneficiario_municipioNacimiento) {
+        && fieldsInputs.beneficiario_departamentoNacimiento && fieldsInputs.beneficiario_municipioNacimiento
+        && fieldsInputs.beneficiario_birthdate) {
         return true;
     }
     
@@ -515,16 +524,13 @@ const validateFields = (type, input, campo) => {
 
 /* funcion que realiza la accion de poner o quitar el error al campo select */
 const validateFieldsSelect = (input, campo) => {
-    console.log('llega:: ', input, campo)
     if ($(`select[name='${ input }']`).val() == null || $(`select[name='${ input }']`).val() === '-1' 
         || $(`select[name='${ input }']`).val() === '' || $(`select[name='${ input }']`).val() === 'undefined'){  
-            console.log('llega:: if')
         $(`#content-${ campo }`).addClass('has-danger');
         $(`#error-${ campo }`).show();
         $(`#error-${ campo }`).html(messages.required);
         fieldsInputs[campo] = false;
     } else {
-        console.log('llega:: else')
         $(`#content-${ campo }`).removeClass('has-danger');
         $(`#error-${ campo }`).hide();
         fieldsInputs[campo] = true;

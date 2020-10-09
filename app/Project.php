@@ -79,6 +79,7 @@ class Project extends Model
     const REJECTED = 5;
     const REVISON_UPDATE=6;
     const ACEPTED=7;
+    const NOT_REMEDIED=8;
     // const NOPUBLISHED = 6;
 
 //    const PERCENTAGE_APPROVAL = 3;

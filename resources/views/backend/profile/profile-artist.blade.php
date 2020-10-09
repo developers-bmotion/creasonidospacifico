@@ -13,7 +13,8 @@
     <div class="row pt-4">
         <div class="col-12">
 
-        @if(count($artist->projects) !== 0)
+            @if(count($artist->projects) !== 0)
+
             @if($artist->projects[0]->status == 4)
                 <!--=====================================
 		        ALERTA PARA MOSTRAR EL ESTADO PENDIENTE
@@ -280,7 +281,7 @@
                             <div class="tab-pane " id="m_user_profile_tab_2">
                                 <div class="m-portlet__body">
                                     <div class="row">
-                                        <div class="col-12 player">
+                                        <div class="col-11 player">
                                             <div class="form-group">
                                                 <h5 style="font-weight: bold">Tu canción:</h5>
                                             </div>
@@ -288,6 +289,62 @@
                                                 <source src="{{ $artist->projects[0]->audio }}">
                                             </audio>
 
+                                        </div>
+                                        <div class="row drop_audio col-12" style="display: none">
+                                            <div class="col-lg-12 m-form__group-sub {{$errors->has('subir_cancion')? 'has-danger':''}}">
+                                                <div class="form-group m-form__group row">
+                                                    <div class="col-lg-12">
+                                                        <label class="form-control-label" form="nombreProyecto"><span class="text-danger">*</span>
+                                                            Subir canción:</label>
+                                                        <div class="m-dropzone dropzone-audio m-dropzone--success" action=""
+                                                             id="m-dropzone-three">
+                                                            <div class="m-dropzone__msg dz-message needsclick">
+                                                                <h3 class="m-dropzone__msg-title">
+                                                                    Agregue su canción en formato MP3</h3>
+                                                                <span
+                                                                    class="m-dropzone__msg-desc">Arrastra o has clic a aquí para subir</span>
+                                                            </div>
+                                                        </div>
+                                                        {!! $errors->first('subir_cancion','<div class="form-control-feedback">*:message
+                                                                   </div>')!!}
+                                                        <span class="m-form__help">Cargue aquí el audio de la canción en formato Mp3.</span>
+                                                        <input type="hidden" id="inputDBAudioAddProject"
+                                                               name="subir_cancion" value="">
+                                                        <div id="erroresImagen" style="color: var(--danger)"
+                                                             class="form-control-feedback"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-1 " style="padding-top: 5rem;">
+                                            <i class="flaticon-edit ml-3 update_audio" style="color:#716aca; cursor:pointer;"></i>
+                                           <button type="button" class="btn btn-primary cancel_audio" style="display:none">Cancelar</button>
+
+                                        </div>
+                                        <div class="secondary_audios col-md-12 row mt-5">
+                                            @if($artist->projects[0]->audio_secundary_two)
+                                            <div class="col-6 player">
+                                                <label style="font-weight: bold" class="form-control-label" form="nombreProyecto">
+                                                    Canción extra uno(no participa en el concurso):</label>
+                                                <audio preload="auto" controls>
+                                                    <source src="{{ $artist->projects[0]->audio_secundary_two}}">
+                                                    {{-- <input name="project_id" id="project_id" type="hidden" value="{{ $project->id }}"> --}}
+                                                </audio>
+
+                                            </div>
+                                            @endif
+                                            @if($artist->projects[0]->audio_secundary_one)
+                                            <div class="col-6 player">
+                                                <label style="font-weight: bold" class="form-control-label" form="nombreProyecto">
+                                                    Canción extra dos(no participa en el concurso):</label>
+                                                <audio preload="auto" controls>
+                                                    <source src="{{ $artist->projects[0]->audio_secundary_one }}">
+                                                    {{-- <input name="project_id" id="project_id" type="hidden" value="{{ $project->id }}"> --}}
+                                                </audio>
+
+                                            </div>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="row pt-4">
@@ -323,6 +380,10 @@
                                                 @if($artist->projects[0]->status == 7)
                                                     <span
                                                         class="m-badge m-badge--success m-badge--wide m-badge--rounded">Aceptado</span>
+                                                @endif
+                                                @if($artist->projects[0]->status == 8)
+                                                    <span
+                                                        class="m-badge m-badge--success m-badge--wide m-badge--rounded">No subsanado</span>
                                                 @endif
                                             </div>
                                         </div>
@@ -882,6 +943,7 @@
                                                                     id="m-dropzone-three">
                                                                     <div
                                                                         class="m-dropzone__msg dz-message needsclick">
+
                                                                         <h3 class="m-dropzone__msg-title">{{ __('Actualizar documento de identidad') }}</h3>
                                                                         <span
                                                                             class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
@@ -1282,4 +1344,96 @@
         });
 
     </script>
+    <script>
+        $('.update_audio').click(function(){
+
+            $(this).hide();
+            $('.cancel_audio').show();
+
+            $('.drop_audio').show();
+            $('.player').hide();
+
+
+        });
+        $('.cancel_audio').click(function(){
+            $(this).hide();
+            $('.update_audio').show();
+            $('.drop_audio').hide();
+            $('.player').show();
+
+
+        });
+
+    </script>
 @endsection
+@section('js.add-project')
+
+    <script>
+        var id =@json($artist->projects);
+        var idProject = -1;
+        if(id.length != 0){
+            idProject= id[0].id;
+        }
+
+        var dropzone = new Dropzone('.dropzone-audio', {
+            url: '{{route('update.audio')}}',
+            acceptedFiles: 'audio/*',
+            maxFiles: 1,
+            paramName: 'audio',
+            headers: {
+                'idproject': idProject,
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            success: function (file, response) {
+                $("#erroresImagen").text('');
+                $('#inputDBAudioAddProject').val(response);
+                $('#img_add_proyect').attr('src', response);
+                $('.update_audio').show();
+                $('.drop_audio').hide();
+                $('.player').show();
+                $('.cancel_audio').hide();
+
+                toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "3000",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+
+              toastr.success("El audio se actualizo correctamente", "Información");
+              window.location.reload();
+            },
+            error: function (file, e, i, o, u) {
+                $("#erroresImagen").text('');
+                if (file.xhr.status === 413) {
+                    $("#erroresImagen").text('{{__("imagen_grande")}}');
+                    $(file.previewElement).addClass("dz-error").find('.dz-error-message').text('{{__("imagen_grande")}}');
+                    setTimeout(() => {
+                        dropzone.removeFile(file)
+                    }, 1000)
+                }
+            }
+        });
+        dropzone.on("addedfile", function (file) {
+            file.previewElement.addEventListener("click", function () {
+                dropzone.removeFile(file);
+            });
+        });
+        Dropzone.autoDiscover = false;
+
+
+    </script>
+
+@endsection
+

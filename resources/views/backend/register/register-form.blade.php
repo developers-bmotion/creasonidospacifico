@@ -44,6 +44,8 @@
             </div>
         @endif
 
+        {{-- @dd($artist); --}}
+
         <form method="post" action="{{ route('update.profile.artist', auth()->user()->id) }}" enctype="multipart/form-data"
             onsubmit="return validationForm()" class="m-form m-form--label-align-left- m-form--state-" id="m_form_new_register">
             @csrf {{method_field('PUT')}}
@@ -252,7 +254,7 @@
                                 
                                 <div class="m-form__group form-group">
                                     <div class="col-lg-6 m-form__group-sub">
-                                        <label for="">Documento de identificación</label>
+                                        <label for="">Seleccione el tipo de formato para subir el documento de identificación</label>
                                         <div class="m-radio-inline">
                                             <label class="m-radio">
                                                 <input type="radio" name="aspirante[identificacionDoc]" value="1" checked="checked"> Imagen
@@ -515,7 +517,7 @@
                                 ======================================-->
                                 <div class="m-form__group form-group">
                                     <div class="col-lg-6 m-form__group-sub">
-                                        <label for="">Documento de identificación</label>
+                                        <label for="">Seleccione el tipo de formato para subir el documento de identificación</label>
                                         <div class="m-radio-inline">
                                             <label class="m-radio">
                                                 <input type="radio" name="beneficiario[identificacionDoc]" value="1" checked="checked"> Imagen
@@ -785,8 +787,24 @@
             };
         }();
 
+        var inputSelect = function() {
+            $('#m_select2_2').select2({
+                placeholder: "Seleccione ciudad ó municipio",
+            });
+            $('#m_select2_4').select2({
+                placeholder: "Seleccione ciudad ó municipio",
+            });
+            $('#m_select2_9').select2({
+                placeholder: "Seleccione ciudad ó municipio",
+            });
+            $('#m_select2_8').select2({
+                placeholder: "Seleccione ciudad ó municipio",
+            });
+        }
+
         jQuery(document).ready(function () {
             BootstrapDatepicker.init();
+            inputSelect();
         });
 
         /* eventos para subir la imagen o pdf del aspirante */
