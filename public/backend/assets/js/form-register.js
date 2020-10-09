@@ -163,7 +163,7 @@ function addViewFormMembers(member) {
 
                 <div class="form-group m-form__group row">
                     <div class="col-lg-6 m-form__group-sub">
-                        <label class="form-control-label">Rol artistico</label>
+                        <label class="form-control-label">Instrumento que interpreta</label>
                         <input type="num" name="integrantes[${member}][rolMember]" class="form-control m-input" placeholder="" value="">                        
                         <span class="m-form__help">Ingrese el rol que desempeña dentro del grupo (Guitarrista, Bocalista, Pianosta, etc.)</span>
                     </div>
