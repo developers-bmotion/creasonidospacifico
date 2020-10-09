@@ -127,8 +127,6 @@ class ProfileController extends Controller
             'township' => $aspirante->vereda,
         ]);
 
-        dd('paso');
-
         User::where('id', '=', $id_artis)->update([
             'name' => $aspirante->name,
             'last_name' => $aspirante->lastname,
