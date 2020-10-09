@@ -115,7 +115,7 @@ class AddProjectController extends Controller
         $user_name = auth()->user()->name;
         \Mail::to($email_artist)->send(new NewProjectArtist($project,  $user_name));
         alert()->success(__("projectCreated"), __('projectCreatedTitle'))->autoClose(3000);
-        return redirect(route("myprojects.artist"))->with('proyect_add' . __('primer_proyecto_add_notificar'));
+        return redirect(route("profile.artist"))->with('proyect_add' . __('primer_proyecto_add_notificar'));
 //        if ($request->get('select_solista') != 1) {
 //            if ($request->get('nombres') != null) {
 //                for ($i = 0; $i < count($request->get('nombres')); $i++) {

@@ -15,7 +15,8 @@
             </div>
             <div class="m-card-profile__details">
                 <span class="m-card-profile__name">{{ auth()->user()->name }}</span>
-
+                <span class="m-card-profile__name">{{ auth()->user()->last_name }}</span>
+                <span class="m-card-profile__name">{{ auth()->user()->second_last_name }}</span>
                 <a href="" class="m-card-profile__email m-link"
                    style="margin-left: -15px;width: 80%; word-wrap: break-word;">{{ auth()->user()->email }}</a>
                 @if(count($artist->projects) !== 0)
