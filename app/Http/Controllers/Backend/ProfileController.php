@@ -108,9 +108,7 @@ class ProfileController extends Controller
     /* metodo para actualizar un aspirante en la base de datos */
     public function insertAspirante($id_artis, $request) {
         $aspirante = (object) $request->aspirante;
-        //$carbon_date = Carbon::parse($aspirante->birthdate)->toDateTimeString();
-        //dd($carbon_date);
-
+        //dd($aspirante);
         Artist::where('user_id', '=', $id_artis)->update([
             'nickname' => $aspirante->name,
             'biography' => $aspirante->biografia,
@@ -125,6 +123,7 @@ class ProfileController extends Controller
             'byrthdate' => Carbon::parse($aspirante->birthdate),
             'byrthdate' => $aspirante->birthdate,
             'township' => $aspirante->vereda,
+            'name_team' => $aspirante->nameTeam,
         ]);
 
         User::where('id', '=', $id_artis)->update([

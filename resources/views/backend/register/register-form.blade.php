@@ -240,20 +240,29 @@
                                     <div class="col-lg-6 m-form__group-sub">
                                         <label class="form-control-label">Biografía</label>
                                         <textarea class="form-control m-input" name="aspirante[biografia]" 
-                                            placeholder="Ingrese la bografía" style="min-height: 8rem;"></textarea>
+                                            placeholder="Ingrese la bografía" style="min-height: 10rem;"></textarea>
                                         <span class="m-form__help">Ingresa una breve descripción de tu historia como artista.</span>
                                     </div>
 
-                                    <div id="content-aspirante_birthdate" class="col-lg-6 m-form__group-sub">
-                                        <label for="example-text-input" class="form-control-label">Fecha de nacimiento *</label>                                        
-                                        <input type="text" name="aspirante[birthdate]" class="form-control" value="" 
-                                            id="datepicker_fecha_nacimiento" readonly placeholder="{{ __('fecha_nacimiento') }}" />
-                                        <div id="error-aspirante_birthdate" class="form-control-feedback" style="display: none"></div>
+                                    <div class="col-lg-6 form-group m-form__group row">  
+                                        <div id="content-aspirante_birthdate" class="col-lg-12 m-form__group-sub">
+                                            <label for="example-text-input" class="form-control-label">Fecha de nacimiento *</label>                                        
+                                            <input type="text" name="aspirante[birthdate]" class="form-control" value="" 
+                                                id="datepicker_fecha_nacimiento" readonly placeholder="{{ __('fecha_nacimiento') }}" />
+                                            <div id="error-aspirante_birthdate" class="form-control-feedback" style="display: none"></div>
+                                        </div>
+                                        <div id="content-aspirante_nameTeam" class="col-lg-12 m-form__group-sub mt-5" style="display: none;">
+                                            <label class="form-control-label">Nombre del grupo *</label>
+                                            <input type="text" name="aspirante[nameTeam]" class="form-control m-input"
+                                                placeholder="" value="{{ old('name_team', $artist->name_team) }}">
+                                            <div id="error-aspirante_nameTeam" class="form-control-feedback" style="display: none"></div>
+                                            <span class="m-form__help">Por favor ingrese el nombre del grupo musical</span>
+                                        </div>
                                     </div>
                                 </div>  
                                 
                                 <div class="m-form__group form-group">
-                                    <div class="col-lg-6 m-form__group-sub">
+                                    <div class="col-lg-12 m-form__group-sub">
                                         <label for="">Seleccione el tipo de formato para subir el documento de identificación</label>
                                         <div class="m-radio-inline">
                                             <label class="m-radio">
