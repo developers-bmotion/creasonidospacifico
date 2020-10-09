@@ -1129,7 +1129,7 @@
             BootstrapDatepicker.init();
         });
         // actualizar pdf aspirante
-        new Dropzone('.dropzone', {
+        new Dropzone('.dropzone',{
             url: '{{ route('cedula.pdf.aspirante') }}',
             acceptedFiles: '.pdf',
             maxFiles: 1,
@@ -1166,7 +1166,7 @@
 
         });
 
-        /* Dropzone.autoDiscover = false; */
+        Dropzone.autoDiscover = false;
         // actualizar pdf beneficiario
         new Dropzone('.dropzone-ben', {
             url: '{{ route('cedula.pdf.beneficiario') }}',

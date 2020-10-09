@@ -18,7 +18,13 @@
 
                 <a href="" class="m-card-profile__email m-link"
                    style="margin-left: -15px;width: 80%; word-wrap: break-word;">{{ auth()->user()->email }}</a>
+                   <div class="form-group pt-5">
+                    <h5 style="font-weight: bold">Actuara como:</h5>
+                    <span>{{ $artist->personType->name }}</span>
+                </div>
                 @if(count($artist->projects) !== 0)
+                {{-- @dd($artist) --}}
+
                     <div class="form-group pt-5">
                         <h5 style="font-weight: bold">Estado de tu propuesta musical:</h5>
                     </div>
