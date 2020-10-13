@@ -145,6 +145,7 @@ Route::group(['namespace'=>'Backend','prefix' => 'dashboard','middleware' => 'au
     =============================================*/
     Route::get('/form-register','ProfileController@index')->name('form.register');
     Route::post('/upload-image-document','ProfileController@uploadImageDocument')->name('upload.image.document');
+    Route::post('/upload-image-profile','ProfileController@uploadImageProfile')->name('upload.image.profile');
     Route::post('/upload-pdf-document','ProfileController@uploadPDFDocument')->name('upload.pdf.document');
 
     //RUTAS PARA EL PERFIL

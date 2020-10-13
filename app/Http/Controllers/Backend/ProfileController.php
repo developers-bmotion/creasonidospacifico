@@ -108,7 +108,7 @@ class ProfileController extends Controller
     /* metodo para actualizar un aspirante en la base de datos */
     public function insertAspirante($id_artis, $request) {
         $aspirante = (object) $request->aspirante;
-        //dd($aspirante);
+        dd($aspirante);
         Artist::where('user_id', '=', $id_artis)->update([
             'nickname' => $aspirante->name,
             'biography' => $aspirante->biografia,
@@ -349,6 +349,15 @@ class ProfileController extends Controller
 
             return back()->with('eliminar', 'Ningún Cambio');
         }
+    }
+
+    public function uploadImageProfile(Request $request)
+    {
+        $image = $request->file('file')->store('imageprofile', 's3');
+        Storage::disk('s3')->setVisibility($image, 'public');
+        $urlS3 = Storage::disk('s3')->url($image);
+
+        return $urlS3;
     }
 
     public function uploadImageDocument(Request $request)
