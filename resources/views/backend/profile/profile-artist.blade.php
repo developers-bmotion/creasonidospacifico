@@ -13,7 +13,7 @@
     <div class="row pt-4">
         <div class="col-12">
 
-            @if(count($artist->projects) !== 0)
+        @if(count($artist->projects) !== 0)
 
             @if($artist->projects[0]->status == 4)
                 <!--=====================================
@@ -116,7 +116,7 @@
                                     <li class="nav-item m-tabs__item">
                                         <a class="nav-link m-tabs__link" data-toggle="tab"
                                            href="#m_user_profile_tab_3"
-                                           role="tab">Información del grupo
+                                           role="tab">Información del grupo musical
                                         </a>
                                     </li>
                                 @endif
@@ -133,92 +133,142 @@
                         <div class="tab-pane active" id="m_user_profile_tab_1">
                             <div class="biografia col-md-10 ml-5 mt-5">
                                 <div class="row">
-                                    {{-- @dd($artist); --}}
 
-                                    <div class="col-md-6 mt-2">
-                                        <label style="font-weight: bold">Identificación:</label>
+                                    @if ($artist->users->picture)
+
+                                        <div class="col-md-4 mb-4">
+                                            <div class="m-scrollable" data-scrollable="true"
+                                                 style="">
+                                                <img class="ml-4"
+                                                     style="border-radius:8rem; width:7rem"
+                                                     src="{{$artist->users->picture}}">
+                                            </div>
+
+                                        </div>
+                                    @else
+
+                                        <div class="col-md-4 mb-4">
+                                            <div class="m-scrollable" data-scrollable="true"
+                                                 style="">
+                                                <img class="ml-4"
+                                                     style="border-radius:8rem; width:7rem"
+                                                     src="/default/user.png">
+                                            </div>
+
+                                        </div>
+
+                                    @endif
+
+                                    <div class="col-md-4">
+                                        <label style="font-weight: bold">Nombre:</label>
+                                        <div class="m-scrollable" data-scrollable="true" style="">
+                                            <p>{{ $artist->users->name }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label style="font-weight: bold">Apellidos:</label>
+                                        <div class="m-scrollable" data-scrollable="true" style="">
+                                            <p>{{ $artist->users->last_name }} {{ $artist->users->second_last_name }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label style="font-weight: bold">Tipo de identificación:</label>
+                                        <div class="m-scrollable" data-scrollable="true" style="">
+                                            <p>{{ $artist->documentType->document }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label style="font-weight: bold">Nº Identificación:</label>
                                         <div class="m-scrollable" data-scrollable="true" style="">
                                             <p>{{ $artist->identification }}</p>
                                         </div>
                                     </div>
-                                    <div class="col-md-6 mt-2">
+                                    <div class="col-md-4">
                                         <label style="font-weight: bold">Direccion:</label>
                                         <div class="m-scrollable" data-scrollable="true" style="">
                                             <p>{{ $artist->adress }}</p>
                                         </div>
                                     </div>
-                                    <div class="col-md-6 mt-2">
+                                    <div class="col-md-4">
                                         <label style="font-weight: bold">Departamento de nacimiento:</label>
                                         <div class="m-scrollable" data-scrollable="true" style="">
                                             {{$artist->city->departaments->descripcion}}</p>
                                         </div>
 
                                     </div>
-                                    <div class="col-md-6 mt-2">
-                                        <label style="font-weight: bold">Fecha de nacimiento:</label>
-                                        <div class="m-scrollable" data-scrollable="true" style="">
-                                            <p>{{ Carbon\Carbon::parse($artist->byrthdate)->formatLocalized('%d de %B de %Y') }}
-                                            </p>
-                                        </div>
-                                    </div>
 
-                                    <div class="col-md-6 mt-2">
+
+                                    <div class="col-md-4">
                                         <label style="font-weight: bold">Ciudad de nacimiento:</label>
                                         <div class="m-scrollable" data-scrollable="true" style="">
                                             {{$artist->city->descripcion}}</p>
                                         </div>
 
                                     </div>
-
-                                    <div class="col-md-6 mt-2">
+                                    <div class="col-md-4">
+                                        <label style="font-weight: bold">Fecha de nacimiento:</label>
+                                        <div class="m-scrollable" data-scrollable="true" style="">
+                                            <p>{{ Carbon\Carbon::parse($artist->byrthdate)->formatLocalized('%d de %B de %Y') }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
                                         <label style="font-weight: bold">Teléfono:</label>
                                         <div class="m-scrollable" data-scrollable="true" style="">
                                             <p>{{ $artist->users->phone_1}}</p>
                                         </div>
                                     </div>
                                     @if($artist->township)
-                                        <div class="col-md-6 mt-2">
+                                        <div class="col-md-4">
                                             <label style="font-weight: bold">Vereda/Corregimiento:</label>
                                             <div class="m-scrollable" data-scrollable="true" style="">
                                                 <p>{{$artist->township }}</p>
                                             </div>
                                         </div>
                                     @endif
-                                    <div class="col-md-6 mt-2">
+
+                                    <div class="col-md-4">
                                         <label style="font-weight: bold">Linea de convocatoria:</label>
                                         <div class="m-scrollable" data-scrollable="true" style="">
                                             <p>{{ $artist->personType->name}}</p>
                                         </div>
                                     </div>
-
-                                    <div class="col-md-6 mt-2">
+                                    <div class="col-md-4">
                                         <label style="font-weight: bold">Actuara como:</label>
                                         <div class="m-scrollable" data-scrollable="true" style="">
-                                            <p>{{ $artist->artistType->name}}</p>
+                                            @if($artist->artistType)
+                                                <p>{{ $artist->artistType->name}}</p>
+                                            @else
+                                                <p>No registrado</p>
+                                            @endif
                                         </div>
                                     </div>
 
 
-                                    <div class="col-md-6 mt-2">
+                                    <div class="col-md-4">
 
                                         <label style="font-weight: bold">{{ __('Departamento de Expedición') }}
                                             :</label>
                                         <div class="m-scrollable" data-scrollable="true" style="">
-                                            <p style="text-align: justify">{{ $artist->expeditionPlace->departaments->descripcion }}</p>
+                                            @if($artist->expeditionPlace->departaments)
+                                                <p style="text-align: justify">{{ $artist->expeditionPlace->departaments->descripcion }}</p>
+                                            @else
+                                                <p>No registrado</p>
+                                            @endif
                                         </div>
                                         {{-- @dd($artist); --}}
                                     </div>
 
 
                                     @if($artist->users->phone_2)
-                                        <div class="col-md-6 mt-2">
+                                        <div class="col-md-4">
                                             <label style="font-weight: bold">Otro teléfono:</label>
                                             <div class="m-scrollable" data-scrollable="true" style="">
                                                 <p>{{$artist->users->phone_2 }}</p>
                                             </div>
                                         </div>
                                     @endif
-                                    <div class="col-md-6 mt-2">
+                                    <div class="col-md-4">
 
                                         <label style="font-weight: bold">{{ __('Ciudad de Expedición') }}
                                             :</label>
@@ -229,6 +279,7 @@
                                     </div>
                                     <div class="col-md-6 mt-2">
                                         <label style="font-weight: bold">Documento de identificación:</label>
+                                        <br>
                                         <button type="button" class="btn btn-primary btn_pdf_asp"
                                                 data-toggle="modal"
                                                 data-target="#verpdfidentificacion">
@@ -261,7 +312,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-12 mt-2">
+                                    <div class="col-md-12 mt-4">
 
                                         <label style="font-weight: bold">{{ __('biografia') }}:</label>
                                         <div class="m-scrollable" data-scrollable="true" style="">
@@ -291,12 +342,15 @@
 
                                         </div>
                                         <div class="row drop_audio col-12" style="display: none">
-                                            <div class="col-lg-12 m-form__group-sub {{$errors->has('subir_cancion')? 'has-danger':''}}">
+                                            <div
+                                                class="col-lg-12 m-form__group-sub {{$errors->has('subir_cancion')? 'has-danger':''}}">
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-lg-12">
-                                                        <label class="form-control-label" form="nombreProyecto"><span class="text-danger">*</span>
+                                                        <label class="form-control-label" form="nombreProyecto"><span
+                                                                class="text-danger">*</span>
                                                             Subir canción:</label>
-                                                        <div class="m-dropzone dropzone-audio m-dropzone--success" action=""
+                                                        <div class="m-dropzone dropzone-audio m-dropzone--success"
+                                                             action=""
                                                              id="m-dropzone-three">
                                                             <div class="m-dropzone__msg dz-message needsclick">
                                                                 <h3 class="m-dropzone__msg-title">
@@ -318,35 +372,41 @@
 
                                         </div>
                                         <div class="col-md-1 " style="padding-top: 5rem;">
-                                            <i class="flaticon-edit ml-3 update_audio" style="color:#716aca; cursor:pointer;"></i>
-                                           <button type="button" class="btn btn-primary cancel_audio" style="display:none">Cancelar</button>
+                                            <i class="flaticon-edit ml-3 update_audio"
+                                               style="color:#716aca; cursor:pointer;"></i>
+                                            <button type="button" class="btn btn-primary cancel_audio"
+                                                    style="display:none">Cancelar
+                                            </button>
 
                                         </div>
                                         <div class="secondary_audios col-md-12 row mt-5">
                                             @if($artist->projects[0]->audio_secundary_two)
-                                            <div class="col-6 player">
-                                                <label style="font-weight: bold" class="form-control-label" form="nombreProyecto">
-                                                    Canción extra uno(no participa en el concurso):</label>
-                                                <audio preload="auto" controls>
-                                                    <source src="{{ $artist->projects[0]->audio_secundary_two}}">
-                                                    {{-- <input name="project_id" id="project_id" type="hidden" value="{{ $project->id }}"> --}}
-                                                </audio>
+                                                <div class="col-6 player">
+                                                    <label style="font-weight: bold" class="form-control-label"
+                                                           form="nombreProyecto">
+                                                        Canción extra uno(no participa en el concurso):</label>
+                                                    <audio preload="auto" controls>
+                                                        <source src="{{ $artist->projects[0]->audio_secundary_two}}">
+                                                        {{-- <input name="project_id" id="project_id" type="hidden" value="{{ $project->id }}"> --}}
+                                                    </audio>
 
-                                            </div>
+                                                </div>
                                             @endif
                                             @if($artist->projects[0]->audio_secundary_one)
-                                            <div class="col-6 player">
-                                                <label style="font-weight: bold" class="form-control-label" form="nombreProyecto">
-                                                    Canción extra dos(no participa en el concurso):</label>
-                                                <audio preload="auto" controls>
-                                                    <source src="{{ $artist->projects[0]->audio_secundary_one }}">
-                                                    {{-- <input name="project_id" id="project_id" type="hidden" value="{{ $project->id }}"> --}}
-                                                </audio>
+                                                <div class="col-6 player">
+                                                    <label style="font-weight: bold" class="form-control-label"
+                                                           form="nombreProyecto">
+                                                        Canción extra dos(no participa en el concurso):</label>
+                                                    <audio preload="auto" controls>
+                                                        <source src="{{ $artist->projects[0]->audio_secundary_one }}">
+                                                        {{-- <input name="project_id" id="project_id" type="hidden" value="{{ $project->id }}"> --}}
+                                                    </audio>
 
-                                            </div>
+                                                </div>
                                             @endif
                                         </div>
                                     </div>
+
                                     <div class="row pt-4">
                                         <div class="col-md-2 col-lg-2 col-12">
                                             <div class="form-group">
@@ -425,6 +485,7 @@
                                 </div>
                             </div>
                         @endif
+
                     <!--=====================================
                                        CONFIGURACIONES
                                         ======================================-->
@@ -443,80 +504,24 @@
 
 
                                                 <div class="m-section__content">
-                                                    {{-- <div class="m-demo" data-code-preview="true" data-code-html="true" data-code-js="false">
-                                                        <div class="m-demo__preview">
-                                                            <!-- CAMBIAR LA CONTRASEÑA DEL USUARIO, PERO PRIMERO SE VALIDA SI EL USUARIO ES NO ES DE ALGUNA RED SOCIAL -->
-                                                            @if(!$artist->users->socialAcounts)
-                                                                <form method="post" action="{{ route('update.password.artist') }}">
-                                                                    @csrf
-                                                                    <div class="row">
-                                                                        <div class="col-lg-6">
-                                                                            <div
-                                                                                class="form-group m-form__group {{$errors->has('password')? 'has-danger':''}}">
-                                                                                <label
-                                                                                    for="exampleInputPassword1">{{ __('actualizar_contraseña') }}</label>
-                                                                                <input type="password" name="password" class="form-control m-input"
-                                                                                       id="exampleInputPassword1"
-                                                                                       placeholder="{{ __('actualizar_contraseña') }}">
-                                                                                {!! $errors->first('password','<div class="form-control-feedback">
-                                                                                    *:message</div>')!!}
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-lg-6">
-                                                                            <div
-                                                                                class="form-group m-form__group {{$errors->has('password_confirmation')? 'has-danger':''}}">
-                                                                                <label
-                                                                                    for="exampleInputPassword1">{{ __('confirmar_contraseña') }}</label>
-                                                                                <input type="password" name="password_confirmation"
-                                                                                       class="form-control m-input" id="exampleInputPassword1"
-                                                                                       placeholder="{{ __('confirmar_contraseña') }}">
-                                                                                {!! $errors->first('password_confirmation','<div
-                                                                                    class="form-control-feedback">*:message</div>')!!}
-                                                                            </div>
-                                                                            <button type="submit"
-                                                                                    class="btn btn-outline-success btn-sm m-btn m-btn--custom pull-right">{{ __('actualizar') }}</button>
-                                                                        </div>
-                                                                    </div>
-                                                                </form>
-                                                            @endif
-                                                            <div class="row">
-                                                                <div class="col">
-                                                                    <div class="form-group m-form__group ">
-                                                                        <label for="">Imagén de Perfil</label>
-                                                                        <div class="m-dropzone dropzone m-dropzone--success"
-                                                                             action="inc/api/dropzone/upload.php" id="m-dropzone-three">
-                                                                            <div class="m-dropzone__msg dz-message needsclick">
-                                                                                <h3 class="m-dropzone__msg-title">
-                                                                                    {{ __('actualizar_foto_perfil') }}</h3>
-                                                                                <span
-                                                                                    class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col">
-                                                                    <div class="form-group m-form__group ">
-                                                                        <label for="">Imagén de Portada</label>
-                                                                        <div class="m-dropzone front_dropzone m-dropzone--success"
-                                                                             action="inc/api/dropzone/upload.php" id="m-dropzone-three">
-                                                                            <div class="m-dropzone__msg dz-message needsclick">
-                                                                                <h3 class="m-dropzone__msg-title">
-                                                                                    {{ __('actualizar_foto_portada') }}</h3>
-                                                                                <span
-                                                                                    class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div> --}}
-
                                                     <div
                                                         class="m-accordion m-accordion--bordered m-accordion--solid"
                                                         id="m_accordion_4" role="tablist">
 
-                                                        <!--begin::Item-->
+                                                        <div class="row pb-2">
+                                                            <div class="col-12">
+                                                                <label
+                                                                    style="font-weight: bold">Nombre de la agrupación musical:</label>
+                                                                <div
+                                                                    class="m-scrollable"
+                                                                    data-scrollable="true"
+                                                                    style="">
+
+                                                                    <p>{{ $artist->name_team }}</p>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
                                                         @foreach ($artist->teams as $team)
                                                             <div class="m-accordion__item">
                                                                 <div class="m-accordion__item-head collapsed"
@@ -539,36 +544,9 @@
                                                                     <div class="m-accordion__item-content">
                                                                         <div class="m-portlet__body ml-5">
                                                                             <div class="row">
-
-
                                                                                 <div
                                                                                     class="biografia col-md-12">
                                                                                     <div class="row">
-
-
-                                                                                        <div
-                                                                                            class="col-md-4 mt-2">
-                                                                                            <label
-                                                                                                style="font-weight: bold">Tipo
-                                                                                                identificación:</label>
-                                                                                            <div
-                                                                                                class="m-scrollable"
-                                                                                                data-scrollable="true"
-                                                                                                style="">
-                                                                                                <p>{{ $team->document_type}}</p>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <div
-                                                                                            class="col-md-4 mt-2">
-                                                                                            <label
-                                                                                                style="font-weight: bold">Identificación:</label>
-                                                                                            <div
-                                                                                                class="m-scrollable"
-                                                                                                data-scrollable="true"
-                                                                                                style="">
-                                                                                                <p>{{ $team->identification}}</p>
-                                                                                            </div>
-                                                                                        </div>
                                                                                         <div
                                                                                             class="col-md-4 mt-2">
                                                                                             <label
@@ -588,9 +566,36 @@
                                                                                                 class="m-scrollable"
                                                                                                 data-scrollable="true"
                                                                                                 style="">
-                                                                                                <p>{{ $team->last_name}}</p>
+                                                                                                <p>{{ $team->last_name}} {{ $team->second_last_name}}</p>
                                                                                             </div>
                                                                                         </div>
+                                                                                        <div
+                                                                                            class="col-md-4 mt-2">
+                                                                                            <label
+                                                                                                style="font-weight: bold">Tipo
+                                                                                                identificación:</label>
+                                                                                            <div
+                                                                                                class="m-scrollable"
+                                                                                                data-scrollable="true"
+                                                                                                style="">
+
+                                                                                                <p>{{ $team->documentType->document}}</p>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div
+                                                                                            class="col-md-4 mt-2">
+                                                                                            <label
+                                                                                                style="font-weight: bold">Nº
+                                                                                                Identificación:</label>
+                                                                                            <div
+                                                                                                class="m-scrollable"
+                                                                                                data-scrollable="true"
+                                                                                                style="">
+
+                                                                                                <p>{{ $team->identification}}</p>
+                                                                                            </div>
+                                                                                        </div>
+
                                                                                         <div
                                                                                             class="col-md-4 mt-2">
                                                                                             <label
@@ -600,6 +605,30 @@
                                                                                                 data-scrollable="true"
                                                                                                 style="">
                                                                                                 <p>{{ $team->addres}}</p>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div
+                                                                                            class="col-md-4 mt-2">
+                                                                                            <label
+                                                                                                style="font-weight: bold">Departamento
+                                                                                                de nacimiento:</label>
+                                                                                            <div
+                                                                                                class="m-scrollable"
+                                                                                                data-scrollable="true"
+                                                                                                style="">
+                                                                                                <p>{{ $team->city->departaments->descripcion}}</p>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div
+                                                                                            class="col-md-4 mt-2">
+                                                                                            <label
+                                                                                                style="font-weight: bold">Ciudad
+                                                                                                de nacimiento:</label>
+                                                                                            <div
+                                                                                                class="m-scrollable"
+                                                                                                data-scrollable="true"
+                                                                                                style="">
+                                                                                                <p>{{ $team->city->descripcion}}</p>
                                                                                             </div>
                                                                                         </div>
                                                                                         <div
@@ -636,17 +665,20 @@
                                                                                                 <p>{{ $team->phone1}}</p>
                                                                                             </div>
                                                                                         </div>
-                                                                                        <div
-                                                                                            class="col-md-4 mt-2">
-                                                                                            <label
-                                                                                                style="font-weight: bold">Teléfono:</label>
+                                                                                        @if($team->phone2)
                                                                                             <div
-                                                                                                class="m-scrollable"
-                                                                                                data-scrollable="true"
-                                                                                                style="">
-                                                                                                <p>{{ $team->phone2}}</p>
+                                                                                                class="col-md-4 mt-2">
+                                                                                                <label
+                                                                                                    style="font-weight: bold">Teléfono
+                                                                                                    2:</label>
+                                                                                                <div
+                                                                                                    class="m-scrollable"
+                                                                                                    data-scrollable="true"
+                                                                                                    style="">
+                                                                                                    <p>{{ $team->phone2}}</p>
+                                                                                                </div>
                                                                                             </div>
-                                                                                        </div>
+                                                                                        @endif
                                                                                         <div
                                                                                             class="col-md-4 mt-2">
 
@@ -671,7 +703,12 @@
                                                                                                 class="m-scrollable"
                                                                                                 data-scrollable="true"
                                                                                                 style="">
-                                                                                                <p>{{ $team->expeditionPlace->departaments->descripcion}}</p>
+                                                                                                @if($team->expeditionPlace)
+                                                                                                    <p>{{ $team->expeditionPlace->departaments->descripcion}}</p>
+                                                                                                @else
+                                                                                                    <p>No registrado</p>
+                                                                                                @endif
+
                                                                                             </div>
 
                                                                                         </div>
@@ -685,7 +722,11 @@
                                                                                                 class="m-scrollable"
                                                                                                 data-scrollable="true"
                                                                                                 style="">
-                                                                                                <p>{{ $team->expeditionPlace->descripcion}}</p>
+                                                                                                @if($team->expeditionPlace)
+                                                                                                    <p>{{ $team->expeditionPlace->descripcion}}</p>
+                                                                                                @else
+                                                                                                    <p>No registrado</p>
+                                                                                                @endif
                                                                                             </div>
 
                                                                                         </div>
@@ -696,10 +737,10 @@
                                                                                                 style="font-weight: bold">Documento
                                                                                                 de
                                                                                                 identificación:</label>
-
+                                                                                            <br>
                                                                                             <button
                                                                                                 type="button"
-                                                                                                class="ml-4 btn btn-primary btn_pdf_team{{ $loop->iteration }}"
+                                                                                                class="btn btn-primary btn_pdf_team{{ $loop->iteration }}"
                                                                                                 data-toggle="modal"
                                                                                                 data-target="#pdfidentificacion{{$loop->iteration}}">
                                                                                                 Ver documento de
@@ -757,7 +798,7 @@
                                                                             <h5 class="modal-title"
                                                                                 id="exampleModalLongTitle">
                                                                                 Documento
-                                                                                de {{ $team->name}}</h5>
+                                                                                de identificación de {{ $team->name}}</h5>
                                                                             <button type="button" class="close"
                                                                                     data-dismiss="modal"
                                                                                     aria-label="Close">
@@ -766,17 +807,38 @@
                                                                             </button>
                                                                         </div>
                                                                         <div class="modal-body">
-                                                                            @if(!$team->pdf_identificacion)
-                                                                                <p>No se cargo el documento
-                                                                                    correctamente</p>
+                                                                            @if(!$team->pdf_identificacion === null)
+                                                                                @if(!$team->img_document_front && !$team->img_document_back)
+                                                                                    <p>No se cargo el documento
+                                                                                        correctamente</p>
+                                                                                @else
+                                                                                    <div class="form-group">
+                                                                                        <label for="">Documento del lado
+                                                                                            frontal:</label>
+                                                                                        <img style="width: 100%"
+                                                                                             src="{{ $team->img_document_front}}"
+                                                                                             alt="">
+                                                                                    </div>
+                                                                                    <div class="form-group">
+                                                                                        <label for="">Documento de la
+                                                                                            parte trasera:</label>
+                                                                                        <img style="width: 100%"
+                                                                                             src="{{ $team->img_document_back}}"
+                                                                                             alt="">
+                                                                                    </div>
+                                                                                @endif
                                                                             @else
-                                                                                <div>
-                                                                                    <embed
-                                                                                        src="{{ $team->pdf_identificacion }}"
-                                                                                        frameborder="0"
-                                                                                        width="100%"
-                                                                                        height="400px">
-                                                                                </div>
+                                                                                @if(!$team->pdf_identificacion)
+                                                                                    <p>No se cargo el documento
+                                                                                        correctamente</p>
+                                                                                @else
+                                                                                    <div>
+                                                                                        <embed
+                                                                                            src="{{ $team->pdf_identificacion }}"
+                                                                                            frameborder="0" width="100%"
+                                                                                            height="400px">
+                                                                                    </div>
+                                                                                @endif
                                                                             @endif
                                                                         </div>
                                                                         <div class="modal-footer">
@@ -852,7 +914,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4 mt-2">
-                                                    <label style="font-weight: bold">Identificación:</label>
+                                                    <label style="font-weight: bold">Nº Identificación:</label>
                                                     <div class="m-scrollable" data-scrollable="true" style="">
                                                         <p>{{ $artist->beneficiary[0]->identification}}</p>
                                                     </div>
@@ -864,6 +926,15 @@
                                                         <p>{{ $artist->beneficiary[0]->adress}}</p>
                                                     </div>
                                                 </div>
+
+                                                @if($artist->beneficiary[0]->township)
+                                                    <div class="col-md-4 mt-2">
+                                                        <label style="font-weight: bold">Vereda/Corregimiento:</label>
+                                                        <div class="m-scrollable" data-scrollable="true" style="">
+                                                            <p>{{$artist->beneficiary[0]->township}}</p>
+                                                        </div>
+                                                    </div>
+                                                @endif
                                                 <div class="col-md-4 mt-2">
                                                     <label style="font-weight: bold">Fecha de
                                                         nacimiento:</label>
@@ -913,7 +984,12 @@
                                                         style="font-weight: bold">{{ __('Departamento de expedición') }}
                                                         :</label>
                                                     <div class="m-scrollable" data-scrollable="true" style="">
-                                                        <p style="text-align: justify">{{ $artist->beneficiary[0]->expeditionPlace->departaments->descripcion}}</p>
+
+                                                        @if($artist->beneficiary[0]->expeditionPlace !== null)
+                                                            <p style="text-align: justify">{{ $artist->beneficiary[0]->expeditionPlace->departaments->descripcion}}</p>
+                                                        @else
+                                                            <p style="text-align: justify">No registrado</p>
+                                                        @endif
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4 mt-2">
@@ -922,7 +998,11 @@
                                                         style="font-weight: bold">{{ __('Ciudad de expedición') }}
                                                         :</label>
                                                     <div class="m-scrollable" data-scrollable="true" style="">
-                                                        <p style="text-align: justify">{{ $artist->beneficiary[0]->expeditionPlace->descripcion}}</p>
+                                                        @if($artist->beneficiary[0]->expeditionPlace !== null)
+                                                            <p style="text-align: justify">{{ $artist->beneficiary[0]->expeditionPlace->descripcion}}</p>
+                                                        @else
+                                                            <p style="text-align: justify">No registrado</p>
+                                                        @endif
                                                     </div>
                                                 </div>
                                                 <div class="col-md-5 mt-2" style="margin-right:-4rem">
@@ -983,7 +1063,8 @@
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title" id="exampleModalLongTitle">
-                                                    Documento de {{ $artist->beneficiary[0]->name}}</h5>
+                                                    Documento de identificación
+                                                    de {{ $artist->beneficiary[0]->name}}</h5>
 
                                                 <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
@@ -991,13 +1072,33 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                @if(!$artist->beneficiary[0]->pdf_documento)
-                                                    <p>No se cargo el documento correctamente</p>
+                                                @if($artist->beneficiary[0]->pdf_documento === null)
+                                                    @if(!$artist->beneficiary[0]->img_document_front && !$artist->beneficiary[0]->img_document_back)
+                                                        <p>No se cargo el documento correctamente</p>
+                                                    @else
+                                                        <div class="form-group">
+                                                            <label for="">Documento del lado frontal:</label>
+                                                            <img style="width: 100%"
+                                                                 src="{{ $artist->beneficiary[0]->img_document_front }}"
+                                                                 alt="">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="">Documento de la parte trasera:</label>
+                                                            <img style="width: 100%"
+                                                                 src="{{ $artist->beneficiary[0]->img_document_back }}"
+                                                                 alt="">
+                                                        </div>
+
+                                                    @endif
                                                 @else
-                                                    <div>
-                                                        <embed src="{{ $artist->beneficiary[0]->pdf_documento}}"
-                                                               frameborder="0" width="100%" height="400px">
-                                                    </div>
+                                                    @if(!$artist->beneficiary[0]->pdf_documento)
+                                                        <p>No se cargo el documento correctamente</p>
+                                                    @else
+                                                        <div>
+                                                            <embed src="{{ $artist->beneficiary[0]->pdf_documento}}"
+                                                                   frameborder="0" width="100%" height="400px">
+                                                        </div>
+                                                    @endif
                                                 @endif
                                             </div>
                                             <div class="modal-footer">
@@ -1018,7 +1119,8 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLongTitle">
-                                Documento de {{ $artist->users->name }} {{ $artist->users->last_name }}</h5>
+                                Documento de
+                                identificación de {{ $artist->users->name }} {{ $artist->users->last_name }}</h5>
                             <button type="button" class="close" data-dismiss="modal"
                                     aria-label="Close">
                                 <span aria-hidden="true">×</span>
@@ -1026,14 +1128,34 @@
                         </div>
                         <div class="modal-body">
 
-                            @if(!$artist->users->pdf_cedula )
-                                <p>No se cargo el documento correctamente</p>
+                            {{--                            @if(!$artist->users->pdf_cedula )--}}
+                            {{--                                <p>No se cargo el documento correctamente</p>--}}
+                            {{--                            @else--}}
+
+                            @if($artist->users->pdf_cedula === null)
+                                @if(!$artist->users->img_document_fron && !$artist->users->img_document_back)
+                                    <p>No se cargo el documento correctamente</p>
+                                @else
+                                    <div class="form-group">
+                                        <label for="">Documento del lado frontal:</label>
+                                        <img style="width: 100%" src="{{ $artist->users->img_document_front }}" alt="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Documento de la parte trasera:</label>
+                                        <img style="width: 100%" src="{{ $artist->users->img_document_back }}" alt="">
+                                    </div>
+                                @endif
                             @else
-                                <div>
-                                    <embed src="{{ $artist->users->pdf_cedula }}" frameborder="0" width="100%"
-                                           height="400px">
-                                </div>
+                                @if(!$artist->users->pdf_cedula)
+                                    <p>No se cargo el documento correctamente</p>
+                                @else
+                                    <div>
+                                        <embed src="{{ $artist->users->pdf_cedula }}" frameborder="0" width="100%"
+                                               height="400px">
+                                    </div>
+                                @endif
                             @endif
+                            {{--                            @endif--}}
                         </div>
                         <div class="modal-footer">
 
@@ -1129,7 +1251,7 @@
             BootstrapDatepicker.init();
         });
         // actualizar pdf aspirante
-        new Dropzone('.dropzone',{
+        new Dropzone('.dropzone', {
             url: '{{ route('cedula.pdf.aspirante') }}',
             acceptedFiles: '.pdf',
             maxFiles: 1,
@@ -1345,7 +1467,7 @@
 
     </script>
     <script>
-        $('.update_audio').click(function(){
+        $('.update_audio').click(function () {
 
             $(this).hide();
             $('.cancel_audio').show();
@@ -1355,7 +1477,7 @@
 
 
         });
-        $('.cancel_audio').click(function(){
+        $('.cancel_audio').click(function () {
             $(this).hide();
             $('.update_audio').show();
             $('.drop_audio').hide();
@@ -1371,8 +1493,8 @@
     <script>
         var id =@json($artist->projects);
         var idProject = -1;
-        if(id.length != 0){
-            idProject= id[0].id;
+        if (id.length != 0) {
+            idProject = id[0].id;
         }
 
         var dropzone = new Dropzone('.dropzone-audio', {
@@ -1411,8 +1533,8 @@
                     "hideMethod": "fadeOut"
                 };
 
-              toastr.success("El audio se actualizo correctamente", "Información");
-              window.location.reload();
+                toastr.success("El audio se actualizo correctamente", "Información");
+                window.location.reload();
             },
             error: function (file, e, i, o, u) {
                 $("#erroresImagen").text('');

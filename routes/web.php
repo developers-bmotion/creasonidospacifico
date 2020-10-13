@@ -47,10 +47,9 @@ Route::get('/prueba-offline', function (){
 
 
 
-Route::get('email',function (){
-    $project = \App\Project::where('id',65)->first();
+Route::get('email/{name}',function ($name){
 
-    return new \App\Mail\NewProjectArtist($project,'admin');
+    return new \App\Mail\NewArtist($name);
 });
 Route::get('fecha',function (){
     $date = date('Y-m-d H:i:s');

@@ -58,6 +58,7 @@ class DatabaseSeeder extends Seeder
             TIPO DE DOCUMENTO
         =============================================*/
         factory(\App\DocumentType::class, 1)->create(['document' => 'Cédula de ciudadania']);
+        factory(\App\DocumentType::class, 1)->create(['document' => 'Cédula de extranjeria']);
         factory(\App\DocumentType::class, 1)->create(['document' => 'Tarjeta de identidad']);
 
 
@@ -65,16 +66,16 @@ class DatabaseSeeder extends Seeder
                 CREANDO LAS CATEGORIAS O MODALIDADES
       =============================================*/
         factory(\App\Category::class, 1)->create(['category' => 'Músicas populares y campesinas', 'slug' => str_slug("populares_campesinas", '-')]);
-        factory(\App\Category::class, 1)->create(['category' => 'Música andina', 'slug' => str_slug("música_andina", '-')]);
-        factory(\App\Category::class, 1)->create(['category' => 'Música tradicional del Sur Occidente', 'slug' => str_slug("música_tradicional", '-')]);
-        factory(\App\Category::class, 1)->create(['category' => 'Música tradicional del Pacífico', 'slug' => str_slug("música_tradicional_pc", '-')]);
-        factory(\App\Category::class, 1)->create(['category' => 'Música urbana Pacífico', 'slug' => str_slug("música_urbana", '-')]);
+        factory(\App\Category::class, 1)->create(['category' => 'Música andina (tradicional y/o contemporánea)', 'slug' => str_slug("música_andina", '-'), 'description' => 'tradicional y/o contemporánea']);
+        factory(\App\Category::class, 1)->create(['category' => 'Música tradicional del Sur Occidente (norte, centro y sur)', 'slug' => str_slug("música_tradicional", '-')]);
+        factory(\App\Category::class, 1)->create(['category' => 'Música tradicional del Pacífico (norte, centro y sur).', 'slug' => str_slug("música_tradicional_pc", '-')]);
+        factory(\App\Category::class, 1)->create(['category' => 'Música urbana Pacífico (fusiones urbanas con música tradicional del Pacífico)', 'slug' => str_slug("música_urbana", '-')]);
         factory(\App\Category::class, 1)->create(['category' => 'Música salsa, antillana y fusión salsa', 'slug' => str_slug("música_urbana", '-')]);
-        factory(\App\Category::class, 1)->create(['category' => 'Músicas espirituales y religiosas', 'slug' => str_slug("músicas_espirituales", '-')]);
-        factory(\App\Category::class, 1)->create(['category' => 'Música Clásica', 'slug' => str_slug("música_clásica", '-')]);
-        factory(\App\Category::class, 1)->create(['category' => 'Música joven', 'slug' => str_slug("música_joven", '-')]);
-        factory(\App\Category::class, 1)->create(['category' => 'Otras Músicas', 'slug' => str_slug("otras_musicas", '-')]);
-        factory(\App\Category::class, 1)->create(['category' => 'Música jazz', 'slug' => str_slug("música_jazz", '-')]);
+        factory(\App\Category::class, 1)->create(['category' => 'Músicas espirituales y religiosas (música sacra, cantos gregorianos, música sacra negra, chigualos, alabaos, salves, cantos de boga)', 'slug' => str_slug("músicas_espirituales", '-')]);
+        factory(\App\Category::class, 1)->create(['category' => 'Música Clásica (en todos sus formatos)', 'slug' => str_slug("música_clásica", '-')]);
+        factory(\App\Category::class, 1)->create(['category' => 'Música joven (trap, rap, reggaetón, hip-hop)', 'slug' => str_slug("música_joven", '-')]);
+        factory(\App\Category::class, 1)->create(['category' => 'Otras Músicas (música experimental, world music, proyectos especiales y nuevas propuestas)', 'slug' => str_slug("otras_musicas", '-')]);
+        factory(\App\Category::class, 1)->create(['category' => 'Música jazz (jazz Pacífico, latín jazz, blues, góspel)', 'slug' => str_slug("música_jazz", '-')]);
 
 
         /*=============================================
