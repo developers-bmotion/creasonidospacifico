@@ -935,6 +935,7 @@
                                                         Ver documento de identidad
                                                     </button>
                                                     <div class="row drop_pdf_ben" style="display: none">
+                                                        <div class="m-loader m-loader--brand" style="width: 30px; display: inline-block;"></div>
                                                         <div class="col">
                                                             <div class="form-group m-form__group ">
                                                                 <div
