@@ -54,6 +54,22 @@
     <!-- END: Subheader -->
     <div class="m-content">
 
+
+        <!--=====================================
+           MOSTAR ALERTA PARA CREAR PROYECTO
+       ======================================-->
+        @if(session()->has('aspirant_register'))
+            <div class="m-alert m-alert--icon m-alert--outline alert alert-success" role="alert">
+                <div class="m-alert__icon">
+                    <i class="la la-check"></i>
+                </div>
+                <div class="m-alert__text">
+                    <strong>Bien hecho!</strong> {{session('aspirant_register')}}
+                </div>
+            </div>
+        @endif
+
+
         <div class="m-portlet m-portlet--mobile m-portlet--body-progress-">
             <div class="m-portlet__head">
                 <div class="m-portlet__head-caption">

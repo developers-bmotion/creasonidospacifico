@@ -16,8 +16,8 @@ class Beneficiary extends Model
     ];
     protected $fillable = [
         'document_type', 'identification', 'name', 'last_name',
-        'second_last_name', 'pdf_documento', 'phone', 'adress',
-        'biography', 'birthday', 'cities_id', 'township', 'expedition_place',
+        'second_last_name', 'pdf_documento', 'phone', 'adress', 'img_document_front',
+        'img_document_back', 'biography', 'birthday', 'cities_id', 'township', 'expedition_place',
         'artist_id'
     ];
 

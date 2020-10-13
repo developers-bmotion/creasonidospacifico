@@ -10,6 +10,7 @@ use App\Country;
 use App\DocumentType;
 use App\Level;
 use App\Location;
+use App\Mail\NewArtist;
 use App\Update;
 use App\User;
 use Carbon\Carbon;
@@ -36,7 +37,7 @@ class ProfileController extends Controller
 
 
         /*   dd($departamentos); */
-        $artist = Artist::where('user_id', auth()->user()->id)->with('projects.category','projects.observations', 'city.departaments','users','teams','artistType','personType','beneficiary.documentType','beneficiary.city.departaments','beneficiary.expeditionPlace.departaments','teams.expeditionPlace.departaments','expeditionPlace.departaments')->first();
+        $artist = Artist::where('user_id', auth()->user()->id)->with('documentType','projects.category','projects.observations', 'city.departaments','users','teams.documentType','teams.expeditionPlace','teams.city.departaments','artistType','personType','beneficiary.documentType','beneficiary.city.departaments','beneficiary.expeditionPlace.departaments','teams.expeditionPlace.departaments','expeditionPlace.departaments')->first();
         return view('backend.profile.profile-artist', compact('documenttype', 'artist', 'departamentos', 'persontypes', 'artisttypes', 'leveltypes'));
     }
 
@@ -74,7 +75,8 @@ class ProfileController extends Controller
             if ($request->actuaraComo == '1'){
                 /* solo se guarda el aspirante */
                 $this->insertAspirante($id_artis, $request);
-                return redirect()->route('profile.artist');
+
+                return redirect()->route('add.project')->with('aspirant_register', 'Es momento de subir tu propuesta musical');
             } else { // se debe guardar los datos del representante
                 $this->insertAspirante($id_artis, $request);
 
@@ -88,8 +90,7 @@ class ProfileController extends Controller
                 } else {
                     $this->createBeneficiario($request, $artist->id);
                 }
-
-                return redirect()->route('profile.artist');
+                return redirect()->route('add.project')->with('aspirant_register', 'Es momento de subir tu propuesta musical');
             }
         } else { // Para este caso se debe guardar el representante
             $this->insertAspirante($id_artis, $request);
@@ -100,17 +101,13 @@ class ProfileController extends Controller
 
             /* se guardan los datos del los integrantes del grupo */
             if ($existTeam == null) $this->insertGroupMembers($request, $artist);
-
-            return redirect()->route('profile.artist');
+            return redirect()->route('add.project')->with('aspirant_register', 'Es momento de subir tu propuesta musical');
         }
     }
 
     /* metodo para actualizar un aspirante en la base de datos */
     public function insertAspirante($id_artis, $request) {
         $aspirante = (object) $request->aspirante;
-        //$carbon_date = Carbon::parse($aspirante->birthdate)->toDateTimeString();
-        //dd($carbon_date);
-
         Artist::where('user_id', '=', $id_artis)->update([
             'nickname' => $aspirante->name,
             'biography' => $aspirante->biografia,
@@ -125,9 +122,10 @@ class ProfileController extends Controller
             'byrthdate' => Carbon::parse($aspirante->birthdate),
             'byrthdate' => $aspirante->birthdate,
             'township' => $aspirante->vereda,
+            'name_team' => $aspirante->nameTeam,
         ]);
 
-        User::where('id', '=', $id_artis)->update([
+       $user = User::where('id', '=', $id_artis)->update([
             'name' => $aspirante->name,
             'last_name' => $aspirante->lastname,
             'second_last_name' => $aspirante->secondLastname,
@@ -136,12 +134,13 @@ class ProfileController extends Controller
             'img_document_front' => $aspirante->urlImageDocumentFrente,
             'img_document_back' => $aspirante->urlImageDocumentAtras,
         ]);
+
+        \Mail::to(auth()->user()->email)->send(new NewArtist($aspirante->name));
     }
 
     /* metodo para insertar un beneficiario en la base de datos */
     public function createBeneficiario($request, $idArtst) {
         $beneficiario = (object) $request->beneficiario;
-
         Beneficiary::create([
             'document_type' => $beneficiario->documentType,
             'identification' => $beneficiario->identificacion,
@@ -156,8 +155,8 @@ class ProfileController extends Controller
             'biography' => $beneficiario->biografia,
             'birthday' => Carbon::parse($beneficiario->birthdate),
             'cities_id' => $beneficiario->municipioNacimiento,
-            'township' => $request->vereda,
-            'expedition_place' => $request->municipioExpedida,
+            'township' => $beneficiario->vereda,
+            'expedition_place' => $beneficiario->municipioExpedida,
             'artist_id' =>  $idArtst
         ]);
     }

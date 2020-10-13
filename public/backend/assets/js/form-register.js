@@ -8,17 +8,20 @@ $('#select-linea-convocatoria').on('change', function() {
 
     switch ( lineaConvocatoria ) {
         case '-1': $("#content-select-form-actuara-como").hide(); 
-                $("#select-actuara-como").val("-1");    
+                $("#select-actuara-como").val("-1");  
+                $("#content-aspirante_nameTeam").hide();  
             break;
         case '1': $("#content-select-form-actuara-como").show();
                 $("#select-actuara-como option[value='1']").show();
                 $("#select-actuara-como option[value='3']").hide(); 
                 $("#select-actuara-como").val("-1");    
+                $("#content-aspirante_nameTeam").hide();
             break;
         case '2': $("#content-select-form-actuara-como").show();                
                 showInfoGroup()
                 $("#select-actuara-como").val("3");    
                 $("#select-actuara-como").prop('disabled', true);
+                $("#content-aspirante_nameTeam").show();
             break;
     }   
 });
@@ -165,7 +168,7 @@ function addViewFormMembers(member) {
                     <div class="col-lg-6 m-form__group-sub">
                         <label class="form-control-label">Instrumento que interpreta</label>
                         <input type="num" name="integrantes[${member}][rolMember]" class="form-control m-input" placeholder="" value="">                        
-                        <span class="m-form__help">Ingrese el rol que desempeña dentro del grupo (Guitarrista, Bocalista, Pianosta, etc.)</span>
+                        <span class="m-form__help">Ingrese el rol que desempeña dentro del grupo (Guitarrista, Vocalista, Pianista, etc.)</span>
                     </div>
                 </div>
 
@@ -397,7 +400,7 @@ function validationForm() {
         validateFormInputs('beneficiario', 'phone'); 
         validateFormInputs('beneficiario', 'identificacion'); 
         validateFormInputs('beneficiario', 'address'); 
-        validateFormInputs('beneficiario', 'birthdate'); 
+        validateFormInputs('beneficiario', 'birthdate');         
         formatDateSend($('input[name="beneficiario[birthdate]"]'))
 
         /* validar selects  */
@@ -410,6 +413,8 @@ function validationForm() {
         if (validateAspirante() && validateBeneficiario()) validate = true;        
     } else {
         validate = validateAspirante();
+        console.log('validar name team');
+        validateFormInputs('aspirante', 'nameTeam'); 
         // falata validar el grupo
     }
     
@@ -419,10 +424,34 @@ function validationForm() {
     } else {
         validate = false;
     }
-    console.log('despues::: ', validate)
-
-    return validate;
-    //return false;
+    /* console.log('despues::: ', validate)
+    var enviar = false;
+ // falta el alert asi como esta no funciona
+    if (validate) {
+        swal({
+            title: "Anuncio",
+            text: "¿Esta seguro de guardar los datos?",
+            icon: "success",
+            confirmButtonText: "<span>Aceptar</span>",
+            cancelButtonText: "<span>cancelar</span>",
+            cancelButtonClass: "btn btn-danger m-btn m-btn--pill m-btn--icon",
+            confirmButtonClass: "btn btn-success m-btn m-btn--pill m-btn--air m-btn--icon",
+            showCancelButton: true,
+        }).then(function (result) {
+            console.log('respondio: ', result);
+            if (result.value) {
+                console.log('respondio: entro');
+                enviar = true;
+                $('#m_form_new_register').submit();
+            } 
+        });
+        console.log('salioo de alert: ', enviar)
+        return enviar;
+    } else {
+        return false;
+    } */
+    
+    return validate;    
 }
 
 /* funcion para formatear la fecha */
@@ -462,7 +491,8 @@ const validateBeneficiario = () => {
 
 /* funcion que realiza las validaciones segun el campo input */
 const validateFormInputs = (tipo, targetName) => {  
-    switch (`${ tipo }[${ targetName }]`) {
+    validateFields('input', `${ tipo }[${ targetName }]`, `${ tipo }_${ targetName }`)
+    /* switch (`${ tipo }[${ targetName }]`) {
         case `${ tipo }[name]`:
             validateFields('input', `${ tipo }[name]`, `${ tipo }_name`)
             break;
@@ -484,7 +514,10 @@ const validateFormInputs = (tipo, targetName) => {
         case `${ tipo }[birthdate]`: 
             validateFields('input', `${ tipo }[birthdate]`, `${ tipo }_birthdate`)
             break;        
-    }
+        case `${ tipo }[nameTeam]`: 
+            validateFields('input', `${ tipo }[nameTeam]`, `${ tipo }_nameTeam`)
+            break;        
+    } */
 }
 
 /* funcion que realiza las validaciones segun el campo select */
@@ -567,5 +600,6 @@ $("input[name='beneficiario[phone]']").keyup( () => validateFormInputs('benefici
 $("input[name='beneficiario[identificacion]']").keyup( () => validateFormInputs('beneficiario', 'identificacion') );
 $("input[name='beneficiario[address]']").keyup( () => validateFormInputs('beneficiario', 'address') );
 $("input[name='beneficiario[birthdate]']").change( () => validateFormInputs('beneficiario', 'birthdate') );
+$("input[name='aspirante[nameTeam]']").keyup( () => validateFormInputs('aspirante', 'nameTeam') );
 
 $("input[name='acceptTermsConditions']").change( () => validateTermsCondition() );
