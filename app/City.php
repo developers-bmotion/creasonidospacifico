@@ -39,7 +39,7 @@ class City extends Model
         return $this->hasMany(Beneficiary::class);
     }
     public function team(){
-        return $this->hasMany(Team::class);
+        return $this->hasMany(Team::class, 'place_expedition');
     }
 
     public function artist(){

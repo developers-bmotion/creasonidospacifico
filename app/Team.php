@@ -25,7 +25,10 @@ use Illuminate\Database\Eloquent\Model;
 class Team extends Model
 {
     protected $fillable = [
-        'name', 'role'
+        'name', 'role', 'name', 'last_name', 'second_last_name',
+        'document_type', 'identification', 'expedition_place',
+        'birthday', 'email', 'adress', 'phone1', 'phone2', 'pdf_identification',
+        'img_document_from', 'img_document_back', 'artist_id'
     ];
 
 
@@ -37,8 +40,14 @@ class Team extends Model
     public function artist(){
         return $this->hasOne(Artist::class,'id');
     }
+    public function city(){
+        return $this->belongsTo(City::class, 'place_birth');
+    }
 
     public function expeditionPlace(){
-        return $this->belongsTo(City::class, 'expedition_place');
+        return $this->belongsTo(City::class, 'place_expedition');
+    }
+    public function documentType(){
+        return $this->belongsTo(DocumentType::class,'type_document');
     }
 }

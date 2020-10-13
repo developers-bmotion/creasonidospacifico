@@ -12,6 +12,10 @@ class DocumentType extends Model
         return $this->hasMany(Artist::class, 'document_type');
     }
 
+    public function team(){
+        return $this->hasMany(Artist::class, 'type_document');
+    }
+
     public function beneficiary(){
         return $this->hasMany(Artist::class, 'document_type');
     }

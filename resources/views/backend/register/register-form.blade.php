@@ -1,10 +1,10 @@
 @extends('backend.layout')
 
 @section('header')
-    
+
     <div class="d-flex align-items-center">
         <div class="mr-auto">
-            <h1 class="m-subheader__title--separator">Proceso de registro del aspirante</h1>            
+            <h1 class="m-subheader__title--separator">Proceso de registro del aspirante</h1>
         </div>
     </div>
 
@@ -193,19 +193,19 @@
                                                 <span class="input-group-text"><i class="la la-phone"></i></span>
                                             </div>
                                             <input type="text" name="aspirante[phone]" class="form-control m-input"
-                                                placeholder="" value="{{ old('phone_1', $artist->users->phone_1) }}">                                            
+                                                placeholder="" value="{{ old('phone_1', $artist->users->phone_1) }}">
                                         </div>
                                         <div id="error-aspirante_phone" class="form-control-feedback" style="display: none"></div>
                                         <span class="m-form__help">Por favor ingrese su número de teléfono valido</span>
                                     </div>
-                                </div> 
+                                </div>
 
                                 <!--=====================================
                                     TIPO DE DOCUMENTO Y Nº IDENTIFICACIÓN
                                 ======================================-->
                                 <div class="form-group m-form__group row">
                                     <div id="content-aspirante_documentType" class="col-lg-6 m-form__group-sub">
-                                        <label class="form-control-label {{$errors->has('document_type')? 'has-danger':''}}">Tipo de documento *</label>                                        
+                                        <label class="form-control-label {{$errors->has('document_type')? 'has-danger':''}}">Tipo de documento *</label>
                                         <select name="aspirante[documentType]" class="form-control m-bootstrap-select m_selectpicker">
                                             @foreach($documenttype as $document_type)
                                                 @if($document_type->document != "Tarjeta de identidad")
@@ -233,51 +233,44 @@
                                     <div id="content-aspirante_departamentoExpedida" class="col-lg-6 m-form__group-sub">
                                         <label class="form-control-label">Departamento de expedición *</label>
                                         <select onchange="onSelectDepartamentosChange(this, 'aspirante-expid-municipios')" id="m_select2_1"
-                                            name="aspirante[departamentoExpedida]" class="form-control m-select2" >    
+                                            name="aspirante[departamentoExpedida]" class="form-control m-select2" >
                                             <option value="-1" >Seleccione departamento</option>
                                             @foreach($departamentos as $departamento)
                                                 <option value="{{$departamento->id}}" {{ old('expedition_place', ($artist->expedition_place == $departamento->id) ? 'selected':'') }}>
                                                     {{ $departamento->descripcion }}</option>
-                                            @endforeach                                            
+                                            @endforeach
                                         </select>
                                         <div id="error-aspirante_departamentoExpedida" class="form-control-feedback" style="display: none"></div>
                                     </div>
 
                                     <div id="content-aspirante_municipioExpedida" class="col-lg-6 m-form__group-sub">
                                         <label class="form-control-label">Municipio de expedición *</label>
-                                        <select onchange="onSelectMunicipiosChange(this)" name="aspirante[municipioExpedida]" class="form-control m-select2 aspirante-expid-municipios" id="m_select2_2"></select> 
+                                        <select onchange="onSelectMunicipiosChange(this)" name="aspirante[municipioExpedida]" class="form-control m-select2 aspirante-expid-municipios" id="m_select2_2"></select>
                                         <div id="error-aspirante_municipioExpedida" class="form-control-feedback" style="display: none"></div>
                                     </div>
-                                </div> 
+                                </div>
 
                                 <!--=====================================
                                     CARGAR DOCUMENTO
                                 ======================================-->
-                                <div class="form-group m-form__group row">   
+                                <div class="form-group m-form__group row">
                                     <div class="col-lg-6 m-form__group-sub">
                                         <label class="form-control-label">Biografía</label>
-                                        <textarea class="form-control m-input" name="aspirante[biografia]" 
+                                        <textarea class="form-control m-input" name="aspirante[biografia]"
                                             placeholder="Ingrese la bografía" style="min-height: 10rem;"></textarea>
                                         <span class="m-form__help">Ingresa una breve descripción de tu historia como artista.</span>
                                     </div>
 
-                                    <div class="col-lg-6 form-group m-form__group row">  
+                                    <div class="col-lg-6 form-group m-form__group row">
                                         <div id="content-aspirante_birthdate" class="col-lg-12 m-form__group-sub">
-                                            <label for="example-text-input" class="form-control-label">Fecha de nacimiento *</label>                                        
-                                            <input type="text" name="aspirante[birthdate]" class="form-control" value="" 
+                                            <label for="example-text-input" class="form-control-label">Fecha de nacimiento *</label>
+                                            <input type="text" name="aspirante[birthdate]" class="form-control" value=""
                                                 id="datepicker_fecha_nacimiento" readonly placeholder="{{ __('fecha_nacimiento') }}" />
                                             <div id="error-aspirante_birthdate" class="form-control-feedback" style="display: none"></div>
                                         </div>
-                                        <div id="content-aspirante_nameTeam" class="col-lg-12 m-form__group-sub mt-5" style="display: none;">
-                                            <label class="form-control-label">Nombre del grupo *</label>
-                                            <input type="text" name="aspirante[nameTeam]" class="form-control m-input"
-                                                placeholder="" value="{{ old('name_team', $artist->name_team) }}">
-                                            <div id="error-aspirante_nameTeam" class="form-control-feedback" style="display: none"></div>
-                                            <span class="m-form__help">Por favor ingrese el nombre del grupo musical</span>
-                                        </div>
                                     </div>
-                                </div>  
-                                
+                                </div>
+
                                 <div class="m-form__group form-group">
                                     <div class="col-lg-12 m-form__group-sub">
                                         <label for="">Seleccione el tipo de formato para subir el documento de identificación</label>
@@ -289,11 +282,11 @@
                                             <label class="m-radio">
                                                 <input type="radio" name="aspirante[identificacionDoc]" value="2"> PDF
                                                 <span></span>
-                                            </label>                                    
+                                            </label>
                                         </div>
                                     </div>
-                                    
-                                    <div id="image-docuemnt-aspirante" class="form-group m-form__group row">                                                                       
+
+                                    <div id="image-docuemnt-aspirante" class="form-group m-form__group row">
                                         <div class="col-lg-6 m-form__group-sub">
                                             <label for="">Imagen documento identificación frente</label>
                                             <div class="m-dropzone file-image-document-aspirante-frente m-dropzone--success"
@@ -315,8 +308,8 @@
                                             </div>
                                         </div>
                                     </div>
-    
-                                    <div id="pdf-docuemnt-aspirante" style="display: none" class="form-group m-form__group row">                                                                       
+
+                                    <div id="pdf-docuemnt-aspirante" style="display: none" class="form-group m-form__group row">
                                         <div class="col-lg-6 m-form__group-sub">
                                             <label for="">PDF documento identificación </label>
                                             <div class="m-dropzone file-pdf-document-aspirante m-dropzone--success"
@@ -328,21 +321,21 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>  
 
-                                <div class="form-group m-form__group row">                                                                       
-                                    <div class="col-lg-6 m-form__group-sub">
-                                        <label for="">Foto de perfil</label>
-                                        <div class="m-dropzone file-image-profile-aspirante m-dropzone--success"
-                                             action="" id="m-dropzone-three">
-                                            <div class="m-dropzone__msg dz-message needsclick">
-                                                <h3 class="m-dropzone__msg-title">Subir foto de perfil</h3>
-                                                <span class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                    <div class="form-group m-form__group row">                                                                       
+                                        <div class="col-lg-6 m-form__group-sub">
+                                            <label for="">Foto de perfil</label>
+                                            <div class="m-dropzone file-image-profile-aspirante m-dropzone--success"
+                                                action="" id="m-dropzone-three">
+                                                <div class="m-dropzone__msg dz-message needsclick">
+                                                    <h3 class="m-dropzone__msg-title">Subir foto de perfil</h3>
+                                                    <span class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>                                    
+                                        </div>                                    
+                                    </div>                                
                                 </div>
-                                
+
                                 <!--=====================================
                                     Campos input type hidden
                                 ======================================-->
@@ -368,8 +361,8 @@
                                 <div class="form-group m-form__group row">
                                     <div id="content-aspirante_departamentoNacimiento" class="col-lg-6 m-form__group-sub">
                                         <label class="form-control-label">Departamento de nacimiento *</label>
-                                        <select onchange="onSelectDepartamentosChange(this, 'aspirante-nacimiento-municipios')"  id="m_select2_3" 
-                                            name="aspirante[departamentoNacimiento]" class="form-control m-select2">  
+                                        <select onchange="onSelectDepartamentosChange(this, 'aspirante-nacimiento-municipios')"  id="m_select2_3"
+                                            name="aspirante[departamentoNacimiento]" class="form-control m-select2">
                                             <option value="-1">Seleccione departamento</option>
                                             @foreach($departamentos as $departamento)
                                                 <option value="{{$departamento->id}}" {{ old('cities_id', ($artist->cities_id == $departamento->id) ? 'selected':'')}}>
@@ -381,10 +374,10 @@
 
                                     <div id="content-aspirante_municipioNacimiento" class="col-lg-6 m-form__group-sub">
                                         <label class="form-control-label">Municipio de nacimiento *</label>
-                                        <select onchange="onSelectMunicipiosChange(this)" name="aspirante[municipioNacimiento]" class="form-control m-select2 aspirante-nacimiento-municipios" id="m_select2_4"></select> 
+                                        <select onchange="onSelectMunicipiosChange(this)" name="aspirante[municipioNacimiento]" class="form-control m-select2 aspirante-nacimiento-municipios" id="m_select2_4"></select>
                                         <div id="error-aspirante_municipioNacimiento" class="form-control-feedback" style="display: none"></div>
                                     </div>
-                                </div> 
+                                </div>
 
                                 <div class="form-group m-form__group row">
                                     <div id="content-aspirante_departamentoResidencia" class="col-lg-6 m-form__group-sub">
@@ -460,14 +453,14 @@
                                 <div class="m-form__heading">
                                     <h3 class="m-form__heading-title">Información del menor de edad</h3>
                                 </div>
-                               
+
                                 <!--=====================================
                                     NOMBRES Y APELLIDOS MENOR DE EDAD
                                 ======================================-->
                                 <div class="form-group m-form__group row">
                                     <div id="content-beneficiario_name" class="col-lg-6 m-form__group-sub">
                                         <label class="form-control-label {{$errors->has('name_menor')? 'has-danger':''}}">Nombre *</label>
-                                        <input type="text" name="beneficiario[name]" class="form-control m-input" 
+                                        <input type="text" name="beneficiario[name]" class="form-control m-input"
                                             placeholder="" value="{{ old('name_menor', $artist->users->name_menor)}}">
                                         <div id="error-beneficiario_name" class="form-control-feedback" style="display: none"></div>
                                         <span class="m-form__help">Por favor ingrese su nombre completo</span>
@@ -506,14 +499,14 @@
                                         <div id="error-beneficiario_phone" class="form-control-feedback" style="display: none"></div>
                                         <span class="m-form__help">Por favor ingrese su número de teléfono valido</span>
                                     </div>
-                                </div> 
+                                </div>
 
                                 <!--=====================================
                                     TIPO DE DOCUMENTO Y Nº IDENTIFICACIÓN MENOR
                                 ======================================-->
                                 <div class="form-group m-form__group row">
                                     <div id="content-beneficiario_documentType" class="col-lg-6 m-form__group-sub">
-                                        <label class="form-control-label {{$errors->has('document_type_menor')? 'has-danger':''}}">Tipo de documento *</label>                                        
+                                        <label class="form-control-label {{$errors->has('document_type_menor')? 'has-danger':''}}">Tipo de documento *</label>
                                         <select name="beneficiario[documentType]" class="form-control m-bootstrap-select m_selectpicker">
                                             <option value="2">Tarjeta de identidad</option>
                                         </select>
@@ -527,7 +520,7 @@
                                         <div id="error-beneficiario_identificacion" class="form-control-feedback" style="display: none"></div>
                                         <span class="m-form__help">Por favor ingrese el número de indentificación</span>
                                     </div>
-                                </div> 
+                                </div>
 
                                 <!--=====================================
                                     DEPARTAMENTO EXPED Y MUNICIPIO DE EXPEDI MENOR
@@ -536,7 +529,7 @@
                                     <div id="content-beneficiario_departamentoExpedida" class="col-lg-6 m-form__group-sub">
                                         <label class="form-control-label">Departamento de expedición *</label>
                                         <select onchange="onSelectDepartamentosChange(this, 'beneficiario-expid-municipios')" id="m_select2_5"
-                                            name="beneficiario[departamentoExpedida]" class="form-control m-select2"> 
+                                            name="beneficiario[departamentoExpedida]" class="form-control m-select2">
                                             <option>Seleccione departamento</option>
                                             @foreach($departamentos as $departamento)
                                                 <option value="{{$departamento->id}}">{{ $departamento->descripcion }}</option>
@@ -544,28 +537,28 @@
                                         </select>
                                         <div id="error-beneficiario_departamentoExpedida" class="form-control-feedback" style="display: none"></div>
                                     </div>
-                                    
+
                                     <div id="content-beneficiario_municipioExpedida" class="col-lg-6 m-form__group-sub">
                                         <label class="form-control-label">Municipio de expedición *</label>
                                         <select name="beneficiario[municipioExpedida]" class="form-control m-select2 beneficiario-expid-municipios" id="m_select2_9"></select>
                                         <div id="error-beneficiario_municipioExpedida" class="form-control-feedback" style="display: none"></div>
                                     </div>
-                                </div> 
+                                </div>
 
                                 <!--=====================================
                                     CARGAR DOCUMENTO Y FECHA DE NACIMIENTO MENOR
                                 ======================================-->
-                                <div class="form-group m-form__group row">                                    
+                                <div class="form-group m-form__group row">
                                     <div class="col-lg-6 m-form__group-sub">
                                         <label class="form-control-label">Biografía</label>
-                                        <textarea class="form-control m-input" name="beneficiario[biografia]" 
+                                        <textarea class="form-control m-input" name="beneficiario[biografia]"
                                             placeholder="Ingrese la bografía" style="min-height: 8rem;"></textarea>
                                         <span class="m-form__help">Ingresa una breve descripción de tu historia como artista.</span>
                                     </div>
 
                                     <div id="content-beneficiario_birthdate" class="col-lg-6 m-form__group-sub">
-                                        <label for="example-text-input" class="form-control-label">Fecha de nacimiento *</label>                                        
-                                        <input type="text" name="beneficiario[birthdate]" class="form-control" value="" 
+                                        <label for="example-text-input" class="form-control-label">Fecha de nacimiento *</label>
+                                        <input type="text" name="beneficiario[birthdate]" class="form-control" value=""
                                             id="datepicker_fecha_nacimiento2" readonly placeholder="{{ __('fecha_nacimiento') }}" />
                                         <div id="error-beneficiario_birthdate" class="form-control-feedback" style="display: none"></div>
                                     </div>
@@ -585,11 +578,11 @@
                                             <label class="m-radio">
                                                 <input type="radio" name="beneficiario[identificacionDoc]" value="2"> PDF
                                                 <span></span>
-                                            </label>                                    
+                                            </label>
                                         </div>
                                     </div>
-    
-                                    <div id="image-docuemnt-beneficiario" class="form-group m-form__group row">                                                                       
+
+                                    <div id="image-docuemnt-beneficiario" class="form-group m-form__group row">
                                         <div class="col-lg-6 m-form__group-sub">
                                             <label for="">Imagen documento identificación frente</label>
                                             <div class="m-dropzone file-image-document-beneficiario-frente m-dropzone--success"
@@ -611,8 +604,8 @@
                                             </div>
                                         </div>
                                     </div>
-    
-                                    <div id="pdf-docuemnt-beneficiario" style="display: none" class="form-group m-form__group row">                                                                       
+
+                                    <div id="pdf-docuemnt-beneficiario" style="display: none" class="form-group m-form__group row">
                                         <div class="col-lg-6 m-form__group-sub">
                                             <label for="">PDF documento identificación</label>
                                             <div class="m-dropzone file-pdf-document-beneficiario m-dropzone--success"
@@ -624,21 +617,22 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div> 
                                 
-                                <div class="form-group m-form__group row">                                                                       
-                                    <div class="col-lg-6 m-form__group-sub">
-                                        <label for="">Foto de perfil</label>
-                                        <div class="m-dropzone file-image-profile-beneficiario m-dropzone--success"
-                                             action="" id="m-dropzone-three">
-                                            <div class="m-dropzone__msg dz-message needsclick">
-                                                <h3 class="m-dropzone__msg-title">Subir foto de perfil</h3>
-                                                <span class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                    <div class="form-group m-form__group row">                                                                       
+                                        <div class="col-lg-6 m-form__group-sub">
+                                            <label for="">Foto de perfil</label>
+                                            <div class="m-dropzone file-image-profile-beneficiario m-dropzone--success"
+                                                action="" id="m-dropzone-three">
+                                                <div class="m-dropzone__msg dz-message needsclick">
+                                                    <h3 class="m-dropzone__msg-title">Subir foto de perfil</h3>
+                                                    <span class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>                                    
+                                        </div>                                    
+                                    </div>
                                 </div>
-                                
+
+
                                 <!--=====================================
                                     Campos input type hidden
                                 ======================================-->
@@ -648,7 +642,7 @@
                                 <input type="hidden" name="beneficiario[urlImageProfile]" class="form-control m-input" value="">                                      
                                 
                                 <div class="m-separator m-separator--dashed m-separator--lg"></div>
-                                
+
                                 <!--=====================================
                                     DIRECCIÓN Y CIUDAD DE RESIDENCIA MENOR
                                 ======================================-->
@@ -663,8 +657,8 @@
                                    <div class="form-group m-form__group row">
                                         <div id="content-beneficiario_departamentoNacimiento" class="col-lg-6 m-form__group-sub">
                                             <label class="form-control-label">Departamento de nacimiento *</label>
-                                            <select onchange="onSelectDepartamentosChange(this, 'beneficiario-nacimiento-municipios')" id="m_select2_7" 
-                                                name="beneficiario[departamentoNacimiento]" class="form-control m-select2"> 
+                                            <select onchange="onSelectDepartamentosChange(this, 'beneficiario-nacimiento-municipios')" id="m_select2_7"
+                                                name="beneficiario[departamentoNacimiento]" class="form-control m-select2">
                                                 <option>Seleccione departamento</option>
                                                 @foreach($departamentos as $departamento)
                                                     <option value="{{$departamento->id}}">{{ $departamento->descripcion }}</option>
@@ -675,10 +669,10 @@
 
                                         <div id="content-beneficiario_municipioNacimiento" class="col-lg-6 m-form__group-sub">
                                             <label class="form-control-label">Municipio de nacimiento *</label>
-                                            <select name="beneficiario[municipioNacimiento]" class="form-control m-select2 beneficiario-nacimiento-municipios" id="m_select2_8"></select> 
+                                            <select name="beneficiario[municipioNacimiento]" class="form-control m-select2 beneficiario-nacimiento-municipios" id="m_select2_8"></select>
                                             <div id="error-beneficiario_municipioNacimiento" class="form-control-feedback" style="display: none"></div>
                                         </div>
-                                    </div> 
+                                    </div>
 
                                     <div class="form-group m-form__group row">
                                         <div id="content-beneficiario_departamentoResidencia" class="col-lg-6 m-form__group-sub">
@@ -704,7 +698,7 @@
                                     <div class="form-group m-form__group row">
                                         <div id="content-beneficiario_address" class="col-lg-6 m-form__group-sub">
                                             <label class="form-control-label {{$errors->has('adress')? 'has-danger':''}}">Dirección de residencia *</label>
-                                            <input type="text" name="beneficiario[address]" class="form-control m-input" 
+                                            <input type="text" name="beneficiario[address]" class="form-control m-input"
                                                 placeholder="" value="">
                                             <div id="error-beneficiario_address" class="form-control-feedback" style="display: none"></div>
                                             <span class="m-form__help">Por favor ingrese dirección de residencia</span>
@@ -716,7 +710,7 @@
                                                 placeholder="" value="">{{-- value="{{ old('vereda', $artist->users->last_name ) }}" --}}
                                             <span class="m-form__help">En caso de vivir en una vereda ó corregimiento, por favor ingrese el nombre</span>
                                         </div>
-                                    </div> 
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -731,7 +725,7 @@
                 <div class="m-portlet__head">
                     <div class="m-portlet__head-caption">
                         <div class="m-portlet__head-title">
-                            <h3 class="m-portlet__head-text">Datos del Grupo Musical</h3>
+                            <h3 class="m-portlet__head-text">Datos de la agrupación musical</h3>
                         </div>
                     </div>
 
@@ -751,11 +745,21 @@
                     <div class="row">
                         <div class="col col-lg-12" style="padding-bottom: 1.5rem;">
                             <div class="row" style="padding-left: 1rem;">
-                                <div class="col-3 form-group m-form__group row">
+                                <div id="content-aspirante_nameTeam" class="col-lg-4 col-md-4 col-12 m-form__group-sub" style="display: none;">
+                                    <label class="form-control-label">Nombre de la agrupación musical *</label>
+                                    <input type="text" name="aspirante[nameTeam]" class="form-control m-input"
+                                           placeholder="" value="{{ old('name_team', $artist->name_team) }}">
+                                    <div id="error-aspirante_nameTeam" class="form-control-feedback" style="display: none"></div>
+                                    <span class="m-form__help">Por favor ingrese el nombre de la agrupación musical</span>
+                                </div>
+
+                                <div class="col-12 col-lg-4 col-md-4 m-form__group-sub">
                                     <label for="example-number-input">Ingrese el número de integrantes</label>
                                     <input id="input-max-members" class="form-control m-input" type="number" value="">
+                                    <span class="m-form__help">Luego clic en agregar integrantes</span>
                                 </div>
-                                <div class="col-lg-4">
+                                
+                                <div class="col-lg-4 col-12 col-md-4 m-form__group-sub">
                                     <div id="event-add-max-members" class="btn btn btn-sm btn-brand m-btn m-btn--icon m-btn--pill m-btn--wide" style="margin: 2rem 2rem 0; padding: 0.8rem 2rem;">
                                         <span>
                                             <i class="la la-plus"></i>
@@ -771,12 +775,12 @@
                             <div class="m-tabs-content" id="m_sections">
                                 <!-- add members group -->
                                 <div class="m-tabs-content__item m-tabs-content__item--active" id="m_section_1">
-                                    <div class="m-accordion m-accordion--section m-accordion--padding-lg" id="m_section_1_content">                   
+                                    <div class="m-accordion m-accordion--section m-accordion--padding-lg" id="m_section_1_content">
                                     </div>
                                 </div>
-                                <!-- add members group -->                                
-                            </div>                            
-                        </div>                        
+                                <!-- add members group -->
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -914,7 +918,7 @@
         });
 
         /* eventos para subir la imagen o pdf del aspirante */
-        new Dropzone('.file-image-document-aspirante-frente', {            
+        new Dropzone('.file-image-document-aspirante-frente', {
             url: '{{ route('upload.image.document') }}',
             acceptedFiles: "image/*",
             maxFiles: 1,
@@ -925,8 +929,8 @@
             success: function (file, response) {
                 $("input[name='aspirante[urlImageDocumentFrente]']").val(response);
             }
-        }); 
-        new Dropzone('.file-image-document-aspirante-atras', {            
+        });
+        new Dropzone('.file-image-document-aspirante-atras', {
             url: '{{ route('upload.image.document') }}',
             acceptedFiles: "image/*",
             maxFiles: 1,
@@ -938,7 +942,7 @@
                 $("input[name='aspirante[urlImageDocumentAtras]']").val(response);
             }
         });
-        new Dropzone('.file-pdf-document-aspirante', {            
+        new Dropzone('.file-pdf-document-aspirante', {
             url: '{{ route('upload.pdf.document') }}',
             acceptedFiles: "application/pdf",
             maxFiles: 1,
@@ -949,10 +953,10 @@
             success: function (file, response) {
                 $("input[name='aspirante[urlPdfDocument]']").val(response);
             }
-        }); 
+        });
 
         /* eventos para subir la imagen o pdf del beneficiario */
-        new Dropzone('.file-image-document-beneficiario-frente', {            
+        new Dropzone('.file-image-document-beneficiario-frente', {
             url: '{{ route('upload.image.document') }}',
             acceptedFiles: "image/*",
             maxFiles: 1,
@@ -964,7 +968,7 @@
                 $("input[name='beneficiario[urlImageDocumentFrente]']").val(response);
             }
         });
-        new Dropzone('.file-image-document-beneficiario-atras', {            
+        new Dropzone('.file-image-document-beneficiario-atras', {
             url: '{{ route('upload.image.document') }}',
             acceptedFiles: "image/*",
             maxFiles: 1,
@@ -976,7 +980,7 @@
                 $("input[name='beneficiario[urlImageDocumentAtras]']").val(response);
             }
         });
-        new Dropzone('.file-pdf-document-beneficiario', {            
+        new Dropzone('.file-pdf-document-beneficiario', {
             url: '{{ route('upload.pdf.document') }}',
             acceptedFiles: "application/pdf",
             maxFiles: 1,
@@ -987,7 +991,7 @@
             success: function (file, response) {
                 $("input[name='beneficiario[urlPdfDocument]']").val(response);
             }
-        }); 
+        });
 
         new Dropzone(".file-image-profile-aspirante", {
             url: '{{ route('upload.image.profile') }}',

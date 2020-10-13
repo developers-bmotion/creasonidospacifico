@@ -58,7 +58,7 @@ class Artist extends Model
         'facebook','instagram','youtube','level_id',
         'country_id','age','birthdate', 'adress',
         'cities_id', 'township','permission','expedition_place',
-        'person_types_id','artist_types_id'
+        'person_types_id','artist_types_id', 'name_team'
     ];
 
     public function projects(){
