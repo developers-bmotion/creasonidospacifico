@@ -422,6 +422,7 @@ class ProfileController extends Controller
         return $front_picture;
     }
 
+    // actualizar pdf aspirante
     public function pdf_cedula_aspirante(Request $request)
     {
 
@@ -433,11 +434,44 @@ class ProfileController extends Controller
         $pdf_cedula_save = $request->file('pdf_cedula_name')->store('pdfdoc','s3');
         Storage::disk('s3')->setVisibility($pdf_cedula_save, 'public');
         $urlS3 = Storage::disk('s3')->url($pdf_cedula_save);
+
+
         User::where('id', auth()->user()->id)->update([
-            'pdf_cedula' => $urlS3
+            'pdf_cedula' => $urlS3,
+            'img_document_back'=> null,
+            'img_document_front'=> null,
         ]);
 
+
         return $urlS3;
+    }
+
+    //
+
+    public function update_img_artist(Request $request)
+    {
+        // $image = $request->file('file')->store('imagendoc', 's3');
+        // Storage::disk('s3')->setVisibility($image, 'public');
+        // $urlS3 = Storage::disk('s3')->url($image);
+        $aspirante = (object) $request->aspirante;
+        //
+        $user = User::where('id', auth()->user()->id)->first();
+        // $pdf_cedula =  str_replace('storage', '', $user->pdf_cedula);
+        //Elimnar pdf de cédula o tarjeta
+        // Storage::disk('s3')->delete($user->pdf_cedula);
+        //Agregar cedula o tarjeta de identidad
+        // $pdf_cedula_save = $request->file('pdf_cedula_name')->store('pdfdoc','s3');
+        // Storage::disk('s3')->setVisibility($pdf_cedula_save, 'public');
+        // $urlS3 = Storage::disk('s3')->url($pdf_cedula_save);
+
+
+       $user_upt = User::where('id', auth()->user()->id)->update([
+            'pdf_cedula' => null,
+            'img_document_front' => $aspirante->urlImageDocumentFrente,
+            'img_document_back' => $aspirante->urlImageDocumentAtras,
+        ]);
+
+        return back();
     }
 
     public function pdf_cedula_beneficiario(Request $request)
@@ -477,7 +511,7 @@ class ProfileController extends Controller
             ]);
         }
 
-        return $urlS3;
+        // return ;
     }
 
     public function pdf_cedula_team(Request $request)
