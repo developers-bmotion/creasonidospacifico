@@ -71,6 +71,7 @@ class ProfileController extends Controller
 
     /* metodo para actualizar datos del aspirante */
     public function profile_update_artist(Request $request, $id_artis) {
+        //dd($request);
         if ($request->lineaConvocatoria == '1') { // Este caso es para solistas
             if ($request->actuaraComo == '1'){
                 /* solo se guarda el aspirante */
@@ -108,6 +109,12 @@ class ProfileController extends Controller
     /* metodo para actualizar un aspirante en la base de datos */
     public function insertAspirante($id_artis, $request) {
         $aspirante = (object) $request->aspirante;
+        $personType = 3; 
+
+        if ($request->actuaraComo) {
+            $personType = $request->actuaraComo;
+        } 
+
         Artist::where('user_id', '=', $id_artis)->update([
             'nickname' => $aspirante->name,
             'biography' => $aspirante->biografia,
@@ -116,8 +123,8 @@ class ProfileController extends Controller
             'user_id' => auth()->user()->id,
             'adress' => $aspirante->address,
             'cities_id' => $aspirante->municipioNacimiento,
-            'person_types_id' => $request->lineaConvocatoria,
-            'artist_types_id' => $request->actuaraComo,
+            'person_types_id' => $personType,
+            'artist_types_id' => $request->lineaConvocatoria,
             'expedition_place' => $aspirante->municipioExpedida,
             'byrthdate' => Carbon::parse($aspirante->birthdate),
             'byrthdate' => $aspirante->birthdate,
@@ -349,6 +356,15 @@ class ProfileController extends Controller
 
             return back()->with('eliminar', 'Ningún Cambio');
         }
+    }
+
+    public function uploadImageProfile(Request $request)
+    {
+        $image = $request->file('file')->store('imageprofile', 's3');
+        Storage::disk('s3')->setVisibility($image, 'public');
+        $urlS3 = Storage::disk('s3')->url($image);
+
+        return $urlS3;
     }
 
     public function uploadImageDocument(Request $request)

@@ -19,7 +19,8 @@ $('#select-linea-convocatoria').on('change', function() {
             break;
         case '2': $("#content-select-form-actuara-como").show();                
                 showInfoGroup()
-                $("#select-actuara-como").val("3");    
+                $("#select-actuara-como").val("3"); 
+                $("#select-actuara-como option[value='3']").show();    
                 $("#select-actuara-como").prop('disabled', true);
                 $("#content-aspirante_nameTeam").show();
             break;
@@ -159,7 +160,7 @@ function addViewFormMembers(member) {
                 ${ addViewIdentificationMembers(member) }
 
                 <!-- DEPARTAMENTO EXPED Y MUNICIPIO DE EXPEDI -->
-                ${ addViewLocationMembers(member, true) }
+                ${ addViewLocationMembers(member, 1) }
 
                 <!-- CARGAR DOCUMENTO -->
                 ${ addViewUploadArchiveMember(member) }
@@ -171,6 +172,7 @@ function addViewFormMembers(member) {
                         <span class="m-form__help">Ingrese el rol que desempeña dentro del grupo (Guitarrista, Vocalista, Pianista, etc.)</span>
                     </div>
                 </div>
+            </div>
 
                 <div class="m-separator m-separator--dashed m-separator--lg"></div>
 
@@ -182,7 +184,9 @@ function addViewFormMembers(member) {
                         </h3>
                     </div>
 
-                    ${ addViewLocationMembers(member, false) }
+                    ${ addViewLocationMembers(member, 2) }
+
+                    ${ addViewLocationMembers(member, 3) }
 
                     <div class="form-group m-form__group row">
                         <div class="col-lg-6 m-form__group-sub">
@@ -252,7 +256,17 @@ function addViewIdentificationMembers(member) { /* TIPO DE DOCUMENTO Y Nº IDENT
 }
 
 function addViewLocationMembers(member, tipo) { /* DEPARTAMENTO EXPED Y MUNICIPIO DE EXPEDI */
-    let tipoSelect = (tipo) ? 'expedición' : 'nacimiento';
+    //let tipoSelect = (tipo) ? 'expedición' : 'nacimiento';
+    let tipoSelect = '';
+
+    switch (tipo) {
+        case 1: tipoSelect = 'expedición';
+        break;
+        case 2: tipoSelect = 'nacimiento';
+        break;
+        case 3: tipoSelect = 'residencia';
+        break;
+    }
 
     return `<div class="form-group m-form__group row">
                 <div class="col-lg-6 m-form__group-sub">
@@ -314,8 +328,7 @@ function addViewUploadArchiveMember(member) {
                     <label for="">PDF documento identificación </label>
                     <input type="file" name="integrantes[${member}][pdfDocument]" class="form-control-file" style="border: none;" />
                 </div>
-            </div>
-        </div>`;            
+            </div>`;            
 }
 
 function changeOptionDocument(element, member) {
@@ -369,6 +382,55 @@ const fieldsInputs = {
     beneficiario_vereda: false,
 }
 
+/* Evento para enviar los datos del formulario */
+$("#send-info").click( function(e) {
+    e.preventDefault();
+
+    if (validationForm()) {
+        $("#alert-info-form").hide();
+
+        swal({
+            title: '¡Buen trabajo!',
+            text: "¿Esta seguro de guardar los datos?",
+            //icon: "info",
+            type: "info",
+            showCancelButton: true,
+            confirmButtonText: 'Aceptar',
+            cancelButtonText: 'Cancelar',
+            reverseButtons: true
+        }).then(function(result){
+            if (result.value) {
+                $('#m_form_new_register').submit();  
+            } 
+        });
+    } else {
+        $("#alert-info-form").show();
+        viewAlertError();
+    }
+});
+
+/* mostrar alerta de datos faltantes */
+function viewAlertError() {
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": false,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "2000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    };      
+    toastr.error("Algunos datos son requeridos", "¡Recuerda!");
+}
+
 /* evento para realizar las validaciones del formulario */
 function validationForm() {
     let validate = false;
@@ -389,6 +451,8 @@ function validationForm() {
     validateFormSelect('aspirante', '[municipioExpedida]');
     validateFormSelect('aspirante', '[departamentoNacimiento]');
     validateFormSelect('aspirante', '[municipioNacimiento]');
+    validateFormSelect('aspirante', '[departamentoResidencia]');
+    validateFormSelect('aspirante', '[municipioResidencia]');
 
     if (lineaConvocatoria === '1' &&  actuaraComo === '1') {
         validate = validateAspirante();        
@@ -409,11 +473,12 @@ function validationForm() {
         validateFormSelect('beneficiario', '[municipioExpedida]');
         validateFormSelect('beneficiario', '[departamentoNacimiento]');
         validateFormSelect('beneficiario', '[municipioNacimiento]');
+        validateFormSelect('beneficiario', '[departamentoResidencia]');
+        validateFormSelect('beneficiario', '[municipioResidencia]');
 
         if (validateAspirante() && validateBeneficiario()) validate = true;        
     } else {
         validate = validateAspirante();
-        console.log('validar name team');
         validateFormInputs('aspirante', 'nameTeam'); 
         // falata validar el grupo
     }
@@ -424,33 +489,7 @@ function validationForm() {
     } else {
         validate = false;
     }
-    /* console.log('despues::: ', validate)
-    var enviar = false;
- // falta el alert asi como esta no funciona
-    if (validate) {
-        swal({
-            title: "Anuncio",
-            text: "¿Esta seguro de guardar los datos?",
-            icon: "success",
-            confirmButtonText: "<span>Aceptar</span>",
-            cancelButtonText: "<span>cancelar</span>",
-            cancelButtonClass: "btn btn-danger m-btn m-btn--pill m-btn--icon",
-            confirmButtonClass: "btn btn-success m-btn m-btn--pill m-btn--air m-btn--icon",
-            showCancelButton: true,
-        }).then(function (result) {
-            console.log('respondio: ', result);
-            if (result.value) {
-                console.log('respondio: entro');
-                enviar = true;
-                $('#m_form_new_register').submit();
-            } 
-        });
-        console.log('salioo de alert: ', enviar)
-        return enviar;
-    } else {
-        return false;
-    } */
-    
+    console.log('despues::: ', validate)
     return validate;    
 }
 
@@ -521,7 +560,7 @@ const validateFormInputs = (tipo, targetName) => {
 }
 
 /* funcion que realiza las validaciones segun el campo select */
-const validateFormSelect = (type, targetName) => { 
+const validateFormSelect = (type, targetName) => {     
     switch (`${ type }${ targetName }`) {
         /* case 'aspirante[documentType]':
             validateFieldsSelect('aspirante[documentType]', 'aspirante_documentType')
@@ -537,6 +576,12 @@ const validateFormSelect = (type, targetName) => {
             break;        
         case `${ type }[municipioNacimiento]`: 
             validateFieldsSelect(`${ type }[municipioNacimiento]`, `${ type }_municipioNacimiento`)
+            break;       
+        case `${ type }[departamentoResidencia]`: 
+            validateFieldsSelect(`${ type }[departamentoResidencia]`, `${ type }_departamentoResidencia`)
+            break;       
+        case `${ type }[municipioResidencia]`: 
+            validateFieldsSelect(`${ type }[municipioResidencia]`, `${ type }_municipioResidencia`)
             break;       
     }
 }
@@ -560,7 +605,7 @@ const validateFieldsSelect = (input, campo) => {
     if ($(`select[name='${ input }']`).val() == null || $(`select[name='${ input }']`).val() === '-1' 
         || $(`select[name='${ input }']`).val() === '' || $(`select[name='${ input }']`).val() === 'undefined'){  
         $(`#content-${ campo }`).addClass('has-danger');
-        $(`#error-${ campo }`).show();
+        $(`#error-${ campo }`).show(); 
         $(`#error-${ campo }`).html(messages.required);
         fieldsInputs[campo] = false;
     } else {

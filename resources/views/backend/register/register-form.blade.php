@@ -44,10 +44,25 @@
             </div>
         @endif
 
-        {{-- @dd($artist); --}}
+        <!--=====================================
+            alerta de confirmacion de datos
+        ======================================-->
+        <div id="alert-info-form" style="display: none" class="m-alert m-alert--icon m-alert--icon-solid m-alert--outline alert alert-danger alert-dismissible fade show" role="alert">
+            <div class="m-alert__icon">
+                <i class="flaticon-exclamation-1"></i>
+                <span></span>
+            </div>
+            <div class="m-alert__text">
+                <strong>¡Recuerda!</strong> Algunos datos son requeridos.
+            </div>
+            <div class="m-alert__close">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                </button>
+            </div>
+        </div>
 
         <form method="post" action="{{ route('update.profile.artist', auth()->user()->id) }}" enctype="multipart/form-data"
-            onsubmit="return validationForm()" class="m-form m-form--label-align-left- m-form--state-" id="m_form_new_register">
+             class="m-form m-form--label-align-left- m-form--state-" id="m_form_new_register">
             @csrf {{method_field('PUT')}}
 
             <!--=====================================
@@ -193,9 +208,11 @@
                                         <label class="form-control-label {{$errors->has('document_type')? 'has-danger':''}}">Tipo de documento *</label>
                                         <select name="aspirante[documentType]" class="form-control m-bootstrap-select m_selectpicker">
                                             @foreach($documenttype as $document_type)
-                                                <option value="{{$document_type->id}}" {{ old('document_type',$artist->document_type) == $document_type->id ? 'selected':''}}>
-                                                {{ $document_type->document }}</option>
-                                            @endforeach
+                                                @if($document_type->document != "Tarjeta de identidad")
+                                                    <option value="{{$document_type->id}}" {{ old('document_type',$artist->document_type) == $document_type->id ? 'selected':''}}>
+                                                    {{ $document_type->document }}</option>
+                                                @endif
+                                            @endforeach                                            
                                         </select>
                                         <div id="error-aspirante_documentType" class="form-control-feedback" style="display: none"></div>
                                     </div>
@@ -304,6 +321,19 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="form-group m-form__group row">                                                                       
+                                        <div class="col-lg-6 m-form__group-sub">
+                                            <label for="">Foto de perfil</label>
+                                            <div class="m-dropzone file-image-profile-aspirante m-dropzone--success"
+                                                action="" id="m-dropzone-three">
+                                                <div class="m-dropzone__msg dz-message needsclick">
+                                                    <h3 class="m-dropzone__msg-title">Subir foto de perfil</h3>
+                                                    <span class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                                </div>
+                                            </div>
+                                        </div>                                    
+                                    </div>                                
                                 </div>
 
                                 <!--=====================================
@@ -311,11 +341,10 @@
                                 ======================================-->
                                 <input type="hidden" name="aspirante[urlImageDocumentFrente]" class="form-control m-input" value="">
                                 <input type="hidden" name="aspirante[urlImageDocumentAtras]" class="form-control m-input" value="">
-                                <input type="hidden" name="aspirante[urlPdfDocument]" class="form-control m-input" value="">
+                                <input type="hidden" name="aspirante[urlPdfDocument]" class="form-control m-input" value="">   
+                                <input type="hidden" name="aspirante[urlImageProfile]" class="form-control m-input" value="">                                 
                             </div>
-
-
-
+                            
                             <div class="m-separator m-separator--dashed m-separator--lg"></div>
 
                             <!--=====================================
@@ -351,6 +380,27 @@
                                 </div>
 
                                 <div class="form-group m-form__group row">
+                                    <div id="content-aspirante_departamentoResidencia" class="col-lg-6 m-form__group-sub">
+                                        <label class="form-control-label">Departamento de residencia *</label>
+                                        <select onchange="onSelectDepartamentosChange(this, 'aspirante-residencia-municipios')"  id="m_select2_1_2" 
+                                            name="aspirante[departamentoResidencia]" class="form-control m-select2">  
+                                            <option value="-1">Seleccione departamento</option>
+                                            @foreach($departamentos as $departamento)
+                                                <option value="{{$departamento->id}}" {{ old('cities_id', ($artist->cities_id == $departamento->id) ? 'selected':'')}}>
+                                                {{ $departamento->descripcion }}</option>
+                                            @endforeach
+                                        </select>
+                                        <div id="error-aspirante_departamentoResidencia" class="form-control-feedback" style="display: none"></div>
+                                    </div>
+
+                                    <div id="content-aspirante_municipioResidencia" class="col-lg-6 m-form__group-sub">
+                                        <label class="form-control-label">Municipio de residencia *</label>
+                                        <select onchange="onSelectMunicipiosChange(this)" name="aspirante[municipioResidencia]" class="form-control m-select2 aspirante-residencia-municipios" id="m_select2_1_3"></select> 
+                                        <div id="error-aspirante_municipioResidencia" class="form-control-feedback" style="display: none"></div>
+                                    </div>
+                                </div> 
+
+                                <div class="form-group m-form__group row">
                                     <div id="content-aspirante_address" class="col-lg-6 m-form__group-sub">
                                         <label class="form-control-label {{$errors->has('adress')? 'has-danger':''}}">Dirección de residencia *</label>
                                         <input type="text" name="aspirante[address]" class="form-control m-input"
@@ -360,7 +410,7 @@
                                     </div>
 
                                     <div class="col-lg-6 m-form__group-sub">
-                                        <label class="form-control-label {{$errors->has('vereda')? 'has-danger':''}}">Vereda/Corregimiento</label>
+                                        <label class="form-control-label {{$errors->has('vereda')? 'has-danger':''}}">Vereda/Corregimiento de residencia</label>
                                         <input type="text" name="aspirante[vereda]" class="form-control m-input"
                                             placeholder="" value=""> {{-- value="{{ old('vereda', $artist->users->last_name ) }}" corregir --}}
                                         {!! $errors->first('vereda','<div class="form-control-feedback">*:message</div>')!!}
@@ -567,7 +617,21 @@
                                             </div>
                                         </div>
                                     </div>
+                                
+                                    <div class="form-group m-form__group row">                                                                       
+                                        <div class="col-lg-6 m-form__group-sub">
+                                            <label for="">Foto de perfil</label>
+                                            <div class="m-dropzone file-image-profile-beneficiario m-dropzone--success"
+                                                action="" id="m-dropzone-three">
+                                                <div class="m-dropzone__msg dz-message needsclick">
+                                                    <h3 class="m-dropzone__msg-title">Subir foto de perfil</h3>
+                                                    <span class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                                </div>
+                                            </div>
+                                        </div>                                    
+                                    </div>
                                 </div>
+
 
                                 <!--=====================================
                                     Campos input type hidden
@@ -575,7 +639,8 @@
                                 <input type="hidden" name="beneficiario[urlImageDocumentFrente]" class="form-control m-input" value="">
                                 <input type="hidden" name="beneficiario[urlImageDocumentAtras]" class="form-control m-input" value="">
                                 <input type="hidden" name="beneficiario[urlPdfDocument]" class="form-control m-input" value="">
-
+                                <input type="hidden" name="beneficiario[urlImageProfile]" class="form-control m-input" value="">                                      
+                                
                                 <div class="m-separator m-separator--dashed m-separator--lg"></div>
 
                                 <!--=====================================
@@ -610,6 +675,27 @@
                                     </div>
 
                                     <div class="form-group m-form__group row">
+                                        <div id="content-beneficiario_departamentoResidencia" class="col-lg-6 m-form__group-sub">
+                                            <label class="form-control-label">Departamento de residencia *</label>
+                                            <select onchange="onSelectDepartamentosChange(this, 'beneficiario-residencia-municipios')"  id="m_select2_1_4" 
+                                                name="beneficiario[departamentoResidencia]" class="form-control m-select2">  
+                                                <option value="-1">Seleccione departamento</option>
+                                                @foreach($departamentos as $departamento)
+                                                    <option value="{{$departamento->id}}" {{ old('cities_id', ($artist->cities_id == $departamento->id) ? 'selected':'')}}>
+                                                    {{ $departamento->descripcion }}</option>
+                                                @endforeach
+                                            </select>
+                                            <div id="error-beneficiario_departamentoResidencia" class="form-control-feedback" style="display: none"></div>
+                                        </div>
+    
+                                        <div id="content-beneficiario_municipioResidencia" class="col-lg-6 m-form__group-sub">
+                                            <label class="form-control-label">Municipio de residencia *</label>
+                                            <select onchange="onSelectMunicipiosChange(this)" name="beneficiario[municipioResidencia]" class="form-control m-select2 beneficiario-residencia-municipios" id="m_select2_1_5"></select> 
+                                            <div id="error-beneficiario_municipioResidencia" class="form-control-feedback" style="display: none"></div>
+                                        </div>
+                                    </div> 
+
+                                    <div class="form-group m-form__group row">
                                         <div id="content-beneficiario_address" class="col-lg-6 m-form__group-sub">
                                             <label class="form-control-label {{$errors->has('adress')? 'has-danger':''}}">Dirección de residencia *</label>
                                             <input type="text" name="beneficiario[address]" class="form-control m-input"
@@ -619,7 +705,7 @@
                                         </div>
 
                                         <div class="col-lg-6 m-form__group-sub">
-                                            <label class="form-control-label {{$errors->has('vereda')? 'has-danger':''}}">Vereda/Corregimiento</label>
+                                            <label class="form-control-label {{$errors->has('vereda')? 'has-danger':''}}">Vereda/Corregimiento de residencia</label>
                                             <input type="text" name="beneficiario[vereda]" class="form-control m-input"
                                                 placeholder="" value="">{{-- value="{{ old('vereda', $artist->users->last_name ) }}" --}}
                                             <span class="m-form__help">En caso de vivir en una vereda ó corregimiento, por favor ingrese el nombre</span>
@@ -666,11 +752,13 @@
                                     <div id="error-aspirante_nameTeam" class="form-control-feedback" style="display: none"></div>
                                     <span class="m-form__help">Por favor ingrese el nombre de la agrupación musical</span>
                                 </div>
+
                                 <div class="col-12 col-lg-4 col-md-4 m-form__group-sub">
                                     <label for="example-number-input">Ingrese el número de integrantes</label>
                                     <input id="input-max-members" class="form-control m-input" type="number" value="">
                                     <span class="m-form__help">Luego clic en agregar integrantes</span>
                                 </div>
+                                
                                 <div class="col-lg-4 col-12 col-md-4 m-form__group-sub">
                                     <div id="event-add-max-members" class="btn btn btn-sm btn-brand m-btn m-btn--icon m-btn--pill m-btn--wide" style="margin: 2rem 2rem 0; padding: 0.8rem 2rem;">
                                         <span>
@@ -718,8 +806,8 @@
                                     <div id="error-acceptTermsConditions" class="form-control-feedback" style="display: none"></div>
                                 </div>
 
-                                <div class="col-xl-3">
-                                    <button class=" pull-right btn btn-primary m-btn m-btn--custom m-btn--icon" data-wizard-action="submit">
+                                <div class="col-xl-3">                                    
+                                    <button id="send-info" class=" pull-right btn btn-primary m-btn m-btn--custom m-btn--icon" data-wizard-action="submit">
                                         <span>
                                             <i class="la la-check"></i>&nbsp;&nbsp;
                                             <span>Enviar registro</span>
@@ -798,6 +886,12 @@
         }();
 
         var inputSelect = function() {
+            $('#m_select2_1_2, #m_select2_1_validate').select2({ 
+                placeholder: "Selecciona una opción"
+            });
+            $('#m_select2_1_4, #m_select2_1_validate').select2({ 
+                placeholder: "Selecciona una opción"
+            });
             $('#m_select2_2').select2({
                 placeholder: "Seleccione ciudad ó municipio",
             });
@@ -808,6 +902,12 @@
                 placeholder: "Seleccione ciudad ó municipio",
             });
             $('#m_select2_8').select2({
+                placeholder: "Seleccione ciudad ó municipio",
+            });
+            $('#m_select2_1_3').select2({
+                placeholder: "Seleccione ciudad ó municipio",
+            });
+            $('#m_select2_1_5').select2({
                 placeholder: "Seleccione ciudad ó municipio",
             });
         }
@@ -893,31 +993,38 @@
             }
         });
 
-        Dropzone.autoDiscover = false;
+        new Dropzone(".file-image-profile-aspirante", {
+            url: '{{ route('upload.image.profile') }}',
+            paramName: "file", 
+            maxFiles: 1,
+            maxFilesize: 5, // MB
+            addRemoveLinks: true,
+            acceptedFiles: "image/*,application/pdf,.psd",
+            headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
+            success: function(file, response) { 
+                $("input[name='aspirante[urlImageProfile]']").val(response);
+            },
+            error: function (file, e, i, o, u) {
+                console.log('se genero un error', file)
+            }   
+        });
 
-        /* var input = document.querySelector("#phone");
-        window.intlTelInput(input, {
-            // allowDropdown: false,
-            // autoHideDialCode: false,
-            // autoPlaceholder: "off",
-            // dropdownContainer: document.body,
-            // excludeCountries: ["us"],
-            // formatOnDisplay: false,
-            // geoIpLookup: function(callback) {
-            //   $.get("http://ipinfo.io", function() {}, "jsonp").always(function(resp) {
-            //     var countryCode = (resp && resp.country) ? resp.country : "";
-            //     callback(countryCode);
-            //   });
-            // },
-            // hiddenInput: "full_number",
-            // initialCountry: "auto",
-            // localizedCountries: { 'de': 'Deutschland' },
-            // nationalMode: false,
-            // onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
-            // placeholderNumberType: "MOBILE",
-            // preferredCountries: ['cn', 'jp'],
-            // separateDialCode: true,
-            utilsScript: "/backend/build/js/utils.js",
-        }); */
+        new Dropzone(".file-image-profile-beneficiario", {
+            url: '{{ route('upload.image.profile') }}',
+            paramName: "file", 
+            maxFiles: 1,
+            maxFilesize: 5, // MB
+            addRemoveLinks: true,
+            acceptedFiles: "image/*,application/pdf,.psd",
+            headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
+            success: function(file, response) { 
+                $("input[name='beneficiario[urlImageProfile]']").val(response);
+            },
+            error: function (file, e, i, o, u) {
+                console.log('se genero un error', file)
+            }   
+        });
+
+        Dropzone.autoDiscover = false;
     </script>
 @endsection
