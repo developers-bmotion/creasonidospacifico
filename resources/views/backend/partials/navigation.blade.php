@@ -132,6 +132,20 @@
                         </a>
                     </li>
                 @endif
+                @if(auth()->user()->roles[0]->rol == "Gestor")
+                    <li class="m-menu__item ">
+                        <a href="{{ route('form.gestor') }}" class="m-menu__link"><i
+                                class="m-menu__link-icon la la-music"></i><span
+                                class="m-menu__link-text">Registrar Aspirante</span>
+                        </a>
+                    </li>
+                    <li class="m-menu__item ">
+                        <a href="#" class="m-menu__link"><i
+                                class="m-menu__link-icon la la-music"></i><span
+                                class="m-menu__link-text">Aspirantes Registrados</span>
+                        </a>
+                    </li>
+                @endif
             </ul>
 
         @endif
@@ -145,6 +159,7 @@
                 </li>
             </ul>
         @endif
+
     </div>
 
     <!-- END: Horizontal Menu -->

@@ -28,8 +28,10 @@ class ManagementsController extends Controller
 //    AQUI TRAEMOS LA VISTA TODOS LOS GESTORES
     public function gestores(){
 
-        $gestores = User::role('Gestor')->get();
-        dd($gestores);
+        $gestores = User::whereHas('roles', function ($query){
+            $query->where('role_idRole', 6);
+        })->get();
+
         return view('backend.admin.gestores-admin', compact('gestores'));
     }
 

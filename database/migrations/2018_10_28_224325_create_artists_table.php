@@ -77,6 +77,8 @@ class CreateArtistsTable extends Migration
             $table->foreign('person_types_id')->references('id')->on('person_types');
             $table->unsignedInteger('artist_types_id')->nullable();
             $table->foreign('artist_types_id')->references('id')->on('artist_types');
+            $table->unsignedInteger('gestor_id')->nullable();
+            $table->foreign('gestor_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

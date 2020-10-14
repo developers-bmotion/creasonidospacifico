@@ -143,6 +143,7 @@ Route::group(['namespace'=>'Backend','prefix' => 'dashboard','middleware' => 'au
        NUEVAS RUTAS PARA EL REGISTRO
     =============================================*/
     Route::get('/form-register','ProfileController@index')->name('form.register');
+    Route::get('/form-gestor','ProfileController@indexGestor')->name('form.gestor');
     Route::post('/upload-image-document','ProfileController@uploadImageDocument')->name('upload.image.document');
     Route::post('/upload-image-profile','ProfileController@uploadImageProfile')->name('upload.image.profile');
     Route::post('/upload-pdf-document','ProfileController@uploadPDFDocument')->name('upload.pdf.document');
@@ -240,6 +241,11 @@ Route::group(['namespace'=>'Backend','prefix' => 'dashboard','middleware' => 'au
     Route::get('datatables-projects-profile-manage','Manage\ProfileController@table_proyects')->name('datatables.projects.profile.manage');
     Route::post('/update-password-management','Manage\ProfileController@update_password_management')->name('update.password.management');
     Route::get('/backings-made-magement/{user}','Manage\BackingsMadeController@index')->name('backings.made.manage');
+
+
+    Route::get('/profile-gestor/{user}','Gestor\ProfileController@index')->name('profile.managament');
+    Route::post('/profile-photo-gestor','Gestor\ProfileController@photo_gestor')->name('profile.photo.gestor');
+    Route::post('/update-password-gestor','Gestor\ProfileController@update_password_gestor')->name('update.password.gestor');
 
 
 
