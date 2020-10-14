@@ -60,6 +60,25 @@ class ProfileController extends Controller
         //dd($artist);
         return view('backend.register.register-form', compact('documenttype', 'artist', 'departamentos', 'persontypes', 'artisttypes', 'leveltypes'));
     }
+    /*=============================================
+        NUEVA RUTA PARA REGISTRAR ASPIRANTES POR UN GESTOR
+    =============================================*/
+    public function indexGestor()
+    {
+        /* $countries = Country::all(); */
+        /* $locactions = Location::all(); */
+        $documenttype = DocumentType::all();
+        $departamentos = Country::all();
+        $persontypes = PersonType::all();
+        $artisttypes = ArtistType::all();
+        $leveltypes = Level::all();
+
+
+        /*   dd($departamentos); */
+        $artist = Artist::where('user_id', auth()->user()->id)->with('users')->first();
+        //dd($artist);
+        return view('backend.register.register-gestor', compact('documenttype', 'artist', 'departamentos', 'persontypes', 'artisttypes', 'leveltypes'));
+    }
 
     public function get_municipios($id)
     {
@@ -103,18 +122,18 @@ class ProfileController extends Controller
             /* se guardan los datos del los integrantes del grupo */
             if ($existTeam == null) $this->insertGroupMembers($request, $artist);
         }
-        
+
         return redirect()->route('add.project')->with('aspirant_register', 'Es momento de subir tu propuesta musical');
     }
 
     /* metodo para actualizar un aspirante en la base de datos */
     public function insertAspirante($id_artis, $request) {
         $aspirante = (object) $request->aspirante;
-        $personType = 3; 
+        $personType = 3;
 
         if ($request->actuaraComo) {
             $personType = $request->actuaraComo;
-        } 
+        }
 
         Artist::where('user_id', '=', $id_artis)->update([
             'nickname' => $aspirante->name,

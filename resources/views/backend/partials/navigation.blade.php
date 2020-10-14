@@ -102,23 +102,52 @@
                  </li>--}}
                 @if(auth()->user()->roles[0]->rol == "Artist")
                     @if(auth()->user()->name !== "")
-                    @if(count(\App\Artist::projects_artist(auth()->user()->id)) === 0)
-                        <li class="m-menu__item ">
-                            <a href="{{ route('add.project') }}" class="m-menu__link"><i
-                                    class="m-menu__link-icon la la-music"></i><span
-                                    class="m-menu__link-text">Subir tu canción</span>
-                            </a>
-                        </li>
-                        <li class="m-menu__item ">
-                            <a href="{{ route('profile.artist') }}" class="m-menu__link"><i
-                                    class="m-menu__link-icon la la-user"></i><span
-                                    class="m-menu__link-text">Ir a tu perfil</span>
-                            </a>
-                        </li>
+                        @if(count(\App\Artist::projects_artist(auth()->user()->id)) === 0)
+                            <li class="m-menu__item ">
+                                <a href="{{ route('add.project') }}" class="m-menu__link"><i
+                                        class="m-menu__link-icon la la-music"></i><span
+                                        class="m-menu__link-text">Subir tu canción</span>
+                                </a>
+                            </li>
+                            <li class="m-menu__item ">
+                                <a href="{{ route('profile.artist') }}" class="m-menu__link"><i
+                                        class="m-menu__link-icon la la-user"></i><span
+                                        class="m-menu__link-text">Ir a tu perfil</span>
+                                </a>
+                            </li>
                         @endif
                     @endif
+                @endif
+                @if(auth()->user()->roles[0]->rol == "Admin")
+                    <li class="m-menu__item ">
+                        <a href="{{ route('managements.admin') }}" class="m-menu__link"><i
+                                class="m-menu__link-icon la la-music"></i><span
+                                class="m-menu__link-text">Agregar y ver curadores</span>
+                        </a>
+                    </li>
+                    <li class="m-menu__item ">
+                        <a href="{{ route('gestores.admin') }}" class="m-menu__link"><i
+                                class="m-menu__link-icon la la-music"></i><span
+                                class="m-menu__link-text">Agregar y ver gestores</span>
+                        </a>
+                    </li>
+                @endif
+                @if(auth()->user()->roles[0]->rol == "Gestor")
+                    <li class="m-menu__item ">
+                        <a href="{{ route('form.gestor') }}" class="m-menu__link"><i
+                                class="m-menu__link-icon la la-music"></i><span
+                                class="m-menu__link-text">Registrar Aspirante</span>
+                        </a>
+                    </li>
+                    <li class="m-menu__item ">
+                        <a href="#" class="m-menu__link"><i
+                                class="m-menu__link-icon la la-music"></i><span
+                                class="m-menu__link-text">Aspirantes Registrados</span>
+                        </a>
+                    </li>
+                @endif
             </ul>
-        @endif
+
         @endif
         @if(\App\User::navigation() === "Subsanador")
             <ul class="m-menu__nav  m-menu__nav--submenu-arrow ">
@@ -130,6 +159,7 @@
                 </li>
             </ul>
         @endif
+
     </div>
 
     <!-- END: Horizontal Menu -->
@@ -337,15 +367,15 @@
                                                                 <a href="{{ route('profile.artist') }}"
                                                                    class="m-nav__link">
                                                                     @endif
-{{--                                                                    <i class="m-nav__link-icon flaticon-profile-1"></i>--}}
-{{--                                                                    <span class="m-nav__link-title">--}}
-{{--																			<span class="m-nav__link-wrap">--}}
-{{--																				<span--}}
-{{--                                                                                    class="m-nav__link-text">Perfil</span>--}}
-{{--																				 <span class="m-nav__link-badge"><span--}}
-{{--                                                                                        class="m-badge m-badge--success">2</span></span> --}}
-{{--																			</span>--}}
-{{--																		</span>--}}
+                                                                    {{--                                                                    <i class="m-nav__link-icon flaticon-profile-1"></i>--}}
+                                                                    {{--                                                                    <span class="m-nav__link-title">--}}
+                                                                    {{--																			<span class="m-nav__link-wrap">--}}
+                                                                    {{--																				<span--}}
+                                                                    {{--                                                                                    class="m-nav__link-text">Perfil</span>--}}
+                                                                    {{--																				 <span class="m-nav__link-badge"><span--}}
+                                                                    {{--                                                                                        class="m-badge m-badge--success">2</span></span> --}}
+                                                                    {{--																			</span>--}}
+                                                                    {{--																		</span>--}}
                                                                 </a>
                                         </li>
                                         {{-- <li class="m-nav__item">

@@ -62,29 +62,33 @@ class LoginController extends Controller
 
         $users = User::where('id', \Auth::user()->id)->with(['roles'])->first();
         $rol = array_pluck($users->roles, 'rol');
-        if (in_array('Admin', $rol) || in_array('Manage', $rol) || in_array('Subsanador', $rol)) {
-
-            if ($request->input("json") === "true") {
-                return "/dashboard";
-            }
-
-            return redirect('/dashboard');
+        if (in_array('Gestor', $rol)) {
+            return redirect('/dashboard/profile-gestor/'.auth()->user()->slug);
         } else {
+            if (in_array('Admin', $rol) || in_array('Manage', $rol) || in_array('Subsanador', $rol)) {
 
-            if ($request->input("json") === "true") {
+                if ($request->input("json") === "true") {
+                    return "/dashboard";
+                }
 
-                return "/dashboard/form-register";
-            }
-
-            $artist = Artist::where('user_id', auth()->user()->id)->first();
-
-            if ($artist->identification == null) {
-                return redirect('/dashboard/form-register');
+                return redirect('/dashboard');
             } else {
 
-                return redirect('/dashboard/profile');
-            }
+                if ($request->input("json") === "true") {
 
+                    return "/dashboard/form-register";
+                }
+
+                $artist = Artist::where('user_id', auth()->user()->id)->first();
+
+                if ($artist->identification == null) {
+                    return redirect('/dashboard/form-register');
+                } else {
+
+                    return redirect('/dashboard/profile');
+                }
+
+            }
         }
     }
 
