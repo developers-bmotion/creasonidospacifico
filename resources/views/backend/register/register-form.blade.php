@@ -332,7 +332,8 @@
                                                     <span class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
                                                 </div>
                                             </div>
-                                        </div>                                    
+                                            <span id="errorImage-profile-aspirante" class="form-control-feedback"></span>
+                                        </div>                          
                                     </div>                                
                                 </div>
 
@@ -797,7 +798,7 @@
                                 <div id="content-acceptTermsConditions" class="col-lg-9 m-form__group-sub">
                                     <label class="form-control-label">Términos y Condiciones *</label>
                                     <div class="m-radio-inline">
-                                        <label class="m-radio">
+                                        <label class="m-checkbox">
                                             <input type="checkbox" name="acceptTermsConditions" value="1">Haga clic aquí para indicar que ha leído y acepta el
                                             acuerdo de Términos y Condiciones.
                                             <span></span>
@@ -849,19 +850,19 @@
             //== Private functions
             var demos = function () {
                 // minimum setup
-                $('#datepicker_fecha_nacimiento #m_datepicker_1_validate').datepicker({
+                /* $('#datepicker_fecha_nacimiento #m_datepicker_1_validate').datepicker({
                     rtl: mUtil.isRTL(),
                     todayHighlight: true,
                     orientation: "bottom left",
                     language: 'es',
-                    startDate: '-18y',
+                    //startDate: '-18y',
                     templates: arrows
-                });
+                }); */
 
                 $('#datepicker_fecha_nacimiento').datepicker({
                     rtl: mUtil.isRTL(),
                     language: 'es',
-                    startDate: '-18y',
+                    //startDate: '-18y',
                     todayHighlight: true,
                     orientation: "bottom left",
                     templates: arrows
@@ -993,19 +994,23 @@
             }
         });
 
-        new Dropzone(".file-image-profile-aspirante", {
+        var dropzone = new Dropzone(".file-image-profile-aspirante", {
             url: '{{ route('upload.image.profile') }}',
             paramName: "file", 
             maxFiles: 1,
             maxFilesize: 5, // MB
             addRemoveLinks: true,
-            acceptedFiles: "image/*,application/pdf,.psd",
+            acceptedFiles: "image/*",
             headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
             success: function(file, response) { 
+                $("#errorImage-profile-aspirante").html('');
                 $("input[name='aspirante[urlImageProfile]']").val(response);
             },
             error: function (file, e, i, o, u) {
                 console.log('se genero un error', file)
+                $("#errorImage-profile-aspirante").html('El tipo de archivo debe ser en formato JPG ó PNG');
+                $("#errorImage-profile-aspirante").css('color', '#f4516c'); 
+                setTimeout(() => { dropzone.removeFile(file) }, 1000)                
             }   
         });
 
@@ -1015,7 +1020,7 @@
             maxFiles: 1,
             maxFilesize: 5, // MB
             addRemoveLinks: true,
-            acceptedFiles: "image/*,application/pdf,.psd",
+            acceptedFiles: "image/*",
             headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
             success: function(file, response) { 
                 $("input[name='beneficiario[urlImageProfile]']").val(response);
