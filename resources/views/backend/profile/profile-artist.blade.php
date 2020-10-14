@@ -286,20 +286,69 @@
                                             Ver documento de identidad
                                         </button>
                                         <div class="row drop_pdf_asp" style="display: none">
-                                            <div class="col">
-                                                <div class="form-group m-form__group ">
-                                                    <div class="m-dropzone dropzone m-dropzone--success"
-                                                         action="inc/api/dropzone/upload.php"
-                                                         id="m-dropzone-three">
-                                                        <div
-                                                            class="m-dropzone__msg dz-message needsclick">
-                                                            <h3 class="m-dropzone__msg-title">{{ __('Actualizar documento de identidad') }}</h3>
-                                                            <span
-                                                                class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+
+                                            <div class="m-form__group form-group">
+                                                <div class="col-lg-12 m-form__group-sub">
+                                                    <label for="">Seleccione el tipo de formato para subir el documento de identificación</label>
+                                                    <div class="m-radio-inline">
+                                                        <label class="m-radio">
+                                                            <input type="radio" name="aspirante[identificacionDoc]" value="1" checked="checked"> Imagen
+                                                            <span></span>
+                                                        </label>
+                                                        <label class="m-radio">
+                                                            <input type="radio" name="aspirante[identificacionDoc]" value="2"> PDF
+                                                            <span></span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+
+                                                <div id="image-docuemnt-aspirante" class="form-group m-form__group row">
+                                                    <div class="col-lg-6 m-form__group-sub">
+                                                        <label for="">Imagen documento identificación frente</label>
+                                                        <div class="m-dropzone file-image-document-aspirante-frente m-dropzone--success"
+                                                            action="inc/api/dropzone/upload.php" id="m-dropzone-three">
+                                                            <div class="m-dropzone__msg dz-message needsclick">
+                                                                <h3 class="m-dropzone__msg-title">Subir documento de identificación</h3>
+                                                                <span class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 m-form__group-sub">
+                                                        <label for="">Imagen documento identificación atras</label>
+                                                        <div class="m-dropzone file-image-document-aspirante-atras m-dropzone--success"
+                                                            action="inc/api/dropzone/upload.php" id="m-dropzone-three">
+                                                            <div class="m-dropzone__msg dz-message needsclick">
+                                                                <h3 class="m-dropzone__msg-title">Subir documento de identificación</h3>
+                                                                <span class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div id="pdf-docuemnt-aspirante" style="display: none" class="form-group m-form__group row">
+                                                    <div class="col">
+                                                        <div class="form-group m-form__group ">
+                                                            <div class="m-dropzone dropzone m-dropzone--success"
+                                                                 action="inc/api/dropzone/upload.php"
+                                                                 id="m-dropzone-three">
+                                                                <div
+                                                                    class="m-dropzone__msg dz-message needsclick">
+                                                                    <h3 class="m-dropzone__msg-title">{{ __('Actualizar documento de identidad') }}</h3>
+                                                                    <span
+                                                                        class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <form id="form_update_img" method="post" action="{{ route('update.imgdoc.artist') }}" enctype="multipart/form-data"
+                                                 class="m-form m-form--label-align-left- m-form--state-" id="actualizar_img_asp">
+                                                 @csrf {{ method_field('PUT') }}
+                                            <input type="hidden" name="aspirante[urlImageDocumentFrente]" class="form-control m-input" value="">
+                                            <input type="hidden" name="aspirante[urlImageDocumentAtras]" class="form-control m-input" value="">
+
+                                            </form>
 
                                         </div>
                                         <i class="flaticon-edit ml-3 update_pdf_asp"
@@ -307,6 +356,10 @@
                                         <button type="button" class="btn btn-primary cancel_pdf_asp"
                                                 style="display:none">Cancelar
                                         </button>
+                                        <button id="btn_enviar_asp" type="button" class="btn btn-primary  enviar_asp"
+                                                style="display:none">enviar
+                                        </button>
+
 
 
                                     </div>
@@ -523,6 +576,7 @@
                                                             </div>
                                                         </div>
                                                         @foreach ($artist->teams as $team)
+                                                        {{-- @dd($team) --}}
                                                             <div class="m-accordion__item">
                                                                 <div class="m-accordion__item-head collapsed"
                                                                      role="tab"
@@ -1289,6 +1343,32 @@
 
         });
 
+        /* eventos para subir la imagen o pdf del aspirante */
+        new Dropzone('.file-image-document-aspirante-frente', {
+            url: '{{ route('upload.image.document') }}',
+            acceptedFiles: "image/*",
+            maxFiles: 1,
+            paramName: 'file',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            success: function (file, response) {
+                $("input[name='aspirante[urlImageDocumentFrente]']").val(response);
+            }
+        });
+        new Dropzone('.file-image-document-aspirante-atras', {
+            url: '{{ route('upload.image.document') }}',
+            acceptedFiles: "image/*",
+            maxFiles: 1,
+            paramName: 'file',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            success: function (file, response) {
+                $("input[name='aspirante[urlImageDocumentAtras]']").val(response);
+            }
+        });
+
         Dropzone.autoDiscover = false;
         // actualizar pdf beneficiario
         new Dropzone('.dropzone-ben', {
@@ -1399,13 +1479,26 @@
             utilsScript: "/backend/build/js/utils.js",
         });
     </script>
-    {{-- editar identificacion aspirante --}}
 
-    <script>
+{{-- editar identificacion aspirante --}}
+<script>
+
+// controles actualizar documentos aspirante
+$("input[name='aspirante[identificacionDoc]']").click( () => {
+    if ($('input:radio[name="aspirante[identificacionDoc]"]:checked').val() === '1') {
+        $("#image-docuemnt-aspirante").show();
+        $(".enviar_asp").show();
+        $("#pdf-docuemnt-aspirante").hide();
+    } else {
+        $("#image-docuemnt-aspirante").hide();
+        $(".enviar_asp").hide();
+        $("#pdf-docuemnt-aspirante").show();
+    }
+});
         $('.update_pdf_asp').click(function () {
             $(this).hide();
             $('.cancel_pdf_asp').show();
-
+            $(".enviar_asp").show();
             $('.drop_pdf_asp').show();
             $('.btn_pdf_asp').hide();
 
@@ -1415,6 +1508,7 @@
             $(this).hide();
             $('.update_pdf_asp').show();
             $('.drop_pdf_asp').hide();
+            $(".enviar_asp").hide();
             $('.btn_pdf_asp').show();
 
 
@@ -1557,6 +1651,39 @@
 
 
     </script>
+
+<script>
+    $('#btn_enviar_asp').click(function (e) {
+        e.preventDefault();
+
+        if( $("input[name='aspirante[urlImageDocumentAtras]']").val() != "" &&  $("input[name='aspirante[urlImageDocumentFrente]']").val() != "" ){
+            $('#form_update_img').submit();
+        swal({
+                "title": "",
+                "text": 'Cargado correctamente',
+                "type": "success",
+                "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
+            }).then((result) => {
+                if(result.value){
+
+                   document.location.reload();
+                }
+            });
+        }else{
+            swal({
+                "title": "",
+                "text": 'Debe cargar las dos imagenes del documento',
+                "type": "error",
+                "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
+            }).then((result) => {
+                // document.location.reload();
+            });
+        }
+
+
+
+    });
+</script>
 
 @endsection
 
