@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Backend\Admin;
 
 use App\Category;
 use App\Country;
+use App\Mail\NewGestorAdmin;
 use App\Mail\NewManagerAdmin;
 use App\Management;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
 
 class ManagementsController extends Controller
 {
@@ -21,6 +23,39 @@ class ManagementsController extends Controller
         $categories = Category::all();
         // return view('backend.admin.management-admin',compact('managements','countries','categories'));
         return view('backend.admin.management-admin',compact('managements','managementstwo','categories'));
+    }
+
+//    AQUI TRAEMOS LA VISTA TODOS LOS GESTORES
+    public function gestores(){
+
+        $gestores = User::role('Gestor')->get();
+        dd($gestores);
+        return view('backend.admin.gestores-admin', compact('gestores'));
+    }
+
+    public function storeGestores(Request $request){
+
+        $this->validate($request,[
+            'name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required|string|email|max:255|unique:users',
+            'phone' => 'required'
+        ]);
+
+        $password = trim(str_random(8));
+        $pass = bcrypt($password);
+        $add_user = User::create([
+            'name' => ucwords($request->get('name')),
+            'last_name' => ucwords($request->get('last_name')),
+            'picture' => '/backend/assets/app/media/img/users/perfil.jpg',
+            'email' => $request->get('email'),
+            'password' => $pass,
+            'phone_1' => $request->get('phone'),
+            'slug' => Str::slug($request->get('name').'-'.str_random(1000),'-')
+        ]);
+        $add_user->roles()->attach('6');
+        \Mail::to($add_user->email)->send(new NewGestorAdmin($add_user->email,$password));
+        return back()->with('msg', ['¡Registro Exitoso!', 'El gestor ha sido registrado en el sistema', 'success']);
     }
 
     public function store(Request $request){

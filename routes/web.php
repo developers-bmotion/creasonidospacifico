@@ -212,7 +212,10 @@ Route::group(['namespace'=>'Backend','prefix' => 'dashboard','middleware' => 'au
         Route::get('/datatables-managements-admin','Admin\ProjectsAdminController@table_managements')->name('datatables.management.admin');
         //Lista de managaments
         Route::get('/managements-admin','Admin\ManagementsController@index')->name('managements.admin');
+        Route::get('/gestores-admin','Admin\ManagementsController@gestores')->name('gestores.admin');
+
         Route::post('/add-management-admin','Admin\ManagementsController@store')->name('add.management.admin');
+        Route::post('/add-gestores-admin','Admin\ManagementsController@storeGestores')->name('add.gestores.admin');
         //ruta para el perfil del admin
         Route::get('/profile-admin/{user}','Admin\ProfileAdminController@indexAdmin')->name('profile.admin');
         Route::post('/update-password-admin','Admin\ProfileAdminController@update_password_admin')->name('update.password.admin');

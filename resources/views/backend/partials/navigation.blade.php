@@ -122,7 +122,13 @@
                     <li class="m-menu__item ">
                         <a href="{{ route('managements.admin') }}" class="m-menu__link"><i
                                 class="m-menu__link-icon la la-music"></i><span
-                                class="m-menu__link-text">Agregar Curadores</span>
+                                class="m-menu__link-text">Agregar y ver curadores</span>
+                        </a>
+                    </li>
+                    <li class="m-menu__item ">
+                        <a href="{{ route('gestores.admin') }}" class="m-menu__link"><i
+                                class="m-menu__link-icon la la-music"></i><span
+                                class="m-menu__link-text">Agregar y ver gestores</span>
                         </a>
                     </li>
                 @endif
