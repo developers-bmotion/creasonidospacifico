@@ -15,7 +15,9 @@ class AlterBeneficiariesTable extends Migration
     {
         Schema::table('beneficiaries', function (Blueprint $table) {
             $table->string('img_document_back')->nullable()->after('pdf_documento');
-            $table->string('img_document_front')->nullable()->after('pdf_documento');
+            $table->string('img_document_front')->nullable()->after('pdf_documento'); 
+            $table->unsignedInteger('place_residence')->nullable()->after('expedition_place');
+            $table->foreign('place_residence')->references('id')->on('ciudad');
         });
     }
 
@@ -29,6 +31,8 @@ class AlterBeneficiariesTable extends Migration
         Schema::table('beneficiaries', function (Blueprint $table) {
             $table->dropColumn('img_document_back');
             $table->dropColumn('img_document_front');
+            $table->dropColumn('place_residence');
+            $table->dropForeign('place_residence');
         });
     }
 }
