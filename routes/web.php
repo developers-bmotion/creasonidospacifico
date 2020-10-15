@@ -162,6 +162,7 @@ Route::group(['namespace'=>'Backend','prefix' => 'dashboard','middleware' => 'au
 
     Route::put('/update-profile-artist/{id_artis}','ProfileController@profile_update_artist')->name('update.profile.artist');
     Route::put('/update-img-artist','ProfileController@update_img_artist')->name('update.imgdoc.artist');
+    Route::put('/update-img-ben','ProfileController@update_img_ben')->name('update.imgdoc.ben');
 
     Route::get('/get-municipios/{id}','ProfileController@get_municipios')->name('get.municipios');
 

@@ -109,11 +109,11 @@ class ProfileController extends Controller
     /* metodo para actualizar un aspirante en la base de datos */
     public function insertAspirante($id_artis, $request) {
         $aspirante = (object) $request->aspirante;
-        $personType = 3; 
+        $personType = 3;
 
         if ($request->actuaraComo) {
             $personType = $request->actuaraComo;
-        } 
+        }
 
         Artist::where('user_id', '=', $id_artis)->update([
             'nickname' => $aspirante->name,
@@ -443,19 +443,11 @@ class ProfileController extends Controller
 
     public function update_img_artist(Request $request)
     {
-        // $image = $request->file('file')->store('imagendoc', 's3');
-        // Storage::disk('s3')->setVisibility($image, 'public');
-        // $urlS3 = Storage::disk('s3')->url($image);
+
         $aspirante = (object) $request->aspirante;
         //
         $user = User::where('id', auth()->user()->id)->first();
-        // $pdf_cedula =  str_replace('storage', '', $user->pdf_cedula);
-        //Elimnar pdf de cédula o tarjeta
-        // Storage::disk('s3')->delete($user->pdf_cedula);
-        //Agregar cedula o tarjeta de identidad
-        // $pdf_cedula_save = $request->file('pdf_cedula_name')->store('pdfdoc','s3');
-        // Storage::disk('s3')->setVisibility($pdf_cedula_save, 'public');
-        // $urlS3 = Storage::disk('s3')->url($pdf_cedula_save);
+
 
 
        $user_upt = User::where('id', auth()->user()->id)->update([
@@ -464,6 +456,25 @@ class ProfileController extends Controller
             'img_document_back' => $aspirante->urlImageDocumentAtras,
         ]);
 
+        return back();
+    }
+
+    // actualizar imagen beneficiario
+    public function update_img_ben(Request $request)
+    {
+
+        $beneficiari = (object) $request->beneficiario;
+        //
+        // $user = User::where('id', auth()->user()->id)->first();
+
+        $artist = Artist::where('user_id', auth()->user()->id)->first();
+        $beneficiario = Beneficiary::where('artist_id', $artist->id)->first();
+
+        $ben=Beneficiary::where('id', $beneficiario->id)->update([
+            'pdf_documento' => null,
+            'img_document_front' => $beneficiari->urlImageDocumentFrente,
+            'img_document_back' => $beneficiari->urlImageDocumentFrente,
+        ]);
         return back();
     }
 
@@ -482,7 +493,9 @@ class ProfileController extends Controller
         Storage::disk('s3')->setVisibility($pdf_cedula_save, 'public');
         $urlS3 = Storage::disk('s3')->url($pdf_cedula_save);
         Beneficiary::where('id', $beneficiario->id)->update([
-            'pdf_documento' => $urlS3
+            'pdf_documento' => $urlS3,
+            'img_document_front' => null,
+            'img_document_back' => null,
         ]);
 
         return $urlS3;
