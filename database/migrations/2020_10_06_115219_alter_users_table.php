@@ -14,8 +14,8 @@ class AlterUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('img_document_front')->nullable()->after('pdf_cedula');
             $table->string('img_document_back')->nullable()->after('pdf_cedula');
+            $table->string('img_document_front')->nullable()->after('pdf_cedula');
         });
     }
 
@@ -27,8 +27,8 @@ class AlterUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('img_document_front');
             $table->dropColumn('img_document_back');
+            $table->dropColumn('img_document_front');
         });
     }
 }

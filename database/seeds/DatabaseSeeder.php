@@ -102,6 +102,11 @@ class DatabaseSeeder extends Seeder
             'description' => 'Encargado de elegir los ganadores'
         ]);
 
+        factory(\App\Role::class, 1)->create([
+            'rol' => 'Gestor',
+            'description' => 'Encargado de registrar aspirantes'
+        ]);
+
         /*=============================================
           CREAMOS EL ADMINISTRADOR DEL SISTEMA
         =============================================*/
@@ -122,6 +127,15 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('secret')
         ])->each(function (\App\User $u) {
             $u->roles()->attach('4');
+        });
+
+        /*=============================================
+          CREAMOS GESTORES
+        =============================================*/
+        factory(\App\User::class, 2)->create([
+            'name' => 'Gestor',
+        ])->each(function (\App\User $u) {
+            $u->roles()->attach('6');
         });
 
         /*=============================================

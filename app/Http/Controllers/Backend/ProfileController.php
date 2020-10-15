@@ -60,6 +60,25 @@ class ProfileController extends Controller
         //dd($artist);
         return view('backend.register.register-form', compact('documenttype', 'artist', 'departamentos', 'persontypes', 'artisttypes', 'leveltypes'));
     }
+    /*=============================================
+        NUEVA RUTA PARA REGISTRAR ASPIRANTES POR UN GESTOR
+    =============================================*/
+    public function indexGestor()
+    {
+        /* $countries = Country::all(); */
+        /* $locactions = Location::all(); */
+        $documenttype = DocumentType::all();
+        $departamentos = Country::all();
+        $persontypes = PersonType::all();
+        $artisttypes = ArtistType::all();
+        $leveltypes = Level::all();
+
+
+        /*   dd($departamentos); */
+        $artist = Artist::where('user_id', auth()->user()->id)->with('users')->first();
+        //dd($artist);
+        return view('backend.register.register-gestor', compact('documenttype', 'artist', 'departamentos', 'persontypes', 'artisttypes', 'leveltypes'));
+    }
 
     public function get_municipios($id)
     {
@@ -77,7 +96,7 @@ class ProfileController extends Controller
                 /* solo se guarda el aspirante */
                 $this->insertAspirante($id_artis, $request);
 
-                return redirect()->route('add.project')->with('aspirant_register', 'Es momento de subir tu propuesta musical');
+                //return redirect()->route('add.project')->with('aspirant_register', 'Es momento de subir tu propuesta musical');
             } else { // se debe guardar los datos del representante
                 $this->insertAspirante($id_artis, $request);
 
@@ -91,7 +110,7 @@ class ProfileController extends Controller
                 } else {
                     $this->createBeneficiario($request, $artist->id);
                 }
-                return redirect()->route('add.project')->with('aspirant_register', 'Es momento de subir tu propuesta musical');
+                //return redirect()->route('add.project')->with('aspirant_register', 'Es momento de subir tu propuesta musical');
             }
         } else { // Para este caso se debe guardar el representante
             $this->insertAspirante($id_artis, $request);
@@ -102,8 +121,9 @@ class ProfileController extends Controller
 
             /* se guardan los datos del los integrantes del grupo */
             if ($existTeam == null) $this->insertGroupMembers($request, $artist);
-            return redirect()->route('add.project')->with('aspirant_register', 'Es momento de subir tu propuesta musical');
         }
+
+        return redirect()->route('add.project')->with('aspirant_register', 'Es momento de subir tu propuesta musical');
     }
 
     /* metodo para actualizar un aspirante en la base de datos */
@@ -126,8 +146,8 @@ class ProfileController extends Controller
             'person_types_id' => $personType,
             'artist_types_id' => $request->lineaConvocatoria,
             'expedition_place' => $aspirante->municipioExpedida,
+            'place_residence' => $aspirante->municipioResidencia,
             'byrthdate' => Carbon::parse($aspirante->birthdate),
-            'byrthdate' => $aspirante->birthdate,
             'township' => $aspirante->vereda,
             'name_team' => $aspirante->nameTeam,
         ]);
@@ -140,6 +160,7 @@ class ProfileController extends Controller
             'pdf_cedula' => $aspirante->urlPdfDocument,
             'img_document_front' => $aspirante->urlImageDocumentFrente,
             'img_document_back' => $aspirante->urlImageDocumentAtras,
+            'picture' => $aspirante->urlImageProfile,
         ]);
 
         \Mail::to(auth()->user()->email)->send(new NewArtist($aspirante->name));
@@ -157,6 +178,7 @@ class ProfileController extends Controller
             'pdf_documento' => $beneficiario->urlPdfDocument,
             'img_document_front' => $beneficiario->urlImageDocumentFrente,
             'img_document_back' => $beneficiario->urlImageDocumentAtras,
+            'picture' => $beneficiario->urlImageProfile,
             'phone' => $beneficiario->phone,
             'adress' => $beneficiario->address,
             'biography' => $beneficiario->biografia,
@@ -164,6 +186,7 @@ class ProfileController extends Controller
             'cities_id' => $beneficiario->municipioNacimiento,
             'township' => $beneficiario->vereda,
             'expedition_place' => $beneficiario->municipioExpedida,
+            'place_residence' => $beneficiario->municipioResidencia,
             'artist_id' =>  $idArtst
         ]);
     }
@@ -181,6 +204,7 @@ class ProfileController extends Controller
             'pdf_documento' => $beneficiario->urlPdfDocument,
             'img_document_front' => $beneficiario->urlImageDocumentFrente,
             'img_document_back' => $beneficiario->urlImageDocumentAtras,
+            'picture' => $beneficiario->urlImageProfile,
             'phone' => $beneficiario->phone,
             'adress' => $beneficiario->address,
             'biography' => $beneficiario->biografia,
@@ -188,6 +212,7 @@ class ProfileController extends Controller
             'cities_id' => $beneficiario->municipioNacimiento,
             'township' => $request->vereda,
             'expedition_place' => $request->municipioExpedida,
+            'place_residence' => $beneficiario->municipioResidencia,
             //'artist_id' =>  $idArtst
         ]);
     }
@@ -199,10 +224,11 @@ class ProfileController extends Controller
             $member->name = $integrante['nameMember'];
             $member->last_name = $integrante['lastnameMember'];
             $member->second_last_name = $integrante['secondLastnameMember'];
-            $member->type_document = $integrante['documentTypeMember'];
+            $member->document_type = $integrante['documentTypeMember'];
             $member->identification = $integrante['identificationMember'];
-            $member->place_expedition = $integrante['municipio_expedición_member'];
+            $member->expedition_place = $integrante['municipio_expedición_member'];
             $member->place_birth = $integrante['municipio_nacimiento_member'];
+            $member->place_residence = $integrante['municipio_residencia_member'];
             $member->addres = $integrante['addressMember'];
             $member->phone1 = $integrante['phoneMember'];
             $member->role = $integrante['rolMember'];
