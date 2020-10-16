@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Artist;
 use App\ArtistType;
 use App\Beneficiary;
+use App\Category;
 use App\City;
 use App\Country;
 use App\DocumentType;
@@ -16,12 +17,14 @@ use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Mail\NewGestorAdmin;
 use App\PersonType;
 use App\Project;
 use App\Team;
 use App\typeCategories;
 use DateTime;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ProfileController extends Controller
 {
@@ -72,12 +75,18 @@ class ProfileController extends Controller
         $persontypes = PersonType::all();
         $artisttypes = ArtistType::all();
         $leveltypes = Level::all();
+        $categories = Category::all();
 
 
         /*   dd($departamentos); */
         $artist = Artist::where('user_id', auth()->user()->id)->with('users')->first();
         //dd($artist);
-        return view('backend.register.register-gestor', compact('documenttype', 'artist', 'departamentos', 'persontypes', 'artisttypes', 'leveltypes'));
+        return view('backend.register.register-gestor', compact('documenttype', 'artist', 'departamentos', 'persontypes', 'artisttypes', 'leveltypes', 'categories'));
+    }
+
+    public function ListAspirantGestor() {
+        $listAspirant = Artist::where('gestor_id', auth()->user()->id)->with('users')->get();
+        return view('backend.gestores.aspirants-all', compact('listAspirant'));
     }
 
     public function get_municipios($id)
@@ -120,7 +129,7 @@ class ProfileController extends Controller
             $existTeam = Team::where('artist_id', $artist->id)->first();
 
             /* se guardan los datos del los integrantes del grupo */
-            if ($existTeam == null) $this->insertGroupMembers($request, $artist);
+            if ($existTeam == null) $this->insertGroupMembers($request, $artist->id);
         }
 
         return redirect()->route('add.project')->with('aspirant_register', 'Es momento de subir tu propuesta musical');
@@ -218,7 +227,7 @@ class ProfileController extends Controller
     }
 
     /* metodo para insertar los integrantes del grupo */
-    public function insertGroupMembers($request, $artist) {
+    public function insertGroupMembers($request, $idArtist) {
         foreach ($request->integrantes as $integrante) {
             $member = new Team();
             $member->name = $integrante['nameMember'];
@@ -232,18 +241,24 @@ class ProfileController extends Controller
             $member->addres = $integrante['addressMember'];
             $member->phone1 = $integrante['phoneMember'];
             $member->role = $integrante['rolMember'];
-            $member->artist_id = $artist->id;
+            $member->artist_id = $idArtist;
 
             /* Guardar archivos del documento de los integrantes */
             if ($integrante['fileType'] == '1') { // guardar imagenes
-                $urlS3 = $this->uploadFile($integrante['imgDocfrente']);
-                if ($urlS3) $member->img_document_front = $urlS3;
-
-                $urlS3 = $this->uploadFile($integrante['imgDocAtras']);
-                if ($urlS3) $member->img_document_back = $urlS3;
+                if (isset($integrante['imgDocfrente'])) {
+                    $urlS3 = $this->uploadFile($integrante['imgDocfrente']);
+                    if ($urlS3) $member->img_document_front = $urlS3;
+                }
+                
+                if (isset($integrante['imgDocAtras'])) {
+                    $urlS3 = $this->uploadFile($integrante['imgDocAtras']);
+                    if ($urlS3) $member->img_document_back = $urlS3;
+                }
             } else { // guradar PDF
-                $urlS3 = $this->uploadFile($integrante['pdfDocument']);
-                if ($urlS3) $member->pdf_identificacion = $urlS3;
+                if (isset($integrante['pdfDocument'])) {
+                    $urlS3 = $this->uploadFile($integrante['pdfDocument']);
+                    if ($urlS3) $member->pdf_identificacion = $urlS3;
+                }
             }
             $member->save();
         }
@@ -257,105 +272,96 @@ class ProfileController extends Controller
         return $urlS3;
     }
 
+    /* metodo para actualizar datos del aspirante */
+    public function createNewAspirant(Request $request) {
+        $idArtist = -1;
 
-    public function profile_update_artist22(Request $request, $id_artis)
-    {
-
-        dd($id_artis);
-        /*  $project_exist = Artist::where('user_id', auth()->user()->id)->with('projects')->first(); */
-        //Actualizar en la tabla Artist
-        //Validaciones
-        /* $this->validate($request, [
-            'nickname' => 'required',
-            'biography' => 'required',
-            'level_id' => 'required',
-            'country_id' => 'required',
-            'location_id' => 'required',
-            'phone_1' => 'required',
-            'birthdate' => 'required',
-        ]);
- */
-        /*=============================================
-            AGREGAR ASPIRANTE O REPRESENTANTE DEL NIÑO
-            =============================================*/
-
-
-
-        Artist::where('user_id', '=', $id_artis)->update([
-            'nickname' => $request->get('nickname'),
-            'biography' => ucfirst($request->get('biography')),
-            'level_id' => $request->get('level_id'),
-            'document_type' => $request->get('document_type'),
-            'identification' => $request->get('identificacion'),
-            'user_id' => auth()->user()->id,
-            'adress' => $request->get('adress'),
-            'cities_id' => $request->get('cities_id'),
-            'person_types_id' => $request->get('person_types_id'),
-            'artist_types_id' => $request->get('artist_type_id'),
-            'level_id' => $request->get('level_id'),
-            'expedition_place' => $request->get('expedition_place'),
-            /* 'birthdate' => Carbon::parse($request->get('birthdate')), */
-            'age' => $request->get('age'),
-        ]);
-
-        User::where('id', '=', $id_artis)->update([
-            'name' => $request->get('name'),
-            'last_name' => $request->get('lastname'),
-            'second_last_name' => $request->get('second_last_name'),
-            'phone_1' => $request->get('phone_1'),
-            /* 'phone_2' => $request->get('phone_2'), */
-        ]);
-
-        $artist = Artist::select('id')->where('user_id', $id_artis)->first();
-
-
-        /*=============================================
-            AGREGAR MENOR DE EDAD NIÑO
-            =============================================*/
-        $sitieneartist = null;
-        $sitieneartist = Beneficiary::where('artist_id', $artist)->first();
-
-        if ($sitieneartist) {
-            Beneficiary::create([
-
-                'document_type' => $request->get('document_type_menor'),
-                'identification' => $request->get('identificacion_menor'),
-                'name' => $request->get('name_menor'),
-                'last_name' => $request->get('last_name_menor'),
-                'second_last_name' => $request->get('second_last_name_menor'),
-                'phone' => $request->get('phone_1_menor'),
-                'adress' => $request->get('adress_menor'),
-                'cities_id' => $request->get('cities_id_menor'),
-                'expedition_place' => $request->get('expedition_place_menor'),
-                'birthday' => Carbon::parse($request->get('birthdate_menor')),
-                'artist_id' =>  $artist->id
-
-            ]);
-        } else {
-
-            Beneficiary::where('artist_id', '=', $artist->id)->update([
-
-                'document_type' => $request->get('document_type_menor'),
-                'identification' => $request->get('identificacion_menor'),
-                'name' => $request->get('name_menor'),
-                'last_name' => $request->get('last_name_menor'),
-                'second_last_name' => $request->get('second_last_name_menor'),
-                'phone' => $request->get('phone_1_menor'),
-                'adress' => $request->get('adress_menor'),
-                'cities_id' => $request->get('cities_id_menor'),
-                'expedition_place' => $request->get('expedition_place_menor'),
-                'birthday' => Carbon::parse($request->get('birthdate_menor')),
-                'artist_id' =>  $artist->id
-
-            ]);
+        if ($request->lineaConvocatoria == '1') { // Este caso es para solistas
+            if ($request->actuaraComo == '1'){
+                // solo se guarda el aspirante 
+                $idArtist = $this->saveNewAspirant($request);
+            } else { // se debe guardar los datos del representante
+                $idArtist = $this->saveNewAspirant($request);
+                $this->createBeneficiario($request, $idArtist);                
+            }
+        } else { // Para este caso se debe guardar el representante
+            $idArtist = $this->saveNewAspirant($request);
+            $this->insertGroupMembers($request, $idArtist);
         }
-        /* alert()->success(__('perfil_actualizado'), __('muy_bien'))->autoClose(3000);
-        $count_project = count($project_exist->projects);
-        if ($count_project >= 1) {
-            return back();
-        } else {
-            return back()->with('profile_update', __('hora_crear_primer_project'));
-        } */
+        $this->createNewProject($request, $idArtist); // guardar proyecto        
+        return redirect()->route('profile.managament', auth()->user()->slug)->with('new_register', 'El aspirante se registro de forma exitosa');
+    }
+
+    /* metodo para crear un aspirante en la base de datos */
+    public function saveNewAspirant($request) {
+        $aspirante = (object) $request->aspirante;
+
+        // crear el usuario
+        $user = new User();
+        $user->name = $aspirante->name;
+        $user->last_name = $aspirante->lastname;
+        $user->second_last_name = $aspirante->secondLastname;
+        $user->phone_1 = $aspirante->phone;
+        $user->pdf_cedula = $aspirante->urlPdfDocument;
+        $user->img_document_front = $aspirante->urlImageDocumentFrente;
+        $user->img_document_back = $aspirante->urlImageDocumentAtras;
+        $user->picture = $aspirante->urlImageProfile;
+        $user->slug = Str::slug($aspirante->name.'-'.str_random(1000), '-');
+
+        if ( isset($aspirante->email) ) { // si existe un correo 
+            if ($aspirante->email != auth()->user()->email){ // debe ser diferente al del usuario gestor
+                $password = trim(str_random(8));
+                $pass = bcrypt($password);
+                $user->email = $aspirante->email;
+                $user->password = $pass;
+                \Mail::to($user->email)->send(new NewGestorAdmin($user->email, $password));
+            }   
+        }
+        $user->save(); // guardar datos del usuario  
+        
+        $personType = 3;
+        if (isset($request->actuaraComo)) { $personType = $request->actuaraComo; }
+
+        // crear el aspirante
+        $aspirant = new Artist();
+        $aspirant->nickname = $aspirante->name;
+        $aspirant->biography = $aspirante->biografia;
+        $aspirant->document_type = $aspirante->documentType;
+        $aspirant->identification = $aspirante->identificacion;
+        $aspirant->user_id = $user->id;
+        $aspirant->adress = $aspirante->address;
+        $aspirant->cities_id = $aspirante->municipioNacimiento;
+        $aspirant->person_types_id = $personType;
+        $aspirant->artist_types_id = $request->lineaConvocatoria;
+        $aspirant->expedition_place = $aspirante->municipioExpedida;
+        $aspirant->place_residence = $aspirante->municipioResidencia;
+        $aspirant->byrthdate = Carbon::parse($aspirante->birthdate);
+        $aspirant->township = $aspirante->vereda;
+        $aspirant->name_team = $aspirante->nameTeam;
+        $aspirant->gestor_id = auth()->user()->id;
+        $aspirant->save();
+
+        //\Mail::to(auth()->user()->email)->send(new NewArtist($aspirante->name));
+        return $aspirant->id;
+    }
+
+    /* metodo para registrar un proyecto y asociarlo con un aspirante en la base de datos */
+    public function createNewProject($request, $idArtist) {
+        $song = (object) $request->song;
+       
+        $project = new Project();
+        $project->title = $song->nameProject;
+        $project->author = $song->author; 
+        $project->category_id = $song->categoryID; 
+        $project->audio = $song->urlSong; 
+        //$project->audio_secundary_one = $song->urlSong; 
+        //$project->audio_secundary_two = $song->urlSong; 
+        $project->description = $song->description; 
+        $project->status = 1; 
+        $project->slug = Str::slug($song->nameProject.'-'.str_random(1000), '-');
+        $project->save();
+
+        $project->artists()->attach($idArtist); // relacionar el proyecto con el artista
     }
 
     public function update_password(Request $request)
