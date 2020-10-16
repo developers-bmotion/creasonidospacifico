@@ -402,6 +402,16 @@ class ProfileController extends Controller
         return $urlS3;
     }
 
+    // public function uploadImageDocumentTeam(Request $request)
+    // {
+    //     $image = $request->file('file')->store('imagendoc', 's3');
+    //     Storage::disk('s3')->setVisibility($image, 'public');
+    //     $urlS3 = Storage::disk('s3')->url($image);
+    //     $id = $request->headers->get('id');
+
+    //     return [$id,$urlS3];
+    // }
+
     public function uploadPDFDocument(Request $request)
     {
         $image = $request->file('file')->store('pdfdoc', 's3');
@@ -424,6 +434,22 @@ class ProfileController extends Controller
         ]);
 
         return $user_picture;
+    }
+
+    public function photo_beneficiario(Request $request)
+    {
+        $artist = Artist::where('user_id', auth()->user()->id)->first();
+        $beneficiario = Beneficiary::where('artist_id', $artist->id)->first();
+        $ben_picture =  str_replace('storage', '', $beneficiario->picture);;
+        //Elimnar foto de perfil del servidor
+        Storage::delete($ben_picture);
+        //Agregar la nueva foto de perfil
+        $photo = $request->file('photo')->store('users');
+        Beneficiary::where('id', $beneficiario->id)->update([
+            'picture' => '/storage/' . $photo
+        ]);
+
+        return $ben_picture;
     }
 
     public function front_photo(Request $request)
@@ -485,7 +511,7 @@ class ProfileController extends Controller
         return back();
     }
 
-    // actualizar imagen beneficiario
+    // actualizar imagen documento beneficiario
     public function update_img_ben(Request $request)
     {
 
@@ -499,8 +525,25 @@ class ProfileController extends Controller
         $ben=Beneficiary::where('id', $beneficiario->id)->update([
             'pdf_documento' => null,
             'img_document_front' => $beneficiari->urlImageDocumentFrente,
-            'img_document_back' => $beneficiari->urlImageDocumentFrente,
+            'img_document_back' => $beneficiari->urlImageDocumentAtras,
         ]);
+        return back();
+    }
+
+// actualizar imagen documento team
+    public function update_img_team(Request $request)
+    {
+
+
+        $teams = (object) $request->team;
+
+        Team::where('id', $teams->id)->update([
+            'pdf_identificacion' => null,
+            'img_document_front' => $teams->urlImageDocumentFrente,
+            'img_document_back' => $teams->urlImageDocumentAtras,
+        ]);
+
+
         return back();
     }
 
@@ -562,7 +605,9 @@ class ProfileController extends Controller
         Storage::disk('s3')->setVisibility($pdf_cedula_save, 'public');
         $urlS3 = Storage::disk('s3')->url($pdf_cedula_save);
         Team::where('id', $teamid)->update([
-            'pdf_identificacion' => $urlS3
+            'pdf_identificacion' => $urlS3,
+            'img_document_front' => null,
+            'img_document_back' => null,
         ]);
 
         return $urlS3;

@@ -57,6 +57,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <link rel="stylesheet" href="/backend/build/css/intlTelInput.css">
     <link rel="stylesheet" href="/backend/assets/css/circle.player.css">
     <link rel="stylesheet" href="/backend/player/css/audioplayer.css">
+    <link rel="stylesheet" href="/backend/assets/css/loading.css">
     {{-- <link rel="stylesheet" href="/backend/assets/css/jplayer.blue.monday.css"> --}}
     <link rel="stylesheet" href="/backend/assets/css/jplayer.pink.flag.css">
     <link rel="stylesheet" href="/backend/build/css/demo.css">
@@ -424,6 +425,7 @@ License: You must have a valid license purchased only from themeforest(the above
 </script>
 <script src="/backend/assets/js/select_expendicion_departamentos.js"></script>
 <script src="/backend/assets/js/lenguage-datepicker.js"></script>
+<script src="/backend/assets/js/loading.js"></script>
 
 
 <!--end::Page Vendors -->

@@ -145,6 +145,7 @@ Route::group(['namespace'=>'Backend','prefix' => 'dashboard','middleware' => 'au
     Route::get('/form-register','ProfileController@index')->name('form.register');
     Route::get('/form-gestor','ProfileController@indexGestor')->name('form.gestor');
     Route::post('/upload-image-document','ProfileController@uploadImageDocument')->name('upload.image.document');
+    // Route::post('/upload-image-document-team','ProfileController@uploadImageDocumentTeam')->name('upload.image.document.team');
     Route::post('/upload-image-profile','ProfileController@uploadImageProfile')->name('upload.image.profile');
     Route::post('/upload-pdf-document','ProfileController@uploadPDFDocument')->name('upload.pdf.document');
 
@@ -152,6 +153,7 @@ Route::group(['namespace'=>'Backend','prefix' => 'dashboard','middleware' => 'au
     //Perfil Artista
     Route::get('/profile','ProfileController@index_artist')->name('profile.artist')->middleware('register_artist');
     Route::post('/profile-photo-artist','ProfileController@photo')->name('profile.photo.artist');
+    Route::post('/profile-photo-beneficiario','ProfileController@photo_beneficiario')->name('profile.photo.beneficiario');
 
     Route::post('/front-photo-artist','ProfileController@front_photo')->name('front.photo.artist');
 
@@ -164,6 +166,7 @@ Route::group(['namespace'=>'Backend','prefix' => 'dashboard','middleware' => 'au
     Route::put('/update-profile-artist/{id_artis}','ProfileController@profile_update_artist')->name('update.profile.artist');
     Route::put('/update-img-artist','ProfileController@update_img_artist')->name('update.imgdoc.artist');
     Route::put('/update-img-ben','ProfileController@update_img_ben')->name('update.imgdoc.ben');
+    Route::put('/update-img-team','ProfileController@update_img_team')->name('update.imgdoc.team');
 
     Route::get('/get-municipios/{id}','ProfileController@get_municipios')->name('get.municipios');
 
