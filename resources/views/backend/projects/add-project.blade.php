@@ -280,7 +280,17 @@
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
+            processing: function(file, response){
+                $('body').loading({
+                    message: 'Subiendo canción...',
+                    start:true,
+                });
+                // this.success();
+            },
             success: function (file, response) {
+                $('body').loading({
+                    start:false,
+                });
                 $("#erroresImagen").text('');
                 $('#inputDBAudioAddProject').val(response);
                 $('#img_add_proyect').attr('src', response);
@@ -298,8 +308,8 @@
         });
 
         // dropzone one
-
-        var dropzone = new Dropzone('.dropzone-one', {
+        var fileOne;
+        var dropzoneOne = new Dropzone('.dropzone-one', {
             url: '{{route('add.audio.one')}}',
             acceptedFiles: 'audio/*',
             maxFiles: 1,
@@ -307,7 +317,17 @@
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
+            processing: function(file, response){
+                $('body').loading({
+                    message: 'Subiendo canción...',
+                    start:true,
+                });
+            },
             success: function (file, response) {
+                fileOne=file;
+                $('body').loading({
+                    start:false,
+                });
                 $("#erroresImagen").text('');
                 $('#inputDropOne').val(response);
                 $('#img_add_proyect').attr('src', response);
@@ -318,14 +338,15 @@
                     $("#erroresImagen").text('{{__("imagen_grande")}}');
                     $(file.previewElement).addClass("dz-error").find('.dz-error-message').text('{{__("imagen_grande")}}');
                     setTimeout(() => {
-                        dropzone.removeFile(file)
+                        dropzoneOne.removeFile(file)
                     }, 1000)
                 }
             }
         });
 
         // dorp two
-        var dropzone = new Dropzone('.dropzone-two', {
+        var fileTwo;
+        var dropzoneTwo = new Dropzone('.dropzone-two', {
             url: '{{route('add.audio.two')}}',
             acceptedFiles: 'audio/*',
             maxFiles: 1,
@@ -333,7 +354,17 @@
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
+            processing: function(file, response){
+                $('body').loading({
+                    message: 'Subiendo canción...',
+                    start:true,
+                });
+            },
             success: function (file, response) {
+                fileTwo=file;
+                $('body').loading({
+                    start:false,
+                });
                 $("#erroresImagen").text('');
                 $('#inputDropTwo').val(response);
                 $('#img_add_proyect').attr('src', response);
@@ -344,7 +375,7 @@
                     $("#erroresImagen").text('{{__("imagen_grande")}}');
                     $(file.previewElement).addClass("dz-error").find('.dz-error-message').text('{{__("imagen_grande")}}');
                     setTimeout(() => {
-                        dropzone.removeFile(file)
+                        dropzoneTwo.removeFile(file)
                     }, 1000)
                 }
             }
@@ -366,9 +397,20 @@
 
         });
         $('.cancel-song').click(function(){
+            // console.log(fileOne,'fileOne');
             $(this).hide();
             $('.add-song-drop').hide();
             $('.add-song').show();
+            $('#inputDropOne').val(" ");
+            $('#inputDropTwo').val(" ");
+            if(fileOne){
+
+                dropzoneOne.removeFile(fileOne);
+            }
+            if(fileTwo){
+
+                dropzoneTwo.removeFile(fileTwo);
+            }
         });
 
 
