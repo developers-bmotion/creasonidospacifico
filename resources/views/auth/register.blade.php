@@ -215,7 +215,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                         <div class="col m--align-left">
                                             <label class="m-checkbox m-checkbox--focus color-rojo-terminos">
                                                 <input type="checkbox" id="check-acepto-terminos" name="agree">Clic aquí para aceptar
-                                                los <a href="#" class="m-link m-link--focus">términos y
+                                                los <a href="https://creasonidos.com/terminos-y-condiciones/" target="_blank" class="m-link m-link--focus">términos y
                                                     condiciones.</a> y continuar con el registro.
                                                 <span></span>
                                             </label>
