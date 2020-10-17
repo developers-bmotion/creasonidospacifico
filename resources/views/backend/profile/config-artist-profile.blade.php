@@ -218,7 +218,17 @@
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
+            processing: function(file, response){
+                $('body').loading({
+                    message: 'Subiendo imagen...',
+                    start:true,
+                });
+            },
             success: function (file, response) {
+                $('body').loading({
+
+                    start:false,
+                });
 
                 $('#inputImagenesPostPlan').val(response);
                 location.reload();
@@ -236,7 +246,9 @@
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
+
             success: function (file, response) {
+
 
                 $('#inputImagenesPostPlan').val(response);
                 location.reload();

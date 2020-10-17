@@ -92,7 +92,7 @@ class AddProjectController extends Controller
         $this->validate($request, [
             'subir_cancion' => 'required'
         ]);
-
+            
         $slug = str_slug($request->get('title'));
         $ramdoNum = mt_rand(1, 10000);
 

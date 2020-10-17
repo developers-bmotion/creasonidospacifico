@@ -61,9 +61,9 @@
             </div>
         </div>
 
-        <form method="post" action="{{ route('update.profile.artist', auth()->user()->id) }}" enctype="multipart/form-data"
+        <form method="post" action="{{ route('create.new.aspirant') }}" enctype="multipart/form-data"
               class="m-form m-form--label-align-left- m-form--state-" id="m_form_new_register">
-        @csrf {{method_field('PUT')}}
+        @csrf 
 
         <!--=====================================
                 CONTENIDO PARA SELECCIONAR LA INFORMACIÓN LEGAL
@@ -151,6 +151,22 @@
                             <div class="m-form__section m-form__section--first">
                                 <div class="m-form__heading">
                                     <h3 class="m-form__heading-title">Información personal</h3>
+                                </div>
+
+                                <!--=====================================
+                                    correo no es obligatorio
+                                ======================================-->
+                                <div class="form-group m-form__group row">
+                                    <div class="col-lg-6 m-form__group-sub" style="text-align: justify; padding-top: 1.8rem;">
+                                        <strong>Nota:</strong>
+                                        Por favor ten presente que si un aspirante no cuenta con un correo electrónico, se debe dejar este campo sin llenar.
+                                    </div>
+
+                                    <div class="col-lg-6 m-form__group-sub">
+										<label class="col-form-label">Email</label>
+                                        <input type="text" class="form-control m-input" name="aspirante[email]" placeholder="">
+                                        <span class="m-form__help">Por favor ingrese su correo electrónico</span>
+									</div>
                                 </div>
 
                                 <!--=====================================
@@ -784,6 +800,94 @@
                     </div>
                 </div>
             </div>
+            
+            <!--=====================================
+                INFORMACIÓN DE LA CANCION
+            ======================================-->
+            <div id="content-informacion-subir-cancion" style="display: none" class="m-portlet m-portlet--mobile m-portlet--body-progress-">
+                <div class="m-portlet__head">
+                    <div class="m-portlet__head-caption">
+                        <div class="m-portlet__head-title">
+                            <h3 class="m-portlet__head-text">Datos de la canción</h3>
+                        </div>
+                    </div>
+
+                    <div class="m-portlet__head-tools">
+                        <ul class="m-portlet__nav">
+                            <li class="m-portlet__nav-item">
+                                <a href="#" data-toggle="m-tooltip" class="m-portlet__nav-link m-portlet__nav-link--icon"
+                                   data-direction="left" data-width="auto" title="Información de la canción">
+                                    <i class="flaticon-info m--icon-font-size-lg3"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="m-portlet__body">
+                    <div class="row">  
+                        <div class="col col-lg-12" style="padding: 0 2rem 1rem 2rem;">                      
+                            <!--=====================================
+                                NOMBRE DE LA CANCIÓN
+                            ======================================-->                        
+                            <div class="form-group m-form__group row">
+                                <div class="col-lg-6 m-form__group-sub">
+                                    <label class="form-control-label" form="nombreProyecto">Nombre de la canción *</label>
+                                    <input id="nombreProyecto" type="text" name="song[nameProject]" class="form-control m-input" placeholder="" value="">
+                                    <span class="m-form__help">{{ __('help_nombre_proyecto') }}</span>
+                                </div>
+
+                                <div class="col-lg-6 m-form__group-sub">
+                                    <label class="form-control-label" form="nombreProyecto">Nombre del autor o compositor *</label>
+                                    <input type="text" name="song[author]" class="form-control m-input" placeholder="" value="">
+                                </div>
+                            </div>
+
+                            <!--=====================================
+                                SELECCIONE CATEGORÍA
+                            ======================================-->
+                            <div class="form-group m-form__group row">
+                                <div class="col-lg-6 m-form__group-sub">
+                                    <label class="form-control-label" form="category_add_proyecto">Seleccione categoría *</label>
+                                    <select id="category_add_proyecto" name="song[categoryID]" class="form-control m-bootstrap-select m_selectpicker">
+                                        <option value="">Seleccione una opción</option>
+                                        @foreach($categories as $tCategorie)
+                                            <option value="{{ $tCategorie->id }}">{{ $tCategorie->category }}</option>
+                                        @endforeach                                    
+                                    </select>
+                                    <span class="m-form__help">{{ __('categoria_de_proyecto') }}</span>
+                                </div>     
+                                
+                                <div class="col-lg-6 m-form__group-sub">
+                                    <label class="form-control-label" form="nombreProyecto">Subir canción *
+                                        <span class="text-danger">(Tenga en cuenta que la canción que va a subir aquí, participará en el concurso)</span>
+                                    </label>
+                                    <div id="m-dropzone-three" class="m-dropzone upload-song m-dropzone--success" action="">
+                                        <div class="m-dropzone__msg dz-message needsclick">
+                                            <h3 class="m-dropzone__msg-title">Agregue su canción en formato MP3</h3>
+                                            <span class="m-dropzone__msg-desc">Arrastra o has clic a aquí para subir</span>
+                                        </div>
+                                    </div>                                       
+                                    <div id="audio-error" style="color: #f4516c" class="form-control-feedback"></div>
+                                    <span class="m-form__help">Cargue aquí el audio de la canción en formato Mp3.</span>
+                                    <input type="hidden" name="song[urlSong]" value="">
+                                </div>
+                            </div>   
+                        
+                            <!--=====================================
+                                BREVE RESEÑA
+                            ======================================-->
+                            <div class="form-group m-form__group row">
+                                <div class="col-lg-12 m-form__group-sub">
+                                    <label class="form-control-label" form="nombreProyecto">Escriba aquí una breve reseña *</label>
+                                    <textarea id="exampleTextarea" name="song[description]" class="form-control m-input" rows="5"></textarea>
+                                    <span class="m-form__help">(máximo 300 palabras) de su proyecto musical, incluyendo una corta descripción de su trayectoria.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <!--=====================================
                 BOTON ENVIAR DATOS
@@ -797,7 +901,7 @@
                                 <div id="content-acceptTermsConditions" class="col-lg-9 m-form__group-sub">
                                     <label class="form-control-label">Términos y Condiciones *</label>
                                     <div class="m-radio-inline">
-                                        <label class="m-radio">
+                                        <label class="m-checkbox">
                                             <input type="checkbox" name="acceptTermsConditions" value="1">Haga clic aquí para indicar que ha leído y acepta el
                                             acuerdo de Términos y Condiciones.
                                             <span></span>
@@ -824,7 +928,7 @@
 @stop
 
 @section('js.form-register')
-    <script src="/backend/assets/js/form-register.js" type="text/javascript"></script>
+    <script src="/backend/assets/js/form-register-gestor.js" type="text/javascript"></script>
 @endsection
 @section('dropzonePhotoArtist')
     <script>
@@ -849,19 +953,19 @@
             //== Private functions
             var demos = function () {
                 // minimum setup
-                $('#datepicker_fecha_nacimiento #m_datepicker_1_validate').datepicker({
+                /* $('#datepicker_fecha_nacimiento #m_datepicker_1_validate').datepicker({
                     rtl: mUtil.isRTL(),
                     todayHighlight: true,
                     orientation: "bottom left",
                     language: 'es',
                     startDate: '-18y',
                     templates: arrows
-                });
+                }); */
 
                 $('#datepicker_fecha_nacimiento').datepicker({
                     rtl: mUtil.isRTL(),
                     language: 'es',
-                    startDate: '-18y',
+                    //startDate: '-18y',
                     todayHighlight: true,
                     orientation: "bottom left",
                     templates: arrows
@@ -999,7 +1103,7 @@
             maxFiles: 1,
             maxFilesize: 5, // MB
             addRemoveLinks: true,
-            acceptedFiles: "image/*,application/pdf,.psd",
+            acceptedFiles: "image/*",
             headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
             success: function(file, response) {
                 $("input[name='aspirante[urlImageProfile]']").val(response);
@@ -1015,13 +1119,32 @@
             maxFiles: 1,
             maxFilesize: 5, // MB
             addRemoveLinks: true,
-            acceptedFiles: "image/*,application/pdf,.psd",
+            acceptedFiles: "image/*",
             headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
             success: function(file, response) {
                 $("input[name='beneficiario[urlImageProfile]']").val(response);
             },
             error: function (file, e, i, o, u) {
                 console.log('se genero un error', file)
+            }
+        });
+        
+        var dropzone = new Dropzone('.upload-song', {
+            url: '{{ route('add.project.audio') }}',
+            acceptedFiles: '.mp3', // 'audio/*'
+            maxFiles: 1,
+            paramName: 'image',
+            addRemoveLinks: true,
+            headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+            success: function (file, response) {
+                console.log('error: ', file)
+                $("#audio-error").text('');
+                $("input[name='song[urlSong]']").val(response);
+            },
+            error: function (file, e, i, o, u) {
+                console.log('error: ', file)
+                $("#audio-error").text('Recuerda que solo se admiten archivos en formato MP3.');
+                setTimeout(() => { dropzone.removeFile(file) }, 2000)
             }
         });
 

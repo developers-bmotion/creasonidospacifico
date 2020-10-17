@@ -41,6 +41,7 @@ Route::get('/prueba-offline', function (){
    return view('pruebaoffline');
 });
 
+
     // Artisan::call('projects:close');
     // dd(\App\Category::where('typeCategory_id', $id_category)->get());
 
@@ -138,16 +139,19 @@ Route::group(['namespace'=>'Backend','prefix' => 'dashboard','middleware' => 'au
     //Rutas para el modulo Artistas
     Route::get('/artists','ArtistsController@index')->name('index.artists');
     Route::get('/artists-all-table','ArtistsController@table_all_artists')->name('all.artists.table');
+    Route::get('/artists-manager-table','ProfileController@tableManagerAspirant')->name('artists.manager.table');
 
     /*=============================================
        NUEVAS RUTAS PARA EL REGISTRO
     =============================================*/
     Route::get('/form-register','ProfileController@index')->name('form.register');
     Route::get('/form-gestor','ProfileController@indexGestor')->name('form.gestor');
+    Route::get('/list-aspirant-gestor','ProfileController@ListAspirantGestor')->name('list.aspirant.gestor');
     Route::post('/upload-image-document','ProfileController@uploadImageDocument')->name('upload.image.document');
     // Route::post('/upload-image-document-team','ProfileController@uploadImageDocumentTeam')->name('upload.image.document.team');
     Route::post('/upload-image-profile','ProfileController@uploadImageProfile')->name('upload.image.profile');
     Route::post('/upload-pdf-document','ProfileController@uploadPDFDocument')->name('upload.pdf.document');
+    Route::post('/create-new-aspirant','ProfileController@createNewAspirant')->name('create.new.aspirant');
 
     //RUTAS PARA EL PERFIL
     //Perfil Artista

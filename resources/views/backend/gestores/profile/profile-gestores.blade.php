@@ -44,6 +44,17 @@
 @stop
 @section('content')
     <div class="m-content">
+        @if(session()->has('new_register'))
+            <div class="m-alert m-alert--icon m-alert--outline alert alert-success" role="alert">
+                <div class="m-alert__icon">
+                    <i class="la la-check"></i>
+                </div>
+                <div class="m-alert__text">
+                    <strong>¡Bien hecho!</strong> {{session('new_register')}}
+                </div>
+            </div>
+        @endif
+
         <div class="row">
             <div class="col-xl-3 col-lg-4">
                 @include('backend.gestores.partials.siderbar-profile')
