@@ -9,6 +9,7 @@ $factory->define(App\Team::class, function (Faker $faker) {
             'document_type'=> 1,
             'identification'=>$faker->randomNumber($nbDigits = NULL, $strict = false),
             'expedition_place'=>\App\City::all()->random()->id,
+            'place_birth'=>\App\City::all()->random()->id,
             'birthday'=>$faker->date($format = 'Y-m-d', $max = 'now'),
             'email'=>$faker->unique()->safeEmail,
             'addres'=>$faker->address,

@@ -18,7 +18,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
 <head>
     <meta charset="utf-8" />
-    <title>Metronic | Login Page - 1</title>
+    <title>Crea Sonidos Pacifico | Crear Cuenta</title>
     <meta name="description" content="Latest updates and statistic charts">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
 
@@ -83,7 +83,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <!--RTL version:<link href="/backend/assets/demo/base/style.bundle.rtl.css" rel="stylesheet" type="text/css" />-->
 
     <!--end::Global Theme Styles -->
-    <link rel="shortcut icon" href="/backend/assets/demo/media/img/logo/favicon.ico" />
+    <link rel="shortcut icon" href="/images/logo-creasonidos.png"/>
 </head>
 
 <!-- end::Head -->
@@ -103,7 +103,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         <div class="m-login__wrapper">
                             <div class="m-login__logo">
                                 <a href="#">
-                                    <img src="/backend/assets/app/media/img/logos/logo-2.png">
+                                    <img style="width: 29rem;" src="/images/logo-creasonidos.png">
                                 </a>
                             </div>
                             @if(session('message'))
@@ -242,7 +242,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 </div>
             </div>
             <div class="m-grid__item m-grid__item--fluid m-grid m-grid--center m-grid--hor m-grid__item--order-tablet-and-mobile-1	m-login__content m-grid-item--center"
-                style="background-image: url(/backend/assets/app/media/img//bg/bg-4.jpg)">
+                 style="background-image: url(/images/imglogin.png)">
                 <div class="m-grid__item">
                     <h3 class="m-login__welcome">CREA SONIDOS PACIFICO</h3>
                     <p class="m-login__msg">
