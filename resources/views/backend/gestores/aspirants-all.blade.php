@@ -24,7 +24,7 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                     </div>
                 </div>
                 <div class="m-portlet__head-tools">
-                   
+
                 </div>
             </div>
             <div class="m-portlet__body">
@@ -33,26 +33,23 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                     <thead>
                     <tr>
                         <th>Id</th>
-                        <th>Artista</th>
-                        <th>Nombres</th>
-                        <th>Nombre Artistico</th>
-                        <th>Nivel</th>
+                        <th>Aspirante</th>
                         <th>Email</th>
-                        <th>Genero</th>
-                        <th>Nacionalidad</th>
-                        <th>Actions</th>
+                        <th>N° documento</th>
+                        <th>Actura Como</th>
+                        <th>Acciones</th>
                     </tr>
                     </thead>
                 </table>
             </div>
         </div>
-        @dd($listAspirant)
+        {{-- @dd($listAspirant) --}}
     </div>
 @stop
 
 @push('js')
     <script>
-       /*  var DatatablesExtensionsScroller = function() {
+       var DatatablesExtensionsScroller = function() {
             var initTable1 = function() {
                 var table = $('#table_artists');
 
@@ -61,10 +58,10 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                     "processing": true,
                     "serverSide": true,
                     "data": null,
-                    "order": [[ 0, "desc" ]],
+                    "order": [[ 0, "asc" ]],
                     "responsive": true,
                     "ajax": {
-                        url: "{{ route('all.artists.table') }}",
+                        url: "{{ route('artists.manager.table') }}",
 
                     },
                     "columns": [
@@ -75,35 +72,36 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                         },
                         {
                             render: function (data, type, JsonResultRow, meta) {
-                                return '<img src="' + JsonResultRow.users.picture + '" width="50px"  style="border-radius: 100%;margin-right: auto;margin-left: auto;display: block; width:50px; height:50px"/>';
+                                return '<span class="label label-danger text-center">'+JsonResultRow.users.name+'</span>  <span class="label label-danger text-center">'+JsonResultRow.users.last_name+'</span>';
+                                // return '<img src="' + JsonResultRow + '" width="50px"  style="border-radius: 100%;margin-right: auto;margin-left: auto;display: block; width:50px; height:50px"/>';
                             }
-                        },
-                        {
-                            data: 'users.name',
-                            defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
-                        },
-                        {
-                            data: 'nickname',
-                            defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
-                        },
-                        {
-                            data: 'levels.level',
-                            defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
-                            // data: 'ganancias',
-                            // defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
                         },
                         {
                             data: 'users.email',
                             defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
                         },
                         {
-                            data: 'nickname',
+                            data: 'identification',
                             defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
                         },
                         {
-                            data: 'countries.country',
+                            data: 'person_type.name',
                             defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
+                            // data: 'ganancias',
+                            // defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
                         },
+                        {
+                        render: function (data, type, JsonResultRow, meta) {
+                            console.log(JSON.stringify(JsonResultRow.projects.slug),'json');
+
+                            JsonResultRow.projects.map(item => {
+                                return (item) ? `<div class="text-center"><a href="/dashboard/project/${ item.slug }" class="btn m-btn--pill btn-secondary"><i class="fa fa-eye"></i></a></div>` : '<h1>hola</h1>'
+                            });
+                            // return '<div class="text-center"><a href="/dashboard/project/' + JsonResultRow.projects.slug + '" class="btn m-btn--pill btn-secondary"><i class="fa fa-eye"></i></a></div>'
+                        }
+                    },
+
+
                     ],
                     "columnDefs": [
                         {
@@ -112,14 +110,14 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                             orderable: false,
                             render: function(data, type, full, meta) {
                                 return `
-                       
+
                         <a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill" title="View">
                           <i class="la la-edit"></i>
                         </a>`;
                             },
                         },
                         {
-                            "targets": 8,
+                            "targets": 5,
                             render: function(data, type, full, meta) {
                                 var status = {
                                     1: {'title': 'Pending', 'class': 'm-badge--brand'},
@@ -178,7 +176,7 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
 
         jQuery(document).ready(function() {
             DatatablesExtensionsScroller.init();
-        }); */
+        });
 
     </script>
 @endpush
