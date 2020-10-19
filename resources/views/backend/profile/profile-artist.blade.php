@@ -95,7 +95,7 @@
                                         Información del aspirante o representante
                                     </a>
                                 </li>
-
+{{-- @dd($artist); --}}
                                 @if(count($artist->projects) !== 0)
                                     <li class="nav-item m-tabs__item">
                                         <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_2"
@@ -230,6 +230,20 @@
                                         <div class="m-scrollable" data-scrollable="true" style="">
                                             <p>{{ $artist->adress }}</p>
                                         </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label style="font-weight: bold">Departamento de residencia:</label>
+                                        <div class="m-scrollable" data-scrollable="true" style="">
+                                            {{$artist->residencePlace->departaments->descripcion}}</p>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label style="font-weight: bold">Ciudad de residencia:</label>
+                                        <div class="m-scrollable" data-scrollable="true" style="">
+                                            {{$artist->residencePlace->descripcion}}</p>
+                                        </div>
+
                                     </div>
                                     <div class="col-md-4">
                                         <label style="font-weight: bold">Departamento de nacimiento:</label>
@@ -711,6 +725,32 @@
                                                                                             class="col-md-4 mt-2">
                                                                                             <label
                                                                                                 style="font-weight: bold">Departamento
+                                                                                                de residencia:</label>
+                                                                                            <div
+                                                                                                class="m-scrollable"
+                                                                                                data-scrollable="true"
+                                                                                                style="">
+
+                                                                                                <p>{{ $team->residencePlace->departaments->descripcion}}</p>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div
+                                                                                            class="col-md-4 mt-2">
+                                                                                            <label
+                                                                                                style="font-weight: bold">Ciudad
+                                                                                                de residencia:</label>
+                                                                                            <div
+                                                                                                class="m-scrollable"
+                                                                                                data-scrollable="true"
+                                                                                                style="">
+
+                                                                                                <p>{{ $team->residencePlace->descripcion}}</p>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div
+                                                                                            class="col-md-4 mt-2">
+                                                                                            <label
+                                                                                                style="font-weight: bold">Departamento
                                                                                                 de nacimiento:</label>
                                                                                             <div
                                                                                                 class="m-scrollable"
@@ -1118,20 +1158,19 @@
                                                     </div>
                                                 </div>
 
-                                                @if($artist->beneficiary[0]->township)
-                                                    <div class="col-md-4 mt-2">
-                                                        <label style="font-weight: bold">Vereda/Corregimiento:</label>
-                                                        <div class="m-scrollable" data-scrollable="true" style="">
-                                                            <p>{{$artist->beneficiary[0]->township}}</p>
-                                                        </div>
-                                                    </div>
-                                                @endif
                                                 <div class="col-md-4 mt-2">
-                                                    <label style="font-weight: bold">Fecha de
-                                                        nacimiento:</label>
+                                                    <label style="font-weight: bold">Departamento de residencia:</label>
                                                     <div class="m-scrollable" data-scrollable="true" style="">
-                                                        <p>{{  Carbon\Carbon::parse($artist->beneficiary[0]->birthday)->formatLocalized('%d de %B de %Y') }}</p>
+                                                        <p>{{ $artist->beneficiary[0]->residencePlace->departaments->descripcion}}</p>
                                                     </div>
+
+                                                </div>
+                                                <div class="col-md-4 mt-2">
+                                                    <label style="font-weight: bold">Ciudad de residencia:</label>
+                                                    <div class="m-scrollable" data-scrollable="true" style="">
+                                                        <p>{{ $artist->beneficiary[0]->residencePlace->descripcion}}</p>
+                                                    </div>
+
                                                 </div>
                                                 <div class="col-md-4 mt-2">
                                                     <label style="font-weight: bold">Departamento de
@@ -1148,6 +1187,21 @@
                                                         <p>{{ $artist->beneficiary[0]->city->descripcion}}</p>
                                                     </div>
 
+                                                </div>
+                                                @if($artist->beneficiary[0]->township)
+                                                    <div class="col-md-4 mt-2">
+                                                        <label style="font-weight: bold">Vereda/Corregimiento:</label>
+                                                        <div class="m-scrollable" data-scrollable="true" style="">
+                                                            <p>{{$artist->beneficiary[0]->township}}</p>
+                                                        </div>
+                                                    </div>
+                                                @endif
+                                                <div class="col-md-4 mt-2">
+                                                    <label style="font-weight: bold">Fecha de
+                                                        nacimiento:</label>
+                                                    <div class="m-scrollable" data-scrollable="true" style="">
+                                                        <p>{{  Carbon\Carbon::parse($artist->beneficiary[0]->birthday)->formatLocalized('%d de %B de %Y') }}</p>
+                                                    </div>
                                                 </div>
 
 
