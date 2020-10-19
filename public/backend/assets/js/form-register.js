@@ -8,21 +8,20 @@ $('#select-linea-convocatoria').on('change', function() {
 
     switch ( lineaConvocatoria ) {
         case '-1': $("#content-select-form-actuara-como").hide(); 
-                $("#select-actuara-como").val("-1");  
-                $("#content-aspirante_nameTeam").hide();  
+                $("#select-actuara-como").val("-1");    
             break;
         case '1': $("#content-select-form-actuara-como").show();
                 $("#select-actuara-como option[value='1']").show();
                 $("#select-actuara-como option[value='3']").hide(); 
                 $("#select-actuara-como").val("-1");    
-                $("#content-aspirante_nameTeam").hide();
+                $("#forma-parte-grupo").hide();
             break;
         case '2': $("#content-select-form-actuara-como").show();                
                 showInfoGroup()
                 $("#select-actuara-como").val("3"); 
                 $("#select-actuara-como option[value='3']").show();    
                 $("#select-actuara-como").prop('disabled', true);
-                $("#content-aspirante_nameTeam").show();
+                $("#forma-parte-grupo").show();
             break;
     }   
 });
@@ -33,6 +32,7 @@ function hideContentInfo() {
     $('#content-informacion-menor-edad').hide();
     $('#content-informacion-grupo-musical').hide();
     $('#btn-enviar-datos').hide();
+    $("#forma-parte-grupo").hide();
 }
 
 /* SELECT ACTUARÁ COMO PARA MOSTRAR CONTENIDO */
@@ -110,6 +110,14 @@ $("input[name='beneficiario[identificacionDoc]']").click( () => {
     }
 });
 
+// evento click para para selecionar si forma parte del grupo musical
+$("input[name='aspirante[partGroup]']").click( () => {
+    if ($('input:radio[name="aspirante[partGroup]"]:checked').val() === '1') {
+        $("#rol-member").show(); 
+    } else {
+        $("#rol-member").hide(); 
+    }
+});
 
 /*  funciones para agragar un nuevo integrante  */
 var currentMembers = 0;

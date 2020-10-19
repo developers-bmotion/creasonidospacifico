@@ -306,7 +306,7 @@
                                         <div class="col-lg-6 m-form__group-sub">
                                             <label for="">Imagen documento identificación frente</label>
                                             <div class="m-dropzone file-image-document-aspirante-frente m-dropzone--success"
-                                                 action="inc/api/dropzone/upload.php" id="m-dropzone-three">
+                                                 action="" >{{-- id="m-dropzone-three" --}}
                                                 <div class="m-dropzone__msg dz-message needsclick">
                                                     <h3 class="m-dropzone__msg-title">Subir documento de identificación</h3>
                                                     <span class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
@@ -434,6 +434,47 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <!--=====================================
+                                EL ASPIRANTE FORMA PARTE DEL GRUPO
+                            ======================================-->
+                            <div id="forma-parte-grupo" style="display: none">
+                                <div class="m-separator m-separator--dashed m-separator--lg"></div>
+
+                                <div class="m-form__section">
+                                    <div class="m-form__heading">
+                                        <h3 class="m-form__heading-title">Información del aspirante si forma parte del grupo
+                                            <i data-toggle="m-tooltip" data-width="auto" class="m-form__heading-help-icon flaticon-info"
+                                               title="Datos importantes del lugar y sitio de nacimiento"></i>
+                                        </h3>
+                                    </div>
+
+                                    <div class="m-form__group form-group">
+                                        <div class="col-lg-12 m-form__group-sub">
+                                            <label for="">¿Usted como aspirante forma parte del grupo?</label>
+                                            <div class="m-radio-inline">
+                                                <label class="m-radio">
+                                                    <input type="radio" name="aspirante[partGroup]" value="1"> Si
+                                                    <span></span>
+                                                </label>
+                                                <label class="m-radio">
+                                                    <input type="radio" name="aspirante[partGroup]" value="2" checked="checked"> No
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div id="rol-member" class="form-group m-form__group row" style="display: none">
+                                        <div class="col-lg-6 m-form__group-sub">
+                                            <label class="form-control-label">Instrumento que interpreta</label>
+                                            <input type="num" name="aspirante[rolMember]" class="form-control m-input" placeholder="" value="">                        
+                                            <span class="m-form__help">Ingrese el rol que desempeña dentro del grupo (Guitarrista, Vocalista, Pianista, etc.)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -761,7 +802,7 @@
                     <div class="row">
                         <div class="col col-lg-12" style="padding-bottom: 1.5rem;">
                             <div class="row" style="padding-left: 1rem;">
-                                <div id="content-aspirante_nameTeam" class="col-lg-4 col-md-4 col-12 m-form__group-sub" style="display: none;">
+                                <div class="col-lg-4 col-md-4 col-12 m-form__group-sub">
                                     <label class="form-control-label">Nombre de la agrupación musical *</label>
                                     <input type="text" name="aspirante[nameTeam]" class="form-control m-input"
                                            placeholder="" value="">
@@ -1031,6 +1072,7 @@
             acceptedFiles: "image/*",
             maxFiles: 1,
             paramName: 'file',
+            addRemoveLinks: true,
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
@@ -1043,6 +1085,7 @@
             acceptedFiles: "image/*",
             maxFiles: 1,
             paramName: 'file',
+            addRemoveLinks: true,
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
@@ -1055,6 +1098,7 @@
             acceptedFiles: "application/pdf",
             maxFiles: 1,
             paramName: 'file',
+            addRemoveLinks: true,
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
@@ -1069,6 +1113,7 @@
             acceptedFiles: "image/*",
             maxFiles: 1,
             paramName: 'file',
+            addRemoveLinks: true,
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
@@ -1081,6 +1126,7 @@
             acceptedFiles: "image/*",
             maxFiles: 1,
             paramName: 'file',
+            addRemoveLinks: true,
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
@@ -1093,6 +1139,7 @@
             acceptedFiles: "application/pdf",
             maxFiles: 1,
             paramName: 'file',
+            addRemoveLinks: true,
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
