@@ -191,7 +191,7 @@ License: You must have a valid license purchased only from themeforest(the above
         </div>
         <div
             class="m-grid__item m-grid__item--fluid m-grid m-grid--center m-grid--hor m-grid__item--order-tablet-and-mobile-1	m-login__content m-grid-item--center"
-            style="background-image: url(/images/imglogin.png)">
+            style="background-image: url(/backend/assets/app/media/img/bg/fondo-auth-min.png)">
             <div class="m-grid__item">
                 <h3 class="m-login__welcome">Join Our Community</h3>
                 <p class="m-login__msg">

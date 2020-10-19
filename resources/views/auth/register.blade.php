@@ -151,7 +151,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
                             <div class="m-login__signin">
                                 <div class="m-login__head">
-                                    <h3 class="m-login__title">Crear Cuenta</h3>
+                                    <h3 class="m-login__title">Primero crea una cuenta</h3>
                                     <div class="m-login__desc">Ingrese por favor los siguientes datos:</div>
                                 </div>
 
@@ -245,11 +245,74 @@ License: You must have a valid license purchased only from themeforest(the above
                  style="background-image: url(/images/imglogin.png)">
                 <div class="m-grid__item">
                     <h3 class="m-login__welcome">CREA SONIDOS PACIFICO</h3>
-                    <p class="m-login__msg">
-                        Una oportunidad para mostrar tu talento
-                    </p>
+                    <h4 class="m-login__msg pb-4">
+                        Te recordamos cuales son los requisitos de registro para que los tengas a la mano
+                    </h4>
+
+                </div>
+                <div class="m-accordion m-accordion--default" id="m_accordion_1" role="tablist">
+
+                    <!--begin::Item-->
+                    <div class="m-accordion__item">
+                        <div class="m-accordion__item-head collapsed" role="tab" id="m_accordion_1_item_1_head" data-toggle="collapse" href="#m_accordion_1_item_1_body" aria-expanded="    false">
+                            <span class="m-accordion__item-icon"><i class="fa flaticon-user-ok"></i></span>
+                            <span class="m-accordion__item-title">Como persona natural</span>
+                            <span class="m-accordion__item-mode"></span>
+                        </div>
+                        <div class="m-accordion__item-body collapse" id="m_accordion_1_item_1_body" class=" " role="tabpanel" aria-labelledby="m_accordion_1_item_1_head" data-parent="#m_accordion_1">
+                            <div class="m-accordion__item-content">
+                                <p>
+                                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
+                                    electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--end::Item-->
+
+                    <!--begin::Item-->
+                    <div class="m-accordion__item">
+                        <div class="m-accordion__item-head collapsed" role="tab" id="m_accordion_1_item_2_head" data-toggle="collapse" href="#m_accordion_1_item_2_body" aria-expanded="    false">
+                            <span class="m-accordion__item-icon"><i class="fa  flaticon-placeholder"></i></span>
+                            <span class="m-accordion__item-title">Como reepresentante de un menor de edad</span>
+                            <span class="m-accordion__item-mode"></span>
+                        </div>
+                        <div class="m-accordion__item-body collapse" id="m_accordion_1_item_2_body" class=" " role="tabpanel" aria-labelledby="m_accordion_1_item_2_head" data-parent="#m_accordion_1">
+                            <div class="m-accordion__item-content">
+                                <p>
+                                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
+                                    electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown
+                                    printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with
+                                    the release of Letraset sheets containing
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--end::Item-->
+
+                    <!--begin::Item-->
+                    <div class="m-accordion__item">
+                        <div class="m-accordion__item-head collapsed" role="tab" id="m_accordion_1_item_3_head" data-toggle="collapse" href="#m_accordion_1_item_3_body" aria-expanded="    false">
+                            <span class="m-accordion__item-icon"><i class="fa  flaticon-alert-2"></i></span>
+                            <span class="m-accordion__item-title">Como grupo constituid</span>
+                            <span class="m-accordion__item-mode"></span>
+                        </div>
+                        <div class="m-accordion__item-body collapse" id="m_accordion_1_item_3_body" class=" " role="tabpanel" aria-labelledby="m_accordion_1_item_3_head" data-parent="#m_accordion_1">
+                            <div class="m-accordion__item-content">
+                                <p>
+                                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
+                                    electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--end::Item-->
                 </div>
             </div>
+
         </div>
     </div>
 

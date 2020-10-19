@@ -63,7 +63,7 @@
 
         <form method="post" action="{{ route('create.new.aspirant') }}" enctype="multipart/form-data"
               class="m-form m-form--label-align-left- m-form--state-" id="m_form_new_register">
-        @csrf 
+        @csrf
 
         <!--=====================================
                 CONTENIDO PARA SELECCIONAR LA INFORMACIÓN LEGAL
@@ -800,7 +800,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <!--=====================================
                 INFORMACIÓN DE LA CANCION
             ======================================-->
@@ -825,11 +825,11 @@
                 </div>
 
                 <div class="m-portlet__body">
-                    <div class="row">  
-                        <div class="col col-lg-12" style="padding: 0 2rem 1rem 2rem;">                      
+                    <div class="row">
+                        <div class="col col-lg-12" style="padding: 0 2rem 1rem 2rem;">
                             <!--=====================================
                                 NOMBRE DE LA CANCIÓN
-                            ======================================-->                        
+                            ======================================-->
                             <div class="form-group m-form__group row">
                                 <div id="content-song_nameProject" class="col-lg-6 m-form__group-sub">
                                     <label class="form-control-label" form="nombreProyecto">Nombre de la canción *</label>
@@ -855,12 +855,12 @@
                                         <option value="">Seleccione una opción</option>
                                         @foreach($categories as $tCategorie)
                                             <option value="{{ $tCategorie->id }}">{{ $tCategorie->category }}</option>
-                                        @endforeach                                    
+                                        @endforeach
                                     </select>
                                     <div id="error-song_categoryID" class="form-control-feedback" style="display: none"></div>
                                     <span class="m-form__help">{{ __('categoria_de_proyecto') }}</span>
-                                </div>     
-                                
+                                </div>
+
                                 <div id="content-song_urlSong" class="col-lg-6 m-form__group-sub">
                                     <label class="form-control-label" form="nombreProyecto">Subir canción *
                                         <span class="text-danger">(Tenga en cuenta que la canción que va a subir aquí, participará en el concurso)</span>
@@ -870,14 +870,14 @@
                                             <h3 class="m-dropzone__msg-title">Agregue su canción en formato MP3</h3>
                                             <span class="m-dropzone__msg-desc">Arrastra o has clic a aquí para subir</span>
                                         </div>
-                                    </div>                                       
+                                    </div>
                                     <div id="audio-error" style="color: #f4516c" class="form-control-feedback"></div>
                                     <div id="error-song_urlSong" class="form-control-feedback" style="display: none"></div>
                                     <span class="m-form__help">Cargue aquí el audio de la canción en formato Mp3.</span>
                                     <input type="hidden" name="song[urlSong]" value="">
                                 </div>
-                            </div>   
-                        
+                            </div>
+
                             <!--=====================================
                                 BREVE RESEÑA
                             ======================================-->
@@ -907,7 +907,7 @@
                                     <div class="m-radio-inline">
                                         <label class="m-checkbox">
                                             <input type="checkbox" name="acceptTermsConditions" value="1">Haga clic aquí para indicar que ha leído y acepta el
-                                            acuerdo de Términos y Condiciones.
+                                            acuerdo de <a target="_blank" href="https://creasonidos.com/terminos-y-condiciones/"><span style="color: #CE7250">Términos y Condiciones.</span></a>
                                             <span></span>
                                         </label>
                                     </div>
@@ -1132,7 +1132,7 @@
                 console.log('se genero un error', file)
             }
         });
-        
+
         var dropzone = new Dropzone('.upload-song', {
             url: '{{ route('add.project.audio') }}',
             acceptedFiles: '.mp3', // 'audio/*'

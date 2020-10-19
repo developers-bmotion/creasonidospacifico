@@ -333,8 +333,8 @@
                                                 </div>
                                             </div>
                                             <span id="errorImage-profile-aspirante" class="form-control-feedback"></span>
-                                        </div>                          
-                                    </div>                                
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <!--=====================================
@@ -800,7 +800,7 @@
                                     <div class="m-radio-inline">
                                         <label class="m-checkbox">
                                             <input type="checkbox" name="acceptTermsConditions" value="1">Haga clic aquí para indicar que ha leído y acepta el
-                                            acuerdo de Términos y Condiciones.
+                                            acuerdo de <a target="_blank" href="https://creasonidos.com/terminos-y-condiciones/"><span style="color: #CE7250">Términos y Condiciones.</span></a>
                                             <span></span>
                                         </label>
                                     </div>
@@ -1002,16 +1002,16 @@
             addRemoveLinks: true,
             acceptedFiles: "image/*",
             headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
-            success: function(file, response) { 
+            success: function(file, response) {
                 $("#errorImage-profile-aspirante").html('');
                 $("input[name='aspirante[urlImageProfile]']").val(response);
             },
             error: function (file, e, i, o, u) {
                 console.log('se genero un error', file)
                 $("#errorImage-profile-aspirante").html('El tipo de archivo debe ser en formato JPG ó PNG');
-                $("#errorImage-profile-aspirante").css('color', '#f4516c'); 
-                setTimeout(() => { dropzone.removeFile(file) }, 1000)                
-            }   
+                $("#errorImage-profile-aspirante").css('color', '#f4516c');
+                setTimeout(() => { dropzone.removeFile(file) }, 1000)
+            }
         });
 
         new Dropzone(".file-image-profile-beneficiario", {
