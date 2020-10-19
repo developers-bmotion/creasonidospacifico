@@ -40,7 +40,7 @@ class ProfileController extends Controller
 
 
         /*   dd($departamentos); */
-        $artist = Artist::where('user_id', auth()->user()->id)->with('documentType','projects.category','projects.observations', 'city.departaments','users','teams.documentType','teams.expeditionPlace','teams.city.departaments','artistType','personType','beneficiary.documentType','beneficiary.city.departaments','beneficiary.expeditionPlace.departaments','teams.expeditionPlace.departaments','expeditionPlace.departaments')->first();
+        $artist = Artist::where('user_id', auth()->user()->id)->with('documentType','projects.category','projects.observations', 'city.departaments','users','teams.documentType','teams.expeditionPlace','teams.city.departaments','artistType','personType','beneficiary.documentType','beneficiary.city.departaments','beneficiary.expeditionPlace.departaments','beneficiary.residencePlace.departaments','teams.expeditionPlace.departaments','teams.residencePlace.departaments','expeditionPlace.departaments','residencePlace.departaments')->first();
         return view('backend.profile.profile-artist', compact('documenttype', 'artist', 'departamentos', 'persontypes', 'artisttypes', 'leveltypes'));
     }
 
@@ -86,9 +86,9 @@ class ProfileController extends Controller
 
     public function ListAspirantGestor() {
 
-        $listAspirant = Artist::where('gestor_id', auth()->user()->id)->with('users','personType','projects')->get();
+        // $listAspirant = Artist::where('gestor_id', auth()->user()->id)->with('users','personType','projects')->get();
 
-        return view('backend.gestores.aspirants-all', compact('listAspirant'));
+        return view('backend.gestores.aspirants-all');
     }
 
     public function tableManagerAspirant() {

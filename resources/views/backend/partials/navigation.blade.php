@@ -100,6 +100,9 @@
                          </ul>
                      </div>
                  </li>--}}
+                <li class="m-menu__item ">
+                    <img width="170" src="/images/logo-creasonidos.png" alt="">
+                </li>
                 @if(auth()->user()->roles[0]->rol == "Artist")
                     @if(auth()->user()->name !== "")
                         @if(count(\App\Artist::projects_artist(auth()->user()->id)) === 0)
@@ -150,7 +153,7 @@
                             <i class="m-menu__link-icon la la-list"></i>
                             <span class="m-menu__link-text">Aspirantes Registrados</span>
                         </a>
-                    </li>                    
+                    </li>
                 @endif
             </ul>
 
@@ -334,7 +337,7 @@
                         <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
                         <div class="m-dropdown__inner">
                             <div class="m-dropdown__header m--align-center"
-                                 style="background: url(/backend/assets/app/media/img/misc/user_profile_bg.jpg); background-size: cover;">
+                                 style="background: url(/backend/assets/app/media/img/misc/user-fondo-min.png); background-size: cover;">
                                 <div class="m-card-user m-card-user--skin-dark">
                                     <div class="m-card-user__pic">
 

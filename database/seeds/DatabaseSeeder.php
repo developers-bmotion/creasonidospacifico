@@ -58,8 +58,9 @@ class DatabaseSeeder extends Seeder
             TIPO DE DOCUMENTO
         =============================================*/
         factory(\App\DocumentType::class, 1)->create(['document' => 'Cédula de ciudadania']);
-        factory(\App\DocumentType::class, 1)->create(['document' => 'Cédula de extranjeria']);
         factory(\App\DocumentType::class, 1)->create(['document' => 'Tarjeta de identidad']);
+        factory(\App\DocumentType::class, 1)->create(['document' => 'Cédula de extranjeria']);
+
 
 
         /*=============================================

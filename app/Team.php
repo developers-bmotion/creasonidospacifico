@@ -46,7 +46,13 @@ class Team extends Model
 
     public function expeditionPlace(){
         return $this->belongsTo(City::class, 'expedition_place');
+
     }
+
+    public function residencePlace(){
+        return $this->belongsTo(City::class, 'place_residence');
+    }
+
     public function documentType(){
         return $this->belongsTo(DocumentType::class,'document_type');
     }

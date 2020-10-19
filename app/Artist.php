@@ -112,6 +112,10 @@ class Artist extends Model
         return $this->belongsTo(City::class, 'expedition_place');
     }
 
+    public function residencePlace(){
+        return $this->belongsTo(City::class, 'place_residence');
+    }
+
 
     public static function projects_artist($id){
 
