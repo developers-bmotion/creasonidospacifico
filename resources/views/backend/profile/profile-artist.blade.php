@@ -292,11 +292,13 @@
                                         <label style="font-weight: bold">{{ __('Departamento de Expedición') }}
                                             :</label>
                                         <div class="m-scrollable" data-scrollable="true" style="">
+
                                             @if($artist->expeditionPlace->departaments)
                                                 <p style="text-align: justify">{{ $artist->expeditionPlace->departaments->descripcion }}</p>
                                             @else
                                                 <p>No registrado</p>
                                             @endif
+
                                         </div>
                                         {{-- @dd($artist); --}}
                                     </div>
@@ -618,6 +620,7 @@
 
                                                             </div>
                                                         </div>
+
                                                         @foreach ($artist->teams as $team)
                                                         {{-- @dd($team) --}}
                                                             <div class="m-accordion__item">
@@ -713,6 +716,7 @@
                                                                                                 class="m-scrollable"
                                                                                                 data-scrollable="true"
                                                                                                 style="">
+
                                                                                                 <p>{{ $team->city->departaments->descripcion}}</p>
                                                                                             </div>
                                                                                         </div>

@@ -85,9 +85,18 @@ class ProfileController extends Controller
     }
 
     public function ListAspirantGestor() {
-        $listAspirant = Artist::where('gestor_id', auth()->user()->id)->with('users')->get();
+
+        $listAspirant = Artist::where('gestor_id', auth()->user()->id)->with('users','personType','projects')->get();
+
         return view('backend.gestores.aspirants-all', compact('listAspirant'));
     }
+
+    public function tableManagerAspirant() {
+        $listAspirant = Artist::where('gestor_id', auth()->user()->id)->with('users','personType','projects')->get();
+        return datatables()->of($listAspirant)->toJson();
+    }
+
+
 
     public function get_municipios($id)
     {
@@ -249,7 +258,7 @@ class ProfileController extends Controller
                     $urlS3 = $this->uploadFile($integrante['imgDocfrente']);
                     if ($urlS3) $member->img_document_front = $urlS3;
                 }
-                
+
                 if (isset($integrante['imgDocAtras'])) {
                     $urlS3 = $this->uploadFile($integrante['imgDocAtras']);
                     if ($urlS3) $member->img_document_back = $urlS3;
@@ -278,17 +287,17 @@ class ProfileController extends Controller
 
         if ($request->lineaConvocatoria == '1') { // Este caso es para solistas
             if ($request->actuaraComo == '1'){
-                // solo se guarda el aspirante 
+                // solo se guarda el aspirante
                 $idArtist = $this->saveNewAspirant($request);
             } else { // se debe guardar los datos del representante
                 $idArtist = $this->saveNewAspirant($request);
-                $this->createBeneficiario($request, $idArtist);                
+                $this->createBeneficiario($request, $idArtist);
             }
         } else { // Para este caso se debe guardar el representante
             $idArtist = $this->saveNewAspirant($request);
             $this->insertGroupMembers($request, $idArtist);
         }
-        $this->createNewProject($request, $idArtist); // guardar proyecto        
+        $this->createNewProject($request, $idArtist); // guardar proyecto
         return redirect()->route('profile.managament', auth()->user()->slug)->with('new_register', 'El aspirante se registro de forma exitosa');
     }
 
@@ -308,17 +317,17 @@ class ProfileController extends Controller
         $user->picture = $aspirante->urlImageProfile;
         $user->slug = Str::slug($aspirante->name.'-'.str_random(1000), '-');
 
-        if ( isset($aspirante->email) ) { // si existe un correo 
+        if ( isset($aspirante->email) ) { // si existe un correo
             if ($aspirante->email != auth()->user()->email){ // debe ser diferente al del usuario gestor
                 $password = trim(str_random(8));
                 $pass = bcrypt($password);
                 $user->email = $aspirante->email;
                 $user->password = $pass;
                 \Mail::to($user->email)->send(new NewGestorAdmin($user->email, $password));
-            }   
+            }
         }
-        $user->save(); // guardar datos del usuario  
-        
+        $user->save(); // guardar datos del usuario
+
         $personType = 3;
         if (isset($request->actuaraComo)) { $personType = $request->actuaraComo; }
 
@@ -348,16 +357,16 @@ class ProfileController extends Controller
     /* metodo para registrar un proyecto y asociarlo con un aspirante en la base de datos */
     public function createNewProject($request, $idArtist) {
         $song = (object) $request->song;
-       
+
         $project = new Project();
         $project->title = $song->nameProject;
-        $project->author = $song->author; 
-        $project->category_id = $song->categoryID; 
-        $project->audio = $song->urlSong; 
-        //$project->audio_secundary_one = $song->urlSong; 
-        //$project->audio_secundary_two = $song->urlSong; 
-        $project->description = $song->description; 
-        $project->status = 1; 
+        $project->author = $song->author;
+        $project->category_id = $song->categoryID;
+        $project->audio = $song->urlSong;
+        //$project->audio_secundary_one = $song->urlSong;
+        //$project->audio_secundary_two = $song->urlSong;
+        $project->description = $song->description;
+        $project->status = 1;
         $project->slug = Str::slug($song->nameProject.'-'.str_random(1000), '-');
         $project->save();
 
