@@ -1,6 +1,5 @@
 /* SELECT LINEA DE LA CONVOCATORIA */
 var lineaConvocatoria = 0;
-console.log('nuevo js')
 
 $('#select-linea-convocatoria').on('change', function() {
     lineaConvocatoria = $(this).val()
@@ -411,6 +410,7 @@ $("#send-info").click( function(e) {
     } else {
         $("#alert-info-form").show();
         viewAlertError();
+        $("input[name='aspirante[name]']").focus();
     }
 });
 
@@ -487,6 +487,12 @@ function validationForm() {
         validateFormInputs('aspirante', 'nameTeam'); 
         // falata validar el grupo
     }
+
+    // validar cancion
+    validateFormInputs('song', 'nameProject');
+    validateFormInputs('song', 'author');
+    validateFormInputs('song', 'urlSong'); 
+    validateFormSelect('song', '[categoryID]');
     
     console.log('antes::: ', validate)    
     if (validateTermsCondition() && validate) {
@@ -588,6 +594,9 @@ const validateFormSelect = (type, targetName) => {
         case `${ type }[municipioResidencia]`: 
             validateFieldsSelect(`${ type }[municipioResidencia]`, `${ type }_municipioResidencia`)
             break;       
+        case `${ type }[categoryID]`: 
+            validateFieldsSelect(`${ type }[categoryID]`, `${ type }_categoryID`)
+            break;       
     }
 }
 
@@ -651,5 +660,9 @@ $("input[name='beneficiario[identificacion]']").keyup( () => validateFormInputs(
 $("input[name='beneficiario[address]']").keyup( () => validateFormInputs('beneficiario', 'address') );
 $("input[name='beneficiario[birthdate]']").change( () => validateFormInputs('beneficiario', 'birthdate') );
 $("input[name='aspirante[nameTeam]']").keyup( () => validateFormInputs('aspirante', 'nameTeam') );
+
+/* evento onkeyup de los inputs canción */  
+$("input[name='song[nameProject]']").keyup( () => validateFormInputs('song', 'nameProject') );
+$("input[name='song[author]']").keyup( () => validateFormInputs('song', 'author') );
 
 $("input[name='acceptTermsConditions']").change( () => validateTermsCondition() );

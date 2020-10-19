@@ -831,15 +831,17 @@
                                 NOMBRE DE LA CANCIÓN
                             ======================================-->                        
                             <div class="form-group m-form__group row">
-                                <div class="col-lg-6 m-form__group-sub">
+                                <div id="content-song_nameProject" class="col-lg-6 m-form__group-sub">
                                     <label class="form-control-label" form="nombreProyecto">Nombre de la canción *</label>
                                     <input id="nombreProyecto" type="text" name="song[nameProject]" class="form-control m-input" placeholder="" value="">
+                                    <div id="error-song_nameProject" class="form-control-feedback" style="display: none"></div>
                                     <span class="m-form__help">{{ __('help_nombre_proyecto') }}</span>
                                 </div>
 
-                                <div class="col-lg-6 m-form__group-sub">
+                                <div id="content-song_author" class="col-lg-6 m-form__group-sub">
                                     <label class="form-control-label" form="nombreProyecto">Nombre del autor o compositor *</label>
                                     <input type="text" name="song[author]" class="form-control m-input" placeholder="" value="">
+                                    <div id="error-song_author" class="form-control-feedback" style="display: none"></div>
                                 </div>
                             </div>
 
@@ -847,18 +849,19 @@
                                 SELECCIONE CATEGORÍA
                             ======================================-->
                             <div class="form-group m-form__group row">
-                                <div class="col-lg-6 m-form__group-sub">
+                                <div id="content-song_categoryID" class="col-lg-6 m-form__group-sub">
                                     <label class="form-control-label" form="category_add_proyecto">Seleccione categoría *</label>
-                                    <select id="category_add_proyecto" name="song[categoryID]" class="form-control m-bootstrap-select m_selectpicker">
+                                    <select id="category_add_proyecto" onchange="onSelectMunicipiosChange(this)" name="song[categoryID]" class="form-control m-bootstrap-select m_selectpicker">
                                         <option value="">Seleccione una opción</option>
                                         @foreach($categories as $tCategorie)
                                             <option value="{{ $tCategorie->id }}">{{ $tCategorie->category }}</option>
                                         @endforeach                                    
                                     </select>
+                                    <div id="error-song_categoryID" class="form-control-feedback" style="display: none"></div>
                                     <span class="m-form__help">{{ __('categoria_de_proyecto') }}</span>
                                 </div>     
                                 
-                                <div class="col-lg-6 m-form__group-sub">
+                                <div id="content-song_urlSong" class="col-lg-6 m-form__group-sub">
                                     <label class="form-control-label" form="nombreProyecto">Subir canción *
                                         <span class="text-danger">(Tenga en cuenta que la canción que va a subir aquí, participará en el concurso)</span>
                                     </label>
@@ -869,6 +872,7 @@
                                         </div>
                                     </div>                                       
                                     <div id="audio-error" style="color: #f4516c" class="form-control-feedback"></div>
+                                    <div id="error-song_urlSong" class="form-control-feedback" style="display: none"></div>
                                     <span class="m-form__help">Cargue aquí el audio de la canción en formato Mp3.</span>
                                     <input type="hidden" name="song[urlSong]" value="">
                                 </div>
@@ -879,7 +883,7 @@
                             ======================================-->
                             <div class="form-group m-form__group row">
                                 <div class="col-lg-12 m-form__group-sub">
-                                    <label class="form-control-label" form="nombreProyecto">Escriba aquí una breve reseña *</label>
+                                    <label class="form-control-label" form="nombreProyecto">Escriba aquí una breve reseña </label>
                                     <textarea id="exampleTextarea" name="song[description]" class="form-control m-input" rows="5"></textarea>
                                     <span class="m-form__help">(máximo 300 palabras) de su proyecto musical, incluyendo una corta descripción de su trayectoria.</span>
                                 </div>
@@ -1137,7 +1141,7 @@
             addRemoveLinks: true,
             headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
             success: function (file, response) {
-                console.log('error: ', file)
+                validateFormInputs('song', 'urlSong');
                 $("#audio-error").text('');
                 $("input[name='song[urlSong]']").val(response);
             },
