@@ -218,20 +218,38 @@
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
-            processing: function(file, response){
+            addedfile: function(file, response){
                 $('body').loading({
                     message: 'Subiendo imagen...',
                     start:true,
                 });
             },
             success: function (file, response) {
-                $('body').loading({
 
-                    start:false,
-                });
+                toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "3000",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+
+                toastr.success("La imagen se actualizo correctamente", "Información");
+                setTimeout(function () {
+                    location.reload();
+                }, 3000);
 
                 $('#inputImagenesPostPlan').val(response);
-                location.reload();
             }
 
         });
@@ -248,7 +266,6 @@
             },
 
             success: function (file, response) {
-
 
                 $('#inputImagenesPostPlan').val(response);
                 location.reload();

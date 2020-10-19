@@ -52,6 +52,7 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
        var DatatablesExtensionsScroller = function() {
             var initTable1 = function() {
                 var table = $('#table_artists');
+                var cont=1;
 
                 // begin first table
                 table.DataTable({
@@ -67,8 +68,10 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                     "columns": [
 
                         {
-                            data: 'id',
-                            defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
+                            render: function () {
+                                return cont++;
+                            }
+
                         },
                         {
                             render: function (data, type, JsonResultRow, meta) {
@@ -77,8 +80,14 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                             }
                         },
                         {
-                            data: 'users.email',
-                            defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
+                            render: function (data, type, JsonResultRow, meta) {
+                                // console.log(JsonResultRow.users.email,'email');
+
+                             return JsonResultRow.users.email?  '<span class="label label-danger text-center">'+JsonResultRow.users.email+'</span>':'<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>';
+
+                            }
+
+                            // defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
                         },
                         {
                             data: 'identification',
@@ -92,11 +101,13 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                         },
                         {
                         render: function (data, type, JsonResultRow, meta) {
-                            console.log(JSON.stringify(JsonResultRow.projects.slug),'json');
-
+                            // console.log(JSON.stringify(JsonResultRow.projects.slug),'json');
+                            var items="";
                             JsonResultRow.projects.map(item => {
-                                return (item) ? `<div class="text-center"><a href="/dashboard/project/${ item.slug }" class="btn m-btn--pill btn-secondary"><i class="fa fa-eye"></i></a></div>` : '<h1>hola</h1>'
+                                // console.log(item,'item');
+                                items=item;
                             });
+                                return items != ""? `<div class="text-center"><a href="/dashboard/project/${ items.slug }" class="btn m-btn--pill btn-secondary"><i class="fa fa-eye"></i></a></div>` : '<span class="label label-danger text-center ml-4" style="color:red !important">N/A</span>'
                             // return '<div class="text-center"><a href="/dashboard/project/' + JsonResultRow.projects.slug + '" class="btn m-btn--pill btn-secondary"><i class="fa fa-eye"></i></a></div>'
                         }
                     },
