@@ -94,10 +94,10 @@
             <li class="m-nav__item" {!! request()->is('dashboard/profile') ? 'style="background-color:#f2f4f9"' : '' !!}>
                 <a href="{{ route('profile.artist') }}" class="m-nav__link active">
                     <i class="m-nav__link-icon flaticon-profile-1" {!! request()->is('dashboard/profile') ?
-                    'style="color:#716aca !important"' : '' !!}></i>
+                    'style="color:#CE7250 !important"' : '' !!}></i>
                     <span class="m-nav__link-title">
                     <span class="m-nav__link-wrap">
-                        <span class="m-nav__link-text" {!! request()->is('dashboard/profile') ? 'style="color:#716aca
+                        <span class="m-nav__link-text" {!! request()->is('dashboard/profile') ? 'style="color:#CE7250
                             !important"' : '' !!}>Perfil del Aspirtante</span>
 
                     </span>
@@ -117,8 +117,8 @@
             !!}>
                 <a href="{{ route('config.profile.artist') }}" class="m-nav__link">
                     <i class="m-nav__link-icon flaticon-settings" {!! request()->is('dashboard/config-profile-artist') ?
-                    'style="color:#716aca !important"' : '' !!}></i>
-                    <span class="m-nav__link-text" {!! request()->is('dashboard/config-profile-artist') ? 'style="color:#716aca
+                    'style="color:#CE7250 !important"' : '' !!}></i>
+                    <span class="m-nav__link-text" {!! request()->is('dashboard/config-profile-artist') ? 'style="color:#CE7250
                     !important"' : '' !!}>{{ __('Configuracion de perfil') }}</span>
                 </a>
             </li>

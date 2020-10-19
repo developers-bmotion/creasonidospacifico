@@ -100,6 +100,9 @@
                          </ul>
                      </div>
                  </li>--}}
+                <li class="m-menu__item ">
+                    <img width="170" src="/images/logo-creasonidos.png" alt="">
+                </li>
                 @if(auth()->user()->roles[0]->rol == "Artist")
                     @if(auth()->user()->name !== "")
                         @if(count(\App\Artist::projects_artist(auth()->user()->id)) === 0)
@@ -150,7 +153,7 @@
                             <i class="m-menu__link-icon la la-list"></i>
                             <span class="m-menu__link-text">Aspirantes Registrados</span>
                         </a>
-                    </li>                    
+                    </li>
                 @endif
             </ul>
 

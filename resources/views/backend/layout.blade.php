@@ -111,7 +111,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- begin::Body -->
 
 <body
-    class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default m-brand--minimize m-aside-left--minimize">
+    class="m-page--fluid m--skin- m-content--skin-light m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default m-brand--minimize m-aside-left--minimize">
 <!-- begin:: Page -->
 <div class="m-grid m-grid--hor m-grid--root m-page" id="app">
 
@@ -240,20 +240,35 @@ License: You must have a valid license purchased only from themeforest(the above
             <div class="m-stack m-stack--flex-tablet-and-mobile m-stack--ver m-stack--desktop">
                 <div class="m-stack__item m-stack__item--left m-stack__item--middle m-stack__item--last">
                         <span class="m-footer__copyright">
-                            <span class="font-weight-bold">{{ config('app.name') }} </span> &copy; 2020 Powered by <a href="https://bmotion.co" class="m-link">Bmotion SAS </a> Todos los derechos reservados
+                            <span class="font-weight-bold">{{ config('app.name') }} </span> &copy; 2020 Powered by <a href="https://bmotion.co" target="_blank" class="m-link">Bmotion SAS </a>
                         </span>
                 </div>
                 <div class="m-stack__item m-stack__item--right m-stack__item--middle m-stack__item--first">
                     <ul class="m-footer__nav m-nav m-nav--inline m--pull-right">
+
                         <li class="m-nav__item">
-                            <a href="#" class="m-nav__link">
+                            <a href="https://creasonidos.com/terminos-y-condiciones" target="_blank" class="m-nav__link">
                                 <span class="m-nav__link-text">Términos y Condiciones</span>
                             </a>
                         </li>
+{{--                        <li class="m-nav__item">--}}
+{{--                            <a href="#" class="m-nav__link">--}}
+{{--                                <span class="m-nav__link-text">Política de Privacidad</span>--}}
+{{--                            </a>--}}
+{{--                        </li>--}}
+                    </ul>
+                    <ul class="m-footer__nav m-nav m-nav--inline pt-2 pr-5">
                         <li class="m-nav__item">
-                            <a href="#" class="m-nav__link">
-                                <span class="m-nav__link-text">Política de Privacidad</span>
-                            </a>
+                            <img width="110" src="/images/logos-patrocinadores/logo-presidencia.png" alt="">
+                        </li>
+                        <li class="m-nav__item">
+                            <img width="80" src="/images/logos-patrocinadores/logo-impulsa.png" alt="">
+                        </li>
+                        <li class="m-nav__item">
+                            <img width="110" src="/images/logos-patrocinadores/logo-fundacion-yuri.png" alt="">
+                        </li>
+                        <li class="m-nav__item">
+                            <img width="69" src="/images/logos-patrocinadores/fundacion-barco.png" alt="">
                         </li>
                     </ul>
                 </div>
@@ -286,12 +301,12 @@ License: You must have a valid license purchased only from themeforest(the above
     <a href="https://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes"
        target="_blank"><i class="la la-cart-arrow-down"></i></a>
 </li>--}}
-    <li class="m-nav-sticky__item" data-toggle="m-tooltip" title="{{ __('documentacion') }}" data-placement="left">
-        <a href="" target="_blank"><i class="la la-code-fork"></i></a>
+    <li class="m-nav-sticky__item" data-toggle="m-tooltip" title="¿Necesitas Ayuda? Contáctanos" data-placement="left">
+        <a href="https://creasonidos.com/contacto/" target="_blank"><i class="la la-question-circle"></i></a>
     </li>
-    <li class="m-nav-sticky__item" data-toggle="m-tooltip" title="{{ __('soporte') }}" data-placement="left">
-        <a href="" target="_blank"><i class="la la-life-ring"></i></a>
-    </li>
+{{--    <li class="m-nav-sticky__item" data-toggle="m-tooltip" title="{{ __('soporte') }}" data-placement="left">--}}
+{{--        <a href="" target="_blank"><i class="la la-life-ring"></i></a>--}}
+{{--    </li>--}}
 </ul>
 
 <!-- begin::Quick Nav -->
