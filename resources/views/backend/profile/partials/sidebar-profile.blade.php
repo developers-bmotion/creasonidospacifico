@@ -6,8 +6,9 @@
             </div>
             <div class="m-card-profile__pic">
                 <div class="m-card-profile__pic-wrapper">
-                    @if(Storage::disk('public')->exists('users/'.auth()->user()->picture))
-                        <img src="{{ auth()->user()->pathAttachment() }}" alt=""/>
+
+                    @if(auth()->user()->picture == null || auth()->user()->picture == '' || auth()->user()->picture =='/images/users/')
+                        <img src="/backend/assets/app/media/img/users/perfil.jpg" alt=""/>
                     @else
                         <img src="{{ auth()->user()->picture }}" alt="">
                     @endif

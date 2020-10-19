@@ -28883,7 +28883,7 @@ html.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown) {
     background: #c36f4f;
     color: #ffffff; }
 .datepicker tbody tr > td.day.today {
-    background: #828ee6;
+    background: #739594;
     color: #ffffff; }
 .datepicker tbody tr > td.day.today:before {
     border-bottom-color: #ffffff;
