@@ -190,9 +190,14 @@ License: You must have a valid license purchased only from themeforest(the above
             </div>
         </div>
         <div
+<<<<<<< HEAD
             class="background_login m-grid__item m-grid__item--fluid m-grid m-grid--center m-grid--hor m-grid__item--order-tablet-and-mobile-1	m-login__content m-grid-item--center"
             {{-- style="background-image: url(/images/imglogin.png)"> --}}
             >
+=======
+            class="m-grid__item m-grid__item--fluid m-grid m-grid--center m-grid--hor m-grid__item--order-tablet-and-mobile-1	m-login__content m-grid-item--center"
+            style="background-image: url(/backend/assets/app/media/img/bg/fondo-auth-min.png)">
+>>>>>>> fc5fed3c14ac4eb2b10284137597151bdc05f5c3
             <div class="m-grid__item">
                 <h1 class="title-login m-login__welcome">PACÍFICO</h1>
                 <p class="parrafo-login m-login__msg">

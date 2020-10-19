@@ -40,7 +40,7 @@ class ProfileController extends Controller
 
 
         /*   dd($departamentos); */
-        $artist = Artist::where('user_id', auth()->user()->id)->with('documentType','projects.category','projects.observations', 'city.departaments','users','teams.documentType','teams.expeditionPlace','teams.city.departaments','artistType','personType','beneficiary.documentType','beneficiary.city.departaments','beneficiary.expeditionPlace.departaments','teams.expeditionPlace.departaments','expeditionPlace.departaments')->first();
+        $artist = Artist::where('user_id', auth()->user()->id)->with('documentType','projects.category','projects.observations', 'city.departaments','users','teams.documentType','teams.expeditionPlace','teams.city.departaments','artistType','personType','beneficiary.documentType','beneficiary.city.departaments','beneficiary.expeditionPlace.departaments','beneficiary.residencePlace.departaments','teams.expeditionPlace.departaments','teams.residencePlace.departaments','expeditionPlace.departaments','residencePlace.departaments')->first();
         return view('backend.profile.profile-artist', compact('documenttype', 'artist', 'departamentos', 'persontypes', 'artisttypes', 'leveltypes'));
     }
 
@@ -86,9 +86,9 @@ class ProfileController extends Controller
 
     public function ListAspirantGestor() {
 
-        $listAspirant = Artist::where('gestor_id', auth()->user()->id)->with('users','personType','projects')->get();
+        // $listAspirant = Artist::where('gestor_id', auth()->user()->id)->with('users','personType','projects')->get();
 
-        return view('backend.gestores.aspirants-all', compact('listAspirant'));
+        return view('backend.gestores.aspirants-all');
     }
 
     public function tableManagerAspirant() {
@@ -113,8 +113,6 @@ class ProfileController extends Controller
             if ($request->actuaraComo == '1'){
                 /* solo se guarda el aspirante */
                 $this->insertAspirante($id_artis, $request);
-
-                //return redirect()->route('add.project')->with('aspirant_register', 'Es momento de subir tu propuesta musical');
             } else { // se debe guardar los datos del representante
                 $this->insertAspirante($id_artis, $request);
 
@@ -128,7 +126,6 @@ class ProfileController extends Controller
                 } else {
                     $this->createBeneficiario($request, $artist->id);
                 }
-                //return redirect()->route('add.project')->with('aspirant_register', 'Es momento de subir tu propuesta musical');
             }
         } else { // Para este caso se debe guardar el representante
             $this->insertAspirante($id_artis, $request);
@@ -138,7 +135,10 @@ class ProfileController extends Controller
             $existTeam = Team::where('artist_id', $artist->id)->first();
 
             /* se guardan los datos del los integrantes del grupo */
-            if ($existTeam == null) $this->insertGroupMembers($request, $artist->id);
+            if ($existTeam == null) {
+                $this->registerAspiranteGroup($request, $artist->id);
+                $this->insertGroupMembers($request, $artist->id);
+            }
         }
 
         return redirect()->route('add.project')->with('aspirant_register', 'Es momento de subir tu propuesta musical');
@@ -235,6 +235,31 @@ class ProfileController extends Controller
         ]);
     }
 
+    /* metodo para registrar el aspirante como un integrante del grupo en la base de datos */
+    public function registerAspiranteGroup($request, $idArtist) {
+        $aspirante = (object) $request->aspirante;
+        
+        if ($aspirante->partGroup == '1') {
+            $member = new Team();
+            $member->name = $aspirante->name;
+            $member->last_name = $aspirante->lastname;
+            $member->second_last_name = $aspirante->secondLastname;
+            $member->document_type = $aspirante->documentType;
+            $member->identification = $aspirante->identificacion;
+            $member->expedition_place = $aspirante->municipioExpedida;
+            $member->place_birth = $aspirante->municipioNacimiento;
+            $member->place_residence = $aspirante->municipioResidencia;
+            $member->addres = $aspirante->address;
+            $member->phone1 = $aspirante->phone;
+            $member->role = $aspirante->rolMember;
+            $member->img_document_front = $aspirante->urlImageDocumentFrente;
+            $member->img_document_back = $aspirante->urlImageDocumentAtras;
+            $member->pdf_identificacion = $aspirante->urlPdfDocument;
+            $member->artist_id = $idArtist;
+            $member->save();
+        }
+    }
+
     /* metodo para insertar los integrantes del grupo */
     public function insertGroupMembers($request, $idArtist) {
         foreach ($request->integrantes as $integrante) {
@@ -284,7 +309,7 @@ class ProfileController extends Controller
     /* metodo para actualizar datos del aspirante */
     public function createNewAspirant(Request $request) {
         $idArtist = -1;
-
+        //dd($request);
         if ($request->lineaConvocatoria == '1') { // Este caso es para solistas
             if ($request->actuaraComo == '1'){
                 // solo se guarda el aspirante
@@ -295,6 +320,7 @@ class ProfileController extends Controller
             }
         } else { // Para este caso se debe guardar el representante
             $idArtist = $this->saveNewAspirant($request);
+            $this->registerAspiranteGroup($request, $idArtist);
             $this->insertGroupMembers($request, $idArtist);
         }
         $this->createNewProject($request, $idArtist); // guardar proyecto
