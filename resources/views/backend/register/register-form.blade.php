@@ -936,7 +936,17 @@
             paramName: 'file',
             addRemoveLinks: true,
             headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+            processing: function(file, response){
+                $('body').loading({
+                    message: 'Subiendo documento...',
+                    start:true,
+                });
+            },
             success: function (file, response) {
+                $('body').loading({
+
+                    start:false,
+                });
                 $("input[name='aspirante[urlImageDocumentFrente]']").val(response);
             }
         });
@@ -947,7 +957,16 @@
             paramName: 'file',
             addRemoveLinks: true,
             headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+            processing: function(file, response){
+                $('body').loading({
+                    message: 'Subiendo documento...',
+                    start:true,
+                });
+            },
             success: function (file, response) {
+                $('body').loading({
+                    start:false,
+                });
                 $("input[name='aspirante[urlImageDocumentAtras]']").val(response);
             }
         });
@@ -958,7 +977,16 @@
             paramName: 'file',
             addRemoveLinks: true,
             headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+            processing: function(file, response){
+                $('body').loading({
+                    message: 'Subiendo documento...',
+                    start:true,
+                });
+            },
             success: function (file, response) {
+                $('body').loading({
+                    start:false,
+                });
                 $("input[name='aspirante[urlPdfDocument]']").val(response);
             }
         });
@@ -971,7 +999,16 @@
             paramName: 'file',
             addRemoveLinks: true,
             headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+            processing: function(file, response){
+                $('body').loading({
+                    message: 'Subiendo documento...',
+                    start:true,
+                });
+            },
             success: function (file, response) {
+                $('body').loading({
+                    start:false,
+                });
                 $("input[name='beneficiario[urlImageDocumentFrente]']").val(response);
             }
         });
@@ -982,7 +1019,16 @@
             paramName: 'file',
             addRemoveLinks: true,
             headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+            processing: function(file, response){
+                $('body').loading({
+                    message: 'Subiendo documento...',
+                    start:true,
+                });
+            },
             success: function (file, response) {
+                $('body').loading({
+                    start:false,
+                });
                 $("input[name='beneficiario[urlImageDocumentAtras]']").val(response);
             }
         });
@@ -993,7 +1039,16 @@
             paramName: 'file',
             addRemoveLinks: true,
             headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+            processing: function(file, response){
+                $('body').loading({
+                    message: 'Subiendo documento...',
+                    start:true,
+                });
+            },
             success: function (file, response) {
+                $('body').loading({
+                    start:false,
+                });
                 $("input[name='beneficiario[urlPdfDocument]']").val(response);
             }
         });
@@ -1006,7 +1061,16 @@
             addRemoveLinks: true,
             acceptedFiles: "image/*",
             headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
+            processing: function(file, response){
+                $('body').loading({
+                    message: 'Subiendo documento...',
+                    start:true,
+                });
+            },
             success: function(file, response) {
+                $('body').loading({
+                    start:false,
+                });
                 $("#errorImage-profile-aspirante").html('');
                 $("input[name='aspirante[urlImageProfile]']").val(response);
             },
@@ -1026,7 +1090,16 @@
             addRemoveLinks: true,
             acceptedFiles: "image/*",
             headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
+            processing: function(file, response){
+                $('body').loading({
+                    message: 'Subiendo documento...',
+                    start:true,
+                });
+            },
             success: function(file, response) {
+                $('body').loading({
+                    start:false,
+                });
                 $("input[name='beneficiario[urlImageProfile]']").val(response);
             },
             error: function (file, e, i, o, u) {
