@@ -16,6 +16,7 @@ CONSULTAS DE PRUEBAS
 
 use App\Artist;
 use App\Mail\ArtistProjectRevision;
+use App\Mail\NewArtist;
 use App\Project;
 
 Route::get('test' , function (){
@@ -37,8 +38,8 @@ Route::get('/offline', function (){
     return view('vendor.laravelpwa.offline');
 });
 
-Route::get('/prueba-offline', function (){
-   return view('pruebaoffline');
+Route::get('/prueba-email', function (){
+   return new NewArtist('Mauricio');
 });
 
 
@@ -162,14 +163,18 @@ Route::group(['namespace'=>'Backend','prefix' => 'dashboard','middleware' => 'au
     Route::post('/front-photo-artist','ProfileController@front_photo')->name('front.photo.artist');
 
     Route::post('/pdf-cedula-aspirante','ProfileController@pdf_cedula_aspirante')->name('cedula.pdf.aspirante');
+    Route::post('/pdf-cedula-aspirante-gestor','ProfileController@pdf_cedula_aspirante_gestor')->name('cedula.pdf.aspirante.gestor');
     Route::post('/pdf-cedula-beneficiario','ProfileController@pdf_cedula_beneficiario')->name('cedula.pdf.beneficiario');
+    Route::post('/pdf-cedula-beneficiario-gestor','ProfileController@pdf_cedula_beneficiario_gestor')->name('cedula.pdf.beneficiario.gestor');
     Route::post('/pdf-cedula-team','ProfileController@pdf_cedula_team')->name('cedula.pdf.team');
     Route::post('/update-audio','ProfileController@update_audio')->name('update.audio');
 
 
     Route::put('/update-profile-artist/{id_artis}','ProfileController@profile_update_artist')->name('update.profile.artist');
     Route::put('/update-img-artist','ProfileController@update_img_artist')->name('update.imgdoc.artist');
+    Route::put('/update-img-artist-gestor','ProfileController@update_img_artist_gestor')->name('update.imgdoc.artist.gestor');
     Route::put('/update-img-ben','ProfileController@update_img_ben')->name('update.imgdoc.ben');
+    Route::put('/update-img-ben-gestor','ProfileController@update_img_ben_gestor')->name('update.imgdoc.ben.gestor');
     Route::put('/update-img-team','ProfileController@update_img_team')->name('update.imgdoc.team');
 
     Route::get('/get-municipios/{id}','ProfileController@get_municipios')->name('get.municipios');

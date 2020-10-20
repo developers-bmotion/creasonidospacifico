@@ -1,9 +1,9 @@
 /* quita un poco de margen al formulario */
-.login-top{
-    padding: 20% 2rem 0 2rem !important;
+.login-top {
+    padding: 25% 2rem 2rem 2rem !important;
 }
 /* Quita un poco de margen al boton de submit */
-.m-login__form-action{
+.m-login__form-action {
     margin: 2rem 0 !important;
 }
 
@@ -14,3 +14,34 @@
 .m-grid__item.m-grid__item--fluid.m-grid.m-grid--ver-desktop.m-grid--desktop.m-body {
     flex: 1 !important;
 } */
+
+.background_login {
+    background-image: url(/images/logo-pacifico.png);
+    background-size:  cover !important;
+}
+.background_register {
+    background-image: url(/images/fondo-registro-2.png);
+    background-size:  cover !important;
+}
+.title-login{
+    font-size: 75px !important;
+    padding: 0 3rem;
+}
+.parrafo-login{
+    font-size: 24px !important;
+    padding: 0 3rem;
+}
+.parrafo-register {
+    font-size: 45px !important;
+    padding: 0 3rem;
+}
+/*Para pantalla movil*/
+@media screen and (max-width: 480px){ 
+
+    .parrafo-register {
+        font-size: 30px !important;
+        padding: 0 3rem;
+    }
+
+
+} 

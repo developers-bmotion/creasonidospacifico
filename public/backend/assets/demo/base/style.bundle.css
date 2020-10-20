@@ -28883,7 +28883,7 @@ html.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown) {
     background: #c36f4f;
     color: #ffffff; }
 .datepicker tbody tr > td.day.today {
-    background: #828ee6;
+    background: #739594;
     color: #ffffff; }
 .datepicker tbody tr > td.day.today:before {
     border-bottom-color: #ffffff;
@@ -32339,7 +32339,7 @@ select.m-select2 {
     width: 700px;
     padding: 2rem 11rem; }
 .m-login.m-login--1 .m-login__content {
-    background-attachment: fixed;
+    /* background-attachment: fixed; */
     background-size: cover; }
 .m-login.m-login--1 .m-login__content .m-login__welcome {
     color: #ffffff;
@@ -39152,7 +39152,7 @@ body.m-content--skin-light2 {
     color: #739594; }
 .m-subheader .m-subheader__breadcrumbs.m-nav > .m-nav__item > .m-nav__link:hover > .m-nav__link-icon {
     color: #739594; }
-.m-subheader .m-subheader__breadcrumbs.m-nav > .m-nav__item.m-nav__item--home > .m-nav__link > .m-nav__link-icon {
+.m-login.m-login--1 .m-login__content.m-subheader .m-subheader__breadcrumbs.m-nav > .m-nav__item.m-nav__item--home > .m-nav__link > .m-nav__link-icon {
     padding-right: 0; }
 .m-subheader .m-subheader__breadcrumbs.m-nav > .m-nav__separator {
     padding: 0 3px;

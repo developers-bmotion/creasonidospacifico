@@ -68,7 +68,7 @@ class DatabaseSeeder extends Seeder
       =============================================*/
         factory(\App\Category::class, 1)->create(['category' => 'Músicas populares y campesinas', 'slug' => str_slug("populares_campesinas", '-')]);
         factory(\App\Category::class, 1)->create(['category' => 'Música andina (tradicional y/o contemporánea)', 'slug' => str_slug("música_andina", '-'), 'description' => 'tradicional y/o contemporánea']);
-        factory(\App\Category::class, 1)->create(['category' => 'Música tradicional del Sur Occidente (norte, centro y sur)', 'slug' => str_slug("música_tradicional", '-')]);
+//        factory(\App\Category::class, 1)->create(['category' => 'Música tradicional del Sur Occidente (norte, centro y sur)', 'slug' => str_slug("música_tradicional", '-')]);
         factory(\App\Category::class, 1)->create(['category' => 'Música tradicional del Pacífico (norte, centro y sur).', 'slug' => str_slug("música_tradicional_pc", '-')]);
         factory(\App\Category::class, 1)->create(['category' => 'Música urbana Pacífico (fusiones urbanas con música tradicional del Pacífico)', 'slug' => str_slug("música_urbana", '-')]);
         factory(\App\Category::class, 1)->create(['category' => 'Música salsa, antillana y fusión salsa', 'slug' => str_slug("música_urbana", '-')]);
