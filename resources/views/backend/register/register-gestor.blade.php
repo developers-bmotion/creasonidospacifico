@@ -165,7 +165,7 @@
                                     <div class="col-lg-6 m-form__group-sub">
 										<label class="col-form-label">Email</label>
                                         <input type="text" class="form-control m-input" name="aspirante[email]" placeholder="">
-                                        <span class="m-form__help">Por favor ingrese su correo electrónico</span>
+                                        <span class="m-form__help">Por favor ingrese correo electrónico</span>
 									</div>
                                 </div>
 
@@ -178,7 +178,7 @@
                                         <input type="text" name="aspirante[name]"class="form-control m-input"
                                                placeholder=""value="">
                                         <div id="error-aspirante_name" class="form-control-feedback" style="display: none"></div>
-                                        <span class="m-form__help">Por favor ingrese su nombre completo</span>
+                                        <span class="m-form__help">Por favor ingrese nombre completo</span>
                                     </div>
 
                                     <div id="content-aspirante_lastname" class="col-lg-6 m-form__group-sub">
@@ -186,7 +186,7 @@
                                         <input type="text" name="aspirante[lastname]" class="form-control m-input"
                                                placeholder="" value="">
                                         <div id="error-aspirante_lastname" class="form-control-feedback" style="display: none"></div>
-                                        <span class="m-form__help">Por favor ingrese su primer apellido</span>
+                                        <span class="m-form__help">Por favor ingrese primer apellido</span>
                                     </div>
                                 </div>
 
@@ -199,7 +199,7 @@
                                         <input type="text" name="aspirante[secondLastname]" class="form-control m-input"
                                                placeholder="" value="">
                                         <div id="error-aspirante_secondLastname" class="form-control-feedback" style="display: none"></div>
-                                        <span class="m-form__help">Por favor ingrese su segundo apellido</span>
+                                        <span class="m-form__help">Por favor ingrese segundo apellido</span>
                                     </div>
 
                                     <div id="content-aspirante_phone" class="col-lg-6 m-form__group-sub">
@@ -212,7 +212,7 @@
                                                    placeholder="" value="">
                                         </div>
                                         <div id="error-aspirante_phone" class="form-control-feedback" style="display: none"></div>
-                                        <span class="m-form__help">Por favor ingrese su número de teléfono valido</span>
+                                        <span class="m-form__help">Por favor ingrese número de teléfono valido</span>
                                     </div>
                                 </div>
 
@@ -308,17 +308,17 @@
                                             <div class="m-dropzone file-image-document-aspirante-frente m-dropzone--success"
                                                  action="" >{{-- id="m-dropzone-three" --}}
                                                 <div class="m-dropzone__msg dz-message needsclick">
-                                                    <h3 class="m-dropzone__msg-title">Subir documento de identificación</h3>
+                                                    <h3 class="m-dropzone__msg-title">Subir foto del frente de su documento de identificación</h3>
                                                     <span class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-lg-6 m-form__group-sub">
-                                            <label for="">Imagen documento identificación atras</label>
+                                            <label for="">Imagen documento identificación atrás</label>
                                             <div class="m-dropzone file-image-document-aspirante-atras m-dropzone--success"
                                                  action="inc/api/dropzone/upload.php" id="m-dropzone-three">
                                                 <div class="m-dropzone__msg dz-message needsclick">
-                                                    <h3 class="m-dropzone__msg-title">Subir documento de identificación</h3>
+                                                    <h3 class="m-dropzone__msg-title">Subir foto de la parte de atrás de su documento de identificación</h3>
                                                     <span class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
                                                 </div>
                                             </div>
@@ -468,7 +468,7 @@
                                     <div id="rol-member" class="form-group m-form__group row" style="display: none">
                                         <div class="col-lg-6 m-form__group-sub">
                                             <label class="form-control-label">Instrumento que interpreta</label>
-                                            <input type="num" name="aspirante[rolMember]" class="form-control m-input" placeholder="" value="">                        
+                                            <input type="num" name="aspirante[rolMember]" class="form-control m-input" placeholder="" value="">
                                             <span class="m-form__help">Ingrese el rol que desempeña dentro del grupo (Guitarrista, Vocalista, Pianista, etc.)</span>
                                         </div>
                                     </div>
@@ -520,7 +520,7 @@
                                         <input type="text" name="beneficiario[name]" class="form-control m-input"
                                                placeholder="" value="">
                                         <div id="error-beneficiario_name" class="form-control-feedback" style="display: none"></div>
-                                        <span class="m-form__help">Por favor ingrese su nombre completo</span>
+                                        <span class="m-form__help">Por favor ingrese nombre completo</span>
                                     </div>
 
                                     <div id="content-beneficiario_lastname" class="col-lg-6 m-form__group-sub">
@@ -528,7 +528,7 @@
                                         <input type="text" name="beneficiario[lastname]" class="form-control m-input"
                                                placeholder="" value="">
                                         <div id="error-beneficiario_lastname" class="form-control-feedback" style="display: none"></div>
-                                        <span class="m-form__help">Por favor ingrese su primer apellido</span>
+                                        <span class="m-form__help">Por favor ingrese primer apellido</span>
                                     </div>
                                 </div>
 
@@ -541,7 +541,7 @@
                                         <input type="text" name="beneficiario[secondLastname]" class="form-control m-input"
                                                placeholder="" value="">
                                         <div id="error-beneficiario_secondLastname" class="form-control-feedback" style="display: none"></div>
-                                        <span class="m-form__help">Por favor ingrese su segundo apellido</span>
+                                        <span class="m-form__help">Por favor ingrese segundo apellido</span>
                                     </div>
 
                                     <div id="content-beneficiario_phone" class="col-lg-6 m-form__group-sub">
@@ -554,7 +554,7 @@
                                                    placeholder="" value="">
                                         </div>
                                         <div id="error-beneficiario_phone" class="form-control-feedback" style="display: none"></div>
-                                        <span class="m-form__help">Por favor ingrese su número de teléfono valido</span>
+                                        <span class="m-form__help">Por favor ingrese número de teléfono valido</span>
                                     </div>
                                 </div>
 
@@ -610,7 +610,7 @@
                                         <label class="form-control-label">Biografía</label>
                                         <textarea class="form-control m-input" name="beneficiario[biografia]"
                                                   placeholder="Ingrese la bografía" style="min-height: 8rem;"></textarea>
-                                        <span class="m-form__help">Ingresa una breve descripción de tu historia como artista.</span>
+                                        <span class="m-form__help">Cuentanos bremente su historia.</span>
                                     </div>
 
                                     <div id="content-beneficiario_birthdate" class="col-lg-6 m-form__group-sub">
@@ -645,17 +645,17 @@
                                             <div class="m-dropzone file-image-document-beneficiario-frente m-dropzone--success"
                                                  action="inc/api/dropzone/upload.php" id="m-dropzone-three">
                                                 <div class="m-dropzone__msg dz-message needsclick">
-                                                    <h3 class="m-dropzone__msg-title">Subir documento de identificación</h3>
+                                                    <h3 class="m-dropzone__msg-title">Subir foto del frente de su documento de identificación</h3>
                                                     <span class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-lg-6 m-form__group-sub">
-                                            <label for="">Imagen documento identificación atras</label>
+                                            <label for="">Imagen documento identificación atrás</label>
                                             <div class="m-dropzone file-image-document-beneficiario-atras m-dropzone--success"
                                                  action="inc/api/dropzone/upload.php" id="m-dropzone-three">
                                                 <div class="m-dropzone__msg dz-message needsclick">
-                                                    <h3 class="m-dropzone__msg-title">Subir documento de identificación</h3>
+                                                    <h3 class="m-dropzone__msg-title">Subir foto de la parte de atrás de su documento de identificación</h3>
                                                     <span class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
                                                 </div>
                                             </div>
