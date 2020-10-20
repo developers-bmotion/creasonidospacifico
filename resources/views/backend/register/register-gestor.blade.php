@@ -208,8 +208,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="la la-phone"></i></span>
                                             </div>
-                                            <input type="text" name="aspirante[phone]" class="form-control m-input"
-                                                   placeholder="" value="">
+                                            <input type="text" name="aspirante[phone]" class="form-control m-input" placeholder="" value="">
                                         </div>
                                         <div id="error-aspirante_phone" class="form-control-feedback" style="display: none"></div>
                                         <span class="m-form__help">Por favor ingrese su número de teléfono valido</span>
@@ -221,14 +220,13 @@
                                 ======================================-->
                                 <div class="form-group m-form__group row">
                                     <div id="content-aspirante_documentType" class="col-lg-6 m-form__group-sub">
-                                        <label class="form-control-label {{$errors->has('document_type')? 'has-danger':''}}">Tipo de documento *</label>
-                                        <select name="aspirante[documentType]" class="form-control m-bootstrap-select m_selectpicker">
+                                        <label class="form-control-label">Tipo de documento *</label>
+                                        <select id="aspirant-document-type" name="aspirante[documentType]" class="form-control m-input">
                                             @foreach($documenttype as $document_type)
                                                 @if($document_type->document != "Tarjeta de identidad")
-                                                    <option value="{{$document_type->id}}">
-                                                        {{ $document_type->document }}</option>
+                                                    <option value="{{$document_type->id}}">{{ $document_type->document }}</option>
                                                 @endif
-                                            @endforeach
+                                            @endforeach                                            
                                         </select>
                                         <div id="error-aspirante_documentType" class="form-control-feedback" style="display: none"></div>
                                     </div>
@@ -443,15 +441,12 @@
 
                                 <div class="m-form__section">
                                     <div class="m-form__heading">
-                                        <h3 class="m-form__heading-title">Información del aspirante si forma parte del grupo
-                                            <i data-toggle="m-tooltip" data-width="auto" class="m-form__heading-help-icon flaticon-info"
-                                               title="Datos importantes del lugar y sitio de nacimiento"></i>
-                                        </h3>
+                                        <h3 class="m-form__heading-title">Si el representante registrado es integrante de la agrupación musical, marque si</h3>
                                     </div>
 
                                     <div class="m-form__group form-group">
                                         <div class="col-lg-12 m-form__group-sub">
-                                            <label for="">¿Usted como aspirante forma parte del grupo?</label>
+                                            {{-- <label for="">¿Usted como aspirante forma parte del grupo?</label> --}}
                                             <div class="m-radio-inline">
                                                 <label class="m-radio">
                                                     <input type="radio" name="aspirante[partGroup]" value="1"> Si
@@ -914,10 +909,54 @@
                                     </div>
                                     <div id="audio-error" style="color: #f4516c" class="form-control-feedback"></div>
                                     <div id="error-song_urlSong" class="form-control-feedback" style="display: none"></div>
-                                    <span class="m-form__help">Cargue aquí el audio de la canción en formato Mp3.</span>
+                                    <span class="m-form__help">Cargue aquí el audio de la canción en formato MP3 ó un video en formato MP4.</span>
                                     <input type="hidden" name="song[urlSong]" value="">
                                 </div>
                             </div>
+
+                            <!--=====================================
+                                AGREGAR DOS NUEVAS CANCIONES
+                            ======================================-->
+                            <div class="form-group m-form__group row" style="margin-top: -5rem;">
+                                <div class="col-lg-6 m-form__group-sub">
+                                    <label class="form-control-label">Agregar canciones si lo desea (No obligatorio)
+                                        <span class="text-danger"> (Tenga en cuenta que la canciónes que agregue aquÍ, no participarán en el concurso. Solo para mostrar tu talento)</span>
+                                    </label>
+                                    <span id="add-song" class="btn btn-primary btn-block">Agregar canciones</span>
+                                </div>    
+                            </div>
+                            
+                            <div id="additional-songs" class="col-lg-12 form-group m-form__group row" style="display: none">
+                                <div class="col-lg-6 m-form__group-sub">
+                                    <label class="form-control-label">Canción dos 
+                                        <span class="text-danger">(Tenga en cuenta que la canción que va a subir aquí, No participará en el concurso)</span>
+                                    </label>
+                                    <div id="m-dropzone-three" class="m-dropzone additional-song-one m-dropzone--success" action="">
+                                        <div class="m-dropzone__msg dz-message needsclick">
+                                            <h3 class="m-dropzone__msg-title">Agregue su canción en formato MP3</h3>
+                                            <span class="m-dropzone__msg-desc">Arrastra o has clic a aquí para subir</span>
+                                        </div>
+                                    </div>    
+                                    <div id="error-additional-song-one" style="color: #f4516c" class="form-control-feedback"></div>
+                                    <span class="m-form__help">Cargue aquí el audio de la canción en formato MP3 ó un video en formato MP4.</span>
+                                    <input type="hidden" name="song[urlAdditionalSongOne]" value="">
+                                </div>
+
+                                <div class="col-lg-6 m-form__group-sub">
+                                    <label class="form-control-label">Canción tres 
+                                        <span class="text-danger">(Tenga en cuenta que la canción que va a subir aquí, No participará en el concurso)</span>
+                                    </label>
+                                    <div id="m-dropzone-three" class="m-dropzone additional-song-two m-dropzone--success" action="">
+                                        <div class="m-dropzone__msg dz-message needsclick">
+                                            <h3 class="m-dropzone__msg-title">Agregue su canción en formato MP3</h3>
+                                            <span class="m-dropzone__msg-desc">Arrastra o has clic a aquí para subir</span>
+                                        </div>
+                                    </div> 
+                                    <div id="error-additional-song-two" style="color: #f4516c" class="form-control-feedback"></div>   
+                                    <span class="m-form__help">Cargue aquí el audio de la canción en formato MP3 ó un video en formato MP4.</span>
+                                    <input type="hidden" name="song[urlAdditionalSongTwo]" value="">
+                                </div>
+                            </div>  
 
                             <!--=====================================
                                 BREVE RESEÑA
@@ -997,25 +1036,13 @@
             }
             //== Private functions
             var demos = function () {
-                // minimum setup
-                /* $('#datepicker_fecha_nacimiento #m_datepicker_1_validate').datepicker({
-                    rtl: mUtil.isRTL(),
-                    todayHighlight: true,
-                    orientation: "bottom left",
-                    language: 'es',
-                    startDate: '-18y',
-                    templates: arrows
-                }); */
-
                 $('#datepicker_fecha_nacimiento').datepicker({
                     rtl: mUtil.isRTL(),
                     language: 'es',
-                    //startDate: '-18y',
                     todayHighlight: true,
                     orientation: "bottom left",
                     templates: arrows
                 });
-
                 $('#datepicker_fecha_nacimiento2').datepicker({
                     rtl: mUtil.isRTL(),
                     language: 'es',
@@ -1027,10 +1054,7 @@
             }
 
             return {
-                // public functions
-                init: function () {
-                    demos();
-                }
+                init: function () { demos(); }
             };
         }();
 
@@ -1182,7 +1206,7 @@
 
         var dropzone = new Dropzone('.upload-song', {
             url: '{{ route('add.project.audio') }}',
-            acceptedFiles: '.mp3', // 'audio/*'
+            acceptedFiles: 'audio/*,video/*', 
             maxFiles: 1,
             paramName: 'image',
             addRemoveLinks: true,
@@ -1196,6 +1220,48 @@
                 console.log('error: ', file)
                 $("#audio-error").text('Recuerda que solo se admiten archivos en formato MP3.');
                 setTimeout(() => { dropzone.removeFile(file) }, 2000)
+            }
+        });
+
+        /* formatos para dropzone   audio/*, video/*, image/*
+        acceptedFiles: '.3gp,.3gp2,.h261,.h263,.h264,.jpgv,.jpm,.jpgm,.mp4,.mp4v,
+        .mpg4,.mpeg,.mpg,.mpe,.m1v,.m2v,.ogv,.qt,.mov,.fli,.flv,.mks,.mkv,.wmv,.avi,
+        .movie,.smv,.g3,.jpeg,.jpg,.jpe,.png,.btif,.sgi,.svg,.tiff,.tif', */
+
+        // canciones adicionales.
+        var fileAdditionalSongOne, fileAdditionalSongTwo;
+        var dropzoneAdditionalSongOne = new Dropzone('.additional-song-one', {
+            url: '{{ route('add.project.audio') }}',
+            acceptedFiles: 'audio/*,video/*', 
+            maxFiles: 1,
+            paramName: 'image',
+            addRemoveLinks: true,
+            headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+            success: function (file, response) {
+                fileAdditionalSongOne = file;
+                $("#error-additional-song-one").text('');
+                $("input[name='song[urlAdditionalSongOne]']").val(response); 
+            },
+            error: function (file, e, i, o, u) {
+                $("#error-additional-song-one").text('Por favor revisa el formato del archivo que deseas subir.');
+                setTimeout(() => { dropzoneAdditionalSongOne.removeFile(file) }, 2000)
+            }
+        });
+        var dropzoneAdditionalSongTwo = new Dropzone('.additional-song-two', {
+            url: '{{ route('add.project.audio') }}',
+            acceptedFiles: 'audio/*,video/*', 
+            maxFiles: 1,
+            paramName: 'image',
+            addRemoveLinks: true,
+            headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+            success: function (file, response) {
+                fileAdditionalSongTwo = file;
+                $("#error-additional-song-two").text('');
+                $("input[name='song[urlAdditionalSongTwo]']").val(response);
+            },
+            error: function (file, e, i, o, u) {
+                $("#error-additional-song-two").text('Por favor revisa el formato del archivo que deseas subir.');
+                setTimeout(() => { dropzoneAdditionalSongTwo.removeFile(file) }, 2000)
             }
         });
 

@@ -383,14 +383,14 @@ class ProfileController extends Controller
     /* metodo para registrar un proyecto y asociarlo con un aspirante en la base de datos */
     public function createNewProject($request, $idArtist) {
         $song = (object) $request->song;
-
+        
         $project = new Project();
         $project->title = $song->nameProject;
         $project->author = $song->author;
         $project->category_id = $song->categoryID;
         $project->audio = $song->urlSong;
-        //$project->audio_secundary_one = $song->urlSong;
-        //$project->audio_secundary_two = $song->urlSong;
+        $project->audio_secundary_one = $song->urlAdditionalSongOne;
+        $project->audio_secundary_two = $song->urlAdditionalSongTwo;
         $project->description = $song->description;
         $project->status = 1;
         $project->slug = Str::slug($song->nameProject.'-'.str_random(1000), '-');
