@@ -174,7 +174,7 @@
                                 ======================================-->
                                 <div class="form-group m-form__group row">
                                     <div id="content-aspirante_name" class="col-lg-6 m-form__group-sub">
-                                        <label class="form-control-label ">Nombre *</label>
+                                        <label class="form-control-label ">Nombre <span class="text-danger">*</span></label>
                                         <input type="text" name="aspirante[name]"class="form-control m-input"
                                                placeholder=""value="">
                                         <div id="error-aspirante_name" class="form-control-feedback" style="display: none"></div>
@@ -182,7 +182,7 @@
                                     </div>
 
                                     <div id="content-aspirante_lastname" class="col-lg-6 m-form__group-sub">
-                                        <label class="form-control-label {{$errors->has('lastname')? 'has-danger':''}}">Primer apellido *</label>
+                                        <label class="form-control-label {{$errors->has('lastname')? 'has-danger':''}}">Primer apellido <span class="text-danger">*</span></label>
                                         <input type="text" name="aspirante[lastname]" class="form-control m-input"
                                                placeholder="" value="">
                                         <div id="error-aspirante_lastname" class="form-control-feedback" style="display: none"></div>
@@ -195,7 +195,7 @@
                                 ======================================-->
                                 <div class="form-group m-form__group row">
                                     <div id="content-aspirante_secondLastname" class="col-lg-6 m-form__group-sub">
-                                        <label class="form-control-label {{$errors->has('second_last_name')? 'has-danger':''}}">Segundo apellido *</label>
+                                        <label class="form-control-label {{$errors->has('second_last_name')? 'has-danger':''}}">Segundo apellido <span class="text-danger">*</span></label>
                                         <input type="text" name="aspirante[secondLastname]" class="form-control m-input"
                                                placeholder="" value="">
                                         <div id="error-aspirante_secondLastname" class="form-control-feedback" style="display: none"></div>
@@ -203,13 +203,12 @@
                                     </div>
 
                                     <div id="content-aspirante_phone" class="col-lg-6 m-form__group-sub">
-                                        <label class="form-control-label {{$errors->has('phone_1')? 'has-danger':''}}">Teléfono celular *</label>
+                                        <label class="form-control-label {{$errors->has('phone_1')? 'has-danger':''}}">Teléfono celular <span class="text-danger">*</span></label>
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="la la-phone"></i></span>
                                             </div>
-                                            <input type="text" name="aspirante[phone]" class="form-control m-input"
-                                                   placeholder="" value="">
+                                            <input type="text" name="aspirante[phone]" class="form-control m-input" placeholder="" value="">
                                         </div>
                                         <div id="error-aspirante_phone" class="form-control-feedback" style="display: none"></div>
                                         <span class="m-form__help">Por favor ingrese número de teléfono valido</span>
@@ -221,20 +220,24 @@
                                 ======================================-->
                                 <div class="form-group m-form__group row">
                                     <div id="content-aspirante_documentType" class="col-lg-6 m-form__group-sub">
-                                        <label class="form-control-label {{$errors->has('document_type')? 'has-danger':''}}">Tipo de documento *</label>
+<<<<<<< HEAD
+                                        <label class="form-control-label">Tipo de documento *</label>
+                                        <select id="aspirant-document-type" name="aspirante[documentType]" class="form-control m-input">
+=======
+                                        <label class="form-control-label {{$errors->has('document_type')? 'has-danger':''}}">Tipo de documento <span class="text-danger">*</span></label>
                                         <select name="aspirante[documentType]" class="form-control m-bootstrap-select m_selectpicker">
+>>>>>>> 65b5a62122e186b94734d4c1c56e69e04695c6f0
                                             @foreach($documenttype as $document_type)
                                                 @if($document_type->document != "Tarjeta de identidad")
-                                                    <option value="{{$document_type->id}}">
-                                                        {{ $document_type->document }}</option>
+                                                    <option value="{{$document_type->id}}">{{ $document_type->document }}</option>
                                                 @endif
-                                            @endforeach
+                                            @endforeach                                            
                                         </select>
                                         <div id="error-aspirante_documentType" class="form-control-feedback" style="display: none"></div>
                                     </div>
 
                                     <div id="content-aspirante_identificacion" class="col-lg-6 m-form__group-sub">
-                                        <label class="form-control-label {{$errors->has('identificacion')? 'has-danger':''}}">Nº de indentificación *</label>
+                                        <label class="form-control-label {{$errors->has('identificacion')? 'has-danger':''}}">Nº de indentificación <span class="text-danger">*</span></label>
                                         <input type="num" name="aspirante[identificacion]" class="form-control m-input"
                                                placeholder="" value="">
                                         <div id="error-aspirante_identificacion" class="form-control-feedback" style="display: none"></div>
@@ -247,7 +250,7 @@
                                 ======================================-->
                                 <div class="form-group m-form__group row">
                                     <div id="content-aspirante_departamentoExpedida" class="col-lg-6 m-form__group-sub">
-                                        <label class="form-control-label">Departamento de expedición *</label>
+                                        <label class="form-control-label">Departamento de expedición <span class="text-danger">*</span></label>
                                         <select onchange="onSelectDepartamentosChange(this, 'aspirante-expid-municipios')" id="m_select2_1"
                                                 name="aspirante[departamentoExpedida]" class="form-control m-select2" >
                                             <option value="-1" >Seleccione departamento</option>
@@ -260,7 +263,7 @@
                                     </div>
 
                                     <div id="content-aspirante_municipioExpedida" class="col-lg-6 m-form__group-sub">
-                                        <label class="form-control-label">Municipio de expedición *</label>
+                                        <label class="form-control-label">Municipio de expedición <span class="text-danger">*</span></label>
                                         <select onchange="onSelectMunicipiosChange(this)" name="aspirante[municipioExpedida]" class="form-control m-select2 aspirante-expid-municipios" id="m_select2_2"></select>
                                         <div id="error-aspirante_municipioExpedida" class="form-control-feedback" style="display: none"></div>
                                     </div>
@@ -279,7 +282,7 @@
 
                                     <div class="col-lg-6 form-group m-form__group row">
                                         <div id="content-aspirante_birthdate" class="col-lg-12 m-form__group-sub">
-                                            <label for="example-text-input" class="form-control-label">Fecha de nacimiento *</label>
+                                            <label for="example-text-input" class="form-control-label">Fecha de nacimiento <span class="text-danger">*</span></label>
                                             <input type="text" name="aspirante[birthdate]" class="form-control" value=""
                                                    id="datepicker_fecha_nacimiento" readonly placeholder="{{ __('fecha_nacimiento') }}" />
                                             <div id="error-aspirante_birthdate" class="form-control-feedback" style="display: none"></div>
@@ -376,7 +379,7 @@
 
                                 <div class="form-group m-form__group row">
                                     <div id="content-aspirante_departamentoNacimiento" class="col-lg-6 m-form__group-sub">
-                                        <label class="form-control-label">Departamento de nacimiento *</label>
+                                        <label class="form-control-label">Departamento de nacimiento <span class="text-danger">*</span></label>
                                         <select onchange="onSelectDepartamentosChange(this, 'aspirante-nacimiento-municipios')"  id="m_select2_3"
                                                 name="aspirante[departamentoNacimiento]" class="form-control m-select2">
                                             <option value="-1">Seleccione departamento</option>
@@ -389,7 +392,7 @@
                                     </div>
 
                                     <div id="content-aspirante_municipioNacimiento" class="col-lg-6 m-form__group-sub">
-                                        <label class="form-control-label">Municipio de nacimiento *</label>
+                                        <label class="form-control-label">Municipio de nacimiento <span class="text-danger">*</span></label>
                                         <select onchange="onSelectMunicipiosChange(this)" name="aspirante[municipioNacimiento]" class="form-control m-select2 aspirante-nacimiento-municipios" id="m_select2_4"></select>
                                         <div id="error-aspirante_municipioNacimiento" class="form-control-feedback" style="display: none"></div>
                                     </div>
@@ -397,7 +400,7 @@
 
                                 <div class="form-group m-form__group row">
                                     <div id="content-aspirante_departamentoResidencia" class="col-lg-6 m-form__group-sub">
-                                        <label class="form-control-label">Departamento de residencia *</label>
+                                        <label class="form-control-label">Departamento de residencia <span class="text-danger">*</span></label>
                                         <select onchange="onSelectDepartamentosChange(this, 'aspirante-residencia-municipios')"  id="m_select2_1_2"
                                                 name="aspirante[departamentoResidencia]" class="form-control m-select2">
                                             <option value="-1">Seleccione departamento</option>
@@ -410,7 +413,7 @@
                                     </div>
 
                                     <div id="content-aspirante_municipioResidencia" class="col-lg-6 m-form__group-sub">
-                                        <label class="form-control-label">Municipio de residencia *</label>
+                                        <label class="form-control-label">Municipio de residencia <span class="text-danger">*</span></label>
                                         <select onchange="onSelectMunicipiosChange(this)" name="aspirante[municipioResidencia]" class="form-control m-select2 aspirante-residencia-municipios" id="m_select2_1_3"></select>
                                         <div id="error-aspirante_municipioResidencia" class="form-control-feedback" style="display: none"></div>
                                     </div>
@@ -418,7 +421,7 @@
 
                                 <div class="form-group m-form__group row">
                                     <div id="content-aspirante_address" class="col-lg-6 m-form__group-sub">
-                                        <label class="form-control-label {{$errors->has('adress')? 'has-danger':''}}">Dirección de residencia *</label>
+                                        <label class="form-control-label {{$errors->has('adress')? 'has-danger':''}}">Dirección de residencia <span class="text-danger">*</span></label>
                                         <input type="text" name="aspirante[address]" class="form-control m-input"
                                                placeholder="" value="">
                                         <div id="error-aspirante_address" class="form-control-feedback" style="display: none"></div>
@@ -443,15 +446,12 @@
 
                                 <div class="m-form__section">
                                     <div class="m-form__heading">
-                                        <h3 class="m-form__heading-title">Información del aspirante si forma parte del grupo
-                                            <i data-toggle="m-tooltip" data-width="auto" class="m-form__heading-help-icon flaticon-info"
-                                               title="Datos importantes del lugar y sitio de nacimiento"></i>
-                                        </h3>
+                                        <h3 class="m-form__heading-title">Si el representante registrado es integrante de la agrupación musical, marque si</h3>
                                     </div>
 
                                     <div class="m-form__group form-group">
                                         <div class="col-lg-12 m-form__group-sub">
-                                            <label for="">¿Usted como aspirante forma parte del grupo?</label>
+                                            {{-- <label for="">¿Usted como aspirante forma parte del grupo?</label> --}}
                                             <div class="m-radio-inline">
                                                 <label class="m-radio">
                                                     <input type="radio" name="aspirante[partGroup]" value="1"> Si
@@ -516,7 +516,7 @@
                                 ======================================-->
                                 <div class="form-group m-form__group row">
                                     <div id="content-beneficiario_name" class="col-lg-6 m-form__group-sub">
-                                        <label class="form-control-label {{$errors->has('name_menor')? 'has-danger':''}}">Nombre *</label>
+                                        <label class="form-control-label {{$errors->has('name_menor')? 'has-danger':''}}">Nombre <span class="text-danger">*</span></label>
                                         <input type="text" name="beneficiario[name]" class="form-control m-input"
                                                placeholder="" value="">
                                         <div id="error-beneficiario_name" class="form-control-feedback" style="display: none"></div>
@@ -524,7 +524,7 @@
                                     </div>
 
                                     <div id="content-beneficiario_lastname" class="col-lg-6 m-form__group-sub">
-                                        <label class="form-control-label {{$errors->has('last_name_menor')? 'has-danger':''}}">Primer apellido *</label>
+                                        <label class="form-control-label {{$errors->has('last_name_menor')? 'has-danger':''}}">Primer apellido <span class="text-danger">*</span></label>
                                         <input type="text" name="beneficiario[lastname]" class="form-control m-input"
                                                placeholder="" value="">
                                         <div id="error-beneficiario_lastname" class="form-control-feedback" style="display: none"></div>
@@ -537,7 +537,7 @@
                                 ======================================-->
                                 <div class="form-group m-form__group row">
                                     <div id="content-beneficiario_secondLastname" class="col-lg-6 m-form__group-sub">
-                                        <label class="form-control-label {{$errors->has('second_last_name_menor')? 'has-danger':''}}">Segundo apellido *</label>
+                                        <label class="form-control-label {{$errors->has('second_last_name_menor')? 'has-danger':''}}">Segundo apellido <span class="text-danger">*</span></label>
                                         <input type="text" name="beneficiario[secondLastname]" class="form-control m-input"
                                                placeholder="" value="">
                                         <div id="error-beneficiario_secondLastname" class="form-control-feedback" style="display: none"></div>
@@ -545,7 +545,7 @@
                                     </div>
 
                                     <div id="content-beneficiario_phone" class="col-lg-6 m-form__group-sub">
-                                        <label class="form-control-label {{$errors->has('phone_1_menor')? 'has-danger':''}}">Teléfono celular *</label>
+                                        <label class="form-control-label {{$errors->has('phone_1_menor')? 'has-danger':''}}">Teléfono celular <span class="text-danger">*</span></label>
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="la la-phone"></i></span>
@@ -563,7 +563,7 @@
                                 ======================================-->
                                 <div class="form-group m-form__group row">
                                     <div id="content-beneficiario_documentType" class="col-lg-6 m-form__group-sub">
-                                        <label class="form-control-label {{$errors->has('document_type_menor')? 'has-danger':''}}">Tipo de documento *</label>
+                                        <label class="form-control-label {{$errors->has('document_type_menor')? 'has-danger':''}}">Tipo de documento <span class="text-danger">*</span></label>
                                         <select name="beneficiario[documentType]" class="form-control m-bootstrap-select m_selectpicker">
                                             <option value="2">Tarjeta de identidad</option>
                                         </select>
@@ -571,7 +571,7 @@
                                     </div>
 
                                     <div id="content-beneficiario_identificacion" class="col-lg-6 m-form__group-sub">
-                                        <label class="form-control-label {{$errors->has('identificacion_menor')? 'has-danger':''}}">Nº de indentificación *</label>
+                                        <label class="form-control-label {{$errors->has('identificacion_menor')? 'has-danger':''}}">Nº de indentificación <span class="text-danger">*</span></label>
                                         <input type="num" name="beneficiario[identificacion]" class="form-control m-input"
                                                placeholder="" value="">
                                         <div id="error-beneficiario_identificacion" class="form-control-feedback" style="display: none"></div>
@@ -584,7 +584,7 @@
                                 ======================================-->
                                 <div class="form-group m-form__group row">
                                     <div id="content-beneficiario_departamentoExpedida" class="col-lg-6 m-form__group-sub">
-                                        <label class="form-control-label">Departamento de expedición *</label>
+                                        <label class="form-control-label">Departamento de expedición <span class="text-danger">*</span></label>
                                         <select onchange="onSelectDepartamentosChange(this, 'beneficiario-expid-municipios')" id="m_select2_5"
                                                 name="beneficiario[departamentoExpedida]" class="form-control m-select2">
                                             <option>Seleccione departamento</option>
@@ -596,7 +596,7 @@
                                     </div>
 
                                     <div id="content-beneficiario_municipioExpedida" class="col-lg-6 m-form__group-sub">
-                                        <label class="form-control-label">Municipio de expedición *</label>
+                                        <label class="form-control-label">Municipio de expedición <span class="text-danger">*</span></label>
                                         <select name="beneficiario[municipioExpedida]" class="form-control m-select2 beneficiario-expid-municipios" id="m_select2_9"></select>
                                         <div id="error-beneficiario_municipioExpedida" class="form-control-feedback" style="display: none"></div>
                                     </div>
@@ -614,7 +614,7 @@
                                     </div>
 
                                     <div id="content-beneficiario_birthdate" class="col-lg-6 m-form__group-sub">
-                                        <label for="example-text-input" class="form-control-label">Fecha de nacimiento *</label>
+                                        <label for="example-text-input" class="form-control-label">Fecha de nacimiento <span class="text-danger">*</span></label>
                                         <input type="text" name="beneficiario[birthdate]" class="form-control" value=""
                                                id="datepicker_fecha_nacimiento2" readonly placeholder="{{ __('fecha_nacimiento') }}" />
                                         <div id="error-beneficiario_birthdate" class="form-control-feedback" style="display: none"></div>
@@ -713,7 +713,7 @@
 
                                     <div class="form-group m-form__group row">
                                         <div id="content-beneficiario_departamentoNacimiento" class="col-lg-6 m-form__group-sub">
-                                            <label class="form-control-label">Departamento de nacimiento *</label>
+                                            <label class="form-control-label">Departamento de nacimiento <span class="text-danger">*</span></label>
                                             <select onchange="onSelectDepartamentosChange(this, 'beneficiario-nacimiento-municipios')" id="m_select2_7"
                                                     name="beneficiario[departamentoNacimiento]" class="form-control m-select2">
                                                 <option>Seleccione departamento</option>
@@ -725,7 +725,7 @@
                                         </div>
 
                                         <div id="content-beneficiario_municipioNacimiento" class="col-lg-6 m-form__group-sub">
-                                            <label class="form-control-label">Municipio de nacimiento *</label>
+                                            <label class="form-control-label">Municipio de nacimiento <span class="text-danger">*</span></label>
                                             <select name="beneficiario[municipioNacimiento]" class="form-control m-select2 beneficiario-nacimiento-municipios" id="m_select2_8"></select>
                                             <div id="error-beneficiario_municipioNacimiento" class="form-control-feedback" style="display: none"></div>
                                         </div>
@@ -733,7 +733,7 @@
 
                                     <div class="form-group m-form__group row">
                                         <div id="content-beneficiario_departamentoResidencia" class="col-lg-6 m-form__group-sub">
-                                            <label class="form-control-label">Departamento de residencia *</label>
+                                            <label class="form-control-label">Departamento de residencia <span class="text-danger">*</span></label>
                                             <select onchange="onSelectDepartamentosChange(this, 'beneficiario-residencia-municipios')"  id="m_select2_1_4"
                                                     name="beneficiario[departamentoResidencia]" class="form-control m-select2">
                                                 <option value="-1">Seleccione departamento</option>
@@ -746,7 +746,7 @@
                                         </div>
 
                                         <div id="content-beneficiario_municipioResidencia" class="col-lg-6 m-form__group-sub">
-                                            <label class="form-control-label">Municipio de residencia *</label>
+                                            <label class="form-control-label">Municipio de residencia <span class="text-danger">*</span></label>
                                             <select onchange="onSelectMunicipiosChange(this)" name="beneficiario[municipioResidencia]" class="form-control m-select2 beneficiario-residencia-municipios" id="m_select2_1_5"></select>
                                             <div id="error-beneficiario_municipioResidencia" class="form-control-feedback" style="display: none"></div>
                                         </div>
@@ -754,7 +754,7 @@
 
                                     <div class="form-group m-form__group row">
                                         <div id="content-beneficiario_address" class="col-lg-6 m-form__group-sub">
-                                            <label class="form-control-label {{$errors->has('adress')? 'has-danger':''}}">Dirección de residencia *</label>
+                                            <label class="form-control-label {{$errors->has('adress')? 'has-danger':''}}">Dirección de residencia <span class="text-danger">*</span></label>
                                             <input type="text" name="beneficiario[address]" class="form-control m-input"
                                                    placeholder="" value="">
                                             <div id="error-beneficiario_address" class="form-control-feedback" style="display: none"></div>
@@ -873,14 +873,14 @@
                             ======================================-->
                             <div class="form-group m-form__group row">
                                 <div id="content-song_nameProject" class="col-lg-6 m-form__group-sub">
-                                    <label class="form-control-label" form="nombreProyecto">Nombre de la canción *</label>
+                                    <label class="form-control-label" form="nombreProyecto">Nombre de la canción <span class="text-danger">*</span></label>
                                     <input id="nombreProyecto" type="text" name="song[nameProject]" class="form-control m-input" placeholder="" value="">
                                     <div id="error-song_nameProject" class="form-control-feedback" style="display: none"></div>
                                     <span class="m-form__help">{{ __('help_nombre_proyecto') }}</span>
                                 </div>
 
                                 <div id="content-song_author" class="col-lg-6 m-form__group-sub">
-                                    <label class="form-control-label" form="nombreProyecto">Nombre del autor o compositor *</label>
+                                    <label class="form-control-label" form="nombreProyecto">Nombre del autor o compositor <span class="text-danger">*</span></label>
                                     <input type="text" name="song[author]" class="form-control m-input" placeholder="" value="">
                                     <div id="error-song_author" class="form-control-feedback" style="display: none"></div>
                                 </div>
@@ -891,7 +891,7 @@
                             ======================================-->
                             <div class="form-group m-form__group row">
                                 <div id="content-song_categoryID" class="col-lg-6 m-form__group-sub">
-                                    <label class="form-control-label" form="category_add_proyecto">Seleccione categoría *</label>
+                                    <label class="form-control-label" form="category_add_proyecto">Seleccione categoría <span class="text-danger">*</span></label>
                                     <select id="category_add_proyecto" onchange="onSelectMunicipiosChange(this)" name="song[categoryID]" class="form-control m-bootstrap-select m_selectpicker">
                                         <option value="">Seleccione una opción</option>
                                         @foreach($categories as $tCategorie)
@@ -903,7 +903,7 @@
                                 </div>
 
                                 <div id="content-song_urlSong" class="col-lg-6 m-form__group-sub">
-                                    <label class="form-control-label" form="nombreProyecto">Subir canción *
+                                    <label class="form-control-label" form="nombreProyecto">Subir canción <span class="text-danger">*</span>
                                         <span class="text-danger">(Tenga en cuenta que la canción que va a subir aquí, participará en el concurso)</span>
                                     </label>
                                     <div id="m-dropzone-three" class="m-dropzone upload-song m-dropzone--success" action="">
@@ -914,10 +914,54 @@
                                     </div>
                                     <div id="audio-error" style="color: #f4516c" class="form-control-feedback"></div>
                                     <div id="error-song_urlSong" class="form-control-feedback" style="display: none"></div>
-                                    <span class="m-form__help">Cargue aquí el audio de la canción en formato Mp3.</span>
+                                    <span class="m-form__help">Cargue aquí el audio de la canción en formato MP3 ó un video en formato MP4.</span>
                                     <input type="hidden" name="song[urlSong]" value="">
                                 </div>
                             </div>
+
+                            <!--=====================================
+                                AGREGAR DOS NUEVAS CANCIONES
+                            ======================================-->
+                            <div class="form-group m-form__group row" style="margin-top: -5rem;">
+                                <div class="col-lg-6 m-form__group-sub">
+                                    <label class="form-control-label">Agregar canciones si lo desea (No obligatorio)
+                                        <span class="text-danger"> (Tenga en cuenta que la canciónes que agregue aquÍ, no participarán en el concurso. Solo para mostrar tu talento)</span>
+                                    </label>
+                                    <span id="add-song" class="btn btn-primary btn-block">Agregar canciones</span>
+                                </div>    
+                            </div>
+                            
+                            <div id="additional-songs" class="col-lg-12 form-group m-form__group row" style="display: none">
+                                <div class="col-lg-6 m-form__group-sub">
+                                    <label class="form-control-label">Canción dos 
+                                        <span class="text-danger">(Tenga en cuenta que la canción que va a subir aquí, No participará en el concurso)</span>
+                                    </label>
+                                    <div id="m-dropzone-three" class="m-dropzone additional-song-one m-dropzone--success" action="">
+                                        <div class="m-dropzone__msg dz-message needsclick">
+                                            <h3 class="m-dropzone__msg-title">Agregue su canción en formato MP3</h3>
+                                            <span class="m-dropzone__msg-desc">Arrastra o has clic a aquí para subir</span>
+                                        </div>
+                                    </div>    
+                                    <div id="error-additional-song-one" style="color: #f4516c" class="form-control-feedback"></div>
+                                    <span class="m-form__help">Cargue aquí el audio de la canción en formato MP3 ó un video en formato MP4.</span>
+                                    <input type="hidden" name="song[urlAdditionalSongOne]" value="">
+                                </div>
+
+                                <div class="col-lg-6 m-form__group-sub">
+                                    <label class="form-control-label">Canción tres 
+                                        <span class="text-danger">(Tenga en cuenta que la canción que va a subir aquí, No participará en el concurso)</span>
+                                    </label>
+                                    <div id="m-dropzone-three" class="m-dropzone additional-song-two m-dropzone--success" action="">
+                                        <div class="m-dropzone__msg dz-message needsclick">
+                                            <h3 class="m-dropzone__msg-title">Agregue su canción en formato MP3</h3>
+                                            <span class="m-dropzone__msg-desc">Arrastra o has clic a aquí para subir</span>
+                                        </div>
+                                    </div> 
+                                    <div id="error-additional-song-two" style="color: #f4516c" class="form-control-feedback"></div>   
+                                    <span class="m-form__help">Cargue aquí el audio de la canción en formato MP3 ó un video en formato MP4.</span>
+                                    <input type="hidden" name="song[urlAdditionalSongTwo]" value="">
+                                </div>
+                            </div>  
 
                             <!--=====================================
                                 BREVE RESEÑA
@@ -944,7 +988,7 @@
                             <div class="form-group m-form__group m-form__group--sm row">
 
                                 <div id="content-acceptTermsConditions" class="col-lg-9 m-form__group-sub">
-                                    <label class="form-control-label">Términos y Condiciones *</label>
+                                    <label class="form-control-label">Términos y Condiciones <span class="text-danger">*</span></label>
                                     <div class="m-radio-inline">
                                         <label class="m-checkbox">
                                             <input type="checkbox" name="acceptTermsConditions" value="1">Haga clic aquí para indicar que ha leído y acepta el
@@ -997,25 +1041,13 @@
             }
             //== Private functions
             var demos = function () {
-                // minimum setup
-                /* $('#datepicker_fecha_nacimiento #m_datepicker_1_validate').datepicker({
-                    rtl: mUtil.isRTL(),
-                    todayHighlight: true,
-                    orientation: "bottom left",
-                    language: 'es',
-                    startDate: '-18y',
-                    templates: arrows
-                }); */
-
                 $('#datepicker_fecha_nacimiento').datepicker({
                     rtl: mUtil.isRTL(),
                     language: 'es',
-                    //startDate: '-18y',
                     todayHighlight: true,
                     orientation: "bottom left",
                     templates: arrows
                 });
-
                 $('#datepicker_fecha_nacimiento2').datepicker({
                     rtl: mUtil.isRTL(),
                     language: 'es',
@@ -1027,10 +1059,7 @@
             }
 
             return {
-                // public functions
-                init: function () {
-                    demos();
-                }
+                init: function () { demos(); }
             };
         }();
 
@@ -1182,7 +1211,7 @@
 
         var dropzone = new Dropzone('.upload-song', {
             url: '{{ route('add.project.audio') }}',
-            acceptedFiles: '.mp3', // 'audio/*'
+            acceptedFiles: 'audio/*,video/*', 
             maxFiles: 1,
             paramName: 'image',
             addRemoveLinks: true,
@@ -1196,6 +1225,48 @@
                 console.log('error: ', file)
                 $("#audio-error").text('Recuerda que solo se admiten archivos en formato MP3.');
                 setTimeout(() => { dropzone.removeFile(file) }, 2000)
+            }
+        });
+
+        /* formatos para dropzone   audio/*, video/*, image/*
+        acceptedFiles: '.3gp,.3gp2,.h261,.h263,.h264,.jpgv,.jpm,.jpgm,.mp4,.mp4v,
+        .mpg4,.mpeg,.mpg,.mpe,.m1v,.m2v,.ogv,.qt,.mov,.fli,.flv,.mks,.mkv,.wmv,.avi,
+        .movie,.smv,.g3,.jpeg,.jpg,.jpe,.png,.btif,.sgi,.svg,.tiff,.tif', */
+
+        // canciones adicionales.
+        var fileAdditionalSongOne, fileAdditionalSongTwo;
+        var dropzoneAdditionalSongOne = new Dropzone('.additional-song-one', {
+            url: '{{ route('add.project.audio') }}',
+            acceptedFiles: 'audio/*,video/*', 
+            maxFiles: 1,
+            paramName: 'image',
+            addRemoveLinks: true,
+            headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+            success: function (file, response) {
+                fileAdditionalSongOne = file;
+                $("#error-additional-song-one").text('');
+                $("input[name='song[urlAdditionalSongOne]']").val(response); 
+            },
+            error: function (file, e, i, o, u) {
+                $("#error-additional-song-one").text('Por favor revisa el formato del archivo que deseas subir.');
+                setTimeout(() => { dropzoneAdditionalSongOne.removeFile(file) }, 2000)
+            }
+        });
+        var dropzoneAdditionalSongTwo = new Dropzone('.additional-song-two', {
+            url: '{{ route('add.project.audio') }}',
+            acceptedFiles: 'audio/*,video/*', 
+            maxFiles: 1,
+            paramName: 'image',
+            addRemoveLinks: true,
+            headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+            success: function (file, response) {
+                fileAdditionalSongTwo = file;
+                $("#error-additional-song-two").text('');
+                $("input[name='song[urlAdditionalSongTwo]']").val(response);
+            },
+            error: function (file, e, i, o, u) {
+                $("#error-additional-song-two").text('Por favor revisa el formato del archivo que deseas subir.');
+                setTimeout(() => { dropzoneAdditionalSongTwo.removeFile(file) }, 2000)
             }
         });
 

@@ -48,6 +48,7 @@ $('#select-actuara-como').on('change', function() {
                 $('#content-informacion-menor-edad').hide();
                 $('#content-informacion-grupo-musical').hide();
                 $('#content-informacion-subir-cancion').show();
+                $("#aspirant-document-type option[value='2']").hide(); // ocultar cedula de extranjeria
                 $('#btn-enviar-datos').show();
             break;
         case '2': $('#title-info-aspirante').html('Información del representante para el menor de edad');
@@ -55,6 +56,7 @@ $('#select-actuara-como').on('change', function() {
                 $('#content-informacion-menor-edad').show();
                 $('#content-informacion-grupo-musical').hide();
                 $('#content-informacion-subir-cancion').show();
+                $("#aspirant-document-type option[value='2']").show(); // mostrar cedula de extranjeria
                 $('#btn-enviar-datos').show();
             break;
     }
@@ -122,6 +124,26 @@ $("input[name='aspirante[partGroup]']").click( () => {
         $("#rol-member").hide(); 
     }
 });
+
+// vento para agregar nuevas canciones.
+var firstClick = true;
+$("#add-song").click( () => {
+    console.log('value:: ', firstClick)
+    if (firstClick) {
+        $('#additional-songs').show();
+        $('#add-song').html('Cancelar');
+        firstClick =  false;
+    } else {
+        $('#additional-songs').hide();
+        $('#add-song').html('Agregar canciones');
+        $("input[name='song[additionalSongOne]']").val(''); 
+        $("input[name='song[additionalSongTwo]']").val(''); 
+        if (fileAdditionalSongOne) dropzoneAdditionalSongOne.removeFile(fileAdditionalSongOne)
+        if (fileAdditionalSongTwo) dropzoneAdditionalSongTwo.removeFile(fileAdditionalSongTwo)
+        firstClick =  true;
+    }
+});
+
 
 /*  funciones para agragar un nuevo integrante  */
 var currentMembers = 0;
