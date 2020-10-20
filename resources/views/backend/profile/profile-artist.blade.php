@@ -410,7 +410,7 @@
                                                                  id="m-dropzone-three">
                                                                 <div
                                                                     class="m-dropzone__msg dz-message needsclick">
-                                                                    <h3 class="m-dropzone__msg-title">{{ __('Actualizar documento de identidad') }}</h3>
+                                                                    <h3 class="m-dropzone__msg-title">Subir documento de identificación por ambos lados</h3>
                                                                     <span
                                                                         class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
                                                                 </div>
@@ -1432,7 +1432,7 @@
                                                                             <div
                                                                                 class="m-dropzone__msg dz-message needsclick">
 
-                                                                                <h3 class="m-dropzone__msg-title">{{ __('Actualizar documento de identidad') }}</h3>
+                                                                                <h3 class="m-dropzone__msg-title">Subir documento de identificación por ambos lados</h3>
                                                                                 <span
                                                                                     class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
                                                                             </div>
