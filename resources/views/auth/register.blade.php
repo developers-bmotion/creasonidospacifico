@@ -79,6 +79,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
     <!--begin::Global Theme Styles -->
     <link href="/backend/assets/demo/base/style.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="/css/main-custom.css" rel="stylesheet" type="text/css"/>
 
     <!--RTL version:<link href="/backend/assets/demo/base/style.bundle.rtl.css" rel="stylesheet" type="text/css" />-->
 
@@ -100,7 +101,7 @@ License: You must have a valid license purchased only from themeforest(the above
             <div class="m-grid__item m-grid__item--order-tablet-and-mobile-2 m-login__aside">
                 <div class="m-stack m-stack--hor m-stack--desktop">
                     <div class="m-stack__item m-stack__item--fluid">
-                        <div class="m-login__wrapper">
+                        <div class="m-login__wrapper login-top">
                             <div class="m-login__logo">
                                 <a href="#">
                                     <img style="width: 29rem;" src="/images/logo-creasonidos.png">
@@ -151,7 +152,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
                             <div class="m-login__signin">
                                 <div class="m-login__head">
-                                    <h3 class="m-login__title">Crear Cuenta</h3>
+                                    <h3 class="m-login__title">Primero crea una cuenta</h3>
                                     <div class="m-login__desc">Ingrese por favor los siguientes datos:</div>
                                 </div>
 
@@ -241,15 +242,17 @@ License: You must have a valid license purchased only from themeforest(the above
                     </div>
                 </div>
             </div>
-            <div class="m-grid__item m-grid__item--fluid m-grid m-grid--center m-grid--hor m-grid__item--order-tablet-and-mobile-1	m-login__content m-grid-item--center"
-                 style="background-image: url(/images/imglogin.png)">
+            <div class="background_register m-grid__item m-grid__item--fluid m-grid m-grid--center m-grid--hor m-grid__item--order-tablet-and-mobile-1	m-login__content m-grid-item--center"
+                 {{-- style="background-image: url(/images/imglogin.png)" --}}
+                 >
                 <div class="m-grid__item">
-                    <h3 class="m-login__welcome">CREA SONIDOS PACIFICO</h3>
-                    <p class="m-login__msg">
-                        Una oportunidad para mostrar tu talento
+                    {{-- <h3 class="title-login m-login__welcome">CREA SONIDOS PACIFICO</h3> --}}
+                    <p class="parrafo-register m-login__msg">
+                        Amplifiquemos el talento musical de la región al mundo.
                     </p>
                 </div>
             </div>
+
         </div>
     </div>
 

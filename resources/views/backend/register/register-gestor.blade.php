@@ -63,7 +63,7 @@
 
         <form method="post" action="{{ route('create.new.aspirant') }}" enctype="multipart/form-data"
               class="m-form m-form--label-align-left- m-form--state-" id="m_form_new_register">
-        @csrf 
+        @csrf
 
         <!--=====================================
                 CONTENIDO PARA SELECCIONAR LA INFORMACIÓN LEGAL
@@ -306,7 +306,7 @@
                                         <div class="col-lg-6 m-form__group-sub">
                                             <label for="">Imagen documento identificación frente</label>
                                             <div class="m-dropzone file-image-document-aspirante-frente m-dropzone--success"
-                                                 action="inc/api/dropzone/upload.php" id="m-dropzone-three">
+                                                 action="" >{{-- id="m-dropzone-three" --}}
                                                 <div class="m-dropzone__msg dz-message needsclick">
                                                     <h3 class="m-dropzone__msg-title">Subir documento de identificación</h3>
                                                     <span class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
@@ -434,6 +434,47 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <!--=====================================
+                                EL ASPIRANTE FORMA PARTE DEL GRUPO
+                            ======================================-->
+                            <div id="forma-parte-grupo" style="display: none">
+                                <div class="m-separator m-separator--dashed m-separator--lg"></div>
+
+                                <div class="m-form__section">
+                                    <div class="m-form__heading">
+                                        <h3 class="m-form__heading-title">Información del aspirante si forma parte del grupo
+                                            <i data-toggle="m-tooltip" data-width="auto" class="m-form__heading-help-icon flaticon-info"
+                                               title="Datos importantes del lugar y sitio de nacimiento"></i>
+                                        </h3>
+                                    </div>
+
+                                    <div class="m-form__group form-group">
+                                        <div class="col-lg-12 m-form__group-sub">
+                                            <label for="">¿Usted como aspirante forma parte del grupo?</label>
+                                            <div class="m-radio-inline">
+                                                <label class="m-radio">
+                                                    <input type="radio" name="aspirante[partGroup]" value="1"> Si
+                                                    <span></span>
+                                                </label>
+                                                <label class="m-radio">
+                                                    <input type="radio" name="aspirante[partGroup]" value="2" checked="checked"> No
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div id="rol-member" class="form-group m-form__group row" style="display: none">
+                                        <div class="col-lg-6 m-form__group-sub">
+                                            <label class="form-control-label">Instrumento que interpreta</label>
+                                            <input type="num" name="aspirante[rolMember]" class="form-control m-input" placeholder="" value="">                        
+                                            <span class="m-form__help">Ingrese el rol que desempeña dentro del grupo (Guitarrista, Vocalista, Pianista, etc.)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -761,7 +802,7 @@
                     <div class="row">
                         <div class="col col-lg-12" style="padding-bottom: 1.5rem;">
                             <div class="row" style="padding-left: 1rem;">
-                                <div id="content-aspirante_nameTeam" class="col-lg-4 col-md-4 col-12 m-form__group-sub" style="display: none;">
+                                <div class="col-lg-4 col-md-4 col-12 m-form__group-sub">
                                     <label class="form-control-label">Nombre de la agrupación musical *</label>
                                     <input type="text" name="aspirante[nameTeam]" class="form-control m-input"
                                            placeholder="" value="">
@@ -800,7 +841,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <!--=====================================
                 INFORMACIÓN DE LA CANCION
             ======================================-->
@@ -825,11 +866,11 @@
                 </div>
 
                 <div class="m-portlet__body">
-                    <div class="row">  
-                        <div class="col col-lg-12" style="padding: 0 2rem 1rem 2rem;">                      
+                    <div class="row">
+                        <div class="col col-lg-12" style="padding: 0 2rem 1rem 2rem;">
                             <!--=====================================
                                 NOMBRE DE LA CANCIÓN
-                            ======================================-->                        
+                            ======================================-->
                             <div class="form-group m-form__group row">
                                 <div id="content-song_nameProject" class="col-lg-6 m-form__group-sub">
                                     <label class="form-control-label" form="nombreProyecto">Nombre de la canción *</label>
@@ -855,12 +896,12 @@
                                         <option value="">Seleccione una opción</option>
                                         @foreach($categories as $tCategorie)
                                             <option value="{{ $tCategorie->id }}">{{ $tCategorie->category }}</option>
-                                        @endforeach                                    
+                                        @endforeach
                                     </select>
                                     <div id="error-song_categoryID" class="form-control-feedback" style="display: none"></div>
                                     <span class="m-form__help">{{ __('categoria_de_proyecto') }}</span>
-                                </div>     
-                                
+                                </div>
+
                                 <div id="content-song_urlSong" class="col-lg-6 m-form__group-sub">
                                     <label class="form-control-label" form="nombreProyecto">Subir canción *
                                         <span class="text-danger">(Tenga en cuenta que la canción que va a subir aquí, participará en el concurso)</span>
@@ -870,14 +911,14 @@
                                             <h3 class="m-dropzone__msg-title">Agregue su canción en formato MP3</h3>
                                             <span class="m-dropzone__msg-desc">Arrastra o has clic a aquí para subir</span>
                                         </div>
-                                    </div>                                       
+                                    </div>
                                     <div id="audio-error" style="color: #f4516c" class="form-control-feedback"></div>
                                     <div id="error-song_urlSong" class="form-control-feedback" style="display: none"></div>
                                     <span class="m-form__help">Cargue aquí el audio de la canción en formato Mp3.</span>
                                     <input type="hidden" name="song[urlSong]" value="">
                                 </div>
-                            </div>   
-                        
+                            </div>
+
                             <!--=====================================
                                 BREVE RESEÑA
                             ======================================-->
@@ -907,7 +948,7 @@
                                     <div class="m-radio-inline">
                                         <label class="m-checkbox">
                                             <input type="checkbox" name="acceptTermsConditions" value="1">Haga clic aquí para indicar que ha leído y acepta el
-                                            acuerdo de Términos y Condiciones.
+                                            acuerdo de <a target="_blank" href="https://creasonidos.com/terminos-y-condiciones/"><span style="color: #CE7250">Términos y Condiciones.</span></a>
                                             <span></span>
                                         </label>
                                     </div>
@@ -1031,6 +1072,7 @@
             acceptedFiles: "image/*",
             maxFiles: 1,
             paramName: 'file',
+            addRemoveLinks: true,
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
@@ -1043,6 +1085,7 @@
             acceptedFiles: "image/*",
             maxFiles: 1,
             paramName: 'file',
+            addRemoveLinks: true,
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
@@ -1055,6 +1098,7 @@
             acceptedFiles: "application/pdf",
             maxFiles: 1,
             paramName: 'file',
+            addRemoveLinks: true,
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
@@ -1069,6 +1113,7 @@
             acceptedFiles: "image/*",
             maxFiles: 1,
             paramName: 'file',
+            addRemoveLinks: true,
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
@@ -1081,6 +1126,7 @@
             acceptedFiles: "image/*",
             maxFiles: 1,
             paramName: 'file',
+            addRemoveLinks: true,
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
@@ -1093,6 +1139,7 @@
             acceptedFiles: "application/pdf",
             maxFiles: 1,
             paramName: 'file',
+            addRemoveLinks: true,
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
@@ -1132,7 +1179,7 @@
                 console.log('se genero un error', file)
             }
         });
-        
+
         var dropzone = new Dropzone('.upload-song', {
             url: '{{ route('add.project.audio') }}',
             acceptedFiles: '.mp3', // 'audio/*'

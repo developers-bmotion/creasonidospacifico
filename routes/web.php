@@ -16,6 +16,7 @@ CONSULTAS DE PRUEBAS
 
 use App\Artist;
 use App\Mail\ArtistProjectRevision;
+use App\Mail\NewArtist;
 use App\Project;
 
 Route::get('test' , function (){
@@ -37,8 +38,8 @@ Route::get('/offline', function (){
     return view('vendor.laravelpwa.offline');
 });
 
-Route::get('/prueba-offline', function (){
-   return view('pruebaoffline');
+Route::get('/prueba-email', function (){
+   return new NewArtist('Mauricio');
 });
 
 

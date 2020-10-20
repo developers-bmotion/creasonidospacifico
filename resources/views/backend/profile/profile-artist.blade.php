@@ -95,7 +95,7 @@
                                         Información del aspirante o representante
                                     </a>
                                 </li>
-{{-- @dd($artist); --}}
+                                {{-- @dd($artist); --}}
                                 @if(count($artist->projects) !== 0)
                                     <li class="nav-item m-tabs__item">
                                         <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_2"
@@ -139,11 +139,19 @@
                                         <div class="col-md-4 mb-4">
                                             <div class="m-scrollable update_asp_profile" data-scrollable="true"
                                                  style="">
-                                                <img class="ml-4"
-                                                     style="border-radius:8rem; width:7rem"
-                                                     src="{{$artist->users->picture}}">
-                                                     <i class="flaticon-edit ml-3 update_img_profile_asp"
-                                           style="color:#716aca; cursor:pointer;"></i>
+                                                @if(auth()->user()->picture == null || auth()->user()->picture == '' || auth()->user()->picture =='/images/users/')
+                                                    <img class="ml-4"
+                                                         style="border-radius:8rem; width:7rem"
+                                                         src="/backend/assets/app/media/img/users/perfil.jpg">
+                                                    <i class="flaticon-edit ml-3 update_img_profile_asp"
+                                                       style="color:#716aca; cursor:pointer;"></i>
+                                                @else
+                                                    <img class="ml-4"
+                                                         style="border-radius:8rem; width:7rem"
+                                                         src="{{$artist->users->picture}}">
+                                                    <i class="flaticon-edit ml-3 update_img_profile_asp"
+                                                       style="color:#716aca; cursor:pointer;"></i>
+                                                @endif
                                             </div>
                                             <div class="col-md-4 drop_prof_asp" style="display: none">
                                                 <div class="form-group m-form__group ">
@@ -160,8 +168,8 @@
                                                     </div>
                                                 </div>
                                                 <button type="button" class="btn btn-primary cancel_prof_asp"
-                                                style="display:none">Cancelar
-                                        </button>
+                                                        style="display:none">Cancelar
+                                                </button>
 
                                             </div>
 
@@ -175,8 +183,8 @@
                                                 <img class="ml-4"
                                                      style="border-radius:8rem; width:7rem"
                                                      src="/default/user.png">
-                                                     <i class="flaticon-edit ml-3 update_img_profile_asp"
-                                           style="color:#716aca; cursor:pointer;"></i>
+                                                <i class="flaticon-edit ml-3 update_img_profile_asp"
+                                                   style="color:#716aca; cursor:pointer;"></i>
                                             </div>
 
                                         </div>
@@ -195,8 +203,8 @@
                                                 </div>
                                             </div>
                                             <button type="button" class="btn btn-primary cancel_prof_asp"
-                                                style="display:none">Cancelar
-                                        </button>
+                                                    style="display:none">Cancelar
+                                            </button>
                                         </div>
 
                                     @endif
@@ -234,7 +242,9 @@
                                     <div class="col-md-4">
                                         <label style="font-weight: bold">Departamento de residencia:</label>
                                         <div class="m-scrollable" data-scrollable="true" style="">
+
                                             {{$artist->residencePlace->departaments->descripcion}}</p>
+
                                         </div>
 
                                     </div>
@@ -248,6 +258,7 @@
                                     <div class="col-md-4">
                                         <label style="font-weight: bold">Departamento de nacimiento:</label>
                                         <div class="m-scrollable" data-scrollable="true" style="">
+
                                             {{$artist->city->departaments->descripcion}}</p>
                                         </div>
 
@@ -347,14 +358,17 @@
 
                                             <div class="m-form__group form-group">
                                                 <div class="col-lg-12 m-form__group-sub">
-                                                    <label for="">Seleccione el tipo de formato para subir el documento de identificación</label>
+                                                    <label for="">Seleccione el tipo de formato para subir el documento
+                                                        de identificación</label>
                                                     <div class="m-radio-inline">
                                                         <label class="m-radio">
-                                                            <input type="radio" name="aspirante[identificacionDoc]" value="1" checked="checked"> Imagen
+                                                            <input type="radio" name="aspirante[identificacionDoc]"
+                                                                   value="1" checked="checked"> Imagen
                                                             <span></span>
                                                         </label>
                                                         <label class="m-radio">
-                                                            <input type="radio" name="aspirante[identificacionDoc]" value="2"> PDF
+                                                            <input type="radio" name="aspirante[identificacionDoc]"
+                                                                   value="2"> PDF
                                                             <span></span>
                                                         </label>
                                                     </div>
@@ -363,27 +377,34 @@
                                                 <div id="image-docuemnt-aspirante" class="form-group m-form__group row">
                                                     <div class="col-lg-6 m-form__group-sub">
                                                         <label for="">Imagen documento identificación frente</label>
-                                                        <div class="m-dropzone file-image-document-aspirante-frente m-dropzone--success"
+                                                        <div
+                                                            class="m-dropzone file-image-document-aspirante-frente m-dropzone--success"
                                                             action="inc/api/dropzone/upload.php" id="m-dropzone-three">
                                                             <div class="m-dropzone__msg dz-message needsclick">
-                                                                <h3 class="m-dropzone__msg-title">Subir documento de identificación</h3>
-                                                                <span class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                                                <h3 class="m-dropzone__msg-title">Subir documento de
+                                                                    identificación</h3>
+                                                                <span
+                                                                    class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6 m-form__group-sub">
                                                         <label for="">Imagen documento identificación atras</label>
-                                                        <div class="m-dropzone file-image-document-aspirante-atras m-dropzone--success"
+                                                        <div
+                                                            class="m-dropzone file-image-document-aspirante-atras m-dropzone--success"
                                                             action="inc/api/dropzone/upload.php" id="m-dropzone-three">
                                                             <div class="m-dropzone__msg dz-message needsclick">
-                                                                <h3 class="m-dropzone__msg-title">Subir documento de identificación</h3>
-                                                                <span class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                                                <h3 class="m-dropzone__msg-title">Subir documento de
+                                                                    identificación</h3>
+                                                                <span
+                                                                    class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
 
-                                                <div id="pdf-docuemnt-aspirante" style="display: none" class="form-group m-form__group row">
+                                                <div id="pdf-docuemnt-aspirante" style="display: none"
+                                                     class="form-group m-form__group row">
                                                     <div class="col">
                                                         <div class="form-group m-form__group ">
                                                             <div class="m-dropzone dropzone m-dropzone--success"
@@ -400,11 +421,16 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <form id="form_update_img" method="post" action="{{ route('update.imgdoc.artist') }}" enctype="multipart/form-data"
-                                                 class="m-form m-form--label-align-left- m-form--state-" id="actualizar_img_asp">
-                                                 @csrf {{ method_field('PUT') }}
-                                            <input type="hidden" name="aspirante[urlImageDocumentFrente]" class="form-control m-input" value="">
-                                            <input type="hidden" name="aspirante[urlImageDocumentAtras]" class="form-control m-input" value="">
+                                            <form id="form_update_img" method="post"
+                                                  action="{{ route('update.imgdoc.artist') }}"
+                                                  enctype="multipart/form-data"
+                                                  class="m-form m-form--label-align-left- m-form--state-"
+                                                  id="actualizar_img_asp">
+                                                @csrf {{ method_field('PUT') }}
+                                                <input type="hidden" name="aspirante[urlImageDocumentFrente]"
+                                                       class="form-control m-input" value="">
+                                                <input type="hidden" name="aspirante[urlImageDocumentAtras]"
+                                                       class="form-control m-input" value="">
 
                                             </form>
 
@@ -417,7 +443,6 @@
                                         <button id="btn_enviar_asp" type="button" class="btn btn-primary  enviar_asp"
                                                 style="display:none">enviar
                                         </button>
-
 
 
                                     </div>
@@ -623,7 +648,8 @@
                                                         <div class="row pb-2">
                                                             <div class="col-12">
                                                                 <label
-                                                                    style="font-weight: bold">Nombre de la agrupación musical:</label>
+                                                                    style="font-weight: bold">Nombre de la agrupación
+                                                                    musical:</label>
                                                                 <div
                                                                     class="m-scrollable"
                                                                     data-scrollable="true"
@@ -636,7 +662,7 @@
                                                         </div>
 
                                                         @foreach ($artist->teams as $team)
-                                                        {{-- @dd($team) --}}
+                                                            {{-- @dd($team) --}}
                                                             <div class="m-accordion__item">
                                                                 <div class="m-accordion__item-head collapsed"
                                                                      role="tab"
@@ -890,62 +916,114 @@
                                                                                             <div
                                                                                                 class="row drop_pdf_team{{ $loop->iteration }}"
                                                                                                 style="display: none">
-                                                                                                <div class="m-form__group form-group">
-                                                                                                    <div class="col-lg-12 m-form__group-sub">
-                                                                                                        <label for="">Seleccione el tipo de formato para subir el documento de identificación</label>
-                                                                                                        <div class="m-radio-inline">
-                                                                                                            <label class="m-radio">
-                                                                                                                <input type="radio" onClick="changeOptionDocument(this, {{$loop->iteration}})" name="team[identificacionDoc]{{ $loop->iteration }}" value="1" checked="checked"> Imagen
-                                                                                                                <span></span>
-                                                                                                            </label>
-                                                                                                            <label class="m-radio">
-                                                                                                                <input type="radio"  onClick="changeOptionDocument(this, {{$loop->iteration}})" name="team[identificacionDoc]{{ $loop->iteration }}" value="2"> PDF
-                                                                                                                <span></span>
-                                                                                                            </label>
-                                                                                                        </div>
-                                                                                                    </div>
-
-                                                                                                    <div id="image-docuemnt-team{{ $loop->iteration }}" class="form-group m-form__group row">
-                                                                                                        <div class="col-lg-6 m-form__group-sub">
-                                                                                                            <label for="">Imagen documento identificación frente</label>
-                                                                                                            <div class="m-dropzone file-image-document-team-frente{{ $loop->iteration }} m-dropzone--success"
-                                                                                                                action="inc/api/dropzone/upload.php" id="m-dropzone-three">
-                                                                                                                <div class="m-dropzone__msg dz-message needsclick">
-                                                                                                                    <h3 class="m-dropzone__msg-title">Subir documento de identificación</h3>
-                                                                                                                    <span class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
-                                                                                                                </div>
-                                                                                                            </div>
-                                                                                                        </div>
-                                                                                                        <div class="col-lg-6 m-form__group-sub">
-                                                                                                            <label for="">Imagen documento identificación atras</label>
-                                                                                                            <div class="m-dropzone file-image-document-team-atras{{ $loop->iteration }} m-dropzone--success"
-                                                                                                                action="inc/api/dropzone/upload.php" id="m-dropzone-three">
-                                                                                                                <div class="m-dropzone__msg dz-message needsclick">
-                                                                                                                    <h3 class="m-dropzone__msg-title">Subir documento de identificación</h3>
-                                                                                                                    <span class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
-                                                                                                                </div>
-                                                                                                            </div>
-                                                                                                        </div>
-                                                                                                    </div>
-
-                                                                                                    <div id="pdf-docuemnt-team{{ $loop->iteration }}" style="display: none" class="form-group m-form__group row">
-                                                                                                        <div
-                                                                                                    class="col">
+                                                                                                <div
+                                                                                                    class="m-form__group form-group">
                                                                                                     <div
-                                                                                                        class="form-group m-form__group ">
+                                                                                                        class="col-lg-12 m-form__group-sub">
+                                                                                                        <label for="">Seleccione
+                                                                                                            el tipo de
+                                                                                                            formato para
+                                                                                                            subir el
+                                                                                                            documento de
+                                                                                                            identificación</label>
                                                                                                         <div
-                                                                                                            class="m-dropzone dropzone-team{{ $loop->iteration }} m-dropzone--success"
-                                                                                                            action="inc/api/dropzone/upload.php"
-                                                                                                            id="m-dropzone-three">
+                                                                                                            class="m-radio-inline">
+                                                                                                            <label
+                                                                                                                class="m-radio">
+                                                                                                                <input
+                                                                                                                    type="radio"
+                                                                                                                    onClick="changeOptionDocument(this, {{$loop->iteration}})"
+                                                                                                                    name="team[identificacionDoc]{{ $loop->iteration }}"
+                                                                                                                    value="1"
+                                                                                                                    checked="checked">
+                                                                                                                Imagen
+                                                                                                                <span></span>
+                                                                                                            </label>
+                                                                                                            <label
+                                                                                                                class="m-radio">
+                                                                                                                <input
+                                                                                                                    type="radio"
+                                                                                                                    onClick="changeOptionDocument(this, {{$loop->iteration}})"
+                                                                                                                    name="team[identificacionDoc]{{ $loop->iteration }}"
+                                                                                                                    value="2">
+                                                                                                                PDF
+                                                                                                                <span></span>
+                                                                                                            </label>
+                                                                                                        </div>
+                                                                                                    </div>
+
+                                                                                                    <div
+                                                                                                        id="image-docuemnt-team{{ $loop->iteration }}"
+                                                                                                        class="form-group m-form__group row">
+                                                                                                        <div
+                                                                                                            class="col-lg-6 m-form__group-sub">
+                                                                                                            <label
+                                                                                                                for="">Imagen
+                                                                                                                documento
+                                                                                                                identificación
+                                                                                                                frente</label>
                                                                                                             <div
-                                                                                                                class="m-dropzone__msg dz-message needsclick">
-                                                                                                                <h3 class="m-dropzone__msg-title">{{ __('Actualizar documento de identidad') }}</h3>
-                                                                                                                <span
-                                                                                                                    class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                                                                                                class="m-dropzone file-image-document-team-frente{{ $loop->iteration }} m-dropzone--success"
+                                                                                                                action="inc/api/dropzone/upload.php"
+                                                                                                                id="m-dropzone-three">
+                                                                                                                <div
+                                                                                                                    class="m-dropzone__msg dz-message needsclick">
+                                                                                                                    <h3 class="m-dropzone__msg-title">
+                                                                                                                        Subir
+                                                                                                                        documento
+                                                                                                                        de
+                                                                                                                        identificación</h3>
+                                                                                                                    <span
+                                                                                                                        class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        <div
+                                                                                                            class="col-lg-6 m-form__group-sub">
+                                                                                                            <label
+                                                                                                                for="">Imagen
+                                                                                                                documento
+                                                                                                                identificación
+                                                                                                                atras</label>
+                                                                                                            <div
+                                                                                                                class="m-dropzone file-image-document-team-atras{{ $loop->iteration }} m-dropzone--success"
+                                                                                                                action="inc/api/dropzone/upload.php"
+                                                                                                                id="m-dropzone-three">
+                                                                                                                <div
+                                                                                                                    class="m-dropzone__msg dz-message needsclick">
+                                                                                                                    <h3 class="m-dropzone__msg-title">
+                                                                                                                        Subir
+                                                                                                                        documento
+                                                                                                                        de
+                                                                                                                        identificación</h3>
+                                                                                                                    <span
+                                                                                                                        class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                                                                                                </div>
                                                                                                             </div>
                                                                                                         </div>
                                                                                                     </div>
-                                                                                                </div>
+
+                                                                                                    <div
+                                                                                                        id="pdf-docuemnt-team{{ $loop->iteration }}"
+                                                                                                        style="display: none"
+                                                                                                        class="form-group m-form__group row">
+                                                                                                        <div
+                                                                                                            class="col">
+                                                                                                            <div
+                                                                                                                class="form-group m-form__group ">
+                                                                                                                <div
+                                                                                                                    class="m-dropzone dropzone-team{{ $loop->iteration }} m-dropzone--success"
+                                                                                                                    action="inc/api/dropzone/upload.php"
+                                                                                                                    id="m-dropzone-three">
+                                                                                                                    <div
+                                                                                                                        class="m-dropzone__msg dz-message needsclick">
+                                                                                                                        <h3 class="m-dropzone__msg-title">{{ __('Actualizar documento de identidad') }}</h3>
+                                                                                                                        <span
+                                                                                                                            class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
                                                                                                     </div>
                                                                                                 </div>
 
@@ -953,11 +1031,26 @@
                                                                                             </div>
                                                                                             <i class="flaticon-edit ml-3 update_pdf_team{{ $loop->iteration }}"
                                                                                                style="color:#716aca; cursor:pointer;"></i>
-                                                                                            <form id="form_update_img_team{{ $loop->iteration }}" method="post" action="{{ route('update.imgdoc.team') }}" enctype="multipart/form-data" class="m-form m-form--label-align-left- m-form--state-" id="actualizar_img_team">
-                                                                                                        @csrf {{ method_field('PUT') }}
-                                                                                                    <input type="hidden" name="team[urlImageDocumentFrente]{{ $loop->iteration }}" class="form-control m-input" value="">
-                                                                                                    <input type="hidden" name="team[urlImageDocumentAtras]{{ $loop->iteration }}" class="form-control m-input" value="">
-                                                                                                    <input type="hidden" name="team[id]" class="form-control m-input" value="{{$team->id}}">
+                                                                                            <form
+                                                                                                id="form_update_img_team{{ $loop->iteration }}"
+                                                                                                method="post"
+                                                                                                action="{{ route('update.imgdoc.team') }}"
+                                                                                                enctype="multipart/form-data"
+                                                                                                class="m-form m-form--label-align-left- m-form--state-"
+                                                                                                id="actualizar_img_team">
+                                                                                                @csrf {{ method_field('PUT') }}
+                                                                                                <input type="hidden"
+                                                                                                       name="team[urlImageDocumentFrente]{{ $loop->iteration }}"
+                                                                                                       class="form-control m-input"
+                                                                                                       value="">
+                                                                                                <input type="hidden"
+                                                                                                       name="team[urlImageDocumentAtras]{{ $loop->iteration }}"
+                                                                                                       class="form-control m-input"
+                                                                                                       value="">
+                                                                                                <input type="hidden"
+                                                                                                       name="team[id]"
+                                                                                                       class="form-control m-input"
+                                                                                                       value="{{$team->id}}">
 
                                                                                             </form>
                                                                                             <button
@@ -966,7 +1059,13 @@
                                                                                                 style="display:none">
                                                                                                 Cancelar
                                                                                             </button>
-                                                                                            <button id="btn_enviar_team{{ $loop->iteration }}" type="button" class="btn btn-primary  enviar_team{{ $loop->iteration }}" style="display:none">enviar</button>
+                                                                                            <button
+                                                                                                id="btn_enviar_team{{ $loop->iteration }}"
+                                                                                                type="button"
+                                                                                                class="btn btn-primary  enviar_team{{ $loop->iteration }}"
+                                                                                                style="display:none">
+                                                                                                enviar
+                                                                                            </button>
 
 
                                                                                         </div>
@@ -989,7 +1088,8 @@
                                                                             <h5 class="modal-title"
                                                                                 id="exampleModalLongTitle">
                                                                                 Documento
-                                                                                de identificación de {{ $team->name}}</h5>
+                                                                                de identificación
+                                                                                de {{ $team->name}}</h5>
                                                                             <button type="button" class="close"
                                                                                     data-dismiss="modal"
                                                                                     aria-label="Close">
@@ -1005,13 +1105,15 @@
                                                                                         correctamente</p>
                                                                                 @else
                                                                                     <div class="form-group">
-                                                                                        <label for="">Parte frontal del documento:</label>
+                                                                                        <label for="">Parte frontal del
+                                                                                            documento:</label>
                                                                                         <img style="width: 100%"
                                                                                              src="{{ $team->img_document_front}}"
                                                                                              alt="">
                                                                                     </div>
                                                                                     <div class="form-group">
-                                                                                        <label for="">Parte trasera del documento:</label>
+                                                                                        <label for="">Parte trasera del
+                                                                                            documento:</label>
                                                                                         <img style="width: 100%"
                                                                                              src="{{ $team->img_document_back}}"
                                                                                              alt="">
@@ -1048,6 +1150,7 @@
                                 </div>
                             </div>
                         @endif
+
                         @if(count($artist->beneficiary) !== 0)
                             <div class="tab-pane " id="m_user_profile_tab_4">
                                 <div class="m-portlet__body ml-5">
@@ -1056,69 +1159,76 @@
 
                                         <div class="biografia col-md-12">
                                             <div class="row">
-
                                                 @if ($artist->beneficiary[0]->picture)
 
                                                     <div class="col-md-4 mb-5 ">
-                                                        <div class="m-scrollable update_ben_profile" data-scrollable="true"
+                                                        <div class="m-scrollable update_ben_profile"
+                                                             data-scrollable="true"
                                                              style="">
                                                             <img class="ml-4"
                                                                  style="border-radius:8rem; width:7rem"
                                                                  src="{{$artist->beneficiary[0]->picture}}">
-                                                                 <i class="flaticon-edit ml-3 update_img_profile_ben"
-                                                                 style="color:#716aca; cursor:pointer;"></i>
-                                                                  </div>
-                                                                  <div class="col-md-4 drop_prof_ben" style="display: none">
-                                                                      <div class="form-group m-form__group ">
+                                                            <i class="flaticon-edit ml-3 update_img_profile_ben"
+                                                               style="color:#716aca; cursor:pointer;"></i>
+                                                        </div>
+                                                        <div class="col-md-4 drop_prof_ben" style="display: none">
+                                                            <div class="form-group m-form__group ">
 
-                                                                          <div class="m-dropzone dropzone_prof_ben m-dropzone--success"
-                                                                               action="inc/api/dropzone/upload.php"
-                                                                               id="m-dropzone-three" style="width: 14rem;height: -1px;">
-                                                                              <div
-                                                                                  class="m-dropzone__msg dz-message needsclick">
-                                                                                  <h3 class="m-dropzone__msg-title">{{ __('actualizar_foto_perfil') }}</h3>
-                                                                                  <span
-                                                                                      class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
-                                                                              </div>
-                                                                          </div>
-                                                                      </div>
-                                                                      <button type="button" class="btn btn-primary cancel_prof_ben"
-                                                                      style="display:none">Cancelar
-                                                              </button>
+                                                                <div
+                                                                    class="m-dropzone dropzone_prof_ben m-dropzone--success"
+                                                                    action="inc/api/dropzone/upload.php"
+                                                                    id="m-dropzone-three"
+                                                                    style="width: 14rem;height: -1px;">
+                                                                    <div
+                                                                        class="m-dropzone__msg dz-message needsclick">
+                                                                        <h3 class="m-dropzone__msg-title">{{ __('actualizar_foto_perfil') }}</h3>
+                                                                        <span
+                                                                            class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <button type="button"
+                                                                    class="btn btn-primary cancel_prof_ben"
+                                                                    style="display:none">Cancelar
+                                                            </button>
 
-                                                                  </div>
+                                                        </div>
 
                                                     </div>
                                                 @else
 
                                                     <div class="col-md-4 mb-5">
-                                                        <div class="m-scrollable update_ben_profile" data-scrollable="true"
+                                                        <div class="m-scrollable update_ben_profile"
+                                                             data-scrollable="true"
                                                              style="">
                                                             <img class="ml-4 "
                                                                  style="border-radius:8rem; width:7rem"
                                                                  src="/default/user.png">
-                                                                 <i class="flaticon-edit ml-3 update_img_profile_ben"
-                                                                 style="color:#716aca; cursor:pointer;"></i>
-                                                                  </div>
-                                                                  <div class="col-md-4 drop_prof_ben" style="display: none">
-                                                                      <div class="form-group m-form__group ">
+                                                            <i class="flaticon-edit ml-3 update_img_profile_ben"
+                                                               style="color:#716aca; cursor:pointer;"></i>
+                                                        </div>
+                                                        <div class="col-md-4 drop_prof_ben" style="display: none">
+                                                            <div class="form-group m-form__group ">
 
-                                                                          <div class="m-dropzone dropzone_prof_ben m-dropzone--success"
-                                                                               action="inc/api/dropzone/upload.php"
-                                                                               id="m-dropzone-three" style="width: 14rem;height: -1px;">
-                                                                              <div
-                                                                                  class="m-dropzone__msg dz-message needsclick">
-                                                                                  <h3 class="m-dropzone__msg-title">{{ __('actualizar_foto_perfil') }}</h3>
-                                                                                  <span
-                                                                                      class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
-                                                                              </div>
-                                                                          </div>
-                                                                      </div>
-                                                                      <button type="button" class="btn btn-primary cancel_prof_ben"
-                                                                      style="display:none">Cancelar
-                                                              </button>
+                                                                <div
+                                                                    class="m-dropzone dropzone_prof_ben m-dropzone--success"
+                                                                    action="inc/api/dropzone/upload.php"
+                                                                    id="m-dropzone-three"
+                                                                    style="width: 14rem;height: -1px;">
+                                                                    <div
+                                                                        class="m-dropzone__msg dz-message needsclick">
+                                                                        <h3 class="m-dropzone__msg-title">{{ __('actualizar_foto_perfil') }}</h3>
+                                                                        <span
+                                                                            class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <button type="button"
+                                                                    class="btn btn-primary cancel_prof_ben"
+                                                                    style="display:none">Cancelar
+                                                            </button>
 
-                                                                  </div>
+                                                        </div>
                                                     </div>
 
                                                 @endif
@@ -1161,14 +1271,18 @@
                                                 <div class="col-md-4 mt-2">
                                                     <label style="font-weight: bold">Departamento de residencia:</label>
                                                     <div class="m-scrollable" data-scrollable="true" style="">
-                                                        <p>{{ $artist->beneficiary[0]->residencePlace->departaments->descripcion}}</p>
+                                                        @if($artist->beneficiary[0]->residencePlace)
+                                                            <p>{{ $artist->beneficiary[0]->residencePlace->departaments->descripcion}}</p>
+                                                        @endif
                                                     </div>
 
                                                 </div>
                                                 <div class="col-md-4 mt-2">
                                                     <label style="font-weight: bold">Ciudad de residencia:</label>
                                                     <div class="m-scrollable" data-scrollable="true" style="">
-                                                        <p>{{ $artist->beneficiary[0]->residencePlace->descripcion}}</p>
+                                                        @if($artist->beneficiary[0]->residencePlace)
+                                                            <p>{{ $artist->beneficiary[0]->residencePlace->descripcion}}</p>
+                                                        @endif
                                                     </div>
 
                                                 </div>
@@ -1263,43 +1377,62 @@
 
                                                         <div class="m-form__group form-group">
                                                             <div class="col-lg-12 m-form__group-sub">
-                                                                <label for="">Seleccione el tipo de formato para subir el documento de identificación</label>
+                                                                <label for="">Seleccione el tipo de formato para subir
+                                                                    el documento de identificación</label>
                                                                 <div class="m-radio-inline">
                                                                     <label class="m-radio">
-                                                                        <input type="radio" name="beneficiario[identificacionDoc]" value="1" checked="checked"> Imagen
+                                                                        <input type="radio"
+                                                                               name="beneficiario[identificacionDoc]"
+                                                                               value="1" checked="checked"> Imagen
                                                                         <span></span>
                                                                     </label>
                                                                     <label class="m-radio">
-                                                                        <input type="radio" name="beneficiario[identificacionDoc]" value="2"> PDF
+                                                                        <input type="radio"
+                                                                               name="beneficiario[identificacionDoc]"
+                                                                               value="2"> PDF
                                                                         <span></span>
                                                                     </label>
                                                                 </div>
                                                             </div>
 
-                                                            <div id="image-docuemnt-beneficiario" class="form-group m-form__group row">
+                                                            <div id="image-docuemnt-beneficiario"
+                                                                 class="form-group m-form__group row">
                                                                 <div class="col-lg-6 m-form__group-sub">
-                                                                    <label for="">Imagen documento identificación frente</label>
-                                                                    <div class="m-dropzone file-image-document-beneficiario-frente m-dropzone--success"
-                                                                        action="inc/api/dropzone/upload.php" id="m-dropzone-three">
-                                                                        <div class="m-dropzone__msg dz-message needsclick">
-                                                                            <h3 class="m-dropzone__msg-title">Subir documento de identificación</h3>
-                                                                            <span class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                                                    <label for="">Imagen documento identificación
+                                                                        frente</label>
+                                                                    <div
+                                                                        class="m-dropzone file-image-document-beneficiario-frente m-dropzone--success"
+                                                                        action="inc/api/dropzone/upload.php"
+                                                                        id="m-dropzone-three">
+                                                                        <div
+                                                                            class="m-dropzone__msg dz-message needsclick">
+                                                                            <h3 class="m-dropzone__msg-title">Subir
+                                                                                documento de identificación</h3>
+                                                                            <span
+                                                                                class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-6 m-form__group-sub">
-                                                                    <label for="">Imagen documento identificación atras</label>
-                                                                    <div class="m-dropzone file-image-document-beneficiario-atras m-dropzone--success"
-                                                                        action="inc/api/dropzone/upload.php" id="m-dropzone-three">
-                                                                        <div class="m-dropzone__msg dz-message needsclick">
-                                                                            <h3 class="m-dropzone__msg-title">Subir documento de identificación</h3>
-                                                                            <span class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                                                    <label for="">Imagen documento identificación
+                                                                        atras</label>
+                                                                    <div
+                                                                        class="m-dropzone file-image-document-beneficiario-atras m-dropzone--success"
+                                                                        action="inc/api/dropzone/upload.php"
+                                                                        id="m-dropzone-three">
+                                                                        <div
+                                                                            class="m-dropzone__msg dz-message needsclick">
+                                                                            <h3 class="m-dropzone__msg-title">Subir
+                                                                                documento de identificación</h3>
+                                                                            <span
+                                                                                class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
 
-                                                            <div id="pdf-docuemnt-beneficiario" style="display: none" class="form-group m-form__group row">
+                                                            <div id="pdf-docuemnt-beneficiario" style="display: none"
+                                                                 class="form-group m-form__group row">
                                                                 <div class="col">
                                                                     <div class="form-group m-form__group ">
                                                                         <div
@@ -1326,17 +1459,24 @@
                                                     <button type="button" class="btn btn-primary cancel_pdf_ben"
                                                             style="display:none">Cancelar
                                                     </button>
-                                                    <button id="btn_enviar_ben" type="button" class="btn btn-primary  enviar_ben"
-                                                      style="display:none">enviar</button>
+                                                    <button id="btn_enviar_ben" type="button"
+                                                            class="btn btn-primary  enviar_ben"
+                                                            style="display:none">enviar
+                                                    </button>
 
                                                 </div>
-                                                <form id="form_update_img_ben" method="post" action="{{ route('update.imgdoc.ben') }}" enctype="multipart/form-data"
-                                                 class="m-form m-form--label-align-left- m-form--state-" id="actualizar_img_asp">
-                                                 @csrf {{ method_field('PUT') }}
-                                            <input type="hidden" name="beneficiario[urlImageDocumentFrente]" class="form-control m-input" value="">
-                                            <input type="hidden" name="beneficiario[urlImageDocumentAtras]" class="form-control m-input" value="">
+                                                <form id="form_update_img_ben" method="post"
+                                                      action="{{ route('update.imgdoc.ben') }}"
+                                                      enctype="multipart/form-data"
+                                                      class="m-form m-form--label-align-left- m-form--state-"
+                                                      id="actualizar_img_asp">
+                                                    @csrf {{ method_field('PUT') }}
+                                                    <input type="hidden" name="beneficiario[urlImageDocumentFrente]"
+                                                           class="form-control m-input" value="">
+                                                    <input type="hidden" name="beneficiario[urlImageDocumentAtras]"
+                                                           class="form-control m-input" value="">
 
-                                            </form>
+                                                </form>
 
                                                 <div class="col-md-12 mt-3">
 
@@ -1556,10 +1696,10 @@
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
-            addedfile: function(file, response){
+            addedfile: function (file, response) {
                 $('body').loading({
                     message: 'Subiendo documento...',
-                    start:true,
+                    start: true,
                 });
             },
             success: function (file, response) {
@@ -1600,17 +1740,17 @@
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
-            processing: function(file, response){
+            processing: function (file, response) {
                 $('body').loading({
                     message: 'Subiendo documento...',
-                    start:true,
+                    start: true,
                 });
             },
             success: function (file, response) {
                 $("input[name='aspirante[urlImageDocumentFrente]']").val(response);
                 $('body').loading({
 
-                    start:false,
+                    start: false,
                 });
             }
         });
@@ -1622,24 +1762,24 @@
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
-            processing: function(file, response){
+            processing: function (file, response) {
                 $('body').loading({
                     message: 'Subiendo documento...',
-                    start:true,
+                    start: true,
                 });
             },
             success: function (file, response) {
                 $("input[name='aspirante[urlImageDocumentAtras]']").val(response);
                 $('body').loading({
 
-                    start:false,
+                    start: false,
                 });
             }
         });
 
 
-         /* eventos para subir la imagen o pdf del beneficiario */
-         new Dropzone('.file-image-document-beneficiario-frente', {
+        /* eventos para subir la imagen o pdf del beneficiario */
+        new Dropzone('.file-image-document-beneficiario-frente', {
             url: '{{ route('upload.image.document') }}',
             acceptedFiles: "image/*",
             maxFiles: 1,
@@ -1647,17 +1787,17 @@
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
-            processing: function(file, response){
+            processing: function (file, response) {
                 $('body').loading({
                     message: 'Subiendo documento...',
-                    start:true,
+                    start: true,
                 });
             },
             success: function (file, response) {
                 $("input[name='beneficiario[urlImageDocumentFrente]']").val(response);
                 $('body').loading({
 
-                    start:false,
+                    start: false,
                 });
             }
         });
@@ -1669,23 +1809,23 @@
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
-            processing: function(file, response){
+            processing: function (file, response) {
                 $('body').loading({
                     message: 'Subiendo documento...',
-                    start:true,
+                    start: true,
                 });
             },
             success: function (file, response) {
                 $("input[name='beneficiario[urlImageDocumentAtras]']").val(response);
                 $('body').loading({
 
-                    start:false,
+                    start: false,
                 });
             }
         });
 
         //Actualizar imagen de perfil aspirante
-         new Dropzone('.dropzone_prof_asp', {
+        new Dropzone('.dropzone_prof_asp', {
             url: '{{ route('profile.photo.artist') }}',
             acceptedFiles: 'image/*',
             maxFiles: 1,
@@ -1693,10 +1833,10 @@
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
-            addedfile: function(file, response){
+            addedfile: function (file, response) {
                 $('body').loading({
                     message: 'Subiendo imagen...',
-                    start:true,
+                    start: true,
                 });
             },
             success: function (file, response) {
@@ -1738,10 +1878,10 @@
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
-            addedfile: function(file, response){
+            addedfile: function (file, response) {
                 $('body').loading({
                     message: 'Subiendo imagen...',
-                    start:true,
+                    start: true,
                 });
             },
             success: function (file, response) {
@@ -1774,7 +1914,6 @@
         });
 
 
-
         Dropzone.autoDiscover = false;
         // actualizar pdf beneficiario
         new Dropzone('.dropzone-ben', {
@@ -1785,10 +1924,10 @@
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
-            addedfile: function(file, response){
+            addedfile: function (file, response) {
                 $('body').loading({
                     message: 'Subiendo documento...',
-                    start:true,
+                    start: true,
                 });
             },
             success: function (file, response) {
@@ -1832,12 +1971,12 @@
                     'id': value.id,
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
                 },
-                addedfile: function(file, response){
-                $('body').loading({
-                    message: 'Subiendo documento...',
-                    start:true,
-                });
-            },
+                addedfile: function (file, response) {
+                    $('body').loading({
+                        message: 'Subiendo documento...',
+                        start: true,
+                    });
+                },
                 success: function (file, response) {
 
                     $('#inputImagenesPostPlan').val(response);
@@ -1869,52 +2008,52 @@
             });
 
             /* eventos para subir la imagen del team */
-         new Dropzone('.file-image-document-team-frente'+ (key + 1), {
-            url: '{{ route('upload.image.document') }}',
-            acceptedFiles: "image/*",
-            maxFiles: 1,
-            paramName: 'file',
-            headers: {
+            new Dropzone('.file-image-document-team-frente' + (key + 1), {
+                url: '{{ route('upload.image.document') }}',
+                acceptedFiles: "image/*",
+                maxFiles: 1,
+                paramName: 'file',
+                headers: {
 
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            },
-            processing: function(file, response){
-                $('body').loading({
-                    message: 'Subiendo documento...',
-                    start:true,
-                });
-            },
-            success: function (file, response) {
-                $("input[name='team[urlImageDocumentFrente]"+ (key + 1)+"']").val(response);
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                processing: function (file, response) {
+                    $('body').loading({
+                        message: 'Subiendo documento...',
+                        start: true,
+                    });
+                },
+                success: function (file, response) {
+                    $("input[name='team[urlImageDocumentFrente]" + (key + 1) + "']").val(response);
                     $('body').loading({
 
-                        start:false,
+                        start: false,
                     });
-            }
-        });
-        new Dropzone('.file-image-document-team-atras'+ (key + 1), {
-            url: '{{ route('upload.image.document') }}',
-            acceptedFiles: "image/*",
-            maxFiles: 1,
-            paramName: 'file',
-            headers: {
+                }
+            });
+            new Dropzone('.file-image-document-team-atras' + (key + 1), {
+                url: '{{ route('upload.image.document') }}',
+                acceptedFiles: "image/*",
+                maxFiles: 1,
+                paramName: 'file',
+                headers: {
 
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            },
-            processing: function(file, response){
-                $('body').loading({
-                    message: 'Subiendo documento...',
-                    start:true,
-                });
-            },
-            success: function (file, response) {
-                $("input[name='team[urlImageDocumentAtras]"+ (key + 1)+"']").val(response);
-                $('body').loading({
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                processing: function (file, response) {
+                    $('body').loading({
+                        message: 'Subiendo documento...',
+                        start: true,
+                    });
+                },
+                success: function (file, response) {
+                    $("input[name='team[urlImageDocumentAtras]" + (key + 1) + "']").val(response);
+                    $('body').loading({
 
-                    start:false,
-                });
-            }
-        });
+                        start: false,
+                    });
+                }
+            });
         });
 
 
@@ -1946,21 +2085,21 @@
         });
     </script>
 
-{{-- editar identificacion aspirante --}}
-<script>
+    {{-- editar identificacion aspirante --}}
+    <script>
 
-// controles actualizar documentos aspirante
-$("input[name='aspirante[identificacionDoc]']").click( () => {
-    if ($('input:radio[name="aspirante[identificacionDoc]"]:checked').val() === '1') {
-        $("#image-docuemnt-aspirante").show();
-        $(".enviar_asp").show();
-        $("#pdf-docuemnt-aspirante").hide();
-    } else {
-        $("#image-docuemnt-aspirante").hide();
-        $(".enviar_asp").hide();
-        $("#pdf-docuemnt-aspirante").show();
-    }
-});
+        // controles actualizar documentos aspirante
+        $("input[name='aspirante[identificacionDoc]']").click(() => {
+            if ($('input:radio[name="aspirante[identificacionDoc]"]:checked').val() === '1') {
+                $("#image-docuemnt-aspirante").show();
+                $(".enviar_asp").show();
+                $("#pdf-docuemnt-aspirante").hide();
+            } else {
+                $("#image-docuemnt-aspirante").hide();
+                $(".enviar_asp").hide();
+                $("#pdf-docuemnt-aspirante").show();
+            }
+        });
         $('.update_pdf_asp').click(function () {
             $(this).hide();
             $('.cancel_pdf_asp').show();
@@ -1981,7 +2120,7 @@ $("input[name='aspirante[identificacionDoc]']").click( () => {
         });
 
         // coontroles actualizacion imagen perfil
-        $('.update_img_profile_asp').click(function(){
+        $('.update_img_profile_asp').click(function () {
             $('.update_asp_profile').hide();
 
             $('.drop_prof_asp').show();
@@ -1989,7 +2128,7 @@ $("input[name='aspirante[identificacionDoc]']").click( () => {
 
         });
 
-        $('.cancel_prof_asp').click(function(){
+        $('.cancel_prof_asp').click(function () {
             $('.update_asp_profile').show();
 
             $('.drop_prof_asp').hide();
@@ -1998,7 +2137,7 @@ $("input[name='aspirante[identificacionDoc]']").click( () => {
         });
 
         // coontroles actualizacion imagen perfil beneficiario
-        $('.update_img_profile_ben').click(function(){
+        $('.update_img_profile_ben').click(function () {
 
             $('.update_ben_profile').hide();
             $('.drop_prof_ben').show();
@@ -2006,7 +2145,7 @@ $("input[name='aspirante[identificacionDoc]']").click( () => {
 
         });
 
-        $('.cancel_prof_ben').click(function(){
+        $('.cancel_prof_ben').click(function () {
             $('.update_ben_profile').show();
             $('.drop_prof_ben').hide();
             $(this).hide();
@@ -2016,17 +2155,17 @@ $("input[name='aspirante[identificacionDoc]']").click( () => {
     </script>
     {{-- editar identificacion beneficiario --}}
     <script>
-        $("input[name='beneficiario[identificacionDoc]']").click( () => {
-    if ($('input:radio[name="beneficiario[identificacionDoc]"]:checked').val() === '1') {
-        $("#image-docuemnt-beneficiario").show();
-        $(".enviar_ben").show();
-        $("#pdf-docuemnt-beneficiario").hide();
-    } else {
-        $("#image-docuemnt-beneficiario").hide();
-        $(".enviar_ben").hide();
-        $("#pdf-docuemnt-beneficiario").show();
-    }
-});
+        $("input[name='beneficiario[identificacionDoc]']").click(() => {
+            if ($('input:radio[name="beneficiario[identificacionDoc]"]:checked').val() === '1') {
+                $("#image-docuemnt-beneficiario").show();
+                $(".enviar_ben").show();
+                $("#pdf-docuemnt-beneficiario").hide();
+            } else {
+                $("#image-docuemnt-beneficiario").hide();
+                $(".enviar_ben").hide();
+                $("#pdf-docuemnt-beneficiario").show();
+            }
+        });
         $('.update_pdf_ben').click(function () {
             $(this).hide();
             $('.cancel_pdf_ben').show();
@@ -2048,27 +2187,27 @@ $("input[name='aspirante[identificacionDoc]']").click( () => {
 
     </script>
     {{-- editar identificacion team--}}
-<script>
-    function changeOptionDocument(element, member) {
-        // console.log($(element).val(),'element');
-        // console.log(member,'menber');
-    if ($(element).val() === '1'){
-        $(`#image-docuemnt-team${ member }`).show();
-        $(`.enviar_team${ member }`).show();
-        $(`#pdf-docuemnt-team${ member }`).hide();
-    } else {
-        $(`#image-docuemnt-team${ member }`).hide();
-        $(`#pdf-docuemnt-team${ member }`).show();
-        $(`.enviar_team${ member }`).hide();
-    }
-}
+    <script>
+        function changeOptionDocument(element, member) {
+            // console.log($(element).val(),'element');
+            // console.log(member,'menber');
+            if ($(element).val() === '1') {
+                $(`#image-docuemnt-team${member}`).show();
+                $(`.enviar_team${member}`).show();
+                $(`#pdf-docuemnt-team${member}`).hide();
+            } else {
+                $(`#image-docuemnt-team${member}`).hide();
+                $(`#pdf-docuemnt-team${member}`).show();
+                $(`.enviar_team${member}`).hide();
+            }
+        }
 
-$.each( @json($artist->teams), function (key, value) {
+        $.each( @json($artist->teams), function (key, value) {
 
             $('.update_pdf_team' + (key + 1)).click(function () {
                 $(this).hide();
                 $('.cancel_pdf_team' + (key + 1)).show();
-                $(".enviar_team"+ (key + 1)).show();
+                $(".enviar_team" + (key + 1)).show();
 
                 $('.drop_pdf_team' + (key + 1)).show();
                 $('.btn_pdf_team' + (key + 1)).hide();
@@ -2129,10 +2268,10 @@ $.each( @json($artist->teams), function (key, value) {
                 'idproject': idProject,
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
-            processing: function(file, response){
+            processing: function (file, response) {
                 $('body').loading({
                     message: 'Subiendo canción...',
-                    start:true,
+                    start: true,
                 });
                 // this.success();
             },
@@ -2140,7 +2279,7 @@ $.each( @json($artist->teams), function (key, value) {
 
                 $('body').loading({
                     message: 'Subiendo canción...',
-                    start:false,
+                    start: false,
                 });
                 $("#erroresImagen").text('');
                 $('#inputDBAudioAddProject').val(response);
@@ -2192,108 +2331,105 @@ $.each( @json($artist->teams), function (key, value) {
 
     </script>
 
-<script>
-    // evento ddel boton enviar imagenes aspirante
-    $('#btn_enviar_asp').click(function (e) {
-        e.preventDefault();
+    <script>
+        // evento ddel boton enviar imagenes aspirante
+        $('#btn_enviar_asp').click(function (e) {
+            e.preventDefault();
 
-        if( $("input[name='aspirante[urlImageDocumentAtras]']").val() != "" &&  $("input[name='aspirante[urlImageDocumentFrente]']").val() != "" ){
-            $('#form_update_img').submit();
-        swal({
-                "title": "",
-                "text": 'Cargado correctamente',
-                "type": "success",
-                "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
-            }).then((result) => {
-                if(result.value){
+            if ($("input[name='aspirante[urlImageDocumentAtras]']").val() != "" && $("input[name='aspirante[urlImageDocumentFrente]']").val() != "") {
+                $('#form_update_img').submit();
+                swal({
+                    "title": "",
+                    "text": 'Cargado correctamente',
+                    "type": "success",
+                    "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
+                }).then((result) => {
+                    if (result.value) {
 
-                   document.location.reload();
+                        document.location.reload();
+                    }
+                });
+            } else {
+                swal({
+                    "title": "",
+                    "text": 'Debe cargar las dos imagenes del documento',
+                    "type": "error",
+                    "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
+                }).then((result) => {
+                    // document.location.reload();
+                });
+            }
+
+
+        });
+
+        // evento ddel boton enviar imagenes beneficiario
+        $('#btn_enviar_ben').click(function (e) {
+            e.preventDefault();
+
+            if ($("input[name='beneficiario[urlImageDocumentAtras]']").val() != "" && $("input[name='beneficiario[urlImageDocumentFrente]']").val() != "") {
+                $('#form_update_img_ben').submit();
+                swal({
+                    "title": "",
+                    "text": 'Cargado correctamente',
+                    "type": "success",
+                    "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
+                }).then((result) => {
+                    if (result.value) {
+
+                        document.location.reload();
+                    }
+                });
+            } else {
+                swal({
+                    "title": "",
+                    "text": 'Debe cargar las dos imagenes del documento',
+                    "type": "error",
+                    "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
+                }).then((result) => {
+                    // document.location.reload();
+                });
+            }
+
+
+        });
+
+
+        // evento ddel boton enviar imagenes team
+
+        $.each( @json($artist->teams), function (key, value) {
+            $('#btn_enviar_team' + (key + 1)).click(function (e) {
+                e.preventDefault();
+
+
+                if ($("input[name='team[urlImageDocumentAtras]" + (key + 1) + "']").val() != "" && $("input[name='team[urlImageDocumentFrente]" + (key + 1) + "']").val() != "") {
+                    $('#form_update_img_team' + (key + 1)).submit();
+                    swal({
+                        "title": "",
+                        "text": 'Cargado correctamente',
+                        "type": "success",
+                        "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
+                    }).then((result) => {
+                        if (result.value) {
+
+                            //    document.location.reload();
+                        }
+                    });
+                } else {
+                    swal({
+                        "title": "",
+                        "text": 'Debe cargar las dos imagenes del documento',
+                        "type": "error",
+                        "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
+                    }).then((result) => {
+                        // document.location.reload();
+                    });
                 }
+
+
             });
-        }else{
-            swal({
-                "title": "",
-                "text": 'Debe cargar las dos imagenes del documento',
-                "type": "error",
-                "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
-            }).then((result) => {
-                // document.location.reload();
-            });
-        }
-
-
-
-    });
-
-    // evento ddel boton enviar imagenes beneficiario
-    $('#btn_enviar_ben').click(function (e) {
-        e.preventDefault();
-
-        if( $("input[name='beneficiario[urlImageDocumentAtras]']").val() != "" &&  $("input[name='beneficiario[urlImageDocumentFrente]']").val() != "" ){
-            $('#form_update_img_ben').submit();
-        swal({
-                "title": "",
-                "text": 'Cargado correctamente',
-                "type": "success",
-                "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
-            }).then((result) => {
-                if(result.value){
-
-                   document.location.reload();
-                }
-            });
-        }else{
-            swal({
-                "title": "",
-                "text": 'Debe cargar las dos imagenes del documento',
-                "type": "error",
-                "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
-            }).then((result) => {
-                // document.location.reload();
-            });
-        }
-
-
-
-    });
-
-
-    // evento ddel boton enviar imagenes team
-
-    $.each( @json($artist->teams), function (key, value) {
-    $('#btn_enviar_team'+ (key + 1)).click(function (e) {
-        e.preventDefault();
-
-
-        if( $("input[name='team[urlImageDocumentAtras]"+ (key + 1)+"']").val() != "" &&  $("input[name='team[urlImageDocumentFrente]"+ (key + 1)+"']").val() != "" ){
-            $('#form_update_img_team'+ (key + 1)).submit();
-        swal({
-                "title": "",
-                "text": 'Cargado correctamente',
-                "type": "success",
-                "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
-            }).then((result) => {
-                if(result.value){
-
-                //    document.location.reload();
-                }
-            });
-        }else{
-            swal({
-                "title": "",
-                "text": 'Debe cargar las dos imagenes del documento',
-                "type": "error",
-                "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
-            }).then((result) => {
-                // document.location.reload();
-            });
-        }
-
-
-
-    });
-});
-</script>
+        });
+    </script>
 
 @endsection
 
