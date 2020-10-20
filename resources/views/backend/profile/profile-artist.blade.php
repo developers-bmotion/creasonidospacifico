@@ -1159,7 +1159,6 @@
 
                                         <div class="biografia col-md-12">
                                             <div class="row">
-
                                                 @if ($artist->beneficiary[0]->picture)
 
                                                     <div class="col-md-4 mb-5 ">
