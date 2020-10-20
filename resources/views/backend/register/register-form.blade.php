@@ -201,13 +201,8 @@
                                 ======================================-->
                                 <div class="form-group m-form__group row">
                                     <div id="content-aspirante_documentType" class="col-lg-6 m-form__group-sub">
-<<<<<<< HEAD
                                         <label class="form-control-label">Tipo de documento *</label>
                                         <select id="aspirant-document-type" name="aspirante[documentType]" class="form-control m-input">
-=======
-                                        <label class="form-control-label">Tipo de documento <span class="text-danger">*</span></label>
-                                        <select name="aspirante[documentType]" class="form-control m-bootstrap-select m_selectpicker">
->>>>>>> 65b5a62122e186b94734d4c1c56e69e04695c6f0
                                             @foreach($documenttype as $document_type)
                                                 @if($document_type->document != "Tarjeta de identidad")
                                                     <option value="{{$document_type->id}}">{{ $document_type->document }}</option>
@@ -255,7 +250,7 @@
                                     <div class="col-lg-6 m-form__group-sub">
                                         <label class="form-control-label">Biografía</label>
                                         <textarea class="form-control m-input" name="aspirante[biografia]"
-                                            placeholder="Ingrese la bografía" style="min-height: 10rem;"></textarea>
+                                            placeholder="Ingrese la biografía" style="min-height: 10rem;"></textarea>
                                         <span class="m-form__help">Ingresa una breve descripción de tu historia como artista.</span>
                                     </div>
 
@@ -313,7 +308,7 @@
                                             <div class="m-dropzone file-pdf-document-aspirante m-dropzone--success"
                                                  action="" id="m-dropzone-three">
                                                 <div class="m-dropzone__msg dz-message needsclick">
-                                                    <h3 class="m-dropzone__msg-title">Subir documento de identificación</h3>
+                                                    <h3 class="m-dropzone__msg-title">Subir documento de identificación por ambos lados</h3>
                                                     <span class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
                                                 </div>
                                             </div>
@@ -421,15 +416,18 @@
 
                                 <div class="m-form__section">
                                     <div class="m-form__heading">
-                                        <h3 class="m-form__heading-title">Si el representante registrado es integrante de la agrupación musical, marque si
-                                            {{-- <i data-toggle="m-tooltip" data-width="auto" class="m-form__heading-help-icon flaticon-info"
-                                               title="Datos importantes del lugar y sitio de nacimiento"></i> --}}
-                                        </h3>
+
+                                        <h3 class="m-form__heading-title">Información de si el representante forma parte del grupo
+                                            <i data-toggle="m-tooltip" data-width="auto" class="m-form__heading-help-icon flaticon-info"
+                                               title="Datos importantes del lugar y sitio de nacimiento"></i>
+                                            </h3>
+
                                     </div>
 
                                     <div class="m-form__group form-group">
                                         <div class="col-lg-12 m-form__group-sub">
-                                            {{-- <label for="">¿Usted como aspirante forma parte del grupo?</label> --}}
+                                            <label for="">¿Usted como representante forma parte del grupo?</label>
+
                                             <div class="m-radio-inline">
                                                 <label class="m-radio">
                                                     <input type="radio" name="aspirante[partGroup]" value="1"> Si
@@ -464,7 +462,7 @@
                 <div class="m-portlet__head">
                     <div class="m-portlet__head-caption">
                         <div class="m-portlet__head-title">
-                            <h3 class="m-portlet__head-text"> Información del menor de edad beneficiario</h3>
+                            <h3 class="m-portlet__head-text"> Información del menor de edad participante</h3>
                         </div>
                     </div>
 
@@ -581,7 +579,7 @@
                                     <div class="col-lg-6 m-form__group-sub">
                                         <label class="form-control-label">Biografía</label>
                                         <textarea class="form-control m-input" name="beneficiario[biografia]"
-                                            placeholder="Ingrese la bografía" style="min-height: 8rem;"></textarea>
+                                            placeholder="Ingrese la biografía" style="min-height: 8rem;"></textarea>
                                         <span class="m-form__help">Cuentanos bremente su historia.</span>
                                     </div>
 
@@ -640,7 +638,7 @@
                                             <div class="m-dropzone file-pdf-document-beneficiario m-dropzone--success"
                                                  action="inc/api/dropzone/upload.php" id="m-dropzone-three">
                                                 <div class="m-dropzone__msg dz-message needsclick">
-                                                    <h3 class="m-dropzone__msg-title">Subir documento de identificación</h3>
+                                                    <h3 class="m-dropzone__msg-title">Subir documento de identificación por ambos lados</h3>
                                                     <span class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
                                                 </div>
                                             </div>
