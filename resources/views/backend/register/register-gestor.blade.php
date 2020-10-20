@@ -1318,7 +1318,16 @@
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
+            processing: function(file, response){
+                $('body').loading({
+                    message: 'Subiendo Archivo...',
+                    start:true,
+                });
+            },
             success: function (file, response) {
+                $('body').loading({
+                    start:false,
+                });
                 $("input[name='aspirante[urlImageDocumentFrente]']").val(response);
             }
         });
@@ -1331,7 +1340,16 @@
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
+            processing: function(file, response){
+                $('body').loading({
+                    message: 'Subiendo Archivo...',
+                    start:true,
+                });
+            },
             success: function (file, response) {
+                $('body').loading({
+                    start:false,
+                });
                 $("input[name='aspirante[urlImageDocumentAtras]']").val(response);
             }
         });
@@ -1344,7 +1362,16 @@
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
+            processing: function(file, response){
+                $('body').loading({
+                    message: 'Subiendo Archivo...',
+                    start:true,
+                });
+            },
             success: function (file, response) {
+                $('body').loading({
+                    start:false,
+                });
                 $("input[name='aspirante[urlPdfDocument]']").val(response);
             }
         });
@@ -1359,7 +1386,16 @@
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
+            processing: function(file, response){
+                $('body').loading({
+                    message: 'Subiendo Archivo...',
+                    start:true,
+                });
+            },
             success: function (file, response) {
+                $('body').loading({
+                    start:false,
+                });
                 $("input[name='beneficiario[urlImageDocumentFrente]']").val(response);
             }
         });
@@ -1372,7 +1408,16 @@
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
+            processing: function(file, response){
+                $('body').loading({
+                    message: 'Subiendo Archivo...',
+                    start:true,
+                });
+            },
             success: function (file, response) {
+                $('body').loading({
+                    start:false,
+                });
                 $("input[name='beneficiario[urlImageDocumentAtras]']").val(response);
             }
         });
@@ -1385,7 +1430,16 @@
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
+            processing: function(file, response){
+                $('body').loading({
+                    message: 'Subiendo Archivo...',
+                    start:true,
+                });
+            },
             success: function (file, response) {
+                $('body').loading({
+                    start:false,
+                });
                 $("input[name='beneficiario[urlPdfDocument]']").val(response);
             }
         });
@@ -1398,7 +1452,16 @@
             addRemoveLinks: true,
             acceptedFiles: "image/*",
             headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
-            success: function (file, response) {
+            processing: function(file, response){
+                $('body').loading({
+                    message: 'Subiendo Archivo...',
+                    start:true,
+                });
+            },
+            success: function(file, response) {
+                $('body').loading({
+                    start:false,
+                });
                 $("input[name='aspirante[urlImageProfile]']").val(response);
             },
             error: function (file, e, i, o, u) {
@@ -1414,7 +1477,18 @@
             addRemoveLinks: true,
             acceptedFiles: "image/*",
             headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
-            success: function (file, response) {
+
+            processing: function(file, response){
+                $('body').loading({
+                    message: 'Subiendo Archivo...',
+                    start:true,
+                });
+            },
+            success: function(file, response) {
+
+                $('body').loading({
+                    start:false,
+                });
                 $("input[name='beneficiario[urlImageProfile]']").val(response);
             },
             error: function (file, e, i, o, u) {
@@ -1428,8 +1502,18 @@
             maxFiles: 1,
             paramName: 'image',
             addRemoveLinks: true,
-            headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
+
+            headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+            processing: function(file, response){
+                $('body').loading({
+                    message: 'Subiendo Archivo...',
+                    start:true,
+                });
+            },
             success: function (file, response) {
+                $('body').loading({
+                    start:false,
+                });
                 validateFormInputs('song', 'urlSong');
                 $("#audio-error").text('');
                 $("input[name='song[urlSong]']").val(response);
@@ -1456,8 +1540,18 @@
             maxFiles: 1,
             paramName: 'image',
             addRemoveLinks: true,
-            headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
+
+            headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+            processing: function(file, response){
+                $('body').loading({
+                    message: 'Subiendo Archivo...',
+                    start:true,
+                });
+            },
             success: function (file, response) {
+                $('body').loading({
+                    start:false,
+                });
                 fileAdditionalSongOne = file;
                 $("#error-additional-song-one").text('');
                 $("input[name='song[urlAdditionalSongOne]']").val(response);
@@ -1475,8 +1569,17 @@
             maxFiles: 1,
             paramName: 'image',
             addRemoveLinks: true,
-            headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
+            headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+            processing: function(file, response){
+                $('body').loading({
+                    message: 'Subiendo Archivo...',
+                    start:true,
+                });
+            },
             success: function (file, response) {
+                $('body').loading({
+                    start:false,
+                });
                 fileAdditionalSongTwo = file;
                 $("#error-additional-song-two").text('');
                 $("input[name='song[urlAdditionalSongTwo]']").val(response);

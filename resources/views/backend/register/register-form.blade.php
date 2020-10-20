@@ -1126,6 +1126,7 @@
             headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
             processing: function (file, response) {
                 $('body').loading({
+
                     message: 'Subiendo documento...',
                     start: true,
                 });
@@ -1191,6 +1192,7 @@
                 $('body').loading({
                     message: 'Subiendo documento...',
                     start: true,
+
                 });
             },
             success: function (file, response) {
