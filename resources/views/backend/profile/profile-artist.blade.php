@@ -108,7 +108,7 @@
                                     <li class="nav-item m-tabs__item">
                                         <a class="nav-link m-tabs__link" data-toggle="tab"
                                            href="#m_user_profile_tab_4"
-                                           role="tab">Información del beneficiario
+                                           role="tab">Información del menor de edad
                                         </a>
                                     </li>
                                 @endif
