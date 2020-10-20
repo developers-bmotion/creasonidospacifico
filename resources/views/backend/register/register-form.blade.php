@@ -201,13 +201,8 @@
                                 ======================================-->
                                 <div class="form-group m-form__group row">
                                     <div id="content-aspirante_documentType" class="col-lg-6 m-form__group-sub">
-<<<<<<< HEAD
                                         <label class="form-control-label">Tipo de documento *</label>
                                         <select id="aspirant-document-type" name="aspirante[documentType]" class="form-control m-input">
-=======
-                                        <label class="form-control-label">Tipo de documento <span class="text-danger">*</span></label>
-                                        <select name="aspirante[documentType]" class="form-control m-bootstrap-select m_selectpicker">
->>>>>>> 65b5a62122e186b94734d4c1c56e69e04695c6f0
                                             @foreach($documenttype as $document_type)
                                                 @if($document_type->document != "Tarjeta de identidad")
                                                     <option value="{{$document_type->id}}">{{ $document_type->document }}</option>
