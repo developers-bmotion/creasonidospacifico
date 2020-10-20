@@ -936,7 +936,7 @@
             headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
             processing: function(file, response){
                 $('body').loading({
-                    message: 'Subiendo documento...',
+                    message: 'Subiendo Archivo...',
                     start:true,
                 });
             },
@@ -957,7 +957,7 @@
             headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
             processing: function(file, response){
                 $('body').loading({
-                    message: 'Subiendo documento...',
+                    message: 'Subiendo Archivo...',
                     start:true,
                 });
             },
@@ -977,7 +977,7 @@
             headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
             processing: function(file, response){
                 $('body').loading({
-                    message: 'Subiendo documento...',
+                    message: 'Subiendo Archivo...',
                     start:true,
                 });
             },
@@ -999,7 +999,7 @@
             headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
             processing: function(file, response){
                 $('body').loading({
-                    message: 'Subiendo documento...',
+                    message: 'Subiendo Archivo...',
                     start:true,
                 });
             },
@@ -1019,7 +1019,7 @@
             headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
             processing: function(file, response){
                 $('body').loading({
-                    message: 'Subiendo documento...',
+                    message: 'Subiendo Archivo...',
                     start:true,
                 });
             },
@@ -1039,7 +1039,7 @@
             headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
             processing: function(file, response){
                 $('body').loading({
-                    message: 'Subiendo documento...',
+                    message: 'Subiendo Archivo...',
                     start:true,
                 });
             },
@@ -1061,7 +1061,7 @@
             headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
             processing: function(file, response){
                 $('body').loading({
-                    message: 'Subiendo documento...',
+                    message: 'Subiendo Archivo...',
                     start:true,
                 });
             },
@@ -1090,7 +1090,7 @@
             headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
             processing: function(file, response){
                 $('body').loading({
-                    message: 'Subiendo documento...',
+                    message: 'Subiendo Archivo...',
                     start:true,
                 });
             },
