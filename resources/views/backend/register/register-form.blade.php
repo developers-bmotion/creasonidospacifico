@@ -201,8 +201,8 @@
                                 ======================================-->
                                 <div class="form-group m-form__group row">
                                     <div id="content-aspirante_documentType" class="col-lg-6 m-form__group-sub">
-                                        <label class="form-control-label">Tipo de documento <span class="text-danger">*</span></label>
-                                        <select name="aspirante[documentType]" class="form-control m-bootstrap-select m_selectpicker">
+                                        <label class="form-control-label">Tipo de documento *</label>
+                                        <select id="aspirant-document-type" name="aspirante[documentType]" class="form-control m-input">
                                             @foreach($documenttype as $document_type)
                                                 @if($document_type->document != "Tarjeta de identidad")
                                                     <option value="{{$document_type->id}}">{{ $document_type->document }}</option>
@@ -416,15 +416,18 @@
 
                                 <div class="m-form__section">
                                     <div class="m-form__heading">
+
                                         <h3 class="m-form__heading-title">Información de si el representante forma parte del grupo
                                             <i data-toggle="m-tooltip" data-width="auto" class="m-form__heading-help-icon flaticon-info"
                                                title="Datos importantes del lugar y sitio de nacimiento"></i>
-                                        </h3>
+                                            </h3>
+
                                     </div>
 
                                     <div class="m-form__group form-group">
                                         <div class="col-lg-12 m-form__group-sub">
                                             <label for="">¿Usted como representante forma parte del grupo?</label>
+
                                             <div class="m-radio-inline">
                                                 <label class="m-radio">
                                                     <input type="radio" name="aspirante[partGroup]" value="1"> Si
