@@ -238,7 +238,7 @@ class ProfileController extends Controller
     /* metodo para registrar el aspirante como un integrante del grupo en la base de datos */
     public function registerAspiranteGroup($request, $idArtist) {
         $aspirante = (object) $request->aspirante;
-        
+
         if ($aspirante->partGroup == '1') {
             $member = new Team();
             $member->name = $aspirante->name;
@@ -532,10 +532,13 @@ class ProfileController extends Controller
         return $urlS3;
     }
 
+    // actualizar el documento en pdf desde el rol de gestor
     public function pdf_cedula_aspirante_gestor(Request $request)
     {
 
-        $user = User::where('id', auth()->user()->id)->first();
+        $idUser=$request->headers->get('idAspirante');
+        // dd($idUser);
+        $user = User::where('id',$idUser )->first();
         // $pdf_cedula =  str_replace('storage', '', $user->pdf_cedula);
         //Elimnar pdf de cédula o tarjeta
         Storage::disk('s3')->delete($user->pdf_cedula);
@@ -545,7 +548,7 @@ class ProfileController extends Controller
         $urlS3 = Storage::disk('s3')->url($pdf_cedula_save);
 
 
-        User::where('id', auth()->user()->id)->update([
+        User::where('id',$idUser)->update([
             'pdf_cedula' => $urlS3,
             'img_document_back'=> null,
             'img_document_front'=> null,
@@ -555,7 +558,7 @@ class ProfileController extends Controller
         return $urlS3;
     }
 
-    //
+    //actualizar la imagen del documento desde el perfil del aspirante
 
     public function update_img_artist(Request $request)
     {
@@ -574,6 +577,25 @@ class ProfileController extends Controller
 
         return back();
     }
+    //actualizar la imagen del documento desde el perfil del gestor
+    public function update_img_artist_gestor(Request $request)
+    {
+
+        $aspirante = (object) $request->aspirante;
+        // dd($aspirante);
+        //
+        $user = User::where('id', $aspirante->idAspirante)->first();
+
+
+
+       $user_upt = User::where('id', $aspirante->idAspirante)->update([
+            'pdf_cedula' => null,
+            'img_document_front' => $aspirante->urlImageDocumentFrente,
+            'img_document_back' => $aspirante->urlImageDocumentAtras,
+        ]);
+
+        return back() ;
+    }
 
     // actualizar imagen documento beneficiario
     public function update_img_ben(Request $request)
@@ -587,6 +609,25 @@ class ProfileController extends Controller
         $beneficiario = Beneficiary::where('artist_id', $artist->id)->first();
 
         $ben=Beneficiary::where('id', $beneficiario->id)->update([
+            'pdf_documento' => null,
+            'img_document_front' => $beneficiari->urlImageDocumentFrente,
+            'img_document_back' => $beneficiari->urlImageDocumentAtras,
+        ]);
+        return back();
+    }
+
+    // actualizar imagen documento beneficiario desde el perfil del gestor
+    public function update_img_ben_gestor(Request $request)
+    {
+
+        $beneficiari = (object) $request->beneficiario;
+        //
+        // $user = User::where('id', auth()->user()->id)->first();
+
+        // $artist = Artist::where('user_id', auth()->user()->id)->first();
+        // $beneficiario = Beneficiary::where('artist_id', $artist->id)->first();
+
+        $ben=Beneficiary::where('id', $beneficiari->idBeneficiario)->update([
             'pdf_documento' => null,
             'img_document_front' => $beneficiari->urlImageDocumentFrente,
             'img_document_back' => $beneficiari->urlImageDocumentAtras,
@@ -633,6 +674,31 @@ class ProfileController extends Controller
 
         return $urlS3;
     }
+
+    // actualizar el pdf del aspirante desde el perfil del gestor
+    public function pdf_cedula_beneficiario_gestor(Request $request)
+    {
+
+        $idUser=$request->headers->get('idAspirante');
+        // $user = User::where('id', auth()->user()->id)->first();
+        $artist = Artist::where('user_id', $idUser)->first();
+        $beneficiario = Beneficiary::where('artist_id', $artist->id)->first();
+        // dd($beneficiario);
+        // $pdf_cedula =  str_replace('storage', '', $beneficiario->pdf_documento);
+        //Elimnar pdf de cédula o tarjeta
+        Storage::disk('s3')->delete($beneficiario->pdf_documento);
+        //Agregar cedula o tarjeta de identidad
+        $pdf_cedula_save = $request->file('pdf_cedula_name')->store('pdfdoc','s3');
+        Storage::disk('s3')->setVisibility($pdf_cedula_save, 'public');
+        $urlS3 = Storage::disk('s3')->url($pdf_cedula_save);
+        Beneficiary::where('id', $beneficiario->id)->update([
+            'pdf_documento' => $urlS3,
+            'img_document_front' => null,
+            'img_document_back' => null,
+        ]);
+
+        return $urlS3;
+    }
     public function update_audio(Request $request)
     {
 
@@ -655,7 +721,7 @@ class ProfileController extends Controller
 
     public function pdf_cedula_team(Request $request)
     {
-        // dd($request->headers->get('id'));
+
         $teamid=$request->headers->get('id');
         // $user = User::where('id', auth()->user()->id)->first();
         // $artist = Artist::where('user_id', auth()->user()->id)->first();
