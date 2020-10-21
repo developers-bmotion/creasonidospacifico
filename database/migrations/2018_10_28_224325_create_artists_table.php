@@ -67,9 +67,10 @@ class CreateArtistsTable extends Migration
             $table->string('township')->nullable();
             $table->string('name_team')->nullable();
             $table->string('permission')->nullable();
+            $table->string('evidence_document')->nullable(); 
             $table->unsignedInteger('expedition_place')->nullable();
             $table->foreign('expedition_place')->references('id')->on('ciudad');
-
+            
             $table->unsignedInteger('place_residence')->nullable();
             $table->foreign('place_residence')->references('id')->on('ciudad');
 

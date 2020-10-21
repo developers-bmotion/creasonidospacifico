@@ -32,6 +32,7 @@ function hideContentInfo() {
     $('#content-informacion-menor-edad').hide();
     $('#content-informacion-grupo-musical').hide();
     $('#content-informacion-subir-cancion').hide();
+    $('#content-document-evidencia-aspirante').hide();
     $('#btn-enviar-datos').hide();
     $("#forma-parte-grupo").hide();   
 }
@@ -48,6 +49,7 @@ $('#select-actuara-como').on('change', function() {
                 $('#content-informacion-menor-edad').hide();
                 $('#content-informacion-grupo-musical').hide();
                 $('#content-informacion-subir-cancion').show();
+                $('#content-document-evidencia-aspirante').show();
                 $("#aspirant-document-type option[value='2']").hide(); // ocultar cedula de extranjeria
                 $('#btn-enviar-datos').show();
             break;
@@ -56,6 +58,7 @@ $('#select-actuara-como').on('change', function() {
                 $('#content-informacion-menor-edad').show();
                 $('#content-informacion-grupo-musical').hide();
                 $('#content-informacion-subir-cancion').show();
+                $('#content-document-evidencia-aspirante').show();
                 $("#aspirant-document-type option[value='2']").show(); // mostrar cedula de extranjeria
                 $('#btn-enviar-datos').show();
             break;

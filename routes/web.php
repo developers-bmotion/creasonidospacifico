@@ -152,6 +152,7 @@ Route::group(['namespace'=>'Backend','prefix' => 'dashboard','middleware' => 'au
     // Route::post('/upload-image-document-team','ProfileController@uploadImageDocumentTeam')->name('upload.image.document.team');
     Route::post('/upload-image-profile','ProfileController@uploadImageProfile')->name('upload.image.profile');
     Route::post('/upload-pdf-document','ProfileController@uploadPDFDocument')->name('upload.pdf.document');
+    Route::post('/upload-evidence-document','ProfileController@uploadEvidenceDocument')->name('upload.evidence.document');
     Route::post('/create-new-aspirant','ProfileController@createNewAspirant')->name('create.new.aspirant');
 
     //RUTAS PARA EL PERFIL
