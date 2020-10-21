@@ -144,12 +144,30 @@ $("#add-song").click( () => {
     }
 });
 
+$("#input-max-members").keyup( () => validateNumberMin( $("#input-max-members").val() ) );
+
+function validateNumberMin(num) {
+    console.log('number: ', num)
+    if (num < 1) {
+        $("#content-input-max-members").addClass('has-danger');
+        $("#error-input-max-members").html('El número mínimo de integrantes es de 1')
+        $("#error-input-max-members").show()
+        return true
+    } else {
+        $("#content-input-max-members").removeClass('has-danger');
+        $("#error-input-max-members").html('')
+        $("#error-input-max-members").hide()
+        return false
+    }
+}
 
 /*  funciones para agragar un nuevo integrante  */
 var currentMembers = 0;
 
 $("#event-add-max-members").click( function() {    
-    let members = parseInt( $("#input-max-members").val() );   
+    let members = parseInt( $("#input-max-members").val() );  
+    
+    if (validateNumberMin(members)) return;
 
     if (currentMembers === members) return; // si el valor no cambia se retorna
 

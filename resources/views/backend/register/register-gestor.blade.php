@@ -208,7 +208,8 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="la la-phone"></i></span>
                                             </div>
-                                            <input type="text" name="aspirante[phone]" class="form-control m-input" placeholder="" value="">
+                                            {{-- <input type="text" name="aspirante[phone]" class="form-control m-input" placeholder="" value=""> --}}
+                                            <input type="number" name="aspirante[phone]" class="form-control m-input" placeholder="" value="">
                                         </div>
                                         <div id="error-aspirante_phone" class="form-control-feedback" style="display: none"></div>
                                         <span class="m-form__help">Por favor ingrese número de teléfono valido</span>
@@ -233,8 +234,7 @@
 
                                     <div id="content-aspirante_identificacion" class="col-lg-6 m-form__group-sub">
                                         <label class="form-control-label {{$errors->has('identificacion')? 'has-danger':''}}">Nº de indentificación <span class="text-danger">*</span></label>
-                                        <input type="num" name="aspirante[identificacion]" class="form-control m-input"
-                                               placeholder="" value="">
+                                        <input type="number" name="aspirante[identificacion]" class="form-control m-input" placeholder="" value="">
                                         <div id="error-aspirante_identificacion" class="form-control-feedback" style="display: none"></div>
                                         <span class="m-form__help">Por favor ingrese el número de indentificación</span>
                                     </div>
@@ -810,9 +810,10 @@
                                     <span class="m-form__help">Por favor ingrese el nombre de la agrupación musical</span>
                                 </div>
 
-                                <div class="col-12 col-lg-4 col-md-4 m-form__group-sub">
+                                <div id="content-input-max-members" class="col-12 col-lg-4 col-md-4 m-form__group-sub">
                                     <label for="example-number-input">Ingrese el número de integrantes</label>
-                                    <input id="input-max-members" class="form-control m-input" type="number" value="">
+                                    <input id="input-max-members" class="form-control m-input" type="number" min="1" max="200" value="">
+                                    <div id="error-input-max-members" class="form-control-feedback" style="display: none"></div>
                                     <span class="m-form__help">Luego clic en agregar integrantes</span>
                                 </div>
 
