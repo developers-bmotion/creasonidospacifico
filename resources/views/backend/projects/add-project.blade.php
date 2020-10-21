@@ -174,7 +174,7 @@
 
                         <div class="col-lg-6 m-form__group-sub " style="margin-top: -8rem;">
                             <div class="form-group m-form__group row">
-                                <div class="col-lg-12">
+                                <div class="col-lg-12 pt-4">
                                     <label class="form-control-label" form="nombreProyecto">
                                         Agregar canciones si lo desea (No obligatorio)<span class="text-danger"> (Tenga en cuenta que la canciónes que agregue aquÍ, no participarán en el concurso. Solo para mostrar tu talento)</span></label>
                                     <button class="btn btn-primary btn-block add-song">Agregar canciones</button>

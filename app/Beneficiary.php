@@ -18,7 +18,7 @@ class Beneficiary extends Model
         'document_type', 'identification', 'name', 'last_name',
         'second_last_name', 'pdf_documento', 'phone', 'adress', 'img_document_front',
         'img_document_back', 'biography', 'birthday', 'cities_id', 'township', 'expedition_place',
-        'artist_id'
+        'artist_id', 'picture'
     ];
 
     public function artist(){

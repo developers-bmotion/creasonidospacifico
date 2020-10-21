@@ -45,9 +45,9 @@ class DatabaseSeeder extends Seeder
         /*=============================================
             CREAMOS LOS TIPOS DE PERSONA
         =============================================*/
-        factory(PersonType::class, 1)->create(['name' => 'Persona natural']);
+        factory(PersonType::class, 1)->create(['name' => 'Persona Natural']);
         factory(PersonType::class, 1)->create(['name' => 'Representante de un menor de edad']);
-        factory(PersonType::class, 1)->create(['name' => 'Grupo constituido']);
+        factory(PersonType::class, 1)->create(['name' => 'Grupo Constituido']);
 
         /*=============================================
             CREAMOS TIPOS DE ARTISTA
@@ -163,7 +163,7 @@ class DatabaseSeeder extends Seeder
         factory(\App\User::class, 10)->create()
             ->each(function (\App\User $u) {
                 factory(\App\Management::class, 1)->create(['user_id' => $u->id])->each(function (\App\Management $m) {
-                    $categories = mt_rand(1, 11);
+                    $categories = mt_rand(1, 10);
                     $m->categories()->attach($categories);
                 });
                 $u->roles()->attach('3');
