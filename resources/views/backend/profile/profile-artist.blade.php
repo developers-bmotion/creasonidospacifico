@@ -12,10 +12,26 @@
     </div>
     <div class="row pt-4">
         <div class="col-12">
+            @if(count(\App\Artist::projects_artist(auth()->user()->id)) === 0)
+                <div class="m-alert m-alert--icon m-alert--outline alert alert-warning" role="alert">
+                    <div class="m-alert__icon">
+                        <i class="la la-warning"></i>
+                    </div>
+                    <div class="m-alert__text">
+                        Aún no has <strong>registrado tu propuesta musical,</strong>
+                        debes registrarla para poder participar.
+                    </div>
+                    <div class="m-alert__actions" style="width: 200px;">
+                        <a href="{{ route('add.project') }}" type="button"
+                           class="btn btn-warning btn-sm m-btn m-btn--pill m-btn--wide"
+                           style="color:#fff">Subir canción
+                        </a>
+                    </div>
+                </div>
+            @endif
+            @if(count($artist->projects) !== 0)
 
-        @if(count($artist->projects) !== 0)
-
-            @if($artist->projects[0]->status == 4)
+                @if($artist->projects[0]->status == 4)
                 <!--=====================================
 		        ALERTA PARA MOSTRAR EL ESTADO PENDIENTE
             ======================================-->
@@ -234,7 +250,29 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4">
-                                        <label style="font-weight: bold">Direccion:</label>
+
+                                        <label style="font-weight: bold">{{ __('Departamento de Expedición') }}
+                                            :</label>
+                                        <div class="m-scrollable" data-scrollable="true" style="">
+
+                                            @if($artist->expeditionPlace->departaments)
+                                                <p style="text-align: justify">{{ $artist->expeditionPlace->departaments->descripcion }}</p>
+                                            @else
+                                                <p>No registrado</p>
+                                            @endif
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+
+                                        <label style="font-weight: bold">{{ __('Ciudad de Expedición') }}
+                                            :</label>
+                                        <div class="m-scrollable" data-scrollable="true" style="">
+                                            <p style="text-align: justify">{{ $artist->expeditionPlace->descripcion }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label style="font-weight: bold">Dirección de residencia:</label>
                                         <div class="m-scrollable" data-scrollable="true" style="">
                                             <p>{{ $artist->adress }}</p>
                                         </div>
@@ -312,23 +350,6 @@
                                     </div>
 
 
-                                    <div class="col-md-4">
-
-                                        <label style="font-weight: bold">{{ __('Departamento de Expedición') }}
-                                            :</label>
-                                        <div class="m-scrollable" data-scrollable="true" style="">
-
-                                            @if($artist->expeditionPlace->departaments)
-                                                <p style="text-align: justify">{{ $artist->expeditionPlace->departaments->descripcion }}</p>
-                                            @else
-                                                <p>No registrado</p>
-                                            @endif
-
-                                        </div>
-                                        {{-- @dd($artist); --}}
-                                    </div>
-
-
                                     @if($artist->users->phone_2)
                                         <div class="col-md-4">
                                             <label style="font-weight: bold">Otro teléfono:</label>
@@ -337,15 +358,7 @@
                                             </div>
                                         </div>
                                     @endif
-                                    <div class="col-md-4">
 
-                                        <label style="font-weight: bold">{{ __('Ciudad de Expedición') }}
-                                            :</label>
-                                        <div class="m-scrollable" data-scrollable="true" style="">
-                                            <p style="text-align: justify">{{ $artist->expeditionPlace->descripcion }}</p>
-                                        </div>
-                                        {{-- @dd($artist); --}}
-                                    </div>
                                     <div class="col-md-6 mt-2">
                                         <label style="font-weight: bold">Documento de identificación:</label>
                                         <br>
@@ -381,7 +394,8 @@
                                                             class="m-dropzone file-image-document-aspirante-frente m-dropzone--success"
                                                             action="inc/api/dropzone/upload.php" id="m-dropzone-three">
                                                             <div class="m-dropzone__msg dz-message needsclick">
-                                                                <h3 class="m-dropzone__msg-title">Subir foto del frente de su documento de identificación</h3>
+                                                                <h3 class="m-dropzone__msg-title">Subir foto del frente
+                                                                    de su documento de identificación</h3>
                                                                 <span
                                                                     class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
                                                             </div>
@@ -393,7 +407,8 @@
                                                             class="m-dropzone file-image-document-aspirante-atras m-dropzone--success"
                                                             action="inc/api/dropzone/upload.php" id="m-dropzone-three">
                                                             <div class="m-dropzone__msg dz-message needsclick">
-                                                                <h3 class="m-dropzone__msg-title">Subir foto de la parte de atrás de su documento de identificación</h3>
+                                                                <h3 class="m-dropzone__msg-title">Subir foto de la parte
+                                                                    de atrás de su documento de identificación</h3>
                                                                 <span
                                                                     class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
                                                             </div>
@@ -410,7 +425,8 @@
                                                                  id="m-dropzone-three">
                                                                 <div
                                                                     class="m-dropzone__msg dz-message needsclick">
-                                                                    <h3 class="m-dropzone__msg-title">Subir documento de identificación por ambos lados</h3>
+                                                                    <h3 class="m-dropzone__msg-title">Subir documento de
+                                                                        identificación por ambos lados</h3>
                                                                     <span
                                                                         class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
                                                                 </div>
@@ -733,11 +749,48 @@
                                                                                                 <p>{{ $team->identification}}</p>
                                                                                             </div>
                                                                                         </div>
+                                                                                        <div
+                                                                                            class="col-md-4 mt-2">
+                                                                                            <label
+                                                                                                style="font-weight: bold">Departamento
+                                                                                                de
+                                                                                                expedición:</label>
+                                                                                            <div
+                                                                                                class="m-scrollable"
+                                                                                                data-scrollable="true"
+                                                                                                style="">
+                                                                                                @if($team->expeditionPlace)
+                                                                                                    <p>{{ $team->expeditionPlace->departaments->descripcion}}</p>
+                                                                                                @else
+                                                                                                    <p>No registrado</p>
+                                                                                                @endif
+
+                                                                                            </div>
+
+                                                                                        </div>
+                                                                                        <div
+                                                                                            class="col-md-4 mt-2">
+                                                                                            <label
+                                                                                                style="font-weight: bold">Ciudad
+                                                                                                de
+                                                                                                expedición:</label>
+                                                                                            <div
+                                                                                                class="m-scrollable"
+                                                                                                data-scrollable="true"
+                                                                                                style="">
+                                                                                                @if($team->expeditionPlace)
+                                                                                                    <p>{{ $team->expeditionPlace->descripcion}}</p>
+                                                                                                @else
+                                                                                                    <p>No registrado</p>
+                                                                                                @endif
+                                                                                            </div>
+
+                                                                                        </div>
 
                                                                                         <div
                                                                                             class="col-md-4 mt-2">
                                                                                             <label
-                                                                                                style="font-weight: bold">Direccion:</label>
+                                                                                                style="font-weight: bold">Dirección de residencia:</label>
                                                                                             <div
                                                                                                 class="m-scrollable"
                                                                                                 data-scrollable="true"
@@ -796,19 +849,19 @@
                                                                                                 <p>{{ $team->city->descripcion}}</p>
                                                                                             </div>
                                                                                         </div>
-                                                                                        <div
-                                                                                            class="col-md-4 mt-2">
-                                                                                            <label
-                                                                                                style="font-weight: bold">Fecha
-                                                                                                de
-                                                                                                nacimiento:</label>
-                                                                                            <div
-                                                                                                class="m-scrollable"
-                                                                                                data-scrollable="true"
-                                                                                                style="">
-                                                                                                <p>{{  Carbon\Carbon::parse($team->birthday)->formatLocalized('%d de %B de %Y') }}</p>
-                                                                                            </div>
-                                                                                        </div>
+                                                                                        {{--                                                                                        <div--}}
+                                                                                        {{--                                                                                            class="col-md-4 mt-2">--}}
+                                                                                        {{--                                                                                            <label--}}
+                                                                                        {{--                                                                                                style="font-weight: bold">Fecha--}}
+                                                                                        {{--                                                                                                de--}}
+                                                                                        {{--                                                                                                nacimiento:</label>--}}
+                                                                                        {{--                                                                                            <div--}}
+                                                                                        {{--                                                                                                class="m-scrollable"--}}
+                                                                                        {{--                                                                                                data-scrollable="true"--}}
+                                                                                        {{--                                                                                                style="">--}}
+                                                                                        {{--                                                                                                <p>{{  Carbon\Carbon::parse($team->birthday)->formatLocalized('%d de %B de %Y') }}</p>--}}
+                                                                                        {{--                                                                                            </div>--}}
+                                                                                        {{--                                                                                        </div>--}}
 
 
                                                                                         {{-- @if($artist->artists[0]->township)
@@ -848,52 +901,24 @@
                                                                                             class="col-md-4 mt-2">
 
                                                                                             <label
-                                                                                                style="font-weight: bold">Rol:</label>
+                                                                                                style="font-weight: bold">Instrumento
+                                                                                                o rol que
+                                                                                                desempeña:</label>
+                                                                                            @if($team->role)
                                                                                             <div
                                                                                                 class="m-scrollable"
                                                                                                 data-scrollable="true"
                                                                                                 style="">
                                                                                                 <p style="text-align: justify">{{ $team->role}}</p>
                                                                                             </div>
-                                                                                        </div>
-
-
-                                                                                        <div
-                                                                                            class="col-md-4 mt-2">
-                                                                                            <label
-                                                                                                style="font-weight: bold">Departamento
-                                                                                                de
-                                                                                                expedición:</label>
-                                                                                            <div
-                                                                                                class="m-scrollable"
-                                                                                                data-scrollable="true"
-                                                                                                style="">
-                                                                                                @if($team->expeditionPlace)
-                                                                                                    <p>{{ $team->expeditionPlace->departaments->descripcion}}</p>
-                                                                                                @else
-                                                                                                    <p>No registrado</p>
-                                                                                                @endif
-
-                                                                                            </div>
-
-                                                                                        </div>
-                                                                                        <div
-                                                                                            class="col-md-4 mt-2">
-                                                                                            <label
-                                                                                                style="font-weight: bold">Ciudad
-                                                                                                de
-                                                                                                expedición:</label>
-                                                                                            <div
-                                                                                                class="m-scrollable"
-                                                                                                data-scrollable="true"
-                                                                                                style="">
-                                                                                                @if($team->expeditionPlace)
-                                                                                                    <p>{{ $team->expeditionPlace->descripcion}}</p>
-                                                                                                @else
-                                                                                                    <p>No registrado</p>
-                                                                                                @endif
-                                                                                            </div>
-
+                                                                                            @else
+                                                                                                <div
+                                                                                                    class="m-scrollable"
+                                                                                                    data-scrollable="true"
+                                                                                                    style="">
+                                                                                                    <p style="text-align: justify">No registrado</p>
+                                                                                                </div>
+                                                                                            @endif
                                                                                         </div>
 
                                                                                         <div
@@ -967,7 +992,15 @@
                                                                                                                 <div
                                                                                                                     class="m-dropzone__msg dz-message needsclick">
                                                                                                                     <h3 class="m-dropzone__msg-title">
-                                                                                                                        Subir foto del frente de su documento de identificación</h3>
+                                                                                                                        Subir
+                                                                                                                        foto
+                                                                                                                        del
+                                                                                                                        frente
+                                                                                                                        de
+                                                                                                                        su
+                                                                                                                        documento
+                                                                                                                        de
+                                                                                                                        identificación</h3>
                                                                                                                     <span
                                                                                                                         class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
                                                                                                                 </div>
@@ -987,7 +1020,18 @@
                                                                                                                 <div
                                                                                                                     class="m-dropzone__msg dz-message needsclick">
                                                                                                                     <h3 class="m-dropzone__msg-title">
-                                                                                                                        Subir foto de la parte de atrás de su documento de identificación</h3>
+                                                                                                                        Subir
+                                                                                                                        foto
+                                                                                                                        de
+                                                                                                                        la
+                                                                                                                        parte
+                                                                                                                        de
+                                                                                                                        atrás
+                                                                                                                        de
+                                                                                                                        su
+                                                                                                                        documento
+                                                                                                                        de
+                                                                                                                        identificación</h3>
                                                                                                                     <span
                                                                                                                         class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
                                                                                                                 </div>
@@ -1151,6 +1195,7 @@
 
                                         <div class="biografia col-md-12">
                                             <div class="row">
+
                                                 @if ($artist->beneficiary[0]->picture)
 
                                                     <div class="col-md-4 mb-5 ">
@@ -1254,7 +1299,35 @@
                                                 </div>
 
                                                 <div class="col-md-4 mt-2">
-                                                    <label style="font-weight: bold">Direccion:</label>
+
+                                                    <label
+                                                        style="font-weight: bold">{{ __('Departamento de expedición') }}
+                                                        :</label>
+                                                    <div class="m-scrollable" data-scrollable="true" style="">
+
+                                                        @if($artist->beneficiary[0]->expeditionPlace !== null)
+                                                            <p style="text-align: justify">{{ $artist->beneficiary[0]->expeditionPlace->departaments->descripcion}}</p>
+                                                        @else
+                                                            <p style="text-align: justify">No registrado</p>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 mt-2">
+
+                                                    <label
+                                                        style="font-weight: bold">{{ __('Ciudad de expedición') }}
+                                                        :</label>
+                                                    <div class="m-scrollable" data-scrollable="true" style="">
+                                                        @if($artist->beneficiary[0]->expeditionPlace !== null)
+                                                            <p style="text-align: justify">{{ $artist->beneficiary[0]->expeditionPlace->descripcion}}</p>
+                                                        @else
+                                                            <p style="text-align: justify">No registrado</p>
+                                                        @endif
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-4 mt-2">
+                                                    <label style="font-weight: bold">Dirección de residencia:</label>
                                                     <div class="m-scrollable" data-scrollable="true" style="">
                                                         <p>{{ $artist->beneficiary[0]->adress}}</p>
                                                     </div>
@@ -1327,39 +1400,10 @@
                                                         <p>{{ $artist->beneficiary[0]->phone}}</p>
                                                     </div>
                                                 </div>
-
-
-                                                <div class="col-md-4 mt-2">
-
-                                                    <label
-                                                        style="font-weight: bold">{{ __('Departamento de expedición') }}
-                                                        :</label>
-                                                    <div class="m-scrollable" data-scrollable="true" style="">
-
-                                                        @if($artist->beneficiary[0]->expeditionPlace !== null)
-                                                            <p style="text-align: justify">{{ $artist->beneficiary[0]->expeditionPlace->departaments->descripcion}}</p>
-                                                        @else
-                                                            <p style="text-align: justify">No registrado</p>
-                                                        @endif
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4 mt-2">
-
-                                                    <label
-                                                        style="font-weight: bold">{{ __('Ciudad de expedición') }}
-                                                        :</label>
-                                                    <div class="m-scrollable" data-scrollable="true" style="">
-                                                        @if($artist->beneficiary[0]->expeditionPlace !== null)
-                                                            <p style="text-align: justify">{{ $artist->beneficiary[0]->expeditionPlace->descripcion}}</p>
-                                                        @else
-                                                            <p style="text-align: justify">No registrado</p>
-                                                        @endif
-                                                    </div>
-                                                </div>
                                                 <div class="col-md-5 mt-2" style="margin-right:-4rem">
                                                     <label style="font-weight: bold">Documento de
                                                         identificación:</label>
-
+                                                    <br>
                                                     <button type="button" class="btn btn-primary btn_pdf_ben"
                                                             data-toggle="modal"
                                                             data-target="#pdfidentificacionBeneficiario">
@@ -1398,7 +1442,9 @@
                                                                         id="m-dropzone-three">
                                                                         <div
                                                                             class="m-dropzone__msg dz-message needsclick">
-                                                                            <h3 class="m-dropzone__msg-title">Subir foto del frente de su documento de identificación</h3>
+                                                                            <h3 class="m-dropzone__msg-title">Subir foto
+                                                                                del frente de su documento de
+                                                                                identificación</h3>
                                                                             <span
                                                                                 class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
                                                                         </div>
@@ -1413,7 +1459,9 @@
                                                                         id="m-dropzone-three">
                                                                         <div
                                                                             class="m-dropzone__msg dz-message needsclick">
-                                                                            <h3 class="m-dropzone__msg-title">Subir foto de la parte de atrás de su documento de identificación</h3>
+                                                                            <h3 class="m-dropzone__msg-title">Subir foto
+                                                                                de la parte de atrás de su documento de
+                                                                                identificación</h3>
                                                                             <span
                                                                                 class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
                                                                         </div>
@@ -1432,7 +1480,9 @@
                                                                             <div
                                                                                 class="m-dropzone__msg dz-message needsclick">
 
-                                                                                <h3 class="m-dropzone__msg-title">Subir documento de identificación por ambos lados</h3>
+                                                                                <h3 class="m-dropzone__msg-title">Subir
+                                                                                    documento de identificación por
+                                                                                    ambos lados</h3>
                                                                                 <span
                                                                                     class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
                                                                             </div>
@@ -1492,7 +1542,6 @@
                                                 <h5 class="modal-title" id="exampleModalLongTitle">
                                                     Documento de identificación
                                                     de {{ $artist->beneficiary[0]->name}}</h5>
-
                                                 <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
                                                     <span aria-hidden="true">×</span>

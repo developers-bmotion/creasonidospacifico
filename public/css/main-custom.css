@@ -19,6 +19,9 @@
     background-image: url(/images/logo-pacifico.png);
     background-size:  cover !important;
 }
+.dz-error-mark{
+    display: none;
+}
 .background_register {
     background-image: url(/images/fondo-register-min.png);
     background-size:  cover !important;
@@ -26,6 +29,10 @@
 .title-login{
     font-size: 75px !important;
     padding: 0 3rem;
+}
+
+.dz-success-mark{
+    display: none;
 }
 .parrafo-login{
     font-size: 24px !important;

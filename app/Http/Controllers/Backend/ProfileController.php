@@ -154,7 +154,7 @@ class ProfileController extends Controller
         }
 
         Artist::where('user_id', '=', $id_artis)->update([
-            'nickname' => $aspirante->name,
+            'nickname' => ucwords($aspirante->name),
             'biography' => $aspirante->biografia,
             'document_type' => $aspirante->documentType,
             'identification' => $aspirante->identificacion,
@@ -171,9 +171,9 @@ class ProfileController extends Controller
         ]);
 
        $user = User::where('id', '=', $id_artis)->update([
-            'name' => $aspirante->name,
-            'last_name' => $aspirante->lastname,
-            'second_last_name' => $aspirante->secondLastname,
+            'name' => ucwords($aspirante->name),
+            'last_name' => ucwords($aspirante->lastname),
+            'second_last_name' => ucwords($aspirante->secondLastname),
             'phone_1' => $aspirante->phone,
             'pdf_cedula' => $aspirante->urlPdfDocument,
             'img_document_front' => $aspirante->urlImageDocumentFrente,
@@ -190,9 +190,9 @@ class ProfileController extends Controller
         Beneficiary::create([
             'document_type' => $beneficiario->documentType,
             'identification' => $beneficiario->identificacion,
-            'name' => $beneficiario->name,
-            'last_name' => $beneficiario->lastname,
-            'second_last_name' => $beneficiario->secondLastname,
+            'name' => ucwords($beneficiario->name),
+            'last_name' => ucwords($beneficiario->lastname),
+            'second_last_name' => ucwords($beneficiario->secondLastname),
             'pdf_documento' => $beneficiario->urlPdfDocument,
             'img_document_front' => $beneficiario->urlImageDocumentFrente,
             'img_document_back' => $beneficiario->urlImageDocumentAtras,
@@ -216,9 +216,9 @@ class ProfileController extends Controller
         Beneficiary::where('artist_id', '=', $idArtst)->update([
             'document_type' => $beneficiario->documentType,
             'identification' => $beneficiario->identificacion,
-            'name' => $beneficiario->name,
-            'last_name' => $beneficiario->lastname,
-            'second_last_name' => $beneficiario->secondLastname,
+            'name' => ucwords($beneficiario->name),
+            'last_name' => ucwords($beneficiario->lastname),
+            'second_last_name' => ucwords($beneficiario->secondLastname),
             'pdf_documento' => $beneficiario->urlPdfDocument,
             'img_document_front' => $beneficiario->urlImageDocumentFrente,
             'img_document_back' => $beneficiario->urlImageDocumentAtras,
@@ -241,9 +241,9 @@ class ProfileController extends Controller
 
         if ($aspirante->partGroup == '1') {
             $member = new Team();
-            $member->name = $aspirante->name;
-            $member->last_name = $aspirante->lastname;
-            $member->second_last_name = $aspirante->secondLastname;
+            $member->name = ucwords($aspirante->name);
+            $member->last_name = ucwords($aspirante->lastname);
+            $member->second_last_name = ucwords($aspirante->secondLastname);
             $member->document_type = $aspirante->documentType;
             $member->identification = $aspirante->identificacion;
             $member->expedition_place = $aspirante->municipioExpedida;
@@ -264,9 +264,9 @@ class ProfileController extends Controller
     public function insertGroupMembers($request, $idArtist) {
         foreach ($request->integrantes as $integrante) {
             $member = new Team();
-            $member->name = $integrante['nameMember'];
-            $member->last_name = $integrante['lastnameMember'];
-            $member->second_last_name = $integrante['secondLastnameMember'];
+            $member->name = ucwords($integrante['nameMember']);
+            $member->last_name = ucwords($integrante['lastnameMember']);
+            $member->second_last_name = ucwords($integrante['secondLastnameMember']);
             $member->document_type = $integrante['documentTypeMember'];
             $member->identification = $integrante['identificationMember'];
             $member->expedition_place = $integrante['municipio_expedición_member'];
@@ -333,9 +333,9 @@ class ProfileController extends Controller
 
         // crear el usuario
         $user = new User();
-        $user->name = $aspirante->name;
-        $user->last_name = $aspirante->lastname;
-        $user->second_last_name = $aspirante->secondLastname;
+        $user->name = ucwords($aspirante->name);
+        $user->last_name = ucwords($aspirante->lastname);
+        $user->second_last_name = ucwords($aspirante->secondLastname);
         $user->phone_1 = $aspirante->phone;
         $user->pdf_cedula = $aspirante->urlPdfDocument;
         $user->img_document_front = $aspirante->urlImageDocumentFrente;
@@ -383,10 +383,10 @@ class ProfileController extends Controller
     /* metodo para registrar un proyecto y asociarlo con un aspirante en la base de datos */
     public function createNewProject($request, $idArtist) {
         $song = (object) $request->song;
-        
+
         $project = new Project();
         $project->title = $song->nameProject;
-        $project->author = $song->author;
+        $project->author = ucwords($song->author);
         $project->category_id = $song->categoryID;
         $project->audio = $song->urlSong;
         $project->audio_secundary_one = $song->urlAdditionalSongOne;
