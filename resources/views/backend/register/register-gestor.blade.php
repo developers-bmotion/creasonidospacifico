@@ -177,7 +177,7 @@
                                     <div class="col-lg-6 m-form__group-sub">
                                         <label class="col-form-label">Email</label>
                                         <input type="text" class="form-control m-input" name="aspirante[email]"
-                                               placeholder="">
+                                               placeholder="example@domain.com">
                                         <span class="m-form__help">Por favor ingrese correo electrónico</span>
                                     </div>
                                 </div>
@@ -1167,6 +1167,50 @@
                 </div>
             </div>
 
+            <!--=====================================================
+                DOCUMENTO DE EVIDENCIA CON DATOS DEL ASPIRANTE
+            ===================================================-->
+            <div id="content-document-evidencia-aspirante" style="display: none"
+                 class="m-portlet m-portlet--mobile m-portlet--body-progress-">
+                <div class="m-portlet__head">
+                    <div class="m-portlet__head-caption">
+                        <div class="m-portlet__head-title">
+                            <h3 class="m-portlet__head-text">Información de formulario offline</h3>
+                        </div>
+                    </div>
+
+                    <div class="m-portlet__head-tools">
+                        <ul class="m-portlet__nav">
+                            <li class="m-portlet__nav-item">
+                                <a href="#" data-toggle="m-tooltip"
+                                   class="m-portlet__nav-link m-portlet__nav-link--icon"
+                                   data-direction="left" data-width="auto"
+                                   title="Este espacio es para subir el formulario offline donde se evidencia la aceptación de terminos y condiciones por parte del aspirante">
+                                    <i class="flaticon-info m--icon-font-size-lg3"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="m-portlet__body">
+                    <div class="form-group m-form__group row">
+                        <div class="col-lg-6 m-form__group-sub">
+                            <label class="form-control-label">En este espacio puedes subir el formulario offline donde se evidencia la aceptación de los terminos y condiciones por parte del aspirante *</label>
+                            <div id="m-dropzone-three" class="m-dropzone evidence-document m-dropzone--success" action="">
+                                <div class="m-dropzone__msg dz-message needsclick">
+                                    <h3 class="m-dropzone__msg-title">Subir formulario offline</h3>
+                                    <span class="m-dropzone__msg-desc">Arrastra o has clic a aquí para subir</span>
+                                </div>
+                            </div>
+                            <div id="error-evidence-document" style="color: #f4516c" class="form-control-feedback"></div>
+                            <span class="m-form__help">Cargue aquí el formulario offline con los datos personales del aspirante.</span>
+                            <input type="hidden" name="aspirante[urlEvidenceDocument]" value="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!--=====================================
                 BOTON ENVIAR DATOS
             ======================================-->
@@ -1575,6 +1619,30 @@
                 setTimeout(() => {
                     dropzoneAdditionalSongTwo.removeFile(file)
                 }, 2000)
+            }
+        });
+
+        var dropzoneEvidenceDocument = new Dropzone('.evidence-document', {
+            url: '{{ route('upload.evidence.document') }}',
+            acceptedFiles: 'application/pdf',
+            maxFiles: 1,
+            paramName: 'doc',
+            addRemoveLinks: true,
+            headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+            processing: function(file, response){
+                $('body').loading({
+                    message: 'Subiendo Archivo...',
+                    start:true,
+                });
+            },
+            success: function (file, response) {
+                $('body').loading({ start:false });
+                $("#error-evidence-document").text('');
+                $("input[name='aspirante[urlEvidenceDocument]']").val(response);
+            },
+            error: function (file, e, i, o, u) {
+                $("#error-evidence-document").text('Recuerde que el documento debe ser en formato PDF.');
+                setTimeout(() => { dropzoneEvidenceDocument.removeFile(file) }, 2000)
             }
         });
 

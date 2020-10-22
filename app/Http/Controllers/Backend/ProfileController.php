@@ -373,6 +373,7 @@ class ProfileController extends Controller
         $aspirant->byrthdate = Carbon::parse($aspirante->birthdate);
         $aspirant->township = $aspirante->vereda;
         $aspirant->name_team = $aspirante->nameTeam;
+        $aspirant->evidence_document = $aspirante->urlEvidenceDocument;
         $aspirant->gestor_id = auth()->user()->id;
         $aspirant->save();
 
@@ -434,8 +435,7 @@ class ProfileController extends Controller
         return $urlS3;
     }
 
-    public function uploadImageDocument(Request $request)
-    {
+    public function uploadImageDocument(Request $request) {
         $image = $request->file('file')->store('imagendoc', 's3');
         Storage::disk('s3')->setVisibility($image, 'public');
         $urlS3 = Storage::disk('s3')->url($image);
@@ -453,8 +453,14 @@ class ProfileController extends Controller
     //     return [$id,$urlS3];
     // }
 
-    public function uploadPDFDocument(Request $request)
-    {
+    public function uploadEvidenceDocument(Request $request) {
+        $image = $request->file('doc')->store('evidencedoc', 's3');
+        Storage::disk('s3')->setVisibility($image, 'public');
+        $urlS3 = Storage::disk('s3')->url($image);
+        return $urlS3;
+    }
+
+    public function uploadPDFDocument(Request $request) {
         $image = $request->file('file')->store('pdfdoc', 's3');
         Storage::disk('s3')->setVisibility($image, 'public');
         $urlS3 = Storage::disk('s3')->url($image);
@@ -462,8 +468,7 @@ class ProfileController extends Controller
         return $urlS3;
     }
 
-    public function photo(Request $request)
-    {
+    public function photo(Request $request) {
         $user = User::where('id', auth()->user()->id)->first();
         $user_picture =  str_replace('storage', '', $user->picture);;
         //Elimnar foto de perfil del servidor
