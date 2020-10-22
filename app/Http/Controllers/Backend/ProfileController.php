@@ -513,7 +513,10 @@ class ProfileController extends Controller
     {
 
         $user = User::where('id', auth()->user()->id)->first();
-        // $pdf_cedula =  str_replace('storage', '', $user->pdf_cedula);
+
+        $team = Team::where('user_id', auth()->user()->id)->first();
+
+
         //Elimnar pdf de cédula o tarjeta
         Storage::disk('s3')->delete($user->pdf_cedula);
         //Agregar cedula o tarjeta de identidad
@@ -521,6 +524,14 @@ class ProfileController extends Controller
         Storage::disk('s3')->setVisibility($pdf_cedula_save, 'public');
         $urlS3 = Storage::disk('s3')->url($pdf_cedula_save);
 
+        if($team->user_id){
+            Team::where('user_id', $team->user_id)->update([
+                'pdf_identificacion' => $urlS3,
+                'img_document_front' => null,
+                'img_document_back' => null,
+            ]);
+
+        }
 
         User::where('id', auth()->user()->id)->update([
             'pdf_cedula' => $urlS3,
@@ -539,6 +550,7 @@ class ProfileController extends Controller
         $idUser=$request->headers->get('idAspirante');
         // dd($idUser);
         $user = User::where('id',$idUser )->first();
+        $team = Team::where('user_id', $user->id)->first();
         // $pdf_cedula =  str_replace('storage', '', $user->pdf_cedula);
         //Elimnar pdf de cédula o tarjeta
         Storage::disk('s3')->delete($user->pdf_cedula);
@@ -547,6 +559,14 @@ class ProfileController extends Controller
         Storage::disk('s3')->setVisibility($pdf_cedula_save, 'public');
         $urlS3 = Storage::disk('s3')->url($pdf_cedula_save);
 
+       if($team->user_id){
+            Team::where('user_id', $team->user_id)->update([
+                'pdf_identificacion' => $urlS3,
+                'img_document_front' => null,
+                'img_document_back' => null,
+            ]);
+
+         }
 
         User::where('id',$idUser)->update([
             'pdf_cedula' => $urlS3,
@@ -564,9 +584,18 @@ class ProfileController extends Controller
     {
 
         $aspirante = (object) $request->aspirante;
-        //
-        $user = User::where('id', auth()->user()->id)->first();
 
+        $team = Team::where('user_id', auth()->user()->id)->first();
+
+        $user = User::where('id', auth()->user()->id)->first();
+        if($team->user_id){
+            Team::where('user_id', $team->user_id)->update([
+                'pdf_identificacion' => null,
+                'img_document_front' => $aspirante->urlImageDocumentFrente,
+                'img_document_back' => $aspirante->urlImageDocumentAtras,
+            ]);
+
+        }
 
 
        $user_upt = User::where('id', auth()->user()->id)->update([
@@ -585,6 +614,16 @@ class ProfileController extends Controller
         // dd($aspirante);
         //
         $user = User::where('id', $aspirante->idAspirante)->first();
+        $team = Team::where('user_id', $aspirante->idAspirante)->first();
+        if($team->user_id){
+                    Team::where('user_id', $team->user_id)->update([
+                        'pdf_identificacion' => null,
+                        'img_document_front' => $aspirante->urlImageDocumentFrente,
+                        'img_document_back' => $aspirante->urlImageDocumentAtras,
+                    ]);
+
+                }
+
 
 
 
@@ -641,6 +680,16 @@ class ProfileController extends Controller
 
 
         $teams = (object) $request->team;
+        $team = Team::where('id',$teams->id )->first();
+
+        if($team->user_id){
+            // dd('hola');
+            User::where('id',$team->user_id)->update([
+                'pdf_cedula' => null,
+                'img_document_front' => $teams->urlImageDocumentFrente,
+                'img_document_back' => $teams->urlImageDocumentAtras,
+            ]);
+        }
 
         Team::where('id', $teams->id)->update([
             'pdf_identificacion' => null,
@@ -723,17 +772,24 @@ class ProfileController extends Controller
     {
 
         $teamid=$request->headers->get('id');
-        // $user = User::where('id', auth()->user()->id)->first();
-        // $artist = Artist::where('user_id', auth()->user()->id)->first();
+
         $team = Team::where('id',$teamid)->first();
-        //  dd($team);
-        // $pdf_cedula =  str_replace('storage', '', $team->pdf_identificacion);
-        //Elimnar pdf de cédula o tarjeta
+
         Storage::disk('s3')->delete($team->pdf_identificacion);
         //Agregar cedula o tarjeta de identidad
         $pdf_cedula_save = $request->file('pdf_cedula_name')->store('pdfdoc','s3');
         Storage::disk('s3')->setVisibility($pdf_cedula_save, 'public');
         $urlS3 = Storage::disk('s3')->url($pdf_cedula_save);
+
+        if($team->user_id){
+            // dd('hola');
+            User::where('id',$team->user_id)->update([
+                'pdf_cedula' => $urlS3,
+                'img_document_back'=> null,
+                'img_document_front'=> null,
+            ]);
+        }
+
         Team::where('id', $teamid)->update([
             'pdf_identificacion' => $urlS3,
             'img_document_front' => null,

@@ -150,7 +150,7 @@
 </div>
 
 @section('table.admin.management')
-    <script>
+    {{-- <script>
         let usuarios = [];
         var DatatablesBasicBasic = function () {
             var initTable1 = function () {
@@ -308,7 +308,7 @@
         jQuery(document).ready(function () {
             DatatablesBasicBasic.init();
         });
-    </script>
+    </script> --}}
 @endsection
 
 @push('js')
