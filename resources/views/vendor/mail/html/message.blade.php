@@ -3,8 +3,9 @@
     @slot('header')
         @component('mail::header', ['url' => config('app.url')])
             {{-- {{ config('app.name') }} --}}
-            <img src="\images\logo-creasonidos.png" alt="" width="250px">
-        @endcomponent
+            <img src="{{ URL::to('images/logo-creasonidos.png') }}" alt="" width="250px">
+            {{-- [logo]: {{asset('\images\logo-creasonidos.png')}} "Logo" --}}
+            @endcomponent
     @endslot
 
     {{-- Body --}}
