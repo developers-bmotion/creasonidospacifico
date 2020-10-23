@@ -251,8 +251,7 @@
                                     </div>
                                     <div class="col-md-4">
 
-                                        <label style="font-weight: bold">{{ __('Departamento de Expedición') }}
-                                            :</label>
+                                        <label style="font-weight: bold">{{ __('Departamento de Expedición') }}:</label>
                                         <div class="m-scrollable" data-scrollable="true" style="">
 
                                             @if($artist->expeditionPlace->departaments)
@@ -265,8 +264,7 @@
                                     </div>
                                     <div class="col-md-4">
 
-                                        <label style="font-weight: bold">{{ __('Ciudad de Expedición') }}
-                                            :</label>
+                                        <label style="font-weight: bold">{{ __('Ciudad de Expedición') }}:</label>
                                         <div class="m-scrollable" data-scrollable="true" style="">
                                             <p style="text-align: justify">{{ $artist->expeditionPlace->descripcion }}</p>
                                         </div>
@@ -293,6 +291,14 @@
                                         </div>
 
                                     </div>
+                                        @if($artist->township)
+                                            <div class="col-md-4">
+                                                <label style="font-weight: bold">Vereda/Corregimiento:</label>
+                                                <div class="m-scrollable" data-scrollable="true" style="">
+                                                    <p>{{$artist->township }}</p>
+                                                </div>
+                                            </div>
+                                        @endif
                                     <div class="col-md-4">
                                         <label style="font-weight: bold">Departamento de nacimiento:</label>
                                         <div class="m-scrollable" data-scrollable="true" style="">
@@ -310,6 +316,7 @@
                                         </div>
 
                                     </div>
+
                                     <div class="col-md-4">
                                         <label style="font-weight: bold">Fecha de nacimiento:</label>
                                         <div class="m-scrollable" data-scrollable="true" style="">
@@ -323,14 +330,7 @@
                                             <p>{{ $artist->users->phone_1}}</p>
                                         </div>
                                     </div>
-                                    @if($artist->township)
-                                        <div class="col-md-4">
-                                            <label style="font-weight: bold">Vereda/Corregimiento:</label>
-                                            <div class="m-scrollable" data-scrollable="true" style="">
-                                                <p>{{$artist->township }}</p>
-                                            </div>
-                                        </div>
-                                    @endif
+
 
                                     <div class="col-md-4">
                                         <label style="font-weight: bold">Linea de convocatoria:</label>

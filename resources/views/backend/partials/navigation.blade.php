@@ -161,6 +161,9 @@
         @if(\App\User::navigation() === "Subsanador")
             <ul class="m-menu__nav  m-menu__nav--submenu-arrow ">
                 <li class="m-menu__item ">
+                    <img width="170" src="/images/logo-creasonidos.png" alt="">
+                </li>
+                <li class="m-menu__item ">
                     <a href="/dashboard" class="m-menu__link"><i
                             class="m-menu__link-icon la la-music"></i><span
                             class="m-menu__link-text">Ver todas las canciones</span>
