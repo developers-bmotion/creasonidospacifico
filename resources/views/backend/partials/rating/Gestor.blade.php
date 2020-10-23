@@ -150,7 +150,7 @@
 </div>
 
 @section('table.admin.management')
-    {{-- <script>
+    <script>
         let usuarios = [];
         var DatatablesBasicBasic = function () {
             var initTable1 = function () {
@@ -206,6 +206,7 @@
                         {
                             data: 'users.email',
                             render: function (data, type, JsonResultRow, meta) {
+                                // console.log(JsonResultRow.users.email,'json result');
                                 return '<a class="m-link--primary" href="mailto:' + JsonResultRow.users.email + '">' + JsonResultRow.users.email + '</a>'
 
                             }
@@ -308,7 +309,7 @@
         jQuery(document).ready(function () {
             DatatablesBasicBasic.init();
         });
-    </script> --}}
+    </script>
 @endsection
 
 @push('js')

@@ -2319,7 +2319,7 @@
 
         var dropzone = new Dropzone('.dropzone-audio', {
             url: '{{route('update.audio')}}',
-            acceptedFiles: 'audio/*',
+            acceptedFiles: 'audio/*,video/*',
             maxFiles: 1,
             paramName: 'audio',
             headers: {
