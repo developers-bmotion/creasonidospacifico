@@ -1186,7 +1186,6 @@
                                 </div>
                             </div>
                         @endif
-
                         @if(count($artist->beneficiary) !== 0)
                             <div class="tab-pane " id="m_user_profile_tab_4">
                                 <div class="m-portlet__body ml-5">
@@ -1548,6 +1547,7 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
+
                                                 @if($artist->beneficiary[0]->pdf_documento === null)
                                                     @if(!$artist->beneficiary[0]->img_document_front && !$artist->beneficiary[0]->img_document_back)
                                                         <p>No se cargo el documento correctamente</p>
@@ -1816,7 +1816,9 @@
             }
         });
 
+        var issetBenefis=@json($artist->beneficiary);
 
+     if(issetBenefis.length != 0){
         /* eventos para subir la imagen o pdf del beneficiario */
         new Dropzone('.file-image-document-beneficiario-frente', {
             url: '{{ route('upload.image.document') }}',
@@ -1863,6 +1865,8 @@
             }
         });
 
+     }
+
         //Actualizar imagen de perfil aspirante
         new Dropzone('.dropzone_prof_asp', {
             url: '{{ route('profile.photo.artist') }}',
@@ -1908,6 +1912,7 @@
 
         });
 
+        if(issetBenefis.length != 0){
         //Actualizar imagen de perfil beneficiario
         new Dropzone('.dropzone_prof_ben', {
             url: '{{ route('profile.photo.beneficiario') }}',
@@ -1952,9 +1957,16 @@
 
         });
 
+        }
+
+
 
         Dropzone.autoDiscover = false;
         // actualizar pdf beneficiario
+
+
+        if(issetBenefis.length != 0){
+
         new Dropzone('.dropzone-ben', {
             url: '{{ route('cedula.pdf.beneficiario') }}',
             acceptedFiles: '.pdf',
@@ -1998,102 +2010,109 @@
             }
 
         });
+        }
 
-        $.each( @json($artist->teams), function (key, value) {
-            // actualizar pdf team
-            new Dropzone('.dropzone-team' + (key + 1), {
-                url: '{{ route('cedula.pdf.team') }}',
-                acceptedFiles: '.pdf',
-                maxFiles: 1,
-                paramName: 'pdf_cedula_name',
-                headers: {
-                    'id': value.id,
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                },
-                addedfile: function (file, response) {
-                    $('body').loading({
-                        message: 'Subiendo documento...',
-                        start: true,
-                    });
-                },
-                success: function (file, response) {
+        var teams =@json($artist->teams);
+        if(teams.length !== 0){
 
-                    $('#inputImagenesPostPlan').val(response);
-                    // location.reload();
-                    toastr.options = {
-                        "closeButton": false,
-                        "debug": false,
-                        "newestOnTop": false,
-                        "progressBar": false,
-                        "positionClass": "toast-top-right",
-                        "preventDuplicates": false,
-                        "onclick": null,
-                        "showDuration": "3000",
-                        "hideDuration": "1000",
-                        "timeOut": "5000",
-                        "extendedTimeOut": "1000",
-                        "showEasing": "swing",
-                        "hideEasing": "linear",
-                        "showMethod": "fadeIn",
-                        "hideMethod": "fadeOut"
-                    };
+            $.each( @json($artist->teams), function (key, value) {
+                // actualizar pdf team
+                new Dropzone('.dropzone-team' + (key + 1), {
+                    url: '{{ route('cedula.pdf.team') }}',
+                    acceptedFiles: '.pdf',
+                    maxFiles: 1,
+                    paramName: 'pdf_cedula_name',
+                    headers: {
+                        'id': value.id,
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    addedfile: function (file, response) {
+                        $('body').loading({
+                            message: 'Subiendo documento...',
+                            start: true,
+                        });
+                    },
+                    success: function (file, response) {
 
-                    toastr.success("El documento se actualizo correctamente", "Información");
-                    setTimeout(function () {
-                        location.reload();
-                    }, 3000);
-                }
+                        $('#inputImagenesPostPlan').val(response);
+                        // location.reload();
+                        toastr.options = {
+                            "closeButton": false,
+                            "debug": false,
+                            "newestOnTop": false,
+                            "progressBar": false,
+                            "positionClass": "toast-top-right",
+                            "preventDuplicates": false,
+                            "onclick": null,
+                            "showDuration": "3000",
+                            "hideDuration": "1000",
+                            "timeOut": "5000",
+                            "extendedTimeOut": "1000",
+                            "showEasing": "swing",
+                            "hideEasing": "linear",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut"
+                        };
 
+                        toastr.success("El documento se actualizo correctamente", "Información");
+                        setTimeout(function () {
+                            location.reload();
+                        }, 3000);
+                    }
+
+                });
+
+                /* eventos para subir la imagen del team */
+                new Dropzone('.file-image-document-team-frente' + (key + 1), {
+                    url: '{{ route('upload.image.document') }}',
+                    acceptedFiles: "image/*",
+                    maxFiles: 1,
+                    paramName: 'file',
+                    headers: {
+
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    processing: function (file, response) {
+                        $('body').loading({
+                            message: 'Subiendo documento...',
+                            start: true,
+                        });
+                    },
+                    success: function (file, response) {
+                        $("input[name='team[urlImageDocumentFrente]" + (key + 1) + "']").val(response);
+                        $('body').loading({
+
+                            start: false,
+                        });
+                    }
+                });
+                new Dropzone('.file-image-document-team-atras' + (key + 1), {
+                    url: '{{ route('upload.image.document') }}',
+                    acceptedFiles: "image/*",
+                    maxFiles: 1,
+                    paramName: 'file',
+                    headers: {
+
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    processing: function (file, response) {
+                        $('body').loading({
+                            message: 'Subiendo documento...',
+                            start: true,
+                        });
+                    },
+                    success: function (file, response) {
+                        $("input[name='team[urlImageDocumentAtras]" + (key + 1) + "']").val(response);
+                        $('body').loading({
+
+                            start: false,
+                        });
+                    }
+                });
             });
 
-            /* eventos para subir la imagen del team */
-            new Dropzone('.file-image-document-team-frente' + (key + 1), {
-                url: '{{ route('upload.image.document') }}',
-                acceptedFiles: "image/*",
-                maxFiles: 1,
-                paramName: 'file',
-                headers: {
+        }
 
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                },
-                processing: function (file, response) {
-                    $('body').loading({
-                        message: 'Subiendo documento...',
-                        start: true,
-                    });
-                },
-                success: function (file, response) {
-                    $("input[name='team[urlImageDocumentFrente]" + (key + 1) + "']").val(response);
-                    $('body').loading({
-
-                        start: false,
-                    });
-                }
-            });
-            new Dropzone('.file-image-document-team-atras' + (key + 1), {
-                url: '{{ route('upload.image.document') }}',
-                acceptedFiles: "image/*",
-                maxFiles: 1,
-                paramName: 'file',
-                headers: {
-
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                },
-                processing: function (file, response) {
-                    $('body').loading({
-                        message: 'Subiendo documento...',
-                        start: true,
-                    });
-                },
-                success: function (file, response) {
-                    $("input[name='team[urlImageDocumentAtras]" + (key + 1) + "']").val(response);
-                    $('body').loading({
-
-                        start: false,
-                    });
-                }
-            });
-        });
 
 
         Dropzone.autoDiscover = false;
@@ -2300,7 +2319,7 @@
 
         var dropzone = new Dropzone('.dropzone-audio', {
             url: '{{route('update.audio')}}',
-            acceptedFiles: 'audio/*',
+            acceptedFiles: 'audio/*,video/*',
             maxFiles: 1,
             paramName: 'audio',
             headers: {

@@ -274,7 +274,7 @@
     <script>
         var dropzone = new Dropzone('.dropzone', {
             url: '{{route('add.project.audio')}}',
-            acceptedFiles: 'audio/*',
+            acceptedFiles: 'audio/*,video/*',
             maxFiles: 1,
             paramName: 'image',
             headers: {
@@ -311,7 +311,7 @@
         var fileOne;
         var dropzoneOne = new Dropzone('.dropzone-one', {
             url: '{{route('add.audio.one')}}',
-            acceptedFiles: 'audio/*',
+            acceptedFiles: 'audio/*,video/*',
             maxFiles: 1,
             paramName: 'image',
             headers: {
@@ -348,7 +348,7 @@
         var fileTwo;
         var dropzoneTwo = new Dropzone('.dropzone-two', {
             url: '{{route('add.audio.two')}}',
-            acceptedFiles: 'audio/*',
+            acceptedFiles: 'audio/*,video/*',
             maxFiles: 1,
             paramName: 'image',
             headers: {

@@ -225,17 +225,14 @@
                                 <div class="form-group m-form__group row">
                                     <div id="content-aspirante_documentType" class="col-lg-6 m-form__group-sub">
                                         <label class="form-control-label">Tipo de documento *</label>
-                                        <select id="aspirant-document-type" name="aspirante[documentType]"
-                                                class="form-control m-input">
+                                        <select id="aspirant-document-type" name="aspirante[documentType]" class="form-control m-input">
                                             @foreach($documenttype as $document_type)
                                                 @if($document_type->document != "Tarjeta de identidad")
-                                                    <option
-                                                        value="{{$document_type->id}}">{{ $document_type->document }}</option>
+                                                    <option value="{{$document_type->id}}">{{ $document_type->document }}</option>
                                                 @endif
                                             @endforeach
                                         </select>
-                                        <div id="error-aspirante_documentType" class="form-control-feedback"
-                                             style="display: none"></div>
+                                        <div id="error-aspirante_documentType" class="form-control-feedback" style="display: none"></div>
                                     </div>
 
                                     <div id="content-aspirante_identificacion" class="col-lg-6 m-form__group-sub">

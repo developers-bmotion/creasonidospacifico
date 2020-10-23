@@ -177,7 +177,7 @@
                                     <div class="col-lg-6 m-form__group-sub">
                                         <label class="col-form-label">Email</label>
                                         <input type="text" class="form-control m-input" name="aspirante[email]"
-                                               placeholder="">
+                                               placeholder="example@domain.com">
                                         <span class="m-form__help">Por favor ingrese correo electrónico</span>
                                     </div>
                                 </div>
@@ -197,7 +197,7 @@
                                     </div>
 
                                     <div id="content-aspirante_lastname" class="col-lg-6 m-form__group-sub">
-                                        <label class="form-control-label {{$errors->has('lastname')? 'has-danger':''}}">Primer
+                                        <label class="form-control-label">Primer
                                             apellido <span class="text-danger">*</span></label>
                                         <input type="text" name="aspirante[lastname]" class="form-control m-input"
                                                placeholder="" value="">
@@ -213,7 +213,7 @@
                                 <div class="form-group m-form__group row">
                                     <div id="content-aspirante_secondLastname" class="col-lg-6 m-form__group-sub">
                                         <label
-                                            class="form-control-label {{$errors->has('second_last_name')? 'has-danger':''}}">Segundo
+                                            class="form-control-label">Segundo
                                             apellido <span class="text-danger">*</span></label>
                                         <input type="text" name="aspirante[secondLastname]" class="form-control m-input"
                                                placeholder="" value="">
@@ -223,14 +223,14 @@
                                     </div>
 
                                     <div id="content-aspirante_phone" class="col-lg-6 m-form__group-sub">
-                                        <label class="form-control-label {{$errors->has('phone_1')? 'has-danger':''}}">Teléfono
+                                        <label class="form-control-label">Teléfono
                                             celular <span class="text-danger">*</span></label>
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="la la-phone"></i></span>
                                             </div>
-                                            <input type="text" name="aspirante[phone]" class="form-control m-input"
-                                                   placeholder="" value="">
+                                            {{-- <input type="text" name="aspirante[phone]" class="form-control m-input" placeholder="" value=""> --}}
+                                            <input type="number" name="aspirante[phone]" class="form-control m-input" placeholder="" value="">
                                         </div>
                                         <div id="error-aspirante_phone" class="form-control-feedback"
                                              style="display: none"></div>
@@ -248,8 +248,7 @@
                                                 class="form-control m-input">
                                             @foreach($documenttype as $document_type)
                                                 @if($document_type->document != "Tarjeta de identidad")
-                                                    <option
-                                                        value="{{$document_type->id}}">{{ $document_type->document }}</option>
+                                                    <option value="{{$document_type->id}}">{{ $document_type->document }}</option>
                                                 @endif
                                             @endforeach
                                         </select>
@@ -258,13 +257,9 @@
                                     </div>
 
                                     <div id="content-aspirante_identificacion" class="col-lg-6 m-form__group-sub">
-                                        <label
-                                            class="form-control-label {{$errors->has('identificacion')? 'has-danger':''}}">Nº
-                                            de indentificación <span class="text-danger">*</span></label>
-                                        <input type="num" name="aspirante[identificacion]" class="form-control m-input"
-                                               placeholder="" value="">
-                                        <div id="error-aspirante_identificacion" class="form-control-feedback"
-                                             style="display: none"></div>
+                                        <label class="form-control-label">Nº de indentificación <span class="text-danger">*</span></label>
+                                        <input type="number" name="aspirante[identificacion]" class="form-control m-input" placeholder="" value="">
+                                        <div id="error-aspirante_identificacion" class="form-control-feedback" style="display: none"></div>
                                         <span class="m-form__help">Por favor ingrese el número de indentificación</span>
                                     </div>
                                 </div>
@@ -276,14 +271,11 @@
                                     <div id="content-aspirante_departamentoExpedida" class="col-lg-6 m-form__group-sub">
                                         <label class="form-control-label">Departamento de expedición <span
                                                 class="text-danger">*</span></label>
-                                        <select
-                                            onchange="onSelectDepartamentosChange(this, 'aspirante-expid-municipios')"
-                                            id="m_select2_1"
-                                            name="aspirante[departamentoExpedida]" class="form-control m-select2">
+                                        <select onchange="onSelectDepartamentosChange(this, 'aspirante-expid-municipios')"
+                                            id="m_select2_1" name="aspirante[departamentoExpedida]" class="form-control m-select2">
                                             <option value="-1">Seleccione departamento</option>
                                             @foreach($departamentos as $departamento)
-                                                <option value="{{$departamento->id}}">
-                                                    {{ $departamento->descripcion }}</option>
+                                                <option value="{{$departamento->id}}">{{ $departamento->descripcion }}</option>
                                             @endforeach
                                         </select>
                                         <div id="error-aspirante_departamentoExpedida" class="form-control-feedback"
@@ -349,7 +341,7 @@
                                             <label for="">Imagen documento identificación frente</label>
                                             <div
                                                 class="m-dropzone file-image-document-aspirante-frente m-dropzone--success"
-                                                action="">{{-- id="m-dropzone-three" --}}
+                                                action="">
                                                 <div class="m-dropzone__msg dz-message needsclick">
                                                     <h3 class="m-dropzone__msg-title">Subir foto del frente de su
                                                         documento de identificación</h3>
@@ -495,7 +487,7 @@
 
                                 <div class="form-group m-form__group row">
                                     <div id="content-aspirante_address" class="col-lg-6 m-form__group-sub">
-                                        <label class="form-control-label {{$errors->has('adress')? 'has-danger':''}}">Dirección
+                                        <label class="form-control-label">Dirección
                                             de residencia <span class="text-danger">*</span></label>
                                         <input type="text" name="aspirante[address]" class="form-control m-input"
                                                placeholder="" value="">
@@ -505,12 +497,10 @@
                                     </div>
 
                                     <div class="col-lg-6 m-form__group-sub">
-                                        <label class="form-control-label {{$errors->has('vereda')? 'has-danger':''}}">Vereda/Corregimiento
+                                        <label class="form-control-label">Vereda/Corregimiento
                                             de residencia</label>
                                         <input type="text" name="aspirante[vereda]" class="form-control m-input"
-                                               placeholder=""
-                                               value=""> {{-- value="{{ old('vereda', $artist->users->last_name ) }}" corregir --}}
-                                        {!! $errors->first('vereda','<div class="form-control-feedback">*:message</div>')!!}
+                                               placeholder="" value=""> 
                                         <span class="m-form__help">En caso de vivir en una vereda ó corregimiento, por favor ingrese el nombre</span>
                                     </div>
                                 </div>
@@ -524,7 +514,6 @@
 
                                 <div class="m-form__section">
                                     <div class="m-form__heading">
-
                                         <h3 class="m-form__heading-title">Información de si el representante forma parte
                                             del grupo
                                         </h3>
@@ -533,7 +522,6 @@
                                     <div class="m-form__group form-group">
                                         <div class="col-lg-12 m-form__group-sub">
                                             <label for="">¿Usted como representante forma parte del grupo?</label>
-
                                             <div class="m-radio-inline">
                                                 <label class="m-radio">
                                                     <input type="radio" name="aspirante[partGroup]" value="1"> Si
@@ -602,9 +590,7 @@
                                 ======================================-->
                                 <div class="form-group m-form__group row">
                                     <div id="content-beneficiario_name" class="col-lg-6 m-form__group-sub">
-                                        <label
-                                            class="form-control-label {{$errors->has('name_menor')? 'has-danger':''}}">Nombre
-                                            <span class="text-danger">*</span></label>
+                                        <label class="form-control-label">Nombre<span class="text-danger">*</span></label>
                                         <input type="text" name="beneficiario[name]" class="form-control m-input"
                                                placeholder="" value="">
                                         <div id="error-beneficiario_name" class="form-control-feedback"
@@ -613,8 +599,7 @@
                                     </div>
 
                                     <div id="content-beneficiario_lastname" class="col-lg-6 m-form__group-sub">
-                                        <label
-                                            class="form-control-label {{$errors->has('last_name_menor')? 'has-danger':''}}">Primer
+                                        <label class="form-control-label">Primer
                                             apellido <span class="text-danger">*</span></label>
                                         <input type="text" name="beneficiario[lastname]" class="form-control m-input"
                                                placeholder="" value="">
@@ -630,7 +615,7 @@
                                 <div class="form-group m-form__group row">
                                     <div id="content-beneficiario_secondLastname" class="col-lg-6 m-form__group-sub">
                                         <label
-                                            class="form-control-label {{$errors->has('second_last_name_menor')? 'has-danger':''}}">Segundo
+                                            class="form-control-label">Segundo
                                             apellido <span class="text-danger">*</span></label>
                                         <input type="text" name="beneficiario[secondLastname]"
                                                class="form-control m-input"
@@ -642,7 +627,7 @@
 
                                     <div id="content-beneficiario_phone" class="col-lg-6 m-form__group-sub">
                                         <label
-                                            class="form-control-label {{$errors->has('phone_1_menor')? 'has-danger':''}}">Teléfono
+                                            class="form-control-label">Teléfono
                                             celular <span class="text-danger">*</span></label>
                                         <div class="input-group">
                                             <div class="input-group-prepend">
@@ -663,7 +648,7 @@
                                 <div class="form-group m-form__group row">
                                     <div id="content-beneficiario_documentType" class="col-lg-6 m-form__group-sub">
                                         <label
-                                            class="form-control-label {{$errors->has('document_type_menor')? 'has-danger':''}}">Tipo
+                                            class="form-control-label">Tipo
                                             de documento <span class="text-danger">*</span></label>
                                         <select name="beneficiario[documentType]"
                                                 class="form-control m-bootstrap-select m_selectpicker">
@@ -675,7 +660,7 @@
 
                                     <div id="content-beneficiario_identificacion" class="col-lg-6 m-form__group-sub">
                                         <label
-                                            class="form-control-label {{$errors->has('identificacion_menor')? 'has-danger':''}}">Nº
+                                            class="form-control-label">Nº
                                             de indentificación <span class="text-danger">*</span></label>
                                         <input type="num" name="beneficiario[identificacion]"
                                                class="form-control m-input"
@@ -918,7 +903,7 @@
                                     <div class="form-group m-form__group row">
                                         <div id="content-beneficiario_address" class="col-lg-6 m-form__group-sub">
                                             <label
-                                                class="form-control-label {{$errors->has('adress')? 'has-danger':''}}">Dirección
+                                                class="form-control-label">Dirección
                                                 de residencia <span class="text-danger">*</span></label>
                                             <input type="text" name="beneficiario[address]" class="form-control m-input"
                                                    placeholder="" value="">
@@ -929,11 +914,11 @@
 
                                         <div class="col-lg-6 m-form__group-sub">
                                             <label
-                                                class="form-control-label {{$errors->has('vereda')? 'has-danger':''}}">Vereda/Corregimiento
+                                                class="form-control-label">Vereda/Corregimiento
                                                 de residencia</label>
                                             <input type="text" name="beneficiario[vereda]" class="form-control m-input"
                                                    placeholder=""
-                                                   value="">{{-- value="{{ old('vereda', $artist->users->last_name ) }}" --}}
+                                                   value="">
                                             <span class="m-form__help">En caso de vivir en una vereda ó corregimiento, por favor ingrese el nombre</span>
                                         </div>
                                     </div>
@@ -984,9 +969,10 @@
                                         class="m-form__help">Por favor ingrese el nombre de la agrupación musical</span>
                                 </div>
 
-                                <div class="col-12 col-lg-4 col-md-4 m-form__group-sub">
+                                <div id="content-input-max-members" class="col-12 col-lg-4 col-md-4 m-form__group-sub">
                                     <label for="example-number-input">Ingrese el número de integrantes</label>
-                                    <input id="input-max-members" class="form-control m-input" type="number" value="">
+                                    <input id="input-max-members" class="form-control m-input" type="number" min="1" max="200" value="">
+                                    <div id="error-input-max-members" class="form-control-feedback" style="display: none"></div>
                                     <span class="m-form__help">Luego clic en agregar integrantes</span>
                                 </div>
 
@@ -1176,6 +1162,50 @@
                                     <span class="m-form__help">(máximo 300 palabras) de su proyecto musical, incluyendo una corta descripción de su trayectoria.</span>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--=====================================================
+                DOCUMENTO DE EVIDENCIA CON DATOS DEL ASPIRANTE
+            ===================================================-->
+            <div id="content-document-evidencia-aspirante" style="display: none"
+                 class="m-portlet m-portlet--mobile m-portlet--body-progress-">
+                <div class="m-portlet__head">
+                    <div class="m-portlet__head-caption">
+                        <div class="m-portlet__head-title">
+                            <h3 class="m-portlet__head-text">Información de formulario offline</h3>
+                        </div>
+                    </div>
+
+                    <div class="m-portlet__head-tools">
+                        <ul class="m-portlet__nav">
+                            <li class="m-portlet__nav-item">
+                                <a href="#" data-toggle="m-tooltip"
+                                   class="m-portlet__nav-link m-portlet__nav-link--icon"
+                                   data-direction="left" data-width="auto"
+                                   title="Este espacio es para subir el formulario offline donde se evidencia la aceptación de terminos y condiciones por parte del aspirante">
+                                    <i class="flaticon-info m--icon-font-size-lg3"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="m-portlet__body">
+                    <div class="form-group m-form__group row">
+                        <div class="col-lg-6 m-form__group-sub">
+                            <label class="form-control-label">En este espacio puedes subir el formulario offline donde se evidencia la aceptación de los terminos y condiciones por parte del aspirante *</label>
+                            <div id="m-dropzone-three" class="m-dropzone evidence-document m-dropzone--success" action="">
+                                <div class="m-dropzone__msg dz-message needsclick">
+                                    <h3 class="m-dropzone__msg-title">Subir formulario offline</h3>
+                                    <span class="m-dropzone__msg-desc">Arrastra o has clic a aquí para subir</span>
+                                </div>
+                            </div>
+                            <div id="error-evidence-document" style="color: #f4516c" class="form-control-feedback"></div>
+                            <span class="m-form__help">Cargue aquí el formulario offline con los datos personales del aspirante.</span>
+                            <input type="hidden" name="aspirante[urlEvidenceDocument]" value="">
                         </div>
                     </div>
                 </div>
@@ -1589,6 +1619,30 @@
                 setTimeout(() => {
                     dropzoneAdditionalSongTwo.removeFile(file)
                 }, 2000)
+            }
+        });
+
+        var dropzoneEvidenceDocument = new Dropzone('.evidence-document', {
+            url: '{{ route('upload.evidence.document') }}',
+            acceptedFiles: 'application/pdf',
+            maxFiles: 1,
+            paramName: 'doc',
+            addRemoveLinks: true,
+            headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+            processing: function(file, response){
+                $('body').loading({
+                    message: 'Subiendo Archivo...',
+                    start:true,
+                });
+            },
+            success: function (file, response) {
+                $('body').loading({ start:false });
+                $("#error-evidence-document").text('');
+                $("input[name='aspirante[urlEvidenceDocument]']").val(response);
+            },
+            error: function (file, e, i, o, u) {
+                $("#error-evidence-document").text('Recuerde que el documento debe ser en formato PDF.');
+                setTimeout(() => { dropzoneEvidenceDocument.removeFile(file) }, 2000)
             }
         });
 
