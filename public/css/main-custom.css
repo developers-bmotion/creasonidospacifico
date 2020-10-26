@@ -46,6 +46,11 @@
     font-size: 45px !important;
     padding: 0 3rem;
 }
+
+.img-logo{
+    width: 29rem;
+}
+
 /*Para pantalla movil*/
 @media screen and (max-width: 480px){
 
@@ -53,6 +58,12 @@
         font-size: 30px !important;
         padding: 0 3rem;
     }
-
+    .title-login{
+        font-size: 50px !important;
+        padding: 0 3rem;
+    }
+    .img-logo{
+        width: 250px;
+    }
 
 }

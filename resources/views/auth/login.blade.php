@@ -105,7 +105,7 @@ License: You must have a valid license purchased only from themeforest(the above
                     <div class="m-login__wrapper login-top">
                         <div class="m-login__logo">
                             <a href="#">
-                                <img style="width: 29rem;" src="/images/logo-creasonidos.png">
+                                <img class="img-logo" src="/images/logo-creasonidos.png">
                             </a>
                         </div>
                         @if(session('message'))
