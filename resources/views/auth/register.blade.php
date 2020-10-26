@@ -358,7 +358,9 @@ License: You must have a valid license purchased only from themeforest(the above
 <script src="/backend/vendors/sweetalert2/dist/sweetalert2.min.js" type="text/javascript"></script>
 <script src="/backend/vendors/js/framework/components/plugins/base/sweetalert2.init.js" type="text/javascript">
 </script>
+@if(env('APP_ENV') === 'production')
 {!! NoCaptcha::renderJs() !!}
+@endif
 
 <!--end:: Global Optional Vendors -->
 
