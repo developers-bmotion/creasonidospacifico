@@ -39,7 +39,7 @@ Route::get('/offline', function (){
 });
 
 Route::get('/prueba-email', function (){
-   return new NewArtist('Mauricio');
+   return new \App\Mail\NewArtistRegisterGestor('Mao', 'Guti', 'amores como el nuestro');
 });
 
 Route::get('/')->middleware('');
