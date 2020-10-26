@@ -115,9 +115,9 @@ $("input[name='beneficiario[identificacionDoc]']").click( () => {
 // evento click para para selecionar si forma parte del grupo musical
 $("input[name='aspirante[partGroup]']").click( () => {
     if ($('input:radio[name="aspirante[partGroup]"]:checked').val() === '1') {
-        $("#rol-member").show();
+        $("#content-aspirante_rolMember").show();
     } else {
-        $("#rol-member").hide();
+        $("#content-aspirante_rolMember").hide();
     }
 });
 
@@ -507,7 +507,14 @@ function validationForm() {
     } else {
         validate = validateAspirante();
         validateFormInputs('aspirante', 'nameTeam');
-        // falata validar el grupo
+        // validar el rol que desempeña en el grupo  
+        if ($('input:radio[name="aspirante[partGroup]"]:checked').val() === '1') {
+            validateFormInputs('aspirante', 'rolMember');            
+            if ($("input[name='aspirante[rolMember]']").val() == '' || $("input[name='aspirante[nameTeam]']").val() == '') {
+                validate =  false;  
+            }
+        }
+        // falta validar el grupo
     }
 
     console.log('antes::: ', validate)
@@ -663,6 +670,7 @@ $("input[name='aspirante[phone]']").keyup( () => validateFormInputs('aspirante',
 $("input[name='aspirante[identificacion]']").keyup( () => validateFormInputs('aspirante', 'identificacion') );
 $("input[name='aspirante[address]']").keyup( () => validateFormInputs('aspirante', 'address') );
 $("input[name='aspirante[birthdate]']").change( () => validateFormInputs('aspirante', 'birthdate') );
+$("input[name='aspirante[rolMember]']").keyup( () => validateFormInputs('aspirante', 'rolMember') ); 
 
 /* evento onkeyup de los inputs beneficiario */
 $("input[name='beneficiario[name]']").keyup( () => validateFormInputs('beneficiario', 'name') );

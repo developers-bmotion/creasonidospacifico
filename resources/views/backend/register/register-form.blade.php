@@ -505,11 +505,12 @@
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div id="rol-member" class="form-group m-form__group row" style="display: none">
+                                    
+                                    <div id="content-aspirante_rolMember" class="form-group m-form__group row" style="display: none">
                                         <div class="col-lg-6 m-form__group-sub">
                                             <label class="form-control-label">Instrumento que interpreta</label>
-                                            <input type="num" name="aspirante[rolMember]" class="form-control m-input" placeholder="" value="">
+                                            <input type="text" name="aspirante[rolMember]" class="form-control m-input" placeholder="" value="">
+                                            <div id="error-aspirante_rolMember" class="form-control-feedback" style="display: none"></div>
                                             <span class="m-form__help">Ingrese el rol que desempeña dentro del grupo (Guitarrista, Vocalista, Pianista, etc.)</span>
                                         </div>
                                     </div>
@@ -900,7 +901,7 @@
                     <div class="row">
                         <div class="col col-lg-12" style="padding-bottom: 1.5rem;">
                             <div class="row" style="padding-left: 1rem;">
-                                <div class="col-lg-4 col-md-4 col-12 m-form__group-sub">
+                                <div id="content-aspirante_nameTeam" class="col-lg-4 col-md-4 col-12 m-form__group-sub">
                                     <label class="form-control-label">Nombre de la agrupación musical <span
                                             class="text-danger">*</span></label>
                                     <input type="text" name="aspirante[nameTeam]" class="form-control m-input"

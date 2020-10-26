@@ -14,14 +14,13 @@ $('#select-linea-convocatoria').on('change', function() {
                 $("#select-actuara-como option[value='1']").show();
                 $("#select-actuara-como option[value='3']").hide(); 
                 $("#select-actuara-como").val("-1"); 
-                $("#forma-parte-grupo").hide();
+                $("#forma-parte-grupo").hide();                
             break;
         case '2': $("#content-select-form-actuara-como").show();                
                 showInfoGroup()
                 $("#select-actuara-como").val("3"); 
                 $("#select-actuara-como option[value='3']").show();    
-                $("#select-actuara-como").prop('disabled', true);
-                $("#forma-parte-grupo").show();
+                $("#select-actuara-como").prop('disabled', true);                
             break;
     }   
 });
@@ -72,6 +71,8 @@ function showInfoGroup() {
     $('#content-informacion-menor-edad').hide();
     $('#content-informacion-grupo-musical').show();
     $('#content-informacion-subir-cancion').show();
+    $("#forma-parte-grupo").show();
+    $('#content-document-evidencia-aspirante').show();
     $('#btn-enviar-datos').show();
 }
 
@@ -122,16 +123,15 @@ $("input[name='beneficiario[identificacionDoc]']").click( () => {
 // evento click para para selecionar si forma parte del grupo musical
 $("input[name='aspirante[partGroup]']").click( () => {
     if ($('input:radio[name="aspirante[partGroup]"]:checked').val() === '1') {
-        $("#rol-member").show(); 
+        $("#content-aspirante_rolMember").show(); 
     } else {
-        $("#rol-member").hide(); 
+        $("#content-aspirante_rolMember").hide(); 
     }
 });
 
 // vento para agregar nuevas canciones.
 var firstClick = true;
 $("#add-song").click( () => {
-    console.log('value:: ', firstClick)
     if (firstClick) {
         $('#additional-songs').show();
         $('#add-song').html('Cancelar');
@@ -420,6 +420,7 @@ const fieldsInputs = {
     aspirante_municipioNacimiento: false,
     aspirante_address: false,
     aspirante_vereda: false,
+    aspirante_urlEvidenceDocument: false,
     beneficiario_name: false,
     beneficiario_lastname: false,
     beneficiario_secondLastname: false,
@@ -434,6 +435,10 @@ const fieldsInputs = {
     beneficiario_municipioNacimiento: false,
     beneficiario_address: false,
     beneficiario_vereda: false,
+    song_nameProject: false,
+    song_author: false,
+    song_urlSong: false,
+    song_categoryID: false,
 }
 
 /* Evento para enviar los datos del formulario */
@@ -498,7 +503,8 @@ function validationForm() {
     validateFormInputs('aspirante', 'identificacion'); 
     validateFormInputs('aspirante', 'address'); 
     validateFormInputs('aspirante', 'birthdate');
-    formatDateSend($('input[name="aspirante[birthdate]"]'))
+    validateFormInputs('aspirante', 'urlEvidenceDocument'); // validar formulario offline  
+    formatDateSend($('input[name="aspirante[birthdate]"]'));
 
     /* validar selects  */
     //validateFormSelect('aspirante', 'documentType'); 
@@ -520,7 +526,7 @@ function validationForm() {
         validateFormInputs('beneficiario', 'identificacion'); 
         validateFormInputs('beneficiario', 'address'); 
         validateFormInputs('beneficiario', 'birthdate');         
-        formatDateSend($('input[name="beneficiario[birthdate]"]'))
+        formatDateSend($('input[name="beneficiario[birthdate]"]'));
 
         /* validar selects  */
         //validateFormSelect('beneficiario', 'documentType');   
@@ -535,22 +541,35 @@ function validationForm() {
     } else {
         validate = validateAspirante();
         validateFormInputs('aspirante', 'nameTeam'); 
-        // falata validar el grupo
+        // validar el rol que desempeña en el grupo  
+        if ($('input:radio[name="aspirante[partGroup]"]:checked').val() === '1') {
+            validateFormInputs('aspirante', 'rolMember');            
+            if ($("input[name='aspirante[rolMember]']").val() == '' || $("input[name='aspirante[nameTeam]']").val() == '') {
+                validate =  false;  
+            }
+        }
+        // falta validar el grupo
+        console.log('value number: ', $("#input-max-members").val())
+        if ($("#input-max-members").val() == '') {
+            console.log('esta vacio')
+            $("#help-max-members").show();
+        } else {
+            console.log('tiene valor')
+        }
     }
 
     // validar cancion
     validateFormInputs('song', 'nameProject');
     validateFormInputs('song', 'author');
-    //validateFormInputs('song', 'urlSong'); 
+    validateFormInputs('song', 'urlSong'); // validar cancion
     validateFormSelect('song', '[categoryID]');
     
-    console.log('antes::: ', validate)    
-    if (validateTermsCondition() && validate) {
+    if (validateSong() && validateTermsCondition() && validate) {
         validate = true
     } else {
         validate = false;
     }
-    console.log('despues::: ', validate)
+    
     return validate;    
 }
 
@@ -569,10 +588,19 @@ const validateAspirante = () => {
         && fieldsInputs.aspirante_phone && fieldsInputs.aspirante_identificacion && fieldsInputs.aspirante_address
         && fieldsInputs.aspirante_departamentoExpedida && fieldsInputs.aspirante_municipioExpedida 
         && fieldsInputs.aspirante_departamentoNacimiento && fieldsInputs.aspirante_municipioNacimiento
-        && fieldsInputs.aspirante_birthdate) {
+        && fieldsInputs.aspirante_birthdate && fieldsInputs.aspirante_urlEvidenceDocument) {
         return true;
     }
 
+    return false;
+}
+
+// función para validar lo datos de la canción 
+const validateSong = () => {
+    if (fieldsInputs.song_nameProject && fieldsInputs.song_author
+        && fieldsInputs.song_urlSong && fieldsInputs.song_categoryID) {
+        return true;
+    }
     return false;
 }
 
@@ -700,6 +728,7 @@ $("input[name='aspirante[phone]']").keyup( () => validateFormInputs('aspirante',
 $("input[name='aspirante[identificacion]']").keyup( () => validateFormInputs('aspirante', 'identificacion') );
 $("input[name='aspirante[address]']").keyup( () => validateFormInputs('aspirante', 'address') );
 $("input[name='aspirante[birthdate]']").change( () => validateFormInputs('aspirante', 'birthdate') );
+$("input[name='aspirante[rolMember]']").keyup( () => validateFormInputs('aspirante', 'rolMember') );
 
 /* evento onkeyup de los inputs beneficiario */
 $("input[name='beneficiario[name]']").keyup( () => validateFormInputs('beneficiario', 'name') );
@@ -892,10 +921,10 @@ var uploadSong = new Dropzone('.upload-song', {
         showLoading('Subiendo la canción...')
     },
     success: function (file, response) {
-        dropzoneSuccess(response, 'upload-song', 'song[urlSong]')
+        dropzoneSuccess(response, 'song_urlSong', 'song[urlSong]')
     },
     error: function (file, responce) {
-        dropzoneError('upload-song', 'Recuerda que solo se admiten archivos en formato MP3 con un peso máximo de 12 MB.', 'song[urlSong]')
+        dropzoneError('song_urlSong', 'Recuerda que solo se admiten archivos en formato MP3 con un peso máximo de 12 MB.', 'song[urlSong]')
         setTimeout( () => { uploadSong.removeFile(file) }, 2000 )
     }
 });
@@ -905,6 +934,7 @@ var fileAdditionalSongOne, fileAdditionalSongTwo;
 var dropzoneAdditionalSongOne = new Dropzone('.additional-song-one', {
     acceptedFiles: 'audio/*',
     maxFiles: 1,
+    maxFilesize: 15, // MB
     paramName: 'image',
     addRemoveLinks: true,
     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
@@ -923,6 +953,7 @@ var dropzoneAdditionalSongOne = new Dropzone('.additional-song-one', {
 var dropzoneAdditionalSongTwo = new Dropzone('.additional-song-two', {
     acceptedFiles: 'audio/*',
     maxFiles: 1,
+    maxFilesize: 15, // MB
     paramName: 'image',
     addRemoveLinks: true,
     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
@@ -950,10 +981,10 @@ var dropzoneEvidenceDocument = new Dropzone('.evidence-document', {
         showLoading()
     },
     success: function (file, response) {
-        dropzoneSuccess(response, 'evidence-document', 'song[urlEvidenceDocument]')
+        dropzoneSuccess(response, 'aspirante_urlEvidenceDocument', 'aspirante[urlEvidenceDocument]')
     },
     error: function (file, responce) {
-        dropzoneError('evidence-document', 'Recuerda que solo se admiten archivos en formato PDF.', 'song[urlEvidenceDocument]')
+        dropzoneError('aspirante_urlEvidenceDocument', 'Recuerda que solo se admiten archivos en formato PDF.', 'aspirante[urlEvidenceDocument]')
         setTimeout( () => { dropzoneEvidenceDocument.removeFile(file) }, 2000 )
     }
 });

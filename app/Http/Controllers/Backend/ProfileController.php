@@ -262,6 +262,8 @@ class ProfileController extends Controller
 
     /* metodo para insertar los integrantes del grupo */
     public function insertGroupMembers($request, $idArtist) {
+        if (!isset($request->integrantes)) return; 
+
         foreach ($request->integrantes as $integrante) {
             $member = new Team();
             $member->name = ucwords($integrante['nameMember']);
@@ -306,7 +308,7 @@ class ProfileController extends Controller
         return $urlS3;
     }
 
-    /* metodo para actualizar datos del aspirante */
+    /* metodo para crear nuevos aspirantes desde rol gestor */
     public function createNewAspirant(Request $request) {
         $idArtist = -1;
         //dd($request);
@@ -349,7 +351,8 @@ class ProfileController extends Controller
                 $pass = bcrypt($password);
                 $user->email = $aspirante->email;
                 $user->password = $pass;
-                \Mail::to($user->email)->send(new NewGestorAdmin($user->email, $password));
+                \Mail::to($user->email)->send(new NewGestorAdmin($user->email, $password)); // credenciales de acceso
+                \Mail::to($user->email)->send(new NewArtist($aspirante->name)); // registro exitoso                
             }
         }
         $user->save(); // guardar datos del usuario
@@ -377,7 +380,7 @@ class ProfileController extends Controller
         $aspirant->gestor_id = auth()->user()->id;
         $aspirant->save();
 
-        //\Mail::to(auth()->user()->email)->send(new NewArtist($aspirante->name));
+        \Mail::to(auth()->user()->email)->send(new NewArtist($aspirante->name)); // correo para el gestor
         return $aspirant->id;
     }
 

@@ -519,11 +519,11 @@
                                         </div>
                                     </div>
 
-                                    <div id="rol-member" class="form-group m-form__group row" style="display: none">
+                                    <div id="content-aspirante_rolMember" class="form-group m-form__group row" style="display: none">
                                         <div class="col-lg-6 m-form__group-sub">
                                             <label class="form-control-label">Instrumento que interpreta</label>
-                                            <input type="num" name="aspirante[rolMember]" class="form-control m-input"
-                                                   placeholder="" value="">
+                                            <input type="text" name="aspirante[rolMember]" class="form-control m-input" placeholder="" value="">
+                                            <div id="error-aspirante_rolMember" class="form-control-feedback" style="display: none"></div>
                                             <span class="m-form__help">Ingrese el rol que desempeña dentro del grupo (Guitarrista, Vocalista, Pianista, etc.)</span>
                                         </div>
                                     </div>
@@ -924,7 +924,7 @@
                     <div class="row">
                         <div class="col col-lg-12" style="padding-bottom: 1.5rem;">
                             <div class="row" style="padding-left: 1rem;">
-                                <div class="col-lg-4 col-md-4 col-12 m-form__group-sub">
+                                <div id="content-aspirante_nameTeam" class="col-lg-4 col-md-4 col-12 m-form__group-sub">
                                     <label class="form-control-label">Nombre de la agrupación musical *</label>
                                     <input type="text" name="aspirante[nameTeam]" class="form-control m-input"
                                            placeholder="" value="">
@@ -953,7 +953,7 @@
                                 </div>
                             </div>
                             <span id="help-max-members" class="m-form__help"
-                                  style="display:none; margin-top: -1rem; color: #f4516c; font-size: 1rem;">Recuerde que el número máximo de integrantes para el grupo es 12 personas</span>
+                                  style="display:none; margin-top: -1rem; color: #f4516c; font-size: 1rem;">Recuerde que el número mínimo de integrantes para el grupo es al menos 1 persona</span>
                         </div>
 
                         <div class="col col-lg-12">
@@ -1043,7 +1043,7 @@
                                     <span class="m-form__help">{{ __('categoria_de_proyecto') }}</span>
                                 </div>
 
-                                <div id="content-upload-song" class="col-lg-6 m-form__group-sub">
+                                <div id="content-song_urlSong" class="col-lg-6 m-form__group-sub">
                                     <label class="form-control-label" form="nombreProyecto">Subir canción <span class="text-danger">*</span>
                                         <span class="m--font-primary"> (Tenga en cuenta que la canción que va a subir aquí, participará en el concurso)</span>
                                     </label>
@@ -1053,7 +1053,7 @@
                                             <span class="m-dropzone__msg-desc">Arrastra o has clic a aquí para subir</span>
                                         </div>
                                     </div>
-                                    <div id="error-upload-song" class="form-control-feedback"></div>
+                                    <div id="error-song_urlSong" class="form-control-feedback"></div>
                                     <span class="m-form__help">Cargue aquí el audio de la canción en formato MP3.</span>
                                     <input type="hidden" name="song[urlSong]" value="">
                                 </div>
@@ -1148,17 +1148,17 @@
 
                 <div class="m-portlet__body">
                     <div class="form-group m-form__group row">
-                        <div id="content-evidence-document" class="col-lg-6 m-form__group-sub">
+                        <div id="content-aspirante_urlEvidenceDocument" class="col-lg-6 m-form__group-sub">
                             <label class="form-control-label">En este espacio puedes subir el formulario offline donde se evidencia la aceptación de los terminos y condiciones por parte del aspirante 
                                 <span class="text-danger">*</span>
                             </label>
                             <div id="m-dropzone-three" class="m-dropzone evidence-document m-dropzone--success" action="{{ route('upload.evidence.document') }}">
                                 <div class="m-dropzone__msg dz-message needsclick">
-                                    <h3 class="m-dropzone__msg-title">Subir formulario offline</h3>
+                                    <h3 class="m-dropzone__msg-title">Subir formulario offline en formato PDF</h3>
                                     <span class="m-dropzone__msg-desc">Arrastra o has clic a aquí para subir</span>
                                 </div>
                             </div>
-                            <div id="error-evidence-document" style="color: #f4516c" class="form-control-feedback"></div>
+                            <div id="error-aspirante_urlEvidenceDocument" style="color: #f4516c" class="form-control-feedback"></div>
                             <span class="m-form__help">Cargue aquí el formulario offline con los datos personales del aspirante.</span>
                             <input type="hidden" name="aspirante[urlEvidenceDocument]" value="">
                         </div>
