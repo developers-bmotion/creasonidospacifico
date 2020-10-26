@@ -44,6 +44,7 @@
 
                                         <source src="{{ $project->audio }}">
                                         {{-- <input name="project_id" id="project_id" type="hidden" value="{{ $project->id }}"> --}}
+                                        {{-- <source src="{{ $project->audio }}" type="video/3gpp;" codecs="mp4v.20.8, samr"> --}}
                                     </audio>
 
                                 </div>
@@ -1720,6 +1721,30 @@
 
                     start: false,
                 });
+            },
+            error:function(file,response){
+                $('body').loading({
+                    start:false,
+                });
+                toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "3000",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+
+                toastr.warning("El documento no se cargó correctamente, inténtalo más tarde", "Información");
             }
         });
         new Dropzone('.file-image-document-aspirante-atras', {
@@ -1742,6 +1767,30 @@
 
                     start: false,
                 });
+            },
+            error:function(file,response){
+                $('body').loading({
+                    start:false,
+                });
+                toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "3000",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+
+                toastr.warning("El documento no se cargó correctamente, inténtalo más tarde", "Información");
             }
         });
 
@@ -1792,6 +1841,30 @@
                 setTimeout(function () {
                     location.reload();
                 }, 3000);
+            },
+            error:function(file,response){
+                $('body').loading({
+                    start:false,
+                });
+                toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "3000",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+
+                toastr.warning("El documento no se cargó correctamente, inténtalo más tarde", "Información");
             }
 
         });
@@ -1902,6 +1975,30 @@
                     location.reload();
                 }, 3000);
 
+            },
+            error:function(file,response){
+                $('body').loading({
+                    start:false,
+                });
+                toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "3000",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+
+                toastr.warning("El documento no se cargó correctamente, inténtalo más tarde", "Información");
             }
 
         });
@@ -1927,6 +2024,30 @@
 
                     start: false,
                 });
+            },
+            error:function(file,response){
+                $('body').loading({
+                    start:false,
+                });
+                toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "3000",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+
+                toastr.warning("El documento no se cargó correctamente, inténtalo más tarde", "Información");
             }
         });
         new Dropzone('.file-image-document-beneficiario-atras', {
@@ -1949,6 +2070,30 @@
 
                     start: false,
                 });
+            },
+            error:function(file,response){
+                $('body').loading({
+                    start:false,
+                });
+                toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "3000",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+
+                toastr.warning("El documento no se cargó correctamente, inténtalo más tarde", "Información");
             }
         });
         // evento del boton enviar imagenes beneficiario
@@ -2067,7 +2212,31 @@
                     setTimeout(function () {
                         location.reload();
                     }, 3000);
-                }
+                },
+            error:function(file,response){
+                $('body').loading({
+                    start:false,
+                });
+                toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "3000",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+
+                toastr.warning("El documento no se cargó correctamente, inténtalo más tarde", "Información");
+            }
 
             });
 
@@ -2093,7 +2262,31 @@
 
                         start: false,
                     });
-                }
+                },
+            error:function(file,response){
+                $('body').loading({
+                    start:false,
+                });
+                toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "3000",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+
+                toastr.warning("El documento no se cargó correctamente, inténtalo más tarde", "Información");
+            }
             });
 
             new Dropzone('.file-image-document-team-atras' + (key + 1), {
@@ -2117,7 +2310,31 @@
 
                         start: false,
                     });
-                }
+                },
+            error:function(file,response){
+                $('body').loading({
+                    start:false,
+                });
+                toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "3000",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+
+                toastr.warning("El documento no se cargó correctamente, inténtalo más tarde", "Información");
+            }
             });
         });
 
@@ -2217,6 +2434,30 @@
                     location.reload();
                 }, 3000);
 
+            },
+            error:function(file,response){
+                $('body').loading({
+                    start:false,
+                });
+                toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "3000",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+
+                toastr.warning("El documento no se cargó correctamente, inténtalo más tarde", "Información");
             }
 
         });
@@ -2280,6 +2521,30 @@
                 window.location.reload();
             },
             error: function (file, e, i, o, u) {
+
+                $('body').loading({
+                    start:false,
+                });
+                toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "3000",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+
+                toastr.warning("El audio no se cargó correctamente, inténtalo más tarde", "Información");
+
                 $("#erroresImagen").text('');
                 if (file.xhr.status === 413) {
                     $("#erroresImagen").text('{{__("imagen_grande")}}');
