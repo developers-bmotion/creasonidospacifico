@@ -206,6 +206,7 @@
                         {
                             data: 'users.email',
                             render: function (data, type, JsonResultRow, meta) {
+                                // console.log(JsonResultRow.users.email,'json result');
                                 return '<a class="m-link--primary" href="mailto:' + JsonResultRow.users.email + '">' + JsonResultRow.users.email + '</a>'
 
                             }

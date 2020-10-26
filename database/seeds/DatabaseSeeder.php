@@ -45,21 +45,21 @@ class DatabaseSeeder extends Seeder
         /*=============================================
             CREAMOS LOS TIPOS DE PERSONA
         =============================================*/
-        factory(PersonType::class, 1)->create(['name' => 'Persona natural']);
+        factory(PersonType::class, 1)->create(['name' => 'Persona Natural']);
         factory(PersonType::class, 1)->create(['name' => 'Representante de un menor de edad']);
-        factory(PersonType::class, 1)->create(['name' => 'Grupo constituido']);
+        factory(PersonType::class, 1)->create(['name' => 'Grupo Constituido']);
 
         /*=============================================
             CREAMOS TIPOS DE ARTISTA
         =============================================*/
         factory(ArtistType::class, 1)->create(['name' => 'Solista']);
-        factory(ArtistType::class, 1)->create(['name' => 'Grupo musical']);
+        factory(ArtistType::class, 1)->create(['name' => 'Grupo Musical']);
         /*=============================================
             TIPO DE DOCUMENTO
         =============================================*/
-        factory(\App\DocumentType::class, 1)->create(['document' => 'Cédula de ciudadania']);
-        factory(\App\DocumentType::class, 1)->create(['document' => 'Tarjeta de identidad']);
-        factory(\App\DocumentType::class, 1)->create(['document' => 'Cédula de extranjeria']);
+        factory(\App\DocumentType::class, 1)->create(['document' => 'Cédula de Ciudadania']);
+        factory(\App\DocumentType::class, 1)->create(['document' => 'Tarjeta de Identidad']);
+        factory(\App\DocumentType::class, 1)->create(['document' => 'Cédula de Extranjeria']);
 
 
 
@@ -68,12 +68,12 @@ class DatabaseSeeder extends Seeder
       =============================================*/
         factory(\App\Category::class, 1)->create(['category' => 'Músicas populares y campesinas', 'slug' => str_slug("populares_campesinas", '-')]);
         factory(\App\Category::class, 1)->create(['category' => 'Música andina (tradicional y/o contemporánea)', 'slug' => str_slug("música_andina", '-'), 'description' => 'tradicional y/o contemporánea']);
-        factory(\App\Category::class, 1)->create(['category' => 'Música tradicional del Sur Occidente (norte, centro y sur)', 'slug' => str_slug("música_tradicional", '-')]);
+//        factory(\App\Category::class, 1)->create(['category' => 'Música tradicional del Sur Occidente (norte, centro y sur)', 'slug' => str_slug("música_tradicional", '-')]);
         factory(\App\Category::class, 1)->create(['category' => 'Música tradicional del Pacífico (norte, centro y sur).', 'slug' => str_slug("música_tradicional_pc", '-')]);
         factory(\App\Category::class, 1)->create(['category' => 'Música urbana Pacífico (fusiones urbanas con música tradicional del Pacífico)', 'slug' => str_slug("música_urbana", '-')]);
         factory(\App\Category::class, 1)->create(['category' => 'Música salsa, antillana y fusión salsa', 'slug' => str_slug("música_urbana", '-')]);
         factory(\App\Category::class, 1)->create(['category' => 'Músicas espirituales y religiosas (música sacra, cantos gregorianos, música sacra negra, chigualos, alabaos, salves, cantos de boga)', 'slug' => str_slug("músicas_espirituales", '-')]);
-        factory(\App\Category::class, 1)->create(['category' => 'Música Clásica (en todos sus formatos)', 'slug' => str_slug("música_clásica", '-')]);
+        factory(\App\Category::class, 1)->create(['category' => 'Música Clásica y Contemporánea (en todos sus formatos)', 'slug' => str_slug("música_clásica", '-')]);
         factory(\App\Category::class, 1)->create(['category' => 'Música joven (trap, rap, reggaetón, hip-hop)', 'slug' => str_slug("música_joven", '-')]);
         factory(\App\Category::class, 1)->create(['category' => 'Otras Músicas (música experimental, world music, proyectos especiales y nuevas propuestas)', 'slug' => str_slug("otras_musicas", '-')]);
         factory(\App\Category::class, 1)->create(['category' => 'Música jazz (jazz Pacífico, latín jazz, blues, góspel)', 'slug' => str_slug("música_jazz", '-')]);
@@ -163,7 +163,7 @@ class DatabaseSeeder extends Seeder
         factory(\App\User::class, 10)->create()
             ->each(function (\App\User $u) {
                 factory(\App\Management::class, 1)->create(['user_id' => $u->id])->each(function (\App\Management $m) {
-                    $categories = mt_rand(1, 11);
+                    $categories = mt_rand(1, 10);
                     $m->categories()->attach($categories);
                 });
                 $u->roles()->attach('3');

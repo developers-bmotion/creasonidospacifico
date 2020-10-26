@@ -154,7 +154,7 @@ class ProfileController extends Controller
         }
 
         Artist::where('user_id', '=', $id_artis)->update([
-            'nickname' => $aspirante->name,
+            'nickname' => ucwords($aspirante->name),
             'biography' => $aspirante->biografia,
             'document_type' => $aspirante->documentType,
             'identification' => $aspirante->identificacion,
@@ -171,9 +171,9 @@ class ProfileController extends Controller
         ]);
 
        $user = User::where('id', '=', $id_artis)->update([
-            'name' => $aspirante->name,
-            'last_name' => $aspirante->lastname,
-            'second_last_name' => $aspirante->secondLastname,
+            'name' => ucwords($aspirante->name),
+            'last_name' => ucwords($aspirante->lastname),
+            'second_last_name' => ucwords($aspirante->secondLastname),
             'phone_1' => $aspirante->phone,
             'pdf_cedula' => $aspirante->urlPdfDocument,
             'img_document_front' => $aspirante->urlImageDocumentFrente,
@@ -190,9 +190,9 @@ class ProfileController extends Controller
         Beneficiary::create([
             'document_type' => $beneficiario->documentType,
             'identification' => $beneficiario->identificacion,
-            'name' => $beneficiario->name,
-            'last_name' => $beneficiario->lastname,
-            'second_last_name' => $beneficiario->secondLastname,
+            'name' => ucwords($beneficiario->name),
+            'last_name' => ucwords($beneficiario->lastname),
+            'second_last_name' => ucwords($beneficiario->secondLastname),
             'pdf_documento' => $beneficiario->urlPdfDocument,
             'img_document_front' => $beneficiario->urlImageDocumentFrente,
             'img_document_back' => $beneficiario->urlImageDocumentAtras,
@@ -216,9 +216,9 @@ class ProfileController extends Controller
         Beneficiary::where('artist_id', '=', $idArtst)->update([
             'document_type' => $beneficiario->documentType,
             'identification' => $beneficiario->identificacion,
-            'name' => $beneficiario->name,
-            'last_name' => $beneficiario->lastname,
-            'second_last_name' => $beneficiario->secondLastname,
+            'name' => ucwords($beneficiario->name),
+            'last_name' => ucwords($beneficiario->lastname),
+            'second_last_name' => ucwords($beneficiario->secondLastname),
             'pdf_documento' => $beneficiario->urlPdfDocument,
             'img_document_front' => $beneficiario->urlImageDocumentFrente,
             'img_document_back' => $beneficiario->urlImageDocumentAtras,
@@ -238,12 +238,12 @@ class ProfileController extends Controller
     /* metodo para registrar el aspirante como un integrante del grupo en la base de datos */
     public function registerAspiranteGroup($request, $idArtist) {
         $aspirante = (object) $request->aspirante;
-        
+
         if ($aspirante->partGroup == '1') {
             $member = new Team();
-            $member->name = $aspirante->name;
-            $member->last_name = $aspirante->lastname;
-            $member->second_last_name = $aspirante->secondLastname;
+            $member->name = ucwords($aspirante->name);
+            $member->last_name = ucwords($aspirante->lastname);
+            $member->second_last_name = ucwords($aspirante->secondLastname);
             $member->document_type = $aspirante->documentType;
             $member->identification = $aspirante->identificacion;
             $member->expedition_place = $aspirante->municipioExpedida;
@@ -264,9 +264,9 @@ class ProfileController extends Controller
     public function insertGroupMembers($request, $idArtist) {
         foreach ($request->integrantes as $integrante) {
             $member = new Team();
-            $member->name = $integrante['nameMember'];
-            $member->last_name = $integrante['lastnameMember'];
-            $member->second_last_name = $integrante['secondLastnameMember'];
+            $member->name = ucwords($integrante['nameMember']);
+            $member->last_name = ucwords($integrante['lastnameMember']);
+            $member->second_last_name = ucwords($integrante['secondLastnameMember']);
             $member->document_type = $integrante['documentTypeMember'];
             $member->identification = $integrante['identificationMember'];
             $member->expedition_place = $integrante['municipio_expedición_member'];
@@ -333,15 +333,15 @@ class ProfileController extends Controller
 
         // crear el usuario
         $user = new User();
-        $user->name = $aspirante->name;
-        $user->last_name = $aspirante->lastname;
-        $user->second_last_name = $aspirante->secondLastname;
+        $user->name = ucwords($aspirante->name);
+        $user->last_name = ucwords($aspirante->lastname);
+        $user->second_last_name = ucwords($aspirante->secondLastname);
         $user->phone_1 = $aspirante->phone;
         $user->pdf_cedula = $aspirante->urlPdfDocument;
         $user->img_document_front = $aspirante->urlImageDocumentFrente;
         $user->img_document_back = $aspirante->urlImageDocumentAtras;
         $user->picture = $aspirante->urlImageProfile;
-        $user->slug = Str::slug($aspirante->name.'-'.str_random(1000), '-');
+        $user->slug = Str::slug($aspirante->name.'-'.str_random(1000000), '-');
 
         if ( isset($aspirante->email) ) { // si existe un correo
             if ($aspirante->email != auth()->user()->email){ // debe ser diferente al del usuario gestor
@@ -373,6 +373,7 @@ class ProfileController extends Controller
         $aspirant->byrthdate = Carbon::parse($aspirante->birthdate);
         $aspirant->township = $aspirante->vereda;
         $aspirant->name_team = $aspirante->nameTeam;
+        $aspirant->evidence_document = $aspirante->urlEvidenceDocument;
         $aspirant->gestor_id = auth()->user()->id;
         $aspirant->save();
 
@@ -386,11 +387,11 @@ class ProfileController extends Controller
 
         $project = new Project();
         $project->title = $song->nameProject;
-        $project->author = $song->author;
+        $project->author = ucwords($song->author);
         $project->category_id = $song->categoryID;
         $project->audio = $song->urlSong;
-        //$project->audio_secundary_one = $song->urlSong;
-        //$project->audio_secundary_two = $song->urlSong;
+        $project->audio_secundary_one = $song->urlAdditionalSongOne;
+        $project->audio_secundary_two = $song->urlAdditionalSongTwo;
         $project->description = $song->description;
         $project->status = 1;
         $project->slug = Str::slug($song->nameProject.'-'.str_random(1000), '-');
@@ -434,8 +435,7 @@ class ProfileController extends Controller
         return $urlS3;
     }
 
-    public function uploadImageDocument(Request $request)
-    {
+    public function uploadImageDocument(Request $request) {
         $image = $request->file('file')->store('imagendoc', 's3');
         Storage::disk('s3')->setVisibility($image, 'public');
         $urlS3 = Storage::disk('s3')->url($image);
@@ -453,8 +453,14 @@ class ProfileController extends Controller
     //     return [$id,$urlS3];
     // }
 
-    public function uploadPDFDocument(Request $request)
-    {
+    public function uploadEvidenceDocument(Request $request) {
+        $image = $request->file('doc')->store('evidencedoc', 's3');
+        Storage::disk('s3')->setVisibility($image, 'public');
+        $urlS3 = Storage::disk('s3')->url($image);
+        return $urlS3;
+    }
+
+    public function uploadPDFDocument(Request $request) {
         $image = $request->file('file')->store('pdfdoc', 's3');
         Storage::disk('s3')->setVisibility($image, 'public');
         $urlS3 = Storage::disk('s3')->url($image);
@@ -462,8 +468,7 @@ class ProfileController extends Controller
         return $urlS3;
     }
 
-    public function photo(Request $request)
-    {
+    public function photo(Request $request) {
         $user = User::where('id', auth()->user()->id)->first();
         $user_picture =  str_replace('storage', '', $user->picture);;
         //Elimnar foto de perfil del servidor
@@ -513,7 +518,10 @@ class ProfileController extends Controller
     {
 
         $user = User::where('id', auth()->user()->id)->first();
-        // $pdf_cedula =  str_replace('storage', '', $user->pdf_cedula);
+
+        $team = Team::where('user_id', auth()->user()->id)->first();
+
+
         //Elimnar pdf de cédula o tarjeta
         Storage::disk('s3')->delete($user->pdf_cedula);
         //Agregar cedula o tarjeta de identidad
@@ -521,6 +529,14 @@ class ProfileController extends Controller
         Storage::disk('s3')->setVisibility($pdf_cedula_save, 'public');
         $urlS3 = Storage::disk('s3')->url($pdf_cedula_save);
 
+        if($team->user_id){
+            Team::where('user_id', $team->user_id)->update([
+                'pdf_identificacion' => $urlS3,
+                'img_document_front' => null,
+                'img_document_back' => null,
+            ]);
+
+        }
 
         User::where('id', auth()->user()->id)->update([
             'pdf_cedula' => $urlS3,
@@ -532,15 +548,59 @@ class ProfileController extends Controller
         return $urlS3;
     }
 
-    //
+    // actualizar el documento en pdf desde el rol de gestor
+    public function pdf_cedula_aspirante_gestor(Request $request)
+    {
+
+        $idUser=$request->headers->get('idAspirante');
+        // dd($idUser);
+        $user = User::where('id',$idUser )->first();
+        $team = Team::where('user_id', $user->id)->first();
+        // $pdf_cedula =  str_replace('storage', '', $user->pdf_cedula);
+        //Elimnar pdf de cédula o tarjeta
+        Storage::disk('s3')->delete($user->pdf_cedula);
+        //Agregar cedula o tarjeta de identidad
+        $pdf_cedula_save = $request->file('pdf_cedula_name')->store('pdfdoc','s3');
+        Storage::disk('s3')->setVisibility($pdf_cedula_save, 'public');
+        $urlS3 = Storage::disk('s3')->url($pdf_cedula_save);
+
+       if($team->user_id){
+            Team::where('user_id', $team->user_id)->update([
+                'pdf_identificacion' => $urlS3,
+                'img_document_front' => null,
+                'img_document_back' => null,
+            ]);
+
+         }
+
+        User::where('id',$idUser)->update([
+            'pdf_cedula' => $urlS3,
+            'img_document_back'=> null,
+            'img_document_front'=> null,
+        ]);
+
+
+        return $urlS3;
+    }
+
+    //actualizar la imagen del documento desde el perfil del aspirante
 
     public function update_img_artist(Request $request)
     {
 
         $aspirante = (object) $request->aspirante;
-        //
-        $user = User::where('id', auth()->user()->id)->first();
 
+        $team = Team::where('user_id', auth()->user()->id)->first();
+
+        $user = User::where('id', auth()->user()->id)->first();
+        if($team->user_id){
+            Team::where('user_id', $team->user_id)->update([
+                'pdf_identificacion' => null,
+                'img_document_front' => $aspirante->urlImageDocumentFrente,
+                'img_document_back' => $aspirante->urlImageDocumentAtras,
+            ]);
+
+        }
 
 
        $user_upt = User::where('id', auth()->user()->id)->update([
@@ -550,6 +610,35 @@ class ProfileController extends Controller
         ]);
 
         return back();
+    }
+    //actualizar la imagen del documento desde el perfil del gestor
+    public function update_img_artist_gestor(Request $request)
+    {
+
+        $aspirante = (object) $request->aspirante;
+        // dd($aspirante);
+        //
+        $user = User::where('id', $aspirante->idAspirante)->first();
+        $team = Team::where('user_id', $aspirante->idAspirante)->first();
+        if($team->user_id){
+                    Team::where('user_id', $team->user_id)->update([
+                        'pdf_identificacion' => null,
+                        'img_document_front' => $aspirante->urlImageDocumentFrente,
+                        'img_document_back' => $aspirante->urlImageDocumentAtras,
+                    ]);
+
+                }
+
+
+
+
+       $user_upt = User::where('id', $aspirante->idAspirante)->update([
+            'pdf_cedula' => null,
+            'img_document_front' => $aspirante->urlImageDocumentFrente,
+            'img_document_back' => $aspirante->urlImageDocumentAtras,
+        ]);
+
+        return back() ;
     }
 
     // actualizar imagen documento beneficiario
@@ -571,12 +660,41 @@ class ProfileController extends Controller
         return back();
     }
 
+    // actualizar imagen documento beneficiario desde el perfil del gestor
+    public function update_img_ben_gestor(Request $request)
+    {
+
+        $beneficiari = (object) $request->beneficiario;
+        //
+        // $user = User::where('id', auth()->user()->id)->first();
+
+        // $artist = Artist::where('user_id', auth()->user()->id)->first();
+        // $beneficiario = Beneficiary::where('artist_id', $artist->id)->first();
+
+        $ben=Beneficiary::where('id', $beneficiari->idBeneficiario)->update([
+            'pdf_documento' => null,
+            'img_document_front' => $beneficiari->urlImageDocumentFrente,
+            'img_document_back' => $beneficiari->urlImageDocumentAtras,
+        ]);
+        return back();
+    }
+
 // actualizar imagen documento team
     public function update_img_team(Request $request)
     {
 
 
         $teams = (object) $request->team;
+        $team = Team::where('id',$teams->id )->first();
+
+        if($team->user_id){
+            // dd('hola');
+            User::where('id',$team->user_id)->update([
+                'pdf_cedula' => null,
+                'img_document_front' => $teams->urlImageDocumentFrente,
+                'img_document_back' => $teams->urlImageDocumentAtras,
+            ]);
+        }
 
         Team::where('id', $teams->id)->update([
             'pdf_identificacion' => null,
@@ -593,6 +711,31 @@ class ProfileController extends Controller
 
         // $user = User::where('id', auth()->user()->id)->first();
         $artist = Artist::where('user_id', auth()->user()->id)->first();
+        $beneficiario = Beneficiary::where('artist_id', $artist->id)->first();
+        // dd($beneficiario);
+        // $pdf_cedula =  str_replace('storage', '', $beneficiario->pdf_documento);
+        //Elimnar pdf de cédula o tarjeta
+        Storage::disk('s3')->delete($beneficiario->pdf_documento);
+        //Agregar cedula o tarjeta de identidad
+        $pdf_cedula_save = $request->file('pdf_cedula_name')->store('pdfdoc','s3');
+        Storage::disk('s3')->setVisibility($pdf_cedula_save, 'public');
+        $urlS3 = Storage::disk('s3')->url($pdf_cedula_save);
+        Beneficiary::where('id', $beneficiario->id)->update([
+            'pdf_documento' => $urlS3,
+            'img_document_front' => null,
+            'img_document_back' => null,
+        ]);
+
+        return $urlS3;
+    }
+
+    // actualizar el pdf del aspirante desde el perfil del gestor
+    public function pdf_cedula_beneficiario_gestor(Request $request)
+    {
+
+        $idUser=$request->headers->get('idAspirante');
+        // $user = User::where('id', auth()->user()->id)->first();
+        $artist = Artist::where('user_id', $idUser)->first();
         $beneficiario = Beneficiary::where('artist_id', $artist->id)->first();
         // dd($beneficiario);
         // $pdf_cedula =  str_replace('storage', '', $beneficiario->pdf_documento);
@@ -632,19 +775,26 @@ class ProfileController extends Controller
 
     public function pdf_cedula_team(Request $request)
     {
-        // dd($request->headers->get('id'));
+
         $teamid=$request->headers->get('id');
-        // $user = User::where('id', auth()->user()->id)->first();
-        // $artist = Artist::where('user_id', auth()->user()->id)->first();
+
         $team = Team::where('id',$teamid)->first();
-        //  dd($team);
-        // $pdf_cedula =  str_replace('storage', '', $team->pdf_identificacion);
-        //Elimnar pdf de cédula o tarjeta
+
         Storage::disk('s3')->delete($team->pdf_identificacion);
         //Agregar cedula o tarjeta de identidad
         $pdf_cedula_save = $request->file('pdf_cedula_name')->store('pdfdoc','s3');
         Storage::disk('s3')->setVisibility($pdf_cedula_save, 'public');
         $urlS3 = Storage::disk('s3')->url($pdf_cedula_save);
+
+        if($team->user_id){
+            // dd('hola');
+            User::where('id',$team->user_id)->update([
+                'pdf_cedula' => $urlS3,
+                'img_document_back'=> null,
+                'img_document_front'=> null,
+            ]);
+        }
+
         Team::where('id', $teamid)->update([
             'pdf_identificacion' => $urlS3,
             'img_document_front' => null,

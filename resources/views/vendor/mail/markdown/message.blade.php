@@ -14,9 +14,9 @@
         @slot('subcopy')
             @component('mail::subcopy')
                 {{ $subcopy }}
-            @endcomponent
-        @endslot
-    @endisset
+                @endcomponent
+           @endslot
+        @endisset
 
     {{-- Footer --}}
     @slot('footer')

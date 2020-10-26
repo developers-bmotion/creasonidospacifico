@@ -32,6 +32,7 @@ function hideContentInfo() {
     $('#content-informacion-menor-edad').hide();
     $('#content-informacion-grupo-musical').hide();
     $('#content-informacion-subir-cancion').hide();
+    $('#content-document-evidencia-aspirante').hide();
     $('#btn-enviar-datos').hide();
     $("#forma-parte-grupo").hide();   
 }
@@ -48,6 +49,8 @@ $('#select-actuara-como').on('change', function() {
                 $('#content-informacion-menor-edad').hide();
                 $('#content-informacion-grupo-musical').hide();
                 $('#content-informacion-subir-cancion').show();
+                $('#content-document-evidencia-aspirante').show();
+                $("#aspirant-document-type option[value='2']").hide(); // ocultar cedula de extranjeria
                 $('#btn-enviar-datos').show();
             break;
         case '2': $('#title-info-aspirante').html('Información del representante para el menor de edad');
@@ -55,6 +58,8 @@ $('#select-actuara-como').on('change', function() {
                 $('#content-informacion-menor-edad').show();
                 $('#content-informacion-grupo-musical').hide();
                 $('#content-informacion-subir-cancion').show();
+                $('#content-document-evidencia-aspirante').show();
+                $("#aspirant-document-type option[value='2']").show(); // mostrar cedula de extranjeria
                 $('#btn-enviar-datos').show();
             break;
     }
@@ -123,11 +128,48 @@ $("input[name='aspirante[partGroup]']").click( () => {
     }
 });
 
+// vento para agregar nuevas canciones.
+var firstClick = true;
+$("#add-song").click( () => {
+    console.log('value:: ', firstClick)
+    if (firstClick) {
+        $('#additional-songs').show();
+        $('#add-song').html('Cancelar');
+        firstClick =  false;
+    } else {
+        $('#additional-songs').hide();
+        $('#add-song').html('Agregar canciones');
+        $("input[name='song[additionalSongOne]']").val(''); 
+        $("input[name='song[additionalSongTwo]']").val(''); 
+        if (fileAdditionalSongOne) dropzoneAdditionalSongOne.removeFile(fileAdditionalSongOne)
+        if (fileAdditionalSongTwo) dropzoneAdditionalSongTwo.removeFile(fileAdditionalSongTwo)
+        firstClick =  true;
+    }
+});
+
+$("#input-max-members").keyup( () => validateNumberMin( $("#input-max-members").val() ) );
+
+function validateNumberMin(num) {
+    if (num < 1) {
+        $("#content-input-max-members").addClass('has-danger');
+        $("#error-input-max-members").html('El número mínimo de integrantes es de 1')
+        $("#error-input-max-members").show()
+        return true
+    } else {
+        $("#content-input-max-members").removeClass('has-danger');
+        $("#error-input-max-members").html('')
+        $("#error-input-max-members").hide()
+        return false
+    }
+}
+
 /*  funciones para agragar un nuevo integrante  */
 var currentMembers = 0;
 
 $("#event-add-max-members").click( function() {    
-    let members = parseInt( $("#input-max-members").val() );   
+    let members = parseInt( $("#input-max-members").val() );  
+    
+    if (validateNumberMin(members)) return;
 
     if (currentMembers === members) return; // si el valor no cambia se retorna
 
@@ -499,7 +541,7 @@ function validationForm() {
     // validar cancion
     validateFormInputs('song', 'nameProject');
     validateFormInputs('song', 'author');
-    validateFormInputs('song', 'urlSong'); 
+    //validateFormInputs('song', 'urlSong'); 
     validateFormSelect('song', '[categoryID]');
     
     console.log('antes::: ', validate)    
@@ -674,3 +716,246 @@ $("input[name='song[nameProject]']").keyup( () => validateFormInputs('song', 'na
 $("input[name='song[author]']").keyup( () => validateFormInputs('song', 'author') );
 
 $("input[name='acceptTermsConditions']").change( () => validateTermsCondition() );
+
+
+/********************************************
+    Funcionalidad de los objetos Dropzone
+ ********************************************/
+function showLoading(msg = 'Subiendo el archivo...') {
+    $('body').loading({
+        message: msg,
+        start: true,
+    });
+}
+function dropzoneSuccess(response, nameField, inputField) {
+    $('body').loading({ start: false });
+    $(`#content-${ nameField }`).removeClass('has-danger');
+    $(`#error-${ nameField }`).text('');
+    $(`input[name='${ inputField }']`).val(response);
+}
+function dropzoneError(nameField, msg, inputField) {
+    $(`#content-${ nameField }`).addClass('has-danger');
+    $(`#error-${ nameField }`).text(msg);
+    $(`input[name='${ inputField }']`).val('');
+}
+
+var imageDocumentFrenteAspirant = new Dropzone('.file-image-document-aspirante-frente', {
+    acceptedFiles: "image/*",
+    maxFiles: 1,
+    paramName: 'file',
+    addRemoveLinks: true,
+    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+    processing: function (file, response) {
+        showLoading()
+    },
+    success: function (file, response) {
+        dropzoneSuccess(response, 'file-image-document-aspirante-frente', 'aspirante[urlImageDocumentFrente]')
+    },
+    error: function (file, responce) {
+        dropzoneError('file-image-document-aspirante-frente', 'Recuerda que solo se admiten archivos en formato JPG ó PNG.', 'aspirante[urlImageDocumentFrente]')
+        setTimeout( () => { imageDocumentFrenteAspirant.removeFile(file) }, 2000 )
+    }
+});
+var imageDocumentAtrasAspirant = new Dropzone('.file-image-document-aspirante-atras', {
+    acceptedFiles: "image/*",
+    maxFiles: 1,
+    paramName: 'file',
+    addRemoveLinks: true,
+    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+    processing: function (file, response) {
+        showLoading()
+    },
+    success: function (file, response) {
+        dropzoneSuccess(response, 'file-image-document-aspirante-atras', 'aspirante[urlImageDocumentAtras]')
+    },
+    error: function (file, responce) {
+        dropzoneError('file-image-document-aspirante-atras', 'Recuerda que solo se admiten archivos en formato JPG ó PNG.', 'aspirante[urlImageDocumentAtras]')
+        setTimeout( () => { imageDocumentAtrasAspirant.removeFile(file) }, 2000 )
+    }
+});
+var pdfDocumentAspirant = new Dropzone('.file-pdf-document-aspirante', {
+    acceptedFiles: "application/pdf",
+    maxFiles: 1,
+    paramName: 'file',
+    addRemoveLinks: true,
+    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+    processing: function (file, response) {
+        showLoading()
+    },
+    success: function (file, response) {
+        dropzoneSuccess(response, 'file-pdf-document-aspirante', 'aspirante[urlPdfDocument]')
+    },
+    error: function (file, responce) {
+        dropzoneError('file-pdf-document-aspirante', 'Recuerda que solo se admiten archivos en formato PDF.', 'aspirante[urlPdfDocument]')
+        setTimeout( () => { pdfDocumentAspirant.removeFile(file) }, 2000 )
+    }
+});
+var imageProfileAspirant = new Dropzone(".file-image-profile-aspirante", {
+    paramName: "file",
+    maxFiles: 1,
+    maxFilesize: 5, 
+    addRemoveLinks: true,
+    acceptedFiles: "image/*",
+    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+    processing: function (file, response) {
+        showLoading()
+    },
+    success: function (file, response) {
+        dropzoneSuccess(response, 'image-profile-aspirante', 'aspirante[urlImageProfile]')
+    },
+    error: function (file, responce) {
+        dropzoneError('image-profile-aspirante', 'Recuerda que solo se admiten archivos en formato JPG ó PNG.', 'aspirante[urlImageProfile]')
+        setTimeout( () => { imageProfileAspirant.removeFile(file) }, 2000 )
+    }
+});
+
+// eventos para subir la imagen o pdf del beneficiario  
+var imageDocumentFrenteBeneficiario = new Dropzone('.file-image-document-beneficiario-frente', {
+    acceptedFiles: "image/*",
+    maxFiles: 1,
+    paramName: 'file',
+    addRemoveLinks: true,
+    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+    processing: function (file, response) {
+        showLoading()
+    },
+    success: function (file, response) {
+        dropzoneSuccess(response, 'file-image-document-beneficiario-frente', 'beneficiario[urlImageDocumentFrente]')
+    },
+    error: function (file, responce) {
+        dropzoneError('file-image-document-beneficiario-frente', 'Recuerda que solo se admiten archivos en formato JPG ó PNG.', 'beneficiario[urlImageDocumentFrente]')
+        setTimeout( () => { imageDocumentFrenteBeneficiario.removeFile(file) }, 2000 )
+    }
+});
+var imageDocumentAtrasBeneficiario = new Dropzone('.file-image-document-beneficiario-atras', {  
+    acceptedFiles: "image/*",
+    maxFiles: 1,
+    paramName: 'file',
+    addRemoveLinks: true,
+    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+    processing: function (file, response) {
+        showLoading()
+    },
+    success: function (file, response) {
+        dropzoneSuccess(response, 'file-image-document-beneficiario-atras', 'beneficiario[urlImageDocumentAtras]')
+    },
+    error: function (file, responce) {
+        dropzoneError('file-image-document-beneficiario-atras', 'Recuerda que solo se admiten archivos en formato JPG ó PNG.', 'beneficiario[urlImageDocumentAtras]')
+        setTimeout( () => { imageDocumentAtrasBeneficiario.removeFile(file) }, 2000 )
+    }
+});
+var pdfDocumentBeneficiario = new Dropzone('.file-pdf-document-beneficiario', {
+    acceptedFiles: "application/pdf",
+    maxFiles: 1,
+    paramName: 'file',
+    addRemoveLinks: true,
+    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+    processing: function (file, response) {
+        showLoading()
+    },
+    success: function (file, response) {
+        dropzoneSuccess(response, 'file-pdf-document-beneficiario', 'beneficiario[urlPdfDocument]')
+    },
+    error: function (file, responce) {
+        dropzoneError('file-pdf-document-beneficiario', 'Recuerda que solo se admiten archivos en formato PDF.', 'beneficiario[urlPdfDocument]')
+        setTimeout( () => { pdfDocumentBeneficiario.removeFile(file) }, 2000 )
+    }
+});
+var imageProfileBeneficiario = new Dropzone(".file-image-profile-beneficiario", {
+    paramName: "file",
+    maxFiles: 1,
+    maxFilesize: 5, // MB
+    addRemoveLinks: true,
+    acceptedFiles: "image/*",
+    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+    processing: function (file, response) {
+        showLoading()
+    },
+    success: function (file, response) {
+        dropzoneSuccess(response, 'file-image-profile-beneficiario', 'beneficiario[urlImageProfile]')
+    },
+    error: function (file, responce) {
+        dropzoneError('file-image-profile-beneficiario', 'Recuerda que solo se admiten archivos en formato JPG ó PNG.', 'beneficiario[urlImageProfile]')
+        setTimeout( () => { imageProfileBeneficiario.removeFile(file) }, 2000 )
+    }
+});
+
+// evento de subir cancion  video/*
+var uploadSong = new Dropzone('.upload-song', {
+    acceptedFiles: 'audio/*',
+    maxFiles: 1,
+    maxFilesize: 15, // MB
+    paramName: 'image',
+    addRemoveLinks: true,
+    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+    processing: function(file, response){
+        showLoading('Subiendo la canción...')
+    },
+    success: function (file, response) {
+        dropzoneSuccess(response, 'upload-song', 'song[urlSong]')
+    },
+    error: function (file, responce) {
+        dropzoneError('upload-song', 'Recuerda que solo se admiten archivos en formato MP3 con un peso máximo de 12 MB.', 'song[urlSong]')
+        setTimeout( () => { uploadSong.removeFile(file) }, 2000 )
+    }
+});
+
+// canciones adicionales
+var fileAdditionalSongOne, fileAdditionalSongTwo;
+var dropzoneAdditionalSongOne = new Dropzone('.additional-song-one', {
+    acceptedFiles: 'audio/*',
+    maxFiles: 1,
+    paramName: 'image',
+    addRemoveLinks: true,
+    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+    processing: function(file, response){
+        showLoading('Subiendo la canción...')
+    },
+    success: function (file, response) {
+        fileAdditionalSongOne = file;
+        dropzoneSuccess(response, 'additional-song-one', 'song[urlAdditionalSongOne]')
+    },
+    error: function (file, responce) {
+        dropzoneError('additional-song-one', 'Recuerda que solo se admiten archivos en formato MP3 con un peso máximo de 12 MB.', 'song[urlAdditionalSongOne]')
+        setTimeout( () => { dropzoneAdditionalSongOne.removeFile(file) }, 2000 )
+    }
+});
+var dropzoneAdditionalSongTwo = new Dropzone('.additional-song-two', {
+    acceptedFiles: 'audio/*',
+    maxFiles: 1,
+    paramName: 'image',
+    addRemoveLinks: true,
+    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+    processing: function(file, response){
+        showLoading('Subiendo la canción...')
+    },
+    success: function (file, response) {
+        fileAdditionalSongTwo = file;
+        dropzoneSuccess(response, 'additional-song-two', 'song[urlAdditionalSongTwo]')
+    },
+    error: function (file, responce) {
+        dropzoneError('additional-song-two', 'Recuerda que solo se admiten archivos en formato MP3 con un peso máximo de 12 MB.', 'song[urlAdditionalSongTwo]')
+        setTimeout( () => { dropzoneAdditionalSongTwo.removeFile(file) }, 2000 )
+    }
+});
+
+// documento adicional que evidencia la aceptacion de terminos y condiciones del aspirante      
+var dropzoneEvidenceDocument = new Dropzone('.evidence-document', {
+    acceptedFiles: 'application/pdf',
+    maxFiles: 1,
+    paramName: 'doc',
+    addRemoveLinks: true,
+    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+    processing: function(file, response){
+        showLoading()
+    },
+    success: function (file, response) {
+        dropzoneSuccess(response, 'evidence-document', 'song[urlEvidenceDocument]')
+    },
+    error: function (file, responce) {
+        dropzoneError('evidence-document', 'Recuerda que solo se admiten archivos en formato PDF.', 'song[urlEvidenceDocument]')
+        setTimeout( () => { dropzoneEvidenceDocument.removeFile(file) }, 2000 )
+    }
+});
+
+Dropzone.autoDiscover = false;
