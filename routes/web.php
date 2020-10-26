@@ -105,7 +105,7 @@ SELECCIONAR IDIOMAS
 =============================================*/
 Route::get('/set_language/{lang}','Controller@setLanguage')->name('set_language');
 
-Route::get('/','Auth\LoginController@index')->name('home');
+Route::get('/','Auth\LoginController@index')->name('home')->middleware('home');
 /*=============================================
 FRONTEND
 =============================================*/
