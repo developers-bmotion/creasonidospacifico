@@ -79,6 +79,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
     <!--begin::Global Theme Styles -->
     <link href="/backend/assets/demo/base/style.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="/css/main-custom.css" rel="stylesheet" type="text/css"/>
 
     <!--RTL version:<link href="/backend/assets/demo/base/style.bundle.rtl.css" rel="stylesheet" type="text/css" />-->
 
@@ -103,7 +104,8 @@ License: You must have a valid license purchased only from themeforest(the above
                         <div class="m-login__wrapper">
                             <div class="m-login__logo">
                                 <a href="#">
-                                    <img src="/backend/assets/app/media/img/logos/logo-2.png">
+                                    {{-- <img src="/backend/assets/app/media/img/logos/logo-2.png"> --}}
+                                    <img style="width: 100%;" src="/images/logo-creasonidos.png">
                                 </a>
                             </div>
                             @if(session('message'))
@@ -140,7 +142,8 @@ License: You must have a valid license purchased only from themeforest(the above
                                         <button type="submit"
                                             class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air">Enviar</button>
                                         <a href="/login"
-                                            class="btn btn-outline-focus m-btn m-btn--pill m-btn--custom">Cancelar</a>
+                                            class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air">Cancelar</a>
+                                            {{-- class="btn btn-outline-focus m-btn m-btn--pill m-btn--custom">Cancelar</a> --}}
                                     </div>
                                 </form>
                             </div>
@@ -156,14 +159,16 @@ License: You must have a valid license purchased only from themeforest(the above
                     </div>
                 </div>
             </div>
-            <div class="m-grid__item m-grid__item--fluid m-grid m-grid--center m-grid--hor m-grid__item--order-tablet-and-mobile-1  m-login__content m-grid-item--center"
-                style="background-image: url(/backend/assets/app/media/img//bg/bg-4.jpg)">
-                <div class="m-grid__item">
-                    <h3 class="m-login__welcome">¿Olvidó su contraseña?</h3>
-                    <p class="m-login__msg">
-                        Ingresa tu correo eléctronico y enviaremos un enlace para que restablezcas tu contraseña
+            <div class="background_reset_email m-grid__item m-grid__item--fluid m-grid m-grid--center m-grid--hor m-grid__item--order-tablet-and-mobile-1  m-login__content m-grid-item--center"
+                {{-- style="background-image: url(/backend/assets/app/media/img//bg/bg-4.jpg)" --}}
+                >
+                
+                {{-- <div class="m-grid__item">
+                    <h3 class="parrafo-login m-login__welcome">¿Olvidó su contraseña?</h3>
+                    <p class="parrafo-login m-login__msg">
+                        Ingresa tu correo eléctronico y enviaremos un enlace para que restablezcas tu contraseña.
                     </p>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
