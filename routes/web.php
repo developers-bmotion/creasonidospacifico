@@ -42,7 +42,7 @@ Route::get('/prueba-email', function (){
    return new NewArtist('Mauricio');
 });
 
-
+Route::get('/')->middleware('');
     // Artisan::call('projects:close');
     // dd(\App\Category::where('typeCategory_id', $id_category)->get());
 
@@ -105,7 +105,7 @@ SELECCIONAR IDIOMAS
 =============================================*/
 Route::get('/set_language/{lang}','Controller@setLanguage')->name('set_language');
 
-Route::get('/','Auth\LoginController@index')->name('home');
+Route::get('/','Auth\LoginController@index')->name('home')->middleware('home');
 /*=============================================
 FRONTEND
 =============================================*/
@@ -165,6 +165,7 @@ Route::group(['namespace'=>'Backend','prefix' => 'dashboard','middleware' => 'au
 
     Route::post('/pdf-cedula-aspirante','ProfileController@pdf_cedula_aspirante')->name('cedula.pdf.aspirante');
     Route::post('/pdf-cedula-aspirante-gestor','ProfileController@pdf_cedula_aspirante_gestor')->name('cedula.pdf.aspirante.gestor');
+    Route::post('/soporte-aspirante-gestor','ProfileController@pdf_soporte_aspirante_gestor')->name('soporte.aspirante.gestor');
     Route::post('/pdf-cedula-beneficiario','ProfileController@pdf_cedula_beneficiario')->name('cedula.pdf.beneficiario');
     Route::post('/pdf-cedula-beneficiario-gestor','ProfileController@pdf_cedula_beneficiario_gestor')->name('cedula.pdf.beneficiario.gestor');
     Route::post('/pdf-cedula-team','ProfileController@pdf_cedula_team')->name('cedula.pdf.team');

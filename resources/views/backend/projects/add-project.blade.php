@@ -49,11 +49,67 @@
 </div>
 
 
+
 @stop
 @section('content')
     <!-- END: Subheader -->
-    <div class="m-content">
 
+    <div class="m-content">
+        <br>
+        @if(count(\App\Artist::projects_artist(auth()->user()->id)) === 0)
+                    <div class="m-alert m-alert--icon m-alert--outline alert alert-warning" role="alert">
+                        <div class="m-alert__icon">
+                            <i class="la la-warning"></i>
+                        </div>
+                        <div class="m-alert__text">
+                            Si tu propuesta musical es un video ingresa al <strong data-toggle="modal" data-target="#convertirMp3"
+                            style="cursor: pointer">siguiente link</strong> y conviértela en formato mp3, si no sabes como <strong style="cursor: pointer" data-toggle="modal" data-target="#exampleModalLong">ingresa aquí</strong> para tener instrucciones.
+                       </div>
+
+                    </div>
+                @endif
+
+                {{-- modal convertir mp3 --}}
+                <div class="modal fade" id="convertirMp3" tabindex="-1" role="dialog"
+                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">
+                                Convertir </h5>
+                            <button type="button" class="close" data-dismiss="modal"
+                                    aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+
+                        </div>
+                        <div class="modal-footer">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+                {{-- modal Instrucciones --}}
+                <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLongTitle">Instrucciones</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+
+                        </div>
+                        <div class="modal-footer">
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
 
         <!--=====================================
            MOSTAR ALERTA PARA CREAR PROYECTO
@@ -416,6 +472,7 @@
 
     </script>
     <script>
+
         $('#btn_add_project').click(function (e) {
             e.preventDefault();
             swal({

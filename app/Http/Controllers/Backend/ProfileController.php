@@ -343,7 +343,7 @@ class ProfileController extends Controller
         $user->img_document_front = $aspirante->urlImageDocumentFrente;
         $user->img_document_back = $aspirante->urlImageDocumentAtras;
         $user->picture = $aspirante->urlImageProfile;
-        $user->slug = Str::slug($aspirante->name.'-'.str_random(1000), '-');
+        $user->slug = Str::slug($aspirante->name.'-'.str_random(1000000), '-');
 
         if ( isset($aspirante->email) ) { // si existe un correo
             if ($aspirante->email != auth()->user()->email){ // debe ser diferente al del usuario gestor
@@ -580,6 +580,31 @@ class ProfileController extends Controller
             'pdf_cedula' => $urlS3,
             'img_document_back'=> null,
             'img_document_front'=> null,
+        ]);
+
+
+        return $urlS3;
+    }
+
+    public function pdf_soporte_aspirante_gestor(Request $request)
+    {
+
+
+
+        $idUser=$request->headers->get('idAspirante');
+        // dd($idUser);
+        $user = User::where('id',$idUser )->first();
+
+        // $pdf_cedula =  str_replace('storage', '', $user->pdf_cedula);
+        //Elimnar pdf de cédula o tarjeta
+        $image = $request->file('doc')->store('evidencedoc', 's3');
+        Storage::disk('s3')->setVisibility($image, 'public');
+        $urlS3 = Storage::disk('s3')->url($image);
+
+
+        Artist::where('user_id',$idUser)->update([
+            'evidence_document' => $urlS3,
+
         ]);
 
 

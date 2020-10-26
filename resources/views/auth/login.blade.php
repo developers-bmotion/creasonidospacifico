@@ -158,12 +158,12 @@ License: You must have a valid license purchased only from themeforest(the above
                                     </div>
                                 </div>
                                 <div class="pt-5">
-                                    {{-- {!! NoCaptcha::display() !!} --}}
+                                     {!! NoCaptcha::display() !!}
                                 </div>
 
                                 @error ('g-recaptcha-response')
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
+                                        <strong class="text-danger">{{ $errors->first('g-recaptcha-response') }}</strong>
                                     </span>
                                 @enderror
                                 <div class="m-login__form-action">
@@ -224,7 +224,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <script src="/backend/vendors/jquery.repeater/src/repeater.js" type="text/javascript"></script>
 <script src="/backend/vendors/jquery-form/dist/jquery.form.min.js" type="text/javascript"></script>
 <script src="/backend/vendors/block-ui/jquery.blockUI.js" type="text/javascript"></script>
-{{-- {!! NoCaptcha::renderJs() !!} --}}
+{!! NoCaptcha::renderJs() !!}
 <script src="/backend/vendors/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js" type="text/javascript">
 </script>
 <script src="/backend/vendors/js/framework/components/plugins/forms/bootstrap-datepicker.init.js"

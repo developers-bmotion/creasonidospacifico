@@ -278,8 +278,9 @@
                                     <div class="col-md-4">
                                         <label style="font-weight: bold">Departamento de residencia:</label>
                                         <div class="m-scrollable" data-scrollable="true" style="">
-
+                                            @if($artist->residencePlace)
                                             {{$artist->residencePlace->departaments->descripcion}}</p>
+                                            @endif
 
                                         </div>
 
@@ -287,18 +288,20 @@
                                     <div class="col-md-4">
                                         <label style="font-weight: bold">Ciudad de residencia:</label>
                                         <div class="m-scrollable" data-scrollable="true" style="">
+                                            @if($artist->residencePlace)
                                             {{$artist->residencePlace->descripcion}}</p>
+                                            @endif
                                         </div>
 
                                     </div>
-                                        @if($artist->township)
-                                            <div class="col-md-4">
-                                                <label style="font-weight: bold">Vereda/Corregimiento:</label>
-                                                <div class="m-scrollable" data-scrollable="true" style="">
-                                                    <p>{{$artist->township }}</p>
-                                                </div>
+                                    @if($artist->township)
+                                        <div class="col-md-4">
+                                            <label style="font-weight: bold">Vereda/Corregimiento:</label>
+                                            <div class="m-scrollable" data-scrollable="true" style="">
+                                                <p>{{$artist->township }}</p>
                                             </div>
-                                        @endif
+                                        </div>
+                                    @endif
                                     <div class="col-md-4">
                                         <label style="font-weight: bold">Departamento de nacimiento:</label>
                                         <div class="m-scrollable" data-scrollable="true" style="">
@@ -471,6 +474,60 @@
                                     </div>
                                 </div>
                             </div>
+
+                            {{-- @dd($artist) --}}
+                            @if($artist->gestor_id !== null)
+                            <hr>
+                            <div class="ml-4">
+
+                                {{-- @dd($artist->users->name) --}}
+                            <h5 style="font-weight: bold" class="">{{ __('Aspirante registrado por gestor') }}</h5>
+                            <div class="ml-5">
+                            <br>
+                            <label style="font-weight: bold">Documento de soporte:</label>
+                            <br>
+                            <button type="button" class="btn btn-primary btn_pdf_asp"
+                                                data-toggle="modal"
+                                                data-target="#verpdfsoporte">
+                                            Ver documento de soporte
+                            </button>
+
+                        </div>
+
+                        </div>
+                        {{-- modal soporte --}}
+                        <div class="modal fade" id="verpdfsoporte" tabindex="-1"
+                                     role="dialog"
+                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">
+                                                    Documento soporte
+                                                    de {{ $artist->users->name}}</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+
+                                                    @if(!$artist->evidence_document)
+                                                        <p>No se cargo el documento correctamente</p>
+                                                    @else
+                                                        <div>
+                                                            <embed src="{{ $artist->evidence_document}}"
+                                                                   frameborder="0" width="100%" height="400px">
+                                                        </div>
+                                                    @endif
+                                            </div>
+                                            <div class="modal-footer">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
                             <div class="row">
                                 <div class="m-portlet__body">
                                 </div>
@@ -790,7 +847,8 @@
                                                                                         <div
                                                                                             class="col-md-4 mt-2">
                                                                                             <label
-                                                                                                style="font-weight: bold">Dirección de residencia:</label>
+                                                                                                style="font-weight: bold">Dirección
+                                                                                                de residencia:</label>
                                                                                             <div
                                                                                                 class="m-scrollable"
                                                                                                 data-scrollable="true"
@@ -905,18 +963,20 @@
                                                                                                 o rol que
                                                                                                 desempeña:</label>
                                                                                             @if($team->role)
-                                                                                            <div
-                                                                                                class="m-scrollable"
-                                                                                                data-scrollable="true"
-                                                                                                style="">
-                                                                                                <p style="text-align: justify">{{ $team->role}}</p>
-                                                                                            </div>
+                                                                                                <div
+                                                                                                    class="m-scrollable"
+                                                                                                    data-scrollable="true"
+                                                                                                    style="">
+                                                                                                    <p style="text-align: justify">{{ $team->role}}</p>
+                                                                                                </div>
                                                                                             @else
                                                                                                 <div
                                                                                                     class="m-scrollable"
                                                                                                     data-scrollable="true"
                                                                                                     style="">
-                                                                                                    <p style="text-align: justify">No registrado</p>
+                                                                                                    <p style="text-align: justify">
+                                                                                                        No
+                                                                                                        registrado</p>
                                                                                                 </div>
                                                                                             @endif
                                                                                         </div>
@@ -1816,56 +1876,56 @@
             }
         });
 
-        var issetBenefis=@json($artist->beneficiary);
+        var issetBenefis =@json($artist->beneficiary);
 
-     if(issetBenefis.length != 0){
-        /* eventos para subir la imagen o pdf del beneficiario */
-        new Dropzone('.file-image-document-beneficiario-frente', {
-            url: '{{ route('upload.image.document') }}',
-            acceptedFiles: "image/*",
-            maxFiles: 1,
-            paramName: 'file',
-            headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            },
-            processing: function (file, response) {
-                $('body').loading({
-                    message: 'Subiendo documento...',
-                    start: true,
-                });
-            },
-            success: function (file, response) {
-                $("input[name='beneficiario[urlImageDocumentFrente]']").val(response);
-                $('body').loading({
+        if (issetBenefis.length != 0) {
+            /* eventos para subir la imagen o pdf del beneficiario */
+            new Dropzone('.file-image-document-beneficiario-frente', {
+                url: '{{ route('upload.image.document') }}',
+                acceptedFiles: "image/*",
+                maxFiles: 1,
+                paramName: 'file',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                processing: function (file, response) {
+                    $('body').loading({
+                        message: 'Subiendo documento...',
+                        start: true,
+                    });
+                },
+                success: function (file, response) {
+                    $("input[name='beneficiario[urlImageDocumentFrente]']").val(response);
+                    $('body').loading({
 
-                    start: false,
-                });
-            }
-        });
-        new Dropzone('.file-image-document-beneficiario-atras', {
-            url: '{{ route('upload.image.document') }}',
-            acceptedFiles: "image/*",
-            maxFiles: 1,
-            paramName: 'file',
-            headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            },
-            processing: function (file, response) {
-                $('body').loading({
-                    message: 'Subiendo documento...',
-                    start: true,
-                });
-            },
-            success: function (file, response) {
-                $("input[name='beneficiario[urlImageDocumentAtras]']").val(response);
-                $('body').loading({
+                        start: false,
+                    });
+                }
+            });
+            new Dropzone('.file-image-document-beneficiario-atras', {
+                url: '{{ route('upload.image.document') }}',
+                acceptedFiles: "image/*",
+                maxFiles: 1,
+                paramName: 'file',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                processing: function (file, response) {
+                    $('body').loading({
+                        message: 'Subiendo documento...',
+                        start: true,
+                    });
+                },
+                success: function (file, response) {
+                    $("input[name='beneficiario[urlImageDocumentAtras]']").val(response);
+                    $('body').loading({
 
-                    start: false,
-                });
-            }
-        });
+                        start: false,
+                    });
+                }
+            });
 
-     }
+        }
 
         //Actualizar imagen de perfil aspirante
         new Dropzone('.dropzone_prof_asp', {
@@ -1912,108 +1972,107 @@
 
         });
 
-        if(issetBenefis.length != 0){
-        //Actualizar imagen de perfil beneficiario
-        new Dropzone('.dropzone_prof_ben', {
-            url: '{{ route('profile.photo.beneficiario') }}',
-            acceptedFiles: 'image/*',
-            maxFiles: 1,
-            paramName: 'photo',
-            headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            },
-            addedfile: function (file, response) {
-                $('body').loading({
-                    message: 'Subiendo imagen...',
-                    start: true,
-                });
-            },
-            success: function (file, response) {
+        if (issetBenefis.length != 0) {
+            //Actualizar imagen de perfil beneficiario
+            new Dropzone('.dropzone_prof_ben', {
+                url: '{{ route('profile.photo.beneficiario') }}',
+                acceptedFiles: 'image/*',
+                maxFiles: 1,
+                paramName: 'photo',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                addedfile: function (file, response) {
+                    $('body').loading({
+                        message: 'Subiendo imagen...',
+                        start: true,
+                    });
+                },
+                success: function (file, response) {
 
-                $('#inputImagenesPostPlan').val(response);
-                toastr.options = {
-                    "closeButton": false,
-                    "debug": false,
-                    "newestOnTop": false,
-                    "progressBar": false,
-                    "positionClass": "toast-top-right",
-                    "preventDuplicates": false,
-                    "onclick": null,
-                    "showDuration": "3000",
-                    "hideDuration": "1000",
-                    "timeOut": "5000",
-                    "extendedTimeOut": "1000",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut"
-                };
+                    $('#inputImagenesPostPlan').val(response);
+                    toastr.options = {
+                        "closeButton": false,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": false,
+                        "positionClass": "toast-top-right",
+                        "preventDuplicates": false,
+                        "onclick": null,
+                        "showDuration": "3000",
+                        "hideDuration": "1000",
+                        "timeOut": "5000",
+                        "extendedTimeOut": "1000",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
+                    };
 
-                toastr.success("Foto actualizada correctamente", "Información");
-                setTimeout(function () {
-                    location.reload();
-                }, 3000);
-            }
+                    toastr.success("Foto actualizada correctamente", "Información");
+                    setTimeout(function () {
+                        location.reload();
+                    }, 3000);
+                }
 
-        });
+            });
 
         }
-
 
 
         Dropzone.autoDiscover = false;
         // actualizar pdf beneficiario
 
 
-        if(issetBenefis.length != 0){
+        if (issetBenefis.length != 0) {
 
-        new Dropzone('.dropzone-ben', {
-            url: '{{ route('cedula.pdf.beneficiario') }}',
-            acceptedFiles: '.pdf',
-            maxFiles: 1,
-            paramName: 'pdf_cedula_name',
-            headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            },
-            addedfile: function (file, response) {
-                $('body').loading({
-                    message: 'Subiendo documento...',
-                    start: true,
-                });
-            },
-            success: function (file, response) {
+            new Dropzone('.dropzone-ben', {
+                url: '{{ route('cedula.pdf.beneficiario') }}',
+                acceptedFiles: '.pdf',
+                maxFiles: 1,
+                paramName: 'pdf_cedula_name',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                addedfile: function (file, response) {
+                    $('body').loading({
+                        message: 'Subiendo documento...',
+                        start: true,
+                    });
+                },
+                success: function (file, response) {
 
-                $('#inputImagenesPostPlan').val(response);
-                toastr.options = {
-                    "closeButton": false,
-                    "debug": false,
-                    "newestOnTop": false,
-                    "progressBar": false,
-                    "positionClass": "toast-top-right",
-                    "preventDuplicates": false,
-                    "onclick": null,
-                    "showDuration": "3000",
-                    "hideDuration": "1000",
-                    "timeOut": "5000",
-                    "extendedTimeOut": "1000",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut"
-                };
+                    $('#inputImagenesPostPlan').val(response);
+                    toastr.options = {
+                        "closeButton": false,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": false,
+                        "positionClass": "toast-top-right",
+                        "preventDuplicates": false,
+                        "onclick": null,
+                        "showDuration": "3000",
+                        "hideDuration": "1000",
+                        "timeOut": "5000",
+                        "extendedTimeOut": "1000",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
+                    };
 
-                toastr.success("El documento se actualizo correctamente", "Información");
-                setTimeout(function () {
-                    location.reload();
-                }, 3000);
+                    toastr.success("El documento se actualizo correctamente", "Información");
+                    setTimeout(function () {
+                        location.reload();
+                    }, 3000);
 
-            }
+                }
 
-        });
+            });
         }
 
         var teams =@json($artist->teams);
-        if(teams.length !== 0){
+        if (teams.length !== 0) {
 
             $.each( @json($artist->teams), function (key, value) {
                 // actualizar pdf team
@@ -2112,7 +2171,6 @@
             });
 
         }
-
 
 
         Dropzone.autoDiscover = false;
