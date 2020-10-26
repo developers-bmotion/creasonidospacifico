@@ -471,6 +471,60 @@
                                     </div>
                                 </div>
                             </div>
+
+                            {{-- @dd($artist) --}}
+                            @if($artist->gestor_id !== null)
+                            <hr>
+                            <div class="ml-4">
+
+                                {{-- @dd($artist->users->name) --}}
+                            <h5 style="font-weight: bold" class="">{{ __('Aspirante registrado por gestor') }}</h5>
+                            <div class="ml-5">
+                            <br>
+                            <label style="font-weight: bold">Documento de soporte:</label>
+                            <br>
+                            <button type="button" class="btn btn-primary btn_pdf_asp"
+                                                data-toggle="modal"
+                                                data-target="#verpdfsoporte">
+                                            Ver documento de soporte
+                            </button>
+
+                        </div>
+
+                        </div>
+                        {{-- modal soporte --}}
+                        <div class="modal fade" id="verpdfsoporte" tabindex="-1"
+                                     role="dialog"
+                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">
+                                                    Documento soporte
+                                                    de {{ $artist->users->name}}</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+
+                                                    @if(!$artist->evidence_document)
+                                                        <p>No se cargo el documento correctamente</p>
+                                                    @else
+                                                        <div>
+                                                            <embed src="{{ $artist->evidence_document}}"
+                                                                   frameborder="0" width="100%" height="400px">
+                                                        </div>
+                                                    @endif
+                                            </div>
+                                            <div class="modal-footer">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
                             <div class="row">
                                 <div class="m-portlet__body">
                                 </div>

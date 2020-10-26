@@ -583,6 +583,31 @@ class ProfileController extends Controller
         return $urlS3;
     }
 
+    public function pdf_soporte_aspirante_gestor(Request $request)
+    {
+
+
+
+        $idUser=$request->headers->get('idAspirante');
+        // dd($idUser);
+        $user = User::where('id',$idUser )->first();
+
+        // $pdf_cedula =  str_replace('storage', '', $user->pdf_cedula);
+        //Elimnar pdf de cédula o tarjeta
+        $image = $request->file('doc')->store('evidencedoc', 's3');
+        Storage::disk('s3')->setVisibility($image, 'public');
+        $urlS3 = Storage::disk('s3')->url($image);
+
+
+        Artist::where('user_id',$idUser)->update([
+            'evidence_document' => $urlS3,
+
+        ]);
+
+
+        return $urlS3;
+    }
+
     //actualizar la imagen del documento desde el perfil del aspirante
 
     public function update_img_artist(Request $request)

@@ -596,8 +596,97 @@
                                             <p style="text-align: justify">{{ $artist->artists[0]->biography }}</p>
                                         </div>
                                     </div>
+                                    {{-- @dd($artist) --}}
+
                                 </div>
+                                @if($artist->artists[0]->gestor_id !== null)
+                            <hr>
+                            <div class="ml-2">
+
+                                {{-- @dd($artist->users->name) --}}
+                            <h5 style="font-weight: bold" class="">{{ __('Aspirante registrado por gestor') }}</h5>
+                            <div class="ml-4">
+                            <br>
+                            <label style="font-weight: bold">Documento de soporte:</label>
+                            <br>
+                            <button type="button" class="btn btn-primary btn_pdf_soporte"
+                                                data-toggle="modal"
+                                                data-target="#verpdfsoporte">
+                                            Ver documento de soporte
+                            </button>
+                            @if(\App\User::navigation() == "Gestor")
+
+                            <div class="row drop_soporte" style="display: none">
+
+                                <div class="m-form__group form-group">
+
+                                    <div id="pdf-soporte"
+                                         class="form-group m-form__group row">
+                                        <div class="col">
+                                            <div class="form-group m-form__group ">
+                                                <div class="m-dropzone dropzone-soporte m-dropzone--success"
+                                                     action="inc/api/dropzone/upload.php"
+                                                     id="m-dropzone-three">
+                                                    <div
+                                                        class="m-dropzone__msg dz-message needsclick">
+                                                        <h3 class="m-dropzone__msg-title">{{ __('Subir formulario offline en formato PDF') }}</h3>
+                                                        <span
+                                                            class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
                             </div>
+                            <i class="flaticon-edit ml-3 update_pdf_soporte"
+                               style="color:#716aca; cursor:pointer;"></i>
+                            <button type="button" class="btn btn-primary cancel_pdf_soporte"
+                                    style="display:none">Cancelar
+                            </button>
+
+                        @endif
+
+                        </div>
+
+                        </div>
+                        {{-- modal soporte --}}
+                        <div class="modal fade" id="verpdfsoporte" tabindex="-1"
+                                     role="dialog"
+                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">
+                                                    Documento soporte
+                                                    de {{ $artist->artists[0]->users->name}}</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+
+                                                    @if(!$artist->artists[0]->evidence_document)
+                                                        <p>No se cargo el documento correctamente</p>
+                                                    @else
+                                                        <div>
+                                                            <embed src="{{ $artist->artists[0]->evidence_document}}"
+                                                                   frameborder="0" width="100%" height="400px">
+                                                        </div>
+                                                    @endif
+                                            </div>
+                                            <div class="modal-footer">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -2067,6 +2156,74 @@
 
             });
         });
+
+        // controles actualizar soporte
+        $('.update_pdf_soporte').click(function () {
+            $(this).hide();
+            $('.cancel_pdf_soporte').show();
+
+            $('.drop_soporte').show();
+            $('.btn_pdf_soporte').hide();
+
+
+        });
+        $('.cancel_pdf_soporte').click(function () {
+            $(this).hide();
+            $('.update_pdf_soporte').show();
+            $('.drop_soporte').hide();
+            $('.btn_pdf_soporte').show();
+
+
+        });
+
+        new Dropzone('.dropzone-soporte', {
+            url: '{{ route('soporte.aspirante.gestor') }}',
+            acceptedFiles: '.pdf',
+            maxFiles: 1,
+            paramName: 'doc',
+            headers: {
+                'idAspirante': idAspirante,
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            addedfile: function (file, response) {
+                $('body').loading({
+                    message: 'Subiendo documento...',
+                    start: true,
+                });
+            },
+            success: function (file, response) {
+
+                $('#inputImagenesPostPlan').val(response);
+                toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "3000",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+
+                toastr.success("El documento se actualizo correctamente", "Información");
+                setTimeout(function () {
+                    location.reload();
+                }, 3000);
+
+            }
+
+        });
+
+
+
+
     </script>
 
 
