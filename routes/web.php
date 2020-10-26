@@ -42,7 +42,7 @@ Route::get('/prueba-email', function (){
    return new NewArtist('Mauricio');
 });
 
-
+Route::get('/')->middleware('');
     // Artisan::call('projects:close');
     // dd(\App\Category::where('typeCategory_id', $id_category)->get());
 

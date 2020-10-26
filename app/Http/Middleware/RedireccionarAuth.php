@@ -3,9 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Request;
 
-class HomeMiddleware
+class RedireccionarAuth
 {
     /**
      * Handle an incoming request.
@@ -16,11 +15,6 @@ class HomeMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (Request::url() === '/') {
-            return redirect("/login")->with('login', __('no_session'));
-        }else if (auth()->user()->roles[0]->rol == "Artist"){
-            return redirect("/dashboard/profile");
-        }
         return $next($request);
     }
 }
