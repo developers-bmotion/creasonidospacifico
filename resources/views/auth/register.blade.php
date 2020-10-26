@@ -252,16 +252,17 @@ License: You must have a valid license purchased only from themeforest(the above
                 {{-- <h3 class="title-login m-login__welcome">CREA SONIDOS PACIFICO</h3> --}}
                 <h3 class="text-white">Recuerda que para realizar la inscripción, debes disponer de los siguientes documentos:</h3>
                 <ul class="text-white pr-3">
-                    <li style="font-size: 1.4rem ">PDF o Foto por ambos lados del documento de identidad del participante y representante, si aplica.</li>
-                    <li style="font-size: 1.4rem ">Canción en formato mp3 o video con buen sonido.</li>
+                    <li style="font-size: 1.2rem ">Cédula de ciudadanía, en imagen (jpg) o pdf.</li>
+                    <li style="font-size: 1.2rem ">Breve reseña (máximo 300 palabras) del(la) participante solista o agrupación.</li>
+                    <li style="font-size: 1.2rem ">Un (1) audio o canción (puede ser inédita o una obra ya creada) en formato mp3.</li>
                 </ul>
                 <h3 class="text-white pt-5">En caso de que la participación sea de un grupo musical, además:</h3>
                 <ul class="text-white pr-3">
-                    <li style="font-size: 1.4rem ">PDF o Foto por ambos lados del documento de identidad, de todos(as) los(las) integrantes del grupo.</li>
+                    <li style="font-size: 1.2rem ">PDF o Foto por ambos lados del documento de identidad, de todos(as) los(las) integrantes del grupo.</li>
                 </ul>
                 <h3 class="text-white pt-5">En caso de que tu inscripción sea realizada a través del gestor cultural de tu zona:</h3>
                 <ul class="text-white pr-3">
-                    <li style="font-size: 1.4rem ">Formulario Offline que corresponda (persona natural / grupo constituido), totalmente diligenciado y firmado.</li>
+                    <li style="font-size: 1.2rem ">Formulario Offline que corresponda (persona natural / grupo constituido), totalmente diligenciado y firmado.</li>
                 </ul>
             </div>
         </div>
