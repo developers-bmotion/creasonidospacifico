@@ -206,7 +206,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
                                 @error ('g-recaptcha-response')
                                 <span class="help-block">
-                                        {{-- <strong>{{ $errors->first('g-recaptcha-response') }}</strong> --}}
+                                        <strong class="text-danger">{{ $errors->first('g-recaptcha-response') }}</strong>
                                     </span>
                                 @enderror
 
