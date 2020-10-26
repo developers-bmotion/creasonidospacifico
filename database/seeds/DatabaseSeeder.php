@@ -142,44 +142,44 @@ class DatabaseSeeder extends Seeder
         /*=============================================
             CREANDO 15 USUARIOS POR DEFECTO Y LE ESTAMOS ASIGNANDO UN ARTISTA
         =============================================*/
-       factory(\App\User::class, 15)->create()
-           ->each(function (\App\User $u) {
-               factory(\App\Artist::class, 1)->create(['user_id' => $u->id]);
-               $u->roles()->attach('2');
-           });
+        factory(\App\User::class, 15)->create()
+            ->each(function (\App\User $u) {
+                factory(\App\Artist::class, 1)->create(['user_id' => $u->id]);
+                $u->roles()->attach('2');
+            });
 
         /*=============================================
           CREAMOS 10 MENORES DE EDAD Y LES ASIGNAMOS
         =============================================*/
-       factory(\App\Beneficiary::class, 3)->create();
+        factory(\App\Beneficiary::class, 3)->create();
          /*=============================================
           CREAMOS 10 INTEGRANTES DE GRUPO
         =============================================*/
-       factory(\App\Team::class, 3)->create();
+        factory(\App\Team::class, 3)->create();
 
         /*=============================================
           CREAMOS 10 CURADORES
         =============================================*/
-       factory(\App\User::class, 10)->create()
-           ->each(function (\App\User $u) {
-               factory(\App\Management::class, 1)->create(['user_id' => $u->id])->each(function (\App\Management $m) {
-                   $categories = mt_rand(1, 10);
-                   $m->categories()->attach($categories);
-               });
-               $u->roles()->attach('3');
-           });
+        factory(\App\User::class, 10)->create()
+            ->each(function (\App\User $u) {
+                factory(\App\Management::class, 1)->create(['user_id' => $u->id])->each(function (\App\Management $m) {
+                    $categories = mt_rand(1, 10);
+                    $m->categories()->attach($categories);
+                });
+                $u->roles()->attach('3');
+            });
 
         /*=============================================
           CREAMOS 60 PROYECTOS
         =============================================*/
-       factory(\App\Project::class, 15)
-           ->create()
-           ->each(function (\App\Project $p) {
-               $artist = mt_rand(1, 10);
-               $manage = mt_rand(1, 5);
-               $p->artists()->attach($artist);
-               $p->management()->attach($manage);
-           });
+        factory(\App\Project::class, 15)
+            ->create()
+            ->each(function (\App\Project $p) {
+                $artist = mt_rand(1, 10);
+                $manage = mt_rand(1, 5);
+                $p->artists()->attach($artist);
+                $p->management()->attach($manage);
+            });
 
     }
 }
