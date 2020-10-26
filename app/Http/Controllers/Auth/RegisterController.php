@@ -66,13 +66,18 @@ class RegisterController extends Controller
     protected function create(Request $request)
     {
         /* $data = $this->validator($request)->validate(); */
-
-        $this->validate($request, [
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-            'g-recaptcha-response' => 'required|captcha',
-        ]);
-
+        if (env('APP_ENV') === 'production') {
+            $this->validate($request, [
+                'email' => 'required|string|email|max:255|unique:users',
+                'password' => 'required|string|min:6|confirmed',
+                'g-recaptcha-response' => 'required|captcha',
+            ]);
+        } else {
+            $this->validate($request, [
+                'email' => 'required|string|email|max:255|unique:users',
+                'password' => 'required|string|min:6|confirmed',
+            ]);
+        }
         $user = User::create([
 
             'email' => $request->get('email'),

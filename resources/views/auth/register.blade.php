@@ -199,10 +199,11 @@ License: You must have a valid license purchased only from themeforest(the above
                                         </span>
                                     @endif
                                 </div>
-
+                                @if(env('APP_ENV') === 'production')
                                 <div class="pt-5">
                                      {!! NoCaptcha::display() !!}
                                 </div>
+                                @endif
 
                                 @error ('g-recaptcha-response')
                                 <span class="help-block">
