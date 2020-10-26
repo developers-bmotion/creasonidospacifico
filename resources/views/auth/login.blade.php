@@ -157,13 +157,16 @@ License: You must have a valid license purchased only from themeforest(the above
                                            class="m-link">¿Olvidaste tu contraseña?</a>
                                     </div>
                                 </div>
-                                <div class="pt-5">
-                                     {!! NoCaptcha::display() !!}
-                                </div>
+                                @if(env('APP_ENV') === 'production')
+                                    <div class="pt-5">
+                                        {!! NoCaptcha::display() !!}
+                                    </div>
+                                @endif
 
                                 @error ('g-recaptcha-response')
-                                    <span class="help-block">
-                                        <strong class="text-danger">{{ $errors->first('g-recaptcha-response') }}</strong>
+                                <span class="help-block">
+                                        <strong
+                                            class="text-danger">{{ $errors->first('g-recaptcha-response') }}</strong>
                                     </span>
                                 @enderror
                                 <div class="m-login__form-action">
@@ -192,7 +195,7 @@ License: You must have a valid license purchased only from themeforest(the above
         <div
             class="background_login m-grid__item m-grid__item--fluid m-grid m-grid--center m-grid--hor m-grid__item--order-tablet-and-mobile-1	m-login__content m-grid-item--center"
             {{-- style="background-image: url(/images/imglogin.png)"> --}}
-            >
+        >
             <div class="m-grid__item">
                 <h1 class="title-login m-login__welcome">PACÍFICO</h1>
                 <p class="parrafo-login m-login__msg">

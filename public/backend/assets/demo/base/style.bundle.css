@@ -35609,7 +35609,7 @@ body.m-content--skin-light2 {
         margin-top: 0; }
     .m-header--fixed-mobile .m-topbar {
         margin-top: 0;
-        top: -50px; }
+        top: 0px; }
     .m-header--fixed-mobile.m-topbar--on .m-topbar {
         margin-top: 0;
         top: 0;

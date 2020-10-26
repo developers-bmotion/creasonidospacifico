@@ -49,7 +49,7 @@ $('#select-actuara-como').on('change', function() {
                 $('#content-informacion-grupo-musical').hide();
                 $('#content-informacion-subir-cancion').show();
                 $('#content-document-evidencia-aspirante').show();
-                $("#aspirant-document-type option[value='2']").hide(); // ocultar cedula de extranjeria
+                $("#aspirant-document-type option[value='3']").hide(); // ocultar cedula de extranjeria
                 $('#btn-enviar-datos').show();
             break;
         case '2': $('#title-info-aspirante').html('Información del representante para el menor de edad');
@@ -58,7 +58,7 @@ $('#select-actuara-como').on('change', function() {
                 $('#content-informacion-grupo-musical').hide();
                 $('#content-informacion-subir-cancion').show();
                 $('#content-document-evidencia-aspirante').show();
-                $("#aspirant-document-type option[value='2']").show(); // mostrar cedula de extranjeria
+                $("#aspirant-document-type option[value='3']").show(); // mostrar cedula de extranjeria
                 $('#btn-enviar-datos').show();
             break;
     }

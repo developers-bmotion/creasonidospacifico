@@ -12,6 +12,8 @@ use App\DocumentType;
 use App\Level;
 use App\Location;
 use App\Mail\NewArtist;
+use App\Mail\NewArtistRegisterGestor;
+use App\Mail\NewAspirantGestor;
 use App\Update;
 use App\User;
 use Carbon\Carbon;
@@ -262,7 +264,7 @@ class ProfileController extends Controller
 
     /* metodo para insertar los integrantes del grupo */
     public function insertGroupMembers($request, $idArtist) {
-        if (!isset($request->integrantes)) return; 
+        if (!isset($request->integrantes)) return;
 
         foreach ($request->integrantes as $integrante) {
             $member = new Team();
@@ -332,6 +334,8 @@ class ProfileController extends Controller
     /* metodo para crear un aspirante en la base de datos */
     public function saveNewAspirant($request) {
         $aspirante = (object) $request->aspirante;
+        $song = (object) $request->song;
+
 
         // crear el usuario
         $user = new User();
@@ -352,7 +356,7 @@ class ProfileController extends Controller
                 $user->email = $aspirante->email;
                 $user->password = $pass;
                 \Mail::to($user->email)->send(new NewGestorAdmin($user->email, $password)); // credenciales de acceso
-                \Mail::to($user->email)->send(new NewArtist($aspirante->name)); // registro exitoso                
+                \Mail::to($user->email)->send(new NewArtistRegisterGestor($aspirante->name, $aspirante->lastname, $song->nameProject )); // registro exitoso
             }
         }
         $user->save(); // guardar datos del usuario
@@ -380,7 +384,7 @@ class ProfileController extends Controller
         $aspirant->gestor_id = auth()->user()->id;
         $aspirant->save();
 
-        \Mail::to(auth()->user()->email)->send(new NewArtist($aspirante->name)); // correo para el gestor
+        \Mail::to(auth()->user()->email)->send(new NewAspirantGestor($user->name, $user->last_name, auth()->user()->name, auth()->user()->last_name)); // correo para el gestor
         return $aspirant->id;
     }
 
