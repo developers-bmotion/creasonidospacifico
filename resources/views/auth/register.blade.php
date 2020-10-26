@@ -201,7 +201,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </div>
 
                                 <div class="pt-5">
-                                    {{-- {!! NoCaptcha::display() !!} --}}
+                                     {!! NoCaptcha::display() !!}
                                 </div>
 
                                 @error ('g-recaptcha-response')
