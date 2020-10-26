@@ -18,9 +18,10 @@ class HomeMiddleware
     public function handle($request, Closure $next)
     {
 
-        if (Request::url() === '/') {
+        if (!auth()->user()) {
             return redirect("/login")->with('login', __('no_session'));
-        }else if (auth()->user()->roles[0]->rol == "Artist"){
+        }
+        else if (auth()->user()->roles[0]->rol == "Artist"){
             $artist=Artist::where('user_id', '=', auth()->user()->id )->first();
             if ($artist->document_type == null){
                 return redirect("/dashboard/form-register");
