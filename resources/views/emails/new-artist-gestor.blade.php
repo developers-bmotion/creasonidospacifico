@@ -1,9 +1,6 @@
 @component('mail::message')
-# {{ __("¡Tus datos han sido registrados!") }}
-
-{{ __("Sr/Sra :artist hemos recibidos tus datos. ", ['artist' => $artist]) }}
-
-{{ __('Ahora es momento de que registres tu propuesta musical.') }}
+# {{ __("¡El aspirante han sido registrado!") }}
+Que tal Sr/Sra gestor {{ $name_gestor }} {{ $last_name_gestor }}, el aspirante <strong >{{ $artist }} {{$last_name}}</strong> ha sido regitrado exitosamente.
 
 {{--@component('mail::button', ['url' => route('show.backend.project', $project->slug)])
  {{ __('Ir a la canción') }}
