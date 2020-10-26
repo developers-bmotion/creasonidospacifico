@@ -341,7 +341,7 @@ class ProfileController extends Controller
         $user->img_document_front = $aspirante->urlImageDocumentFrente;
         $user->img_document_back = $aspirante->urlImageDocumentAtras;
         $user->picture = $aspirante->urlImageProfile;
-        $user->slug = Str::slug($aspirante->name.'-'.str_random(1000), '-');
+        $user->slug = Str::slug($aspirante->name.'-'.str_random(1000000), '-');
 
         if ( isset($aspirante->email) ) { // si existe un correo
             if ($aspirante->email != auth()->user()->email){ // debe ser diferente al del usuario gestor

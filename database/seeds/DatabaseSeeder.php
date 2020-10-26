@@ -73,7 +73,7 @@ class DatabaseSeeder extends Seeder
         factory(\App\Category::class, 1)->create(['category' => 'Música urbana Pacífico (fusiones urbanas con música tradicional del Pacífico)', 'slug' => str_slug("música_urbana", '-')]);
         factory(\App\Category::class, 1)->create(['category' => 'Música salsa, antillana y fusión salsa', 'slug' => str_slug("música_urbana", '-')]);
         factory(\App\Category::class, 1)->create(['category' => 'Músicas espirituales y religiosas (música sacra, cantos gregorianos, música sacra negra, chigualos, alabaos, salves, cantos de boga)', 'slug' => str_slug("músicas_espirituales", '-')]);
-        factory(\App\Category::class, 1)->create(['category' => 'Música Clásica (en todos sus formatos)', 'slug' => str_slug("música_clásica", '-')]);
+        factory(\App\Category::class, 1)->create(['category' => 'Música Clásica y Contemporánea (en todos sus formatos)', 'slug' => str_slug("música_clásica", '-')]);
         factory(\App\Category::class, 1)->create(['category' => 'Música joven (trap, rap, reggaetón, hip-hop)', 'slug' => str_slug("música_joven", '-')]);
         factory(\App\Category::class, 1)->create(['category' => 'Otras Músicas (música experimental, world music, proyectos especiales y nuevas propuestas)', 'slug' => str_slug("otras_musicas", '-')]);
         factory(\App\Category::class, 1)->create(['category' => 'Música jazz (jazz Pacífico, latín jazz, blues, góspel)', 'slug' => str_slug("música_jazz", '-')]);

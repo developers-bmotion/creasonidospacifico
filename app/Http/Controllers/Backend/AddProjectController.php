@@ -92,9 +92,9 @@ class AddProjectController extends Controller
         $this->validate($request, [
             'subir_cancion' => 'required'
         ]);
-            
+
         $slug = str_slug($request->get('title'));
-        $ramdoNum = mt_rand(1, 10000);
+        $ramdoNum = mt_rand(1, 100000);
 
         $artist = Artist::where('user_id', auth()->user()->id)->with('users')->first();
         $email_artist =  $artist->users->email;
