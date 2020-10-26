@@ -210,7 +210,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="la la-phone"></i></span>
                                             </div>
-                                            <input type="text" name="aspirante[phone]" class="form-control m-input"
+                                            <input type="number" name="aspirante[phone]" class="form-control m-input"
                                                    placeholder="" value="">
                                         </div>
                                         <div id="error-aspirante_phone" class="form-control-feedback"
@@ -238,7 +238,7 @@
                                     <div id="content-aspirante_identificacion" class="col-lg-6 m-form__group-sub">
                                         <label class="form-control-label">Nº de indentificación <span
                                                 class="text-danger">*</span></label>
-                                        <input type="num" name="aspirante[identificacion]" class="form-control m-input"
+                                        <input type="number" name="aspirante[identificacion]" class="form-control m-input"
                                                placeholder="" value="">
                                         <div id="error-aspirante_identificacion" class="form-control-feedback"
                                              style="display: none"></div>
@@ -322,78 +322,59 @@
                                     </div>
 
                                     <div id="image-docuemnt-aspirante" class="form-group m-form__group row">
-                                        <div class="col-lg-6 m-form__group-sub">
+                                        <div id="content-file-image-document-aspirante-frente" class="col-lg-6 m-form__group-sub">
                                             <label for="">Imagen documento identificación frente</label>
-                                            <div
-                                                class="m-dropzone file-image-document-aspirante-frente m-dropzone--success"
-                                                action="" id="m-dropzone-three">
+                                            <div class="m-dropzone file-image-document-aspirante-frente m-dropzone--success" action="{{ route('upload.image.document') }}" id="m-dropzone-three">
                                                 <div class="m-dropzone__msg dz-message needsclick">
-                                                    <h3 class="m-dropzone__msg-title">Subir foto del frente de su
-                                                        documento de identificación</h3>
-                                                    <span
-                                                        class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                                    <h3 class="m-dropzone__msg-title">Subir foto del frente de su documento de identificación</h3>
+                                                    <span class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
                                                 </div>
                                             </div>
+                                            <div id="error-file-image-document-aspirante-frente" class="form-control-feedback"></div>
+                                            <input type="hidden" name="aspirante[urlImageDocumentFrente]" class="form-control m-input" value="">
                                         </div>
-                                        <div class="col-lg-6 m-form__group-sub">
+
+                                        <div id="content-file-image-document-aspirante-atras" class="col-lg-6 m-form__group-sub">
                                             <label for="">Imagen documento identificación atrás</label>
-                                            <div
-                                                class="m-dropzone file-image-document-aspirante-atras m-dropzone--success"
-                                                action="" id="m-dropzone-three">
+                                            <div class="m-dropzone file-image-document-aspirante-atras m-dropzone--success" action="{{ route('upload.image.document') }}" id="m-dropzone-three">
                                                 <div class="m-dropzone__msg dz-message needsclick">
-                                                    <h3 class="m-dropzone__msg-title">Subir foto de la parte de atrás de
-                                                        su documento de identificación</h3>
-                                                    <span
-                                                        class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                                    <h3 class="m-dropzone__msg-title">Subir foto de la parte de atrás de su documento de identificación</h3>
+                                                    <span class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
                                                 </div>
                                             </div>
+                                            <div id="error-file-image-document-aspirante-atras" class="form-control-feedback"></div>
+                                            <input type="hidden" name="aspirante[urlImageDocumentAtras]" class="form-control m-input" value="">
                                         </div>
                                     </div>
 
-                                    <div id="pdf-docuemnt-aspirante" style="display: none"
-                                         class="form-group m-form__group row">
-                                        <div class="col-lg-6 m-form__group-sub">
+                                    <div id="pdf-docuemnt-aspirante" style="display: none" class="form-group m-form__group row">
+                                        <div id="content-file-pdf-document-aspirante" class="col-lg-6 m-form__group-sub">
                                             <label for="">PDF documento identificación </label>
-                                            <div class="m-dropzone file-pdf-document-aspirante m-dropzone--success"
-                                                 action="" id="m-dropzone-three">
+                                            <div class="m-dropzone file-pdf-document-aspirante m-dropzone--success" action="{{ route('upload.pdf.document') }}" id="m-dropzone-three">
                                                 <div class="m-dropzone__msg dz-message needsclick">
-                                                    <h3 class="m-dropzone__msg-title">Subir documento de identificación
-                                                        por ambos lados</h3>
-                                                    <span
-                                                        class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                                    <h3 class="m-dropzone__msg-title">Subir documento de identificación por ambos lados</h3>
+                                                    <span class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
                                                 </div>
                                             </div>
+                                            <div id="error-file-pdf-document-aspirante" class="form-control-feedback"></div>
+                                            <input type="hidden" name="aspirante[urlPdfDocument]" class="form-control m-input" value="">
                                         </div>
                                     </div>
 
                                     <div class="form-group m-form__group row">
-                                        <div class="col-lg-6 m-form__group-sub">
+                                        <div id="content-image-profile-aspirante" class="col-lg-6 m-form__group-sub">
                                             <label for="">Foto de perfil</label>
-                                            <div class="m-dropzone file-image-profile-aspirante m-dropzone--success"
-                                                 action="" id="m-dropzone-three">
+                                            <div class="m-dropzone file-image-profile-aspirante m-dropzone--success" action="{{ route('upload.image.profile') }}" id="m-dropzone-three">
                                                 <div class="m-dropzone__msg dz-message needsclick">
                                                     <h3 class="m-dropzone__msg-title">Subir foto de perfil</h3>
-                                                    <span
-                                                        class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                                    <span class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
                                                 </div>
                                             </div>
-                                            <span id="errorImage-profile-aspirante"
-                                                  class="form-control-feedback"></span>
+                                            <span id="error-image-profile-aspirante" class="form-control-feedback"></span>
+                                            <input type="hidden" name="aspirante[urlImageProfile]" class="form-control m-input" value="">
                                         </div>
                                     </div>
                                 </div>
-
-                                <!--=====================================
-                                    Campos input type hidden
-                                ======================================-->
-                                <input type="hidden" name="aspirante[urlImageDocumentFrente]"
-                                       class="form-control m-input" value="">
-                                <input type="hidden" name="aspirante[urlImageDocumentAtras]"
-                                       class="form-control m-input" value="">
-                                <input type="hidden" name="aspirante[urlPdfDocument]" class="form-control m-input"
-                                       value="">
-                                <input type="hidden" name="aspirante[urlImageProfile]" class="form-control m-input"
-                                       value="">
                             </div>
 
                             <div class="m-separator m-separator--dashed m-separator--lg"></div>
@@ -528,8 +509,7 @@
                                     <div id="rol-member" class="form-group m-form__group row" style="display: none">
                                         <div class="col-lg-6 m-form__group-sub">
                                             <label class="form-control-label">Instrumento que interpreta</label>
-                                            <input type="num" name="aspirante[rolMember]" class="form-control m-input"
-                                                   placeholder="" value="">
+                                            <input type="num" name="aspirante[rolMember]" class="form-control m-input" placeholder="" value="">
                                             <span class="m-form__help">Ingrese el rol que desempeña dentro del grupo (Guitarrista, Vocalista, Pianista, etc.)</span>
                                         </div>
                                     </div>
@@ -732,77 +712,59 @@
                                     </div>
 
                                     <div id="image-docuemnt-beneficiario" class="form-group m-form__group row">
-                                        <div class="col-lg-6 m-form__group-sub">
+                                        <div id="content-file-image-document-beneficiario-frente" class="col-lg-6 m-form__group-sub">
                                             <label for="">Imagen documento identificación frente</label>
-                                            <div
-                                                class="m-dropzone file-image-document-beneficiario-frente m-dropzone--success"
-                                                action="inc/api/dropzone/upload.php" id="m-dropzone-three">
+                                            <div class="m-dropzone file-image-document-beneficiario-frente m-dropzone--success" action="{{ route('upload.image.document') }}" id="m-dropzone-three">
                                                 <div class="m-dropzone__msg dz-message needsclick">
-                                                    <h3 class="m-dropzone__msg-title">Subir foto del frente de su
-                                                        documento de identificación</h3>
-                                                    <span
-                                                        class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                                    <h3 class="m-dropzone__msg-title">Subir foto del frente de su documento de identificación</h3>
+                                                    <span class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
                                                 </div>
                                             </div>
+                                            <div id="error-file-image-document-beneficiario-frente" class="form-control-feedback"></div>
+                                            <input type="hidden" name="beneficiario[urlImageDocumentFrente]" class="form-control m-input" value="">
                                         </div>
-                                        <div class="col-lg-6 m-form__group-sub">
+
+                                        <div id="content-file-image-document-beneficiario-atras" class="col-lg-6 m-form__group-sub">
                                             <label for="">Imagen documento identificación atras</label>
-                                            <div
-                                                class="m-dropzone file-image-document-beneficiario-atras m-dropzone--success"
-                                                action="inc/api/dropzone/upload.php" id="m-dropzone-three">
+                                            <div class="m-dropzone file-image-document-beneficiario-atras m-dropzone--success" action="{{ route('upload.image.document') }}" id="m-dropzone-three">
                                                 <div class="m-dropzone__msg dz-message needsclick">
-                                                    <h3 class="m-dropzone__msg-title">Subir foto de la parte de atrás de
-                                                        su documento de identificación</h3>
-                                                    <span
-                                                        class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                                    <h3 class="m-dropzone__msg-title">Subir foto de la parte de atrás de su documento de identificación</h3>
+                                                    <span class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
                                                 </div>
                                             </div>
+                                            <div id="error-file-image-document-beneficiario-atras" class="form-control-feedback"></div>
+                                            <input type="hidden" name="beneficiario[urlImageDocumentAtras]" class="form-control m-input" value="">
                                         </div>
                                     </div>
 
-                                    <div id="pdf-docuemnt-beneficiario" style="display: none"
-                                         class="form-group m-form__group row">
-                                        <div class="col-lg-6 m-form__group-sub">
+                                    <div id="pdf-docuemnt-beneficiario" style="display: none" class="form-group m-form__group row">
+                                        <div id="content-file-pdf-document-beneficiario" class="col-lg-6 m-form__group-sub">
                                             <label for="">PDF documento identificación</label>
-                                            <div class="m-dropzone file-pdf-document-beneficiario m-dropzone--success"
-                                                 action="inc/api/dropzone/upload.php" id="m-dropzone-three">
+                                            <div class="m-dropzone file-pdf-document-beneficiario m-dropzone--success" action="{{ route('upload.pdf.document') }}" id="m-dropzone-three">
                                                 <div class="m-dropzone__msg dz-message needsclick">
-                                                    <h3 class="m-dropzone__msg-title">Subir documento de identificación
-                                                        por ambos lados</h3>
-                                                    <span
-                                                        class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                                    <h3 class="m-dropzone__msg-title">Subir documento de identificación por ambos lados</h3>
+                                                    <span class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
                                                 </div>
                                             </div>
+                                            <div id="error-file-pdf-document-beneficiario" class="form-control-feedback"></div>
+                                            <input type="hidden" name="beneficiario[urlPdfDocument]" class="form-control m-input" value="">
                                         </div>
                                     </div>
 
                                     <div class="form-group m-form__group row">
-                                        <div class="col-lg-6 m-form__group-sub">
+                                        <div id="content-file-image-profile-beneficiario" class="col-lg-6 m-form__group-sub">
                                             <label for="">Foto de perfil</label>
-                                            <div class="m-dropzone file-image-profile-beneficiario m-dropzone--success"
-                                                 action="" id="m-dropzone-three">
+                                            <div class="m-dropzone file-image-profile-beneficiario m-dropzone--success" action="{{ route('upload.image.profile') }}" id="m-dropzone-three">
                                                 <div class="m-dropzone__msg dz-message needsclick">
                                                     <h3 class="m-dropzone__msg-title">Subir foto de perfil</h3>
-                                                    <span
-                                                        class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                                    <span class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
                                                 </div>
                                             </div>
+                                            <div id="error-file-image-profile-beneficiario" class="form-control-feedback"></div>
+                                            <input type="hidden" name="beneficiario[urlImageProfile]" class="form-control m-input" value="">
                                         </div>
                                     </div>
                                 </div>
-
-
-                                <!--=====================================
-                                    Campos input type hidden
-                                ======================================-->
-                                <input type="hidden" name="beneficiario[urlImageDocumentFrente]"
-                                       class="form-control m-input" value="">
-                                <input type="hidden" name="beneficiario[urlImageDocumentAtras]"
-                                       class="form-control m-input" value="">
-                                <input type="hidden" name="beneficiario[urlPdfDocument]" class="form-control m-input"
-                                       value="">
-                                <input type="hidden" name="beneficiario[urlImageProfile]" class="form-control m-input"
-                                       value="">
 
                                 <div class="m-separator m-separator--dashed m-separator--lg"></div>
 
@@ -949,9 +911,10 @@
                                         class="m-form__help">Por favor ingrese el nombre de la agrupación musical</span>
                                 </div>
 
-                                <div class="col-12 col-lg-4 col-md-4 m-form__group-sub">
+                                <div id="content-input-max-members" class="col-12 col-lg-4 col-md-4 m-form__group-sub">
                                     <label for="example-number-input">Ingrese el número de integrantes</label>
                                     <input id="input-max-members" class="form-control m-input" type="number" value="">
+                                    <div id="error-input-max-members" class="form-control-feedback" style="display: none"></div>
                                     <span class="m-form__help">Luego clic en agregar integrantes</span>
                                 </div>
 
@@ -1036,7 +999,7 @@
 @endsection
 @section('dropzonePhotoArtist')
     <script>
-        /* variables que se emplean en form-register */
+        // variables que se emplean en form-register 
         var typeDocument = @json($documenttype);
         var departamentos = @json($departamentos);
 
@@ -1063,7 +1026,6 @@
                     orientation: "bottom left",
                     templates: arrows
                 });
-
                 $('#datepicker_fecha_nacimiento2').datepicker({
                     rtl: mUtil.isRTL(),
                     language: 'es',
@@ -1075,9 +1037,7 @@
             }
 
             return {
-                init: function () {
-                    demos();
-                }
+                init: function () { demos(); }
             };
         }();
 
@@ -1111,191 +1071,6 @@
         jQuery(document).ready(function () {
             BootstrapDatepicker.init();
             inputSelect();
-        });
-
-        /* eventos para subir la imagen o pdf del aspirante */
-        new Dropzone('.file-image-document-aspirante-frente', {
-            url: '{{ route('upload.image.document') }}',
-            acceptedFiles: "image/*",
-            maxFiles: 1,
-            paramName: 'file',
-            addRemoveLinks: true,
-            headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
-            processing: function (file, response) {
-                $('body').loading({
-
-                    message: 'Subiendo documento...',
-                    start: true,
-                });
-            },
-            success: function (file, response) {
-                $('body').loading({
-
-                    start: false,
-                });
-                $("input[name='aspirante[urlImageDocumentFrente]']").val(response);
-            }
-        });
-        new Dropzone('.file-image-document-aspirante-atras', {
-            url: '{{ route('upload.image.document') }}',
-            acceptedFiles: "image/*",
-            maxFiles: 1,
-            paramName: 'file',
-            addRemoveLinks: true,
-            headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
-            processing: function (file, response) {
-                $('body').loading({
-                    message: 'Subiendo documento...',
-                    start: true,
-                });
-            },
-            success: function (file, response) {
-                $('body').loading({
-                    start: false,
-                });
-                $("input[name='aspirante[urlImageDocumentAtras]']").val(response);
-            }
-        });
-        new Dropzone('.file-pdf-document-aspirante', {
-            url: '{{ route('upload.pdf.document') }}',
-            acceptedFiles: "application/pdf",
-            maxFiles: 1,
-            paramName: 'file',
-            addRemoveLinks: true,
-            headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
-            processing: function (file, response) {
-                $('body').loading({
-                    message: 'Subiendo documento...',
-                    start: true,
-                });
-            },
-            success: function (file, response) {
-                $('body').loading({
-                    start: false,
-                });
-                $("input[name='aspirante[urlPdfDocument]']").val(response);
-            }
-        });
-
-        /* eventos para subir la imagen o pdf del beneficiario */
-        new Dropzone('.file-image-document-beneficiario-frente', {
-            url: '{{ route('upload.image.document') }}',
-            acceptedFiles: "image/*",
-            maxFiles: 1,
-            paramName: 'file',
-            addRemoveLinks: true,
-            headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
-            processing: function (file, response) {
-                $('body').loading({
-                    message: 'Subiendo documento...',
-                    start: true,
-
-                });
-            },
-            success: function (file, response) {
-                $('body').loading({
-                    start: false,
-                });
-                $("input[name='beneficiario[urlImageDocumentFrente]']").val(response);
-            }
-        });
-        new Dropzone('.file-image-document-beneficiario-atras', {
-            url: '{{ route('upload.image.document') }}',
-            acceptedFiles: "image/*",
-            maxFiles: 1,
-            paramName: 'file',
-            addRemoveLinks: true,
-            headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
-            processing: function (file, response) {
-                $('body').loading({
-                    message: 'Subiendo documento...',
-                    start: true,
-                });
-            },
-            success: function (file, response) {
-                $('body').loading({
-                    start: false,
-                });
-                $("input[name='beneficiario[urlImageDocumentAtras]']").val(response);
-            }
-        });
-        new Dropzone('.file-pdf-document-beneficiario', {
-            url: '{{ route('upload.pdf.document') }}',
-            acceptedFiles: "application/pdf",
-            maxFiles: 1,
-            paramName: 'file',
-            addRemoveLinks: true,
-            headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
-            processing: function (file, response) {
-                $('body').loading({
-                    message: 'Subiendo documento...',
-                    start: true,
-                });
-            },
-            success: function (file, response) {
-                $('body').loading({
-                    start: false,
-                });
-                $("input[name='beneficiario[urlPdfDocument]']").val(response);
-            }
-        });
-
-        var dropzone = new Dropzone(".file-image-profile-aspirante", {
-            url: '{{ route('upload.image.profile') }}',
-            paramName: "file",
-            maxFiles: 1,
-            maxFilesize: 5, // MB
-            addRemoveLinks: true,
-            acceptedFiles: "image/*",
-            headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
-            processing: function (file, response) {
-                $('body').loading({
-                    message: 'Subiendo documento...',
-                    start: true,
-                });
-            },
-            success: function (file, response) {
-                $('body').loading({
-                    start: false,
-                });
-                $("#errorImage-profile-aspirante").html('');
-                $("input[name='aspirante[urlImageProfile]']").val(response);
-            },
-            error: function (file, e, i, o, u) {
-                console.log('se genero un error', file)
-                $("#errorImage-profile-aspirante").html('El tipo de archivo debe ser en formato JPG ó PNG');
-                $("#errorImage-profile-aspirante").css('color', '#f4516c');
-                setTimeout(() => {
-                    dropzone.removeFile(file)
-                }, 1000)
-            }
-        });
-
-        new Dropzone(".file-image-profile-beneficiario", {
-            url: '{{ route('upload.image.profile') }}',
-            paramName: "file",
-            maxFiles: 1,
-            maxFilesize: 5, // MB
-            addRemoveLinks: true,
-            acceptedFiles: "image/*",
-            headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
-            processing: function (file, response) {
-                $('body').loading({
-                    message: 'Subiendo documento...',
-                    start: true,
-                });
-            },
-            success: function (file, response) {
-                $('body').loading({
-                    start: false,
-                });
-                $("input[name='beneficiario[urlImageProfile]']").val(response);
-            },
-            error: function (file, e, i, o, u) {
-                console.log('se genero un error', file)
-            }
-        });
-
-        Dropzone.autoDiscover = false;
+        });        
     </script>
 @endsection

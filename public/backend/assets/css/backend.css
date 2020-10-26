@@ -13,6 +13,26 @@
 .flaticon-edit{
     color:#739594!important;
 }
+
+/* ocultar icono de info para la alerta */
+.swal2-icon.swal2-info.swal2-animate-info-icon span {
+    display: none;
+}
+
+/* ocultar botones del dropzone */
+.dz-preview.dz-image-preview.dz-complete .dz-success-mark {
+    display: none;
+}
+.dz-preview.dz-image-preview.dz-complete .dz-error-mark {
+    display: none;
+}
+.dz-preview.dz-file-preview.dz-complete .dz-success-mark {
+    display: none;
+}
+.dz-preview.dz-file-preview.dz-complete .dz-error-mark {
+    display: none;
+}
+
 /*.m-nav__link.active .m-nav__link-text{*/
 /*    color:#CE7250!important;*/
 /*}*/
