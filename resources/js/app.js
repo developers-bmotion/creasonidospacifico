@@ -42,6 +42,7 @@ Vue.component('reset-password-component', require('./components/ForgotPassword.v
 Vue.component('notification-component', require('./components/NotificationComponent.vue'));
 Vue.component('messages-projects-artists', require('./components/message/MessagesProjectsArtistsComponent.vue'));
 Vue.component('player-component', require('./components/player/player.vue'));
+Vue.component('aspirants-admin', require('./components/admin/AspirantsAdmin.vue'));
 
 //Vue.component('add-project', require('./components/AddProject.vue'));
 

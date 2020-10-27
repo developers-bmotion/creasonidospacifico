@@ -553,7 +553,7 @@
                 confirmButtonText: "<span>{{ __('Aceptar') }}</span>",
                 confirmButtonClass: "btn btn-success m-btn m-btn--pill m-btn--air m-btn--icon",
 
-
+                reverseButtons: true,
 
                 showCancelButton: true,
 
