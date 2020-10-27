@@ -8878,6 +8878,7 @@ html {
 
 html,
 body {
+    overflow: auto;
     height: 100%;
     margin: 0px;
     padding: 0px;
@@ -12071,7 +12072,8 @@ strong {
         -webkit-box-orient: vertical;
         -webkit-box-direction: normal;
         -ms-flex-direction: column;
-        flex-direction: column; }
+        flex-direction: column; 
+        height: fit-content;}
     .m-stack.m-stack--flex-tablet-and-mobile.m-stack--ver > .m-stack__item.m-stack__item--first {
         display: block;
         -webkit-box-ordinal-group: 2;
