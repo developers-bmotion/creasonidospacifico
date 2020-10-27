@@ -97,7 +97,8 @@ License: You must have a valid license purchased only from themeforest(the above
     <link href="/backend/assets/vendors/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css"/>
     <link href="/backend/assets/vendors/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css"/>
 
-
+    {{-- Custom css --}}
+    <link href="/css/main-custom.css" rel="stylesheet" type="text/css"/>
     <!--RTL version:<link href="assets/vendors/custom/fullcalendar/fullcalendar.bundle.rtl.css" rel="stylesheet" type="text/css" />-->
 
     <!--end::Page Vendors Styles -->
@@ -237,7 +238,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- begin::Footer -->
     <footer class="m-grid__item m-footer ">
         <div class="m-container m-container--fluid m-container--full-height m-page__container">
-            <div class="m-stack m-stack--flex-tablet-and-mobile m-stack--ver m-stack--desktop">
+            <div class="footer-display-custom m-stack m-stack--flex-tablet-and-mobile m-stack--ver m-stack--desktop">
                 <div class="m-stack__item m-stack__item--left m-stack__item--middle m-stack__item--last">
                         <span class="m-footer__copyright">
                             <span class="font-weight-bold">{{ config('app.name') }} </span> &copy; 2020 Powered by <a href="https://bmotion.co" target="_blank" class="m-link">Bmotion SAS </a>
@@ -248,7 +249,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
                         <li class="m-nav__item">
                             <a href="https://creasonidos.com/terminos-y-condiciones" target="_blank" class="m-nav__link">
-                                <span class="m-nav__link-text">Términos y Condiciones</span>
+                                <span class="term-footer m-nav__link-text">Términos y Condiciones</span>
                             </a>
                         </li>
 {{--                        <li class="m-nav__item">--}}
@@ -296,13 +297,16 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- end::Scroll Top -->
 
 <!-- begin::Quick Nav -->
-<ul class="m-nav-sticky" style="margin-top: 30px;">
+<ul class="m-nav-sticky" style="margin-top: 30px;background-color: #739594;">
     {{--<li class="m-nav-sticky__item" data-toggle="m-tooltip" title="Purchase" data-placement="left">
     <a href="https://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes"
        target="_blank"><i class="la la-cart-arrow-down"></i></a>
 </li>--}}
-    <li class="m-nav-sticky__item" data-toggle="m-tooltip" title="¿Necesitas Ayuda? Contáctanos" data-placement="left">
-        <a href="https://creasonidos.com/contacto/" target="_blank"><i class="la la-question-circle"></i></a>
+    <li class="m-nav-sticky__item " data-toggle="m-tooltip" title="¿Necesitas Ayuda? Contáctanos" data-placement="left">
+        <a href="https://creasonidos.com/contacto/" target="_blank"><i class="la la-question-circle" style="color: white; !important;"></i></a>
+    </li>
+    <li class="m-nav-sticky__item pt-3" data-toggle="m-tooltip" title="Términos de Referencia" data-placement="left">
+        <a href="/documents/Términos-de-refencia-Crea-Sonidos.pdf" target="_blank"><i class="la la-book" style="color: white; !important;"></i></a>
     </li>
 {{--    <li class="m-nav-sticky__item" data-toggle="m-tooltip" title="{{ __('soporte') }}" data-placement="left">--}}
 {{--        <a href="" target="_blank"><i class="la la-life-ring"></i></a>--}}

@@ -4,7 +4,7 @@
 
     <div class="d-flex align-items-center">
         <div class="mr-auto">
-            <h1 class="m-subheader__title--separator">Proceso de registro del aspirante</h1>
+            <h1 class="title-movil m-subheader__title--separator">Proceso de registro del aspirante</h1>
         </div>
     </div>
 
@@ -976,7 +976,7 @@
                                          style="display: none"></div>
                                 </div>
 
-                                <div class="col-xl-3">
+                                <div id="send-info-div" class="col-xl-3">
                                     <button id="send-info"
                                             class=" pull-right btn btn-primary m-btn m-btn--custom m-btn--icon"
                                             data-wizard-action="submit">

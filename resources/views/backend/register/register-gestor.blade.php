@@ -483,7 +483,7 @@
                                         <label class="form-control-label">Vereda/Corregimiento
                                             de residencia</label>
                                         <input type="text" name="aspirante[vereda]" class="form-control m-input"
-                                               placeholder="" value=""> 
+                                               placeholder="" value="">
                                         <span class="m-form__help">En caso de vivir en una vereda ó corregimiento, por favor ingrese el nombre</span>
                                     </div>
                                 </div>
@@ -1028,8 +1028,8 @@
                             ======================================-->
                             <div class="form-group m-form__group row">
                                 <div id="content-song_categoryID" class="col-lg-6 m-form__group-sub">
-                                    <label class="form-control-label" form="category_add_proyecto">Seleccione categoría
-                                        <span class="text-danger">*</span></label>
+                                    <label class="form-control-label" form="category_add_proyecto">Seleccione modalidad
+                                        <span class="text-danger">*</span></label><a target="_blank" class="pl-2" href="/documents/GUIA-DESCRIPTIVA-DE-MODALIDADES.pdf"><span>Más Información</span></a>
                                     <select id="category_add_proyecto" onchange="onSelectMunicipiosChange(this)"
                                             name="song[categoryID]"
                                             class="form-control m-bootstrap-select m_selectpicker">
@@ -1149,7 +1149,7 @@
                 <div class="m-portlet__body">
                     <div class="form-group m-form__group row">
                         <div id="content-aspirante_urlEvidenceDocument" class="col-lg-6 m-form__group-sub">
-                            <label class="form-control-label">En este espacio puedes subir el formulario offline donde se evidencia la aceptación de los terminos y condiciones por parte del aspirante 
+                            <label class="form-control-label">En este espacio puedes subir el formulario offline donde se evidencia la aceptación de los terminos y condiciones por parte del aspirante
                                 <span class="text-danger">*</span>
                             </label>
                             <div id="m-dropzone-three" class="m-dropzone evidence-document m-dropzone--success" action="{{ route('upload.evidence.document') }}">
@@ -1291,7 +1291,7 @@
         jQuery(document).ready(function () {
             BootstrapDatepicker.init();
             inputSelect();
-        });        
+        });
 
         /* formatos para dropzone   audio/*, video/*, image/*
         acceptedFiles: '.3gp,.3gp2,.h261,.h263,.h264,.jpgv,.jpm,.jpgm,.mp4,.mp4v,
