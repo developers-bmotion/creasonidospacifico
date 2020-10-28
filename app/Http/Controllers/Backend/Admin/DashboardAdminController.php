@@ -9,6 +9,15 @@ use Illuminate\Support\Facades\DB;
 
 class DashboardAdminController extends Controller
 {
+
+    public function AspirantsAll(){
+        $project = \App\User::whereNotNull('last_name')->has('artista')->with('artista.projects','artista.documentType','artista.city.departaments','artista.personType')->get();
+
+        // if ($request->input("tipoProyecto")){
+        //     $project->where('status', "=", $request->input("tipoProyecto"));
+        // }
+        return response()->json($project);
+    }
     public function showProyect (Request $request){
 
         $data = Project::select(array(
