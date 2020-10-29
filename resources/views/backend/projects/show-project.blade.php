@@ -199,8 +199,9 @@
 
 
                                 <!-- ------------------------- ACCIONES SEGUN LOS ROLES----------------------------- -->
-
-                                @include('backend.partials.rating.' .\App\User::rating_proyect())
+                                @if(\App\User::navigation() !== "Admin")
+                                   @include('backend.partials.rating.' .\App\User::rating_proyect())
+                                @endif
 
                             <!-- ------------------------- CALIFICACION DEL PROYECTO CUANDO ESTA PUBLICADO Y APROBADO----------------------------- -->
                                 {{-- @if($project->status == 3 || $project->status == 4 || $project->status == 5)
