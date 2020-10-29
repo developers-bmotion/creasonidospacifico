@@ -134,18 +134,18 @@
                                 class="m-menu__link-text">Agregar y ver gestores</span>
                         </a>
                     </li>
-                    <li class="m-menu__item ">
-                        <a href="{{ route('form.gestor') }}" class="m-menu__link"><i
-                                class="m-menu__link-icon la la-user"></i><span
-                                class="m-menu__link-text">Registrar Aspirante</span>
-                        </a>
-                    </li>
-                    <li class="m-menu__item ">
-                        <a href="#" class="m-menu__link"><i
-                                class="m-menu__link-icon la la-users"></i><span
-                                class="m-menu__link-text">Ver Aspirantes</span>
-                        </a>
-                    </li>
+{{--                    <li class="m-menu__item ">--}}
+{{--                        <a href="{{ route('form.gestor') }}" class="m-menu__link"><i--}}
+{{--                                class="m-menu__link-icon la la-user"></i><span--}}
+{{--                                class="m-menu__link-text">Registrar Aspirante</span>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+{{--                    <li class="m-menu__item ">--}}
+{{--                        <a href="#" class="m-menu__link"><i--}}
+{{--                                class="m-menu__link-icon la la-users"></i><span--}}
+{{--                                class="m-menu__link-text">Ver Aspirantes</span>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
                 @endif
                 @if(auth()->user()->roles[0]->rol == "Gestor")
                     <li class="m-menu__item ">
