@@ -27,12 +27,12 @@ class ManagementsController extends Controller
 
 //    AQUI TRAEMOS LA VISTA TODOS LOS GESTORES
     public function gestores(){
-
+        $departamentos = Country::all();
         $gestores = User::whereHas('roles', function ($query){
             $query->where('role_idRole', 6);
         })->get();
 
-        return view('backend.admin.gestores-admin', compact('gestores'));
+        return view('backend.admin.gestores-admin', compact('gestores', 'departamentos'));
     }
 
     public function storeGestores(Request $request){
@@ -41,7 +41,10 @@ class ManagementsController extends Controller
             'name' => 'required',
             'last_name' => 'required',
             'email' => 'required|string|email|max:255|unique:users',
-            'phone' => 'required'
+            'phone' => 'required',
+            'document_type' => 'required',
+            'identificacion' => 'required',
+            'city' => 'required',
         ]);
 
         $password = trim(str_random(8));
@@ -50,6 +53,10 @@ class ManagementsController extends Controller
             'name' => ucwords($request->get('name')),
             'last_name' => ucwords($request->get('last_name')),
             'picture' => '/backend/assets/app/media/img/users/perfil.jpg',
+            'document_type' => $request->document_type,
+            'id_city' => $request->city,
+            'profile' => $request->profile,
+            'identification' => $request->identificacion,
             'email' => $request->get('email'),
             'password' => $pass,
             'phone_1' => $request->get('phone'),
