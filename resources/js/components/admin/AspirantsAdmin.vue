@@ -1,14 +1,20 @@
 
 <template>
     <div>
-        <vue-good-table :columns="columns" :rows="listAspirants">
+        <vue-good-table
+        :columns="columns"
+        :rows="listAspirants"
+        :pagination-options="{
+            enabled: true,
+            mode: 'records'
+        }"
+        :line-numbers="true"
+        >
             <template slot="table-row" slot-scope="props">
                 <span v-if="props.column.field == 'name'">
                     <span>{{ props.row.name }} {{ props.row.last_name }}</span>
                 </span>
-            </template>
-            <template slot="table-row" slot-scope="props">
-                <span v-if="props.column.field == 'artista.projects'">
+                 <span v-else-if="props.column.field == 'status'">
                     <div
                         v-for="status in props.row.artista.projects"
                         :key="status.id"
@@ -58,15 +64,15 @@
                         >
                     </div>
                 </span>
-            </template>
+                <span v-else-if="props.column.field == 'action'">
+                <div v-for="project in props.row.artista.projects" :key="project.id">
 
-            <!-- <template slot="table-row" slot-scope="props">
-                <div v-for="status in props.row.artista.projects" :key="status.id">
-
-                  <div class="text-center"><a href="/dashboard/project/"++" class="btn m-btn--pill btn-secondary"><i class="fa fa-eye"></i></a></div>
+                  <div class="text-center"><a :href="'/dashboard/project/'+project.slug" class="btn m-btn--pill btn-secondary"><i class="fa fa-eye"></i></a></div>
 
                 </div>
-            </template> -->
+                </span>
+            </template>
+
         </vue-good-table>
     </div>
 </template>
@@ -109,7 +115,7 @@ export default {
                 },
                 {
                     label: "Estado",
-                    field: "artista.projects",
+                    field: "status",
                 },
                 {
                     label: "Acciones",
@@ -145,3 +151,15 @@ export default {
     },
 };
 </script>
+<style lang="">
+.vgt-table tr:hover{
+    background-color: #6b6a6a0f !important;
+}
+
+td.vgt-left-align span {
+    font-size: 0.9rem;
+}
+th.vgt-left-align.sortable span {
+    font-size: 0.9rem;
+}
+</style>
