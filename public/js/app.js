@@ -59949,7 +59949,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             listAspirants: [],
             columns: [{
-                label: "Nombre",
+                label: "Nombres y Apellidos",
                 field: "name"
             }, {
                 label: "Actuara como",

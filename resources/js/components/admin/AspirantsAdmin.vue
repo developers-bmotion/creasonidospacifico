@@ -86,7 +86,7 @@ export default {
             listAspirants: [],
             columns: [
                 {
-                    label: "Nombre",
+                    label: "Nombres y Apellidos",
                     field: "name",
                 },
                 {
