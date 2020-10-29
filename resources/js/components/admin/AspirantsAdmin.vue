@@ -90,7 +90,7 @@ export default {
                     field: "name",
                 },
                 {
-                    label: "Actuara como",
+                    label: "Actuará como",
                     field: "artista.person_type.name",
                 },
                 {
