@@ -106,11 +106,11 @@ export default {
                     field: "email",
                 },
                 {
-                    label: "Departamento",
+                    label: "Departamento Nacimiento",
                     field: "artista.city.departaments.descripcion",
                 },
                 {
-                    label: "Ciudad",
+                    label: "Ciudad Nacimiento",
                     field: "artista.city.descripcion",
                 },
                 {
