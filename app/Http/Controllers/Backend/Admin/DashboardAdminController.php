@@ -16,7 +16,7 @@ class DashboardAdminController extends Controller
         // if ($request->input("tipoProyecto")){
         //     $project->where('status', "=", $request->input("tipoProyecto"));
         // }
-        return response()->json($project);
+        return datatables()->of($project)->toJson();
     }
     public function showProyect (Request $request){
 

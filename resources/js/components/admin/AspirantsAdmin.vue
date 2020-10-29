@@ -22,8 +22,7 @@
                         <span
                             v-if="status.status == 1"
                             class="m-badge m-badge--metal m-badge--wide m-badge--rounded"
-                            >Revisión</span
-                        >
+                            >Revisión</span>
                         <span
                             v-if="status.status == 2"
                             class="m-badge m-badge--brand m-badge--wide m-badge--rounded"
