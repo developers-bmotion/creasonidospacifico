@@ -94,7 +94,7 @@ export default {
                     field: "artista.person_type.name",
                 },
                 {
-                    label: "Tipo identificación",
+                    label: "Tipo Identificación",
                     field: "artista.document_type.document",
                 },
                 {
@@ -102,7 +102,7 @@ export default {
                     field: "artista.identification",
                 },
                 {
-                    label: "Email",
+                    label: "Correo Eléctronico",
                     field: "email",
                 },
                 {
