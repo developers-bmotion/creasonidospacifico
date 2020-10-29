@@ -7,8 +7,6 @@
 import Vue from 'vue';
 import APlayer from '@moefe/vue-aplayer';
 import VueGoodTablePlugin from 'vue-good-table';
-import AspirantsAdmin from './components/admin/AspirantsAdmin.vue'
-// import App from "./App.vue";
 
 // import the styles
 import 'vue-good-table/dist/vue-good-table.css'
@@ -52,10 +50,7 @@ Vue.component('messages-projects-artists', require('./components/message/Message
 Vue.component('player-component', require('./components/player/player.vue'));
 Vue.component('aspirants-admin', require('./components/admin/AspirantsAdmin.vue'));
 
-//Vue.component('add-project', require('./components/AddProject.vue'));
-// new Vue({
-//     render: h => h(App)
-//   }).$mount("#app");
+
 const app = new Vue({
     el: '#app'
 });

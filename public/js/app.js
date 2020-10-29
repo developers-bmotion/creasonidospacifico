@@ -31660,13 +31660,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__moefe_vue_aplayer__ = __webpack_require__(40);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__moefe_vue_aplayer___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__moefe_vue_aplayer__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_good_table__ = __webpack_require__(41);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_admin_AspirantsAdmin_vue__ = __webpack_require__(64);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_admin_AspirantsAdmin_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_admin_AspirantsAdmin_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vue_good_table_dist_vue_good_table_css__ = __webpack_require__(42);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vue_good_table_dist_vue_good_table_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_vue_good_table_dist_vue_good_table_css__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vue_fragment__ = __webpack_require__(37);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_sweetalert2__ = __webpack_require__(46);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_sweetalert2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_sweetalert2__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vue_good_table_dist_vue_good_table_css__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vue_good_table_dist_vue_good_table_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_vue_good_table_dist_vue_good_table_css__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vue_fragment__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_sweetalert2__ = __webpack_require__(46);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_sweetalert2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_sweetalert2__);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -31676,8 +31674,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
-
-// import App from "./App.vue";
 
 // import the styles
 
@@ -31689,7 +31685,7 @@ __webpack_require__(16);
 window.Vue = __webpack_require__(4);
 
 
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_5_vue_fragment__["a" /* Plugin */]);
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_4_vue_fragment__["a" /* Plugin */]);
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1__moefe_vue_aplayer___default.a, {
     defaultCover: 'https://github.com/u3u.png',
@@ -31703,8 +31699,8 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1__moe
  */
 
 
-window.swal = __WEBPACK_IMPORTED_MODULE_6_sweetalert2___default.a;
-var toast = __WEBPACK_IMPORTED_MODULE_6_sweetalert2___default.a.mixin({
+window.swal = __WEBPACK_IMPORTED_MODULE_5_sweetalert2___default.a;
+var toast = __WEBPACK_IMPORTED_MODULE_5_sweetalert2___default.a.mixin({
     toast: true,
     position: 'top-end',
     showConfirmButton: false,
@@ -31721,10 +31717,6 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('messages-projects-artists
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('player-component', __webpack_require__(63));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('aspirants-admin', __webpack_require__(64));
 
-//Vue.component('add-project', require('./components/AddProject.vue'));
-// new Vue({
-//     render: h => h(App)
-//   }).$mount("#app");
 var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     el: '#app'
 });
