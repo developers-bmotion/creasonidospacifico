@@ -98,7 +98,7 @@ export default {
                     field: "artista.document_type.document",
                 },
                 {
-                    label: "N° identificación",
+                    label: "N° Identificación",
                     field: "artista.identification",
                 },
                 {
