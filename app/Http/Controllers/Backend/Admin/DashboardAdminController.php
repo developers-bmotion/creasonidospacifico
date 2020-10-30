@@ -13,12 +13,34 @@ class DashboardAdminController extends Controller
 
     public function AspirantsAll(Request $request){
 
-        $listAspirant = Artist::with('users','personType','projects','documentType','city.departaments')->get();
 
 
-        if ($request->input("tipoProyecto")){
-            $project=Project::where('artist_id',$listAspirant->id);
-            $listAspirant = Artist::with('users','personType','projects','documentType','city.departaments')->get();
+      $idstatus=$request->input("tipoProyecto");
+        // dd($request->input("tipoProyecto"));
+        if ($idstatus){
+
+
+             if($idstatus==9){
+                $listAspirant = Artist::with('users','personType','documentType','city.departaments')->whereNull('nickname')->whereDoesntHave('projects')->get();
+             }else if($idstatus==10){
+              $listAspirant = Artist::with('users','personType','documentType','city.departaments')->whereNotNull('document_type')->doesnthave('projects')->get();
+            }else{
+                $listAspirant = Artist::with('users','personType','documentType','city.departaments')->whereHas('projects', function ($q) use($idstatus){
+                    $q->where('status', $idstatus);
+                 })->with('projects')->get();
+             }
+            // $projects=Project::with('artists')->where('status',$request->input("tipoProyecto"))->get();
+
+            // // dd($project);
+            // foreach($projects as $project ){
+            //    $id= $project->artists[0]->id;
+            // //    echo $project->artists[0]->id.'--';
+            //    $listAspirant->where('id',$id);
+            // }
+
+        }else{
+
+            $listAspirant = Artist::with('users','personType','projects','documentType','city.departaments');
         }
 
         // $project = Project::with([

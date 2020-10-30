@@ -82,10 +82,21 @@
                                             </li>
                                             <li class="m-nav__separator m-nav__separator--fit">
                                             </li>
+                                            <li class="m-nav__item text-center">
+                                                <span style="color:white"
+                                                      class="changeType w-100 btn btn-success m-btn m-btn--pill m-btn--wide btn-sm"
+                                                      data-type="{{\App\Project::PENDING_REGISTER}}">{{ __('Registro pendiente') }}</span>
+                                            </li>
+                                            <li class="m-nav__item text-center">
+                                                <span style="color:white"
+                                                      class="changeType w-100 btn btn-success m-btn m-btn--pill m-btn--wide btn-sm"
+                                                      data-type="{{\App\Project::NOT_PROJECT_REGISTER}}">{{ __('Sin projecto registrado') }}</span>
+                                            </li>
                                             <li class="m-nav__item">
                                                 <span
                                                     class="changeType w-100 btn btn-metal m-btn m-btn--pill m-btn--wide btn-block">{{ __('todos') }}</span>
                                             </li>
+
                                         </ul>
                                     </div>
                                 </div>
@@ -239,8 +250,13 @@
                     {
 
                         render: function (data, type, JsonResultRow, meta) {
-                            console.log(JsonResultRow,'data');
+                            // console.log(JsonResultRow,'data');
+                                if(JsonResultRow.users.last_name === null){
+                                   return '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
+                                }else{
+
                                 return '<span class="label label-danger text-center">'+JsonResultRow.users.name+'</span>  <span class="label label-danger text-center">'+JsonResultRow.users.last_name+'</span>';
+                                }
                                 // return '<img src="' + JsonResultRow + '" width="50px"  style="border-radius: 100%;margin-right: auto;margin-left: auto;display: block; width:50px; height:50px"/>';
                             }
                     },
@@ -306,9 +322,14 @@
 
                         render:function (data,type, JsonResultRow,meta) {
                             var status="";
-                            JsonResultRow.projects.map(item => {
-                                status=item.status;
-                            });
+
+                            if(JsonResultRow.projects){
+                                JsonResultRow.projects.map(item => {
+                                    status=item.status;
+                                });
+
+                            }
+
                             let info = '<span class="label label-danger text-center ml-4" style="color:red !important">Sin propuesta</span>';
                             switch(parseInt(status)){
                                 case 1:
@@ -328,14 +349,19 @@
                                     break;
                             }
                             return '<div class="text-center">'+info+'</div>';
+
                         }
                     },
                     {
                         render:function (data,type, JsonResultRow,meta) {
                             var items="";
+                            if(JsonResultRow.projects){
+
                             JsonResultRow.projects.map(item => {
                                 items=item;
                             });
+                            }
+
                                 return items != ""? `<div class="text-center"><a href="/dashboard/project/${ items.slug }" class="btn m-btn--pill btn-secondary"><i class="fa fa-eye"></i></a></div>` : '<span class="label label-danger text-center ml-4" style="color:red !important">Sin propuesta</span>'
                         }
                     },
