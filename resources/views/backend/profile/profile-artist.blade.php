@@ -1669,7 +1669,7 @@
                             {{--                            @else--}}
 
                             @if($artist->users->pdf_cedula === null)
-                                @if(!$artist->users->img_document_fron && !$artist->users->img_document_back)
+                                @if(!$artist->users->img_document_front && !$artist->users->img_document_back)
                                     <p>No se cargo el documento correctamente</p>
                                 @else
                                     <div class="form-group">
