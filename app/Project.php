@@ -80,6 +80,8 @@ class Project extends Model
     const REVISON_UPDATE=6;
     const ACEPTED=7;
     const NOT_REMEDIED=8;
+    const PENDING_REGISTER=9;
+    const NOT_PROJECT_REGISTER=10;
     // const NOPUBLISHED = 6;
 
 //    const PERCENTAGE_APPROVAL = 3;
