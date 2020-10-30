@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend\Admin;
 
+use App\Artist;
 use App\Project;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -10,13 +11,47 @@ use Illuminate\Support\Facades\DB;
 class DashboardAdminController extends Controller
 {
 
-    public function AspirantsAll(){
-        $project = \App\User::whereNotNull('last_name')->has('artista')->with('artista.projects','artista.documentType','artista.city.departaments','artista.personType')->get();
+    public function AspirantsAll(Request $request){
+
+        $listAspirant = Artist::with('users','personType','projects','documentType','city.departaments')->get();
+
+
+        if ($request->input("tipoProyecto")){
+            $project=Project::where('artist_id',$listAspirant->id);
+            $listAspirant = Artist::with('users','personType','projects','documentType','city.departaments')->get();
+        }
+
+        // $project = Project::with([
+        //     'artists',
+        //     'category',
+        //     'artists.users',
+        //     'artists.personType',
+        //     'artists.documentType'
+        //     ]);
+        //     if ($request->input("tipoProyecto")){
+        //         // dd($request);
+        //     $project->where('status', "=", $request->input("tipoProyecto"));
+        // }
+
+        return datatables()->of($listAspirant)->toJson();
+
+
+        // old
+        // $project = \App\User::whereNotNull('last_name')->has('artista')->with('artista.projects','artista.documentType','artista.city.departaments','artista.personType');
 
         // if ($request->input("tipoProyecto")){
         //     $project->where('status', "=", $request->input("tipoProyecto"));
         // }
-        return datatables()->of($project)->toJson();
+        // dd($project);
+        // if ($request->input("tipoProyecto")){
+        //     // dd($project);
+        //     $project = \App\User::whereNotNull('last_name')->has('artista')->with(['artista.projects' => function($q){
+
+        //         return $q->where('status',$request->input("tipoProyecto"));
+        //     },'artista.documentType','artista.city.departaments','artista.personType'])->get();
+        // }
+        // dd($project);
+        // return datatables()->of($project)->toJson();
     }
     public function showProyect (Request $request){
 

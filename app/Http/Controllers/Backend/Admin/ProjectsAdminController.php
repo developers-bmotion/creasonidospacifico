@@ -48,10 +48,11 @@ class ProjectsAdminController extends Controller
                 'artists.personType'
                 ]);
                 if ($request->input("tipoProyecto")){
-                    dd($request);
+                    // dd($request);
                 $project->where('status', "=", $request->input("tipoProyecto"));
             }
         }
+        // dd($project);
         return datatables()->of($project)->toJson();
     }
 
