@@ -2643,6 +2643,7 @@
             url: '{{route('update.audio')}}',
             acceptedFiles: 'audio/*,video/*',
             maxFiles: 1,
+            timeout: 180000,
             paramName: 'audio',
             headers: {
                 'idproject': idProject,

@@ -293,98 +293,92 @@
                                     role="tablist">
                                     <li class="nav-item m-tabs__item">
                                         <a class="nav-link m-tabs__link active" data-toggle="tab"
-                                           href="#m_user_profile_tab_1" role="tab">
-                                            <i class="flaticon-share m--hide"></i>
-                                            Configuración del perfil
+                                           href="#m_user_profile_tab_1"
+                                           role="tab">Información del gestor
+                                        </a>
+                                    </li>
+                                    <li class="nav-item m-tabs__item">
+                                        <a class="nav-link m-tabs__link" data-toggle="tab"
+                                           href="#m_user_profile_tab_12"
+                                           role="tab">Configuración del perfil
                                         </a>
                                     </li>
                                 </ul>
                             </div>
                         </div>
-                        <div class="tab-pane " id="m_user_profile_tab_1">
-                            <div class="m-portlet__body">
-                                <div class="row">
-                                    <div class="col-lg-12">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="m_user_profile_tab_1">
+                                <div class="m-portlet__body">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <h1>Hola</h1>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-                                        <!--=====================================
-                                       CONFIGURACIONES PARA EL PERFIL DE USUARIO
-                                       ======================================-->
+                            <div class="tab-pane" id="m_user_profile_tab_12">
+                                <div class="m-portlet__body">
+                                    <div class="row">
+                                        <div class="col-lg-12">
 
-
-                                        <div class="m-demo" data-code-preview="true" data-code-html="true"
-                                             data-code-js="false">
-                                            <div class="m-demo__preview">
-                                                <!-- CAMBIAR LA CONTRASEÑA DEL USUARIO, PERO PRIMERO SE VALIDA SI EL USUARIO ES NO ES DE ALGUNA RED SOCIAL -->
-                                                <form method="post"
-                                                      action="{{ route('update.password.gestor') }}">
-                                                    @csrf
-                                                    <div class="row">
-                                                        <div class="col-lg-6">
-                                                            <div
-                                                                class="form-group m-form__group {{$errors->has('password')? 'has-danger':''}}">
-                                                                <label
-                                                                    for="exampleInputPassword1">{{ __('actualizar_contraseña') }}</label>
-                                                                <input type="password" name="password"
-                                                                       class="form-control m-input"
-                                                                       id="exampleInputPassword1"
-                                                                       placeholder="{{ __('actualizar_contraseña') }}">
-                                                                {!! $errors->first('password','<div class="form-control-feedback">*:message</div>')!!}
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-6">
-                                                            <div
-                                                                class="form-group m-form__group {{$errors->has('password_confirmation')? 'has-danger':''}}">
-                                                                <label
-                                                                    for="exampleInputPassword1">{{ __('confirmar_contraseña') }}</label>
-                                                                <input type="password"
-                                                                       name="password_confirmation"
-                                                                       class="form-control m-input"
-                                                                       id="exampleInputPassword1"
-                                                                       placeholder="{{ __('confirmar_contraseña') }}">
-                                                                {!! $errors->first('password_confirmation','<div class="form-control-feedback">*:message</div>')!!}
-                                                            </div>
-                                                            <button type="submit"
-                                                                    class="btn btn-outline-success btn-sm m-btn m-btn--custom pull-right">{{ __('actualizar') }}</button>
-                                                        </div>
-                                                    </div>
-                                                </form>
+                                            <!--=====================================
+                                           CONFIGURACIONES PARA EL PERFIL DE USUARIO
+                                           ======================================-->
+                                            <!-- CAMBIAR LA CONTRASEÑA DEL USUARIO, PERO PRIMERO SE VALIDA SI EL USUARIO ES NO ES DE ALGUNA RED SOCIAL -->
+                                            <form method="post"
+                                                  action="{{ route('update.password.gestor') }}">
+                                                @csrf
                                                 <div class="row">
                                                     <div class="col-lg-6">
-                                                        <div class="form-group m-form__group">
-                                                            <label for="">Imagén de Perfil</label>
-                                                            <div
-                                                                class="m-dropzone dropzone-management m-dropzone--success"
-                                                                action="inc/api/dropzone/upload.php"
-                                                                id="m-dropzone-three">
-                                                                <div class="m-dropzone__msg dz-message needsclick">
-                                                                    <h3 class="m-dropzone__msg-title">{{ __('actualizar_foto_perfil') }}</h3>
-                                                                    <span
-                                                                        class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
-                                                                </div>
+                                                        <div
+                                                            class="form-group m-form__group {{$errors->has('password')? 'has-danger':''}}">
+                                                            <label
+                                                                for="exampleInputPassword1">{{ __('actualizar_contraseña') }}</label>
+                                                            <input type="password" name="password"
+                                                                   class="form-control m-input"
+                                                                   id="exampleInputPassword1"
+                                                                   placeholder="{{ __('actualizar_contraseña') }}">
+                                                            {!! $errors->first('password','<div class="form-control-feedback">*:message</div>')!!}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div
+                                                            class="form-group m-form__group {{$errors->has('password_confirmation')? 'has-danger':''}}">
+                                                            <label
+                                                                for="exampleInputPassword1">{{ __('confirmar_contraseña') }}</label>
+                                                            <input type="password"
+                                                                   name="password_confirmation"
+                                                                   class="form-control m-input"
+                                                                   id="exampleInputPassword1"
+                                                                   placeholder="{{ __('confirmar_contraseña') }}">
+                                                            {!! $errors->first('password_confirmation','<div class="form-control-feedback">*:message</div>')!!}
+                                                        </div>
+                                                        <button type="submit"
+                                                                class="btn btn-outline-success btn-sm m-btn m-btn--custom pull-right">{{ __('actualizar') }}</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="form-group m-form__group">
+                                                        <label for="">Imagén de Perfil</label>
+                                                        <div
+                                                            class="m-dropzone dropzone-management m-dropzone--success"
+                                                            action="inc/api/dropzone/upload.php"
+                                                            id="m-dropzone-three">
+                                                            <div class="m-dropzone__msg dz-message needsclick">
+                                                                <h3 class="m-dropzone__msg-title">{{ __('actualizar_foto_perfil') }}</h3>
+                                                                <span
+                                                                    class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                {{-- <div class="row">
-                                                    <div class="col-lg-6">
-                                                        <div class="form-group m-form__group">
-                                                            <label for="">Imagén de Portada</label>
-                                                            <div class="m-dropzone dropzone-management m-dropzone--success"
-                                                                 action="inc/api/dropzone/upload.php"
-                                                                 id="m-dropzone-three">
-                                                                <div class="m-dropzone__msg dz-message needsclick">
-                                                                    <h3 class="m-dropzone__msg-title">{{ __('actualizar_foto_perfil') }}</h3>
-                                                                    <span class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div> --}}
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     @endif
