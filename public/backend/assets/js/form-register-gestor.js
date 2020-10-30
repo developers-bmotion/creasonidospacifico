@@ -7,22 +7,22 @@ $('#select-linea-convocatoria').on('change', function() {
     hideContentInfo();
 
     switch ( lineaConvocatoria ) {
-        case '-1': $("#content-select-form-actuara-como").hide(); 
-                $("#select-actuara-como").val("-1");                 
+        case '-1': $("#content-select-form-actuara-como").hide();
+                $("#select-actuara-como").val("-1");
             break;
         case '1': $("#content-select-form-actuara-como").show();
                 $("#select-actuara-como option[value='1']").show();
-                $("#select-actuara-como option[value='3']").hide(); 
-                $("#select-actuara-como").val("-1"); 
-                $("#forma-parte-grupo").hide();                
+                $("#select-actuara-como option[value='3']").hide();
+                $("#select-actuara-como").val("-1");
+                $("#forma-parte-grupo").hide();
             break;
-        case '2': $("#content-select-form-actuara-como").show();                
+        case '2': $("#content-select-form-actuara-como").show();
                 showInfoGroup()
-                $("#select-actuara-como").val("3"); 
-                $("#select-actuara-como option[value='3']").show();    
-                $("#select-actuara-como").prop('disabled', true);                
+                $("#select-actuara-como").val("3");
+                $("#select-actuara-como option[value='3']").show();
+                $("#select-actuara-como").prop('disabled', true);
             break;
-    }   
+    }
 });
 
 /* funcion para ocultar elementos de la vista */
@@ -33,7 +33,7 @@ function hideContentInfo() {
     $('#content-informacion-subir-cancion').hide();
     $('#content-document-evidencia-aspirante').hide();
     $('#btn-enviar-datos').hide();
-    $("#forma-parte-grupo").hide();   
+    $("#forma-parte-grupo").hide();
 }
 
 /* SELECT ACTUARÁ COMO PARA MOSTRAR CONTENIDO */
@@ -81,8 +81,8 @@ function showInfoGroup() {
 function onSelectDepartamentosChange(element, component ) {
     $.get('/dashboard/get-municipios/' + $(element).val(), function(data) {
         var html_select = '<option value="-1">Seleccione una opción</option>'
-        html_select += data.map( municipio => { return `<option value="${ municipio.id }">${ municipio.descripcion }</option>`; } ).join(' ');        
-        $( `.${ component }` ).html(html_select);  
+        html_select += data.map( municipio => { return `<option value="${ municipio.id }">${ municipio.descripcion }</option>`; } ).join(' ');
+        $( `.${ component }` ).html(html_select);
     });
 
     let tags = $(element).attr('name');
@@ -102,30 +102,30 @@ function onSelectMunicipiosChange(element) {
 /* evento click para los radio button de subir docuemntos */
 $("input[name='aspirante[identificacionDoc]']").click( () => {
     if ($('input:radio[name="aspirante[identificacionDoc]"]:checked').val() === '1') {
-        $("#image-docuemnt-aspirante").show(); 
-        $("#pdf-docuemnt-aspirante").hide(); 
+        $("#image-docuemnt-aspirante").show();
+        $("#pdf-docuemnt-aspirante").hide();
     } else {
-        $("#image-docuemnt-aspirante").hide(); 
-        $("#pdf-docuemnt-aspirante").show(); 
+        $("#image-docuemnt-aspirante").hide();
+        $("#pdf-docuemnt-aspirante").show();
     }
 });
 
 $("input[name='beneficiario[identificacionDoc]']").click( () => {
     if ($('input:radio[name="beneficiario[identificacionDoc]"]:checked').val() === '1') {
-        $("#image-docuemnt-beneficiario").show(); 
-        $("#pdf-docuemnt-beneficiario").hide(); 
+        $("#image-docuemnt-beneficiario").show();
+        $("#pdf-docuemnt-beneficiario").hide();
     } else {
-        $("#image-docuemnt-beneficiario").hide(); 
-        $("#pdf-docuemnt-beneficiario").show(); 
+        $("#image-docuemnt-beneficiario").hide();
+        $("#pdf-docuemnt-beneficiario").show();
     }
 });
 
 // evento click para para selecionar si forma parte del grupo musical
 $("input[name='aspirante[partGroup]']").click( () => {
     if ($('input:radio[name="aspirante[partGroup]"]:checked').val() === '1') {
-        $("#content-aspirante_rolMember").show(); 
+        $("#content-aspirante_rolMember").show();
     } else {
-        $("#content-aspirante_rolMember").hide(); 
+        $("#content-aspirante_rolMember").hide();
     }
 });
 
@@ -139,8 +139,8 @@ $("#add-song").click( () => {
     } else {
         $('#additional-songs').hide();
         $('#add-song').html('Agregar canciones');
-        $("input[name='song[additionalSongOne]']").val(''); 
-        $("input[name='song[additionalSongTwo]']").val(''); 
+        $("input[name='song[additionalSongOne]']").val('');
+        $("input[name='song[additionalSongTwo]']").val('');
         if (fileAdditionalSongOne) dropzoneAdditionalSongOne.removeFile(fileAdditionalSongOne)
         if (fileAdditionalSongTwo) dropzoneAdditionalSongTwo.removeFile(fileAdditionalSongTwo)
         firstClick =  true;
@@ -166,23 +166,23 @@ function validateNumberMin(num) {
 /*  funciones para agragar un nuevo integrante  */
 var currentMembers = 0;
 
-$("#event-add-max-members").click( function() {    
-    let members = parseInt( $("#input-max-members").val() );  
-    
+$("#event-add-max-members").click( function() {
+    let members = parseInt( $("#input-max-members").val() );
+
     if (validateNumberMin(members)) return;
 
     if (currentMembers === members) return; // si el valor no cambia se retorna
 
     currentMembers = members;
     $("#m_section_1_content").empty(); // vaciar la vista
-    
+
     for(let i = 0; i < members; i++){
         addViewMembers(i);
     }
 });
 
 /* funcion para agregar nuevos items */
-function addViewMembers(members) {    
+function addViewMembers(members) {
     var newItem = `<div id="member-${members}" class="m-accordion__item">
                         <div class="m-accordion__item-head collapsed" role="tab" id="section_members_head_${members}" data-toggle="collapse" href="#section_members_body_${members}">
                             <span class="m-accordion__item-title">Datos del Integrante No. ${(members + 1)}</span>
@@ -190,12 +190,12 @@ function addViewMembers(members) {
                         </div>
                         <div class="m-accordion__item-body collapse" id="section_members_body_${members}" role="tabpanel" aria-labelledby="section_members_head_${members}" data-parent="#m_section_1_content">
                             <div class="m-accordion__item-content">
-                                ${ addViewFormMembers(members) }                             
-                            </div>                                                      
-                        </div>                        
+                                ${ addViewFormMembers(members) }
+                            </div>
+                        </div>
                     </div>`;
 
-    $("#m_section_1_content").append(newItem);  
+    $("#m_section_1_content").append(newItem);
 }
 
 function addViewFormMembers(member) {
@@ -205,7 +205,7 @@ function addViewFormMembers(member) {
                 </div>
 
                 <!-- NOMBRES Y APELLIDOS -->
-                ${ addViewNameMembers(member) }                
+                ${ addViewNameMembers(member) }
 
                 <!-- SEGUNDO APELLIDO Y TÉLEFONO -->
                 ${ addViewPhoneMembers(member) }
@@ -222,7 +222,7 @@ function addViewFormMembers(member) {
                 <div class="form-group m-form__group row">
                     <div class="col-lg-6 m-form__group-sub">
                         <label class="form-control-label">Instrumento que interpreta</label>
-                        <input type="num" name="integrantes[${member}][rolMember]" class="form-control m-input" placeholder="" value="">                        
+                        <input type="num" name="integrantes[${member}][rolMember]" class="form-control m-input" placeholder="" value="">
                         <span class="m-form__help">Ingrese el rol que desempeña dentro del grupo (Guitarrista, Vocalista, Pianista, etc.)</span>
                     </div>
                 </div>
@@ -294,7 +294,7 @@ function addViewPhoneMembers(member) { /* SEGUNDO APELLIDO Y TÉLEFONO */
 function addViewIdentificationMembers(member) { /* TIPO DE DOCUMENTO Y Nº IDENTIFICACIÓN */
     return `<div class="form-group m-form__group row">
                 <div class="col-lg-6 m-form__group-sub">
-                    <label class="form-control-label">Tipo de documento *</label>                        
+                    <label class="form-control-label">Tipo de documento *</label>
                     <select name="integrantes[${member}][documentTypeMember]" class="form-control m-input">
                         ${ typeDocument.map( obj => { return `<option value="${ obj.id }">${ obj.document }</option>` } ).join(' ') }
                     </select>
@@ -303,7 +303,7 @@ function addViewIdentificationMembers(member) { /* TIPO DE DOCUMENTO Y Nº IDENT
 
                 <div class="col-lg-6 m-form__group-sub">
                     <label class="form-control-label">Nº de indentificación *</label>
-                    <input type="num" name="integrantes[${member}][identificationMember]" class="form-control m-input" placeholder="" value="">                        
+                    <input type="num" name="integrantes[${member}][identificationMember]" class="form-control m-input" placeholder="" value="">
                     <span class="m-form__help">Por favor ingrese el número de indentificación</span>
                 </div>
             </div> `;
@@ -325,7 +325,7 @@ function addViewLocationMembers(member, tipo) { /* DEPARTAMENTO EXPED Y MUNICIPI
     return `<div class="form-group m-form__group row">
                 <div class="col-lg-6 m-form__group-sub">
                     <label class="form-control-label">Departamento de ${ tipoSelect } *</label>
-                    <select onchange="eventOnChangeDepartamentos(this, ${ tipo }, ${ member })" id="select-control-departamentos-${ tipo }-${ member }" 
+                    <select onchange="eventOnChangeDepartamentos(this, ${ tipo }, ${ member })" id="select-control-departamentos-${ tipo }-${ member }"
                         name="integrantes[${member}][departamento_${ tipoSelect }_member]" class="form-control m-input">
                         <option value="-1">Seleccione departamento</option>
                         ${ departamentos.map( dep => { return `<option value="${ dep.id }">${ dep.descripcion }</option>`; } ).join(' ') }
@@ -346,8 +346,8 @@ function eventOnChangeDepartamentos(element, tipo, member) {
     // AJAX
     $.get('/dashboard/get-municipios/' + $(element).val(), function(data) {
         var html_select = '<option value="-1">Seleccione una opción</option>'
-        html_select += data.map( municipio => { return `<option value="${ municipio.id }">${ municipio.descripcion }</option>`; } ).join(' ');        
-        $( `#select-control-municipio-${ tipo }-${ member }` ).html(html_select);  
+        html_select += data.map( municipio => { return `<option value="${ municipio.id }">${ municipio.descripcion }</option>`; } ).join(' ');
+        $( `#select-control-municipio-${ tipo }-${ member }` ).html(html_select);
     });
 }
 
@@ -363,11 +363,11 @@ function addViewUploadArchiveMember(member) {
                         <label class="m-radio">
                             <input type="radio" onClick="changeOptionDocument(this, ${ member })" name="integrantes[${member}][fileType]" value="2"> PDF
                             <span></span>
-                        </label>                                    
+                        </label>
                     </div>
                 </div>
 
-                <div id="image-docuemnt-integrantes-${ member }" class="col-lg-12 form-group m-form__group row">                                                                       
+                <div id="image-docuemnt-integrantes-${ member }" class="col-lg-12 form-group m-form__group row">
                     <div class="col-lg-6 m-form__group-sub">
                         <label for="">Imagen documento identificación frente</label>
                         <input type="file" name="integrantes[${member}][imgDocfrente]" class="form-control-file" style="border: none;" />
@@ -382,16 +382,16 @@ function addViewUploadArchiveMember(member) {
                     <label for="">PDF documento identificación </label>
                     <input type="file" name="integrantes[${member}][pdfDocument]" class="form-control-file" style="border: none;" />
                 </div>
-            </div>`;            
+            </div>`;
 }
 
 function changeOptionDocument(element, member) {
     if ($(element).val() === '1'){
-        $(`#image-docuemnt-integrantes-${ member }`).show(); 
-        $(`#pdf-docuemnt-integrantes-${ member }`).hide(); 
+        $(`#image-docuemnt-integrantes-${ member }`).show();
+        $(`#pdf-docuemnt-integrantes-${ member }`).hide();
     } else {
-        $(`#image-docuemnt-integrantes-${ member }`).hide(); 
-        $(`#pdf-docuemnt-integrantes-${ member }`).show(); 
+        $(`#image-docuemnt-integrantes-${ member }`).hide();
+        $(`#pdf-docuemnt-integrantes-${ member }`).show();
     }
 }
 
@@ -459,8 +459,8 @@ $("#send-info").click( function(e) {
             reverseButtons: true
         }).then(function(result){
             if (result.value) {
-                $('#m_form_new_register').submit();  
-            } 
+                $('#m_form_new_register').submit();
+            }
         });
     } else {
         $("#alert-info-form").show();
@@ -487,7 +487,7 @@ function viewAlertError() {
         "hideEasing": "linear",
         "showMethod": "fadeIn",
         "hideMethod": "fadeOut"
-    };      
+    };
     toastr.error("Algunos datos son requeridos", "¡Recuerda!");
 }
 
@@ -498,17 +498,17 @@ function validationForm() {
     /* validar inputs */
     validateFormInputs('aspirante', 'name');
     validateFormInputs('aspirante', 'lastname');
-    validateFormInputs('aspirante', 'secondLastname'); 
-    validateFormInputs('aspirante', 'phone'); 
-    validateFormInputs('aspirante', 'identificacion'); 
-    validateFormInputs('aspirante', 'address'); 
+    validateFormInputs('aspirante', 'secondLastname');
+    validateFormInputs('aspirante', 'phone');
+    validateFormInputs('aspirante', 'identificacion');
+    validateFormInputs('aspirante', 'address');
     validateFormInputs('aspirante', 'birthdate');
-    validateFormInputs('aspirante', 'urlEvidenceDocument'); // validar formulario offline  
+    validateFormInputs('aspirante', 'urlEvidenceDocument'); // validar formulario offline
     formatDateSend($('input[name="aspirante[birthdate]"]'));
 
     /* validar selects  */
-    //validateFormSelect('aspirante', 'documentType'); 
-    validateFormSelect('aspirante', '[departamentoExpedida]'); 
+    //validateFormSelect('aspirante', 'documentType');
+    validateFormSelect('aspirante', '[departamentoExpedida]');
     validateFormSelect('aspirante', '[municipioExpedida]');
     validateFormSelect('aspirante', '[departamentoNacimiento]');
     validateFormSelect('aspirante', '[municipioNacimiento]');
@@ -516,36 +516,36 @@ function validationForm() {
     validateFormSelect('aspirante', '[municipioResidencia]');
 
     if (lineaConvocatoria === '1' &&  actuaraComo === '1') {
-        validate = validateAspirante();        
+        validate = validateAspirante();
     } else if (lineaConvocatoria === '1' &&  actuaraComo === '2') {
         /* validar inputs */
         validateFormInputs('beneficiario', 'name');
         validateFormInputs('beneficiario', 'lastname');
-        validateFormInputs('beneficiario', 'secondLastname'); 
-        validateFormInputs('beneficiario', 'phone'); 
-        validateFormInputs('beneficiario', 'identificacion'); 
-        validateFormInputs('beneficiario', 'address'); 
-        validateFormInputs('beneficiario', 'birthdate');         
+        validateFormInputs('beneficiario', 'secondLastname');
+        validateFormInputs('beneficiario', 'phone');
+        validateFormInputs('beneficiario', 'identificacion');
+        validateFormInputs('beneficiario', 'address');
+        validateFormInputs('beneficiario', 'birthdate');
         formatDateSend($('input[name="beneficiario[birthdate]"]'));
 
         /* validar selects  */
-        //validateFormSelect('beneficiario', 'documentType');   
-        validateFormSelect('beneficiario', '[departamentoExpedida]'); 
+        //validateFormSelect('beneficiario', 'documentType');
+        validateFormSelect('beneficiario', '[departamentoExpedida]');
         validateFormSelect('beneficiario', '[municipioExpedida]');
         validateFormSelect('beneficiario', '[departamentoNacimiento]');
         validateFormSelect('beneficiario', '[municipioNacimiento]');
         validateFormSelect('beneficiario', '[departamentoResidencia]');
         validateFormSelect('beneficiario', '[municipioResidencia]');
 
-        if (validateAspirante() && validateBeneficiario()) validate = true;        
+        if (validateAspirante() && validateBeneficiario()) validate = true;
     } else {
         validate = validateAspirante();
-        validateFormInputs('aspirante', 'nameTeam'); 
-        // validar el rol que desempeña en el grupo  
+        validateFormInputs('aspirante', 'nameTeam');
+        // validar el rol que desempeña en el grupo
         if ($('input:radio[name="aspirante[partGroup]"]:checked').val() === '1') {
-            validateFormInputs('aspirante', 'rolMember');            
+            validateFormInputs('aspirante', 'rolMember');
             if ($("input[name='aspirante[rolMember]']").val() == '' || $("input[name='aspirante[nameTeam]']").val() == '') {
-                validate =  false;  
+                validate =  false;
             }
         }
         // falta validar el grupo
@@ -563,14 +563,14 @@ function validationForm() {
     validateFormInputs('song', 'author');
     validateFormInputs('song', 'urlSong'); // validar cancion
     validateFormSelect('song', '[categoryID]');
-    
+
     if (validateSong() && validateTermsCondition() && validate) {
         validate = true
     } else {
         validate = false;
     }
-    
-    return validate;    
+
+    return validate;
 }
 
 /* funcion para formatear la fecha */
@@ -586,7 +586,7 @@ function formatDateSend(element) {
 const validateAspirante = () => {
     if (fieldsInputs.aspirante_name && fieldsInputs.aspirante_lastname && fieldsInputs.aspirante_secondLastname
         && fieldsInputs.aspirante_phone && fieldsInputs.aspirante_identificacion && fieldsInputs.aspirante_address
-        && fieldsInputs.aspirante_departamentoExpedida && fieldsInputs.aspirante_municipioExpedida 
+        && fieldsInputs.aspirante_departamentoExpedida && fieldsInputs.aspirante_municipioExpedida
         && fieldsInputs.aspirante_departamentoNacimiento && fieldsInputs.aspirante_municipioNacimiento
         && fieldsInputs.aspirante_birthdate && fieldsInputs.aspirante_urlEvidenceDocument) {
         return true;
@@ -595,7 +595,7 @@ const validateAspirante = () => {
     return false;
 }
 
-// función para validar lo datos de la canción 
+// función para validar lo datos de la canción
 const validateSong = () => {
     if (fieldsInputs.song_nameProject && fieldsInputs.song_author
         && fieldsInputs.song_urlSong && fieldsInputs.song_categoryID) {
@@ -607,80 +607,80 @@ const validateSong = () => {
 /* funcion para validar los datos requeridos del beneficiario */
 const validateBeneficiario = () => {
     if (fieldsInputs.beneficiario_name && fieldsInputs.beneficiario_lastname && fieldsInputs.beneficiario_secondLastname
-        && fieldsInputs.beneficiario_phone && fieldsInputs.beneficiario_identificacion && fieldsInputs.beneficiario_address 
-        && fieldsInputs.beneficiario_departamentoExpedida && fieldsInputs.beneficiario_municipioExpedida 
+        && fieldsInputs.beneficiario_phone && fieldsInputs.beneficiario_identificacion && fieldsInputs.beneficiario_address
+        && fieldsInputs.beneficiario_departamentoExpedida && fieldsInputs.beneficiario_municipioExpedida
         && fieldsInputs.beneficiario_departamentoNacimiento && fieldsInputs.beneficiario_municipioNacimiento
         && fieldsInputs.beneficiario_birthdate) {
         return true;
     }
-    
+
     return false
 }
 
 /* funcion que realiza las validaciones segun el campo input */
-const validateFormInputs = (tipo, targetName) => {  
+const validateFormInputs = (tipo, targetName) => {
     validateFields('input', `${ tipo }[${ targetName }]`, `${ tipo }_${ targetName }`)
     /* switch (`${ tipo }[${ targetName }]`) {
         case `${ tipo }[name]`:
             validateFields('input', `${ tipo }[name]`, `${ tipo }_name`)
             break;
-        case `${ tipo }[lastname]`: 
+        case `${ tipo }[lastname]`:
             validateFields('input', `${ tipo }[lastname]`, `${ tipo }_lastname`)
             break;
-        case `${ tipo }[secondLastname]`: 
+        case `${ tipo }[secondLastname]`:
             validateFields('input', `${ tipo }[secondLastname]`, `${ tipo }_secondLastname`)
             break;
-        case `${ tipo }[phone]`: 
+        case `${ tipo }[phone]`:
             validateFields('input', `${ tipo }[phone]`, `${ tipo }_phone`)
             break;
-        case `${ tipo }[identificacion]`: 
+        case `${ tipo }[identificacion]`:
             validateFields('input', `${ tipo }[identificacion]`, `${ tipo }_identificacion`)
             break;
-        case `${ tipo }[address]`: 
+        case `${ tipo }[address]`:
             validateFields('input', `${ tipo }[address]`, `${ tipo }_address`)
-            break;        
-        case `${ tipo }[birthdate]`: 
+            break;
+        case `${ tipo }[birthdate]`:
             validateFields('input', `${ tipo }[birthdate]`, `${ tipo }_birthdate`)
-            break;        
-        case `${ tipo }[nameTeam]`: 
+            break;
+        case `${ tipo }[nameTeam]`:
             validateFields('input', `${ tipo }[nameTeam]`, `${ tipo }_nameTeam`)
-            break;        
+            break;
     } */
 }
 
 /* funcion que realiza las validaciones segun el campo select */
-const validateFormSelect = (type, targetName) => {     
+const validateFormSelect = (type, targetName) => {
     switch (`${ type }${ targetName }`) {
         /* case 'aspirante[documentType]':
             validateFieldsSelect('aspirante[documentType]', 'aspirante_documentType')
             break; */
-        case `${ type }[departamentoExpedida]`: 
+        case `${ type }[departamentoExpedida]`:
             validateFieldsSelect(`${ type }[departamentoExpedida]`, `${ type }_departamentoExpedida`)
-            break;        
-        case `${ type }[municipioExpedida]`: 
+            break;
+        case `${ type }[municipioExpedida]`:
             validateFieldsSelect(`${ type }[municipioExpedida]`, `${ type }_municipioExpedida`)
-            break;        
-        case `${ type }[departamentoNacimiento]`: 
+            break;
+        case `${ type }[departamentoNacimiento]`:
             validateFieldsSelect(`${ type }[departamentoNacimiento]`, `${ type }_departamentoNacimiento`)
-            break;        
-        case `${ type }[municipioNacimiento]`: 
+            break;
+        case `${ type }[municipioNacimiento]`:
             validateFieldsSelect(`${ type }[municipioNacimiento]`, `${ type }_municipioNacimiento`)
-            break;       
-        case `${ type }[departamentoResidencia]`: 
+            break;
+        case `${ type }[departamentoResidencia]`:
             validateFieldsSelect(`${ type }[departamentoResidencia]`, `${ type }_departamentoResidencia`)
-            break;       
-        case `${ type }[municipioResidencia]`: 
+            break;
+        case `${ type }[municipioResidencia]`:
             validateFieldsSelect(`${ type }[municipioResidencia]`, `${ type }_municipioResidencia`)
-            break;       
-        case `${ type }[categoryID]`: 
+            break;
+        case `${ type }[categoryID]`:
             validateFieldsSelect(`${ type }[categoryID]`, `${ type }_categoryID`)
-            break;       
+            break;
     }
 }
 
 /* funcion que realiza la accion de poner o quitar el error al campo input */
 const validateFields = (type, input, campo) => {
-    if ( $(`${ type }[name='${ input }']`).val() === '' ){  
+    if ( $(`${ type }[name='${ input }']`).val() === '' ){
         $(`#content-${ campo }`).addClass('has-danger');
         $(`#error-${ campo }`).show();
         $(`#error-${ campo }`).html(messages.required);
@@ -694,10 +694,10 @@ const validateFields = (type, input, campo) => {
 
 /* funcion que realiza la accion de poner o quitar el error al campo select */
 const validateFieldsSelect = (input, campo) => {
-    if ($(`select[name='${ input }']`).val() == null || $(`select[name='${ input }']`).val() === '-1' 
-        || $(`select[name='${ input }']`).val() === '' || $(`select[name='${ input }']`).val() === 'undefined'){  
+    if ($(`select[name='${ input }']`).val() == null || $(`select[name='${ input }']`).val() === '-1'
+        || $(`select[name='${ input }']`).val() === '' || $(`select[name='${ input }']`).val() === 'undefined'){
         $(`#content-${ campo }`).addClass('has-danger');
-        $(`#error-${ campo }`).show(); 
+        $(`#error-${ campo }`).show();
         $(`#error-${ campo }`).html(messages.required);
         fieldsInputs[campo] = false;
     } else {
@@ -716,7 +716,7 @@ const validateTermsCondition = () => {
         $('#content-acceptTermsConditions').addClass('has-danger');
         $('#error-acceptTermsConditions').show();
         $('#error-acceptTermsConditions').html(messages.required);
-        return false;       
+        return false;
     }
 }
 
@@ -740,7 +740,7 @@ $("input[name='beneficiario[address]']").keyup( () => validateFormInputs('benefi
 $("input[name='beneficiario[birthdate]']").change( () => validateFormInputs('beneficiario', 'birthdate') );
 $("input[name='aspirante[nameTeam]']").keyup( () => validateFormInputs('aspirante', 'nameTeam') );
 
-/* evento onkeyup de los inputs canción */  
+/* evento onkeyup de los inputs canción */
 $("input[name='song[nameProject]']").keyup( () => validateFormInputs('song', 'nameProject') );
 $("input[name='song[author]']").keyup( () => validateFormInputs('song', 'author') );
 
@@ -771,6 +771,7 @@ function dropzoneError(nameField, msg, inputField) {
 var imageDocumentFrenteAspirant = new Dropzone('.file-image-document-aspirante-frente', {
     acceptedFiles: "image/*",
     maxFiles: 1,
+    timeout: 180000,
     paramName: 'file',
     addRemoveLinks: true,
     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
@@ -788,6 +789,7 @@ var imageDocumentFrenteAspirant = new Dropzone('.file-image-document-aspirante-f
 var imageDocumentAtrasAspirant = new Dropzone('.file-image-document-aspirante-atras', {
     acceptedFiles: "image/*",
     maxFiles: 1,
+    timeout: 180000,
     paramName: 'file',
     addRemoveLinks: true,
     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
@@ -805,6 +807,7 @@ var imageDocumentAtrasAspirant = new Dropzone('.file-image-document-aspirante-at
 var pdfDocumentAspirant = new Dropzone('.file-pdf-document-aspirante', {
     acceptedFiles: "application/pdf",
     maxFiles: 1,
+    timeout: 180000,
     paramName: 'file',
     addRemoveLinks: true,
     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
@@ -822,7 +825,8 @@ var pdfDocumentAspirant = new Dropzone('.file-pdf-document-aspirante', {
 var imageProfileAspirant = new Dropzone(".file-image-profile-aspirante", {
     paramName: "file",
     maxFiles: 1,
-    maxFilesize: 5, 
+    timeout: 180000,
+    maxFilesize: 5,
     addRemoveLinks: true,
     acceptedFiles: "image/*",
     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
@@ -838,10 +842,11 @@ var imageProfileAspirant = new Dropzone(".file-image-profile-aspirante", {
     }
 });
 
-// eventos para subir la imagen o pdf del beneficiario  
+// eventos para subir la imagen o pdf del beneficiario
 var imageDocumentFrenteBeneficiario = new Dropzone('.file-image-document-beneficiario-frente', {
     acceptedFiles: "image/*",
     maxFiles: 1,
+    timeout: 180000,
     paramName: 'file',
     addRemoveLinks: true,
     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
@@ -856,9 +861,10 @@ var imageDocumentFrenteBeneficiario = new Dropzone('.file-image-document-benefic
         setTimeout( () => { imageDocumentFrenteBeneficiario.removeFile(file) }, 2000 )
     }
 });
-var imageDocumentAtrasBeneficiario = new Dropzone('.file-image-document-beneficiario-atras', {  
+var imageDocumentAtrasBeneficiario = new Dropzone('.file-image-document-beneficiario-atras', {
     acceptedFiles: "image/*",
     maxFiles: 1,
+    timeout: 180000,
     paramName: 'file',
     addRemoveLinks: true,
     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
@@ -876,6 +882,7 @@ var imageDocumentAtrasBeneficiario = new Dropzone('.file-image-document-benefici
 var pdfDocumentBeneficiario = new Dropzone('.file-pdf-document-beneficiario', {
     acceptedFiles: "application/pdf",
     maxFiles: 1,
+    timeout: 180000,
     paramName: 'file',
     addRemoveLinks: true,
     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
@@ -893,6 +900,7 @@ var pdfDocumentBeneficiario = new Dropzone('.file-pdf-document-beneficiario', {
 var imageProfileBeneficiario = new Dropzone(".file-image-profile-beneficiario", {
     paramName: "file",
     maxFiles: 1,
+    timeout: 180000,
     maxFilesize: 5, // MB
     addRemoveLinks: true,
     acceptedFiles: "image/*",
@@ -913,6 +921,7 @@ var imageProfileBeneficiario = new Dropzone(".file-image-profile-beneficiario", 
 var uploadSong = new Dropzone('.upload-song', {
     acceptedFiles: 'audio/*',
     maxFiles: 1,
+    timeout: 180000,
     maxFilesize: 15, // MB
     paramName: 'image',
     addRemoveLinks: true,
@@ -934,6 +943,7 @@ var fileAdditionalSongOne, fileAdditionalSongTwo;
 var dropzoneAdditionalSongOne = new Dropzone('.additional-song-one', {
     acceptedFiles: 'audio/*',
     maxFiles: 1,
+    timeout: 180000,
     maxFilesize: 15, // MB
     paramName: 'image',
     addRemoveLinks: true,
@@ -953,6 +963,7 @@ var dropzoneAdditionalSongOne = new Dropzone('.additional-song-one', {
 var dropzoneAdditionalSongTwo = new Dropzone('.additional-song-two', {
     acceptedFiles: 'audio/*',
     maxFiles: 1,
+    timeout: 180000,
     maxFilesize: 15, // MB
     paramName: 'image',
     addRemoveLinks: true,
@@ -970,10 +981,11 @@ var dropzoneAdditionalSongTwo = new Dropzone('.additional-song-two', {
     }
 });
 
-// documento adicional que evidencia la aceptacion de terminos y condiciones del aspirante      
+// documento adicional que evidencia la aceptacion de terminos y condiciones del aspirante
 var dropzoneEvidenceDocument = new Dropzone('.evidence-document', {
     acceptedFiles: 'application/pdf',
     maxFiles: 1,
+    timeout: 180000,
     paramName: 'doc',
     addRemoveLinks: true,
     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },

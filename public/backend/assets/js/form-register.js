@@ -121,7 +121,7 @@ $("input[name='aspirante[partGroup]']").click( () => {
     }
 });
 
-// validar el número de integrantes del grupo 
+// validar el número de integrantes del grupo
 $("#input-max-members").keyup( () => validateNumberMin( $("#input-max-members").val() ) );
 
 function validateNumberMin(num) {
@@ -507,11 +507,11 @@ function validationForm() {
     } else {
         validate = validateAspirante();
         validateFormInputs('aspirante', 'nameTeam');
-        // validar el rol que desempeña en el grupo  
+        // validar el rol que desempeña en el grupo
         if ($('input:radio[name="aspirante[partGroup]"]:checked').val() === '1') {
-            validateFormInputs('aspirante', 'rolMember');            
+            validateFormInputs('aspirante', 'rolMember');
             if ($("input[name='aspirante[rolMember]']").val() == '' || $("input[name='aspirante[nameTeam]']").val() == '') {
-                validate =  false;  
+                validate =  false;
             }
         }
         // falta validar el grupo
@@ -670,7 +670,7 @@ $("input[name='aspirante[phone]']").keyup( () => validateFormInputs('aspirante',
 $("input[name='aspirante[identificacion]']").keyup( () => validateFormInputs('aspirante', 'identificacion') );
 $("input[name='aspirante[address]']").keyup( () => validateFormInputs('aspirante', 'address') );
 $("input[name='aspirante[birthdate]']").change( () => validateFormInputs('aspirante', 'birthdate') );
-$("input[name='aspirante[rolMember]']").keyup( () => validateFormInputs('aspirante', 'rolMember') ); 
+$("input[name='aspirante[rolMember]']").keyup( () => validateFormInputs('aspirante', 'rolMember') );
 
 /* evento onkeyup de los inputs beneficiario */
 $("input[name='beneficiario[name]']").keyup( () => validateFormInputs('beneficiario', 'name') );
@@ -709,6 +709,7 @@ function dropzoneError(nameField, msg, inputField) {
 var imageDocumentFrenteAspirant = new Dropzone('.file-image-document-aspirante-frente', {
     acceptedFiles: "image/*",
     maxFiles: 1,
+    timeout: 180000,
     paramName: 'file',
     addRemoveLinks: true,
     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
@@ -726,6 +727,7 @@ var imageDocumentFrenteAspirant = new Dropzone('.file-image-document-aspirante-f
 var imageDocumentAtrasAspirant = new Dropzone('.file-image-document-aspirante-atras', {
     acceptedFiles: "image/*",
     maxFiles: 1,
+    timeout: 180000,
     paramName: 'file',
     addRemoveLinks: true,
     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
@@ -743,6 +745,7 @@ var imageDocumentAtrasAspirant = new Dropzone('.file-image-document-aspirante-at
 var pdfDocumentAspirant = new Dropzone('.file-pdf-document-aspirante', {
     acceptedFiles: "application/pdf",
     maxFiles: 1,
+    timeout: 180000,
     paramName: 'file',
     addRemoveLinks: true,
     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
@@ -760,7 +763,8 @@ var pdfDocumentAspirant = new Dropzone('.file-pdf-document-aspirante', {
 var imageProfileAspirant = new Dropzone(".file-image-profile-aspirante", {
     paramName: "file",
     maxFiles: 1,
-    maxFilesize: 5, 
+    timeout: 180000,
+    maxFilesize: 5,
     addRemoveLinks: true,
     acceptedFiles: "image/*",
     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
@@ -776,10 +780,11 @@ var imageProfileAspirant = new Dropzone(".file-image-profile-aspirante", {
     }
 });
 
-// eventos para subir la imagen o pdf del beneficiario  
+// eventos para subir la imagen o pdf del beneficiario
 var imageDocumentFrenteBeneficiario = new Dropzone('.file-image-document-beneficiario-frente', {
     acceptedFiles: "image/*",
     maxFiles: 1,
+    timeout: 180000,
     paramName: 'file',
     addRemoveLinks: true,
     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
@@ -794,9 +799,10 @@ var imageDocumentFrenteBeneficiario = new Dropzone('.file-image-document-benefic
         setTimeout( () => { imageDocumentFrenteBeneficiario.removeFile(file) }, 2000 )
     }
 });
-var imageDocumentAtrasBeneficiario = new Dropzone('.file-image-document-beneficiario-atras', {  
+var imageDocumentAtrasBeneficiario = new Dropzone('.file-image-document-beneficiario-atras', {
     acceptedFiles: "image/*",
     maxFiles: 1,
+    timeout: 180000,
     paramName: 'file',
     addRemoveLinks: true,
     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
@@ -814,6 +820,7 @@ var imageDocumentAtrasBeneficiario = new Dropzone('.file-image-document-benefici
 var pdfDocumentBeneficiario = new Dropzone('.file-pdf-document-beneficiario', {
     acceptedFiles: "application/pdf",
     maxFiles: 1,
+    timeout: 180000,
     paramName: 'file',
     addRemoveLinks: true,
     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
@@ -831,6 +838,7 @@ var pdfDocumentBeneficiario = new Dropzone('.file-pdf-document-beneficiario', {
 var imageProfileBeneficiario = new Dropzone(".file-image-profile-beneficiario", {
     paramName: "file",
     maxFiles: 1,
+    timeout: 180000,
     maxFilesize: 5, // MB
     addRemoveLinks: true,
     acceptedFiles: "image/*",
