@@ -337,6 +337,7 @@
         var dropzone = new Dropzone('.dropzone', {
             url: '{{route('add.project.audio')}}',
             acceptedFiles: 'audio/*,video/*',
+            timeout: 180000,
             maxFiles: 1,
             paramName: 'image',
             headers: {
@@ -396,6 +397,7 @@
         var dropzoneOne = new Dropzone('.dropzone-one', {
             url: '{{route('add.audio.one')}}',
             acceptedFiles: 'audio/*,video/*',
+            timeout: 180000,
             maxFiles: 1,
             paramName: 'image',
             headers: {
