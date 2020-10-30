@@ -711,11 +711,17 @@
                             </div>
                         </div>
                         <div class="m-portlet__body">
+                            <div class="row mb-4" >
+
+                                <h5 class="col-md-3" style="margin-right: -6rem;">Nombre de la agrupación:</h5><span class="col-md-6">{{ $artist->artists[0]->name_team }}</span>
+                            </div>
                             <div class="m-accordion m-accordion--bordered m-accordion--solid" id="m_accordion_4"
                                  role="tablist">
 
-                                <!--begin::Item-->
-                                @foreach ($artist->artists[0]->teams as $team)
+                                 <!--begin::Item-->
+                                 @foreach ($artist->artists[0]->teams as $team)
+
+                                 {{-- @dd($team) --}}
                                     <div class="m-accordion__item">
                                         <div class="m-accordion__item-head collapsed" role="tab"
                                              id="m_accordion_4_item_1_head"
@@ -742,7 +748,7 @@
                                                                         identificación:</label>
                                                                     <div class="m-scrollable" data-scrollable="true"
                                                                          style="">
-                                                                        <p>{{ $team->document_type}}</p>
+                                                                        <p>{{ $team->documentType->document}}</p>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-4 mt-2">
