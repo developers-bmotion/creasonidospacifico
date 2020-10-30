@@ -455,6 +455,7 @@
         var dropzoneTwo = new Dropzone('.dropzone-two', {
             url: '{{route('add.audio.two')}}',
             acceptedFiles: 'audio/*,video/*',
+            timeout: 180000,
             maxFiles: 1,
             paramName: 'image',
             headers: {
