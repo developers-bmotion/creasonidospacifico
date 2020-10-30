@@ -310,8 +310,13 @@
                             <div class="tab-pane active" id="m_user_profile_tab_1">
                                 <div class="m-portlet__body">
                                     <div class="row">
-                                        <div class="col-lg-12">
-                                            <h1>Hola</h1>
+                                        <div class="col-md-6 col-lg-6 col-12">
+                                            <div class="form-group m-form__group row">
+                                                <div id="content-aspirante_name" class="col-lg-6 m-form__group-sub">
+                                                    <label class="form-control-label ">Nombre:</label>
+
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
