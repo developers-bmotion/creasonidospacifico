@@ -711,9 +711,9 @@
                             </div>
                         </div>
                         <div class="m-portlet__body">
-                            <div class="row mb-4" >
+                            <div class="row mb-4 pl-4" >
 
-                                <h5 class="col-md-3" style="margin-right: -6rem;">Nombre de la agrupación:</h5><span class="col-md-6">{{ $artist->artists[0]->name_team }}</span>
+                                <h5 class="mr-3">Nombre de la agrupación: </h5><span> {{ $artist->artists[0]->name_team }}</span>
                             </div>
                             <div class="m-accordion m-accordion--bordered m-accordion--solid" id="m_accordion_4"
                                  role="tablist">
