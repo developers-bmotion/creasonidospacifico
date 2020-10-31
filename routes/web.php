@@ -152,7 +152,7 @@ Route::group(['namespace'=>'Backend','prefix' => 'dashboard','middleware' => 'au
     //Rutas para el modulo Artistas
     Route::get('/artists','ArtistsController@index')->name('index.artists');
     Route::get('/artists-all-table','ArtistsController@table_all_artists')->name('all.artists.table');
-    Route::get('/artists-manager-table','ProfileController@tableManagerAspirant')->name('artists.manager.table');
+    Route::get('/artists-manager-table/{user}','ProfileController@tableManagerAspirant')->name('artists.manager.table');
 
     /*=============================================
        NUEVAS RUTAS PARA EL REGISTRO

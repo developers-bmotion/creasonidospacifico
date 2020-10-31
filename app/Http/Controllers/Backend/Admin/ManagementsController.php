@@ -30,8 +30,7 @@ class ManagementsController extends Controller
         $departamentos = Country::all();
         $gestores = User::whereHas('roles', function ($query){
             $query->where('role_idRole', 6);
-        })->get();
-
+        })->with('city')->get();
         return view('backend.admin.gestores-admin', compact('gestores', 'departamentos'));
     }
 

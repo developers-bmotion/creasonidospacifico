@@ -93,8 +93,9 @@ class ProfileController extends Controller
         return view('backend.gestores.aspirants-all');
     }
 
-    public function tableManagerAspirant() {
-        $listAspirant = Artist::where('gestor_id', auth()->user()->id)->with('users','personType','projects')->get();
+    public function tableManagerAspirant(User $user) {
+
+        $listAspirant = Artist::where('gestor_id', $user->id)->with('users','personType','projects')->get();
         return datatables()->of($listAspirant)->toJson();
     }
 

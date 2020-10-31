@@ -69,19 +69,21 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                                                         Your Profile
                                                     </div>
                                                     <div class="m-card-profile__pic">
-                                                        <div class="m-card-profile__pic-wrapper">
-                                                            @if(Storage::disk('public')->exists('users/'.$gestor->picture))
-                                                                <img src="{{ $gestor->pathAttachment()}}"
-                                                                     alt=""/>
-                                                            @else
-                                                                <img src="{{ $gestor->picture }}" alt="">
-                                                            @endif
-                                                        </div>
+                                                        <a href="{{ route('profile.managament',$gestor->slug)}}">
+                                                            <div class="m-card-profile__pic-wrapper">
+                                                                @if(Storage::disk('public')->exists('users/'.$gestor->picture))
+                                                                    <img src="{{ $gestor->pathAttachment()}}"
+                                                                         alt=""/>
+                                                                @else
+                                                                    <img src="{{ $gestor->picture }}" alt="">
+                                                                @endif
+                                                            </div>
+                                                        </a>
                                                     </div>
                                                     <div class="m-card-profile__details">
                                                         <span
                                                             class="m-card-profile__name">{{ $gestor->name }} {{ $gestor->last_name }}</span>
-
+                                                        <p>{{ $gestor->city->departaments->descripcion }}</p>
                                                         <a href="" class="m-card-profile__email m-link"
                                                            style="margin-left: -15px">{{ $gestor->email  }}</a>
 
@@ -124,7 +126,8 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                     @csrf
                     <div class="modal-body">
                         <div class="row">
-                            <div class="form-group col-12 col-md-6 col-lg-6 m-form__group {{$errors->has('name')? 'has-danger':''}}">
+                            <div
+                                class="form-group col-12 col-md-6 col-lg-6 m-form__group {{$errors->has('name')? 'has-danger':''}}">
                                 <label for="exampleInputEmail1">{{ __('nombre') }}:<span
                                         class="text-danger">*</span></label>
                                 <input type="text" class="form-control m-input" id="" name="name"
@@ -132,7 +135,8 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                                        value="{{ old('name') }}">
                                 {!! $errors->first('name','<div class="form-control-feedback">*:message</div>')!!}
                             </div>
-                            <div class="form-group m-form__group  col-12 col-md-6 col-lg-6 {{$errors->has('last_name')? 'has-danger':''}}">
+                            <div
+                                class="form-group m-form__group  col-12 col-md-6 col-lg-6 {{$errors->has('last_name')? 'has-danger':''}}">
                                 <label for="exampleInputEmail1">{{ __('apellidos') }}:<span
                                         class="text-danger">*</span></label>
                                 <input type="text" name="last_name" class="form-control m-input" id=""
@@ -140,7 +144,8 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                                        value="{{ old('last_name') }}">
                                 {!! $errors->first('last_name','<div class="form-control-feedback">*:message</div>')!!}
                             </div>
-                            <div class="form-group m-form__group col-12 col-md-6 col-lg-6 {{$errors->has('phone')? 'has-danger':''}}">
+                            <div
+                                class="form-group m-form__group col-12 col-md-6 col-lg-6 {{$errors->has('phone')? 'has-danger':''}}">
                                 <label for="exampleInputEmail1">{{ __('Teléfono') }}:<span
                                         class="text-danger">*</span></label>
                                 <input type="tel" name="phone" class="form-control m-input" id=""
@@ -148,21 +153,23 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                                        value="{{ old('phone') }}">
                                 {!! $errors->first('phone','<div class="form-control-feedback">*:message</div>')!!}
                             </div>
-                            <div class="form-group m-form__group  col-12 col-md-6 col-lg-6 {{$errors->has('document_type')? 'has-danger':''}}">
+                            <div
+                                class="form-group m-form__group  col-12 col-md-6 col-lg-6 {{$errors->has('document_type')? 'has-danger':''}}">
                                 <div class="m-form__group-sub">
                                     <label class="form-control-label">Tipo de documento:<span
                                             class="text-danger">*</span></label>
                                     <select name="document_type" class="form-control">
                                         <option value="-1">Seleccione departamento</option>
                                         <option value="1">Cédula de Ciudadania</option>
-                                        <option value="3">Cédula de  Extrangeria</option>
+                                        <option value="3">Cédula de Extrangeria</option>
                                     </select>
                                     <div id="error-aspirante_departamentoNacimiento" class="form-control-feedback"
                                          style="display: none"></div>
                                     {!! $errors->first('document_type','<div class="form-control-feedback">*:message</div>')!!}
                                 </div>
                             </div>
-                            <div class="form-group m-form__group col-12 col-md-6 col-lg-6 {{$errors->has('identificacion')? 'has-danger':''}}">
+                            <div
+                                class="form-group m-form__group col-12 col-md-6 col-lg-6 {{$errors->has('identificacion')? 'has-danger':''}}">
                                 <label for="exampleInputEmail1">Nº Identificación:<span
                                         class="text-danger">*</span></label>
                                 <input type="num" name="identificacion" class="form-control m-input" id=""
@@ -201,12 +208,15 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                                          style="display: none"></div>
                                 </div>
                             </div>
-                            <div class="form-group m-form__group  col-12 col-md-6 col-lg-6 {{$errors->has('profile')? 'has-danger':''}}">
+                            <div
+                                class="form-group m-form__group  col-12 col-md-6 col-lg-6 {{$errors->has('profile')? 'has-danger':''}}">
                                 <label for="exampleInputEmail1">{{ __('Perfil') }}</label>
-                                <textarea name="profile" class="form-control m-input" placeholder="Describa el perfil"></textarea>
+                                <textarea name="profile" class="form-control m-input"
+                                          placeholder="Describa el perfil"></textarea>
                                 {!! $errors->first('profile','<div class="form-control-feedback">*:message</div>')!!}
                             </div>
-                            <div class="form-group m-form__group col-12 col-md-6 col-lg-6 {{$errors->has('email')? 'has-danger':''}}">
+                            <div
+                                class="form-group m-form__group col-12 col-md-6 col-lg-6 {{$errors->has('email')? 'has-danger':''}}">
                                 <label for="exampleInputEmail1">{{ __('email') }}:<span
                                         class="text-danger">*</span></label>
                                 <input type="email" name="email" class="form-control m-input" id="exampleInputEmail1"

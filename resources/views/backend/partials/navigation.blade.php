@@ -166,12 +166,12 @@
                             <span class="m-menu__link-text">Registrar Aspirante</span>
                         </a>
                     </li>
-                    <li class="m-menu__item ">
-                        <a href="{{ route('list.aspirant.gestor') }}" class="m-menu__link">
-                            <i class="m-menu__link-icon la la-list"></i>
-                            <span class="m-menu__link-text">Aspirantes Registrados</span>
-                        </a>
-                    </li>
+{{--                    <li class="m-menu__item ">--}}
+{{--                        <a href="{{ route('list.aspirant.gestor') }}" class="m-menu__link">--}}
+{{--                            <i class="m-menu__link-icon la la-list"></i>--}}
+{{--                            <span class="m-menu__link-text">Aspirantes Registrados</span>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
                 @endif
             </ul>
 
