@@ -26,7 +26,7 @@
                     <div class="m-dropdown m-dropdown--inline  m-dropdown--arrow m-dropdown--align-right"
                          m-dropdown-toggle="hover">
                         <a href="#" class="m-dropdown__toggle btn btn-warning dropdown-toggle">
-                            {{ __('estado') }}
+                            Filtrar
                         </a>
                         <div class="m-dropdown__wrapper">
                             <span class="m-dropdown__arrow m-dropdown__arrow--right"></span>
@@ -35,7 +35,7 @@
                                     <div class="m-dropdown__content selectType">
                                         <ul class="m-nav">
                                             <li class="m-nav__section m-nav__section--first">
-                                                <span class="m-nav__section-text">{{ __('selecciona') }}</span>
+                                                <span class="m-nav__section-text">FILTRAR POR ESTADO</span>
                                             </li>
                                             <li class="m-nav__item text-center">
                                                 <span style="background-color: #9c9ca5"
@@ -82,15 +82,18 @@
                                             </li>
                                             <li class="m-nav__separator m-nav__separator--fit">
                                             </li>
-                                            <li class="m-nav__item text-center">
-                                                <span style="color:white"
-                                                      class="changeType w-100 btn btn-success m-btn m-btn--pill m-btn--wide btn-sm"
-                                                      data-type="{{\App\Project::PENDING_REGISTER}}">{{ __('Registro pendiente') }}</span>
+                                            <li class="m-nav__section m-nav__section--first">
+                                                <span class="m-nav__section-text">FILTRAR POR REGISTRO</span>
                                             </li>
                                             <li class="m-nav__item text-center">
                                                 <span style="color:white"
-                                                      class="changeType w-100 btn btn-success m-btn m-btn--pill m-btn--wide btn-sm"
-                                                      data-type="{{\App\Project::NOT_PROJECT_REGISTER}}">{{ __('Sin projecto registrado') }}</span>
+                                                      class="changeType w-100 btn btn-warning m-btn m-btn--pill m-btn--wide btn-sm"
+                                                      data-type="{{\App\Project::PENDING_REGISTER}}">{{ __('Registro Pendiente') }}</span>
+                                            </li>
+                                            <li class="m-nav__item text-center">
+                                                <span style="color:white"
+                                                      class="changeType w-100 btn btn-danger m-btn m-btn--pill m-btn--wide btn-sm"
+                                                      data-type="{{\App\Project::NOT_PROJECT_REGISTER}}">{{ __('Sin Proyecto Registrado') }}</span>
                                             </li>
                                             <li class="m-nav__item">
                                                 <span
@@ -211,6 +214,9 @@
             aceptados: {name: 'Aceptados', color: '#34bfa3'},
             nuevarevision: {name: 'Nueva Revición', color: '#36a3f7'},
             nosubsanados: {name: 'No Subsanados', color: '#36a3f7'},
+            registropendiente: {name: 'Registro Pendiente', color: '#ffb822'},
+            sinregistroproyecto: {name: 'Sin Proyecto Registrado', color: '#f4516c'},
+            todos: {name: 'Todos', color: '#9c9ca5'},
         }
         var estado = getStorage('storeTipoProyecto');
 
@@ -439,6 +445,19 @@
                     $("#current_status").css("background", listStatus.nosubsanados.color);
                     $('#current_status').html(listStatus.nosubsanados.name)
                     break;
+                case 9:
+                    $("#current_status").css("background", listStatus.registropendiente.color);
+                    $('#current_status').html(listStatus.registropendiente.name)
+                    break;
+                case 10:
+                    $("#current_status").css("background", listStatus.sinregistroproyecto.color);
+                    $('#current_status').html(listStatus.sinregistroproyecto.name)
+                    break;
+                    case 11:
+                    $("#current_status").css("background", listStatus.todos.color);
+                    $('#current_status').html(listStatus.todos.name)
+                    break;
+
                 default:
                     console.log('no entro')
             }
