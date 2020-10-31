@@ -143,6 +143,14 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class,'roles_users','user_idUser','role_idRole');
     }
 
+    public function documentType(){
+        return $this->belongsTo(DocumentType::class,'document_type');
+    }
+
+    public function city(){
+        return $this->belongsTo(City::class, 'id_city');
+    }
+
     public function artist_user($id){
         return User::select('*')
             ->where('id',$id)

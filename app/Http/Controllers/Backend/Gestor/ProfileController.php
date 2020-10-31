@@ -13,7 +13,8 @@ class ProfileController extends Controller
 {
     public function index(User $user)
     {
-        return view('backend.gestores.profile.profile-gestores', compact('user'));
+        $userProfile = User::where('id', $user->id)->with('documentType', 'city.departaments')->first();
+        return view('backend.gestores.profile.profile-gestores', compact('userProfile'));
     }
 
 

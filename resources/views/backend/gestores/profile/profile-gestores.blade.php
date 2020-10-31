@@ -297,12 +297,14 @@
                                            role="tab">Información del gestor
                                         </a>
                                     </li>
+                                    @if(auth()->user()->roles[0]->rol == "Gestor")
                                     <li class="nav-item m-tabs__item">
                                         <a class="nav-link m-tabs__link" data-toggle="tab"
                                            href="#m_user_profile_tab_12"
                                            role="tab">Configuración del perfil
                                         </a>
                                     </li>
+                                    @endif
                                 </ul>
                             </div>
                         </div>
@@ -310,10 +312,94 @@
                             <div class="tab-pane active" id="m_user_profile_tab_1">
                                 <div class="m-portlet__body">
                                     <div class="row">
-                                        <div class="col-md-6 col-lg-6 col-12">
-                                            <div class="form-group m-form__group row">
-                                                <div id="content-aspirante_name" class="col-lg-6 m-form__group-sub">
-                                                    <label class="form-control-label ">Nombre:</label>
+                                        <div class="col-md-4 col-lg-4 col-12">
+                                            <div class="form-group m-form__group">
+                                                <div id="content-aspirante_name" class="m-form__group-sub">
+                                                    <label class="form-control-label font-weight-bold">Nombre:</label>
+                                                    <p>{{ $userProfile->name }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-lg-4 col-12">
+                                            <div class="form-group m-form__group">
+                                                <div id="content-aspirante_name" class="m-form__group-sub">
+                                                    <label
+                                                        class="form-control-label font-weight-bold">Apellidos:</label>
+                                                    <p>{{ $userProfile->last_name }}</p>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-lg-4 col-12">
+                                            <div class="form-group m-form__group">
+                                                <div id="content-aspirante_name" class="m-form__group-sub">
+                                                    <label
+                                                        class="form-control-label font-weight-bold">Correo Eléctronico:</label>
+                                                    <p>{{ $userProfile->email }}</p>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-lg-4 col-12">
+                                            <div class="form-group m-form__group">
+                                                <div id="content-aspirante_name" class="m-form__group-sub">
+                                                    <label
+                                                        class="form-control-label font-weight-bold">Teléfono:</label>
+                                                    <p>{{ $userProfile->phone_1 }}</p>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-lg-4 col-12">
+                                            <div class="form-group m-form__group">
+                                                <div id="content-aspirante_name" class="m-form__group-sub">
+
+                                                    <label
+                                                        class="form-control-label font-weight-bold">Tipo de Documento:</label>
+                                                    <p>{{ $userProfile->documentType->document }}</p>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-lg-4 col-12">
+                                            <div class="form-group m-form__group">
+                                                <div id="content-aspirante_name" class="m-form__group-sub">
+
+                                                    <label
+                                                        class="form-control-label font-weight-bold">Nº Identificación:</label>
+                                                    <p>{{ $userProfile->identification }}</p>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-lg-4 col-12">
+                                            <div class="form-group m-form__group">
+                                                <div id="content-aspirante_name" class="m-form__group-sub">
+                                                    <label
+                                                        class="form-control-label font-weight-bold">Departamento:</label>
+                                                    <p>{{ $userProfile->city->departaments->descripcion }}</p>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-lg-4 col-12">
+                                            <div class="form-group m-form__group">
+                                                <div id="content-aspirante_name" class="m-form__group-sub">
+                                                    <label
+                                                        class="form-control-label font-weight-bold">Ciudad:</label>
+                                                    <p>{{ $userProfile->city->descripcion }}</p>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 col-md-12 col-lg-12">
+                                            <div class="form-group m-form__group">
+                                                <div id="content-aspirante_name" class="m-form__group-sub">
+                                                    <label
+                                                        class="form-control-label font-weight-bold">Perfil:</label>
+                                                    <p>{{ $userProfile->profile }}</p>
 
                                                 </div>
                                             </div>
@@ -400,7 +486,7 @@
             acceptedFiles: 'image/*',
             maxFiles: 1,
             paramName: 'photo',
-            params: {'id_user': '{{ $user->id }}'},
+            params: {'id_user': '{{  $userProfile->id }}'},
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
