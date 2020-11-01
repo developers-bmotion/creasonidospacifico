@@ -1035,7 +1035,7 @@
                                             class="form-control m-bootstrap-select m_selectpicker">
                                         <option value="">Seleccione una opción</option>
                                         @foreach($categories as $tCategorie)
-                                            <option value="{{ $tCategorie->id }}">{{ $tCategorie->category }}</option>
+                                            <option value="{{ $tCategorie->id }}">{{ $tCategorie->category }} ({{ $tCategorie->description }})</option>
                                         @endforeach
                                     </select>
                                     <div id="error-song_categoryID" class="form-control-feedback"

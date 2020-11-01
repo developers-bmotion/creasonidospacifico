@@ -47,31 +47,55 @@ class DashboardController extends Controller
         $objetCiudades = new \stdClass();
         $ciudades = [];
         foreach ($ciudadesAspirantes as $ciudad) {
-//            $objetCiudades->ciudad = $ciudad->city->descripcion;
-//            $objetCiudades->cantidad = Artist::countbycities($ciudad->cities_id);
-//            array_push($ciudades, $objetCiudades);
             array_push($ciudades, (object)[
-                'ciudad' => $ciudad->city->descripcion,
+                'ciudad' => ucwords($ciudad->city->descripcion),
                 'cantidad' => Artist::countbycities($ciudad->cities_id),
-                'departamento' => $ciudad->city->departaments->descripcion
+                'departamento' => ucwords($ciudad->city->departaments->descripcion)
 
             ]);
         }
         usort($ciudades, function ($a, $b) {
-            // compare the tab option value
             $diff = $b->cantidad - $a->cantidad;
-            // and return it. Unless it's zero, then compare order, instead.
             return $diff;
         });
         $ciudades = array_slice($ciudades, 0, 3);
 
         $total = null;
-        foreach ($ciudades as $ciudad){
+        foreach ($ciudades as $ciudad) {
             $total = $total + $ciudad->cantidad;
         }
+
+        /*=============================================
+          DATOS PARA LAS MEJORES CATEGORIAS
+       =============================================*/
+
+        $projectscategoires = Project::has('category')->with('category')->groupBy('category_id')->get();
+        $objetCategories = new \stdClass();
+        $categories = [];
+        foreach ($projectscategoires as $projectscategory) {
+            array_push($categories, (object)[
+                'category' => ucwords($projectscategory->category->category),
+                'description' => $projectscategory->category->description,
+                'quantity' => Project::countbyCategories($projectscategory->category_id)
+            ]);
+        }
+
+        usort($categories, function ($a, $b) {
+            // compare the tab option value
+            $diff = $b->quantity - $a->quantity;
+            // and return it. Unless it's zero, then compare order, instead.
+            return $diff;
+        });
+       $categories = array_slice($categories, 0, 3);
+
+        $totalCategories = null;
+        foreach ($categories as $category) {
+            $totalCategories = $totalCategories + $category->quantity;
+        }
+
         return view('backend.dashboard.dashboard', compact('aspiranteRegistroCompleto',
             'aspiranteRegistroSinCanción', 'aspirantessolocuenta',
-            'totalregistros', 'ciudades', 'total'));
+            'totalregistros', 'ciudades', 'total', 'categories', 'totalCategories'));
 
     }
 }

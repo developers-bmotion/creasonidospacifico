@@ -13,7 +13,7 @@
                         <div class="m-widget1">
                             <div class="m-widget1__item">
                                 <h5 class="m-portlet__head-text">
-                                    Cantidad de registros
+                                    Cantidad de aspirantes registrados
                                 </h5>
                                 <hr>
                                 <div class="row m-row--no-padding align-items-center">
@@ -70,9 +70,10 @@
 
                         <!--begin:: Widgets/Stats2-1 -->
                         <div class="m-widget1">
-                            <h5 class="m-portlet__head-text pt-3">
-                                Las tres mejores ciudades
+                            <h5 class="m-portlet__head-text">
+                                Las tres ciudades con más registros
                             </h5>
+                            <span class="m-widget1__desc">Esta información es basada en el lugar de nacimiento</span>
                             <hr>
                             @forelse($ciudades as $ciudadesAspirante)
                                 <div class="m-widget1__item">
@@ -113,65 +114,51 @@
 
                         <!--end:: Widgets/Stats2-1 -->
                     </div>
-{{--                    <div class="col-md-12 col-lg-12 col-xl-4">--}}
+                    <div class="col-md-12 col-lg-12 col-xl-4">
 
-{{--                        <!--begin:: Widgets/Stats2-1 -->--}}
-{{--                        <div class="m-widget1">--}}
-{{--                            <div class="m-widget1__item">--}}
-{{--                                <h5 class="m-portlet__head-text">--}}
-{{--                                    Información de Aspirantes--}}
-{{--                                </h5>--}}
-{{--                                <hr>--}}
-{{--                                <div class="row m-row--no-padding align-items-center">--}}
-{{--                                    <div class="col">--}}
-{{--                                        <h3 class="m-widget1__title">Registrados</h3>--}}
-{{--                                        <span class="m-widget1__desc">Aquellos que han hecho todo el proceso</span>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="col m--align-right">--}}
-{{--                                        <span class="m-widget1__number m--font-brand"--}}
-{{--                                              style="font-size: 2rem">{{ $aspiranteRegistroCompleto }}</span>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <div class="m-widget1__item">--}}
-{{--                                <div class="row m-row--no-padding align-items-center">--}}
-{{--                                    <div class="col">--}}
-{{--                                        <h3 class="m-widget1__title">Registros sin canción</h3>--}}
-{{--                                        <span class="m-widget1__desc">Aquellos registros sin canción</span>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="col m--align-right">--}}
-{{--                                        <span class="m-widget1__number m--font-danger"--}}
-{{--                                              style="font-size: 2rem">{{ $aspiranteRegistroSinCanción }}</span>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <div class="m-widget1__item">--}}
-{{--                                <div class="row m-row--no-padding align-items-center">--}}
-{{--                                    <div class="col">--}}
-{{--                                        <h3 class="m-widget1__title">Sin Registro</h3>--}}
-{{--                                        <span class="m-widget1__desc">Aquellos que solo han creado la cuenta</span>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="col m--align-right">--}}
-{{--                                        <span class="m-widget1__number m--font-warning"--}}
-{{--                                              style="font-size: 2rem">{{ $aspirantessolocuenta }}</span>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <div class="m-widget1__item">--}}
-{{--                                <div class="row m-row--no-padding align-items-center">--}}
-{{--                                    <div class="col">--}}
-{{--                                        <h3 class="m-widget1__title">Total</h3>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="col m--align-right">--}}
-{{--                                        <span class="m-widget1__number m--font-"--}}
-{{--                                              style="font-size: 2rem">{{ $totalregistros }}</span>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
+                        <!--begin:: Widgets/Stats2-1 -->
 
-{{--                        <!--end:: Widgets/Stats2-1 -->--}}
-{{--                    </div>--}}
+                        <div class="m-widget1">
+                            <h5 class="m-portlet__head-text">
+                                Modalidades más  registradas
+                            </h5>
+                            <hr>
+                            @forelse($categories as $category)
+                                <div class="m-widget1__item">
+                                    <div class="row m-row--no-padding align-items-center">
+                                        <div class="col-10">
+                                            <h3 class="m-widget1__title">{{ $category->category }}</h3>
+                                          <span class="m-widget1__desc">{{ $category->description }}</span>
+                                        </div>
+                                        <div class="col-2 m--align-right">
+                                        <span class="m-widget1__number m--font"
+                                              style="font-size: 1.8rem">{{ $category->quantity }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            @empty
+                                <h1>No hay datos</h1>
+                            @endforelse
+                            <div class="m-widget1__item">
+                                <div class="row m-row--no-padding align-items-center">
+                                    <div class="col">
+                                        <h3 class="m-widget1__title">Total</h3>
+                                    </div>
+
+                                    <div class="col m--align-right">
+                                        @if($total)
+                                            <span class="m-widget1__number m--font-"
+                                                  style="font-size: 2rem">{{ $totalCategories }}</span>
+                                        @else
+                                            <span class="m-widget1__number m--font-"
+                                                  style="font-size: 2rem">0</span>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--end:: Widgets/Stats2-1 -->
+                    </div>
                 </div>
             </div>
         </div>

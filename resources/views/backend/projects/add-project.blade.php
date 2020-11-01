@@ -197,7 +197,7 @@
 
                                 @foreach($categories as $tCategorie)
                                     <option value="{{ $tCategorie->id }}" {{ old('tCategory_id') == $tCategorie->id ? 'selected':''}} >
-                                        {{ $tCategorie->category }}
+                                        {{ $tCategorie->category }} ({{ $tCategorie->description }})
                                     </option>
                                 @endforeach
                                 {!! $errors->first('category_id','<div
