@@ -308,6 +308,9 @@ License: You must have a valid license purchased only from themeforest(the above
     <li class="m-nav-sticky__item pt-3" data-toggle="m-tooltip" title="Términos de Referencia" data-placement="left">
         <a href="/documents/Términos-de-refencia-Crea-Sonidos.pdf" target="_blank"><i class="la la-book" style="color: white; !important;"></i></a>
     </li>
+    <li class="m-nav-sticky__item pt-3" data-toggle="m-tooltip" title="Preguntas Frecuentes" data-placement="left">
+        <a href="/documents/PREGUNTAS_FRECUENTES_CON RESPUESTAS_26-10-2020_APROBADO.pdf" target="_blank"><i class="la la-question-circle" style="color: white; !important;"></i></a>
+    </li>
 {{--    <li class="m-nav-sticky__item" data-toggle="m-tooltip" title="{{ __('soporte') }}" data-placement="left">--}}
 {{--        <a href="" target="_blank"><i class="la la-life-ring"></i></a>--}}
 {{--    </li>--}}

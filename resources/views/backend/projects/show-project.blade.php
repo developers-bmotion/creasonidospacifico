@@ -608,7 +608,7 @@
 
                                         {{-- @dd($artist->users->name) --}}
                                         <h5 style="font-weight: bold"
-                                            class="">{{ __('Aspirante registrado por gestor') }}</h5>
+                                            class="">Aspirante registrado por el gestor <a href="{{ route('profile.managament', $artist->artists[0]->userGestor->slug)}}"><span>{{ $artist->artists[0]->userGestor->name }} {{$artist->artists[0]->userGestor->last_name}}</span></a></h5>
                                         <div class="">
                                             <br>
                                             <label style="font-weight: bold">Documento de soporte:</label>
@@ -666,7 +666,7 @@
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="exampleModalLongTitle">
                                                         Documento soporte
-                                                        de {{ $artist->artists[0]->users->name}}</h5>
+                                                        de {{ $artist->artists[0]->users->name}} {{ $artist->artists[0]->users->last_name}}</h5>
                                                     <button type="button" class="close" data-dismiss="modal"
                                                             aria-label="Close">
                                                         <span aria-hidden="true">×</span>

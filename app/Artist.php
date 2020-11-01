@@ -116,6 +116,9 @@ class Artist extends Model
         return $this->belongsTo(City::class, 'place_residence');
     }
 
+    public function userGestor(){
+        return $this->belongsTo(User::class, 'gestor_id');
+    }
 
     public static function projects_artist($id){
 
