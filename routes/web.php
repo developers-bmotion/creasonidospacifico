@@ -18,25 +18,14 @@ use App\Artist;
 use App\Mail\ArtistProjectRevision;
 use App\Mail\NewArtist;
 use App\Project;
+use App\User;
 
 Route::get('/datos' , function (){
+    $totalregistros = User::whereHas('roles', function ($q){
+        $q->where('rol', 'Artist');
+    })->get();
 
-    $project = \App\User::whereNotNull('last_name')->has('artista')->with(['artista.projects' => function($q){
-
-        $q->whereNull('status');
-    },'artista.documentType','artista.city.departaments','artista.personType'])->get();
-
-    $listAspirant = Artist::with(['users','personType','documentType','city.departaments',
-    'projects' => function($q){
-        return $q->where('status',2);
-    }])->get();
-
-    return $listAspirant;
-    // $project = Project::where('id',9)->with('artists.users')->first();
-    // return new ArtistProjectRevision($project,'nombre', 'mensaje');
-    // Artisan::call('projects:close');
-    // dd(\App\Category::where('typeCategory_id', 2)->get());
-    // dd(App\Project::where('status', 1)->count());
+    return $totalregistros;
 });
 
 Route::get('/represtante-menor-edad/{id}', function($id){

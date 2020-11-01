@@ -385,6 +385,7 @@ class ProfileController extends Controller
         $aspirant->gestor_id = auth()->user()->id;
         $aspirant->save();
 
+        $user->roles()->attach(['2']);
         \Mail::to(auth()->user()->email)->send(new NewAspirantGestor($user->name, $user->last_name, auth()->user()->name, auth()->user()->last_name)); // correo para el gestor
         return $aspirant->id;
     }

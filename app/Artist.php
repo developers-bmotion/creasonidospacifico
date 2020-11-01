@@ -126,6 +126,20 @@ class Artist extends Model
 
         return $artist->projects;
     }
+
+    public static function cityArtist($id){
+        return DB::table('ciudad')
+            ->where('id', $id)
+            ->get();
+    }
+
+    public static function countbycities($id){
+        return DB::table('artists')
+            ->where('cities_id',$id)
+            ->orderBy('cities_id', 'desc')
+            ->count('id');
+
+    }
     /**
      * Consultas $
      */
