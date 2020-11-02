@@ -315,7 +315,7 @@
                 </div>
                 <div class="m-portlet__foot m-portlet__foot--fit">
                     <div class="m-form__actions">
-                        <button id="btn_add_project" class="btn btn-primary pull-right">Enviar información</button>
+                        <button id="btn_add_project" class="btn btn-primary pull-right">Registrar canción</button>
                     </div>
                 </div>
             </form>
@@ -570,6 +570,10 @@
 
             }).then(function (result) {
                 if (result.value) {
+                    $('body').loading({
+                        message: 'Tu propuesta musical se esta enviando...',
+                        start:true,
+                    });
                     $('#form_add_project').submit();
                 }
             })

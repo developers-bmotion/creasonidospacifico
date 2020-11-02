@@ -427,6 +427,10 @@ $("#send-info").click( function(e) {
             reverseButtons: true
         }).then(function(result){
             if (result.value) {
+                $('body').loading({
+                    message: 'Guardando datos...',
+                    start:true,
+                });
                 $('#m_form_new_register').submit();
             }
         });
