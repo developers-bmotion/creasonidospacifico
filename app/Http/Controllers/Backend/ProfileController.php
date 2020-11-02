@@ -337,7 +337,9 @@ class ProfileController extends Controller
         $aspirante = (object) $request->aspirante;
         $song = (object) $request->song;
 
-
+        if ($aspirante->urlImageProfile == '' || $aspirante->urlImageProfile == null){
+            $aspirante->urlImageProfile = '/backend/assets/app/media/img/users/perfil.jpg';
+        }
         // crear el usuario
         $user = new User();
         $user->name = ucwords($aspirante->name);
@@ -348,7 +350,7 @@ class ProfileController extends Controller
         $user->img_document_front = $aspirante->urlImageDocumentFrente;
         $user->img_document_back = $aspirante->urlImageDocumentAtras;
         $user->picture = $aspirante->urlImageProfile;
-        $user->slug = Str::slug($aspirante->name.'-'.str_random(1000000), '-');
+        $user->slug = Str::slug($aspirante->name.'-'.str_random(100000), '-');
 
         if ( isset($aspirante->email) ) { // si existe un correo
             if ($aspirante->email != auth()->user()->email){ // debe ser diferente al del usuario gestor
@@ -403,7 +405,7 @@ class ProfileController extends Controller
         $project->audio_secundary_two = $song->urlAdditionalSongTwo;
         $project->description = $song->description;
         $project->status = 1;
-        $project->slug = Str::slug($song->nameProject.'-'.str_random(1000), '-');
+        $project->slug = Str::slug($song->nameProject.'-'.str_random(100000), '-');
         $project->save();
 
         $project->artists()->attach($idArtist); // relacionar el proyecto con el artista

@@ -7,7 +7,7 @@ Ten encuenta que puedes iniciar sesión e ingresar a tu perfil a traves de este 
  {{ __('Iniciar Sesión') }}
 @endcomponent
 
-Y no olvides en registrar tu propues musical a traves de este link:
+Y no olvides en registrar tu propuesta musical a traves de este link:
 @component('mail::button', ['url' => route('add.project')])
     {{ __('Subir Canción') }}
 @endcomponent
