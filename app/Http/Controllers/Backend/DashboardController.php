@@ -98,4 +98,63 @@ class DashboardController extends Controller
             'totalregistros', 'ciudades', 'total', 'categories', 'totalCategories'));
 
     }
+
+    public function getCitiesAspirants(){
+        /*=============================================
+           DATOS PARA LA INFORMACIÓN POR CIUDADES
+        =============================================*/
+        $ciudadesAspirantes = Artist::has('city')->with('city.departaments')->groupBy('cities_id')->get();
+
+        $objetCiudades = new \stdClass();
+        $ciudades = [];
+
+        foreach ($ciudadesAspirantes as $ciudad) {
+            array_push($ciudades, (object)[
+                'ciudad' => ucwords($ciudad->city->descripcion),
+                'cantidad' => Artist::countbycities($ciudad->cities_id),
+                'departamento' => ucwords($ciudad->city->departaments->descripcion)
+
+            ]);
+        }
+        usort($ciudades, function ($a, $b) {
+            $diff = $b->cantidad - $a->cantidad;
+            return $diff;
+        });
+
+        $total = null;
+        foreach ($ciudades as $ciudad) {
+            $total = $total + $ciudad->cantidad;
+        }
+
+        return datatables()->of($ciudades)->toJson();
+    }
+    public function getModalidadesAspirants(){
+        /*=============================================
+         DATOS PARA LAS MEJORES CATEGORIAS
+      =============================================*/
+
+        $projectscategoires = Project::has('category')->with('category')->groupBy('category_id')->get();
+        $objetCategories = new \stdClass();
+        $categories = [];
+        foreach ($projectscategoires as $projectscategory) {
+            array_push($categories, (object)[
+                'category' => ucwords($projectscategory->category->category),
+                'description' => $projectscategory->category->description,
+                'quantity' => Project::countbyCategories($projectscategory->category_id)
+            ]);
+        }
+
+        usort($categories, function ($a, $b) {
+            // compare the tab option value
+            $diff = $b->quantity - $a->quantity;
+            // and return it. Unless it's zero, then compare order, instead.
+            return $diff;
+        });
+
+        $totalCategories = null;
+        foreach ($categories as $category) {
+            $totalCategories = $totalCategories + $category->quantity;
+        }
+        return datatables()->of($categories)->toJson();
+    }
 }

@@ -4,6 +4,9 @@
 
 @section('content')
     <div class="m-content">
+        <!--=====================================
+		    INFORMACIÓN NÚMERICA E IMPORTANTE
+        ======================================-->
         <div class="m-portlet">
             <div class="m-portlet__body m-portlet__body--no-padding">
                 <div class="row m-row--no-padding m-row--col-separator-xl">
@@ -109,6 +112,13 @@
                                         @endif
                                     </div>
                                 </div>
+                                <div class="row pt-2">
+                                    <div class="col-12 text-center">
+                                        <button data-toggle="collapse" href="#m_accordion_3_item_1_body" type="button"
+                                                id="btn_info_cities" class="btn btn-secondary">Más información
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -120,7 +130,7 @@
 
                         <div class="m-widget1">
                             <h5 class="m-portlet__head-text">
-                                Modalidades más  registradas
+                                Modalidades más registradas
                             </h5>
                             <hr>
                             @forelse($categories as $category)
@@ -128,7 +138,7 @@
                                     <div class="row m-row--no-padding align-items-center">
                                         <div class="col-10">
                                             <h3 class="m-widget1__title">{{ $category->category }}</h3>
-                                          <span class="m-widget1__desc">{{ $category->description }}</span>
+                                            <span class="m-widget1__desc">{{ $category->description }}</span>
                                         </div>
                                         <div class="col-2 m--align-right">
                                         <span class="m-widget1__number m--font"
@@ -158,6 +168,67 @@
                             </div>
                         </div>
                         <!--end:: Widgets/Stats2-1 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--=====================================
+		   TABLAS EN ACORDEONES
+        ======================================-->
+        <div class="row">
+            <div class="col-12 col-md-12 col-md-12">
+                <div class="m-accordion m-accordion--default m-accordion--solid" id="m_accordion_3" role="tablist">
+
+                    <!--begin::Item-->
+                    <div class="m-accordion__item">
+                        <div class="m-accordion__item-head collapsed" role="tab" id="m_accordion_3_item_1_head"
+                             data-toggle="collapse" href="#m_accordion_3_item_1_body" aria-expanded="false">
+                            <span class="m-accordion__item-icon"><i class="fa flaticon-user-ok"></i></span>
+                            <span class="m-accordion__item-title">Información de ciudades & Modalidades (Clic para más información)</span>
+                            <span class="m-accordion__item-mode"></span>
+                        </div>
+                        <div class="m-accordion__item-body collapse" id="m_accordion_3_item_1_body" role="tabpanel"
+                             aria-labelledby="m_accordion_3_item_1_head" data-parent="#m_accordion_3" style="">
+                            <div class="m-accordion__item-content">
+                                <div class="row">
+                                    <div class="col-12 col-md-4 col-lg-4">
+                                    </div>
+                                    <div class="col-12 col-md-4 col-lg-4">
+                                        <h5 class="m-portlet__head-text" style="text-align: center;">
+                                            Cantidad de aspirantes por ciudad o municipio
+                                        </h5>
+                                        <hr>
+                                        <table class="table table-striped- table-bordered table-hover table-checkable"
+                                               id="table_ciudades">
+                                            <thead>
+                                            <tr>
+                                                {{-- <th>#</th> --}}
+                                                <th>{{ __('Ciudad') }}</th>
+                                                <th>{{ __('Departamento') }}</th>
+                                                <th>{{ __('Aspisrantes') }}</th>
+                                            </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                    <div class="col-12 col-md-4 col-lg-4">
+                                        <h5 class="m-portlet__head-text" style="text-align: center;">
+                                            Cantidad de aspirantes por modalidad
+                                        </h5>
+                                        <hr>
+                                        <table class="table table-striped- table-bordered table-hover table-checkable"
+                                               id="table_modalidades">
+                                            <thead>
+                                            <tr>
+                                                {{-- <th>#</th> --}}
+                                                <th>{{ __('Modalidad') }}</th>
+                                                <th>{{ __('Aspirantes') }}</th>
+                                            </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -645,6 +716,101 @@
         // loadTable();
     </script>
 
+    <script>
 
+        $('#table_ciudades').DataTable({
+            "processing": true,
+            "order": [[2, "desc"]],
+            "ajax": '{{route('get.aspirants.cities')}}',
+            "columns": [
+                {
+                    data: "ciudad",
+
+                },
+                {
+                    data: "departamento",
+
+                },
+                {
+                    data: "cantidad",
+
+                },
+
+            ],
+            "language": {
+                "sProcessing": "{{__('procesando')}}",
+                "sLengthMenu": "{{__('mostrar')}} _MENU_ {{__('registros')}}",
+                "sZeroRecords": "No se encontraron resultados",
+                "sEmptyTable": "{{__('nigun_dato_tabla')}}",
+                "sInfo": "_TOTAL_ {{__('registros')}}",
+                "sInfoEmpty": "{{ __('mostrando_registros_del_cero') }}",
+                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                "sInfoPostFix": "",
+                "sSearch": "{{__('buscar')}}:",
+                "sUrl": "",
+                "sInfoThousands": ",",
+                "sLoadingRecords": "{{__('cargando')}}",
+                "oPaginate": {
+                    "sFirst": "Primero",
+                    "sLast": "Último",
+                    "sNext": "{{__('siguiente')}}",
+                    "sPrevious": "{{__('anterior')}}"
+                },
+                "oAria": {
+                    "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                }
+            }
+
+        });
+        $("#btn_info_cities").click(function () {
+            $('html,body').animate({
+                scrollTop: $("#m_accordion_3_item_1_head").offset().top
+            }, 500);
+        });
+    </script>
+    <script>
+        $('#table_modalidades').DataTable({
+            "processing": true,
+            "order": [[1, "desc"]],
+            "ajax": '{{route('get.aspirants.modalidades')}}',
+            "columns": [
+                {
+                    data: "category",
+
+                },
+                {
+                    data: "quantity",
+
+                },
+
+            ],
+            "language": {
+                "sProcessing": "{{__('procesando')}}",
+                "sLengthMenu": "{{__('mostrar')}} _MENU_ {{__('registros')}}",
+                "sZeroRecords": "No se encontraron resultados",
+                "sEmptyTable": "{{__('nigun_dato_tabla')}}",
+                "sInfo": "_TOTAL_ {{__('registros')}}",
+                "sInfoEmpty": "{{ __('mostrando_registros_del_cero') }}",
+                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                "sInfoPostFix": "",
+                "sSearch": "{{__('buscar')}}:",
+                "sUrl": "",
+                "sInfoThousands": ",",
+                "sLoadingRecords": "{{__('cargando')}}",
+                "oPaginate": {
+                    "sFirst": "Primero",
+                    "sLast": "Último",
+                    "sNext": "{{__('siguiente')}}",
+                    "sPrevious": "{{__('anterior')}}"
+                },
+                "oAria": {
+                    "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                }
+            }
+
+        });
+    </script>
 @endpush
 

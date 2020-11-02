@@ -20,13 +20,7 @@ use App\Mail\NewArtist;
 use App\Project;
 use App\User;
 
-Route::get('/datos' , function (){
-    $totalregistros = User::whereHas('roles', function ($q){
-        $q->where('rol', 'Artist');
-    })->get();
-
-    return $totalregistros;
-});
+Route::get('/datos', '\App\Http\Controllers\Backend\DashboardController@getCitiesAspirants');
 
 Route::get('/represtante-menor-edad/{id}', function($id){
     $artist = Artist::where('id', $id)
@@ -241,6 +235,9 @@ Route::group(['namespace'=>'Backend','prefix' => 'dashboard','middleware' => 'au
         Route::post("/projects-news", "Admin\DashboardAdminController@showProyect")->name("admin.projects_news");
         Route::get("/aspirants-all", "Admin\DashboardAdminController@AspirantsAll")->name("aspirants.all");
         Route::post("/top-countries", "Admin\DashboardAdminController@showTopCountry")->name("admin.top_country");
+
+        Route::get('/aspirants-cities', 'DashboardController@getCitiesAspirants')->name('get.aspirants.cities');
+        Route::get('/aspirants-categories', 'DashboardController@getModalidadesAspirants')->name('get.aspirants.modalidades');
 
     });
 
