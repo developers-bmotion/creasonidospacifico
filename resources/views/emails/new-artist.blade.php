@@ -2,8 +2,16 @@
 # {{ __("¡Tus datos han sido registrados!") }}
 
 {{ __("Sr/Sra :artist hemos recibidos tus datos. ", ['artist' => $artist]) }}
+Ten encuenta que puedes iniciar sesión e ingresar a tu perfil a traves de este link usando las credenciales de acceso (Correo eléctronico y contreseña) que ingresarte al crear tu cuenta.
+@component('mail::button', ['url' => route('login')])
+ {{ __('Iniciar Sesión') }}
+@endcomponent
 
-{{ __('Ahora es momento de que registres tu propuesta musical.') }}
+Y no olvides en registrar tu propues musical a traves de este link:
+@component('mail::button', ['url' => route('add.project')])
+    {{ __('Subir Canción') }}
+@endcomponent
+
 
 {{--@component('mail::button', ['url' => route('show.backend.project', $project->slug)])
  {{ __('Ir a la canción') }}

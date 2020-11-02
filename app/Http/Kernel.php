@@ -63,6 +63,7 @@ class Kernel extends HttpKernel
         'admin_permisos' => \App\Http\Middleware\AdminPermisos::class,
         'home' => \App\Http\Middleware\HomeMiddleware::class,
         'register_artist' => \App\Http\Middleware\RegisterArtist::class,
+        'exist_project_artist' => \App\Http\Middleware\ExistProjectArtist::class,
         'manage_permisos' => \App\Http\Middleware\ManagePermisos::class,
         'verifyProjectUser' => \App\Http\Middleware\VerifyProjectForUser::class,
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,

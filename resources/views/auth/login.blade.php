@@ -171,8 +171,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 @enderror
                                 <div class="m-login__form-action">
                                     <button type="submit"
-                                            class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air">Ingresar a
-                                        tu perfil
+                                            class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air">Ingresar
                                     </button>
                                 </div>
                             </form>

@@ -40,7 +40,7 @@ Route::get('/offline', function (){
 });
 
 Route::get('/prueba-email', function (){
-   return new \App\Mail\NewArtistRegisterGestor('Mao', 'Guti', 'amores como el nuestro');
+   return new \App\Mail\NewArtist('Mao', 'Guti', 'amores como el nuestro');
 });
 
 Route::get('/')->middleware('');
@@ -196,7 +196,7 @@ Route::group(['namespace'=>'Backend','prefix' => 'dashboard','middleware' => 'au
 
     //RUTAS PARA AGREGAR PROYECTOS
 
-    Route::get('/new-project','AddProjectController@index')->name('add.project')->middleware('register_artist');
+    Route::get('/new-project','AddProjectController@index')->name('add.project')->middleware(['register_artist', 'exist_project_artist']);
 
     Route::post('/add-project-audio','AddProjectController@upload_image')->name('add.project.audio');
     Route::post('/add-audio-one','AddProjectController@audio_one')->name('add.audio.one');
