@@ -25,6 +25,7 @@ class ResetPasswordController extends Controller
      *
      * @var string
      */
+
     protected $redirectTo = '/dashboard/profile';
 
     /**
@@ -32,8 +33,22 @@ class ResetPasswordController extends Controller
      *
      * @return void
      */
+
+    protected function redirectTo()
+    {
+        if (auth()->user()->roles[0]->rol == "Gestor") {
+            return '/dashboard/profile-gestor/' . auth()->user()->slug;
+        } else if (auth()->user()->roles[0]->rol == "Artist") {
+            return '/dashboard/profile';
+        } else {
+            return '/dashboard';
+        }
+    }
+
     public function __construct()
     {
+
         $this->middleware('guest');
     }
+
 }
