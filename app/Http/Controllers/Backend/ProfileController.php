@@ -543,7 +543,7 @@ class ProfileController extends Controller
         Storage::disk('s3')->setVisibility($pdf_cedula_save, 'public');
         $urlS3 = Storage::disk('s3')->url($pdf_cedula_save);
 
-        if($team->user_id){
+        if($team && $team->user_id){
             Team::where('user_id', $team->user_id)->update([
                 'pdf_identificacion' => $urlS3,
                 'img_document_front' => null,
@@ -578,7 +578,7 @@ class ProfileController extends Controller
         Storage::disk('s3')->setVisibility($pdf_cedula_save, 'public');
         $urlS3 = Storage::disk('s3')->url($pdf_cedula_save);
 
-       if($team->user_id){
+       if($team && $team->user_id){
             Team::where('user_id', $team->user_id)->update([
                 'pdf_identificacion' => $urlS3,
                 'img_document_front' => null,
@@ -632,7 +632,7 @@ class ProfileController extends Controller
         $team = Team::where('user_id', auth()->user()->id)->first();
 
         $user = User::where('id', auth()->user()->id)->first();
-        if($team->user_id){
+        if($team && $team->user_id){
             Team::where('user_id', $team->user_id)->update([
                 'pdf_identificacion' => null,
                 'img_document_front' => $aspirante->urlImageDocumentFrente,
@@ -659,7 +659,7 @@ class ProfileController extends Controller
         //
         $user = User::where('id', $aspirante->idAspirante)->first();
         $team = Team::where('user_id', $aspirante->idAspirante)->first();
-        if($team->user_id){
+        if($team && $team->user_id){
                     Team::where('user_id', $team->user_id)->update([
                         'pdf_identificacion' => null,
                         'img_document_front' => $aspirante->urlImageDocumentFrente,
@@ -726,7 +726,7 @@ class ProfileController extends Controller
         $teams = (object) $request->team;
         $team = Team::where('id',$teams->id )->first();
 
-        if($team->user_id){
+        if($team && $team->user_id){
             // dd('hola');
             User::where('id',$team->user_id)->update([
                 'pdf_cedula' => null,
@@ -825,7 +825,7 @@ class ProfileController extends Controller
         Storage::disk('s3')->setVisibility($pdf_cedula_save, 'public');
         $urlS3 = Storage::disk('s3')->url($pdf_cedula_save);
 
-        if($team->user_id){
+        if($team && $team->user_id){
             // dd('hola');
             User::where('id',$team->user_id)->update([
                 'pdf_cedula' => $urlS3,
