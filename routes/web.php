@@ -239,6 +239,8 @@ Route::group(['namespace'=>'Backend','prefix' => 'dashboard','middleware' => 'au
         Route::get('/aspirants-cities', 'DashboardController@getCitiesAspirants')->name('get.aspirants.cities');
         Route::get('/aspirants-categories', 'DashboardController@getModalidadesAspirants')->name('get.aspirants.modalidades');
 
+        Route::get('/report-dashboard', 'DashboardController@reportDashboard')->name('report.pdf.dashboard');
+
     });
 
     //RUTAS PARA EL MANAGEMENT -------------------------------------------------------------------------------------------

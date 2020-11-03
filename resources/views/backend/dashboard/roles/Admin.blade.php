@@ -115,7 +115,7 @@
                                 <div class="row pt-2">
                                     <div class="col-12 text-center">
                                         <button data-toggle="collapse" href="#m_accordion_3_item_1_body" type="button"
-                                                id="btn_info_cities" class="btn btn-secondary">Más información
+                                                class="btn btn-secondary btn_info_cities">Más información
                                         </button>
                                     </div>
                                 </div>
@@ -165,6 +165,13 @@
                                         @endif
                                     </div>
                                 </div>
+                                <div class="row pt-2">
+                                    <div class="col-12 text-center">
+                                        <button data-toggle="collapse" href="#m_accordion_3_item_1_body" type="button"
+                                                class="btn btn-secondary btn_info_cities">Más información
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <!--end:: Widgets/Stats2-1 -->
@@ -192,6 +199,91 @@
                             <div class="m-accordion__item-content">
                                 <div class="row">
                                     <div class="col-12 col-md-4 col-lg-4">
+{{--                                        <h5 class="m-portlet__head-text" style="text-align: center;">--}}
+{{--                                            Últimos aspirantes registrados--}}
+{{--                                        </h5>--}}
+{{--                                        <div class="m-widget4">--}}
+{{--                                            <div class="m-widget4__item">--}}
+{{--                                                <div class="m-widget4__img m-widget4__img--logo">--}}
+{{--                                                    <img src="assets/app/media/img/client-logos/logo5.png" alt="">--}}
+{{--                                                </div>--}}
+{{--                                                <div class="m-widget4__info">--}}
+{{--													<span class="m-widget4__title">--}}
+{{--														Trump Themes--}}
+{{--													</span><br>--}}
+{{--                                                    <span class="m-widget4__sub">--}}
+{{--														Make Metronic Great Again--}}
+{{--													</span>--}}
+{{--                                                </div>--}}
+{{--                                                <span class="m-widget4__ext">--}}
+{{--													<span class="m-widget4__number m--font-brand">+$2500</span>--}}
+{{--												</span>--}}
+{{--                                            </div>--}}
+{{--                                            <div class="m-widget4__item">--}}
+{{--                                                <div class="m-widget4__img m-widget4__img--logo">--}}
+{{--                                                    <img src="assets/app/media/img/client-logos/logo4.png" alt="">--}}
+{{--                                                </div>--}}
+{{--                                                <div class="m-widget4__info">--}}
+{{--													<span class="m-widget4__title">--}}
+{{--														StarBucks--}}
+{{--													</span><br>--}}
+{{--                                                    <span class="m-widget4__sub">--}}
+{{--														Good Coffee &amp; Snacks--}}
+{{--													</span>--}}
+{{--                                                </div>--}}
+{{--                                                <span class="m-widget4__ext">--}}
+{{--													<span class="m-widget4__number m--font-brand">-$290</span>--}}
+{{--												</span>--}}
+{{--                                            </div>--}}
+{{--                                            <div class="m-widget4__item">--}}
+{{--                                                <div class="m-widget4__img m-widget4__img--logo">--}}
+{{--                                                    <img src="assets/app/media/img/client-logos/logo3.png" alt="">--}}
+{{--                                                </div>--}}
+{{--                                                <div class="m-widget4__info">--}}
+{{--													<span class="m-widget4__title">--}}
+{{--														Phyton--}}
+{{--													</span><br>--}}
+{{--                                                    <span class="m-widget4__sub">--}}
+{{--														A Programming Language--}}
+{{--													</span>--}}
+{{--                                                </div>--}}
+{{--                                                <span class="m-widget4__ext">--}}
+{{--													<span class="m-widget4__number m--font-brand">+$17</span>--}}
+{{--												</span>--}}
+{{--                                            </div>--}}
+{{--                                            <div class="m-widget4__item">--}}
+{{--                                                <div class="m-widget4__img m-widget4__img--logo">--}}
+{{--                                                    <img src="assets/app/media/img/client-logos/logo2.png" alt="">--}}
+{{--                                                </div>--}}
+{{--                                                <div class="m-widget4__info">--}}
+{{--													<span class="m-widget4__title">--}}
+{{--														GreenMakers--}}
+{{--													</span><br>--}}
+{{--                                                    <span class="m-widget4__sub">--}}
+{{--														Make Green Great Again--}}
+{{--													</span>--}}
+{{--                                                </div>--}}
+{{--                                                <span class="m-widget4__ext">--}}
+{{--													<span class="m-widget4__number m--font-brand">-$2.50</span>--}}
+{{--												</span>--}}
+{{--                                            </div>--}}
+{{--                                            <div class="m-widget4__item">--}}
+{{--                                                <div class="m-widget4__img m-widget4__img--logo">--}}
+{{--                                                    <img src="assets/app/media/img/client-logos/logo1.png" alt="">--}}
+{{--                                                </div>--}}
+{{--                                                <div class="m-widget4__info">--}}
+{{--													<span class="m-widget4__title">--}}
+{{--														FlyThemes--}}
+{{--													</span><br>--}}
+{{--                                                    <span class="m-widget4__sub">--}}
+{{--														A Let's Fly Fast Again Language--}}
+{{--													</span>--}}
+{{--                                                </div>--}}
+{{--                                                <span class="m-widget4__ext">--}}
+{{--													<span class="m-widget4__number m--font-brand">+$200</span>--}}
+{{--												</span>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
                                     </div>
                                     <div class="col-12 col-md-4 col-lg-4">
                                         <h5 class="m-portlet__head-text" style="text-align: center;">
@@ -226,6 +318,7 @@
                                             </thead>
                                         </table>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
@@ -763,7 +856,7 @@
             }
 
         });
-        $("#btn_info_cities").click(function () {
+        $(".btn_info_cities").click(function () {
             $('html,body').animate({
                 scrollTop: $("#m_accordion_3_item_1_head").offset().top
             }, 500);

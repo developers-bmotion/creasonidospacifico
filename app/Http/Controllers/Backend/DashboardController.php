@@ -6,6 +6,7 @@ use App\Artist;
 use App\City;
 use App\Project;
 use App\User;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -156,5 +157,11 @@ class DashboardController extends Controller
             $totalCategories = $totalCategories + $category->quantity;
         }
         return datatables()->of($categories)->toJson();
+    }
+
+    public function reportDashboard(){
+
+        $pdf = PDF::loadView('backend.admin.reports.report-dashboard');
+        return $pdf->stream();
     }
 }
