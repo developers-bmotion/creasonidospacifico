@@ -325,7 +325,7 @@
 
 
                                             <div class="form-group pt-5 text-center">
-                                                <h5 style="font-weight: bold">Estado de tu propuesta musical:</h5>
+                                                <h5 style="font-weight: bold">Estado de la propuesta musical:</h5>
                                             </div>
                                             <div class="form-group text-center">
                                                 @if($project->status == 1)
@@ -666,7 +666,7 @@
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="exampleModalLongTitle">
                                                         Documento soporte
-                                                        de {{ $artist->artists[0]->users->name}} {{ $artist->artists[0]->users->last_name}}</h5>
+                                                        de {{ $artist->artists[0]->users->name}} {{ $artist->artists[0]->users->last_name}} {{ $artist->artists[0]->users->second_last_name}}</h5>
                                                     <button type="button" class="close" data-dismiss="modal"
                                                             aria-label="Close">
                                                         <span aria-hidden="true">×</span>
@@ -774,7 +774,7 @@
                                                                     <label style="font-weight: bold">Apellidos:</label>
                                                                     <div class="m-scrollable" data-scrollable="true"
                                                                          style="">
-                                                                        <p>{{ $team->last_name}}</p>
+                                                                        <p>{{ $team->last_name}} {{ $team->second_last_name }}</p>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-4 mt-2">
@@ -1547,7 +1547,7 @@
                 {
                     data: 'users.name',
                     render: function (data, type, JsonResultRow, meta) {
-                        return JsonResultRow.users.name + ' ' + JsonResultRow.users.last_name;
+                        return JsonResultRow.users.name + ' ' + JsonResultRow.users.last_name+''+JsonResultRow.users.second_last_name;
                     },
                     defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
                 },

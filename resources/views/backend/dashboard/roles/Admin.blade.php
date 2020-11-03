@@ -191,7 +191,7 @@
                         <div class="m-accordion__item-head collapsed" role="tab" id="m_accordion_3_item_1_head"
                              data-toggle="collapse" href="#m_accordion_3_item_1_body" aria-expanded="false">
                             <span class="m-accordion__item-icon"><i class="fa flaticon-user-ok"></i></span>
-                            <span class="m-accordion__item-title">Información de ciudades & Modalidades (Clic para más información)</span>
+                            <span class="m-accordion__item-title">Información de ciudades & modalidades (Clic para más información)</span>
                             <span class="m-accordion__item-mode"></span>
                         </div>
                         <div class="m-accordion__item-body collapse" id="m_accordion_3_item_1_body" role="tabpanel"

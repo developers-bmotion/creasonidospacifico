@@ -26,7 +26,7 @@
                 {{-- @dd($artist) --}}
 
                     <div class="form-group pt-5">
-                        <h5 style="font-weight: bold">Estado de tu propuesta musical:</h5>
+                        <h5 style="font-weight: bold">Estado de la propuesta musical:</h5>
                     </div>
                     <div class="form-group">
                         @if($artist->projects[0]->status == 1)
