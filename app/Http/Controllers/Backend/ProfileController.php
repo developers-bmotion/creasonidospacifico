@@ -241,6 +241,8 @@ class ProfileController extends Controller
     /* metodo para registrar el aspirante como un integrante del grupo en la base de datos */
     public function registerAspiranteGroup($request, $idArtist) {
         $aspirante = (object) $request->aspirante;
+        $Artist =Artist::where('id',$idArtist)->get();
+        // dd($Artist[0]->user_id);
 
         if ($aspirante->partGroup == '1') {
             $member = new Team();
@@ -259,6 +261,7 @@ class ProfileController extends Controller
             $member->img_document_back = $aspirante->urlImageDocumentAtras;
             $member->pdf_identificacion = $aspirante->urlPdfDocument;
             $member->artist_id = $idArtist;
+            $member->user_id =$Artist[0]->user_id;
             $member->save();
         }
     }
