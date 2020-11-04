@@ -171,7 +171,6 @@
                 </li>
             </ul>
         @endif
-
     </div>
 
     <!-- END: Horizontal Menu -->
@@ -379,6 +378,7 @@
                                                                 <a href="{{ route('profile.artist') }}"
                                                                    class="m-nav__link">
                                                                     @endif
+                                                                    Ver perfil
                                                                     {{--                                                                    <i class="m-nav__link-icon flaticon-profile-1"></i>--}}
                                                                     {{--                                                                    <span class="m-nav__link-title">--}}
                                                                     {{--																			<span class="m-nav__link-wrap">--}}
