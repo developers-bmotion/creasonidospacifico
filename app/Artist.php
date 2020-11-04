@@ -116,12 +116,29 @@ class Artist extends Model
         return $this->belongsTo(City::class, 'place_residence');
     }
 
+    public function userGestor(){
+        return $this->belongsTo(User::class, 'gestor_id');
+    }
 
     public static function projects_artist($id){
 
         $artist=Artist::where('user_id','=',$id)->with('projects')->first();
 
         return $artist->projects;
+    }
+
+    public static function cityArtist($id){
+        return DB::table('ciudad')
+            ->where('id', $id)
+            ->get();
+    }
+
+    public static function countbycities($id){
+        return DB::table('artists')
+            ->where('cities_id',$id)
+            ->orderBy('cities_id', 'desc')
+            ->count('id');
+
     }
     /**
      * Consultas $

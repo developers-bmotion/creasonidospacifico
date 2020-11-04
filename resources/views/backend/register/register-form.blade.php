@@ -505,7 +505,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                     <div id="content-aspirante_rolMember" class="form-group m-form__group row" style="display: none">
                                         <div class="col-lg-6 m-form__group-sub">
                                             <label class="form-control-label">Instrumento que interpreta</label>
@@ -982,7 +982,7 @@
                                             data-wizard-action="submit">
                                         <span>
                                             <i class="la la-check"></i>&nbsp;&nbsp;
-                                            <span>Enviar registro</span>
+                                            <span>Enviar y continuar con el registro</span>
                                         </span>
                                     </button>
                                 </div>
@@ -1000,7 +1000,7 @@
 @endsection
 @section('dropzonePhotoArtist')
     <script>
-        // variables que se emplean en form-register 
+        // variables que se emplean en form-register
         var typeDocument = @json($documenttype);
         var departamentos = @json($departamentos);
 
@@ -1072,6 +1072,6 @@
         jQuery(document).ready(function () {
             BootstrapDatepicker.init();
             inputSelect();
-        });        
+        });
     </script>
 @endsection

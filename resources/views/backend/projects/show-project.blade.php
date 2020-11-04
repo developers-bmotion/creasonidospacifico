@@ -199,9 +199,11 @@
 
 
                                 <!-- ------------------------- ACCIONES SEGUN LOS ROLES----------------------------- -->
-
-                                @include('backend.partials.rating.' .\App\User::rating_proyect())
-
+                                @if(!auth()->user()->roles[0]->rol == "Gestor")
+                                    @if(\App\User::navigation() !== "Admin")
+                                        @include('backend.partials.rating.' .\App\User::rating_proyect())
+                                    @endif
+                                @endif
                             <!-- ------------------------- CALIFICACION DEL PROYECTO CUANDO ESTA PUBLICADO Y APROBADO----------------------------- -->
                                 {{-- @if($project->status == 3 || $project->status == 4 || $project->status == 5)
                                     <div class="form-group">
@@ -323,7 +325,7 @@
 
 
                                             <div class="form-group pt-5 text-center">
-                                                <h5 style="font-weight: bold">Estado de tu propuesta musical:</h5>
+                                                <h5 style="font-weight: bold">Estado de la propuesta musical:</h5>
                                             </div>
                                             <div class="form-group text-center">
                                                 @if($project->status == 1)
@@ -601,74 +603,76 @@
 
                                 </div>
                                 @if($artist->artists[0]->gestor_id !== null)
-                            <hr>
-                            <div class="ml-2">
+                                    <hr>
+                                    <div class="ml-2">
 
-                                {{-- @dd($artist->users->name) --}}
-                            <h5 style="font-weight: bold" class="">{{ __('Aspirante registrado por gestor') }}</h5>
-                            <div class="ml-4">
-                            <br>
-                            <label style="font-weight: bold">Documento de soporte:</label>
-                            <br>
-                            <button type="button" class="btn btn-primary btn_pdf_soporte"
-                                                data-toggle="modal"
-                                                data-target="#verpdfsoporte">
-                                            Ver documento de soporte
-                            </button>
-                            @if(\App\User::navigation() == "Gestor")
+                                        {{-- @dd($artist->users->name) --}}
+                                        <h5 style="font-weight: bold"
+                                            class="">Aspirante registrado por el gestor <a href="{{ route('profile.managament', $artist->artists[0]->userGestor->slug)}}"><span>{{ $artist->artists[0]->userGestor->name }} {{$artist->artists[0]->userGestor->last_name}}</span></a></h5>
+                                        <div class="">
+                                            <br>
+                                            <label style="font-weight: bold">Documento de soporte:</label>
+                                            <br>
+                                            <button type="button" class="btn btn-primary btn_pdf_soporte"
+                                                    data-toggle="modal"
+                                                    data-target="#verpdfsoporte">
+                                                Ver documento de soporte
+                                            </button>
+                                            @if(\App\User::navigation() == "Gestor")
 
-                            <div class="row drop_soporte" style="display: none">
+                                                <div class="row drop_soporte" style="display: none">
 
-                                <div class="m-form__group form-group">
+                                                    <div class="m-form__group form-group">
 
-                                    <div id="pdf-soporte"
-                                         class="form-group m-form__group row">
-                                        <div class="col">
-                                            <div class="form-group m-form__group ">
-                                                <div class="m-dropzone dropzone-soporte m-dropzone--success"
-                                                     action="inc/api/dropzone/upload.php"
-                                                     id="m-dropzone-three">
-                                                    <div
-                                                        class="m-dropzone__msg dz-message needsclick">
-                                                        <h3 class="m-dropzone__msg-title">{{ __('Subir formulario offline en formato PDF') }}</h3>
-                                                        <span
-                                                            class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                                        <div id="pdf-soporte"
+                                                             class="form-group m-form__group row">
+                                                            <div class="col">
+                                                                <div class="form-group m-form__group ">
+                                                                    <div
+                                                                        class="m-dropzone dropzone-soporte m-dropzone--success"
+                                                                        action="inc/api/dropzone/upload.php"
+                                                                        id="m-dropzone-three">
+                                                                        <div
+                                                                            class="m-dropzone__msg dz-message needsclick">
+                                                                            <h3 class="m-dropzone__msg-title">{{ __('Subir formulario offline en formato PDF') }}</h3>
+                                                                            <span
+                                                                                class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
+
+
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                            </div>
-                            <i class="flaticon-edit ml-3 update_pdf_soporte"
-                               style="color:#716aca; cursor:pointer;"></i>
-                            <button type="button" class="btn btn-primary cancel_pdf_soporte"
-                                    style="display:none">Cancelar
-                            </button>
-
-                        @endif
-
-                        </div>
-
-                        </div>
-                        {{-- modal soporte --}}
-                        <div class="modal fade" id="verpdfsoporte" tabindex="-1"
-                                     role="dialog"
-                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLongTitle">
-                                                    Documento soporte
-                                                    de {{ $artist->artists[0]->users->name}}</h5>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                    <span aria-hidden="true">×</span>
+                                                <i class="flaticon-edit ml-3 update_pdf_soporte"
+                                                   style="color:#716aca; cursor:pointer;"></i>
+                                                <button type="button" class="btn btn-primary cancel_pdf_soporte"
+                                                        style="display:none">Cancelar
                                                 </button>
-                                            </div>
-                                            <div class="modal-body">
+
+                                            @endif
+
+                                        </div>
+
+                                    </div>
+                                    {{-- modal soporte --}}
+                                    <div class="modal fade" id="verpdfsoporte" tabindex="-1"
+                                         role="dialog"
+                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLongTitle">
+                                                        Documento soporte
+                                                        de {{ $artist->artists[0]->users->name}} {{ $artist->artists[0]->users->last_name}} {{ $artist->artists[0]->users->second_last_name}}</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
 
                                                     @if(!$artist->artists[0]->evidence_document)
                                                         <p>No se cargo el documento correctamente</p>
@@ -678,14 +682,14 @@
                                                                    frameborder="0" width="100%" height="400px">
                                                         </div>
                                                     @endif
-                                            </div>
-                                            <div class="modal-footer">
+                                                </div>
+                                                <div class="modal-footer">
 
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            @endif
+                                @endif
                             </div>
 
                         </div>
@@ -710,11 +714,18 @@
                             </div>
                         </div>
                         <div class="m-portlet__body">
+                            <div class="row mb-4 pl-4">
+
+                                <h5 class="mr-3">Nombre de la agrupación: </h5>
+                                <span> {{ $artist->artists[0]->name_team }}</span>
+                            </div>
                             <div class="m-accordion m-accordion--bordered m-accordion--solid" id="m_accordion_4"
                                  role="tablist">
 
                                 <!--begin::Item-->
                                 @foreach ($artist->artists[0]->teams as $team)
+
+                                    {{-- @dd($team) --}}
                                     <div class="m-accordion__item">
                                         <div class="m-accordion__item-head collapsed" role="tab"
                                              id="m_accordion_4_item_1_head"
@@ -741,7 +752,7 @@
                                                                         identificación:</label>
                                                                     <div class="m-scrollable" data-scrollable="true"
                                                                          style="">
-                                                                        <p>{{ $team->document_type}}</p>
+                                                                        <p>{{ $team->documentType->document}}</p>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-4 mt-2">
@@ -763,7 +774,7 @@
                                                                     <label style="font-weight: bold">Apellidos:</label>
                                                                     <div class="m-scrollable" data-scrollable="true"
                                                                          style="">
-                                                                        <p>{{ $team->last_name}}</p>
+                                                                        <p>{{ $team->last_name}} {{ $team->second_last_name }}</p>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-4 mt-2">
@@ -817,17 +828,19 @@
                                                                     </div>
                                                                 </div>
                                                                 @if($team->phone2)
-                                                                <div class="col-md-4 mt-2">
-                                                                    <label style="font-weight: bold">Teléfono 2:</label>
-                                                                    <div class="m-scrollable" data-scrollable="true"
-                                                                         style="">
-                                                                        <p>{{ $team->phone2}}</p>
+                                                                    <div class="col-md-4 mt-2">
+                                                                        <label style="font-weight: bold">Teléfono
+                                                                            2:</label>
+                                                                        <div class="m-scrollable" data-scrollable="true"
+                                                                             style="">
+                                                                            <p>{{ $team->phone2}}</p>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
                                                                 @endif
                                                                 <div class="col-md-4 mt-2">
 
-                                                                    <label style="font-weight: bold">Instrumento que interpreta:</label>
+                                                                    <label style="font-weight: bold">Instrumento que
+                                                                        interpreta:</label>
                                                                     <div class="m-scrollable" data-scrollable="true"
                                                                          style="">
                                                                         <p style="text-align: justify">{{ $team->role}}</p>
@@ -1534,7 +1547,7 @@
                 {
                     data: 'users.name',
                     render: function (data, type, JsonResultRow, meta) {
-                        return JsonResultRow.users.name + ' ' + JsonResultRow.users.last_name;
+                        return JsonResultRow.users.name + ' ' + JsonResultRow.users.last_name+''+JsonResultRow.users.second_last_name;
                     },
                     defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
                 },
@@ -1722,9 +1735,9 @@
                     start: false,
                 });
             },
-            error:function(file,response){
+            error: function (file, response) {
                 $('body').loading({
-                    start:false,
+                    start: false,
                 });
                 toastr.options = {
                     "closeButton": false,
@@ -1768,9 +1781,9 @@
                     start: false,
                 });
             },
-            error:function(file,response){
+            error: function (file, response) {
                 $('body').loading({
-                    start:false,
+                    start: false,
                 });
                 toastr.options = {
                     "closeButton": false,
@@ -1842,9 +1855,9 @@
                     location.reload();
                 }, 3000);
             },
-            error:function(file,response){
+            error: function (file, response) {
                 $('body').loading({
-                    start:false,
+                    start: false,
                 });
                 toastr.options = {
                     "closeButton": false,
@@ -1976,9 +1989,9 @@
                 }, 3000);
 
             },
-            error:function(file,response){
+            error: function (file, response) {
                 $('body').loading({
-                    start:false,
+                    start: false,
                 });
                 toastr.options = {
                     "closeButton": false,
@@ -2025,9 +2038,9 @@
                     start: false,
                 });
             },
-            error:function(file,response){
+            error: function (file, response) {
                 $('body').loading({
-                    start:false,
+                    start: false,
                 });
                 toastr.options = {
                     "closeButton": false,
@@ -2071,9 +2084,9 @@
                     start: false,
                 });
             },
-            error:function(file,response){
+            error: function (file, response) {
                 $('body').loading({
-                    start:false,
+                    start: false,
                 });
                 toastr.options = {
                     "closeButton": false,
@@ -2213,30 +2226,30 @@
                         location.reload();
                     }, 3000);
                 },
-            error:function(file,response){
-                $('body').loading({
-                    start:false,
-                });
-                toastr.options = {
-                    "closeButton": false,
-                    "debug": false,
-                    "newestOnTop": false,
-                    "progressBar": false,
-                    "positionClass": "toast-top-right",
-                    "preventDuplicates": false,
-                    "onclick": null,
-                    "showDuration": "3000",
-                    "hideDuration": "1000",
-                    "timeOut": "5000",
-                    "extendedTimeOut": "1000",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut"
-                };
+                error: function (file, response) {
+                    $('body').loading({
+                        start: false,
+                    });
+                    toastr.options = {
+                        "closeButton": false,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": false,
+                        "positionClass": "toast-top-right",
+                        "preventDuplicates": false,
+                        "onclick": null,
+                        "showDuration": "3000",
+                        "hideDuration": "1000",
+                        "timeOut": "5000",
+                        "extendedTimeOut": "1000",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
+                    };
 
-                toastr.warning("El documento no se cargó correctamente, inténtalo más tarde", "Información");
-            }
+                    toastr.warning("El documento no se cargó correctamente, inténtalo más tarde", "Información");
+                }
 
             });
 
@@ -2263,30 +2276,30 @@
                         start: false,
                     });
                 },
-            error:function(file,response){
-                $('body').loading({
-                    start:false,
-                });
-                toastr.options = {
-                    "closeButton": false,
-                    "debug": false,
-                    "newestOnTop": false,
-                    "progressBar": false,
-                    "positionClass": "toast-top-right",
-                    "preventDuplicates": false,
-                    "onclick": null,
-                    "showDuration": "3000",
-                    "hideDuration": "1000",
-                    "timeOut": "5000",
-                    "extendedTimeOut": "1000",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut"
-                };
+                error: function (file, response) {
+                    $('body').loading({
+                        start: false,
+                    });
+                    toastr.options = {
+                        "closeButton": false,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": false,
+                        "positionClass": "toast-top-right",
+                        "preventDuplicates": false,
+                        "onclick": null,
+                        "showDuration": "3000",
+                        "hideDuration": "1000",
+                        "timeOut": "5000",
+                        "extendedTimeOut": "1000",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
+                    };
 
-                toastr.warning("El documento no se cargó correctamente, inténtalo más tarde", "Información");
-            }
+                    toastr.warning("El documento no se cargó correctamente, inténtalo más tarde", "Información");
+                }
             });
 
             new Dropzone('.file-image-document-team-atras' + (key + 1), {
@@ -2311,30 +2324,30 @@
                         start: false,
                     });
                 },
-            error:function(file,response){
-                $('body').loading({
-                    start:false,
-                });
-                toastr.options = {
-                    "closeButton": false,
-                    "debug": false,
-                    "newestOnTop": false,
-                    "progressBar": false,
-                    "positionClass": "toast-top-right",
-                    "preventDuplicates": false,
-                    "onclick": null,
-                    "showDuration": "3000",
-                    "hideDuration": "1000",
-                    "timeOut": "5000",
-                    "extendedTimeOut": "1000",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut"
-                };
+                error: function (file, response) {
+                    $('body').loading({
+                        start: false,
+                    });
+                    toastr.options = {
+                        "closeButton": false,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": false,
+                        "positionClass": "toast-top-right",
+                        "preventDuplicates": false,
+                        "onclick": null,
+                        "showDuration": "3000",
+                        "hideDuration": "1000",
+                        "timeOut": "5000",
+                        "extendedTimeOut": "1000",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
+                    };
 
-                toastr.warning("El documento no se cargó correctamente, inténtalo más tarde", "Información");
-            }
+                    toastr.warning("El documento no se cargó correctamente, inténtalo más tarde", "Información");
+                }
             });
         });
 
@@ -2435,9 +2448,9 @@
                 }, 3000);
 
             },
-            error:function(file,response){
+            error: function (file, response) {
                 $('body').loading({
-                    start:false,
+                    start: false,
                 });
                 toastr.options = {
                     "closeButton": false,
@@ -2461,8 +2474,6 @@
             }
 
         });
-
-
 
 
     </script>
@@ -2523,7 +2534,7 @@
             error: function (file, e, i, o, u) {
 
                 $('body').loading({
-                    start:false,
+                    start: false,
                 });
                 toastr.options = {
                     "closeButton": false,

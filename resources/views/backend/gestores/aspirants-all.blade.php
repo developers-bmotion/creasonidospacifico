@@ -19,7 +19,7 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                 <div class="m-portlet__head-caption">
                     <div class="m-portlet__head-title">
                         <h3 class="m-portlet__head-text">
-                            {{ __('todos_artistas') }}
+                            Todos los aspirantes
                         </h3>
                     </div>
                 </div>
@@ -77,7 +77,10 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                             render: function (data, type, JsonResultRow, meta) {
                                 return '<span class="label label-danger text-center">'+JsonResultRow.users.name+'</span>  <span class="label label-danger text-center">'+JsonResultRow.users.last_name+'</span>';
                                 // return '<img src="' + JsonResultRow + '" width="50px"  style="border-radius: 100%;margin-right: auto;margin-left: auto;display: block; width:50px; height:50px"/>';
-                            }
+                            },
+                            defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
+
+
                         },
                         {
                             render: function (data, type, JsonResultRow, meta) {

@@ -43,7 +43,7 @@ class City extends Model
     }
 
     public function artist(){
-        return $this->hasMany(Artist::class);
+        return $this->hasMany(Artist::class, 'cities_id');
     }
 
     public function departaments(){

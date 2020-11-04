@@ -93,8 +93,9 @@ class ProfileController extends Controller
         return view('backend.gestores.aspirants-all');
     }
 
-    public function tableManagerAspirant() {
-        $listAspirant = Artist::where('gestor_id', auth()->user()->id)->with('users','personType','projects')->get();
+    public function tableManagerAspirant(User $user) {
+
+        $listAspirant = Artist::where('gestor_id', $user->id)->with('users','personType','projects')->get();
         return datatables()->of($listAspirant)->toJson();
     }
 
@@ -240,6 +241,8 @@ class ProfileController extends Controller
     /* metodo para registrar el aspirante como un integrante del grupo en la base de datos */
     public function registerAspiranteGroup($request, $idArtist) {
         $aspirante = (object) $request->aspirante;
+        $Artist =Artist::where('id',$idArtist)->get();
+        // dd($Artist[0]->user_id);
 
         if ($aspirante->partGroup == '1') {
             $member = new Team();
@@ -258,6 +261,7 @@ class ProfileController extends Controller
             $member->img_document_back = $aspirante->urlImageDocumentAtras;
             $member->pdf_identificacion = $aspirante->urlPdfDocument;
             $member->artist_id = $idArtist;
+            $member->user_id =$Artist[0]->user_id;
             $member->save();
         }
     }
@@ -336,7 +340,9 @@ class ProfileController extends Controller
         $aspirante = (object) $request->aspirante;
         $song = (object) $request->song;
 
-
+        if ($aspirante->urlImageProfile == '' || $aspirante->urlImageProfile == null){
+            $aspirante->urlImageProfile = '/backend/assets/app/media/img/users/perfil.jpg';
+        }
         // crear el usuario
         $user = new User();
         $user->name = ucwords($aspirante->name);
@@ -347,7 +353,7 @@ class ProfileController extends Controller
         $user->img_document_front = $aspirante->urlImageDocumentFrente;
         $user->img_document_back = $aspirante->urlImageDocumentAtras;
         $user->picture = $aspirante->urlImageProfile;
-        $user->slug = Str::slug($aspirante->name.'-'.str_random(1000000), '-');
+        $user->slug = Str::slug($aspirante->name.'-'.str_random(100000), '-');
 
         if ( isset($aspirante->email) ) { // si existe un correo
             if ($aspirante->email != auth()->user()->email){ // debe ser diferente al del usuario gestor
@@ -384,6 +390,7 @@ class ProfileController extends Controller
         $aspirant->gestor_id = auth()->user()->id;
         $aspirant->save();
 
+        $user->roles()->attach(['2']);
         \Mail::to(auth()->user()->email)->send(new NewAspirantGestor($user->name, $user->last_name, auth()->user()->name, auth()->user()->last_name)); // correo para el gestor
         return $aspirant->id;
     }
@@ -401,7 +408,7 @@ class ProfileController extends Controller
         $project->audio_secundary_two = $song->urlAdditionalSongTwo;
         $project->description = $song->description;
         $project->status = 1;
-        $project->slug = Str::slug($song->nameProject.'-'.str_random(1000), '-');
+        $project->slug = Str::slug($song->nameProject.'-'.str_random(100000), '-');
         $project->save();
 
         $project->artists()->attach($idArtist); // relacionar el proyecto con el artista
@@ -536,7 +543,7 @@ class ProfileController extends Controller
         Storage::disk('s3')->setVisibility($pdf_cedula_save, 'public');
         $urlS3 = Storage::disk('s3')->url($pdf_cedula_save);
 
-        if($team->user_id){
+        if($team && $team->user_id){
             Team::where('user_id', $team->user_id)->update([
                 'pdf_identificacion' => $urlS3,
                 'img_document_front' => null,
@@ -571,7 +578,7 @@ class ProfileController extends Controller
         Storage::disk('s3')->setVisibility($pdf_cedula_save, 'public');
         $urlS3 = Storage::disk('s3')->url($pdf_cedula_save);
 
-       if($team->user_id){
+       if($team && $team->user_id){
             Team::where('user_id', $team->user_id)->update([
                 'pdf_identificacion' => $urlS3,
                 'img_document_front' => null,
@@ -625,7 +632,7 @@ class ProfileController extends Controller
         $team = Team::where('user_id', auth()->user()->id)->first();
 
         $user = User::where('id', auth()->user()->id)->first();
-        if($team->user_id){
+        if($team && $team->user_id){
             Team::where('user_id', $team->user_id)->update([
                 'pdf_identificacion' => null,
                 'img_document_front' => $aspirante->urlImageDocumentFrente,
@@ -652,7 +659,7 @@ class ProfileController extends Controller
         //
         $user = User::where('id', $aspirante->idAspirante)->first();
         $team = Team::where('user_id', $aspirante->idAspirante)->first();
-        if($team->user_id){
+        if($team && $team->user_id){
                     Team::where('user_id', $team->user_id)->update([
                         'pdf_identificacion' => null,
                         'img_document_front' => $aspirante->urlImageDocumentFrente,
@@ -719,7 +726,7 @@ class ProfileController extends Controller
         $teams = (object) $request->team;
         $team = Team::where('id',$teams->id )->first();
 
-        if($team->user_id){
+        if($team && $team->user_id){
             // dd('hola');
             User::where('id',$team->user_id)->update([
                 'pdf_cedula' => null,
@@ -818,7 +825,7 @@ class ProfileController extends Controller
         Storage::disk('s3')->setVisibility($pdf_cedula_save, 'public');
         $urlS3 = Storage::disk('s3')->url($pdf_cedula_save);
 
-        if($team->user_id){
+        if($team && $team->user_id){
             // dd('hola');
             User::where('id',$team->user_id)->update([
                 'pdf_cedula' => $urlS3,

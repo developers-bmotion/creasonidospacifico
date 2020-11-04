@@ -31,7 +31,8 @@ class ProjectsAdminController extends Controller
             $project = Project::whereIn('status',[1,4,5,6,7])->with([
                 'artists',
                 'category',
-                'artists.users'
+                'artists.users',
+                'artists.personType'
                 ]);
                 if ($request->input("tipoProyecto")){
                 $project->where('status', "=", $request->input("tipoProyecto"));
@@ -43,13 +44,15 @@ class ProjectsAdminController extends Controller
             $project = Project::with([
                 'artists',
                 'category',
-                'artists.users'
+                'artists.users',
+                'artists.personType'
                 ]);
                 if ($request->input("tipoProyecto")){
-                    dd($request);
+                    // dd($request);
                 $project->where('status', "=", $request->input("tipoProyecto"));
             }
         }
+        // dd($project);
         return datatables()->of($project)->toJson();
     }
 

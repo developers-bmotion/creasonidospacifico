@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend\Admin;
 
+use App\Artist;
 use App\Project;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -9,6 +10,71 @@ use Illuminate\Support\Facades\DB;
 
 class DashboardAdminController extends Controller
 {
+
+    public function AspirantsAll(Request $request){
+
+
+
+      $idstatus=$request->input("tipoProyecto");
+        // dd($request->input("tipoProyecto"));
+        if ($idstatus){
+
+
+             if($idstatus==9){
+                $listAspirant = Artist::with('users','personType','documentType','city.departaments')->whereNull('nickname')->whereDoesntHave('projects')->get();
+             }else if($idstatus==10){
+              $listAspirant = Artist::with('users','personType','documentType','city.departaments')->whereNotNull('document_type')->doesnthave('projects')->get();
+            }else{
+                $listAspirant = Artist::with('users','personType','documentType','city.departaments')->whereHas('projects', function ($q) use($idstatus){
+                    $q->where('status', $idstatus);
+                 })->with('projects')->get();
+             }
+            // $projects=Project::with('artists')->where('status',$request->input("tipoProyecto"))->get();
+
+            // // dd($project);
+            // foreach($projects as $project ){
+            //    $id= $project->artists[0]->id;
+            // //    echo $project->artists[0]->id.'--';
+            //    $listAspirant->where('id',$id);
+            // }
+
+        }else{
+
+            $listAspirant = Artist::with('users','personType','projects','documentType','city.departaments');
+        }
+
+        // $project = Project::with([
+        //     'artists',
+        //     'category',
+        //     'artists.users',
+        //     'artists.personType',
+        //     'artists.documentType'
+        //     ]);
+        //     if ($request->input("tipoProyecto")){
+        //         // dd($request);
+        //     $project->where('status', "=", $request->input("tipoProyecto"));
+        // }
+
+        return datatables()->of($listAspirant)->toJson();
+
+
+        // old
+        // $project = \App\User::whereNotNull('last_name')->has('artista')->with('artista.projects','artista.documentType','artista.city.departaments','artista.personType');
+
+        // if ($request->input("tipoProyecto")){
+        //     $project->where('status', "=", $request->input("tipoProyecto"));
+        // }
+        // dd($project);
+        // if ($request->input("tipoProyecto")){
+        //     // dd($project);
+        //     $project = \App\User::whereNotNull('last_name')->has('artista')->with(['artista.projects' => function($q){
+
+        //         return $q->where('status',$request->input("tipoProyecto"));
+        //     },'artista.documentType','artista.city.departaments','artista.personType'])->get();
+        // }
+        // dd($project);
+        // return datatables()->of($project)->toJson();
+    }
     public function showProyect (Request $request){
 
         $data = Project::select(array(

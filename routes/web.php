@@ -18,14 +18,9 @@ use App\Artist;
 use App\Mail\ArtistProjectRevision;
 use App\Mail\NewArtist;
 use App\Project;
+use App\User;
 
-Route::get('test' , function (){
-    // $project = Project::where('id',9)->with('artists.users')->first();
-    // return new ArtistProjectRevision($project,'nombre', 'mensaje');
-    // Artisan::call('projects:close');
-    // dd(\App\Category::where('typeCategory_id', 2)->get());
-    // dd(App\Project::where('status', 1)->count());
-});
+Route::get('/datos', '\App\Http\Controllers\Backend\DashboardController@getCitiesAspirants');
 
 Route::get('/represtante-menor-edad/{id}', function($id){
     $artist = Artist::where('id', $id)
@@ -39,7 +34,7 @@ Route::get('/offline', function (){
 });
 
 Route::get('/prueba-email', function (){
-   return new \App\Mail\NewArtistRegisterGestor('Mao', 'Guti', 'amores como el nuestro');
+   return new \App\Mail\NewArtist('Mao', 'Guti', 'amores como el nuestro');
 });
 
 Route::get('/')->middleware('');
@@ -140,7 +135,7 @@ Route::group(['namespace'=>'Backend','prefix' => 'dashboard','middleware' => 'au
     //Rutas para el modulo Artistas
     Route::get('/artists','ArtistsController@index')->name('index.artists');
     Route::get('/artists-all-table','ArtistsController@table_all_artists')->name('all.artists.table');
-    Route::get('/artists-manager-table','ProfileController@tableManagerAspirant')->name('artists.manager.table');
+    Route::get('/artists-manager-table/{user}','ProfileController@tableManagerAspirant')->name('artists.manager.table');
 
     /*=============================================
        NUEVAS RUTAS PARA EL REGISTRO
@@ -195,7 +190,7 @@ Route::group(['namespace'=>'Backend','prefix' => 'dashboard','middleware' => 'au
 
     //RUTAS PARA AGREGAR PROYECTOS
 
-    Route::get('/new-project','AddProjectController@index')->name('add.project')->middleware('register_artist');
+    Route::get('/new-project','AddProjectController@index')->name('add.project')->middleware(['register_artist', 'exist_project_artist']);
 
     Route::post('/add-project-audio','AddProjectController@upload_image')->name('add.project.audio');
     Route::post('/add-audio-one','AddProjectController@audio_one')->name('add.audio.one');
@@ -238,7 +233,13 @@ Route::group(['namespace'=>'Backend','prefix' => 'dashboard','middleware' => 'au
         Route::post('/profile-photo-admin','Admin\ProfileAdminController@photo_admin')->name('profile.photo.admin');
 
         Route::post("/projects-news", "Admin\DashboardAdminController@showProyect")->name("admin.projects_news");
+        Route::get("/aspirants-all", "Admin\DashboardAdminController@AspirantsAll")->name("aspirants.all");
         Route::post("/top-countries", "Admin\DashboardAdminController@showTopCountry")->name("admin.top_country");
+
+        Route::get('/aspirants-cities', 'DashboardController@getCitiesAspirants')->name('get.aspirants.cities');
+        Route::get('/aspirants-categories', 'DashboardController@getModalidadesAspirants')->name('get.aspirants.modalidades');
+
+        Route::get('/report-dashboard', 'DashboardController@reportDashboard')->name('report.pdf.dashboard');
 
     });
 

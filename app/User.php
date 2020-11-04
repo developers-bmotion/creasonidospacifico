@@ -69,7 +69,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','picture','last_name','phone_1','phone_2','slug','email','front_picture','pdf_cedula'
+        'name', 'email', 'password','picture','last_name','phone_1','phone_2','slug','email','front_picture','pdf_cedula',
+        'profile', 'document_type', 'id_city', 'identification'
     ];
 
     public function sendPasswordResetNotification($token)
@@ -140,6 +141,14 @@ class User extends Authenticatable
     }
     public function roles(){
         return $this->belongsToMany(Role::class,'roles_users','user_idUser','role_idRole');
+    }
+
+    public function documentType(){
+        return $this->belongsTo(DocumentType::class,'document_type');
+    }
+
+    public function city(){
+        return $this->belongsTo(City::class, 'id_city');
     }
 
     public function artist_user($id){

@@ -80,6 +80,8 @@ class Project extends Model
     const REVISON_UPDATE=6;
     const ACEPTED=7;
     const NOT_REMEDIED=8;
+    const PENDING_REGISTER=9;
+    const NOT_PROJECT_REGISTER=10;
     // const NOPUBLISHED = 6;
 
 //    const PERCENTAGE_APPROVAL = 3;
@@ -129,7 +131,7 @@ class Project extends Model
     }
 
     public function category(){
-        return $this->belongsTo(Category::class)->select('id','category');
+        return $this->belongsTo(Category::class)->select('id','category', 'description');
     }
 
     public function type_category(){
@@ -208,9 +210,15 @@ class Project extends Model
             ->first();
     }
 
-
     public static function countProjects($id){
 
         $count=Project::where('status', $id)->count();
+    }
+    public static function countbyCategories($id){
+        return DB::table('projects')
+            ->where('category_id',$id)
+            ->orderBy('category_id', 'desc')
+            ->count('id');
+
     }
 }

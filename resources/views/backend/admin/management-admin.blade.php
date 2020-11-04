@@ -10,7 +10,7 @@
 @section('header')
     <div class="d-flex align-items-center">
         <div class="mr-auto">
-            <h3 class="m-subheader__title m-subheader__title--separator">Managements</h3>
+            <h3 class="m-subheader__title m-subheader__title--separator">Curadores</h3>
             <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
                 <li class="m-nav__item m-nav__item--home">
                     <a href="#" class="m-nav__link m-nav__link--icon">
@@ -20,7 +20,7 @@
                 <li class="m-nav__separator">-</li>
                 <li class="m-nav__item">
                     <a href="" class="m-nav__link">
-                        <span class="m-nav__link-text">{{ __('Managements') }}</span>
+                        <span class="m-nav__link-text">Curadores</span>
                     </a>
                 </li>
             </ul>
@@ -30,7 +30,7 @@
                class="btn btn-secondary m-btn m-btn--icon m-btn--pill" style="cursor: pointer">
                 <span>
                     <i class="fa flaticon-plus"></i>
-                    <span>{{ __('nuevo_management') }}</span>
+                    <span>Nuevo Curador</span>
                 </span>
             </a>
         </div>
@@ -178,7 +178,7 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">{{ __('agregar_management') }}</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Agregar Curador</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

@@ -62,8 +62,7 @@
                             <i class="la la-warning"></i>
                         </div>
                         <div class="m-alert__text">
-                            Si tu propuesta musical es un video ingresa al <strong data-toggle="modal" data-target="#convertirMp3"
-                            style="cursor: pointer">siguiente link</strong> y conviértela en formato mp3, si no sabes como <strong style="cursor: pointer" data-toggle="modal" data-target="#exampleModalLong">ingresa aquí</strong> para tener instrucciones.
+                            Si tu propuesta musical es un video ingresa al <a target="_blank" href="https://online-audio-converter.com/es/"><strong class="text-warning" style="cursor: pointer">siguiente link</strong></a> y conviértela en formato mp3, si no sabes como <strong style="cursor: pointer" data-toggle="modal" data-target="#exampleModalLong">ingresa aquí</strong> para tener instrucciones.
                        </div>
 
                     </div>
@@ -102,7 +101,14 @@
                           </button>
                         </div>
                         <div class="modal-body">
-
+                            <div class="row">
+                                <div class="col-12">
+                                    <video style="width:100%" controls>
+                                        <source src="/video/video.mp4" type="video/mp4">
+                                    </video>
+{{--                                    <video autoplay style="width: 100%" src="/video/video.mov"></video>--}}
+                                </div>
+                            </div>
                         </div>
                         <div class="modal-footer">
 
@@ -183,7 +189,7 @@
                         ======================================-->
                         <div class="col-lg-6 m-form__group-sub pt-4">
                             <label class="form-control-label" form="category_add_proyecto"><span class="text-danger">*</span>
-                                Seleccione categoría:</label>
+                                Seleccione modalidad:</label><a target="_blank" class="pl-2" href="/documents/GUIA-DESCRIPTIVA-DE-MODALIDADES.pdf"><span>Más Información</span></a>
                             <select name="tCategory_id" required
                                     class="form-control m-bootstrap-select m_selectpicker required"
                                     id="category_add_proyecto">
@@ -191,7 +197,7 @@
 
                                 @foreach($categories as $tCategorie)
                                     <option value="{{ $tCategorie->id }}" {{ old('tCategory_id') == $tCategorie->id ? 'selected':''}} >
-                                        {{ $tCategorie->category }}
+                                        {{ $tCategorie->category }} ({{ $tCategorie->description }})
                                     </option>
                                 @endforeach
                                 {!! $errors->first('category_id','<div
@@ -309,7 +315,7 @@
                 </div>
                 <div class="m-portlet__foot m-portlet__foot--fit">
                     <div class="m-form__actions">
-                        <button id="btn_add_project" class="btn btn-primary pull-right">Enviar información</button>
+                        <button id="btn_add_project" class="btn btn-primary pull-right">Registrar canción</button>
                     </div>
                 </div>
             </form>
@@ -331,6 +337,7 @@
         var dropzone = new Dropzone('.dropzone', {
             url: '{{route('add.project.audio')}}',
             acceptedFiles: 'audio/*,video/*',
+            timeout: 180000,
             maxFiles: 1,
             paramName: 'image',
             headers: {
@@ -390,6 +397,7 @@
         var dropzoneOne = new Dropzone('.dropzone-one', {
             url: '{{route('add.audio.one')}}',
             acceptedFiles: 'audio/*,video/*',
+            timeout: 180000,
             maxFiles: 1,
             paramName: 'image',
             headers: {
@@ -449,6 +457,7 @@
         var dropzoneTwo = new Dropzone('.dropzone-two', {
             url: '{{route('add.audio.two')}}',
             acceptedFiles: 'audio/*,video/*',
+            timeout: 180000,
             maxFiles: 1,
             paramName: 'image',
             headers: {
@@ -553,7 +562,7 @@
                 confirmButtonText: "<span>{{ __('Aceptar') }}</span>",
                 confirmButtonClass: "btn btn-success m-btn m-btn--pill m-btn--air m-btn--icon",
 
-
+                reverseButtons: true,
 
                 showCancelButton: true,
 
@@ -561,6 +570,10 @@
 
             }).then(function (result) {
                 if (result.value) {
+                    $('body').loading({
+                        message: 'Tu propuesta musical se esta enviando...',
+                        start:true,
+                    });
                     $('#form_add_project').submit();
                 }
             })

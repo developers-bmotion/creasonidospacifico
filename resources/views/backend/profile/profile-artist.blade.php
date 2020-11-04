@@ -63,6 +63,16 @@
         <!--=====================================
             MOSTAR ALERTA PARA CREAR PROYECTO
         ======================================-->
+        @if(session()->has('existe_cancion'))
+            <div class="m-alert m-alert--icon m-alert--outline alert alert-danger" role="alert">
+                <div class="m-alert__icon">
+                    <i class="la la-warning"></i>
+                </div>
+                <div class="m-alert__text">
+                    <strong>¡Aviso!</strong> {{session('existe_cancion')}}
+                </div>
+            </div>
+        @endif
         @if(session()->has('profile_update'))
             <div class="m-alert m-alert--icon m-alert--outline alert alert-success" role="alert">
                 <div class="m-alert__icon">
@@ -1669,7 +1679,7 @@
                             {{--                            @else--}}
 
                             @if($artist->users->pdf_cedula === null)
-                                @if(!$artist->users->img_document_fron && !$artist->users->img_document_back)
+                                @if(!$artist->users->img_document_front && !$artist->users->img_document_back)
                                     <p>No se cargo el documento correctamente</p>
                                 @else
                                     <div class="form-group">
@@ -2643,6 +2653,7 @@
             url: '{{route('update.audio')}}',
             acceptedFiles: 'audio/*,video/*',
             maxFiles: 1,
+            timeout: 180000,
             paramName: 'audio',
             headers: {
                 'idproject': idProject,

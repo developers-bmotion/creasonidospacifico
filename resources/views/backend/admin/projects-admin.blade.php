@@ -189,7 +189,8 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                     <thead>
                     <tr>
                         <th>#</th>
-                        <th>{{ __('artista') }}</th>
+                        <th>{{ __('Aspirante') }}</th>
+                        <th>Actuará como</th>
                         <th>Nombre de la canción</th>
                         <th>Género musical</th>
                         <th>{{ __('estado') }}</th>
@@ -248,16 +249,28 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                         data: 'id',
                         defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
                     },
+
                     {
                         data: 'artists.users.name',
                         defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>',
                         render: function (data, type, JsonResultRow, meta) {
+                            // console.log(JsonResultRow,'data t');
                             let artista = JsonResultRow.artists[0];
                             //console.log(JsonResultRow);
                             //if (JsonResultRow.status+"" === 4+""){
-                            return `<span target="_blank">${artista.users.name} ${artista.users.last_name}</span>`;
+                            return `<span target="_blank">${artista.users.name} ${artista.users.last_name} ${artista.users.second_last_name}</span>`;
                             //}
                             //return artista.nickname;
+                        }
+                    },
+                    {
+                        "width": "1%",
+                        data: 'artists',
+                        defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>',
+                        render: function (data, type, JsonResultRow, meta) {
+                            console.log(JsonResultRow,'data t');
+                            let artista = JsonResultRow.artists[0];
+                            return `<span target="_blank">${artista.person_type.name}</span>`;
                         }
                     },
                     {

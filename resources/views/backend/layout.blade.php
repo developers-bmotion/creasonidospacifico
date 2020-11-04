@@ -114,7 +114,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <body
     class="m-page--fluid m--skin- m-content--skin-light m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default m-brand--minimize m-aside-left--minimize">
 <!-- begin:: Page -->
-<div class="m-grid m-grid--hor m-grid--root m-page" id="app">
+<div class="m-grid m-grid--hor m-grid--root m-page" id="app" >
 
     <!-- BEGIN: Header -->
 
@@ -297,13 +297,19 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- end::Scroll Top -->
 
 <!-- begin::Quick Nav -->
-<ul class="m-nav-sticky" style="margin-top: 30px;">
+<ul class="m-nav-sticky" style="margin-top: 30px;background-color: #739594;">
     {{--<li class="m-nav-sticky__item" data-toggle="m-tooltip" title="Purchase" data-placement="left">
     <a href="https://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes"
        target="_blank"><i class="la la-cart-arrow-down"></i></a>
 </li>--}}
-    <li class="m-nav-sticky__item" data-toggle="m-tooltip" title="¿Necesitas Ayuda? Contáctanos" data-placement="left">
-        <a href="https://creasonidos.com/contacto/" target="_blank"><i class="la la-question-circle"></i></a>
+    <li class="m-nav-sticky__item " data-toggle="m-tooltip" title="¿Necesitas Ayuda? Contáctanos" data-placement="left">
+        <a href="https://creasonidos.com/contacto/" target="_blank"><i class="la la-question-circle" style="color: white; !important;"></i></a>
+    </li>
+    <li class="m-nav-sticky__item pt-3" data-toggle="m-tooltip" title="Términos de Referencia" data-placement="left">
+        <a href="/documents/Términos-de-refencia-Crea-Sonidos.pdf" target="_blank"><i class="la la-book" style="color: white; !important;"></i></a>
+    </li>
+    <li class="m-nav-sticky__item pt-3" data-toggle="m-tooltip" title="Preguntas Frecuentes" data-placement="left">
+        <a href="/documents/PREGUNTAS_FRECUENTES_CON RESPUESTAS_26-10-2020_APROBADO.pdf" target="_blank"><i class="la la-question-circle" style="color: white; !important;"></i></a>
     </li>
 {{--    <li class="m-nav-sticky__item" data-toggle="m-tooltip" title="{{ __('soporte') }}" data-placement="left">--}}
 {{--        <a href="" target="_blank"><i class="la la-life-ring"></i></a>--}}
