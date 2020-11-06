@@ -12491,7 +12491,7 @@ strong {
         flex: 0 0 auto; }
     .m-grid.m-grid--ver-desktop.m-grid--desktop > .m-grid__item.m-grid__item--fluid, .m-grid.m-grid--ver-desktop.m-grid--desktop > .m-grid__item.m-grid__item--fluid-desktop {
         -webkit-box-flex: 1;
-        /*flex: 1 auto;*/
+        flex: 1 auto;
         -ms-flex: 1 0 0px;
         min-width: 0; } }
 @media screen\0  and (min-width: 1025px) {
