@@ -868,6 +868,7 @@
                                                                 <div class="col-md-4 mt-2">
                                                                     <label style="font-weight: bold">Documento de
                                                                         identificación:</label>
+                                                                    <br>
                                                                     <button type="button" class="btn btn-primary"
                                                                             data-toggle="modal"
                                                                             data-target="#pdfidentificacion{{$loop->iteration}}">
