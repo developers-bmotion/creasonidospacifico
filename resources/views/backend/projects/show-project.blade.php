@@ -22,7 +22,7 @@
         </div>
     </div> --}}
         <div class="row">
-            <div class="col-xl-12 col-lg-8">
+            <div class="col-xl-12 col-lg-12">
                 <div class="m-portlet m-portlet--full-height ">
                     <div class="m-portlet__head">
                         <div class="m-portlet__head-caption">
@@ -54,7 +54,7 @@
 
                                     <div class="row drop_audio col-12" style="display: none">
                                         <div
-                                            class="col-lg-11 m-form__group-sub {{$errors->has('subir_cancion')? 'has-danger':''}}">
+                                            class="col-lg-12 m-form__group-sub {{$errors->has('subir_cancion')? 'has-danger':''}}">
                                             <div class="form-group m-form__group row">
                                                 <div class="col-lg-12">
                                                     <label class="form-control-label" form="nombreProyecto"><span
@@ -280,7 +280,7 @@
         <br>
         <br>
         <div class="row">
-            <div class="col-xl-12 col-lg-8">
+            <div class="col-xl-12 col-lg-12">
                 <div class="m-portlet m-portlet--full-height ">
                     <div class="m-portlet__head">
                         <div class="m-portlet__head-caption">
@@ -702,7 +702,7 @@
 
         <!--begin::Portlet-->
             <div class="row">
-                <div class="col-xl-12 col-lg-8">
+                <div class="col-xl-12 col-lg-12">
                     <div class="m-portlet m-portlet--full-height">
                         <div class="m-portlet__head">
                             <div class="m-portlet__head-caption">
@@ -1106,7 +1106,7 @@
     {{-- informacion de beneficiario --}}
     @if(count($artist->artists[0]->beneficiary) != 0)
         <div class="row">
-            <div class="col-xl-12 col-lg-8">
+            <div class="col-xl-12 col-lg-12">
                 <div class="m-portlet m-portlet--full-height ">
                     <div class="m-portlet__head">
                         <div class="m-portlet__head-caption">
