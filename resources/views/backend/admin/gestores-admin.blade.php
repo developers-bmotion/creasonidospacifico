@@ -14,7 +14,7 @@
             <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
                 <li class="m-nav__item m-nav__item--home">
                     <a href="#" class="m-nav__link m-nav__link--icon">
-                        <i class="m-nav__link-icon flaticon-users"></i>
+                        <i class="m-nav__link-icon la la-music"></i>
                     </a>
                 </li>
                 <li class="m-nav__separator">-</li>
