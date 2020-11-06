@@ -117,7 +117,7 @@ License: You must have a valid license purchased only from themeforest(the above
     @else
         <body
             class="m-page--fluid m--skin- m-content--skin-light m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default m-brand--minimize m-aside-left--minimize"
-            style="margin-left: 3rem">
+            style="margin-left: 5rem">
         @endif
         <!-- begin:: Page -->
         <div class="m-grid m-grid--hor m-grid--root m-page" id="app">
