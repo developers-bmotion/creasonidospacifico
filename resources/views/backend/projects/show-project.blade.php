@@ -179,7 +179,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <h5 style="font-weight: bold">{{ __('genero') }}:</h5>
+                                        <h5 style="font-weight: bold">Modalidad:</h5>
                                     </div>
                                     <div class="form-group">
                                         {{ $project->category->category }}

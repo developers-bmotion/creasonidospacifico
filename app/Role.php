@@ -33,8 +33,8 @@ class Role extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    
+
     public function users(){
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class, 'roles_users', 'role_idRole','user_idUser',);
     }
 }

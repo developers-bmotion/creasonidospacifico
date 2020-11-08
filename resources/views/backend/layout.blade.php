@@ -99,6 +99,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
     {{-- Custom css --}}
     <link href="/css/main-custom.css" rel="stylesheet" type="text/css"/>
+
     <!--RTL version:<link href="assets/vendors/custom/fullcalendar/fullcalendar.bundle.rtl.css" rel="stylesheet" type="text/css" />-->
 
     <!--end::Page Vendors Styles -->
