@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Artist;
+use App\Category;
 use App\City;
 use App\Project;
 use App\User;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\PersonType;
 
 class DashboardController extends Controller
 {
@@ -94,9 +96,13 @@ class DashboardController extends Controller
             $totalCategories = $totalCategories + $category->quantity;
         }
 
+        // tipos de persona(actuara como)
+        $tipoPersona=PersonType::All();
+        $cat=Category::All();
+
         return view('backend.dashboard.dashboard', compact('aspiranteRegistroCompleto',
             'aspiranteRegistroSinCanción', 'aspirantessolocuenta',
-            'totalregistros', 'ciudades', 'total', 'categories', 'totalCategories'));
+            'totalregistros', 'ciudades', 'total', 'categories', 'totalCategories','tipoPersona','cat'));
 
     }
 
