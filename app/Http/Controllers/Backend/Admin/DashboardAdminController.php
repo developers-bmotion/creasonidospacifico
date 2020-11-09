@@ -16,6 +16,7 @@ class DashboardAdminController extends Controller
 
       $idstatus=$request->input("tipoProyecto");
       $tipoPer=$request->input("tipoPer");
+      $category=$request->input("category");
         // dd($request->input("tipoPer"));
         // if($tipoPer == 0){
         //     echo 'hola***';
@@ -54,18 +55,43 @@ class DashboardAdminController extends Controller
             }else{
 
                 if($tipoPer > 0){
-                    $listAspirant = Artist::with('users','documentType','city.departaments')
-                    ->whereHas('personType', function ($q) use($tipoPer){
-                        $q->where('id', $tipoPer);
-                    })->whereHas('projects', function ($q) use($idstatus){
-                        $q->where('status', $idstatus);
-                    })->with('projects.category','personType')->get();
+
+                    if($category > 0){
+                        $listAspirant = Artist::with('users','documentType','city.departaments')
+                        ->whereHas('personType', function ($q) use($tipoPer){
+                            $q->where('id', $tipoPer);
+                        })->whereHas('projects', function ($q) use($idstatus){
+                            $q->where('status', $idstatus);
+                        })->whereHas('projects.category', function ($q) use($category){
+                            $q->where('category_id', $category);
+                        })->with('projects.category','personType')->get();
+
+                    }else{
+                        $listAspirant = Artist::with('users','documentType','city.departaments')
+                        ->whereHas('personType', function ($q) use($tipoPer){
+                            $q->where('id', $tipoPer);
+                        })->whereHas('projects', function ($q) use($idstatus){
+                            $q->where('status', $idstatus);
+                        })->with('projects.category','personType')->get();
+                    }
+
+
 
                 }else{
+                    if($category > 0){
+                        $listAspirant = Artist::with('users','personType','documentType','city.departaments')->whereHas('projects', function ($q) use($idstatus){
+                            $q->where('status', $idstatus);
+                        })->whereHas('projects.category', function ($q) use($category){
+                            $q->where('category_id', $category);
+                        })->with('projects.category')->get();
 
-                    $listAspirant = Artist::with('users','personType','documentType','city.departaments')->whereHas('projects', function ($q) use($idstatus){
-                        $q->where('status', $idstatus);
-                    })->with('projects.category')->get();
+                    }else{
+
+                        $listAspirant = Artist::with('users','personType','documentType','city.departaments')->whereHas('projects', function ($q) use($idstatus){
+                            $q->where('status', $idstatus);
+                        })->with('projects.category')->get();
+                    }
+
 
                 }
              }
@@ -74,14 +100,35 @@ class DashboardAdminController extends Controller
         }else{
 
             if($tipoPer > 0){
-                $listAspirant = Artist::with('users','documentType','city.departaments','projects.category')
-                ->whereHas('personType', function ($q) use($tipoPer){
-                    $q->where('id', $tipoPer);
-                })->with('personType')->get();
+
+                if($category > 0){
+
+                    $listAspirant = Artist::with('users','documentType','city.departaments')
+                    ->whereHas('personType', function ($q) use($tipoPer){
+                        $q->where('id', $tipoPer);
+                    })->whereHas('projects.category', function ($q) use($category){
+                        $q->where('category_id', $category);
+                    })->with('personType','projects.category')->get();
+                }else{
+
+                    $listAspirant = Artist::with('users','documentType','city.departaments','projects.category')
+                    ->whereHas('personType', function ($q) use($tipoPer){
+                        $q->where('id', $tipoPer);
+                    })->with('personType')->get();
+                }
 
             }else{
+                if($category > 0){
+                    $listAspirant = Artist::with('users','personType','documentType','city.departaments')
+                    ->whereHas('projects.category', function ($q) use($category){
+                        $q->where('category_id', $category);
+                    })->with('projects.category')->get();
 
-                $listAspirant = Artist::with('users','personType','projects.category','documentType','city.departaments');
+                }else{
+
+                    $listAspirant = Artist::with('users','personType','projects.category','documentType','city.departaments');
+                }
+
             }
 
         }

@@ -343,105 +343,11 @@
                 <div class="m-portlet__head-caption">
                     <div class="m-portlet__head-title">
                         <h3 class="m-portlet__head-text">
-                            {{ __('Aspirantes') }}
+                            {{ __('Propuestas musicales') }}
                         </h3>
                     </div>
                 </div>
-                <div class="m-portlet__head-tools">
-                    <ul class="m-portlet__nav">
 
-                        <li class="m-portlet__nav-item">
-                            <h5 class="mr-2">Mostrando todos los: </h5>
-                            <span id="current_status"
-                                  class="m-badge m-badge--metal m-badge--wide m-badge--rounded">{{ __('revision') }}</span>
-                        </li>
-                        <div class="m-dropdown m-dropdown--inline  m-dropdown--arrow m-dropdown--align-right"
-                             m-dropdown-toggle="hover">
-                            <a href="#" class="m-dropdown__toggle btn btn-warning dropdown-toggle">
-                                Filtrar
-                            </a>
-                            <div class="m-dropdown__wrapper">
-                                <span class="m-dropdown__arrow m-dropdown__arrow--right"></span>
-                                <div class="m-dropdown__inner">
-                                    <div class="m-dropdown__body">
-                                        <div class="m-dropdown__content selectType">
-                                            <ul class="m-nav">
-                                                <li class="m-nav__section m-nav__section--first">
-                                                    <span class="m-nav__section-text">FILTRAR POR ESTADO</span>
-                                                </li>
-                                                <li class="m-nav__item text-center">
-                                                <span style="background-color: #9c9ca5"
-                                                      class="changeType w-100 btn btn-metal m-btn m-btn--pill m-btn--wide btn-sm"
-                                                      data-type="{{\App\Project::REVISION}}">{{ __('revision') }}</span>
-                                                </li>
-                                                @if(\App\User::navigation() !== "Subsanador")
-                                                    <li class="m-nav__item text-center">
-                                                    <span
-                                                        style="background-color:#9C26EA"
-                                                        class="changeType w-100 btn btn-brand m-btn m-btn--pill m-btn--wide btn-sm"
-                                                        data-type="{{\App\Project::PREAPPROVAL}}">{{ __('pre_aprovado') }}</span>
-
-                                                    </li>
-                                                @endif
-                                                <li class="m-nav__item text-center">
-                                                <span
-                                                    class="changeType w-100 btn btn-success m-btn m-btn--pill m-btn--wide btn-sm"
-                                                    data-type="{{\App\Project::APPROVAL}}">{{ __('Aprovados') }}</span>
-                                                </li>
-                                                <li class="m-nav__item text-center">
-                                                <span style="color:white;"
-                                                      class="changeType w-100 btn btn-warning m-btn m-btn--pill m-btn--wide btn-sm"
-                                                      data-type="{{\App\Project::PENDING}}">{{ __('Pendientes') }}</span>
-                                                </li>
-                                                <li class="m-nav__item text-center">
-                                                <span
-                                                    class="changeType w-100 btn btn-danger m-btn m-btn--pill m-btn--wide btn-sm"
-                                                    data-type="{{\App\Project::REJECTED}}">{{ __('rechazados') }}</span>
-                                                </li>
-                                                <li class="m-nav__item text-center">
-                                                <span style="color:white"
-                                                      class="changeType w-100 btn btn-success m-btn m-btn--pill m-btn--wide btn-sm"
-                                                      data-type="{{\App\Project::ACEPTED}}">{{ __('Aceptados') }}</span>
-                                                </li>
-                                                <li class="m-nav__item text-center">
-                                                <span
-                                                    class="changeType w-100 btn btn-info m-btn m-btn--pill m-btn--wide btn-sm"
-                                                    data-type="{{\App\Project::REVISON_UPDATE}}">{{ __('Nueva revisión') }}</span>
-                                                </li>
-                                                <li class="m-nav__item text-center">
-                                                <span
-                                                    class="changeType w-100 btn btn-info m-btn m-btn--pill m-btn--wide btn-sm"
-                                                    data-type="{{\App\Project::NOT_REMEDIED}}">{{ __('No subsanados') }}</span>
-                                                </li>
-                                                <li class="m-nav__separator m-nav__separator--fit">
-                                                </li>
-                                                <li class="m-nav__section m-nav__section--first">
-                                                    <span class="m-nav__section-text">FILTRAR POR REGISTRO</span>
-                                                </li>
-                                                <li class="m-nav__item text-center">
-                                                <span style="color:white"
-                                                      class="changeType w-100 btn btn-warning m-btn m-btn--pill m-btn--wide btn-sm"
-                                                      data-type="{{\App\Project::PENDING_REGISTER}}">{{ __('Registro Pendiente') }}</span>
-                                                </li>
-                                                <li class="m-nav__item text-center">
-                                                <span style="color:white"
-                                                      class="changeType w-100 btn btn-danger m-btn m-btn--pill m-btn--wide btn-sm"
-                                                      data-type="{{\App\Project::NOT_PROJECT_REGISTER}}">{{ __('Sin Proyecto Registrado') }}</span>
-                                                </li>
-                                                <li class="m-nav__item">
-                                                    <span
-                                                        class="changeType w-100 btn btn-metal m-btn m-btn--pill m-btn--wide btn-block"
-                                                        data-type="0">{{ __('todos') }}</span>
-                                                </li>
-
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </ul>
-                </div>
                 {{-- <div class="m-portlet__head-tools">
                     <ul class="m-portlet__nav">
 
@@ -493,7 +399,7 @@
             <div class="m-portlet__body">
                 {{-- filtros para datatable --}}
                 <div class="row">
-                    <select class="form-control m-input m-input--square col-md-2 mb-3 tipoPersona" name="tipoPersona" id="tipoPersona">
+                    <select class="form-control m-input m-input--square col-md-3 mb-3  tipoPersona" name="tipoPersona" id="tipoPersona">
                         <option value="0">Seleccione tipo persona</option>
                         @foreach ($tipoPersona as $tipoPer)
                         <option value="{{$tipoPer->id  }}">{{ $tipoPer->name }}</option>
@@ -501,13 +407,112 @@
 
                     </select>
                     {{-- @dd($cat) --}}
-                    <select type="search" class="form-control m-input m-input--square col-md-2 mb-3" aria-controls="table_projects_management">
+                    <select class="form-control m-input m-input--square col-md-3 mb-3" id="category_filter"
+                    style="margin-left: 1rem;margin-right: -1rem;"
+                    >
                         <option value="0">Seleccione categoría</option>
                         @foreach ($cat as $category)
-                        <option value="{{$category->id}}">{{ $category->category}}</option>
+                        <option value="{{$category->id}}" >{{$category->category}}</option>
                         @endforeach
 
                     </select>
+
+                    {{-- filtro estado --}}
+                    <div class="m-portlet__head-tools col-md-6">
+                        <ul class="m-portlet__nav row mr-1" style="float: right">
+
+                            <li class="m-portlet__nav-item row mr-2" style="margin-top: 0.6rem;">
+                                <h5 class="mr-2">Estado: </h5>
+                                <span id="current_status"
+                                      class="m-badge m-badge--metal m-badge--wide m-badge--rounded" style="height:23px">{{ __('revision') }}</span>
+                            </li>
+                            <div class="m-dropdown m-dropdown--inline  m-dropdown--arrow m-dropdown--align-right"
+                                 m-dropdown-toggle="hover">
+                                <a href="#" class="m-dropdown__toggle btn btn-warning dropdown-toggle">
+                                    Filtrar
+                                </a>
+                                <div class="m-dropdown__wrapper">
+                                    <span class="m-dropdown__arrow m-dropdown__arrow--right"></span>
+                                    <div class="m-dropdown__inner">
+                                        <div class="m-dropdown__body">
+                                            <div class="m-dropdown__content selectType">
+                                                <ul class="m-nav">
+                                                    <li class="m-nav__section m-nav__section--first">
+                                                        <span class="m-nav__section-text">FILTRAR POR ESTADO</span>
+                                                    </li>
+                                                    <li class="m-nav__item text-center">
+                                                    <span style="background-color: #9c9ca5"
+                                                          class="changeType w-100 btn btn-metal m-btn m-btn--pill m-btn--wide btn-sm"
+                                                          data-type="{{\App\Project::REVISION}}">{{ __('revision') }}</span>
+                                                    </li>
+                                                    @if(\App\User::navigation() !== "Subsanador")
+                                                        <li class="m-nav__item text-center">
+                                                        <span
+                                                            style="background-color:#9C26EA"
+                                                            class="changeType w-100 btn btn-brand m-btn m-btn--pill m-btn--wide btn-sm"
+                                                            data-type="{{\App\Project::PREAPPROVAL}}">{{ __('pre_aprovado') }}</span>
+
+                                                        </li>
+                                                    @endif
+                                                    <li class="m-nav__item text-center">
+                                                    <span
+                                                        class="changeType w-100 btn btn-success m-btn m-btn--pill m-btn--wide btn-sm"
+                                                        data-type="{{\App\Project::APPROVAL}}">{{ __('Aprovados') }}</span>
+                                                    </li>
+                                                    <li class="m-nav__item text-center">
+                                                    <span style="color:white;"
+                                                          class="changeType w-100 btn btn-warning m-btn m-btn--pill m-btn--wide btn-sm"
+                                                          data-type="{{\App\Project::PENDING}}">{{ __('Pendientes') }}</span>
+                                                    </li>
+                                                    <li class="m-nav__item text-center">
+                                                    <span
+                                                        class="changeType w-100 btn btn-danger m-btn m-btn--pill m-btn--wide btn-sm"
+                                                        data-type="{{\App\Project::REJECTED}}">{{ __('rechazados') }}</span>
+                                                    </li>
+                                                    <li class="m-nav__item text-center">
+                                                    <span style="color:white"
+                                                          class="changeType w-100 btn btn-success m-btn m-btn--pill m-btn--wide btn-sm"
+                                                          data-type="{{\App\Project::ACEPTED}}">{{ __('Aceptados') }}</span>
+                                                    </li>
+                                                    <li class="m-nav__item text-center">
+                                                    <span
+                                                        class="changeType w-100 btn btn-info m-btn m-btn--pill m-btn--wide btn-sm"
+                                                        data-type="{{\App\Project::REVISON_UPDATE}}">{{ __('Nueva revisión') }}</span>
+                                                    </li>
+                                                    <li class="m-nav__item text-center">
+                                                    <span
+                                                        class="changeType w-100 btn btn-info m-btn m-btn--pill m-btn--wide btn-sm"
+                                                        data-type="{{\App\Project::NOT_REMEDIED}}">{{ __('No subsanados') }}</span>
+                                                    </li>
+                                                    <li class="m-nav__separator m-nav__separator--fit">
+                                                    </li>
+                                                    <li class="m-nav__section m-nav__section--first">
+                                                        <span class="m-nav__section-text">FILTRAR POR REGISTRO</span>
+                                                    </li>
+                                                    <li class="m-nav__item text-center">
+                                                    <span style="color:white"
+                                                          class="changeType w-100 btn btn-warning m-btn m-btn--pill m-btn--wide btn-sm"
+                                                          data-type="{{\App\Project::PENDING_REGISTER}}">{{ __('Registro Pendiente') }}</span>
+                                                    </li>
+                                                    <li class="m-nav__item text-center">
+                                                    <span style="color:white"
+                                                          class="changeType w-100 btn btn-danger m-btn m-btn--pill m-btn--wide btn-sm"
+                                                          data-type="{{\App\Project::NOT_PROJECT_REGISTER}}">{{ __('Sin Proyecto Registrado') }}</span>
+                                                    </li>
+                                                    <li class="m-nav__item">
+                                                        <span
+                                                            class="changeType w-100 btn btn-metal m-btn m-btn--pill m-btn--wide btn-block"
+                                                            data-type="0">{{ __('todos') }}</span>
+                                                    </li>
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ul>
+                    </div>
 
 
                 </div>
@@ -578,44 +583,42 @@
         if (estado) {
             changedStatusColor(parseInt(estado))
         }
-        console.log(estado);
         var storeTipoProyecto = "storeTipoProyecto";
         var tipoProyecto = getStorage(storeTipoProyecto);
         var tipoPer = 0;
+        var category=0;
         if (tipoProyecto == 11) {
             tipoProyecto = null
         }
-        console.log('get', tipoProyecto);
-        console.log('get tipo per', tipoPer);
+
         var table = null;
-        // var tipoProyecto = null;
-        // var table = null;
+
         const loadTable = function () {
             if (table !== null) {
                 table.destroy();
             }
             var cont = 0;
+            var cat;
             table = $('#table_projects_management').DataTable({
                 "processing": true,
                 "serverSide": true,
                 "scrollX": true,
                 "data": null,
                 "order": [[0, "asc"]],
-                "columnDefs": [{
-                    "searchable": false,
-                    "orderable": false,
-                    "targets": 0
-                }],
+
                 "ajax": {
                     url: "{{route('aspirants.all')}}",
                     data: {
                         tipoProyecto: tipoProyecto,
-                        tipoPer:tipoPer
+                        tipoPer:tipoPer,
+                        category:category
                     }
                 },
                 "columns": [
 
                     {
+                        data: 'users.name',
+                        defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>',
 
                         render: function (data, type, JsonResultRow, meta) {
                             // console.log(JsonResultRow,'data****');
@@ -629,11 +632,19 @@
                         }
                     },
                     {
-                        data: 'person_type.name',
-                        defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
+                        // data: 'person_type.name',
+                        defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>',
 
+                        render:function(data,type,JsonResultRow, meta){
+                            if (JsonResultRow.person_type){
+                                return JsonResultRow.person_type.name;
+                            }
+
+                        }
                     },
                     {
+
+
                         render: function (data, type, JsonResultRow, meta) {
                             var category = "";
                             if (JsonResultRow.projects) {
@@ -643,8 +654,13 @@
                                 });
                             }
 
-                            return category != "" ? `<span>${category.category.category}</span>` : '<span class="label label-danger text-center ml-4" style="color:red !important">Sin categoria</span>'
-                        }
+                           cat = category != "" ? `${category.category.category}` : '<span class="label label-danger text-center ml-4" style="color:red !important">Sin categoria</span>'
+                           return cat;
+                        },
+
+
+
+
                     },
                     // {
                     //     data: 'document_type.document',
@@ -669,6 +685,7 @@
                     //     // defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
                     // },
                     {
+                        data:'users.email',
                         render: function (data, type, JsonResultRow, meta) {
                             // console.log(JsonResultRow.users.email,'email');
 
@@ -764,11 +781,25 @@
                         "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
                         "sSortDescending": ": Activar para ordenar la columna de manera descendente"
                     }
-                }
+                },
+
+
+
+
 
             });
 
         };
+        // filtro por categoria
+        $('#category_filter').on('change', function(){
+            category = $(this).val();
+            console.log(category,'catt');
+            loadTable();
+            // console.log(this.value,'value---');
+            // console.log(this.value,'value---');
+            //     table.search(this.value).draw();
+        });
+        // filtro por tipo
         $(".selectType").on('click', '.changeType', function () {
             let tipo = parseInt($(this).attr("data-type"));
             if (!(tipo > 0)) {
