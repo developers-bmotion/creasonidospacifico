@@ -7,13 +7,13 @@
         <h5 style="font-weight: bold">{{ __('asignar_proyecto') }}:</h5>
     </div>
     <div class="form-group">
-        <button type="button" data-toggle="modal" data-target="#list_modal_manage"
-                class="btn btn-info m-btn m-btn--icon">
-        <span>
-            <i class="la la-user"></i>
-            <span>{{ __('buscar') }}</span>
-        </span>
-        </button>
+{{--        <button type="button" data-toggle="modal" data-target="#list_modal_manage"--}}
+{{--                class="btn btn-info m-btn m-btn--icon">--}}
+{{--        <span>--}}
+{{--            <i class="la la-user"></i>--}}
+{{--            <span>{{ __('buscar') }}</span>--}}
+{{--        </span>--}}
+{{--        </button>--}}
 
         <form method="post" action="{{ route('project.admin.rejected') }}" class="" style="display: inline"
               id="frm_rejected_admin">

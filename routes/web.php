@@ -38,7 +38,7 @@ Route::get('/offline', function () {
 });
 
 Route::get('/prueba-email', function () {
-    return new \App\Mail\NewArtist('Mao', 'Guti', 'amores como el nuestro');
+    return new \App\Mail\NewManagerAdmin('Mauricio', 'Gutierrez', 'sm@gm.com','oamsoamsoams');
 });
 
 Route::get('/')->middleware('');
@@ -257,7 +257,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'dashboard', 'middleware' =>
         //CALIFICAR PROYECTO POR EL MANAGEMENT
         Route::post('/update-review-management', 'Manage\ProjectsManageController@add_review')->name('update.review.management');
     });
-    Route::get('/profile-managament/{user}', 'Manage\ProfileController@index')->name('profile.managament');
+    Route::get('/profile-managament/{user}', 'Manage\ProfileController@index')->name('profile.curador');
     Route::get('/profile-my_proyects/{user}', 'Manage\ProfileController@my_proyects')->name('profile.managament.myProyects');
     Route::put('/update-info-profile-manage/{id}', 'Manage\ProfileController@update_profile_management')->name('update.profile.management');
     Route::post('/profile-photo-management', 'Manage\ProfileController@photo_management')->name('profile.photo.management');
