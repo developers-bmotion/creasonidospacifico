@@ -22,8 +22,8 @@ use App\User;
 
 Route::get('/datos', function () {
 
-    $users = \App\Role::whereIn('id', [1, 3, 4])->with('users')->get();
-    return $users;
+     $artist = Artist::where('user_id', auth()->user()->id)->with('projects.historyReviews')->first();
+    return $artist;
 });
 
 Route::get('/represtante-menor-edad/{id}', function ($id) {
@@ -38,7 +38,7 @@ Route::get('/offline', function () {
 });
 
 Route::get('/prueba-email', function () {
-    return new \App\Mail\NewManagerAdmin('Mauricio', 'Gutierrez', 'sm@gm.com','oamsoamsoams');
+    return new \App\Mail\NewRevisionProjectAspirant('Mauricio', 'Gutierrez', 'Estoy contigo');
 });
 
 Route::get('/')->middleware('');
@@ -167,6 +167,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'dashboard', 'middleware' =>
     Route::post('/pdf-cedula-beneficiario-gestor', 'ProfileController@pdf_cedula_beneficiario_gestor')->name('cedula.pdf.beneficiario.gestor');
     Route::post('/pdf-cedula-team', 'ProfileController@pdf_cedula_team')->name('cedula.pdf.team');
     Route::post('/update-audio', 'ProfileController@update_audio')->name('update.audio');
+    Route::put('/update-state-revision', 'ProfileController@update_state_revision')->name('update.state.revision');
 
 
     Route::put('/update-profile-artist/{id_artis}', 'ProfileController@profile_update_artist')->name('update.profile.artist');
@@ -271,9 +272,9 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'dashboard', 'middleware' =>
     Route::post('/update-password-gestor', 'Gestor\ProfileController@update_password_gestor')->name('update.password.gestor');
 
     //RUTAS PARA EL SUBSANADOR -------------------------------------------------------------------------------------------
-    Route::get('/profile-subsanador/{user}', 'Subsanador\ProfileController@index')->name('profile.subsanador');
-    Route::post('/profile-photo-subsanador', 'Subsanador\ProfileController@photo_subsanador')->name('profile.photo.subsanador');
-    Route::post('/update-password-subsanador', 'Subsanador\ProfileController@update_password_subsanador')->name('update.password.subsanador');
+    Route::get('/profile-subsanador/{user}', 'Subsanador\ProfileController@index')->name('profile.subsanador')->middleware('subsanador_permisos');
+    Route::post('/profile-photo-subsanador', 'Subsanador\ProfileController@photo_subsanador')->name('profile.photo.subsanador')->middleware('subsanador_permisos');
+    Route::post('/update-password-subsanador', 'Subsanador\ProfileController@update_password_subsanador')->name('update.password.subsanador')->middleware('subsanador_permisos');
 
     //Enviar Mensajes a managers
     Route::post("send-project-management", "Admin\ProjectsAdminController@send_project_management")->name("send.project.admin");

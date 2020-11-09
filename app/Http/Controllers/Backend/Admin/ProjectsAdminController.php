@@ -118,10 +118,13 @@ class ProjectsAdminController extends Controller
         $revision_project = Project::where('id',$id)->update([
             'status' => 4
             ]);
-            // dd($request);
         $project = Project::where('id',$id)->with('artists.users')->first();
-
-       $artistSendEmail = \Mail::to($project->artists[0]->users->email)->send(new ArtistProjectRevision($project,$project->artists[0]->users->name, $request->input('observation')));
+        DB::table('history_revisions')->insert([
+            'user_id' => auth()->user()->id,
+            'project_id' => $id,
+            'observation' => $request->input('observation')
+        ]);
+       $artistSendEmail = \Mail::to($project->artists[0]->users->email)->send(new ArtistProjectRevision($project->title,$project->artists[0]->users->name, $request->input('observation')));
 
         // alert()->success( 'Enviado a revisión',__('Ok'))->autoClose(3000);
 

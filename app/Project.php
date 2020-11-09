@@ -170,6 +170,10 @@ class Project extends Model
         return $this->reviews->avg('rating');
     }
 
+    public function historyReviews(){
+        return $this->belongsToMany(User::class,'history_revisions','project_id', 'user_id')->withPivot('observation','state');
+    }
+
     public function images(){
         return $this->hasMany(ProjectImage::class);
     }

@@ -139,7 +139,8 @@
             <div class="modal-body">
 
                     <label style="font-weight: bold" class="col-md-12">Observación:</label>
-                <textarea name="mesage" id="mesage" cols="50" rows="10" class="col-md-12" required></textarea>
+                <div class="summernote" id="m_summernote_1"></div>
+{{--                <textarea name="mesage" id="mesage" cols="50" rows="10" class="col-md-12" required></textarea>--}}
             </div>
             <div class="modal-footer">
                 {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> --}}
@@ -312,6 +313,7 @@
 @endsection
 
 @push('js')
+    <script src="/backend/assets/demo/custom/crud/forms/widgets/summernote.js" type="text/javascript"></script>
     <script src="/js/ajax.js"></script>
     <script>
         (function () {
@@ -366,7 +368,7 @@
             $("#btnSendObservation").click(function () {
                 if($('#mesage').val() !==''){
                 const
-                    mesage=$('#mesage').val(),
+                    mesage=$('#m_summernote_1').summernote('code'),
                     token = '{{ csrf_token() }}',
                     url = '{{route("project.admin.revision")}}';
 

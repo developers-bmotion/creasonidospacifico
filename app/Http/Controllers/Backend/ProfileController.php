@@ -9,11 +9,13 @@ use App\Category;
 use App\City;
 use App\Country;
 use App\DocumentType;
+use App\HistoryRevision;
 use App\Level;
 use App\Location;
 use App\Mail\NewArtist;
 use App\Mail\NewArtistRegisterGestor;
 use App\Mail\NewAspirantGestor;
+use App\Mail\NewRevisionProjectAspirant;
 use App\Update;
 use App\User;
 use Carbon\Carbon;
@@ -42,7 +44,7 @@ class ProfileController extends Controller
 
 
         /*   dd($departamentos); */
-        $artist = Artist::where('user_id', auth()->user()->id)->with('documentType','projects.category','projects.observations', 'city.departaments','users','teams.documentType','teams.expeditionPlace','teams.city.departaments','artistType','personType','beneficiary.documentType','beneficiary.city.departaments','beneficiary.expeditionPlace.departaments','beneficiary.residencePlace.departaments','teams.expeditionPlace.departaments','teams.residencePlace.departaments','expeditionPlace.departaments','residencePlace.departaments')->first();
+        $artist = Artist::where('user_id', auth()->user()->id)->with('documentType','projects.category','projects.observations', 'projects.historyReviews','city.departaments','users','teams.documentType','teams.expeditionPlace','teams.city.departaments','artistType','personType','beneficiary.documentType','beneficiary.city.departaments','beneficiary.expeditionPlace.departaments','beneficiary.residencePlace.departaments','teams.expeditionPlace.departaments','teams.residencePlace.departaments','expeditionPlace.departaments','residencePlace.departaments')->first();
         return view('backend.profile.profile-artist', compact('documenttype', 'artist', 'departamentos', 'persontypes', 'artisttypes', 'leveltypes'));
     }
 
@@ -853,5 +855,20 @@ class ProfileController extends Controller
     {
         $municipio = City::where('id', $id)->first();
         return response()->json($municipio);
+    }
+
+    public function update_state_revision(Request $request){
+
+        $idProject = $request->get('project_id');
+        $stateProjectRevision = $request->get('state_revision');
+        $project = Project::where('id', $idProject)->update(['status' => $stateProjectRevision]);
+        $projectName = Project::where('id', $idProject)->first();
+
+        HistoryRevision::where('project_id', $request->get('project_id'))->orWhere('state','<>' ,1)->update(['state' => 2]);
+
+        /*ENVIO DE CORREO AL ASPRIANTE*/
+        \Mail::to(auth()->user()->email)->send(new NewRevisionProjectAspirant(auth()->user()->name, auth()->user()->last_name, $projectName->title));
+
+        return back()->with('exitoso', 'Se ha enviado su correción exitosamente');
     }
 }

@@ -146,7 +146,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
                             <div class="m-login__signin">
                                 <div class="m-login__head">
-                                    <h3 class="m-login__title">Crear Cuenta</h3>
+                                    <h3 class="m-login__title">Restablecer Contraseña</h3>
                                     <div class="m-login__desc">Ingrese por favor los siguientes datos:</div>
                                 </div>
                                 <form class="m-login__form m-form" method="POST"
