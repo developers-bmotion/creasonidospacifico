@@ -117,8 +117,7 @@ License: You must have a valid license purchased only from themeforest(the above
         class="m-page--fluid m--skin- m-content--skin-light m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default m-brand--minimize m-aside-left--minimize">
     @else
         <body
-            class="m-page--fluid m--skin- m-content--skin-light m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default m-brand--minimize m-aside-left--minimize"
-            style="margin-left: 5rem">
+            class="cls-body m-page--fluid m--skin- m-content--skin-light m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default m-brand--minimize m-aside-left--minimize">
         @endif
         <!-- begin:: Page -->
         <div class="m-grid m-grid--hor m-grid--root m-page" id="app">
@@ -134,16 +133,16 @@ License: You must have a valid license purchased only from themeforest(the above
                         @if(auth()->user()->roles[0]->rol == "Artist" || auth()->user()->roles[0]->rol == "Gestor" || auth()->user()->roles[0]->rol == "Manage" || auth()->user()->roles[0]->rol == "Subsanador")
                             <div class="m-stack__item m-brand  m-brand--skin-dark" style="display: none">
                                 @else
-                                    <div class="m-stack__item m-brand  m-brand--skin-dark" style="display: none">
+                                    <div class="skin-movil m-stack__item m-brand  m-brand--skin-dark" >
                                         @endif
                                         <div class="m-stack m-stack--ver m-stack--general">
-                                            <div class="m-stack__item m-stack__item--middle m-brand__logo">
+                                            {{-- <div class="menu-top-botones m-stack__item m-stack__item--middle m-brand__logo">
                                                 <a href="#" class="m-brand__logo-wrapper">
-                                                    {{--<h4 style="color: white">{{ config('app.name') }}</h4>--}}
+                                                    {{--<h4 style="color: white">{{ config('app.name') }}</h4>--
                                                     <h4 style="color: white;width: 170px;">Caza talentos</h4>
                                                 </a>
-                                            </div>
-                                            <div class="m-stack__item m-stack__item--middle m-brand__tools">
+                                            </div> --}}
+                                            <div class="pos-item m-stack__item m-stack__item--middle m-brand__tools">
 
                                                 <!-- BEGIN: Left Aside Minimize Toggle -->
                                                 <a href="javascript:;" id="m_aside_left_minimize_toggle"
@@ -155,25 +154,25 @@ License: You must have a valid license purchased only from themeforest(the above
 
                                                 <!-- BEGIN: Responsive Aside Left Menu Toggler -->
                                                 <a href="javascript:;" id="m_aside_left_offcanvas_toggle"
-                                                   class="m-brand__icon m-brand__toggler m-brand__toggler--left m--visible-tablet-and-mobile-inline-block m-brand__toggler--active">
+                                                   class="m-brand__icon m-brand__toggler m-brand__toggler m--visible-tablet-and-mobile-inline-block m-brand__toggler--active">
                                                     <span></span>
                                                 </a>
 
                                                 <!-- END -->
 
-                                                <!-- BEGIN: Responsive Header Menu Toggler -->
+                                                {{-- <!-- BEGIN: Responsive Header Menu Toggler -->
                                                 <a id="m_aside_header_menu_mobile_toggle" href="javascript:;"
                                                    class="m-brand__icon m-brand__toggler m--visible-tablet-and-mobile-inline-block">
                                                     <span></span>
-                                                </a>
+                                                </a> --}}
 
                                                 <!-- END -->
 
                                                 <!-- BEGIN: Topbar Toggler -->
-                                                <a id="m_aside_header_topbar_mobile_toggle" href="javascript:;"
+                                                {{-- <a id="m_aside_header_topbar_mobile_toggle" href="javascript:;"
                                                    class="m-brand__icon m--visible-tablet-and-mobile-inline-block">
                                                     <i class="flaticon-more"></i>
-                                                </a>
+                                                </a> --}}
 
                                                 <!-- BEGIN: Topbar Toggler -->
                                             </div>

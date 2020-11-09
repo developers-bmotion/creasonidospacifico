@@ -395,38 +395,6 @@
                                             @if(auth()->user()->roles[0]->rol == "Admin")
                                                 <a href="{{ route('profile.admin',auth()->user()->slug) }}"
                                                    class="m-nav__link">
-<<<<<<< HEAD
-                                                    @elseif(auth()->user()->roles[0]->rol == "Manage")
-                                                        <a href="{{ route('profile.managament',auth()->user()->slug) }}"
-                                                           class="m-nav__link">
-                                                            @elseif(auth()->user()->roles[0]->rol == "Artist")
-                                                                <a href="{{ route('profile.artist') }}"
-                                                                   class="m-nav__link">
-                                                                    @endif
-                                                                    Ver perfil
-                                                                    {{--                                                                    <i class="m-nav__link-icon flaticon-profile-1"></i>--}}
-                                                                    {{--                                                                    <span class="m-nav__link-title">--}}
-                                                                    {{--																			<span class="m-nav__link-wrap">--}}
-                                                                    {{--																				<span--}}
-                                                                    {{--                                                                                    class="m-nav__link-text">Perfil</span>--}}
-                                                                    {{--																				 <span class="m-nav__link-badge"><span--}}
-                                                                    {{--                                                                                        class="m-badge m-badge--success">2</span></span> --}}
-                                                                    {{--																			</span>--}}
-                                                                    {{--																		</span>--}}
-                                                                </a>
-                                        </li>
-                                        {{-- <li class="m-nav__item">
-                                            <a href="header/profile.html" class="m-nav__link">
-                                                <i class="m-nav__link-icon flaticon-share"></i>
-                                                <span class="m-nav__link-text">Activity</span>
-                                            </a>
-                                        </li>
-                                        <li class="m-nav__item">
-                                            <a href="header/profile.html" class="m-nav__link">
-                                                <i class="m-nav__link-icon flaticon-chat-1"></i>
-                                                <span class="m-nav__link-text">Messages</span>
-                                            </a>
-=======
                                                     <i class="m-nav__link-icon flaticon-user"></i>
                                                     <span class="m-nav__link-text">Perfil</span>
                                                 </a>
@@ -447,7 +415,6 @@
                                                     <span class="m-nav__link-text">Perfil</span>
                                                 </a>
                                             @endif
->>>>>>> 6d51ecdbaafa24c8cc12de0b73dbc0eea6a751fd
                                         </li>
                                         {{--                                        <li class="m-nav__item">--}}
                                         {{--                                            <a href="header/profile.html" class="m-nav__link">--}}
