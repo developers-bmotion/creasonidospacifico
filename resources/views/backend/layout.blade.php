@@ -112,7 +112,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
 <!-- begin::Body -->
 
-@if(auth()->user()->roles[0]->rol == "Artist" || auth()->user()->roles[0]->rol == "Manage" || auth()->user()->roles[0]->rol == "Gestor")
+@if(auth()->user()->roles[0]->rol == "Artist" || auth()->user()->roles[0]->rol == "Manage" || auth()->user()->roles[0]->rol == "Gestor" || auth()->user()->roles[0]->rol == "Subsanador")
     <body
         class="m-page--fluid m--skin- m-content--skin-light m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default m-brand--minimize m-aside-left--minimize">
     @else
@@ -131,7 +131,7 @@ License: You must have a valid license purchased only from themeforest(the above
                     <div class="m-stack m-stack--ver m-stack--desktop">
 
                         <!-- BEGIN: Brand -->
-                        @if(auth()->user()->roles[0]->rol == "Artist" || auth()->user()->roles[0]->rol == "Gestor" || auth()->user()->roles[0]->rol == "Manage")
+                        @if(auth()->user()->roles[0]->rol == "Artist" || auth()->user()->roles[0]->rol == "Gestor" || auth()->user()->roles[0]->rol == "Manage" || auth()->user()->roles[0]->rol == "Subsanador")
                             <div class="m-stack__item m-brand  m-brand--skin-dark" style="display: none">
                                 @else
                                     <div class="m-stack__item m-brand  m-brand--skin-dark" style="display: none">
@@ -195,15 +195,15 @@ License: You must have a valid license purchased only from themeforest(the above
                 <!-- BEGIN: Left Aside -->
                 <button class="m-aside-left-close  m-aside-left-close--skin-dark " id="m_aside_left_close_btn"><i
                         class="la la-close"></i></button>
-                @if(auth()->user()->roles[0]->rol == "Artist" || auth()->user()->roles[0]->rol == "Manage" || auth()->user()->roles[0]->rol == "Gestor")
+                @if(auth()->user()->roles[0]->rol == "Artist" || auth()->user()->roles[0]->rol == "Manage" || auth()->user()->roles[0]->rol == "Gestor" || auth()->user()->roles[0]->rol == "Subsanador")
                     <div id="m_aside_left" class="m-grid__item	m-aside-left  m-aside-left--skin-dark "
                          style="display: none">
                         @else
                             <div id="m_aside_left" class="m-grid__item	m-aside-left  m-aside-left--skin-dark">
                             @endif
                             <!--=====================================
-              NAVEGACION
-                ======================================-->
+                            NAVEGACION
+                            ======================================-->
                                 @if(\App\User::navigation() !== "Subsanador" )
                                     @include('backend.partials.menu_navigation')
                                 @endif
