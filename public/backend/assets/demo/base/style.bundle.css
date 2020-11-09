@@ -35625,7 +35625,7 @@ body.m-content--skin-light2 {
         margin-left: -2px;
         top: 5px; }
     .m-topbar .m-topbar__nav.m-nav > .m-nav__item > .m-nav__link .m-topbar__userpic img {
-        max-width: 31px !important; } }
+        /* max-width: 31px !important; */ } } 
 
 @media (max-width: 768px) {
     .m-topbar .m-topbar__nav.m-nav > .m-nav__item.m-dropdown {
