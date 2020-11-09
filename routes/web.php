@@ -265,11 +265,15 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'dashboard', 'middleware' =>
     Route::post('/update-password-management', 'Manage\ProfileController@update_password_management')->name('update.password.management');
     Route::get('/backings-made-magement/{user}', 'Manage\BackingsMadeController@index')->name('backings.made.manage');
 
-
+    //RUTAS PARA EL GESTOR -------------------------------------------------------------------------------------------
     Route::get('/profile-gestor/{user}', 'Gestor\ProfileController@index')->name('profile.managament');
     Route::post('/profile-photo-gestor', 'Gestor\ProfileController@photo_gestor')->name('profile.photo.gestor');
     Route::post('/update-password-gestor', 'Gestor\ProfileController@update_password_gestor')->name('update.password.gestor');
 
+    //RUTAS PARA EL SUBSANADOR -------------------------------------------------------------------------------------------
+    Route::get('/profile-subsanador/{user}', 'Subsanador\ProfileController@index')->name('profile.subsanador');
+    Route::post('/profile-photo-subsanador', 'Subsanador\ProfileController@photo_subsanador')->name('profile.photo.subsanador');
+    Route::post('/update-password-subsanador', 'Subsanador\ProfileController@update_password_subsanador')->name('update.password.subsanador');
 
     //Enviar Mensajes a managers
     Route::post("send-project-management", "Admin\ProjectsAdminController@send_project_management")->name("send.project.admin");

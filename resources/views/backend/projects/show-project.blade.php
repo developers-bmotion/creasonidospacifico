@@ -196,41 +196,9 @@
                                         {{ $project->description }}
                                     </div>
                                 </div>
-
-                                @include('backend.partials.rating.'.\App\User::rating_proyect())
-                                <!-- ------------------------- ACCIONES SEGUN LOS ROLES----------------------------- -->
-{{--                                @if(!auth()->user()->roles[0]->rol == "Gestor")--}}
-{{--                                    @if(\App\User::navigation() !== "Admin")--}}
-{{--                                        @include('backend.partials.rating.' .\App\User::rating_proyect())--}}
-{{--                                    @endif--}}
-{{--                                @endif--}}
-                            <!-- ------------------------- CALIFICACION DEL PROYECTO CUANDO ESTA PUBLICADO Y APROBADO----------------------------- -->
-                                {{-- @if($project->status == 3 || $project->status == 4 || $project->status == 5)
-                                    <div class="form-group">
-                                        <h5 style="font-weight: bold">{{ __('valoracion') }}:</h5>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <ul id="list_rating_project" class="list-inline" style="font-size: 20px">
-                                            <li class="list-inline-item star"><i
-                                                    class="fa fa-star fa-1x{{ $project->rating >= 1 ? ' yellow-rating' : '' }}"></i>
-                                            </li>
-                                            <li class="list-inline-item star"><i
-                                                    class="fa fa-star fa-1x{{ $project->rating >= 2 ? ' yellow-rating' : '' }}"></i>
-                                            </li>
-                                            <li class="list-inline-item star"><i
-                                                    class="fa fa-star fa-1x{{ $project->rating >= 3 ? ' yellow-rating' : '' }}"></i>
-                                            </li>
-                                            <li class="list-inline-item star"><i
-                                                    class="fa fa-star fa-1x{{ $project->rating >= 4 ? ' yellow-rating' : '' }}"></i>
-                                            </li>
-                                            <li class="list-inline-item star"><i
-                                                    class="fa fa-star fa-1x{{ $project->rating >= 5 ? ' yellow-rating' : '' }}"></i>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                @endif --}}
-
+                                @if(auth()->user()->roles[0]->rol == "Subsanador")
+                                    @include('backend.partials.rating.'.\App\User::rating_proyect())
+                                @endif
 
                             </div>
 
@@ -608,7 +576,9 @@
 
                                         {{-- @dd($artist->users->name) --}}
                                         <h5 style="font-weight: bold"
-                                            class="">Aspirante registrado por el gestor <a href="{{ route('profile.managament', $artist->artists[0]->userGestor->slug)}}"><span>{{ $artist->artists[0]->userGestor->name }} {{$artist->artists[0]->userGestor->last_name}}</span></a></h5>
+                                            class="">Aspirante registrado por el gestor <a
+                                                href="{{ route('profile.managament', $artist->artists[0]->userGestor->slug)}}"><span>{{ $artist->artists[0]->userGestor->name }} {{$artist->artists[0]->userGestor->last_name}}</span></a>
+                                        </h5>
                                         <div class="">
                                             <br>
                                             <label style="font-weight: bold">Documento de soporte:</label>
@@ -1548,7 +1518,7 @@
                 {
                     data: 'users.name',
                     render: function (data, type, JsonResultRow, meta) {
-                        return JsonResultRow.users.name + ' ' + JsonResultRow.users.last_name+''+JsonResultRow.users.second_last_name;
+                        return JsonResultRow.users.name + ' ' + JsonResultRow.users.last_name + '' + JsonResultRow.users.second_last_name;
                     },
                     defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
                 },

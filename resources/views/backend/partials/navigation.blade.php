@@ -187,6 +187,12 @@
                             class="m-menu__link-text">Ver todas las canciones</span>
                     </a>
                 </li>
+                <li class="m-menu__item ">
+                    <a href="{{ route('profile.subsanador',auth()->user()->slug) }}" class="m-menu__link"><i
+                            class="m-menu__link-icon la la-user"></i><span
+                            class="m-menu__link-text">Ir al perfil</span>
+                    </a>
+                </li>
             </ul>
         @endif
     </div>
@@ -432,6 +438,11 @@
                                                 </a>
                                             @elseif(auth()->user()->roles[0]->rol == "Artist")
                                                 <a href="{{ route('profile.artist') }}" class="m-nav__link">
+                                                    <i class="m-nav__link-icon flaticon-user"></i>
+                                                    <span class="m-nav__link-text">Perfil</span>
+                                                </a>
+                                            @elseif(auth()->user()->roles[0]->rol == "Subsanador")
+                                                <a href="{{ route('profile.subsanador',auth()->user()->slug) }}" class="m-nav__link">
                                                     <i class="m-nav__link-icon flaticon-user"></i>
                                                     <span class="m-nav__link-text">Perfil</span>
                                                 </a>
