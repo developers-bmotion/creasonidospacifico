@@ -1,7 +1,7 @@
 @extends('backend.layout')
 
 @push('css')
-<link rel="stylesheet" href="/frontend/css/style.css">
+    <link rel="stylesheet" href="/frontend/css/style.css">
 @endpush
 <!--=====================================
    HEADER
@@ -14,7 +14,7 @@
             <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
                 <li class="m-nav__item m-nav__item--home">
                     <a href="#" class="m-nav__link m-nav__link--icon">
-                        <i class="m-nav__link-icon flaticon-users"></i>
+                        <i class="m-nav__link-icon la la-check"></i>
                     </a>
                 </li>
                 <li class="m-nav__separator">-</li>
@@ -50,10 +50,10 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                         <div class="m-widget19">
                             <div class="m-widget19__pic m-portlet-fit--top m-portlet-fit--sides"
                                  style="min-height-: 100px">
-                                <img src="/backend/assets/app/media/img//managements/fondo-managements.jpg" alt=""
+                                <img src="/images/banner-contacto.png" alt=""
                                      style="height: 230px;object-fit: cover;">
                                 <h3 class="m-widget19__title m--font-light">
-                                    Managements
+                                    Curadores
                                 </h3>
                                 <div class="m-widget19__shadow">
                                 </div>
@@ -64,110 +64,58 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
 
                         </div>
                         <div class="m-portlet__body">
-                            <ul class="nav nav-tabs  m-tabs-line" role="tablist">
-                                <li class="nav-item m-tabs__item">
-                                    <a class="nav-link m-tabs__link active" data-toggle="tab" href="#m_tabs_1_1" role="tab">Curador uno</a>
-                                </li>
 
-
-                                <li class="nav-item m-tabs__item">
-                                    <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_1_3" role="tab">Curador dos</a>
-                                </li>
-                            </ul>
-                            <div class="tab-content">
-                                {{-- inicio tab curador 1 --}}
-                                <div class="tab-pane active" id="m_tabs_1_1" role="tabpanel">
-                                    <div class="row p-3">
-                                        @forelse($managements as $management)
-                                            <div class="col-lg-4">
-                                                <div class="m-portlet m-portlet--full-height  ">
-                                                    <div class="m-portlet__body">
-                                                        <div class="m-card-profile">
-                                                            <div class="m-card-profile__title m--hide">
-                                                                Your Profile
-                                                            </div>
-                                                            <div class="m-card-profile__pic">
-                                                                <div class="m-card-profile__pic-wrapper">
-                                                                    @if(Storage::disk('public')->exists('users/'.$management->users->picture))
-                                                                        <img src="{{ $management->users->pathAttachment()}}"
-                                                                             alt=""/>
-                                                                    @else
-                                                                        <img src="{{ $management->users->picture }}" alt="">
-                                                                    @endif
-                                                                </div>
-                                                            </div>
-                                                            <div class="m-card-profile__details">
-                                                                <span class="m-card-profile__name">{{ $management->users->name }}</span>
-
-                                                                <a href="" class="m-card-profile__email m-link"
-                                                                   style="margin-left: -15px">{{ $management->users->email  }}</a>
-
-                                                            </div>
-                                                            <div class="m-card-profile__details" style=padding-top:20px;>
-                                                                <a href="{{ route('profile.managament',$management->users->slug)}}" class="btn btn-secondary m-btn m-btn--icon m-btn--pill">{{ __('mas_informacion') }}</a>
-                                                            </div>
-
-                                                        </div>
+                            <div class="row p-3">
+                                @forelse($managements as $management)
+                                    <div class="col-lg-4">
+                                        <div class="m-portlet m-portlet--full-height  ">
+                                            <div class="m-portlet__body">
+                                                <div class="m-card-profile">
+                                                    <div class="m-card-profile__title m--hide">
+                                                        Your Profile
                                                     </div>
+                                                    <div class="m-card-profile__pic">
+                                                        <a href="{{ route('profile.curador',$management->users->slug)}}">
+                                                            <div class="m-card-profile__pic-wrapper">
+
+                                                                @if(Storage::disk('public')->exists('users/'.$management->users->picture))
+                                                                    <img src="{{ $management->users->pathAttachment()}}"
+                                                                         alt=""/>
+                                                                @else
+                                                                    <img src="{{ $management->users->picture }}" alt="">
+                                                                @endif
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                    <div class="m-card-profile__details">
+                                                        <span
+                                                            class="m-card-profile__name">{{ $management->users->name }}</span>
+
+                                                        <a href="" class="m-card-profile__email m-link"
+                                                           style="margin-left: -15px">{{ $management->users->email  }}</a>
+
+                                                    </div>
+                                                    <div class="m-card-profile__details" style=padding-top:20px;>
+                                                        <a href="{{ route('profile.curador',$management->users->slug)}}"
+                                                           class="btn btn-secondary m-btn m-btn--icon m-btn--pill">{{ __('mas_informacion') }}</a>
+                                                    </div>
+
                                                 </div>
                                             </div>
-                                        @empty
-                                            <h4 class="text-center">{{ __('no_hay_registros') }}</h4>
-                                        @endforelse
+                                        </div>
                                     </div>
-                                    {{ $managements->links() }}
-                                </div>
-                                {{-- fin tab curador 1 --}}
-
-                                <div class="tab-pane" id="m_tabs_1_3" role="tabpanel">
-                                    <div class="row p-3">
-                                        @forelse($managementstwo as $management)
-                                        {{-- @dd($management->tipoCurador) --}}
-
-                                            <div class="col-lg-4">
-                                                <div class="m-portlet m-portlet--full-height  ">
-                                                    <div class="m-portlet__body">
-                                                        <div class="m-card-profile">
-                                                            <div class="m-card-profile__title m--hide">
-                                                                Your Profile
-                                                            </div>
-                                                            <div class="m-card-profile__pic">
-                                                                <div class="m-card-profile__pic-wrapper">
-                                                                    @if(Storage::disk('public')->exists('users/'.$management->users->picture))
-                                                                        <img src="{{ $management->users->pathAttachment()}}"
-                                                                             alt=""/>
-                                                                    @else
-                                                                        <img src="{{ $management->users->picture }}" alt="">
-                                                                    @endif
-                                                                </div>
-                                                            </div>
-                                                            <div class="m-card-profile__details">
-                                                                <span class="m-card-profile__name">{{ $management->users->name }}</span>
-
-                                                                <a href="" class="m-card-profile__email m-link"
-                                                                   style="margin-left: -15px">{{ $management->users->email  }}</a>
-
-                                                            </div>
-                                                            <div class="m-card-profile__details" style=padding-top:20px;>
-                                                                <a href="{{ route('profile.managament',$management->users->slug)}}" class="btn btn-secondary m-btn m-btn--icon m-btn--pill">{{ __('mas_informacion') }}</a>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        @empty
-                                            <h4 class="text-center">{{ __('no_hay_registros') }}</h4>
-                                        @endforelse
-                                    </div>
-                                    {{ $managementstwo->links() }}
-                                </div>
+                                @empty
+                                    <h4 class="text-center">{{ __('no_hay_registros') }}</h4>
+                                @endforelse
                             </div>
+                            {{ $managements->links() }}
+                            {{-- fin tab curador 1 --}}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
     <!--=====================================
@@ -175,7 +123,7 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
     ======================================-->
     <div class="modal fade" id="modal_add_management" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Agregar Curador</h5>
@@ -195,52 +143,99 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                                 {!! $errors->first('country_id','<div class="form-control-feedback">*:message</div>')!!}
                             </select>
                         </div> --}}
-                        <div class="form-group m-form__group {{$errors->has('name')? 'has-danger':''}}">
-                            <label for="exampleInputEmail1">{{ __('nombre') }}</label>
-                            <input type="text" class="form-control m-input" id="" name="name"
-                                   aria-describedby="emailHelp" placeholder="Enter {{ __('nombre') }}" value="{{ old('name') }}">
-                            {!! $errors->first('name','<div class="form-control-feedback">*:message</div>')!!}
-                        </div>
-                        <div class="form-group m-form__group {{$errors->has('last_name')? 'has-danger':''}}">
-                            <label for="exampleInputEmail1">{{ __('apellidos') }}</label>
-                            <input type="text" name="last_name" class="form-control m-input" id=""
-                                   aria-describedby="emailHelp" placeholder="Enter {{ __('apellidos') }}" value="{{ old('last_name') }}">
-                            {!! $errors->first('last_name','<div class="form-control-feedback">*:message</div>')!!}
-                        </div>
-                        <div class="form-group m-form__group {{$errors->has('email')? 'has-danger':''}}">
-                            <label for="exampleInputEmail1">{{ __('email') }}</label>
-                            <input type="email" name="email" class="form-control m-input" id="exampleInputEmail1"
-                                   aria-describedby="emailHelp" placeholder="Enter {{ __('email') }}" value="{{ old('email') }}">
-                            {!! $errors->first('email','<div class="form-control-feedback">*:message</div>')!!}
-                        </div>
-                        <div class="form-group m-form__group {{$errors->has('insteres')? 'has-danger':''}}">
+                        <div class="row">
+                            <div
+                                class="form-group m-form__group col-12 col-md-6 col-lg-6 {{$errors->has('name')? 'has-danger':''}}">
+                                <label for="exampleInputEmail1">Nombres<span
+                                        class="text-danger">*</span></label>
+                                <input type="text" class="form-control m-input" id="" name="name"
+                                       aria-describedby="emailHelp" placeholder="Ingrese nombres"
+                                       value="{{ old('name') }}">
+                                {!! $errors->first('name','<div class="form-control-feedback">*:message</div>')!!}
+                            </div>
+                            <div
+                                class="form-group m-form__group col-12 col-md-6 col-lg-6 {{$errors->has('last_name')? 'has-danger':''}}">
+                                <label for="exampleInputEmail1">{{ __('apellidos') }}<span
+                                        class="text-danger">*</span></label>
+                                <input type="text" name="last_name" class="form-control m-input" id=""
+                                       aria-describedby="emailHelp" placeholder="Ingrese {{ __('apellidos') }}"
+                                       value="{{ old('last_name') }}">
+                                {!! $errors->first('last_name','<div class="form-control-feedback">*:message</div>')!!}
+                            </div>
+                            <div
+                                class="form-group m-form__group col-12 col-md-6 col-lg-6 {{$errors->has('phone')? 'has-danger':''}}">
+                                <label for="exampleInputEmail1">{{ __('Teléfono') }}:<span
+                                        class="text-danger">*</span></label>
+                                <input type="tel" name="phone" class="form-control m-input" id=""
+                                       aria-describedby="emailHelp" placeholder="Ingrese teléfono"
+                                       value="{{ old('phone') }}">
+                                {!! $errors->first('phone','<div class="form-control-feedback">*:message</div>')!!}
+                            </div>
+                            <div class="form-group m-form__group  col-12 col-md-6 col-lg-6">
+                                <label class="form-control-label">Tipo de documento:<span
+                                        class="text-danger">*</span></label>
+                                <select name="document_type" class="form-control">
+                                    <option value="-1">Seleccione departamento</option>
+                                    <option value="1">Cédula de Ciudadania</option>
+                                    <option value="3">Cédula de Extrangeria</option>
+                                </select>
+                                <div id="error-aspirante_departamentoNacimiento" class="form-control-feedback"
+                                     style="display: none"></div>
+                                {!! $errors->first('document_type','<div class="form-control-feedback">*:message</div>')!!}
+                            </div>
 
-                            <label for="exampleInputEmail1">{{ __('selecciona_insteres') }}</label>
+                            <div
+                                class="form-group m-form__group col-12 col-md-6 col-lg-6 {{$errors->has('identificacion')? 'has-danger':''}}">
+                                <label for="exampleInputEmail1">Nº Identificación:<span
+                                        class="text-danger">*</span></label>
+                                <input type="num" name="identificacion" class="form-control m-input" id=""
+                                       aria-describedby="emailHelp" placeholder="Ingrese documento"
+                                       value="{{ old('identificacion') }}">
+                                {!! $errors->first('identificacion','<div class="form-control-feedback">*:message</div>')!!}
+                            </div>
 
-                            <select class="form-control m-select2" id="m_select2_11_tipo" multiple name="insteres[]">
-                                <option></option>
-                                @foreach($categories as $categorie)
-                                    <option value="{{ $categorie->id }}" {{(old('insteres') && in_array($categorie->id."", old('insteres')))?"selected":""}}>{{ $categorie->category }}</option>
-                                @endforeach
-                                {!! $errors->first('insteres','<div class="form-control-feedback">*:message</div>')!!}
-                            </select>
+                            <div
+                                class="form-group m-form__group col-12 col-md-6 col-lg-6 {{$errors->has('email')? 'has-danger':''}}">
+                                <label for="exampleInputEmail1">{{ __('email') }}<span
+                                        class="text-danger">*</span></label>
+                                <input type="email" name="email" class="form-control m-input" id="exampleInputEmail1"
+                                       aria-describedby="emailHelp" placeholder="Ingrese {{ __('email') }}"
+                                       value="{{ old('email') }}">
+                                {!! $errors->first('email','<div class="form-control-feedback">*:message</div>')!!}
+                            </div>
                         </div>
+                        <div class="row">
+                            <div
+                                class="form-group m-form__group col-12 col-md-12 col-lg-12 {{$errors->has('insteres')? 'has-danger':''}}">
 
-                        <div class="form-group m-form__group {{$errors->has('tipoCurador')? 'has-danger':''}}">
-                            <label for="exampleSelect1">Tipo de curador</label>
-                            <select class="form-control m-input m-input--air" id="tipoCurador" name="tipoCurador" required>
-                                <option value="0">Seleccione</option>
-                                <option value="1">Primer curador</option>
-                                <option value="2">Segundo curador</option>
-                            </select>
-                            <div style="display:none; color:#f66e84" class="form-control-feedback tipoErr">*Debe llenar el campo</div>
+                                <label for="exampleInputEmail1">{{ __('selecciona_insteres') }} (Modalidades)<span
+                                        class="text-danger">*</span></label>
+
+                                <select class="form-control m-select2" id="m_select2_11_tipo" multiple
+                                        name="insteres[]">
+                                    <option></option>
+                                    @foreach($categories as $categorie)
+                                        <option
+                                            value="{{ $categorie->id }}" {{(old('insteres') && in_array($categorie->id."", old('insteres')))?"selected":""}}>{{ $categorie->category }}</option>
+                                    @endforeach
+                                    {!! $errors->first('insteres','<div class="form-control-feedback">*:message</div>')!!}
+                                </select>
+                            </div>
                         </div>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('cerrar') }}</button>
-                        <button type="submit" class="btn btn-primary">{{ __('guardar') }}</button>
-                    </div>
+                        <div class="row">
+                            <div
+                                class="form-group m-form__group  col-12 col-md-12 col-lg-12 {{$errors->has('profile')? 'has-danger':''}}">
+                                <label for="exampleInputEmail1">{{ __('Perfil') }}</label>
+                                <textarea rows="8" cols="50" name="profile" class="form-control m-input"
+                                          placeholder="Describa el perfil"></textarea>
+                                {!! $errors->first('profile','<div class="form-control-feedback">*:message</div>')!!}
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary"
+                                    data-dismiss="modal">{{ __('cerrar') }}</button>
+                            <button type="submit" class="btn btn-primary">{{ __('guardar') }}</button>
+                        </div>
                 </form>
             </div>
         </div>
@@ -251,34 +246,34 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
     <script>
         @if(\Session::has('msg'))
         swal({
-            "title": "{{\Session::get('msg')[0]}}",
-            "text": "{{\Session::get('msg')[1]}}",
+            "title": "Correcto",
+            "text": "Curador creado correctamente",
             "type": "{{\Session::get('msg')[2]}}",
             "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
         });
         @endif
         var select = false;
-        const startSelectTag = function (){
-            setTimeout(function (){
+        const startSelectTag = function () {
+            setTimeout(function () {
                 $('#m_select2_11_tipo').select2({
                     placeholder: "{{ __('selecciona_insteres') }}",
                     tags: true
                 });
-            },500);
+            }, 500);
         };
         @if (count($errors) > 0 )
         $('#modal_add_management').modal('show');
-        if($('#tipoCurador').val() == 0){
-        $('.tipoErr').show();
+        if ($('#tipoCurador').val() == 0) {
+            $('.tipoErr').show();
 
-        }else{
+        } else {
             $('.tipoErr').hide();
         }
 
         startSelectTag();
         @endif
         $('#modalAddManager').click(function () {
-            if (select){
+            if (select) {
                 return;
             }
             select = true;

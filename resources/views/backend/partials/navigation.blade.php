@@ -121,38 +121,38 @@
                         @endif
                     @endif
                 @endif
-                @if(auth()->user()->roles[0]->rol == "Admin")
-                    <li class="m-menu__item ">
-                        <a href="/dashboard" class="m-menu__link"><i
-                                class="m-menu__link-icon la la-dashboard"></i><span
-                                class="m-menu__link-text">Dashboard</span>
-                        </a>
-                    </li>
-                    <li class="m-menu__item ">
-                        <a href="{{ route('managements.admin') }}" class="m-menu__link"><i
-                                class="m-menu__link-icon la la-music"></i><span
-                                class="m-menu__link-text">Agregar y ver curadores</span>
-                        </a>
-                    </li>
-                    <li class="m-menu__item ">
-                        <a href="{{ route('gestores.admin') }}" class="m-menu__link"><i
-                                class="m-menu__link-icon la la-music"></i><span
-                                class="m-menu__link-text">Agregar y ver gestores</span>
-                        </a>
-                    </li>
-{{--                    <li class="m-menu__item ">--}}
-{{--                        <a href="{{ route('form.gestor') }}" class="m-menu__link"><i--}}
-{{--                                class="m-menu__link-icon la la-user"></i><span--}}
-{{--                                class="m-menu__link-text">Registrar Aspirante</span>--}}
-{{--                        </a>--}}
-{{--                    </li>--}}
-{{--                    <li class="m-menu__item ">--}}
-{{--                        <a href="#" class="m-menu__link"><i--}}
-{{--                                class="m-menu__link-icon la la-users"></i><span--}}
-{{--                                class="m-menu__link-text">Ver Aspirantes</span>--}}
-{{--                        </a>--}}
-{{--                    </li>--}}
-                @endif
+                {{--                @if(auth()->user()->roles[0]->rol == "Admin")--}}
+                {{--                    <li class="m-menu__item ">--}}
+                {{--                        <a href="/dashboard" class="m-menu__link"><i--}}
+                {{--                                class="m-menu__link-icon la la-dashboard"></i><span--}}
+                {{--                                class="m-menu__link-text">Dashboard</span>--}}
+                {{--                        </a>--}}
+                {{--                    </li>--}}
+                {{--                    <li class="m-menu__item ">--}}
+                {{--                        <a href="{{ route('managements.admin') }}" class="m-menu__link"><i--}}
+                {{--                                class="m-menu__link-icon la la-music"></i><span--}}
+                {{--                                class="m-menu__link-text">Agregar y ver curadores</span>--}}
+                {{--                        </a>--}}
+                {{--                    </li>--}}
+                {{--                    <li class="m-menu__item ">--}}
+                {{--                        <a href="{{ route('gestores.admin') }}" class="m-menu__link"><i--}}
+                {{--                                class="m-menu__link-icon la la-music"></i><span--}}
+                {{--                                class="m-menu__link-text">Agregar y ver gestores</span>--}}
+                {{--                        </a>--}}
+                {{--                    </li>--}}
+                {{--                    <li class="m-menu__item ">--}}
+                {{--                        <a href="{{ route('form.gestor') }}" class="m-menu__link"><i--}}
+                {{--                                class="m-menu__link-icon la la-user"></i><span--}}
+                {{--                                class="m-menu__link-text">Registrar Aspirante</span>--}}
+                {{--                        </a>--}}
+                {{--                    </li>--}}
+                {{--                    <li class="m-menu__item ">--}}
+                {{--                        <a href="#" class="m-menu__link"><i--}}
+                {{--                                class="m-menu__link-icon la la-users"></i><span--}}
+                {{--                                class="m-menu__link-text">Ver Aspirantes</span>--}}
+                {{--                        </a>--}}
+                {{--                    </li>--}}
+                {{--                @endif--}}
                 @if(auth()->user()->roles[0]->rol == "Gestor")
                     <li class="m-menu__item ">
                         <a href="{{route('profile.managament', auth()->user()->slug)}}" class="m-menu__link">
@@ -166,12 +166,12 @@
                             <span class="m-menu__link-text">Registrar Aspirante</span>
                         </a>
                     </li>
-{{--                    <li class="m-menu__item ">--}}
-{{--                        <a href="{{ route('list.aspirant.gestor') }}" class="m-menu__link">--}}
-{{--                            <i class="m-menu__link-icon la la-list"></i>--}}
-{{--                            <span class="m-menu__link-text">Aspirantes Registrados</span>--}}
-{{--                        </a>--}}
-{{--                    </li>--}}
+                    {{--                    <li class="m-menu__item ">--}}
+                    {{--                        <a href="{{ route('list.aspirant.gestor') }}" class="m-menu__link">--}}
+                    {{--                            <i class="m-menu__link-icon la la-list"></i>--}}
+                    {{--                            <span class="m-menu__link-text">Aspirantes Registrados</span>--}}
+                    {{--                        </a>--}}
+                    {{--                    </li>--}}
                 @endif
             </ul>
 
@@ -389,6 +389,7 @@
                                             @if(auth()->user()->roles[0]->rol == "Admin")
                                                 <a href="{{ route('profile.admin',auth()->user()->slug) }}"
                                                    class="m-nav__link">
+<<<<<<< HEAD
                                                     @elseif(auth()->user()->roles[0]->rol == "Manage")
                                                         <a href="{{ route('profile.managament',auth()->user()->slug) }}"
                                                            class="m-nav__link">
@@ -419,21 +420,45 @@
                                                 <i class="m-nav__link-icon flaticon-chat-1"></i>
                                                 <span class="m-nav__link-text">Messages</span>
                                             </a>
+=======
+                                                    <i class="m-nav__link-icon flaticon-user"></i>
+                                                    <span class="m-nav__link-text">Perfil</span>
+                                                </a>
+                                            @elseif(auth()->user()->roles[0]->rol == "Manage")
+                                                <a href="{{ route('profile.managament',auth()->user()->slug) }}"
+                                                   class="m-nav__link">
+                                                    <i class="m-nav__link-icon flaticon-user"></i>
+                                                    <span class="m-nav__link-text">Perfil</span>
+                                                </a>
+                                            @elseif(auth()->user()->roles[0]->rol == "Artist")
+                                                <a href="{{ route('profile.artist') }}" class="m-nav__link">
+                                                    <i class="m-nav__link-icon flaticon-user"></i>
+                                                    <span class="m-nav__link-text">Perfil</span>
+                                                </a>
+                                            @endif
+>>>>>>> 6d51ecdbaafa24c8cc12de0b73dbc0eea6a751fd
                                         </li>
+                                        {{--                                        <li class="m-nav__item">--}}
+                                        {{--                                            <a href="header/profile.html" class="m-nav__link">--}}
+                                        {{--                                                <i class="m-nav__link-icon flaticon-chat-1"></i>--}}
+                                        {{--                                                <span class="m-nav__link-text">Messages</span>--}}
+                                        {{--                                            </a>--}}
+                                        {{--                                        </li>--}}
                                         <li class="m-nav__separator m-nav__separator--fit">
                                         </li>
-                                        <li class="m-nav__item">
-                                            <a href="header/profile.html" class="m-nav__link">
-                                                <i class="m-nav__link-icon flaticon-info"></i>
-                                                <span class="m-nav__link-text">FAQ</span>
-                                            </a>
-                                        </li>
-                                        <li class="m-nav__item">
-                                            <a href="header/profile.html" class="m-nav__link">
-                                                <i class="m-nav__link-icon flaticon-lifebuoy"></i>
-                                                <span class="m-nav__link-text">Support</span>
-                                            </a>
-                                        </li> --}}
+                                        {{--                                        <li class="m-nav__item">--}}
+                                        {{--                                            <a href="header/profile.html" class="m-nav__link">--}}
+                                        {{--                                                <i class="m-nav__link-icon flaticon-info"></i>--}}
+                                        {{--                                                <span class="m-nav__link-text">FAQ</span>--}}
+                                        {{--                                            </a>--}}
+                                        {{--                                        </li>--}}
+                                        {{--                                        <li class="m-nav__item">--}}
+                                        {{--                                            <a href="header/profile.html" class="m-nav__link">--}}
+                                        {{--                                                <i class="m-nav__link-icon flaticon-lifebuoy"></i>--}}
+                                        {{--                                                <span class="m-nav__link-text">Support</span>--}}
+                                        {{--                                            </a>--}}
+                                        {{--                                        </li>--}}
+
                                         <li class="m-nav__separator m-nav__separator--fit">
                                         </li>
                                         <li class="m-nav__item">
@@ -449,11 +474,7 @@
                         </div>
                     </div>
                 </li>
-                {{--                <li id="m_quick_sidebar_toggle" class="m-nav__item">--}}
-                {{--                    <a href="#" class="m-nav__link m-dropdown__toggle">--}}
-                {{--                        <span class="m-nav__link-icon"><i class="flaticon-grid-menu"></i></span>--}}
-                {{--                    </a>--}}
-                {{--                </li>--}}
+
             </ul>
         </div>
     </div>

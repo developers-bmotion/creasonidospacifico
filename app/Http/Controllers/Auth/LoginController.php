@@ -62,10 +62,13 @@ class LoginController extends Controller
 
         $users = User::where('id', \Auth::user()->id)->with(['roles'])->first();
         $rol = array_pluck($users->roles, 'rol');
-        if (in_array('Gestor', $rol)) {
+
+        if ( in_array('Manage', $rol)){
+           return redirect('/dashboard/profile-managament/'.auth()->user()->slug);
+        }else if (in_array('Gestor', $rol)) {
             return redirect('/dashboard/profile-gestor/'.auth()->user()->slug);
         } else {
-            if (in_array('Admin', $rol) || in_array('Manage', $rol) || in_array('Subsanador', $rol)) {
+            if (in_array('Admin', $rol) || in_array('Subsanador', $rol)) {
 
                 if ($request->input("json") === "true") {
                     return "/dashboard";

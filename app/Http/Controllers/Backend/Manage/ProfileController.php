@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Storage;
 class ProfileController extends Controller
 {
     public function index(User $user)
-    {
+    {   $user = User::where('id', $user->id)->with('roles')->first();
         $managements = Management::where('user_id',$user->id)->with('categories')->first();
         return view('backend.management.profile.profile-management', compact('user','managements'));
     }

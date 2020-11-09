@@ -14,43 +14,45 @@
 
                         <!--begin:: Widgets/Stats2-1 -->
                         <div class="m-widget1">
-                            <div class="m-widget1__item">
-                                <h5 class="m-portlet__head-text">
-                                    Cantidad de aspirantes registrados
-                                </h5>
-                                <hr>
-                                <div class="row m-row--no-padding align-items-center">
-                                    <div class="col">
-                                        <h3 class="m-widget1__title">Registrados</h3>
-                                        <span class="m-widget1__desc">Aquellos que han hecho todo el proceso</span>
-                                    </div>
-                                    <div class="col m--align-right">
+                            <h5 class="m-portlet__head-text">
+                                Cantidad de aspirantes registrados
+                            </h5>
+                            <hr>
+                            <div class="displayNoneRegistros" style="display: none">
+                                <div class="m-widget1__item">
+                                    <div class="row m-row--no-padding align-items-center">
+                                        <div class="col">
+                                            <h3 class="m-widget1__title">Registrados</h3>
+                                            <span class="m-widget1__desc">Aquellos que han hecho todo el proceso</span>
+                                        </div>
+                                        <div class="col m--align-right">
                                         <span class="m-widget1__number m--font-brand"
                                               style="font-size: 2rem">{{ $aspiranteRegistroCompleto }}</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="m-widget1__item">
-                                <div class="row m-row--no-padding align-items-center">
-                                    <div class="col">
-                                        <h3 class="m-widget1__title">Registros sin canción</h3>
-                                        <span class="m-widget1__desc">Aquellos registros sin canción</span>
-                                    </div>
-                                    <div class="col m--align-right">
+                                <div class="m-widget1__item">
+                                    <div class="row m-row--no-padding align-items-center">
+                                        <div class="col">
+                                            <h3 class="m-widget1__title">Registros sin canción</h3>
+                                            <span class="m-widget1__desc">Aquellos registros sin canción</span>
+                                        </div>
+                                        <div class="col m--align-right">
                                         <span class="m-widget1__number m--font-danger"
                                               style="font-size: 2rem">{{ $aspiranteRegistroSinCanción }}</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="m-widget1__item">
-                                <div class="row m-row--no-padding align-items-center">
-                                    <div class="col">
-                                        <h3 class="m-widget1__title">Sin Registro</h3>
-                                        <span class="m-widget1__desc">Aquellos que solo han creado la cuenta</span>
-                                    </div>
-                                    <div class="col m--align-right">
+                                <div class="m-widget1__item">
+                                    <div class="row m-row--no-padding align-items-center">
+                                        <div class="col">
+                                            <h3 class="m-widget1__title">Sin Registro</h3>
+                                            <span class="m-widget1__desc">Aquellos que solo han creado la cuenta</span>
+                                        </div>
+                                        <div class="col m--align-right">
                                         <span class="m-widget1__number m--font-warning"
                                               style="font-size: 2rem">{{ $aspirantessolocuenta }}</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -62,6 +64,16 @@
                                     <div class="col m--align-right">
                                         <span class="m-widget1__number m--font-"
                                               style="font-size: 2rem">{{ $totalregistros }}</span>
+                                    </div>
+                                </div>
+                                <div class="row pt-2">
+                                    <div class="col-12 text-center conteBtn1" style="display: block">
+                                        <button type="button" class="btn btn-secondary btnMasInfoRegis1">Más información
+                                        </button>
+                                    </div>
+                                    <div class="col-12 text-center conteBtn2"  style="display: none">
+                                        <button type="button" class="btn btn-secondary btnMasInfoRegis2">Ocultar Información
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -199,91 +211,91 @@
                             <div class="m-accordion__item-content">
                                 <div class="row">
                                     <div class="col-12 col-md-4 col-lg-4">
-{{--                                        <h5 class="m-portlet__head-text" style="text-align: center;">--}}
-{{--                                            Últimos aspirantes registrados--}}
-{{--                                        </h5>--}}
-{{--                                        <div class="m-widget4">--}}
-{{--                                            <div class="m-widget4__item">--}}
-{{--                                                <div class="m-widget4__img m-widget4__img--logo">--}}
-{{--                                                    <img src="assets/app/media/img/client-logos/logo5.png" alt="">--}}
-{{--                                                </div>--}}
-{{--                                                <div class="m-widget4__info">--}}
-{{--													<span class="m-widget4__title">--}}
-{{--														Trump Themes--}}
-{{--													</span><br>--}}
-{{--                                                    <span class="m-widget4__sub">--}}
-{{--														Make Metronic Great Again--}}
-{{--													</span>--}}
-{{--                                                </div>--}}
-{{--                                                <span class="m-widget4__ext">--}}
-{{--													<span class="m-widget4__number m--font-brand">+$2500</span>--}}
-{{--												</span>--}}
-{{--                                            </div>--}}
-{{--                                            <div class="m-widget4__item">--}}
-{{--                                                <div class="m-widget4__img m-widget4__img--logo">--}}
-{{--                                                    <img src="assets/app/media/img/client-logos/logo4.png" alt="">--}}
-{{--                                                </div>--}}
-{{--                                                <div class="m-widget4__info">--}}
-{{--													<span class="m-widget4__title">--}}
-{{--														StarBucks--}}
-{{--													</span><br>--}}
-{{--                                                    <span class="m-widget4__sub">--}}
-{{--														Good Coffee &amp; Snacks--}}
-{{--													</span>--}}
-{{--                                                </div>--}}
-{{--                                                <span class="m-widget4__ext">--}}
-{{--													<span class="m-widget4__number m--font-brand">-$290</span>--}}
-{{--												</span>--}}
-{{--                                            </div>--}}
-{{--                                            <div class="m-widget4__item">--}}
-{{--                                                <div class="m-widget4__img m-widget4__img--logo">--}}
-{{--                                                    <img src="assets/app/media/img/client-logos/logo3.png" alt="">--}}
-{{--                                                </div>--}}
-{{--                                                <div class="m-widget4__info">--}}
-{{--													<span class="m-widget4__title">--}}
-{{--														Phyton--}}
-{{--													</span><br>--}}
-{{--                                                    <span class="m-widget4__sub">--}}
-{{--														A Programming Language--}}
-{{--													</span>--}}
-{{--                                                </div>--}}
-{{--                                                <span class="m-widget4__ext">--}}
-{{--													<span class="m-widget4__number m--font-brand">+$17</span>--}}
-{{--												</span>--}}
-{{--                                            </div>--}}
-{{--                                            <div class="m-widget4__item">--}}
-{{--                                                <div class="m-widget4__img m-widget4__img--logo">--}}
-{{--                                                    <img src="assets/app/media/img/client-logos/logo2.png" alt="">--}}
-{{--                                                </div>--}}
-{{--                                                <div class="m-widget4__info">--}}
-{{--													<span class="m-widget4__title">--}}
-{{--														GreenMakers--}}
-{{--													</span><br>--}}
-{{--                                                    <span class="m-widget4__sub">--}}
-{{--														Make Green Great Again--}}
-{{--													</span>--}}
-{{--                                                </div>--}}
-{{--                                                <span class="m-widget4__ext">--}}
-{{--													<span class="m-widget4__number m--font-brand">-$2.50</span>--}}
-{{--												</span>--}}
-{{--                                            </div>--}}
-{{--                                            <div class="m-widget4__item">--}}
-{{--                                                <div class="m-widget4__img m-widget4__img--logo">--}}
-{{--                                                    <img src="assets/app/media/img/client-logos/logo1.png" alt="">--}}
-{{--                                                </div>--}}
-{{--                                                <div class="m-widget4__info">--}}
-{{--													<span class="m-widget4__title">--}}
-{{--														FlyThemes--}}
-{{--													</span><br>--}}
-{{--                                                    <span class="m-widget4__sub">--}}
-{{--														A Let's Fly Fast Again Language--}}
-{{--													</span>--}}
-{{--                                                </div>--}}
-{{--                                                <span class="m-widget4__ext">--}}
-{{--													<span class="m-widget4__number m--font-brand">+$200</span>--}}
-{{--												</span>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
+                                        {{--                                        <h5 class="m-portlet__head-text" style="text-align: center;">--}}
+                                        {{--                                            Últimos aspirantes registrados--}}
+                                        {{--                                        </h5>--}}
+                                        {{--                                        <div class="m-widget4">--}}
+                                        {{--                                            <div class="m-widget4__item">--}}
+                                        {{--                                                <div class="m-widget4__img m-widget4__img--logo">--}}
+                                        {{--                                                    <img src="assets/app/media/img/client-logos/logo5.png" alt="">--}}
+                                        {{--                                                </div>--}}
+                                        {{--                                                <div class="m-widget4__info">--}}
+                                        {{--													<span class="m-widget4__title">--}}
+                                        {{--														Trump Themes--}}
+                                        {{--													</span><br>--}}
+                                        {{--                                                    <span class="m-widget4__sub">--}}
+                                        {{--														Make Metronic Great Again--}}
+                                        {{--													</span>--}}
+                                        {{--                                                </div>--}}
+                                        {{--                                                <span class="m-widget4__ext">--}}
+                                        {{--													<span class="m-widget4__number m--font-brand">+$2500</span>--}}
+                                        {{--												</span>--}}
+                                        {{--                                            </div>--}}
+                                        {{--                                            <div class="m-widget4__item">--}}
+                                        {{--                                                <div class="m-widget4__img m-widget4__img--logo">--}}
+                                        {{--                                                    <img src="assets/app/media/img/client-logos/logo4.png" alt="">--}}
+                                        {{--                                                </div>--}}
+                                        {{--                                                <div class="m-widget4__info">--}}
+                                        {{--													<span class="m-widget4__title">--}}
+                                        {{--														StarBucks--}}
+                                        {{--													</span><br>--}}
+                                        {{--                                                    <span class="m-widget4__sub">--}}
+                                        {{--														Good Coffee &amp; Snacks--}}
+                                        {{--													</span>--}}
+                                        {{--                                                </div>--}}
+                                        {{--                                                <span class="m-widget4__ext">--}}
+                                        {{--													<span class="m-widget4__number m--font-brand">-$290</span>--}}
+                                        {{--												</span>--}}
+                                        {{--                                            </div>--}}
+                                        {{--                                            <div class="m-widget4__item">--}}
+                                        {{--                                                <div class="m-widget4__img m-widget4__img--logo">--}}
+                                        {{--                                                    <img src="assets/app/media/img/client-logos/logo3.png" alt="">--}}
+                                        {{--                                                </div>--}}
+                                        {{--                                                <div class="m-widget4__info">--}}
+                                        {{--													<span class="m-widget4__title">--}}
+                                        {{--														Phyton--}}
+                                        {{--													</span><br>--}}
+                                        {{--                                                    <span class="m-widget4__sub">--}}
+                                        {{--														A Programming Language--}}
+                                        {{--													</span>--}}
+                                        {{--                                                </div>--}}
+                                        {{--                                                <span class="m-widget4__ext">--}}
+                                        {{--													<span class="m-widget4__number m--font-brand">+$17</span>--}}
+                                        {{--												</span>--}}
+                                        {{--                                            </div>--}}
+                                        {{--                                            <div class="m-widget4__item">--}}
+                                        {{--                                                <div class="m-widget4__img m-widget4__img--logo">--}}
+                                        {{--                                                    <img src="assets/app/media/img/client-logos/logo2.png" alt="">--}}
+                                        {{--                                                </div>--}}
+                                        {{--                                                <div class="m-widget4__info">--}}
+                                        {{--													<span class="m-widget4__title">--}}
+                                        {{--														GreenMakers--}}
+                                        {{--													</span><br>--}}
+                                        {{--                                                    <span class="m-widget4__sub">--}}
+                                        {{--														Make Green Great Again--}}
+                                        {{--													</span>--}}
+                                        {{--                                                </div>--}}
+                                        {{--                                                <span class="m-widget4__ext">--}}
+                                        {{--													<span class="m-widget4__number m--font-brand">-$2.50</span>--}}
+                                        {{--												</span>--}}
+                                        {{--                                            </div>--}}
+                                        {{--                                            <div class="m-widget4__item">--}}
+                                        {{--                                                <div class="m-widget4__img m-widget4__img--logo">--}}
+                                        {{--                                                    <img src="assets/app/media/img/client-logos/logo1.png" alt="">--}}
+                                        {{--                                                </div>--}}
+                                        {{--                                                <div class="m-widget4__info">--}}
+                                        {{--													<span class="m-widget4__title">--}}
+                                        {{--														FlyThemes--}}
+                                        {{--													</span><br>--}}
+                                        {{--                                                    <span class="m-widget4__sub">--}}
+                                        {{--														A Let's Fly Fast Again Language--}}
+                                        {{--													</span>--}}
+                                        {{--                                                </div>--}}
+                                        {{--                                                <span class="m-widget4__ext">--}}
+                                        {{--													<span class="m-widget4__number m--font-brand">+$200</span>--}}
+                                        {{--												</span>--}}
+                                        {{--                                            </div>--}}
+                                        {{--                                        </div>--}}
                                     </div>
                                     <div class="col-12 col-md-4 col-lg-4">
                                         <h5 class="m-portlet__head-text" style="text-align: center;">
@@ -477,7 +489,28 @@
                     </ul>
                 </div> --}}
             </div>
+
             <div class="m-portlet__body">
+                {{-- filtros para datatable --}}
+                <div class="row">
+                    <select class="form-control m-input m-input--square col-md-2 mb-3 tipoPersona" name="tipoPersona" id="tipoPersona">
+                        <option value="0">Seleccione tipo persona</option>
+                        @foreach ($tipoPersona as $tipoPer)
+                        <option value="{{$tipoPer->id  }}">{{ $tipoPer->name }}</option>
+                        @endforeach
+
+                    </select>
+                    {{-- @dd($cat) --}}
+                    <select type="search" class="form-control m-input m-input--square col-md-2 mb-3" aria-controls="table_projects_management">
+                        <option value="0">Seleccione categoría</option>
+                        @foreach ($cat as $category)
+                        <option value="{{$category->id}}">{{ $category->category}}</option>
+                        @endforeach
+
+                    </select>
+
+
+                </div>
                 <table class="table table-striped- table-bordered table-hover table-checkable "
                        id="table_projects_management">
                     <thead>
@@ -485,8 +518,7 @@
                         {{-- <th>#</th> --}}
                         <th>{{ __('Nombres y Apellidos') }}</th>
                         <th>{{ __('Actuara como') }}</th>
-                        <th>{{ __('Tipo identificación') }}</th>
-                        <th>{{ __('N° identificación') }}</th>
+                        <th>{{ __('Categoría') }}</th>
                         <th>{{ __('Email') }}</th>
                         <th>{{ __('Departamento de nacimiento') }}</th>
                         <th>{{ __('Ciudad de nacimiento') }}</th>
@@ -549,10 +581,12 @@
         console.log(estado);
         var storeTipoProyecto = "storeTipoProyecto";
         var tipoProyecto = getStorage(storeTipoProyecto);
+        var tipoPer = 0;
         if (tipoProyecto == 11) {
             tipoProyecto = null
         }
         console.log('get', tipoProyecto);
+        console.log('get tipo per', tipoPer);
         var table = null;
         // var tipoProyecto = null;
         // var table = null;
@@ -575,7 +609,8 @@
                 "ajax": {
                     url: "{{route('aspirants.all')}}",
                     data: {
-                        tipoProyecto: tipoProyecto
+                        tipoProyecto: tipoProyecto,
+                        tipoPer:tipoPer
                     }
                 },
                 "columns": [
@@ -583,7 +618,7 @@
                     {
 
                         render: function (data, type, JsonResultRow, meta) {
-                            // console.log(JsonResultRow,'data');
+                            // console.log(JsonResultRow,'data****');
                             if (JsonResultRow.users.last_name === null) {
                                 return '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
                             } else {
@@ -596,37 +631,43 @@
                     {
                         data: 'person_type.name',
                         defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
-                        // "width": "1%",
-                        // data: 'artists',
-                        // defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>',
-                        // render: function (data, type, JsonResultRow, meta) {
-                        //     // console.log(JsonResultRow,'data t');
-                        //     let artista = JsonResultRow.artists[0];
-                        //     return `<span target="_blank">${artista.person_type.name}</span>`;
-                        // }
+
                     },
                     {
-                        data: 'document_type.document',
-                        defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
-                        // render: function (data, type, JsonResultRow, meta) {
-                        //     // console.log(JsonResultRow,'data t');
-                        //     let artista = JsonResultRow.artists[0];
-                        //     return `<span target="_blank">${artista.document_type.document}</span>`;
-                        // }
-                        // data: 'artists.document_type.document',
-                        // defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
+                        render: function (data, type, JsonResultRow, meta) {
+                            var category = "";
+                            if (JsonResultRow.projects) {
+
+                                JsonResultRow.projects.map(item => {
+                                    category = item;
+                                });
+                            }
+
+                            return category != "" ? `<span>${category.category.category}</span>` : '<span class="label label-danger text-center ml-4" style="color:red !important">Sin categoria</span>'
+                        }
                     },
-                    {
-                        data: 'identification',
-                        defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
-                        // render: function (data, type, JsonResultRow, meta) {
-                        //     // console.log(JsonResultRow,'data t');
-                        //     let artista = JsonResultRow.artists[0];
-                        //     return `<span target="_blank">${artista.identification}</span>`;
-                        // }
-                        // data: 'artista.identification',
-                        // defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
-                    },
+                    // {
+                    //     data: 'document_type.document',
+                    //     defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
+                    //     // render: function (data, type, JsonResultRow, meta) {
+                    //     //     // console.log(JsonResultRow,'data t');
+                    //     //     let artista = JsonResultRow.artists[0];
+                    //     //     return `<span target="_blank">${artista.document_type.document}</span>`;
+                    //     // }
+                    //     // data: 'artists.document_type.document',
+                    //     // defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
+                    // },
+                    // {
+                    //     data: 'identification',
+                    //     defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
+                    //     // render: function (data, type, JsonResultRow, meta) {
+                    //     //     // console.log(JsonResultRow,'data t');
+                    //     //     let artista = JsonResultRow.artists[0];
+                    //     //     return `<span target="_blank">${artista.identification}</span>`;
+                    //     // }
+                    //     // data: 'artista.identification',
+                    //     // defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
+                    // },
                     {
                         render: function (data, type, JsonResultRow, meta) {
                             // console.log(JsonResultRow.users.email,'email');
@@ -742,10 +783,18 @@
                 tipoProyecto = null
             }
             loadTable();
-            console.log(typeof (tipoProyecto))
+            // console.log(typeof (tipoProyecto),'tipoProyecto')
+            // console.log(tipo,'tipoProyecto')
             changedStatusColor(tipoProyecto)
             // tipoProyecto = tipo;
             // loadTable();
+        });
+
+        $(".tipoPersona").on('change', function () {
+
+            tipoPer = $(this).val();
+            console.log(tipoPer);
+            loadTable();
         });
 
         function changedStatusColor(status) {
@@ -860,6 +909,16 @@
             $('html,body').animate({
                 scrollTop: $("#m_accordion_3_item_1_head").offset().top
             }, 500);
+        });
+        $(".btnMasInfoRegis1").click(function () {
+            $('.displayNoneRegistros').show();
+            $('.conteBtn1').hide();
+            $('.conteBtn2').show();
+        });
+        $(".btnMasInfoRegis2").click(function () {
+            $('.displayNoneRegistros').hide();
+            $('.conteBtn2').hide();
+            $('.conteBtn1').show();
         });
     </script>
     <script>

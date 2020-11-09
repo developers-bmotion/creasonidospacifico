@@ -21,6 +21,17 @@ Route::get('/proyectos',function (){
    return $proyectos;
 });
 
+Route::get('/change-status-user/{id}/{status}',function ($id, $status){
+
+    if ($status == 1){
+        return \App\User::where('id', '=', $id)->update(['state' => 2]);
+    }else{
+        return \App\User::where('id', '=', $id)->update(['state' => 1]);
+    }
+
+
+});
+
 Route::group(['namespace'=>'Frontend'],function (){
     Route::prefix('v1')->group(function () {
         Route::prefix('auth')->group(function () {
