@@ -14,6 +14,9 @@
 .m-grid__item.m-grid__item--fluid.m-grid.m-grid--ver-desktop.m-grid--desktop.m-body {
     flex: 1 !important;
 } */
+.cls-body{
+    margin-left: 5rem;
+}
 
 .background_login {
     background-image: url(/images/logo-pacifico.png);
@@ -51,6 +54,9 @@
     width: 29rem;
 }
 
+/* .menu-top-botones{
+    display: none !important;
+} */
 
 /*Para pantalla movil*/
 @media (max-width: 480px){
@@ -91,6 +97,23 @@
         padding-bottom: 20px !important;
     }
 }
+@media (max-width: 1024px){
+    .cls-body{
+        margin-left: 0;
+    }
+    .pos-item{
+        text-align: left !important;
+    }
+    .skin-movil{
+        position: absolute !important;
+        background: transparent !important;
+        width: 50% !important;
+    }
+    .custom-item-menu{
+        padding-bottom: 30px !important;
+        text-align: center !important;
+    }
+}
 
 @media (max-width: 653px) and (min-width: 481px){
     .term-footer { padding-right: 20px !important; }
@@ -101,6 +124,14 @@
     .footer-display-custom{
         table-layout: auto !important;
     }
+
+    .skin-movil{
+        display: none !important;
+    }
+    .custom-item-menu{
+        display: none !important;
+    }
+    
 }
 
 /*.displayNoneRegistros{*/

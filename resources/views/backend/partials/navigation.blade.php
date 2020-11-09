@@ -195,7 +195,6 @@
                 </li>
             </ul>
         @endif
-
     </div>
 
     <!-- END: Horizontal Menu -->

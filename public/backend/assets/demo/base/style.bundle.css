@@ -35947,9 +35947,9 @@ body.m-content--skin-light2 {
         transition: all 0.3s ease;
         left: 229px; }
     .m-aside-left-close.m-aside-left-close--skin-dark {
-        background-color: #323446; }
+        background-color: transparent; }
     .m-aside-left-close.m-aside-left-close--skin-dark > i {
-        color: #968ad4; }
+        color: #fff; }
     .m-aside-left-close.m-aside-left-close--skin-dark:hover {
         background-color: #739594; }
     .m-aside-left-close.m-aside-left-close--skin-dark:hover > i {
