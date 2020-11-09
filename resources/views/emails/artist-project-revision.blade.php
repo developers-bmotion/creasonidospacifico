@@ -1,17 +1,20 @@
 @component('mail::message')
 # {{ __("¡Saludos! :artist", ['artist' => $artist]) }}
 
-{{ __("Informamos que tu canción **:project**  Se ha puesto en revisión. Actualiza tu información lo mas pronto posible para seguir concursando.
+Informamos que tu canción <strong>{{$project}}</strong> se ha puesto en estado <strong>Pendiente</strong> por proceso de subsanación. Actualiza tu información lo más pronto posible para seguir concursando.
 
-",['artist' => $artist, 'project' => $project->title], )
-
-
-}}
-{{ __("**Estas son tus observaciones:** ") }}<br>
-{{ __(":mesage", ['mesage' => $mesage]) }}
+**Estas son tus observaciones:**
+<br>
+{!! $mesage !!}
+{{--{{ __(":mesage", ['mesage' => $mesage]) }}--}}
 {{--@component('mail::button', ['url' => route('show.backend.project', $project->slug)])--}}
 {{--{{ __('Ir a la canción') }}--}}
 {{--@endcomponent--}}
+<hr>
+Ten en cuenta que puedes iniciar sesión e ingresar a tu perfil a través de este link usando las credenciales de acceso (correo eléctronico y contreseña) que usaste al crear tu cuenta.
+@component('mail::button', ['url' => route('login')])
+    {{ __('Iniciar Sesión') }}
+@endcomponent
 
 {{ __('Gracias') }}.<br>
 {{ config('app.name') }}

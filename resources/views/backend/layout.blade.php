@@ -243,6 +243,14 @@ License: You must have a valid license purchased only from themeforest(the above
                                         </div>
 
                                     @endif
+                                        @if(session()->has('exitoso'))
+                                            <div class="container">
+                                                <div class="alert alert-success" role="alert">
+                                                    <strong>{{session('exitoso')}}</strong>
+                                                </div>
+                                            </div>
+
+                                        @endif
                                     @yield('header')
                                 </div>
                                 @yield('content')

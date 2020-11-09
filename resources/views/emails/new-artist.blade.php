@@ -2,7 +2,7 @@
 # {{ __("¡Tus datos han sido registrados!") }}
 
 {{ __("Sr/Sra :artist hemos recibidos tus datos. ", ['artist' => $artist]) }}
-Ten encuenta que puedes iniciar sesión e ingresar a tu perfil a traves de este link usando las credenciales de acceso (Correo eléctronico y contreseña) que ingresarte al crear tu cuenta.
+Ten encuenta que puedes iniciar sesión e ingresar a tu perfil a traves de este link usando las credenciales de acceso (correo eléctronico y contreseña) que usaste al crear tu cuenta.
 @component('mail::button', ['url' => route('login')])
  {{ __('Iniciar Sesión') }}
 @endcomponent

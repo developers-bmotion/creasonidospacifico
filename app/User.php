@@ -147,6 +147,10 @@ class User extends Authenticatable
         return $this->belongsTo(DocumentType::class,'document_type');
     }
 
+    public function historyReviews(){
+        return $this->belongsToMany(Project::class, 'history_revisions', 'project_id', 'user_id');
+    }
+
     public function city(){
         return $this->belongsTo(City::class, 'id_city');
     }

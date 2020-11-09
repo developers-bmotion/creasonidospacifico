@@ -35,22 +35,28 @@
                 <!--=====================================
 		        ALERTA PARA MOSTRAR EL ESTADO PENDIENTE
             ======================================-->
-                    <div class="m-alert m-alert--icon m-alert--outline alert alert-warning" role="alert">
-                        <div class="m-alert__icon">
-                            <i class="la la-warning"></i>
+                    <form action="{{ route('update.state.revision') }}" method="post">
+                        @csrf {{ method_field('PUT') }}
+                        <input type="hidden" name="state_revision" value="6">
+                        <input type="hidden" name="project_id" value="{{ $artist->projects[0]->id }}">
+                        <div class="m-alert m-alert--icon m-alert--outline alert alert-warning" role="alert">
+                            <div class="m-alert__icon">
+                                <i class="la la-warning"></i>
+                            </div>
+                            <div class="m-alert__text">
+                                Tu propuesta musical esta en estado <strong>Pendiente</strong>, click
+                                <strong data-toggle="modal" data-target="#verObservaciones"
+                                        style="cursor: pointer">aquí</strong> para ver los detalles que debes ajustar.
+                                Al terminar y estar seguro que todo esta bien, volver a enviar.
+                            </div>
+                            <div class="m-alert__actions" style="width: 200px;">
+                                <button href="{{ route('update.state.revision') }}" type="submit"
+                                        class="btn btn-warning btn-sm m-btn m-btn--pill m-btn--wide"
+                                        style="color:#fff">Enviar propuesta musical nuevamente
+                                </button>
+                            </div>
                         </div>
-                        <div class="m-alert__text">
-                            Tu propuesta musical esta en estado <strong>Pendiente</strong>, click
-                            <strong data-toggle="modal" data-target="#verObservaciones"
-                                    style="cursor: pointer">aquí</strong> para ver los detalles que debes ajustar.
-                            Al terminar y estar seguro que todo esta bien, volver a enviar.
-                        </div>
-                        <div class="m-alert__actions" style="width: 200px;">
-                            <button type="button" class="btn btn-warning btn-sm m-btn m-btn--pill m-btn--wide"
-                                    style="color:#fff">Enviar propuesta musical nuevamente
-                            </button>
-                        </div>
-                    </div>
+                    </form>
                 @endif
             @endif
 
@@ -169,14 +175,18 @@
                                                     <img class="ml-4"
                                                          style="border-radius:8rem; width:7rem"
                                                          src="/backend/assets/app/media/img/users/perfil.jpg">
-                                                    <i class="flaticon-edit ml-3 update_img_profile_asp"
-                                                       style="color:#716aca; cursor:pointer;"></i>
+                                                    @if($artist->projects[0]->status == 4 || $artist->projects[0]->status == 1)
+                                                        <i class="flaticon-edit ml-3 update_img_profile_asp"
+                                                           style="color:#716aca; cursor:pointer;"></i>
+                                                    @endif
                                                 @else
                                                     <img class="ml-4"
                                                          style="border-radius:8rem; width:7rem"
                                                          src="{{$artist->users->picture}}">
-                                                    <i class="flaticon-edit ml-3 update_img_profile_asp"
-                                                       style="color:#716aca; cursor:pointer;"></i>
+                                                    @if($artist->projects[0]->status == 4 || $artist->projects[0]->status == 1)
+                                                        <i class="flaticon-edit ml-3 update_img_profile_asp"
+                                                           style="color:#716aca; cursor:pointer;"></i>
+                                                    @endif
                                                 @endif
                                             </div>
                                             <div class="col-md-4 drop_prof_asp" style="display: none">
@@ -209,8 +219,10 @@
                                                 <img class="ml-4"
                                                      style="border-radius:8rem; width:7rem"
                                                      src="/default/user.png">
-                                                <i class="flaticon-edit ml-3 update_img_profile_asp"
-                                                   style="color:#716aca; cursor:pointer;"></i>
+                                                @if($artist->projects[0]->status == 4 || $artist->projects[0]->status == 1)
+                                                    <i class="flaticon-edit ml-3 update_img_profile_asp"
+                                                       style="color:#716aca; cursor:pointer;"></i>
+                                                @endif
                                             </div>
 
                                         </div>
@@ -462,8 +474,10 @@
                                             </form>
 
                                         </div>
-                                        <i class="flaticon-edit ml-3 update_pdf_asp"
-                                           style="color:#716aca; cursor:pointer;"></i>
+                                        @if($artist->projects[0]->status == 4 || $artist->projects[0]->status == 1)
+                                            <i class="flaticon-edit ml-3 update_pdf_asp"
+                                               style="color:#716aca; cursor:pointer;"></i>
+                                        @endif
                                         <button type="button" class="btn btn-primary cancel_pdf_asp"
                                                 style="display:none">Cancelar
                                         </button>
@@ -487,26 +501,27 @@
 
                             {{-- @dd($artist) --}}
                             @if($artist->gestor_id !== null)
-                            <hr>
-                            <div class="ml-4">
+                                <hr>
+                                <div class="ml-4">
 
-                                {{-- @dd($artist->users->name) --}}
-                            <h5 style="font-weight: bold" class="">{{ __('Aspirante registrado por gestor') }}</h5>
-                            <div class="ml-5">
-                            <br>
-                            <label style="font-weight: bold">Documento de soporte:</label>
-                            <br>
-                            <button type="button" class="btn btn-primary btn_pdf_asp"
+                                    {{-- @dd($artist->users->name) --}}
+                                    <h5 style="font-weight: bold"
+                                        class="">{{ __('Aspirante registrado por gestor') }}</h5>
+                                    <div class="ml-5">
+                                        <br>
+                                        <label style="font-weight: bold">Documento de soporte:</label>
+                                        <br>
+                                        <button type="button" class="btn btn-primary btn_pdf_asp"
                                                 data-toggle="modal"
                                                 data-target="#verpdfsoporte">
                                             Ver documento de soporte
-                            </button>
+                                        </button>
 
-                        </div>
+                                    </div>
 
-                        </div>
-                        {{-- modal soporte --}}
-                        <div class="modal fade" id="verpdfsoporte" tabindex="-1"
+                                </div>
+                                {{-- modal soporte --}}
+                                <div class="modal fade" id="verpdfsoporte" tabindex="-1"
                                      role="dialog"
                                      aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-lg" role="document">
@@ -522,14 +537,14 @@
                                             </div>
                                             <div class="modal-body">
 
-                                                    @if(!$artist->evidence_document)
-                                                        <p>No se cargo el documento correctamente</p>
-                                                    @else
-                                                        <div>
-                                                            <embed src="{{ $artist->evidence_document}}"
-                                                                   frameborder="0" width="100%" height="400px">
-                                                        </div>
-                                                    @endif
+                                                @if(!$artist->evidence_document)
+                                                    <p>No se cargo el documento correctamente</p>
+                                                @else
+                                                    <div>
+                                                        <embed src="{{ $artist->evidence_document}}"
+                                                               frameborder="0" width="100%" height="400px">
+                                                    </div>
+                                                @endif
                                             </div>
                                             <div class="modal-footer">
 
@@ -589,8 +604,10 @@
 
                                         </div>
                                         <div class="col-md-1 " style="padding-top: 5rem;">
-                                            <i class="flaticon-edit ml-3 update_audio"
-                                               style="color:#716aca; cursor:pointer;"></i>
+                                            @if($artist->projects[0]->status == 4 || $artist->projects[0]->status == 1)
+                                                <i class="flaticon-edit ml-3 update_audio"
+                                                   style="color:#716aca; cursor:pointer;"></i>
+                                            @endif
                                             <button type="button" class="btn btn-primary cancel_audio"
                                                     style="display:none">Cancelar
                                             </button>
@@ -1135,8 +1152,10 @@
 
 
                                                                                             </div>
-                                                                                            <i class="flaticon-edit ml-3 update_pdf_team{{ $loop->iteration }}"
-                                                                                               style="color:#716aca; cursor:pointer;"></i>
+                                                                                            @if($artist->projects[0]->status == 4 || $artist->projects[0]->status == 1)
+                                                                                                <i class="flaticon-edit ml-3 update_pdf_team{{ $loop->iteration }}"
+                                                                                                   style="color:#716aca; cursor:pointer;"></i>
+                                                                                            @endif
                                                                                             <form
                                                                                                 id="form_update_img_team{{ $loop->iteration }}"
                                                                                                 method="post"
@@ -1274,8 +1293,10 @@
                                                             <img class="ml-4"
                                                                  style="border-radius:8rem; width:7rem"
                                                                  src="{{$artist->beneficiary[0]->picture}}">
-                                                            <i class="flaticon-edit ml-3 update_img_profile_ben"
-                                                               style="color:#716aca; cursor:pointer;"></i>
+                                                            @if($artist->projects[0]->status == 4 || $artist->projects[0]->status == 1)
+                                                                <i class="flaticon-edit ml-3 update_img_profile_ben"
+                                                                   style="color:#716aca; cursor:pointer;"></i>
+                                                            @endif
                                                         </div>
                                                         <div class="col-md-4 drop_prof_ben" style="display: none">
                                                             <div class="form-group m-form__group ">
@@ -1310,8 +1331,10 @@
                                                             <img class="ml-4 "
                                                                  style="border-radius:8rem; width:7rem"
                                                                  src="/default/user.png">
-                                                            <i class="flaticon-edit ml-3 update_img_profile_ben"
-                                                               style="color:#716aca; cursor:pointer;"></i>
+                                                            @if($artist->projects[0]->status == 4 || $artist->projects[0]->status == 1)
+                                                                <i class="flaticon-edit ml-3 update_img_profile_ben"
+                                                                   style="color:#716aca; cursor:pointer;"></i>
+                                                            @endif
                                                         </div>
                                                         <div class="col-md-4 drop_prof_ben" style="display: none">
                                                             <div class="form-group m-form__group ">
@@ -1563,8 +1586,10 @@
                                                         </div>
 
                                                     </div>
-                                                    <i class="flaticon-edit ml-3 update_pdf_ben"
-                                                       style="color:#716aca; cursor:pointer;"></i>
+                                                    @if($artist->projects[0]->status == 4 || $artist->projects[0]->status == 1)
+                                                        <i class="flaticon-edit ml-3 update_pdf_ben"
+                                                           style="color:#716aca; cursor:pointer;"></i>
+                                                    @endif
                                                     <button type="button" class="btn btn-primary cancel_pdf_ben"
                                                             style="display:none">Cancelar
                                                     </button>
@@ -1723,15 +1748,42 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <div class="row">
-                                @if(count($artist->projects) !== 0)
-                                    @foreach($artist->projects[0]->observations as $observations)
-                                        <div class="col-12">
-                                            {{ $observations->description }}
+                            @php($count = 1 )
+                            @forelse($artist->projects[0]->historyReviews as $historyReviews)
+                                <h5 class="pb-3">{{ $count++ }}. Observación </h5>
+                                <div class="row">
+                                    <div class="col-12 col-md-10 col-lg-10">
+                                        <div class="form-group m-form__group">
+                                            <div class="m-form__group-sub">
+                                                <label
+                                                    class="form-control-label font-weight-bold">Observación:
+                                                </label>
+                                                <p>{!! $historyReviews->pivot->observation !!}</p>
+                                            </div>
                                         </div>
-                                    @endforeach
-                                @endif
-                            </div>
+                                    </div>
+                                    <div class="col-12 col-md-2 col-lg-2">
+                                        <div class="form-group m-form__group">
+                                            <div class="m-form__group-sub">
+                                                <label
+                                                    class="form-control-label font-weight-bold">Estado:
+                                                </label>
+                                                <br>
+                                                @if($historyReviews->pivot->state == 1)
+                                                    <span
+                                                        class="m-badge m-badge--warning m-badge--wide">Pendiente</span>
+                                                @else
+                                                    <span
+                                                        class="m-badge m-badge--success m-badge--wide">Corregido</span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                            @empty
+                                <h4 class="text-center">Sin observaciones</h4>
+                            @endforelse
                         </div>
                         <div class="modal-footer">
 
@@ -1837,9 +1889,9 @@
                     location.reload();
                 }, 3000);
             },
-            error:function(file,response){
+            error: function (file, response) {
                 $('body').loading({
-                    start:false,
+                    start: false,
                 });
                 toastr.options = {
                     "closeButton": false,
@@ -1886,9 +1938,9 @@
                     start: false,
                 });
             },
-            error:function(file,response){
+            error: function (file, response) {
                 $('body').loading({
-                    start:false,
+                    start: false,
                 });
                 toastr.options = {
                     "closeButton": false,
@@ -1932,9 +1984,9 @@
                     start: false,
                 });
             },
-            error:function(file,response){
+            error: function (file, response) {
                 $('body').loading({
-                    start:false,
+                    start: false,
                 });
                 toastr.options = {
                     "closeButton": false,
@@ -1983,30 +2035,30 @@
                         start: false,
                     });
                 },
-            error:function(file,response){
-                $('body').loading({
-                    start:false,
-                });
-                toastr.options = {
-                    "closeButton": false,
-                    "debug": false,
-                    "newestOnTop": false,
-                    "progressBar": false,
-                    "positionClass": "toast-top-right",
-                    "preventDuplicates": false,
-                    "onclick": null,
-                    "showDuration": "3000",
-                    "hideDuration": "1000",
-                    "timeOut": "5000",
-                    "extendedTimeOut": "1000",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut"
-                };
+                error: function (file, response) {
+                    $('body').loading({
+                        start: false,
+                    });
+                    toastr.options = {
+                        "closeButton": false,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": false,
+                        "positionClass": "toast-top-right",
+                        "preventDuplicates": false,
+                        "onclick": null,
+                        "showDuration": "3000",
+                        "hideDuration": "1000",
+                        "timeOut": "5000",
+                        "extendedTimeOut": "1000",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
+                    };
 
-                toastr.warning("El documento no se cargó correctamente, inténtalo más tarde", "Información");
-            }
+                    toastr.warning("El documento no se cargó correctamente, inténtalo más tarde", "Información");
+                }
             });
             new Dropzone('.file-image-document-beneficiario-atras', {
                 url: '{{ route('upload.image.document') }}',
@@ -2029,30 +2081,30 @@
                         start: false,
                     });
                 },
-            error:function(file,response){
-                $('body').loading({
-                    start:false,
-                });
-                toastr.options = {
-                    "closeButton": false,
-                    "debug": false,
-                    "newestOnTop": false,
-                    "progressBar": false,
-                    "positionClass": "toast-top-right",
-                    "preventDuplicates": false,
-                    "onclick": null,
-                    "showDuration": "3000",
-                    "hideDuration": "1000",
-                    "timeOut": "5000",
-                    "extendedTimeOut": "1000",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut"
-                };
+                error: function (file, response) {
+                    $('body').loading({
+                        start: false,
+                    });
+                    toastr.options = {
+                        "closeButton": false,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": false,
+                        "positionClass": "toast-top-right",
+                        "preventDuplicates": false,
+                        "onclick": null,
+                        "showDuration": "3000",
+                        "hideDuration": "1000",
+                        "timeOut": "5000",
+                        "extendedTimeOut": "1000",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
+                    };
 
-                toastr.warning("El documento no se cargó correctamente, inténtalo más tarde", "Información");
-            }
+                    toastr.warning("El documento no se cargó correctamente, inténtalo más tarde", "Información");
+                }
             });
 
         }
@@ -2099,9 +2151,9 @@
                     location.reload();
                 }, 3000);
             },
-            error:function(file,response){
+            error: function (file, response) {
                 $('body').loading({
-                    start:false,
+                    start: false,
                 });
                 toastr.options = {
                     "closeButton": false,
@@ -2168,30 +2220,30 @@
                         location.reload();
                     }, 3000);
                 },
-            error:function(file,response){
-                $('body').loading({
-                    start:false,
-                });
-                toastr.options = {
-                    "closeButton": false,
-                    "debug": false,
-                    "newestOnTop": false,
-                    "progressBar": false,
-                    "positionClass": "toast-top-right",
-                    "preventDuplicates": false,
-                    "onclick": null,
-                    "showDuration": "3000",
-                    "hideDuration": "1000",
-                    "timeOut": "5000",
-                    "extendedTimeOut": "1000",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut"
-                };
+                error: function (file, response) {
+                    $('body').loading({
+                        start: false,
+                    });
+                    toastr.options = {
+                        "closeButton": false,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": false,
+                        "positionClass": "toast-top-right",
+                        "preventDuplicates": false,
+                        "onclick": null,
+                        "showDuration": "3000",
+                        "hideDuration": "1000",
+                        "timeOut": "5000",
+                        "extendedTimeOut": "1000",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
+                    };
 
-                toastr.warning("El documento no se cargó correctamente, inténtalo más tarde", "Información");
-            }
+                    toastr.warning("El documento no se cargó correctamente, inténtalo más tarde", "Información");
+                }
 
             });
 
@@ -2245,30 +2297,30 @@
                     }, 3000);
 
                 },
-            error:function(file,response){
-                $('body').loading({
-                    start:false,
-                });
-                toastr.options = {
-                    "closeButton": false,
-                    "debug": false,
-                    "newestOnTop": false,
-                    "progressBar": false,
-                    "positionClass": "toast-top-right",
-                    "preventDuplicates": false,
-                    "onclick": null,
-                    "showDuration": "3000",
-                    "hideDuration": "1000",
-                    "timeOut": "5000",
-                    "extendedTimeOut": "1000",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut"
-                };
+                error: function (file, response) {
+                    $('body').loading({
+                        start: false,
+                    });
+                    toastr.options = {
+                        "closeButton": false,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": false,
+                        "positionClass": "toast-top-right",
+                        "preventDuplicates": false,
+                        "onclick": null,
+                        "showDuration": "3000",
+                        "hideDuration": "1000",
+                        "timeOut": "5000",
+                        "extendedTimeOut": "1000",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
+                    };
 
-                toastr.warning("El documento no se cargó correctamente, inténtalo más tarde", "Información");
-            }
+                    toastr.warning("El documento no se cargó correctamente, inténtalo más tarde", "Información");
+                }
 
             });
         }
@@ -2320,30 +2372,30 @@
                             location.reload();
                         }, 3000);
                     },
-            error:function(file,response){
-                $('body').loading({
-                    start:false,
-                });
-                toastr.options = {
-                    "closeButton": false,
-                    "debug": false,
-                    "newestOnTop": false,
-                    "progressBar": false,
-                    "positionClass": "toast-top-right",
-                    "preventDuplicates": false,
-                    "onclick": null,
-                    "showDuration": "3000",
-                    "hideDuration": "1000",
-                    "timeOut": "5000",
-                    "extendedTimeOut": "1000",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut"
-                };
+                    error: function (file, response) {
+                        $('body').loading({
+                            start: false,
+                        });
+                        toastr.options = {
+                            "closeButton": false,
+                            "debug": false,
+                            "newestOnTop": false,
+                            "progressBar": false,
+                            "positionClass": "toast-top-right",
+                            "preventDuplicates": false,
+                            "onclick": null,
+                            "showDuration": "3000",
+                            "hideDuration": "1000",
+                            "timeOut": "5000",
+                            "extendedTimeOut": "1000",
+                            "showEasing": "swing",
+                            "hideEasing": "linear",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut"
+                        };
 
-                toastr.warning("El documento no se cargó correctamente, inténtalo más tarde", "Información");
-            }
+                        toastr.warning("El documento no se cargó correctamente, inténtalo más tarde", "Información");
+                    }
 
                 });
 
@@ -2370,30 +2422,30 @@
                             start: false,
                         });
                     },
-            error:function(file,response){
-                $('body').loading({
-                    start:false,
-                });
-                toastr.options = {
-                    "closeButton": false,
-                    "debug": false,
-                    "newestOnTop": false,
-                    "progressBar": false,
-                    "positionClass": "toast-top-right",
-                    "preventDuplicates": false,
-                    "onclick": null,
-                    "showDuration": "3000",
-                    "hideDuration": "1000",
-                    "timeOut": "5000",
-                    "extendedTimeOut": "1000",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut"
-                };
+                    error: function (file, response) {
+                        $('body').loading({
+                            start: false,
+                        });
+                        toastr.options = {
+                            "closeButton": false,
+                            "debug": false,
+                            "newestOnTop": false,
+                            "progressBar": false,
+                            "positionClass": "toast-top-right",
+                            "preventDuplicates": false,
+                            "onclick": null,
+                            "showDuration": "3000",
+                            "hideDuration": "1000",
+                            "timeOut": "5000",
+                            "extendedTimeOut": "1000",
+                            "showEasing": "swing",
+                            "hideEasing": "linear",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut"
+                        };
 
-                toastr.warning("El documento no se cargó correctamente, inténtalo más tarde", "Información");
-            }
+                        toastr.warning("El documento no se cargó correctamente, inténtalo más tarde", "Información");
+                    }
                 });
                 new Dropzone('.file-image-document-team-atras' + (key + 1), {
                     url: '{{ route('upload.image.document') }}',
@@ -2417,30 +2469,30 @@
                             start: false,
                         });
                     },
-            error:function(file,response){
-                $('body').loading({
-                    start:false,
-                });
-                toastr.options = {
-                    "closeButton": false,
-                    "debug": false,
-                    "newestOnTop": false,
-                    "progressBar": false,
-                    "positionClass": "toast-top-right",
-                    "preventDuplicates": false,
-                    "onclick": null,
-                    "showDuration": "3000",
-                    "hideDuration": "1000",
-                    "timeOut": "5000",
-                    "extendedTimeOut": "1000",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut"
-                };
+                    error: function (file, response) {
+                        $('body').loading({
+                            start: false,
+                        });
+                        toastr.options = {
+                            "closeButton": false,
+                            "debug": false,
+                            "newestOnTop": false,
+                            "progressBar": false,
+                            "positionClass": "toast-top-right",
+                            "preventDuplicates": false,
+                            "onclick": null,
+                            "showDuration": "3000",
+                            "hideDuration": "1000",
+                            "timeOut": "5000",
+                            "extendedTimeOut": "1000",
+                            "showEasing": "swing",
+                            "hideEasing": "linear",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut"
+                        };
 
-                toastr.warning("El documento no se cargó correctamente, inténtalo más tarde", "Información");
-            }
+                        toastr.warning("El documento no se cargó correctamente, inténtalo más tarde", "Información");
+                    }
                 });
             });
 
@@ -2704,7 +2756,7 @@
             error: function (file, e, i, o, u) {
 
                 $('body').loading({
-                    start:false,
+                    start: false,
                 });
                 toastr.options = {
                     "closeButton": false,
