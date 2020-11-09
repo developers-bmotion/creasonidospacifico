@@ -92,7 +92,7 @@ class ManagementsController extends Controller
             'tipoCurador' => $request->get('tipoCurador')
         ]);
         // dd($add_management);
-        $add_user->roles()->attach(['4']);
+        $add_user->roles()->attach(['3']);
         $add_management->categories()->attach($request->get('insteres'));
 
         //alert()->success(,__('managementCreatedTitle'))->autoClose(10000);

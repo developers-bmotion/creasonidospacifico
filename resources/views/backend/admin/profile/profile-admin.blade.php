@@ -46,7 +46,7 @@
     <div class="m-content">
         <div class="row">
             <div class="col-xl-3 col-lg-4">
-                @include('backend.management.partials.siderbar-profile')
+                @include('backend.admin.partials.sidebar-profile-admin')
             </div>
             <div class="col-xl-9 col-lg-8">
                 <!--=====================================
@@ -386,7 +386,7 @@
                                             {{ $managements->description }}
                                         @endif --}}
                                     </div>
-                                </div> 
+                                </div>
                                 <div class="form-group m-form__group row {{$errors->has('web_site')? 'has-danger':''}}">
                                     <h5 class="m-section__heading" style="padding-left: 28px">Web Site:</h5>
                                     <div class="col-7">

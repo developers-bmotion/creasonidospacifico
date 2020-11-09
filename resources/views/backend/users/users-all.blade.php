@@ -10,17 +10,17 @@
 @section('header')
     <div class="d-flex align-items-center">
         <div class="mr-auto">
-            <h3 class="m-subheader__title m-subheader__title--separator">Gestores</h3>
+            <h3 class="m-subheader__title m-subheader__title--separator">Usuarios</h3>
             <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
                 <li class="m-nav__item m-nav__item--home">
                     <a href="#" class="m-nav__link m-nav__link--icon">
-                        <i class="m-nav__link-icon la la-music"></i>
+                        <i class="m-nav__link-icon la la-users"></i>
                     </a>
                 </li>
                 <li class="m-nav__separator">-</li>
                 <li class="m-nav__item">
                     <a href="" class="m-nav__link">
-                        <span class="m-nav__link-text">{{ __('Gestores') }}</span>
+                        <span class="m-nav__link-text">Usuarios</span>
                     </a>
                 </li>
             </ul>
@@ -30,7 +30,7 @@
                class="btn btn-secondary m-btn m-btn--icon m-btn--pill" style="cursor: pointer">
                 <span>
                     <i class="fa flaticon-plus"></i>
-                    <span>Nuevo Gestor</span>
+                    <span>Nuevo Usuario</span>
                 </span>
             </a>
         </div>
@@ -48,10 +48,10 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                         <div class="m-widget19">
                             <div class="m-widget19__pic m-portlet-fit--top m-portlet-fit--sides"
                                  style="min-height-: 100px">
-                                <img src="/images/fondo_gestores.png" alt=""
+                                <img src="/images/banner2.png" alt=""
                                      style="height: 230px;object-fit: cover;">
                                 <h3 class="m-widget19__title m--font-light">
-                                    Gestores
+                                    Usuarios
                                 </h3>
                                 <div class="m-widget19__shadow">
                                 </div>
@@ -60,48 +60,33 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
 
                             </div>
                             <div class="row p-3">
-                                @forelse($gestores as $gestor)
-                                    <div class="col-lg-4">
-                                        <div class="m-portlet m-portlet--full-height  ">
-                                            <div class="m-portlet__body">
-                                                <div class="m-card-profile">
-                                                    <div class="m-card-profile__title m--hide">
-                                                        Your Profile
-                                                    </div>
-                                                    <div class="m-card-profile__pic">
-                                                        <a href="{{ route('profile.managament',$gestor->slug)}}">
-                                                            <div class="m-card-profile__pic-wrapper">
-                                                                @if(Storage::disk('public')->exists('users/'.$gestor->picture))
-                                                                    <img src="{{ $gestor->pathAttachment()}}"
-                                                                         alt=""/>
-                                                                @else
-                                                                    <img src="{{ $gestor->picture }}" alt="">
-                                                                @endif
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                    <div class="m-card-profile__details">
-                                                        <span
-                                                            class="m-card-profile__name">{{ $gestor->name }} {{ $gestor->last_name }}</span>
-                                                        <p>{{ $gestor->city->departaments->descripcion }}</p>
-                                                        <a href="" class="m-card-profile__email m-link"
-                                                           style="margin-left: -15px">{{ $gestor->email  }}</a>
-
-                                                    </div>
-                                                    <div class="m-card-profile__details" style=padding-top:20px;>
-                                                        <a href="{{ route('profile.managament',$gestor->slug)}}"
-                                                           class="btn btn-secondary m-btn m-btn--icon m-btn--pill">{{ __('mas_informacion') }}</a>
-                                                    </div>
-
-                                                </div>
+                                <div class="col-12">
+                                    <div class="m-portlet__head">
+                                        <div class="m-portlet__head-caption">
+                                            <div class="m-portlet__head-title">
+                                                <h3 class="m-portlet__head-text">
+                                                    Usuarios Registrados
+                                                </h3>
                                             </div>
                                         </div>
                                     </div>
-                                @empty
-                                    <h4 class="text-center">{{ __('no_hay_registros') }}</h4>
-                                @endforelse
+                                    <!--begin::Section-->
+                                    <table class="table table-striped- table-bordered table-hover table-checkable"
+                                           id="table_users">
+                                        <thead>
+                                        <tr>
+                                            {{-- <th>#</th> --}}
+                                            <th>Nombres</th>
+                                            <th>Correo Electrónico</th>
+                                            <th>Teléfono</th>
+                                            <th>Rol</th>
+                                            <th>Estado</th>
+                                        </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+
                             </div>
-                            {{--                            {{ $gestor->links() }}--}}
                         </div>
                     </div>
                 </div>
@@ -187,10 +172,7 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                                         id="m_select2_3"
                                         name="departamento" class="form-control m-select2">
                                         <option value="-1">Seleccione departamento</option>
-                                        @foreach($departamentos as $departamento)
-                                            <option
-                                                value="{{$departamento->id}}">{{ $departamento->descripcion }}</option>
-                                        @endforeach
+
                                     </select>
                                     <div id="error-aspirante_departamentoNacimiento" class="form-control-feedback"
                                          style="display: none"></div>
@@ -236,39 +218,153 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
     </div>
 
 @stop
-@section('js.form-register')
-    <script src="/backend/assets/js/form-register.js" type="text/javascript"></script>
-@endsection
+
 @push('js')
     <script>
-        @if(\Session::has('msg'))
-        swal({
-            "title": "{{\Session::get('msg')[0]}}",
-            "text": "{{\Session::get('msg')[1]}}",
-            "type": "{{\Session::get('msg')[2]}}",
-            "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
-        });
-        @endif
-        var select = false;
-        const startSelectTag = function () {
-            setTimeout(function () {
-                $('#m_select2_11_tipo').select2({
-                    placeholder: "{{ __('selecciona_insteres') }}",
-                    tags: true
-                });
-            }, 500);
-        };
-        @if (count($errors) > 0)
-        $('#modal_add_management').modal('show');
-        startSelectTag();
-        @endif
-        $('#modalAddManager').click(function () {
-            if (select) {
-                return;
-            }
-            select = true;
-            startSelectTag();
-        });
+        $('#table_users').DataTable({
+            "processing": true,
+            "order": [[1, "desc"]],
+            "ajax": '{{route('get.users.tables')}}',
+            "columns": [
+                {
+                    render: function (data, type, JsonResultRow, meta) {
+                        // console.log(JsonResultRow,'data');
+                        if (JsonResultRow.users[0].name === null) {
+                            return '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
+                        } else {
 
+                            return '<span class="label label-danger text-center">' + JsonResultRow.users[0].name + '</span>  <span class="label label-danger text-center">' + JsonResultRow.users[0].last_name + '</span>';
+                        }
+                        // return '<img src="' + JsonResultRow + '" width="50px"  style="border-radius: 100%;margin-right: auto;margin-left: auto;display: block; width:50px; height:50px"/>';
+                    }
+
+                },
+                {
+                    render: function (data, type, JsonResultRow, meta) {
+                        // console.log(JsonResultRow,'data');
+                        if (JsonResultRow.users[0].email === null) {
+                            return '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
+                        } else {
+
+                            return '<span class="label label-danger text-center">' + JsonResultRow.users[0].email;
+                        }
+                        // return '<img src="' + JsonResultRow + '" width="50px"  style="border-radius: 100%;margin-right: auto;margin-left: auto;display: block; width:50px; height:50px"/>';
+                    }
+                },
+                {
+                    render: function (data, type, JsonResultRow, meta) {
+                        // console.log(JsonResultRow,'data');
+                        if (JsonResultRow.users[0].phone_1 === null) {
+                            return '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
+                        } else {
+
+                            return '<span class="label label-danger text-center">' + JsonResultRow.users[0].phone_1;
+                        }
+                        // return '<img src="' + JsonResultRow + '" width="50px"  style="border-radius: 100%;margin-right: auto;margin-left: auto;display: block; width:50px; height:50px"/>';
+                    }
+
+                },
+                {
+                    data: "rol",
+
+                },
+                {
+                    render: function (data, type, JsonResultRow, meta) {
+                        return `<span class="m-switch m-switch--outline m-switch--icon m-switch--success"><label><input class="swicthState`+ JsonResultRow.users[0].id+`" id-user="` + JsonResultRow.users[0].id + `" data-type="` + JsonResultRow.users[0].state + `" type="checkbox" ${JsonResultRow.users[0].state == 1 ? 'checked' : ""} name=""><span></span></label></span>`
+                    }
+                },
+
+
+            ],
+            "language": {
+                "sProcessing": "{{__('procesando')}}",
+                "sLengthMenu": "{{__('mostrar')}} _MENU_ {{__('registros')}}",
+                "sZeroRecords": "No se encontraron resultados",
+                "sEmptyTable": "{{__('nigun_dato_tabla')}}",
+                "sInfo": "_TOTAL_ {{__('registros')}}",
+                "sInfoEmpty": "{{ __('mostrando_registros_del_cero') }}",
+                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                "sInfoPostFix": "",
+                "sSearch": "{{__('buscar')}}:",
+                "sUrl": "",
+                "sInfoThousands": ",",
+                "sLoadingRecords": "{{__('cargando')}}",
+                "oPaginate": {
+                    "sFirst": "Primero",
+                    "sLast": "Último",
+                    "sNext": "{{__('siguiente')}}",
+                    "sPrevious": "{{__('anterior')}}"
+                },
+                "oAria": {
+                    "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                }
+            }
+
+        });
+    </script>
+    <script>
+        $(function () {
+            let userId = parseInt($(this).attr("id-user"));
+            $(`.swicthState${userId}`).change(function () {
+                let status = parseInt($(this).attr("data-type"));
+                let user = parseInt($(this).attr("id-user"));
+                console.log('estado', status);
+                console.log('user', user);
+
+                swal({
+                    title: '¡Actualizar Estado!',
+                    text: "¿Esta seguro que desea actualizar el estado?",
+                    type: 'info',
+                    showCancelButton: true,
+                    confirmButtonText: 'Aceptar',
+                    cancelButtonText: 'Cancelar',
+                    reverseButtons: true
+                }).then(function (result) {
+                    console.log(result);
+                    if (result.value) {
+                        $('body').loading({
+                            message: 'Guardando datos...',
+                            start: true,
+                        });
+                        $.get('/api/change-status-user/' + user + '/' + status, function (r) {
+                            $('body').loading({start: false});
+                            viewAlertError();
+                        })
+                    } else if (result.dismiss === 'cancel') {
+                        // location.reload();
+                        if (status == 1) {
+                            $(".swicthState"+userId).prop('checked', true);
+                        } else {
+                            $(".swicthState"+userId).prop('checked', false);
+                        }
+                    }
+                });
+
+
+            });
+
+            /* mostrar alerta de datos faltantes */
+            function viewAlertError() {
+                toastr.options = {
+                    "closeButton": true,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "2000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+                toastr.success("Estado actualizado correctamente", "");
+            }
+        })
     </script>
 @endpush

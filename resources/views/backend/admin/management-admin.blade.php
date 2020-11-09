@@ -14,7 +14,7 @@
             <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
                 <li class="m-nav__item m-nav__item--home">
                     <a href="#" class="m-nav__link m-nav__link--icon">
-                        <i class="m-nav__link-icon flaticon-users"></i>
+                        <i class="m-nav__link-icon la la-check"></i>
                     </a>
                 </li>
                 <li class="m-nav__separator">-</li>
@@ -50,10 +50,10 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                         <div class="m-widget19">
                             <div class="m-widget19__pic m-portlet-fit--top m-portlet-fit--sides"
                                  style="min-height-: 100px">
-                                <img src="/backend/assets/app/media/img//managements/fondo-managements.jpg" alt=""
+                                <img src="/images/banner-contacto.png" alt=""
                                      style="height: 230px;object-fit: cover;">
                                 <h3 class="m-widget19__title m--font-light">
-                                    Managements
+                                    Curadores
                                 </h3>
                                 <div class="m-widget19__shadow">
                                 </div>

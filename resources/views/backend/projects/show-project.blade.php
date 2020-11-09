@@ -22,7 +22,7 @@
         </div>
     </div> --}}
         <div class="row">
-            <div class="col-xl-12 col-lg-8">
+            <div class="col-xl-12 col-lg-12">
                 <div class="m-portlet m-portlet--full-height ">
                     <div class="m-portlet__head">
                         <div class="m-portlet__head-caption">
@@ -54,7 +54,7 @@
 
                                     <div class="row drop_audio col-12" style="display: none">
                                         <div
-                                            class="col-lg-11 m-form__group-sub {{$errors->has('subir_cancion')? 'has-danger':''}}">
+                                            class="col-lg-12 m-form__group-sub {{$errors->has('subir_cancion')? 'has-danger':''}}">
                                             <div class="form-group m-form__group row">
                                                 <div class="col-lg-12">
                                                     <label class="form-control-label" form="nombreProyecto"><span
@@ -179,7 +179,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <h5 style="font-weight: bold">{{ __('genero') }}:</h5>
+                                        <h5 style="font-weight: bold">Modalidad:</h5>
                                     </div>
                                     <div class="form-group">
                                         {{ $project->category->category }}
@@ -280,7 +280,7 @@
         <br>
         <br>
         <div class="row">
-            <div class="col-xl-12 col-lg-8">
+            <div class="col-xl-12 col-lg-12">
                 <div class="m-portlet m-portlet--full-height ">
                     <div class="m-portlet__head">
                         <div class="m-portlet__head-caption">
@@ -702,7 +702,7 @@
 
         <!--begin::Portlet-->
             <div class="row">
-                <div class="col-xl-12 col-lg-8">
+                <div class="col-xl-12 col-lg-12">
                     <div class="m-portlet m-portlet--full-height">
                         <div class="m-portlet__head">
                             <div class="m-portlet__head-caption">
@@ -868,6 +868,7 @@
                                                                 <div class="col-md-4 mt-2">
                                                                     <label style="font-weight: bold">Documento de
                                                                         identificación:</label>
+                                                                    <br>
                                                                     <button type="button" class="btn btn-primary"
                                                                             data-toggle="modal"
                                                                             data-target="#pdfidentificacion{{$loop->iteration}}">
@@ -1106,7 +1107,7 @@
     {{-- informacion de beneficiario --}}
     @if(count($artist->artists[0]->beneficiary) != 0)
         <div class="row">
-            <div class="col-xl-12 col-lg-8">
+            <div class="col-xl-12 col-lg-12">
                 <div class="m-portlet m-portlet--full-height ">
                     <div class="m-portlet__head">
                         <div class="m-portlet__head-caption">
