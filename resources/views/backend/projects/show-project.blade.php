@@ -197,13 +197,13 @@
                                     </div>
                                 </div>
 
-
+                                @include('backend.partials.rating.'.\App\User::rating_proyect())
                                 <!-- ------------------------- ACCIONES SEGUN LOS ROLES----------------------------- -->
-                                @if(!auth()->user()->roles[0]->rol == "Gestor")
-                                    @if(\App\User::navigation() !== "Admin")
-                                        @include('backend.partials.rating.' .\App\User::rating_proyect())
-                                    @endif
-                                @endif
+{{--                                @if(!auth()->user()->roles[0]->rol == "Gestor")--}}
+{{--                                    @if(\App\User::navigation() !== "Admin")--}}
+{{--                                        @include('backend.partials.rating.' .\App\User::rating_proyect())--}}
+{{--                                    @endif--}}
+{{--                                @endif--}}
                             <!-- ------------------------- CALIFICACION DEL PROYECTO CUANDO ESTA PUBLICADO Y APROBADO----------------------------- -->
                                 {{-- @if($project->status == 3 || $project->status == 4 || $project->status == 5)
                                     <div class="form-group">

@@ -243,8 +243,8 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
     <script>
         @if(\Session::has('msg'))
         swal({
-            "title": "{{\Session::get('msg')[0]}}",
-            "text": "{{\Session::get('msg')[1]}}",
+            "title": "Correcto",
+            "text": "Gestor creado correctamente",
             "type": "{{\Session::get('msg')[2]}}",
             "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
         });
