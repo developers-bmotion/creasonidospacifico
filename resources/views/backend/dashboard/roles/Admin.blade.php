@@ -1,5 +1,7 @@
 @push('css')
     <link rel="stylesheet" href="/backend/admin/css/dashboard.css">
+    {{-- Custom css --}}
+    <link href="/css/main-custom.css" rel="stylesheet" type="text/css"/>
 @endpush
 
 @section('content')
@@ -400,7 +402,7 @@
                 {{-- filtros para datatable --}}
                 <div class="row">
                     <select class="form-control m-input m-input--square col-md-3 mb-3  tipoPersona" name="tipoPersona" id="tipoPersona">
-                        <option value="0">Seleccione tipo persona</option>
+                        <option value="0">Filtrar por tipo persona</option>
                         @foreach ($tipoPersona as $tipoPer)
                         <option value="{{$tipoPer->id  }}">{{ $tipoPer->name }}</option>
                         @endforeach
@@ -408,9 +410,9 @@
                     </select>
                     {{-- @dd($cat) --}}
                     <select class="form-control m-input m-input--square col-md-3 mb-3" id="category_filter"
-                    style="margin-left: 1rem;margin-right: -1rem;"
+
                     >
-                        <option value="0">Seleccione categoría</option>
+                        <option value="0">Filtrar por modalidad</option>
                         @foreach ($cat as $category)
                         <option value="{{$category->id}}" >{{$category->category}}</option>
                         @endforeach
@@ -419,7 +421,7 @@
 
                     {{-- filtro estado --}}
                     <div class="m-portlet__head-tools col-md-6">
-                        <ul class="m-portlet__nav row mr-1" style="float: right">
+                        <ul class="m-portlet__nav row mr-1 state_mobile">
 
                             <li class="m-portlet__nav-item row mr-2" style="margin-top: 0.6rem;">
                                 <h5 class="mr-2">Estado: </h5>
@@ -457,22 +459,22 @@
                                                     <li class="m-nav__item text-center">
                                                     <span
                                                         class="changeType w-100 btn btn-success m-btn m-btn--pill m-btn--wide btn-sm"
-                                                        data-type="{{\App\Project::APPROVAL}}">{{ __('Aprovados') }}</span>
+                                                        data-type="{{\App\Project::APPROVAL}}">{{ __('Aprobado') }}</span>
                                                     </li>
                                                     <li class="m-nav__item text-center">
                                                     <span style="color:white;"
                                                           class="changeType w-100 btn btn-warning m-btn m-btn--pill m-btn--wide btn-sm"
-                                                          data-type="{{\App\Project::PENDING}}">{{ __('Pendientes') }}</span>
+                                                          data-type="{{\App\Project::PENDING}}">{{ __('Pendiente') }}</span>
                                                     </li>
                                                     <li class="m-nav__item text-center">
                                                     <span
                                                         class="changeType w-100 btn btn-danger m-btn m-btn--pill m-btn--wide btn-sm"
-                                                        data-type="{{\App\Project::REJECTED}}">{{ __('rechazados') }}</span>
+                                                        data-type="{{\App\Project::REJECTED}}">{{ __('Rechazado') }}</span>
                                                     </li>
                                                     <li class="m-nav__item text-center">
                                                     <span style="color:white"
                                                           class="changeType w-100 btn btn-success m-btn m-btn--pill m-btn--wide btn-sm"
-                                                          data-type="{{\App\Project::ACEPTED}}">{{ __('Aceptados') }}</span>
+                                                          data-type="{{\App\Project::ACEPTED}}">{{ __('Aceptado') }}</span>
                                                     </li>
                                                     <li class="m-nav__item text-center">
                                                     <span
@@ -482,7 +484,7 @@
                                                     <li class="m-nav__item text-center">
                                                     <span
                                                         class="changeType w-100 btn btn-info m-btn m-btn--pill m-btn--wide btn-sm"
-                                                        data-type="{{\App\Project::NOT_REMEDIED}}">{{ __('No subsanados') }}</span>
+                                                        data-type="{{\App\Project::NOT_REMEDIED}}">{{ __('No subsanado') }}</span>
                                                     </li>
                                                     <li class="m-nav__separator m-nav__separator--fit">
                                                     </li>
@@ -597,7 +599,7 @@
             if (table !== null) {
                 table.destroy();
             }
-            var cont = 0;
+            var cont = 1;
             var cat;
             table = $('#table_projects_management').DataTable({
                 "processing": true,
@@ -615,6 +617,13 @@
                     }
                 },
                 "columns": [
+
+                    // {
+                    //     render: function(h) {
+                    //         return cont++;
+                    //     },
+
+                    // },
 
                     {
                         data: 'users.name',
@@ -995,5 +1004,12 @@
 
         });
     </script>
+<style>
+    .m-nav .m-nav__item {
+        display: block;
+        padding-bottom: 9px;
+    }
+</style>
+
 @endpush
 

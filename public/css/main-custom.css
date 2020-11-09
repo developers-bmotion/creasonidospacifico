@@ -7,6 +7,7 @@
     margin: 2rem 0 !important;
 }
 
+
 /* div#app {
     flex: 0.1 !important;
 }
@@ -60,6 +61,9 @@
 
 /*Para pantalla movil*/
 @media (max-width: 480px){
+    .state_mobile{
+        float: left;
+    }
 
     .parrafo-register {
         font-size: 30px !important;
@@ -98,6 +102,10 @@
     }
 }
 @media (max-width: 1024px){
+
+    #table_projects_management_wrapper{
+        overflow: scroll !important;
+    }
     .cls-body{
         margin-left: 0;
     }
@@ -121,6 +129,9 @@
 }
 
 @media (min-width: 1025px) {
+    .state_mobile{
+        float: right;
+    }
     .footer-display-custom{
         table-layout: auto !important;
     }
@@ -131,7 +142,12 @@
     .custom-item-menu{
         display: none !important;
     }
-    
+
+    select#category_filter {
+        margin-left: 1rem;
+        margin-right: -1rem;
+    }
+
 }
 
 /*.displayNoneRegistros{*/
