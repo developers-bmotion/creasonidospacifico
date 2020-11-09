@@ -489,7 +489,28 @@
                     </ul>
                 </div> --}}
             </div>
+
             <div class="m-portlet__body">
+                {{-- filtros para datatable --}}
+                <div class="row">
+                    <select class="form-control m-input m-input--square col-md-2 mb-3 tipoPersona" name="tipoPersona" id="tipoPersona">
+                        <option value="0">Seleccione tipo persona</option>
+                        @foreach ($tipoPersona as $tipoPer)
+                        <option value="{{$tipoPer->id  }}">{{ $tipoPer->name }}</option>
+                        @endforeach
+
+                    </select>
+                    {{-- @dd($cat) --}}
+                    <select type="search" class="form-control m-input m-input--square col-md-2 mb-3" aria-controls="table_projects_management">
+                        <option value="0">Seleccione categoría</option>
+                        @foreach ($cat as $category)
+                        <option value="{{$category->id}}">{{ $category->category}}</option>
+                        @endforeach
+
+                    </select>
+
+
+                </div>
                 <table class="table table-striped- table-bordered table-hover table-checkable "
                        id="table_projects_management">
                     <thead>
@@ -497,8 +518,7 @@
                         {{-- <th>#</th> --}}
                         <th>{{ __('Nombres y Apellidos') }}</th>
                         <th>{{ __('Actuara como') }}</th>
-                        <th>{{ __('Tipo identificación') }}</th>
-                        <th>{{ __('N° identificación') }}</th>
+                        <th>{{ __('Categoría') }}</th>
                         <th>{{ __('Email') }}</th>
                         <th>{{ __('Departamento de nacimiento') }}</th>
                         <th>{{ __('Ciudad de nacimiento') }}</th>
@@ -561,10 +581,12 @@
         console.log(estado);
         var storeTipoProyecto = "storeTipoProyecto";
         var tipoProyecto = getStorage(storeTipoProyecto);
+        var tipoPer = 0;
         if (tipoProyecto == 11) {
             tipoProyecto = null
         }
         console.log('get', tipoProyecto);
+        console.log('get tipo per', tipoPer);
         var table = null;
         // var tipoProyecto = null;
         // var table = null;
@@ -587,7 +609,8 @@
                 "ajax": {
                     url: "{{route('aspirants.all')}}",
                     data: {
-                        tipoProyecto: tipoProyecto
+                        tipoProyecto: tipoProyecto,
+                        tipoPer:tipoPer
                     }
                 },
                 "columns": [
@@ -595,7 +618,7 @@
                     {
 
                         render: function (data, type, JsonResultRow, meta) {
-                            // console.log(JsonResultRow,'data');
+                            // console.log(JsonResultRow,'data****');
                             if (JsonResultRow.users.last_name === null) {
                                 return '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
                             } else {
@@ -608,37 +631,43 @@
                     {
                         data: 'person_type.name',
                         defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
-                        // "width": "1%",
-                        // data: 'artists',
-                        // defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>',
-                        // render: function (data, type, JsonResultRow, meta) {
-                        //     // console.log(JsonResultRow,'data t');
-                        //     let artista = JsonResultRow.artists[0];
-                        //     return `<span target="_blank">${artista.person_type.name}</span>`;
-                        // }
+
                     },
                     {
-                        data: 'document_type.document',
-                        defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
-                        // render: function (data, type, JsonResultRow, meta) {
-                        //     // console.log(JsonResultRow,'data t');
-                        //     let artista = JsonResultRow.artists[0];
-                        //     return `<span target="_blank">${artista.document_type.document}</span>`;
-                        // }
-                        // data: 'artists.document_type.document',
-                        // defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
+                        render: function (data, type, JsonResultRow, meta) {
+                            var category = "";
+                            if (JsonResultRow.projects) {
+
+                                JsonResultRow.projects.map(item => {
+                                    category = item;
+                                });
+                            }
+
+                            return category != "" ? `<span>${category.category.category}</span>` : '<span class="label label-danger text-center ml-4" style="color:red !important">Sin categoria</span>'
+                        }
                     },
-                    {
-                        data: 'identification',
-                        defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
-                        // render: function (data, type, JsonResultRow, meta) {
-                        //     // console.log(JsonResultRow,'data t');
-                        //     let artista = JsonResultRow.artists[0];
-                        //     return `<span target="_blank">${artista.identification}</span>`;
-                        // }
-                        // data: 'artista.identification',
-                        // defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
-                    },
+                    // {
+                    //     data: 'document_type.document',
+                    //     defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
+                    //     // render: function (data, type, JsonResultRow, meta) {
+                    //     //     // console.log(JsonResultRow,'data t');
+                    //     //     let artista = JsonResultRow.artists[0];
+                    //     //     return `<span target="_blank">${artista.document_type.document}</span>`;
+                    //     // }
+                    //     // data: 'artists.document_type.document',
+                    //     // defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
+                    // },
+                    // {
+                    //     data: 'identification',
+                    //     defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
+                    //     // render: function (data, type, JsonResultRow, meta) {
+                    //     //     // console.log(JsonResultRow,'data t');
+                    //     //     let artista = JsonResultRow.artists[0];
+                    //     //     return `<span target="_blank">${artista.identification}</span>`;
+                    //     // }
+                    //     // data: 'artista.identification',
+                    //     // defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
+                    // },
                     {
                         render: function (data, type, JsonResultRow, meta) {
                             // console.log(JsonResultRow.users.email,'email');
@@ -754,10 +783,18 @@
                 tipoProyecto = null
             }
             loadTable();
-            console.log(typeof (tipoProyecto))
+            // console.log(typeof (tipoProyecto),'tipoProyecto')
+            // console.log(tipo,'tipoProyecto')
             changedStatusColor(tipoProyecto)
             // tipoProyecto = tipo;
             // loadTable();
+        });
+
+        $(".tipoPersona").on('change', function () {
+
+            tipoPer = $(this).val();
+            console.log(tipoPer);
+            loadTable();
         });
 
         function changedStatusColor(status) {
