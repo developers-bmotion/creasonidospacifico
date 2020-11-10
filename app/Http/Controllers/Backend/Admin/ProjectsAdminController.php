@@ -156,7 +156,7 @@ class ProjectsAdminController extends Controller
             'project_id' => $id,
             'observation' => $request->input('observation')
         ]);
-       $artistSendEmail = \Mail::to($project->artists[0]->users->email)->send(new ArtistProjectRevision($project->title,$project->artists[0]->users->name, $request->input('observation'), $MyDateCarbon));
+       $artistSendEmail = \Mail::to($project->artists[0]->users->email)->send(new ArtistProjectRevision($project->title,$project->artists[0]->users->name, $request->input('observation'), $MyDateCarbon->formatLocalized('%A %d de %B de %Y %H:%M:%S')));
 
         // alert()->success( 'Enviado a revisión',__('Ok'))->autoClose(3000);
 

@@ -160,7 +160,7 @@ class AddProjectController extends Controller
         $date = Carbon::now();
         $MyDateCarbon = Carbon::parse($date);
 
-        $MyDateCarbon->addWeekdays(40);
+        $MyDateCarbon->addWeekdays(3);
 
         for ($i = 1; $i <= 3; $i++) {
 
@@ -170,8 +170,8 @@ class AddProjectController extends Controller
 
             }
         }
+//        dd($MyDateCarbon);
+        return $MyDateCarbon->formatLocalized('%A %d de %B de %Y %H:%M:%S');
 
-        return Carbon::parse($MyDateCarbon)->formatLocalized('%d de %B de %Y');
-//        $date = Carbon::createFromDate('Y-m-d H:i:s', )
     }
 }
