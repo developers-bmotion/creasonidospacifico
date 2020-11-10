@@ -43,11 +43,14 @@
                             <div class="m-alert__icon">
                                 <i class="la la-warning"></i>
                             </div>
-                            <div class="m-alert__text">
+                            <div class="m-alert__text" style="color:#ca8e0c !important;" data-toggle="modal" data-target="#verObservaciones">
                                 Tu propuesta musical esta en estado <strong>Pendiente</strong>, click
-                                <strong data-toggle="modal" data-target="#verObservaciones"
+                                <strong
                                         style="cursor: pointer">aquí</strong> para ver los detalles que debes ajustar.
                                 Al terminar y estar seguro que todo esta bien, volver a enviar.
+                                <p style="font-style: oblique;"> Nota: Recuerda que debes realizar los ajustes antes del <strong>{{ \Carbon\Carbon::parse($artist->projects[0]->published_at)->formatLocalized('%A %d de %B de %Y %H:%M:%S') }}</strong></p>
+
+
                             </div>
                             <div class="m-alert__actions" style="width: 200px;">
                                 <button href="{{ route('update.state.revision') }}" type="submit"

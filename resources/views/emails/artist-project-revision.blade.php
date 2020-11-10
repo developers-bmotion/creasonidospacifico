@@ -11,7 +11,7 @@ Informamos que tu canción <strong>{{$project}}</strong> se ha puesto en estado 
 {{--{{ __('Ir a la canción') }}--}}
 {{--@endcomponent--}}
 <hr>
-Ten en cuenta que puedes iniciar sesión e ingresar a tu perfil a través de este link usando las credenciales de acceso (correo eléctronico y contreseña) que usaste al crear tu cuenta.
+Ten en cuenta que puedes iniciar sesión e ingresar a tu perfil a través de este botón usando las credenciales de acceso (correo eléctronico y contreseña) que usaste al crear tu cuenta.
 @component('mail::button', ['url' => route('login')])
     {{ __('Iniciar Sesión') }}
 @endcomponent
