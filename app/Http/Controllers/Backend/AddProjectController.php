@@ -12,6 +12,7 @@ use App\Survey;
 use App\typeCategories;
 use App\Team;
 use App\Question;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
@@ -145,5 +146,32 @@ class AddProjectController extends Controller
 //            return redirect(route("myprojects.artist"))->with('proyect_add', ' ' . $name_artist . ' ' . __('primer_proyecto_add_notificar'));
 //
 //        }
+    }
+
+    public function updateProjectCron(){
+//        $holidays = ["2020-11-09", "2020-11-10"];
+        $holidays = [
+            "2020-11-14", "2020-11-15", "2020-11-16",
+            "2020-11-21", "2020-11-22", "2020-11-28",
+            "2020-11-29", "2020-12-05", "2020-12-06",
+            "2020-12-08", "2020-12-12", "2020-12-13"
+        ];
+
+        $date = Carbon::now();
+        $MyDateCarbon = Carbon::parse($date);
+
+        $MyDateCarbon->addWeekdays(3);
+
+        for ($i = 1; $i <= 3; $i++) {
+
+            if (in_array(Carbon::parse($date)->addWeekdays($i)->toDateString(), $holidays)) {
+
+                $MyDateCarbon->addDay();
+
+            }
+        }
+
+        dd($MyDateCarbon);
+//        $date = Carbon::createFromDate('Y-m-d H:i:s', )
     }
 }
