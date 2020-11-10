@@ -368,10 +368,23 @@
             });
             $("#btnSendObservation").click(function () {
                 //
+                swal({
+                    title: '¡Observación!',
+                    text: "¿Esta seguro de enviar a correción?",
+                    type: 'info',
+                    showCancelButton: true,
+                    confirmButtonText: 'Aceptar',
+                    cancelButtonText: 'Cancelar',
+                    reverseButtons: true
+                }).then(function (result) {
+                    console.log(result);
+                    if (result.value) {
+                        $('#revision').loading({
+                            message: 'Enviando...',
+                            start: true,
+                        });
 
-
-                //
-                if($('#mesage').val() !==''){
+                        if($('#m_summernote_1').summernote('code') !==''){
                 const
                     mesage=$('#m_summernote_1').summernote('code'),
                     token = '{{ csrf_token() }}',
@@ -396,6 +409,9 @@
                     }
                 };
                 const error = function (e) {
+                    $('#revision').loading({
+                            start: false,
+                        });
                     swal({
                         "title": "",
                         "text": "No se ha enviado el mensaje.",
@@ -414,6 +430,54 @@
                         "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
                     });
             }
+                    }
+
+                });
+
+                //
+            //     if($('#mesage').val() !==''){
+            //     const
+            //         mesage=$('#m_summernote_1').summernote('code'),
+            //         token = '{{ csrf_token() }}',
+            //         url = '{{route("project.admin.revision")}}';
+
+            //     let data = {
+            //         __token: token,
+            //         observation: mesage,
+            //         project: {{ $project->id }}
+            //     };
+            //     const success = function (r) {
+            //         console.log(r);
+            //         if (r.status === 200) {
+            //             swal({
+            //                 "title": "",
+            //                 "text": r.msg,
+            //                 "type": "success",
+            //                 "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
+            //             }).then((result) => {
+            //                 document.location.reload();
+            //             });
+            //         }
+            //     };
+            //     const error = function (e) {
+            //         swal({
+            //             "title": "",
+            //             "text": "No se ha enviado el mensaje.",
+            //             "type": "error",
+            //             "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
+            //         });
+            //     };
+
+
+            //     ajax(url, data, success, "post", error, true, "#list_modal_manage");
+            // }else{
+            //     swal({
+            //             "title": "",
+            //             "text": "Debe llenar el campo de observación.",
+            //             "type": "error",
+            //             "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
+            //         });
+            // }
             });
         })();
     </script>
