@@ -60,6 +60,7 @@
 
 /*Para pantalla movil*/
 @media (max-width: 480px) {
+    
     .state_mobile {
         float: left;
     }
@@ -146,6 +147,12 @@
         padding-bottom: 30px !important;
         text-align: center !important;
     }
+    .my-scroll-nav{
+        display: flex;
+        /* white-space: nowrap; */
+        flex-flow: nowrap;
+        overflow: scroll;
+    }
 }
 
 @media (max-width: 653px) and (min-width: 481px) {
@@ -181,6 +188,12 @@
     select#category_filter {
         margin-left: 1rem;
         margin-right: -1rem;
+    }
+}
+
+@media (max-width: 767px) {
+    div#image-docuemnt-aspirante {
+        margin-right: 50px;
     }
 }
 

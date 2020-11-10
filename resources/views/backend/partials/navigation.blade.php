@@ -351,9 +351,9 @@
                                 </li>
                 --}}
                 {{-- @if(\App\User::navigation() !== "Admin") --}}
-                <li class="m-menu__item img-item-menu" >
+                {{-- <li class="m-menu__item img-item-menu" >
                     <img width="150" src="/images/logo-creasonidos.png" alt="">
-                </li>
+                </li> --}}
                 {{-- @endif --}}
                 <li class="m-nav__item m-topbar__user-profile m-topbar__user-profile--img  m-dropdown m-dropdown--medium m-dropdown--arrow m-dropdown--header-bg-fill m-dropdown--align-right m-dropdown--mobile-full-width m-dropdown--skin-light"
                     m-dropdown-toggle="click">
