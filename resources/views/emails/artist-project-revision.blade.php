@@ -15,7 +15,7 @@ Ten en cuenta que puedes iniciar sesión e ingresar a tu perfil a través de est
 @component('mail::button', ['url' => route('login')])
     {{ __('Iniciar Sesión') }}
 @endcomponent
-
+Nota: tienes plazo para realizar estas correcciónes hasta el <strong>{{ $dateValidate }}</strong><br>
 {{ __('Gracias') }}.<br>
 {{ config('app.name') }}
 @endcomponent

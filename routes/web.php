@@ -38,7 +38,7 @@ Route::get('/offline', function () {
 });
 
 Route::get('/prueba-email', function () {
-    return new \App\Mail\NewRevisionProjectAspirant('Mauricio', 'Gutierrez', 'Estoy contigo');
+    return new \App\Mail\NewRevisionProjectSubsanador('Mauricio', 'Gutierrez', 'Estoy contigo', 'Dario', 'Gonzales');
 });
 
 Route::get('/')->middleware('');
@@ -338,7 +338,7 @@ Route::get('/test', function () {
     }
 });
 
-
+Route::get('/udpdate-project-cron', 'Backend\AddProjectController@updateProjectCron')->name('update.project.cron');
 Route::resource('project-message', 'Backend\ProjectMessageController');
 Route::get('project-message-artist', 'Backend\ProjectMessageController@showProjectsByArtist');
 Route::patch('notification-read/{id}', 'Backend\NotificationController@read');

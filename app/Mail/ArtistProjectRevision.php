@@ -14,12 +14,14 @@ class ArtistProjectRevision extends Mailable
     private $name_project;
     private $artist_name;
     private $mesage;
+    private $dateValidate;
 
-    public function __construct($name_project, $artist_name, $mesage)
+    public function __construct($name_project, $artist_name, $mesage, $dateValidate)
     {
         $this->name_project = $name_project;
         $this->artist_name = $artist_name;
         $this->mesage = $mesage;
+        $this->dateValidate = $dateValidate;
     }
 
     /**
@@ -34,6 +36,7 @@ class ArtistProjectRevision extends Mailable
             ->markdown('emails.artist-project-revision')
             ->with('project',$this->name_project)
             ->with('artist',$this->artist_name)
-            ->with('mesage',$this->mesage);
+            ->with('mesage',$this->mesage)
+            ->with('dateValidate',$this->dateValidate);
     }
 }

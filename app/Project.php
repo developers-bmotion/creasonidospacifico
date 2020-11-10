@@ -67,6 +67,7 @@ class Project extends Model
         'created_at',
         'updated_at',
         'published_at',
+        'original_datetime'
     ];
 
 
@@ -102,6 +103,10 @@ class Project extends Model
         'audio_secundary_one',
         'audio_secundary_two'
     ];
+
+    public function getRejectedAttribute($value){
+        return $value ? 'Si' : 'No';
+    }
 
     public static function card($arrayProject, $artist = null){
         return $arrayProject->map(function ($project) use ($artist){

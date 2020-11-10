@@ -16,6 +16,7 @@ use App\Mail\NewArtist;
 use App\Mail\NewArtistRegisterGestor;
 use App\Mail\NewAspirantGestor;
 use App\Mail\NewRevisionProjectAspirant;
+use App\Mail\NewRevisionProjectSubsanador;
 use App\Update;
 use App\User;
 use Carbon\Carbon;
@@ -858,16 +859,19 @@ class ProfileController extends Controller
     }
 
     public function update_state_revision(Request $request){
-
         $idProject = $request->get('project_id');
+        $userSubsanador = Project::where('id', $request->get('project_id'))->with('historyReviews')->first();
+
         $stateProjectRevision = $request->get('state_revision');
         $project = Project::where('id', $idProject)->update(['status' => $stateProjectRevision]);
         $projectName = Project::where('id', $idProject)->first();
 
-        HistoryRevision::where('project_id', $request->get('project_id'))->orWhere('state','<>' ,1)->update(['state' => 2]);
+        HistoryRevision::where('project_id', $request->get('project_id'))->orWhere('state','<>' ,1)->update(['state' => 2, '']);
 
         /*ENVIO DE CORREO AL ASPRIANTE*/
         \Mail::to(auth()->user()->email)->send(new NewRevisionProjectAspirant(auth()->user()->name, auth()->user()->last_name, $projectName->title));
+        /*ENVIO DE CORREO AL SUBSANADOR*/
+        \Mail::to($userSubsanador->historyReviews[0]->email)->send(new NewRevisionProjectSubsanador($userSubsanador->historyReviews[0]->name, $userSubsanador->historyReviews[0]->last_name, $projectName->title,auth()->user()->name, auth()->user()->last_name));
 
         return back()->with('exitoso', 'Se ha enviado su correción exitosamente');
     }
