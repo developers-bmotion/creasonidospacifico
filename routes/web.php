@@ -229,11 +229,12 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'dashboard', 'middleware' =>
         Route::get('/gestores-admin', 'Admin\ManagementsController@gestores')->name('gestores.admin');
 
         Route::post('/add-management-admin', 'Admin\ManagementsController@store')->name('add.management.admin');
-        Route::post('/add-gestores-admin', 'Admin\ManagementsController@storeGestores')->name('add.gestores.admin');
+        Route::post('/add-gestores-admin', 'Admin\UserController@storeUsers')->name('add.gestores.admin');
 
 //      /* Rutas para los usuarios */
         Route::get('/users-admin', 'Admin\UserController@index')->name('user.admin.index');
         Route::get('/users-system', 'Admin\UserController@getUsersTable')->name('get.users.tables');
+        Route::post('/add-users-admin', 'Admin\ManagementsController@storeGestores')->name('add.users.admin');
 
         //ruta para el perfil del admin
         Route::get('/profile-admin/{user}', 'Admin\ProfileAdminController@indexAdmin')->name('profile.admin');
