@@ -171,7 +171,7 @@ class AddProjectController extends Controller
             }
         }
 
-        return $MyDateCarbon->toDayDateTimeString();
+        return Carbon::parse($MyDateCarbon)->formatLocalized('%d de %B de %Y');
 //        $date = Carbon::createFromDate('Y-m-d H:i:s', )
     }
 }

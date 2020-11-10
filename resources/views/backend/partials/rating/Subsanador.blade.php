@@ -359,6 +359,7 @@
         })();
     </script>
     <script>
+
         (function () {
             $.ajaxSetup({
                 headers: {
@@ -366,6 +367,10 @@
                 }
             });
             $("#btnSendObservation").click(function () {
+                //
+
+
+                //
                 if($('#mesage').val() !==''){
                 const
                     mesage=$('#m_summernote_1').summernote('code'),
