@@ -159,7 +159,7 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                                     <label class="form-control-label">Tipo de documento:<span
                                             class="text-danger">*</span></label>
                                     <select name="document_type" class="form-control">
-                                        <option value="-1">Seleccione departamento</option>
+                                        <option value="-1">Seleccione documento</option>
                                         <option value="1">Cédula de Ciudadania</option>
                                         <option value="3">Cédula de Extrangeria</option>
                                     </select>

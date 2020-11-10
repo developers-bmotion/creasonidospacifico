@@ -102,12 +102,12 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Agregar Gestor</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Agregar Usuario</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="post" action="{{ route('add.gestores.admin') }}">
+                <form method="post" action="{{ route('add.users.admin') }}">
                     @csrf
                     <div class="modal-body">
                         <div class="row">
@@ -162,41 +162,6 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                                        value="{{ old('identificacion') }}">
                                 {!! $errors->first('identificacion','<div class="form-control-feedback">*:message</div>')!!}
                             </div>
-                            <div class="form-group m-form__group  col-12 col-md-6 col-lg-6">
-                                <div id="content-aspirante_departamentoNacimiento"
-                                     class="m-form__group-sub">
-                                    <label class="form-control-label">Departamento:<span
-                                            class="text-danger">*</span></label>
-                                    <select
-                                        onchange="onSelectDepartamentosChange(this, 'aspirante-nacimiento-municipios')"
-                                        id="m_select2_3"
-                                        name="departamento" class="form-control m-select2">
-                                        <option value="-1">Seleccione departamento</option>
-
-                                    </select>
-                                    <div id="error-aspirante_departamentoNacimiento" class="form-control-feedback"
-                                         style="display: none"></div>
-                                </div>
-                            </div>
-                            <div class="form-group m-form__group  col-12 col-md-6 col-lg-6">
-                                <div id="content-aspirante_municipioNacimiento" class="m-form__group-sub">
-                                    <label class="form-control-label">Municipio o Ciudad: <span
-                                            class="text-danger">*</span></label>
-                                    <select onchange="onSelectMunicipiosChange(this)"
-                                            name="city"
-                                            class="form-control m-select2 aspirante-nacimiento-municipios"
-                                            id="m_select2_4"></select>
-                                    <div id="error-aspirante_municipioNacimiento" class="form-control-feedback"
-                                         style="display: none"></div>
-                                </div>
-                            </div>
-                            <div
-                                class="form-group m-form__group  col-12 col-md-6 col-lg-6 {{$errors->has('profile')? 'has-danger':''}}">
-                                <label for="exampleInputEmail1">{{ __('Perfil') }}</label>
-                                <textarea name="profile" class="form-control m-input"
-                                          placeholder="Describa el perfil"></textarea>
-                                {!! $errors->first('profile','<div class="form-control-feedback">*:message</div>')!!}
-                            </div>
                             <div
                                 class="form-group m-form__group col-12 col-md-6 col-lg-6 {{$errors->has('email')? 'has-danger':''}}">
                                 <label for="exampleInputEmail1">{{ __('email') }}:<span
@@ -205,6 +170,33 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                                        aria-describedby="emailHelp" placeholder="Ingrese email"
                                        value="{{ old('email') }}">
                                 {!! $errors->first('email','<div class="form-control-feedback">*:message</div>')!!}
+                            </div>
+                            <div
+                                class="form-group m-form__group  col-12 col-md-6 col-lg-6 {{$errors->has('document_type')? 'has-danger':''}}">
+                                <div class="m-form__group-sub">
+                                    <label class="form-control-label">Rol en el sistema:<span
+                                            class="text-danger">*</span></label>
+                                    <select name="document_type" class="form-control">
+                                        <option value="-1">Seleccione departamento</option>
+                                        <option value="1">Administrador</option>
+                                        <option value="2">Aspirante</option>
+                                        <option value="4">Subsanador</option>
+                                        <option value="3">Curador</option>
+                                        <option value="6">Gestor Cultural</option>
+                                    </select>
+                                    <div id="error-aspirante_departamentoNacimiento" class="form-control-feedback"
+                                         style="display: none"></div>
+                                    {!! $errors->first('document_type','<div class="form-control-feedback">*:message</div>')!!}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div
+                                class="form-group m-form__group  col-12 col-md-12 col-lg-12 {{$errors->has('profile')? 'has-danger':''}}">
+                                <label for="exampleInputEmail1">{{ __('Perfil') }}</label>
+                                <textarea rows="8" cols="50" name="profile" class="form-control m-input"
+                                          placeholder="Describa el perfil"></textarea>
+                                {!! $errors->first('profile','<div class="form-control-feedback">*:message</div>')!!}
                             </div>
                         </div>
                     </div>
@@ -218,6 +210,9 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
     </div>
 
 @stop
+@section('js.form-register')
+    <script src="/backend/assets/js/form-register.js" type="text/javascript"></script>
+@endsection
 
 @push('js')
     <script>
@@ -270,7 +265,7 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                 },
                 {
                     render: function (data, type, JsonResultRow, meta) {
-                        return `<span class="m-switch m-switch--outline m-switch--icon m-switch--success"><label><input class="swicthState`+ JsonResultRow.users[0].id+`" id-user="` + JsonResultRow.users[0].id + `" data-type="` + JsonResultRow.users[0].state + `" type="checkbox" ${JsonResultRow.users[0].state == 1 ? 'checked' : ""} name=""><span></span></label></span>`
+                        return `<span class="m-switch m-switch--outline m-switch--icon m-switch--success"><label><input class="swicthState` + JsonResultRow.users[0].id + `" id-user="` + JsonResultRow.users[0].id + `" data-type="` + JsonResultRow.users[0].state + `" type="checkbox" ${JsonResultRow.users[0].state == 1 ? 'checked' : ""} name=""><span></span></label></span>`
                     }
                 },
 
@@ -334,9 +329,9 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                     } else if (result.dismiss === 'cancel') {
                         // location.reload();
                         if (status == 1) {
-                            $(".swicthState"+userId).prop('checked', true);
+                            $(".swicthState" + userId).prop('checked', true);
                         } else {
-                            $(".swicthState"+userId).prop('checked', false);
+                            $(".swicthState" + userId).prop('checked', false);
                         }
                     }
                 });

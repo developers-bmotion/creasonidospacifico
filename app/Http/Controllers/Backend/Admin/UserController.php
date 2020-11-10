@@ -11,12 +11,17 @@ class UserController extends Controller
 {
     public function index()
     {
-        return view('backend.users.users-all');
+        $roles = Role::all();
+        return view('backend.users.users-all', compact('roles'));
     }
 
     public function getUsersTable()
     {
         $users = Role::whereIn('id', [1, 3, 4])->with('users')->get();
         return datatables()->of($users)->toJson();
+    }
+
+    public function storeUsers(Request $request){
+        return $request;
     }
 }
