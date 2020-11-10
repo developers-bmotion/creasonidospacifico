@@ -5,7 +5,7 @@
     <ul class="m-menu__nav  m-menu__nav--dropdown-submenu-arrow ">
         
         <li class="m-menu__item custom-item-menu">
-            <img width="180" src="/images/logo-blanco.png" alt="">
+            <img width="160" src="/images/logo-blanco.png" alt="">
         </li>
 
         <li class="m-menu__item {{request()->is('dashboard') ? 'm-menu__item--active' : '' }}" 

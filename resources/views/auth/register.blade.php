@@ -236,7 +236,11 @@ License: You must have a valid license purchased only from themeforest(the above
                                     </button>
                                     {{--  <button id="m_login_signup_cancel"
                                         class="btn btn-outline-focus  m-btn m-btn--pill m-btn--custom" style="display: none">Cancel</button> --}}
+                                
+                                        <a style="padding-top: 30px;" href="/login" class="m-link m-link--focus">Volver al login</a>
                                 </div>
+
+                                
                             </form>
                         </div>
 
@@ -246,9 +250,7 @@ License: You must have a valid license purchased only from themeforest(the above
             </div>
         </div>
         <div
-            class="background_register m-grid__item m-grid__item--fluid m-grid m-grid--center m-grid--hor m-grid__item--order-tablet-and-mobile-1	m-login__content m-grid-item--center"
-            {{-- style="background-image: url(/images/imglogin.png)" --}}
-        >
+            class="background_register m-grid__item m-grid__item--fluid m-grid m-grid--center m-grid--hor m-grid__item--order-tablet-and-mobile-1	m-login__content m-grid-item--center">
             <div class="m-grid__item p-4">
                 {{-- <h3 class="title-login m-login__welcome">CREA SONIDOS PACIFICO</h3> --}}
                 <h3 class="text-white">Recuerda que para realizar la inscripción, debes disponer de los siguientes documentos:</h3>

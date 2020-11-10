@@ -130,11 +130,11 @@ License: You must have a valid license purchased only from themeforest(the above
                     <div class="m-stack m-stack--ver m-stack--desktop">
 
                         <!-- BEGIN: Brand -->
-                        @if(auth()->user()->roles[0]->rol == "Artist" || auth()->user()->roles[0]->rol == "Gestor" || auth()->user()->roles[0]->rol == "Manage" || auth()->user()->roles[0]->rol == "Subsanador")
-                            <div class="m-stack__item m-brand  m-brand--skin-dark" style="display: none">
-                                @else
+                        {{-- @if(auth()->user()->roles[0]->rol == "Artist" || auth()->user()->roles[0]->rol == "Gestor" || auth()->user()->roles[0]->rol == "Manage" || auth()->user()->roles[0]->rol == "Subsanador") --}}
+                            {{-- <div class="m-stack__item m-brand  m-brand--skin-dark" style="display: none"> --}}
+                                {{-- @else --}}
                                     <div class="skin-movil m-stack__item m-brand  m-brand--skin-dark" >
-                                        @endif
+                                        {{-- @endif --}}
                                         <div class="m-stack m-stack--ver m-stack--general">
                                             {{-- <div class="menu-top-botones m-stack__item m-stack__item--middle m-brand__logo">
                                                 <a href="#" class="m-brand__logo-wrapper">
@@ -152,20 +152,22 @@ License: You must have a valid license purchased only from themeforest(the above
 
                                                 <!-- END -->
 
+                                                @if(auth()->user()->roles[0]->rol == "Admin" )
                                                 <!-- BEGIN: Responsive Aside Left Menu Toggler -->
                                                 <a href="javascript:;" id="m_aside_left_offcanvas_toggle"
                                                    class="m-brand__icon m-brand__toggler m-brand__toggler m--visible-tablet-and-mobile-inline-block m-brand__toggler--active">
                                                     <span></span>
                                                 </a>
+                                                @endif
 
                                                 <!-- END -->
-
-                                                {{-- <!-- BEGIN: Responsive Header Menu Toggler -->
+                                                @if(auth()->user()->roles[0]->rol !== "Admin" )
+                                                <!-- BEGIN: Responsive Header Menu Toggler -->
                                                 <a id="m_aside_header_menu_mobile_toggle" href="javascript:;"
                                                    class="m-brand__icon m-brand__toggler m--visible-tablet-and-mobile-inline-block">
                                                     <span></span>
-                                                </a> --}}
-
+                                                </a>
+                                                @endif
                                                 <!-- END -->
 
                                                 <!-- BEGIN: Topbar Toggler -->
@@ -181,7 +183,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
                                     <!-- END: Brand -->
                                     @include('backend.partials.navigation')
-                            </div>
+                            {{-- </div> --}}
                     </div>
             </header>
 
