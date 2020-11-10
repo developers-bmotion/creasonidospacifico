@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend\Admin;
 
 use App\Artist;
+use App\Category;
 use App\EndProject;
 use App\Mail\ArtistProjectPreAprov;
 use App\Mail\ArtistProjectRejected;
@@ -74,30 +75,55 @@ class ProjectsAdminController extends Controller
     }
     public function send_project_management(Request $request){
         //En la consola de el navegador se visualizan los datos que se envian
-        $data = $request->input("users");
+
         $dateNow = date('Y-m-d');
         $week = date("Y-m-d",strtotime($dateNow."+ 2 week"));
         $project = Project::where('id', $request->input('project'))->with('artists')->first();
-        $end_project = EndProject::insert(['project_id' => $project->id,'end_time' => $week]);
-        $end_time = EndProject::select('end_time')->where('project_id',$project->id)->first();
+        $data = Management::whereHas('categories', function($q) use($project){
+            $q->where('categories.id',$project->category_id);
+         })->with('categories')->get();
+
+        // dd($data);
+        // $end_project = EndProject::insert(['project_id' => $project->id,'end_time' => $week]);
+        // $end_time = EndProject::select('end_time')->where('project_id',$project->id)->first();
         $img_artist = User::where('id',$project->artists[0]->user_id)->first();
         $artist= Artist::where('user_id',$img_artist->id)->with('users')->first();
+        $cont=0;
+        $disponible=false;
+
         foreach ($data as $key => $user){
-            $nickname = $project->artists[0]->nickname;
-            //echo $user['email']."  ".$project->artists[0]->nickname."\n";
+
             $management = Management::where('user_id',$user['user_id'])->first();
+
+
+
+            if($user['tipoCurador']==1 && $cont==0 ){
+                $project->management()->attach($management->id);
+                $management->update([
+                    'tipoCurador'=>2
+                ]);
+                $cont++;
+
+            }
+
+
+        }
+            // $nickname = $project->artists[0]->nickname;
+            //echo $user['email']."  ".$project->artists[0]->nickname."\n";
+            // $management = Management::where('user_id',$user['user_id'])->first();
             // se envia email a los managements
             // \Mail::to($user['email'])->send(new AssignProjectManager($project,$nickname,$end_time,$img_artist));
-            $project->management()->attach($management->id);
-            $reviews = Review::create([
-               'project_id' => $project->id,
-                'user_id' => $user['user_id'],
-                'end_time' => $week
-            ]);
-        }
-        $artistSendEmail = \Mail::to($artist->users->email)->send(new ArtistProjectPreAprov($project,$artist->users->name));
-        $statusProject = Project::where('id', $request->input('project'))->update(array('status' => 7));
-        return '{"status":200, "msg":"'.__('send_project_management').'"}';
+            // $project->management()->attach($management->id);
+            // $reviews = Review::create([
+            //    'project_id' => $project->id,
+            //     'user_id' => $user['user_id'],
+            //     'end_time' => $week
+            // ]);
+        // }
+        // $artistSendEmail = \Mail::to($artist->users->email)->send(new ArtistProjectPreAprov($project,$artist->users->name));
+        // $statusProject = Project::where('id', $request->input('project'))->update(array('status' => 7));
+        // return '{"status":200, "msg":"'.__('send_project_management').'"}';
+
     }
 
     public function rejected_project(Request $request){

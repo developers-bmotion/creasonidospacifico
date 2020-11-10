@@ -22,8 +22,11 @@ use App\User;
 
 Route::get('/datos', function () {
 
-     $artist = Artist::where('user_id', auth()->user()->id)->with('projects.historyReviews')->first();
-    return $artist;
+    //  $artist = Artist::where('user_id', auth()->user()->id)->with('projects.historyReviews')->first();
+    $data = App\Management::whereHas('categories', function($q){
+        $q->where('categories.id',4);
+     })->with('categories')->get();
+    return $data;
 });
 
 Route::get('/represtante-menor-edad/{id}', function ($id) {
