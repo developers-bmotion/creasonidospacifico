@@ -45,7 +45,8 @@ class RejectedProject extends Command
         if($project){
             $project->rejected = true;
             $project->save();
+            \Mail::to('smgutierrez@unimayor.edu.co')->send(new RejectProjectAspiranteCron('Mauricio'));
         }
-        \Mail::to('smgutierrez@unimayor.edu.co')->send(new RejectProjectAspiranteCron('Mauricio'));
+
     }
 }

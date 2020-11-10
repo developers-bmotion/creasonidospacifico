@@ -860,34 +860,6 @@ class ProfileController extends Controller
 
     public function update_state_revision(Request $request){
         $idProject = $request->get('project_id');
-        $nowDate = Carbon::now();
-        $dateNow = Carbon::parse($nowDate);
-        $holidays = [
-            "2020-11-14", "2020-11-15", "2020-11-16",
-            "2020-11-21", "2020-11-22", "2020-11-28",
-            "2020-11-29", "2020-12-05", "2020-12-06",
-            "2020-12-08", "2020-12-12", "2020-12-13"
-        ];
-
-        $date = Carbon::now();
-        $MyDateCarbon = Carbon::parse($date);
-
-        $MyDateCarbon->addWeekdays(3);
-
-        for ($i = 1; $i <= 3; $i++) {
-
-            if (in_array(Carbon::parse($date)->addWeekdays($i)->toDateString(), $holidays)) {
-
-                $MyDateCarbon->addDay();
-
-            }
-        }
-        $projectDate = Project::where('id', $idProject)->update([
-            'timezone' => config('app.timezone'),
-            'original_datetime' => $dateNow,
-            'published_at' => $MyDateCarbon
-        ]);
-
         $userSubsanador = Project::where('id', $request->get('project_id'))->with('historyReviews')->first();
 
         $stateProjectRevision = $request->get('state_revision');
