@@ -169,11 +169,12 @@ class ProjectsAdminController extends Controller
         $projectDate = Project::where('id', $id)->update([
             'timezone' => config('app.timezone'),
             'original_datetime' => $dateNow,
-            'published_at' => $MyDateCarbon
+            'published_at' => $MyDateCarbon,
+            'rejected' => '1'
         ]);
 
         $revision_project = Project::where('id',$id)->update([
-            'status' => 4
+            'status' => 4,
             ]);
 
         $project = Project::where('id',$id)->with('artists.users')->first();

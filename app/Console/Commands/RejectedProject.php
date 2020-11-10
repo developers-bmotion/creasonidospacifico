@@ -41,9 +41,10 @@ class RejectedProject extends Command
     public function handle()
     {
         $date = Carbon::now();
-        $project = Project::where('published_at', '<=', $date->format('Y-m-d H:i:s'))->where('rejected', false)->first();
+        $project = Project::where('published_at', '<=', $date->format('Y-m-d H:i:s'))->where('rejected', '1')->first();
         if($project){
-            $project->rejected = true;
+            $project->rejected = '2';
+            $project->status = 5;
             $project->save();
             \Mail::to('smgutierrez@unimayor.edu.co')->send(new RejectProjectAspiranteCron('Mauricio'));
         }

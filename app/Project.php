@@ -101,7 +101,8 @@ class Project extends Model
         'category_id',
         'type_categories_id',
         'audio_secundary_one',
-        'audio_secundary_two'
+        'audio_secundary_two',
+        'rejected'
     ];
 
     public function getRejectedAttribute($value){

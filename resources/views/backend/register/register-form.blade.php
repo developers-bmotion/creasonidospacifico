@@ -84,10 +84,14 @@
                     <div class="m-portlet__head-tools">
                         <ul class="m-portlet__nav">
                             <li class="m-portlet__nav-item">
-                                <a href="#" data-toggle="m-tooltip"
+                                {{-- <a href="#" data-toggle="m-tooltip"
                                    class="m-portlet__nav-link m-portlet__nav-link--icon"
                                    data-direction="left" data-width="auto"
                                    title="Por favor dilegencie esta información, para poder continuar">
+                                    <i class="flaticon-info m--icon-font-size-lg3"></i>
+                                </a> --}}
+                                <a  class="my-tooltip" data-container="body" data-toggle="m-tooltip" data-placement="left" 
+                                    title="Por favor dilegencie esta información, para poder continuar">
                                     <i class="flaticon-info m--icon-font-size-lg3"></i>
                                 </a>
                             </li>
@@ -145,10 +149,14 @@
                     <div class="m-portlet__head-tools">
                         <ul class="m-portlet__nav">
                             <li class="m-portlet__nav-item">
-                                <a href="#" data-toggle="m-tooltip"
+                                {{-- <a href="#" data-toggle="m-tooltip"
                                    class="m-portlet__nav-link m-portlet__nav-link--icon"
                                    data-direction="left" data-width="auto"
                                    title="Información del aspirante o representante">
+                                    <i class="flaticon-info m--icon-font-size-lg3"></i>
+                                </a> --}}
+                                <a  class="my-tooltip" data-toggle="m-tooltip" data-placement="left" 
+                                    title="Información del aspirante o representante">
                                     <i class="flaticon-info m--icon-font-size-lg3"></i>
                                 </a>
                             </li>
@@ -385,9 +393,13 @@
                             <div class="m-form__section">
                                 <div class="m-form__heading">
                                     <h3 class="m-form__heading-title">Información de nacimiento y residencia
-                                        <i data-toggle="m-tooltip" data-width="auto"
+                                        {{-- <i data-toggle="m-tooltip" data-width="auto"
                                            class="m-form__heading-help-icon flaticon-info"
-                                           title="Datos importantes del lugar y sitio de nacimiento"></i>
+                                           title="Datos importantes del lugar y sitio de nacimiento"></i> --}}
+                                        <a class="my-tooltip" data-toggle="m-tooltip" data-placement="right" 
+                                           title="Datos importantes del lugar y sitio de nacimiento">
+                                           <i class="flaticon-info m--icon-font-size-lg3"></i>
+                                       </a>
                                     </h3>
                                 </div>
 
@@ -536,9 +548,14 @@
                     <div class="m-portlet__head-tools">
                         <ul class="m-portlet__nav">
                             <li class="m-portlet__nav-item">
-                                <a href="#" data-toggle="m-tooltip"
+                                {{-- <a href="#" data-toggle="m-tooltip"
                                    class="m-portlet__nav-link m-portlet__nav-link--icon"
-                                   data-direction="left" data-width="auto" title="Información del menor de edad">
+                                   data-direction="left" 
+                                   data-width="auto" title="Información del menor de edad">
+                                    <i class="flaticon-info m--icon-font-size-lg3"></i>
+                                </a> --}}
+                                <a class="my-tooltip" data-toggle="m-tooltip" data-placement="left" 
+                                    title="Información del menor de edad">
                                     <i class="flaticon-info m--icon-font-size-lg3"></i>
                                 </a>
                             </li>
@@ -775,9 +792,13 @@
                                 <div class="m-form__section">
                                     <div class="m-form__heading">
                                         <h3 class="m-form__heading-title">Información de nacimiento y residencia
-                                            <i data-toggle="m-tooltip" data-width="auto"
+                                            {{-- <i data-toggle="m-tooltip" data-width="auto"
                                                class="m-form__heading-help-icon flaticon-info"
-                                               title="Datos importantes del lugar y sitio de nacimiento"></i>
+                                               title="Datos importantes del lugar y sitio de nacimiento"></i> --}}
+                                            <a class="my-tooltip" data-toggle="m-tooltip" data-placement="right" 
+                                               title="Datos importantes del lugar y sitio de nacimiento">
+                                               <i class="flaticon-info m--icon-font-size-lg3"></i>
+                                           </a>
                                         </h3>
                                     </div>
 
@@ -886,10 +907,14 @@
                     <div class="m-portlet__head-tools">
                         <ul class="m-portlet__nav">
                             <li class="m-portlet__nav-item">
-                                <a href="#" data-toggle="m-tooltip"
+                                {{-- <a href="#" data-toggle="m-tooltip"
                                    class="m-portlet__nav-link m-portlet__nav-link--icon"
                                    data-direction="left" data-width="auto"
                                    title="Información de los integrante del grupo">
+                                    <i class="flaticon-info m--icon-font-size-lg3"></i>
+                                </a> --}}
+                                <a class="my-tooltip" data-toggle="m-tooltip" data-placement="left" 
+                                    title="Información de los integrante del grupo">
                                     <i class="flaticon-info m--icon-font-size-lg3"></i>
                                 </a>
                             </li>
