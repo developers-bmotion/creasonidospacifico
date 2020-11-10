@@ -17,7 +17,7 @@ class AlterProjectsTable extends Migration
             $table->string('timezone')->nullable()->after('group_name');
             $table->dateTime('original_datetime')->nullable()->after('group_name');
             $table->dateTime('published_at')->nullable()->after('group_name');
-            $table->boolean('rejected')->default(false)->after('group_name');
+            $table->enum('rejected', [0,1,2])->default(0)->nullable()->after('group_name');
         });
     }
 

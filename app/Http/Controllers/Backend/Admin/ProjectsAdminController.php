@@ -147,7 +147,8 @@ class ProjectsAdminController extends Controller
         ]);
 
         $revision_project = Project::where('id',$id)->update([
-            'status' => 4
+            'status' => 4,
+            'rejected' => 1
             ]);
 
         $project = Project::where('id',$id)->with('artists.users')->first();

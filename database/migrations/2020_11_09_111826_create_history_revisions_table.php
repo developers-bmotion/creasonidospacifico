@@ -15,9 +15,9 @@ class CreateHistoryRevisionsTable extends Migration
     {
         Schema::create('history_revisions', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->unsignedInteger('project_id');
+            $table->unsignedInteger('project_id')->nullable();
             $table->foreign('project_id')->references('id')->on('projects');
             $table->text('observation')->nullable();
             $table->enum("state", ['1', '2'])->default('1');

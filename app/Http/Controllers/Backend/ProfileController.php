@@ -866,7 +866,7 @@ class ProfileController extends Controller
         $project = Project::where('id', $idProject)->update(['status' => $stateProjectRevision]);
         $projectName = Project::where('id', $idProject)->first();
 
-        HistoryRevision::where('project_id', $request->get('project_id'))->orWhere('state','<>' ,1)->update(['state' => 2]);
+        HistoryRevision::where('project_id', $request->get('project_id'))->orWhere('state','<>' ,1)->update(['state' => 2, '']);
 
         /*ENVIO DE CORREO AL ASPRIANTE*/
         \Mail::to(auth()->user()->email)->send(new NewRevisionProjectAspirant(auth()->user()->name, auth()->user()->last_name, $projectName->title));
