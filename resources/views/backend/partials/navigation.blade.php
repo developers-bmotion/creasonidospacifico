@@ -100,7 +100,11 @@
                          </ul>
                      </div>
                  </li>--}}
-                <li class="m-menu__item ">
+               {{-- logos blanco y oscuro para movil y web --}}
+                <li id="img-mobile" class="m-menu__item custom-item-menu">
+                    <img width="170" src="/images/logo-blanco.png" alt="">
+                </li>
+                <li id="img-desktop" class="m-menu__item">
                     <img width="170" src="/images/logo-creasonidos.png" alt="">
                 </li>
                 @if(auth()->user()->roles[0]->rol == "Artist")
@@ -178,7 +182,11 @@
         @endif
         @if(\App\User::navigation() === "Subsanador")
             <ul class="m-menu__nav  m-menu__nav--submenu-arrow ">
-                <li class="m-menu__item ">
+                {{-- logos blanco y oscuro para movil y web --}}
+                <li id="img-mobile" class="m-menu__item custom-item-menu">
+                    <img width="170" src="/images/logo-blanco.png" alt="">
+                </li>
+                <li id="img-desktop" class="m-menu__item">
                     <img width="170" src="/images/logo-creasonidos.png" alt="">
                 </li>
                 <li class="m-menu__item ">
@@ -202,7 +210,7 @@
     <!-- BEGIN: Topbar -->
     <div id="m_header_topbar" class="m-topbar  m-stack m-stack--ver m-stack--general m-stack--fluid">
         <div class="m-stack__item m-topbar__nav-wrapper">
-            <ul class="m-topbar__nav m-nav m-nav--inline">
+            <ul class="m-topbar__nav m-nav m-nav--inline" style="display: flex;">
                 {{--
                                 <li class="m-nav__item m-dropdown m-dropdown--large m-dropdown--arrow m-dropdown--align-center m-dropdown--mobile-full-width m-dropdown--skin-light	m-list-search m-list-search--skin-light"
                                     m-dropdown-toggle="click" id="m_quicksearch"
@@ -342,6 +350,11 @@
                                     </div>
                                 </li>
                 --}}
+                {{-- @if(\App\User::navigation() !== "Admin") --}}
+                <li class="m-menu__item img-item-menu" >
+                    <img width="150" src="/images/logo-creasonidos.png" alt="">
+                </li>
+                {{-- @endif --}}
                 <li class="m-nav__item m-topbar__user-profile m-topbar__user-profile--img  m-dropdown m-dropdown--medium m-dropdown--arrow m-dropdown--header-bg-fill m-dropdown--align-right m-dropdown--mobile-full-width m-dropdown--skin-light"
                     m-dropdown-toggle="click">
                     <a href="#" class="m-nav__link m-dropdown__toggle">

@@ -7,7 +7,6 @@
     margin: 2rem 0 !important;
 }
 
-
 /* div#app {
     flex: 0.1 !important;
 }
@@ -15,34 +14,34 @@
 .m-grid__item.m-grid__item--fluid.m-grid.m-grid--ver-desktop.m-grid--desktop.m-body {
     flex: 1 !important;
 } */
-.cls-body{
+.cls-body {
     margin-left: 5rem;
 }
 
 .background_login {
     background-image: url(/images/logo-pacifico.png);
-    background-size:  cover !important;
+    background-size: cover !important;
 }
-.dz-error-mark{
+.dz-error-mark {
     display: none;
 }
 .background_register {
     background-image: url(/images/fondo-register-min.png);
-    background-size:  cover !important;
+    background-size: cover !important;
 }
 .background_reset_email {
     background-image: url(/images/imglogin.png);
-    background-size:  cover !important;
+    background-size: cover !important;
 }
-.title-login{
+.title-login {
     font-size: 75px !important;
     padding: 0 3rem;
 }
 
-.dz-success-mark{
+.dz-success-mark {
     display: none;
 }
-.parrafo-login{
+.parrafo-login {
     font-size: 24px !important;
     padding: 0 3rem;
 }
@@ -51,7 +50,7 @@
     padding: 0 3rem;
 }
 
-.img-logo{
+.img-logo {
     width: 29rem;
 }
 
@@ -60,26 +59,30 @@
 } */
 
 /*Para pantalla movil*/
-@media (max-width: 480px){
-    .state_mobile{
+@media (max-width: 480px) {
+    .state_mobile {
         float: left;
+    }
+
+    .m-tooltip.tooltip .tooltip-inner {
+        font-size: 12px !important;
     }
 
     .parrafo-register {
         font-size: 30px !important;
         padding: 0 3rem;
     }
-    .title-login{
+    .title-login {
         font-size: 50px !important;
         padding: 0 3rem;
     }
-    .img-logo{
+    .img-logo {
         width: 250px;
     }
-    .title-movil{
+    .title-movil {
         font-size: 22px;
     }
-    .send-info-div{
+    .send-info-div {
         padding-top: 20px;
         width: auto;
     }
@@ -88,58 +91,90 @@
         padding-top: 0px !important;
         padding-bottom: 0px !important;
     }
-    .m-footer__copyright{
+    .m-footer__copyright {
         padding-top: 20px;
     }
 }
 
-@media (max-width: 1024px) and (min-width: 653px){
-
+@media (max-width: 1024px) and (min-width: 653px) {
     .term-footer {
         padding-right: 20px !important;
         padding-top: 20px !important;
         padding-bottom: 20px !important;
     }
 }
-@media (max-width: 1024px){
+@media (max-width: 1024px) {
+    #img-desktop {
+        display: none;
+    }
 
-    #table_projects_management_wrapper{
+    .m-aside-header-menu-mobile.m-aside-header-menu-mobile--on {
+        -webkit-transition: all 0.3s ease;
+        transition: all 0.3s ease;
+        left: 0;
+    }
+    .m-aside-header-menu-mobile.m-aside-header-menu-mobile--skin-dark {
+        background-color: #739594;
+    }
+    .m-aside-header-menu-mobile-close.m-aside-header-menu-mobile-close--skin-dark {
+        background-color: transparent;
+    }
+    .m-aside-header-menu-mobile-close.m-aside-header-menu-mobile-close--skin-dark
+        > i {
+        color: #fff;
+    }
+    .img-item-menu {
+        align-self: center;
+        margin-right: 25px;
+    }
+
+    #table_projects_management_wrapper {
         overflow: scroll !important;
     }
-    .cls-body{
+    .cls-body {
         margin-left: 0;
     }
-    .pos-item{
+    .pos-item {
         text-align: left !important;
     }
-    .skin-movil{
+    .skin-movil {
         position: absolute !important;
         background: transparent !important;
         width: 50% !important;
     }
-    .custom-item-menu{
+    .custom-item-menu {
         padding-bottom: 30px !important;
         text-align: center !important;
     }
 }
 
-@media (max-width: 653px) and (min-width: 481px){
-    .term-footer { padding-right: 20px !important; }
-    .m-footer__copyright{ padding-top: 20px !important; }
+@media (max-width: 653px) and (min-width: 481px) {
+    .term-footer {
+        padding-right: 20px !important;
+    }
+    .m-footer__copyright {
+        padding-top: 20px !important;
+    }
 }
 
 @media (min-width: 1025px) {
-    .state_mobile{
+    .img-item-menu {
+        display: none;
+    }
+    #img-mobile {
+        display: none;
+    }
+    .state_mobile {
         float: right;
     }
-    .footer-display-custom{
+    .footer-display-custom {
         table-layout: auto !important;
     }
 
-    .skin-movil{
+    .skin-movil {
         display: none !important;
     }
-    .custom-item-menu{
+    .custom-item-menu {
         display: none !important;
     }
 
@@ -147,7 +182,6 @@
         margin-left: 1rem;
         margin-right: -1rem;
     }
-
 }
 
 /*.displayNoneRegistros{*/
