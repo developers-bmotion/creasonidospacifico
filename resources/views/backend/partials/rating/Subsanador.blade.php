@@ -4,16 +4,10 @@
 
 
     <div class="form-group">
-        <h5 style="font-weight: bold">{{ __('asignar_proyecto') }}:</h5>
+        <h5 style="font-weight: bold">{{ __('Acciones') }}:</h5>
     </div>
     <div class="form-group">
-{{--        <button type="button" data-toggle="modal" data-target="#list_modal_manage"--}}
-{{--                class="btn btn-info m-btn m-btn--icon">--}}
-{{--        <span>--}}
-{{--            <i class="la la-user"></i>--}}
-{{--            <span>{{ __('buscar') }}</span>--}}
-{{--        </span>--}}
-{{--        </button>--}}
+
 
         <form method="post" action="{{ route('project.admin.rejected') }}" class="" style="display: inline"
               id="frm_rejected_admin">
@@ -32,6 +26,14 @@
     <i class="la la-exclamation-triangle"></i>
     <span >Enviar a revisión</span>
 </span>
+</button>
+<button type="button"
+               class="btn btn-success m-btn m-btn--icon">
+       <span>
+           <i class="la la-user"></i>
+           <span id="btnSendMessage">{{ __('Aceptar y enviar a curador') }}</span>
+
+       </span>
 </button>
     </div>
 </div>
@@ -95,7 +97,7 @@
 
 
 <!-- MODAL, BUSCAR MANAGEMENT-->
-<div class="modal fade" id="list_modal_manage" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+{{-- <div class="modal fade" id="list_modal_manage" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -124,7 +126,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 <!-- MODAL REVISIÓN PROJECTO-->
 <div class="modal fade" id="revision" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
