@@ -1,143 +1,180 @@
 <!-- Acciones para el Admin -->
 @if($project->status == 1 || $project->status == 6)
     <div class="col-md-12 mt-5">
-
-
         <div class="form-group">
             <h5 style="font-weight: bold">{{ __('Acciones') }}:</h5>
         </div>
         <div class="form-group">
-
-
             <form method="post" action="{{ route('project.admin.rejected') }}" class="" style="display: inline"
                   id="frm_rejected_admin">
                 @csrf {{ method_field('PUT') }}
                 <button id="btn_rejected_admin" class="btn btn-danger m-btn m-btn--icon">
-        <span>
-            <i class="la la-close"></i>
-            <span>{{ __('No subsanado') }}</span>
-        </span>
+                        <span>
+                            <i class="la la-close"></i>
+                            <span>{{ __('No subsanado') }}</span>
+                        </span>
                 </button>
                 <input type="hidden" name="rejected" value="{{ $project->id }}">
             </form>
             <button type="button" data-toggle="modal" data-target="#revision"
                     class="btn btn-warning m-btn m-btn--icon">
-<span style="color: white">
-    <i class="la la-exclamation-triangle"></i>
-    <span>Enviar a revisión</span>
-</span>
+            <span style="color: white">
+                <i class="la la-exclamation-triangle"></i>
+                <span>Enviar a revisión</span>
+            </span>
             </button>
-            <button type="button"
-                    class="btn btn-success m-btn m-btn--icon">
-       <span>
-           <i class="la la-user"></i>
-           <span id="btnSendMessage">{{ __('Aceptar y enviar a curador') }}</span>
-
-       </span>
+            <button type="button" class="btn btn-success m-btn m-btn--icon">
+                <span><i class="la la-user"></i><span id="btnSendMessage">{{ __('Aceptar y enviar a curador') }}</span></span>
             </button>
         </div>
-
-        <div class="form-group">
-            <h5 style="font-weight: bold">Historial de Observaciones:</h5>
-        </div>
-        @endif
-        <div class="form-group">
-            @php($count = 1 )
-            @dd($artist->historyReviews)
-            @forelse($artist->projects[0]->historyReviews as $historyReviews)
-                <h5 class="pb-3">{{ $count++ }}. Observación </h5>
-                <div class="row">
-                    <div class="col-12 col-md-10 col-lg-10">
-                        <div class="form-group m-form__group">
-                            <div class="m-form__group-sub">
-                                <label
-                                    class="form-control-label font-weight-bold">Observación:
-                                </label>
-                                <p>{!! $historyReviews->pivot->observation !!}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-2 col-lg-2">
-                        <div class="form-group m-form__group">
-                            <div class="m-form__group-sub">
-                                <label
-                                    class="form-control-label font-weight-bold">Estado:
-                                </label>
-                                <br>
-                                @if($historyReviews->pivot->state == 1)
-                                    <span
-                                        class="m-badge m-badge--warning m-badge--wide">Pendiente</span>
-                                @else
-                                    <span
-                                        class="m-badge m-badge--success m-badge--wide">Corregido</span>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-            @empty
-                <h4 class="text-center">Sin observaciones</h4>
-            @endforelse
-        </div>
-
     </div>
-    {{--@else--}}
-    {{--    <!-- TIEMPO ESTIMADO PARA CALIFICAR-->--}}
-    {{--    @if(! $project->status == 5)--}}
-    {{--        <div class="form-group">--}}
-    {{--            <h5 style="font-weight: bold">{{ __('tiempo_calificar') }}:</h5>--}}
-    {{--        </div>--}}
-    {{--        <div class="form-group">--}}
-    {{--            @if(!$end_time == null)--}}
-    {{--                <span class="m--font-bold m--font-primary"--}}
-    {{--                      style="font-weight: bold; font-size: 16px">{{ $end_time->end_time->toFormattedDateString() }}</span>--}}
-    {{--            @endif--}}
-    {{--        </div>--}}
-    {{--    @endif--}}
-    {{-- @if($project->status == 2)
-        <!-- Rating Project -->
-        <div class="form-group">
-            <h5 style="font-weight: bold">{{ __('calificacion') }}:</h5>
-        </div> --}}
-    {{-- <div class="form-group">
-        <ul id="list_rating" class="list-inline" style="font-size: 20px">
-            <li class="list-inline-item star" data-number="1"><i
-                    class="fa fa-star fa-1x {{$currentRaing>=1?"yellow-rating":""}}"></i></li>
-            <li class="list-inline-item star" data-number="2"><i
-                    class="fa fa-star fa-1x {{$currentRaing>=2?"yellow-rating":""}}"></i></li>
-            <li class="list-inline-item star" data-number="3"><i
-                    class="fa fa-star fa-1x {{$currentRaing>=3?"yellow-rating":""}}"></i></li>
-            <li class="list-inline-item star" data-number="4"><i
-                    class="fa fa-star fa-1x {{$currentRaing>=4?"yellow-rating":""}}"></i></li>
-            <li class="list-inline-item star" data-number="5"><i
-                    class="fa fa-star fa-1x {{$currentRaing==5?"yellow-rating":""}}"></i></li>
-        </ul>
+@endif
+@if(count($artist->historyReviews) != 0)
+    @php($count = 1 )
+    <div class="row pt-3">
+        <div class="col-12">
+            <div class="form-group">
+                <h5 style="font-weight: bold">Historial de Observaciones:</h5>
+            </div>
+            <div class="m-section">
+                <div class="m-section__content">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Observación</th>
+                            <th>Estado</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($artist->historyReviews as $historyReviews)
+                            <tr>
+                                <th scope="row">{{ $count++ }}</th>
+                                <td>{!! $historyReviews->pivot->observation !!}</td>
+
+                                @if($historyReviews->pivot->state == 1)
+                                    <td>
+                                <span
+                                    class="m-badge m-badge--warning m-badge--wide">Pendiente</span></td>
+                                @else
+                                    <td>
+                                    <span
+                                        class="m-badge m-badge--success m-badge--wide">Corregido</span></td>
+                                @endif
+
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    {{--        @forelse($artist->historyReviews as $historyReviews)--}}
+
+
+
+
+
+    {{--            <h5 class="pb-3">{{ $count++ }}. Observación </h5>--}}
+    {{--            <div class="row">--}}
+
+    {{--                <div class="row">--}}
+    {{--                    <div class="col-12 col-md-10 col-lg-10">--}}
+    {{--                        <div class="form-group m-form__group">--}}
+    {{--                            <div class="m-form__group-sub">--}}
+    {{--                                <label--}}
+    {{--                                    class="form-control-label font-weight-bold">Observación:--}}
+    {{--                                </label>--}}
+    {{--                                <p>{!! $historyReviews->pivot->observation !!}</p>--}}
+    {{--                            </div>--}}
+    {{--                        </div>--}}
+    {{--                    </div>--}}
+    {{--                    <div class="col-12 col-md-2 col-lg-2">--}}
+    {{--                        <div class="form-group m-form__group">--}}
+    {{--                            <div class="m-form__group-sub">--}}
+    {{--                                <label--}}
+    {{--                                    class="form-control-label font-weight-bold">Estado:--}}
+    {{--                                </label>--}}
+    {{--                                <br>--}}
+    {{--                                @if($historyReviews->pivot->state == 1)--}}
+    {{--                                    <span--}}
+    {{--                                        class="m-badge m-badge--warning m-badge--wide">Pendiente</span>--}}
+    {{--                                @else--}}
+    {{--                                    <span--}}
+    {{--                                        class="m-badge m-badge--success m-badge--wide">Corregido</span>--}}
+    {{--                                @endif--}}
+    {{--                            </div>--}}
+    {{--                        </div>--}}
+    {{--                    </div>--}}
+    {{--                </div>--}}
+    {{--                <hr>--}}
+    {{--                @empty--}}
+    {{--                    <h4 class="text-center">Sin observaciones</h4>--}}
+    {{--                @endforelse--}}
+
+    {{--            </div>--}}
+@endif
+
+{{--@else--}}
+{{--    <!-- TIEMPO ESTIMADO PARA CALIFICAR-->--}}
+{{--    @if(! $project->status == 5)--}}
+{{--        <div class="form-group">--}}
+{{--            <h5 style="font-weight: bold">{{ __('tiempo_calificar') }}:</h5>--}}
+{{--        </div>--}}
+{{--        <div class="form-group">--}}
+{{--            @if(!$end_time == null)--}}
+{{--                <span class="m--font-bold m--font-primary"--}}
+{{--                      style="font-weight: bold; font-size: 16px">{{ $end_time->end_time->toFormattedDateString() }}</span>--}}
+{{--            @endif--}}
+{{--        </div>--}}
+{{--    @endif--}}
+{{-- @if($project->status == 2)
+    <!-- Rating Project -->
+    <div class="form-group">
+        <h5 style="font-weight: bold">{{ __('calificacion') }}:</h5>
     </div> --}}
-    {{-- @endif --}}
-    <!-- VER A QUIEN SE ASIGNO EL PROYECTO-->
-    {{-- @if( ($project->status !== 1 && $asignado !== 0))
-    @if($project->status != 4)
-    <div class="col-md-12 mt-5">
-        <div class="row">
+{{-- <div class="form-group">
+    <ul id="list_rating" class="list-inline" style="font-size: 20px">
+        <li class="list-inline-item star" data-number="1"><i
+                class="fa fa-star fa-1x {{$currentRaing>=1?"yellow-rating":""}}"></i></li>
+        <li class="list-inline-item star" data-number="2"><i
+                class="fa fa-star fa-1x {{$currentRaing>=2?"yellow-rating":""}}"></i></li>
+        <li class="list-inline-item star" data-number="3"><i
+                class="fa fa-star fa-1x {{$currentRaing>=3?"yellow-rating":""}}"></i></li>
+        <li class="list-inline-item star" data-number="4"><i
+                class="fa fa-star fa-1x {{$currentRaing>=4?"yellow-rating":""}}"></i></li>
+        <li class="list-inline-item star" data-number="5"><i
+                class="fa fa-star fa-1x {{$currentRaing==5?"yellow-rating":""}}"></i></li>
+    </ul>
+</div> --}}
+{{-- @endif --}}
+<!-- VER A QUIEN SE ASIGNO EL PROYECTO-->
+{{-- @if( ($project->status !== 1 && $asignado !== 0))
+@if($project->status != 4)
+<div class="col-md-12 mt-5">
+    <div class="row">
 
 
-        <div class="form-group col-md-3">
-            <h5 style="font-weight: bold">{{ __('asignado_a') }}: </h5>
-        </div>
-        <div class="form-group col-md-6">
-            <button type="button" id="mostrar_managements_asignados" class="btn btn-danger m-btn m-btn--icon">
-        <span>
-            <i class="la la-users"></i>
-            <span>{{ __('mostrar') }}</span>
-        </span>
-            </button>
+    <div class="form-group col-md-3">
+        <h5 style="font-weight: bold">{{ __('asignado_a') }}: </h5>
+    </div>
+    <div class="form-group col-md-6">
+        <button type="button" id="mostrar_managements_asignados" class="btn btn-danger m-btn m-btn--icon">
+    <span>
+        <i class="la la-users"></i>
+        <span>{{ __('mostrar') }}</span>
+    </span>
+        </button>
 
-        </div>
     </div>
 </div>
-     @endif
-    @endif --}}
+</div>
+ @endif
+@endif --}}
 
 <!-- MODAL, BUSCAR MANAGEMENT-->
 {{-- <div class="modal fade" id="list_modal_manage" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -189,7 +226,8 @@
             </div>
             <div class="modal-footer">
                 {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> --}}
-                <button type="button" class="btn btn-primary" id="btnSendObservation">{{ __('enviar') }}</button>
+                <button type="button" class="btn btn-primary"
+                        id="btnSendObservation">{{ __('enviar') }}</button>
             </div>
         </div>
     </div>
