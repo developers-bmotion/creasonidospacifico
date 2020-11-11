@@ -85,7 +85,39 @@ License: You must have a valid license purchased only from themeforest(the above
 
     <!--end::Global Theme Styles -->
     <link rel="shortcut icon" href="/images/logo-creasonidos.png"/>
-{{--    @include('facebook-pixel::head')--}}
+@if(env('APP_ENV') === 'production')
+    <!-- Facebook Pixel Code -->
+        <script>
+            !function (f, b, e, v, n, t, s) {
+                if (f.fbq) return;
+                n = f.fbq = function () {
+                    n.callMethod ?
+                        n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+                };
+                if (!f._fbq) f._fbq = n;
+                n.push = n;
+                n.loaded = !0;
+                n.version = '2.0';
+                n.queue = [];
+                t = b.createElement(e);
+                t.async = !0;
+                t.src = v;
+                s = b.getElementsByTagName(e)[0];
+                s.parentNode.insertBefore(t, s)
+            }(window, document, 'script',
+                'https://connect.facebook.net/en_US/fbevents.js');
+            fbq('init', '498233024192618');
+            fbq('track', 'PageView');
+        </script>
+        <noscript>
+            <img height="1" width="1"
+                 src="https://www.facebook.com/tr?id=498233024192618&ev=PageView
+&noscript=1"/>
+        </noscript>
+        <!-- End Facebook Pixel Code -->
+    @endif
+
+    {{--    @include('facebook-pixel::head')--}}
 </head>
 
 <!-- end::Head -->
@@ -228,7 +260,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <script src="/backend/vendors/jquery-form/dist/jquery.form.min.js" type="text/javascript"></script>
 <script src="/backend/vendors/block-ui/jquery.blockUI.js" type="text/javascript"></script>
 @if(env('APP_ENV') === 'production')
-{!! NoCaptcha::renderJs() !!}
+    {!! NoCaptcha::renderJs() !!}
 @endif
 <script src="/backend/vendors/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js" type="text/javascript">
 </script>
