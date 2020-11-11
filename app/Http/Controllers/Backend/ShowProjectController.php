@@ -24,7 +24,7 @@ class ShowProjectController extends Controller
         $users = User::where('id', \Auth::user()->id)->with(['roles'])->first();
         $rol = array_pluck($users->roles, 'rol');
         $end_time = EndProject::where('project_id',$project->id)->first();
-        $artist= Project::where('id',$project->id)->with('artists.users','artists.artistType','artists.personType','artists.documentType','artists.beneficiary.documentType','artists.beneficiary.city','artists.beneficiary.expeditionPlace','artists.beneficiary.residencePlace.departaments','artists.teams','artists.teams.documentType','artists.teams.expeditionPlace','artists.teams.residencePlace.departaments','artists.expeditionPlace.departaments','artists.residencePlace.departaments','artists.userGestor')->first();
+        $artist= Project::where('id',$project->id)->with('historyReviews', 'artists.users','artists.artistType','artists.personType','artists.documentType','artists.beneficiary.documentType','artists.beneficiary.city','artists.beneficiary.expeditionPlace','artists.beneficiary.residencePlace.departaments','artists.teams','artists.teams.documentType','artists.teams.expeditionPlace','artists.teams.residencePlace.departaments','artists.expeditionPlace.departaments','artists.residencePlace.departaments','artists.userGestor')->first();
         $country = City::where('id',$artist->artists[0]->cities_id)->with('departaments')->first();
         // $location = Location::where('id',$artist->artists[0]->location_id)->first();
         // dd($artist);
