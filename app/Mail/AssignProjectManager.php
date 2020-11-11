@@ -14,19 +14,19 @@ class AssignProjectManager extends Mailable
 
     private $project;
     private $artist_name;
-    private $end_time;
-    private $img_artist;
+    // private $end_time;
+    private $artist_pro;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(Project $project, $artist_name, $end_time, $img_artist)
+    public function __construct($project, $artist_name,$artist_pro)
     {
         $this->project = $project;
         $this->artist_name = $artist_name;
-        $this->end_time = $end_time;
-        $this->img_artist = $img_artist;
+        // $this->end_time = $end_time;
+        $this->artist_pro = $artist_pro;
     }
 
     /**
@@ -41,7 +41,7 @@ class AssignProjectManager extends Mailable
             ->markdown('emails.new-project-assign-manager')
             ->with('project',$this->project)
             ->with('artist',$this->artist_name)
-            ->with('end_time',$this->end_time)
-            ->with('img_artist',$this->img_artist);
+            ->with('img_artist',$this->artist_pro);
+            // ->with('end_time',$this->end_time)
     }
 }

@@ -106,24 +106,22 @@ class ProjectsAdminController extends Controller
 
             $project = Project::where('id', $idProject)->with('artists')->first();
             $management = Management::where('user_id', $data->user_id)->first();
-
-                $project->management()->attach($management->id);
-                $management->update([
-                    'tipoCurador' => 2
+            // dd($user_manament);
+            $project->management()->attach($management->id);
+            $management->update([
+                'tipoCurador' => 2
                 ]);
 
-            /*$this->asignarProyectoCurador($data[0], $idProject);*/
-        }
+                /*$this->asignarProyectoCurador($data[0], $idProject);*/
+            }
 
-        // $end_project = EndProject::insert(['project_id' => $project->id,'end_time' => $week]);
-        // $end_time = EndProject::select('end_time')->where('project_id',$project->id)->first();
-//        $img_artist = User::where('id',$project->artists[0]->user_id)->first();
-//        $artist= Artist::where('user_id',$img_artist->id)->with('users')->first();
-        // $nickname = $project->artists[0]->nickname;
-        //echo $user['email']."  ".$project->artists[0]->nickname."\n";
-        // $management = Management::where('user_id',$user['user_id'])->first();
-        // se envia email a los managements
-        // \Mail::to($user['email'])->send(new AssignProjectManager($project,$nickname,$end_time,$img_artist));
+            $user_manament=User::where('id',$data->user_id)->first();
+            $artist_pro = User::where('id',$project->artists[0]->user_id)->first();
+            $artist= Artist::where('user_id',$artist_pro->id)->with('users')->first();
+            \Mail::to($artist->users->email)->send(new ArtistProjectPreAprov($project,$artist->users->name));
+            \Mail::to($user_manament->email)->send(new AssignProjectManager($project->title,$user_manament,$artist));
+
+
         // $project->management()->attach($management->id);
         // $reviews = Review::create([
         //    'project_id' => $project->id,
@@ -131,9 +129,8 @@ class ProjectsAdminController extends Controller
         //     'end_time' => $week
         // ]);
         // }
-        // $artistSendEmail = \Mail::to($artist->users->email)->send(new ArtistProjectPreAprov($project,$artist->users->name));
         // $statusProject = Project::where('id', $request->input('project'))->update(array('status' => 7));
-        // return '{"status":200, "msg":"'.__('send_project_management').'"}';
+        return '{"status":200, "msg":"'.__('send_project_management').'"}';
 
     }
 
@@ -164,6 +161,14 @@ class ProjectsAdminController extends Controller
             }
 //
         }
+
+        // $user_manament=User::where('id',$data->user_id)->first();
+        // $artist_pro = User::where('id',$project->artists[0]->user_id)->first();
+        // $artist= Artist::where('user_id',$artist_pro->id)->with('users')->first();
+        // return \Mail::to($artist->users->email)->send(new ArtistProjectPreAprov($project,$artist->users->name));
+        // \Mail::to($user_manament->email)->send(new AssignProjectManager($project->title,$user_manament,$artist));
+        // $statusProject = Project::where('id', $idProject)->update(array('status' => 7));
+        // return '{"status":200, "msg":"'.__('send_project_management').'"}';
 
     }
 
