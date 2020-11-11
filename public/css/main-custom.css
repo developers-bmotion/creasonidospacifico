@@ -54,6 +54,12 @@
     width: 29rem;
 }
 
+.img-artist{
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+}
+
 /* .menu-top-botones{
     display: none !important;
 } */
