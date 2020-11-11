@@ -218,17 +218,19 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
     <script>
         $('#table_users').DataTable({
             "processing": true,
+            "recordsTotal": 10000,
+            "recordsFiltered": 3000,
             "order": [[1, "desc"]],
             "ajax": '{{route('get.users.tables')}}',
             "columns": [
                 {
                     render: function (data, type, JsonResultRow, meta) {
                         // console.log(JsonResultRow,'data');
-                        if (JsonResultRow.users[0].name === null) {
+                        if (JsonResultRow.name === null) {
                             return '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
                         } else {
 
-                            return '<span class="label label-danger text-center">' + JsonResultRow.users[0].name + '</span>  <span class="label label-danger text-center">' + JsonResultRow.users[0].last_name + '</span>';
+                            return '<span class="label label-danger text-center">' + JsonResultRow.name + '</span>  <span class="label label-danger text-center">' + JsonResultRow.last_name + '</span>';
                         }
                         // return '<img src="' + JsonResultRow + '" width="50px"  style="border-radius: 100%;margin-right: auto;margin-left: auto;display: block; width:50px; height:50px"/>';
                     }
@@ -237,11 +239,11 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                 {
                     render: function (data, type, JsonResultRow, meta) {
                         // console.log(JsonResultRow,'data');
-                        if (JsonResultRow.users[0].email === null) {
+                        if (JsonResultRow.email === null) {
                             return '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
                         } else {
 
-                            return '<span class="label label-danger text-center">' + JsonResultRow.users[0].email;
+                            return '<span class="label label-danger text-center">' + JsonResultRow.email;
                         }
                         // return '<img src="' + JsonResultRow + '" width="50px"  style="border-radius: 100%;margin-right: auto;margin-left: auto;display: block; width:50px; height:50px"/>';
                     }
@@ -249,23 +251,31 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                 {
                     render: function (data, type, JsonResultRow, meta) {
                         // console.log(JsonResultRow,'data');
-                        if (JsonResultRow.users[0].phone_1 === null) {
+                        if (JsonResultRow.phone_1 === null) {
                             return '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
                         } else {
 
-                            return '<span class="label label-danger text-center">' + JsonResultRow.users[0].phone_1;
+                            return '<span class="label label-danger text-center">' + JsonResultRow.phone_1;
                         }
                         // return '<img src="' + JsonResultRow + '" width="50px"  style="border-radius: 100%;margin-right: auto;margin-left: auto;display: block; width:50px; height:50px"/>';
                     }
 
                 },
                 {
-                    data: "rol",
+                    render: function (data, type, JsonResultRow, meta) {
+                        // console.log(JsonResultRow,'data');
+                        if (JsonResultRow.roles[0].rol === null) {
+                            return '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
+                        } else {
+
+                            return '<span class="label label-danger text-center">' + JsonResultRow.roles[0].rol;
+                        }
+                    }
 
                 },
                 {
                     render: function (data, type, JsonResultRow, meta) {
-                        return `<span class="m-switch m-switch--outline m-switch--icon m-switch--success"><label><input class="swicthState` + JsonResultRow.users[0].id + `" id-user="` + JsonResultRow.users[0].id + `" data-type="` + JsonResultRow.users[0].state + `" type="checkbox" ${JsonResultRow.users[0].state == 1 ? 'checked' : ""} name=""><span></span></label></span>`
+                        return `<span class="m-switch m-switch--outline m-switch--icon m-switch--success"><label><input class="swicthState` + JsonResultRow.id + `" id-user="` + JsonResultRow.id + `" data-type="` + JsonResultRow.state + `" type="checkbox" ${JsonResultRow.state == 1 ? 'checked' : ""} name=""><span></span></label></span>`
                     }
                 },
 
