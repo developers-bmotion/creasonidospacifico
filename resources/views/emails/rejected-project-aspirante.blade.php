@@ -1,7 +1,7 @@
 @component('mail::message')
-# ¡Saludos!  Sr/Sra Subsanador {{ $name }}.
+# ¡Saludos!  Sr/Sra aspirante {{ $name }} {{ $last_name }}.
 
-Informamos que su proyecto ha sido rechazado
+Informamos que su proyecto ha sido rechazado por no realizar las correciones a tiempo.
 
 {{ __('Gracias') }}.<br>
 {{ config('app.name') }}

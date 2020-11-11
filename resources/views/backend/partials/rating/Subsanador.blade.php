@@ -1,5 +1,5 @@
 <!-- Acciones para el Admin -->
-@if($project->status == 1)
+@if($project->status == 1 || $project->status == 6)
 <div class="col-md-12 mt-5">
 
 

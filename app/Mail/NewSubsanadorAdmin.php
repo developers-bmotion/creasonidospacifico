@@ -7,20 +7,21 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class RejectProjectAspiranteCron extends Mailable
+class NewSubsanadorAdmin extends Mailable
 {
     use Queueable, SerializesModels;
-    private $name;
-    private $last_name;
+    private $user;
+    private $password;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($name, $last_name)
+    public function __construct($user,$password)
     {
-        $this->name = $name;
-        $this->last_name = $last_name;
+        $this->user = $user;
+        $this->password = $password;
     }
 
     /**
@@ -31,9 +32,9 @@ class RejectProjectAspiranteCron extends Mailable
     public function build()
     {
         return $this
-            ->subject(__('CREA SONIDOS PACIFICO - PROPUESTA RECHAZADA'))
-            ->markdown('emails.rejected-project-aspirante')
-            ->with('name',$this->name)
-            ->with('last_name',$this->last_name);
+            ->subject('CREA SONIDOS PACIFICO - TUS CREDENCIALES DE ACCESO' )
+            ->markdown('emails.new-subsanador-admin')
+            ->with('user',$this->user)
+            ->with('password',$this->password);
     }
 }

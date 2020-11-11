@@ -26,7 +26,7 @@
                 <li class="m-nav__separator">-</li>
                 <li class="m-nav__item">
                     <a href="" class="m-nav__link">
-                        <span class="m-nav__link-text">{{__('perfil')}} Gestor</span>
+                        <span class="m-nav__link-text">{{__('perfil')}} Subsanador</span>
                     </a>
                 </li>
                 <li class="m-nav__separator">-</li>
@@ -158,26 +158,26 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-4 col-lg-4 col-12">
-                                                    <div class="form-group m-form__group">
-                                                        <div id="content-aspirante_name" class="m-form__group-sub">
-                                                            <label
-                                                                class="form-control-label font-weight-bold">Departamento:</label>
-                                                            <p>{{ $userProfile->city->departaments->descripcion }}</p>
+{{--                                                <div class="col-md-4 col-lg-4 col-12">--}}
+{{--                                                    <div class="form-group m-form__group">--}}
+{{--                                                        <div id="content-aspirante_name" class="m-form__group-sub">--}}
+{{--                                                            <label--}}
+{{--                                                                class="form-control-label font-weight-bold">Departamento:</label>--}}
+{{--                                                            <p>{{ $userProfile->city->departaments->descripcion }}</p>--}}
 
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4 col-lg-4 col-12">
-                                                    <div class="form-group m-form__group">
-                                                        <div id="content-aspirante_name" class="m-form__group-sub">
-                                                            <label
-                                                                class="form-control-label font-weight-bold">Ciudad:</label>
-                                                            <p>{{ $userProfile->city->descripcion }}</p>
+{{--                                                        </div>--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                                <div class="col-md-4 col-lg-4 col-12">--}}
+{{--                                                    <div class="form-group m-form__group">--}}
+{{--                                                        <div id="content-aspirante_name" class="m-form__group-sub">--}}
+{{--                                                            <label--}}
+{{--                                                                class="form-control-label font-weight-bold">Ciudad:</label>--}}
+{{--                                                            <p>{{ $userProfile->city->descripcion }}</p>--}}
 
-                                                        </div>
-                                                    </div>
-                                                </div>
+{{--                                                        </div>--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
                                             </div>
                                             <div class="row">
                                                 <div class="col-12 col-md-12 col-lg-12">

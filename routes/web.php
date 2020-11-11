@@ -18,15 +18,13 @@ use App\Artist;
 use App\Mail\ArtistProjectRevision;
 use App\Mail\NewArtist;
 use App\Project;
+use App\Role;
 use App\User;
 
 Route::get('/datos', function () {
-
-    //  $artist = Artist::where('user_id', auth()->user()->id)->with('projects.historyReviews')->first();
-    $data = App\Management::whereHas('categories', function($q){
-        $q->where('categories.id',4);
-     })->with('categories')->get();
-    return $data;
+    $project = Project::where('rejected', '1')->with('artists.users')->first();
+//    dd($project->artists[0]->users->last_name);
+    return \Illuminate\Support\Facades\Mail::to($project->artists[0]->users->email)->send(new \App\Mail\RejectProjectAspiranteCron($project->artists[0]->users->name, $project->artists[0]->users->last_name));
 });
 
 Route::get('/represtante-menor-edad/{id}', function ($id) {
@@ -237,7 +235,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'dashboard', 'middleware' =>
 //      /* Rutas para los usuarios */
         Route::get('/users-admin', 'Admin\UserController@index')->name('user.admin.index');
         Route::get('/users-system', 'Admin\UserController@getUsersTable')->name('get.users.tables');
-        Route::post('/add-users-admin', 'Admin\ManagementsController@storeGestores')->name('add.users.admin');
+        Route::post('/add-users-admin', 'Admin\UserController@storeUsers')->name('add.users.admin');
 
         //ruta para el perfil del admin
         Route::get('/profile-admin/{user}', 'Admin\ProfileAdminController@indexAdmin')->name('profile.admin');

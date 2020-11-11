@@ -35,7 +35,7 @@
                 <!--=====================================
 		        ALERTA PARA MOSTRAR EL ESTADO PENDIENTE
             ======================================-->
-                    <form action="{{ route('update.state.revision') }}" method="post">
+                    <form id="update_revision" action="{{ route('update.state.revision') }}" method="post">
                         @csrf {{ method_field('PUT') }}
                         <input type="hidden" name="state_revision" value="6">
                         <input type="hidden" name="project_id" value="{{ $artist->projects[0]->id }}">
@@ -52,8 +52,8 @@
 
 
                             </div>
-                            <div class="m-alert__actions" style="width: 200px;">
-                                <button href="{{ route('update.state.revision') }}" type="submit"
+                            <div  class="m-alert__actions" style="width: 200px;">
+                                <button id="btn_update_revision" href="{{ route('update.state.revision') }}"
                                         class="btn btn-warning btn-sm m-btn m-btn--pill m-btn--wide"
                                         style="color:#fff">Enviar propuesta musical nuevamente
                                 </button>
@@ -1729,7 +1729,7 @@
                                     </div>
                                 @endif
                             @endif
-                            {{--                            @endif--}}
+                                                       {{-- @endif --}}
                         </div>
                         <div class="modal-footer">
 
@@ -2530,7 +2530,7 @@
         });
     </script>
 
-    {{-- editar identificacion aspirante --}}
+    // {{-- editar identificacion aspirante --}}
     <script>
 
         // controles actualizar documentos aspirante
@@ -2898,6 +2898,36 @@
 
 
             });
+        });
+    </script>
+
+    //evento enviar revision
+    <script>
+
+    $('#btn_update_revision').click(function (e) {
+            e.preventDefault();
+            swal({
+                title: "{{__('Anuncio')}}",
+                text: "{{ __('¿ Está seguro de enviar la solicitud de revisión ?') }}",
+                icon: "success",
+                confirmButtonText: 'Aceptar',
+                cancelButtonText: 'Cancelar',
+
+                reverseButtons: true,
+
+                showCancelButton: true,
+
+
+
+            }).then(function (result) {
+                if (result.value) {
+                    $('body').loading({
+                        message: 'Enviando solicitud...',
+                        start:true,
+                    });
+                    $('#update_revision').submit();
+                }
+            })
         });
     </script>
 
