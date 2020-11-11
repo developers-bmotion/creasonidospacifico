@@ -85,6 +85,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
     <!--end::Global Theme Styles -->
     <link rel="shortcut icon" href="/images/logo-creasonidos.png"/>
+{{--    @include('facebook-pixel::body')--}}
 </head>
 
 <!-- end::Head -->
@@ -93,7 +94,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
 <body
     class="m--skin- m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default">
-
+{{--@include('facebook-pixel::body')--}}
 <!-- begin:: Page -->
 <div class="m-grid m-grid--hor m-grid--root m-page">
     <div
@@ -236,11 +237,11 @@ License: You must have a valid license purchased only from themeforest(the above
                                     </button>
                                     {{--  <button id="m_login_signup_cancel"
                                         class="btn btn-outline-focus  m-btn m-btn--pill m-btn--custom" style="display: none">Cancel</button> --}}
-                                
+
                                         <a style="padding-top: 30px;" href="/login" class="m-link m-link--focus">Volver al login</a>
                                 </div>
 
-                                
+
                             </form>
                         </div>
 

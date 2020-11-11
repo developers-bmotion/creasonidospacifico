@@ -105,7 +105,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <!--end::Page Vendors Styles -->
     {{--<link rel="shortcut icon" href="/backend/assets/demo/media/img/logo/favicon.ico"/>--}}
     @stack('css')
-    @include('facebook-pixel::head')
+{{--    @include('facebook-pixel::head')--}}
 </head>
 
 <!-- end::Head -->
@@ -119,7 +119,7 @@ License: You must have a valid license purchased only from themeforest(the above
         <body
             class="cls-body m-page--fluid m--skin- m-content--skin-light m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default m-brand--minimize m-aside-left--minimize">
         @endif
-        @include('facebook-pixel::body')
+{{--        @include('facebook-pixel::body')--}}
         <!-- begin:: Page -->
         <div class="m-grid m-grid--hor m-grid--root m-page" id="app">
 
