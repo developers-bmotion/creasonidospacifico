@@ -131,59 +131,59 @@ License: You must have a valid license purchased only from themeforest(the above
 
                         <!-- BEGIN: Brand -->
                         {{-- @if(auth()->user()->roles[0]->rol == "Artist" || auth()->user()->roles[0]->rol == "Gestor" || auth()->user()->roles[0]->rol == "Manage" || auth()->user()->roles[0]->rol == "Subsanador") --}}
-                            {{-- <div class="m-stack__item m-brand  m-brand--skin-dark" style="display: none"> --}}
-                                {{-- @else --}}
-                                    <div class="skin-movil m-stack__item m-brand  m-brand--skin-dark" >
-                                        {{-- @endif --}}
-                                        <div class="m-stack m-stack--ver m-stack--general">
-                                            {{-- <div class="menu-top-botones m-stack__item m-stack__item--middle m-brand__logo">
-                                                <a href="#" class="m-brand__logo-wrapper">
-                                                    {{--<h4 style="color: white">{{ config('app.name') }}</h4>--
-                                                    <h4 style="color: white;width: 170px;">Caza talentos</h4>
-                                                </a>
-                                            </div> --}}
-                                            <div class="pos-item m-stack__item m-stack__item--middle m-brand__tools">
+                        {{-- <div class="m-stack__item m-brand  m-brand--skin-dark" style="display: none"> --}}
+                        {{-- @else --}}
+                        <div class="skin-movil m-stack__item m-brand  m-brand--skin-dark">
+                            {{-- @endif --}}
+                            <div class="m-stack m-stack--ver m-stack--general">
+                                {{-- <div class="menu-top-botones m-stack__item m-stack__item--middle m-brand__logo">
+                                    <a href="#" class="m-brand__logo-wrapper">
+                                        {{--<h4 style="color: white">{{ config('app.name') }}</h4>--
+                                        <h4 style="color: white;width: 170px;">Caza talentos</h4>
+                                    </a>
+                                </div> --}}
+                                <div class="pos-item m-stack__item m-stack__item--middle m-brand__tools">
 
-                                                <!-- BEGIN: Left Aside Minimize Toggle -->
-                                                <a href="javascript:;" id="m_aside_left_minimize_toggle"
-                                                   class="m-brand__icon m-brand__toggler m-brand__toggler--left m--visible-desktop-inline-block m-brand__toggler--active">
-                                                    <span></span>
-                                                </a>
+                                    <!-- BEGIN: Left Aside Minimize Toggle -->
+                                    <a href="javascript:;" id="m_aside_left_minimize_toggle"
+                                       class="m-brand__icon m-brand__toggler m-brand__toggler--left m--visible-desktop-inline-block m-brand__toggler--active">
+                                        <span></span>
+                                    </a>
 
-                                                <!-- END -->
+                                    <!-- END -->
 
-                                                @if(auth()->user()->roles[0]->rol == "Admin" )
-                                                <!-- BEGIN: Responsive Aside Left Menu Toggler -->
-                                                <a href="javascript:;" id="m_aside_left_offcanvas_toggle"
-                                                   class="m-brand__icon m-brand__toggler m-brand__toggler m--visible-tablet-and-mobile-inline-block m-brand__toggler--active">
-                                                    <span></span>
-                                                </a>
-                                                @endif
+                                @if(auth()->user()->roles[0]->rol == "Admin" )
+                                    <!-- BEGIN: Responsive Aside Left Menu Toggler -->
+                                        <a href="javascript:;" id="m_aside_left_offcanvas_toggle"
+                                           class="m-brand__icon m-brand__toggler m-brand__toggler m--visible-tablet-and-mobile-inline-block m-brand__toggler--active">
+                                            <span></span>
+                                        </a>
+                                @endif
 
-                                                <!-- END -->
-                                                @if(auth()->user()->roles[0]->rol !== "Admin" )
-                                                <!-- BEGIN: Responsive Header Menu Toggler -->
-                                                <a id="m_aside_header_menu_mobile_toggle" href="javascript:;"
-                                                   class="m-brand__icon m-brand__toggler m--visible-tablet-and-mobile-inline-block">
-                                                    <span></span>
-                                                </a>
-                                                @endif
-                                                <!-- END -->
+                                <!-- END -->
+                                @if(auth()->user()->roles[0]->rol !== "Admin" )
+                                    <!-- BEGIN: Responsive Header Menu Toggler -->
+                                        <a id="m_aside_header_menu_mobile_toggle" href="javascript:;"
+                                           class="m-brand__icon m-brand__toggler m--visible-tablet-and-mobile-inline-block">
+                                            <span></span>
+                                        </a>
+                                @endif
+                                <!-- END -->
 
-                                                <!-- BEGIN: Topbar Toggler -->
-                                                {{-- <a id="m_aside_header_topbar_mobile_toggle" href="javascript:;"
-                                                   class="m-brand__icon m--visible-tablet-and-mobile-inline-block">
-                                                    <i class="flaticon-more"></i>
-                                                </a> --}}
+                                    <!-- BEGIN: Topbar Toggler -->
+                                {{-- <a id="m_aside_header_topbar_mobile_toggle" href="javascript:;"
+                                   class="m-brand__icon m--visible-tablet-and-mobile-inline-block">
+                                    <i class="flaticon-more"></i>
+                                </a> --}}
 
-                                                <!-- BEGIN: Topbar Toggler -->
-                                            </div>
-                                        </div>
-                                    </div>
+                                <!-- BEGIN: Topbar Toggler -->
+                                </div>
+                            </div>
+                        </div>
 
-                                    <!-- END: Brand -->
-                                    @include('backend.partials.navigation')
-                            {{-- </div> --}}
+                        <!-- END: Brand -->
+                        @include('backend.partials.navigation')
+                        {{-- </div> --}}
                     </div>
             </header>
 
@@ -245,14 +245,14 @@ License: You must have a valid license purchased only from themeforest(the above
                                         </div>
 
                                     @endif
-                                        @if(session()->has('exitoso'))
-                                            <div class="container">
-                                                <div class="alert alert-success" role="alert">
-                                                    <strong>{{session('exitoso')}}</strong>
-                                                </div>
+                                    @if(session()->has('exitoso'))
+                                        <div class="container">
+                                            <div class="alert alert-success" role="alert">
+                                                <strong>{{session('exitoso')}}</strong>
                                             </div>
+                                        </div>
 
-                                        @endif
+                                    @endif
                                     @yield('header')
                                 </div>
                                 @yield('content')
@@ -362,6 +362,37 @@ License: You must have a valid license purchased only from themeforest(the above
                 const lang = "{{ session("applocale") }}";
                 window.lang = lang;
             </script>
+            <!-- Facebook Pixel Code -->
+            @if(env('APP_ENV') === 'production')
+                <script>
+                    !function (f, b, e, v, n, t, s) {
+                        if (f.fbq) return;
+                        n = f.fbq = function () {
+                            n.callMethod ?
+                                n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+                        };
+                        if (!f._fbq) f._fbq = n;
+                        n.push = n;
+                        n.loaded = !0;
+                        n.version = '2.0';
+                        n.queue = [];
+                        t = b.createElement(e);
+                        t.async = !0;
+                        t.src = v;
+                        s = b.getElementsByTagName(e)[0];
+                        s.parentNode.insertBefore(t, s)
+                    }(window, document, 'script',
+                        'https://connect.facebook.net/en_US/fbevents.js');
+                    fbq('init', '498233024192618');
+                    fbq('track', 'PageView');
+                </script>
+                <noscript>
+                    <img height="1" width="1"
+                         src="https://www.facebook.com/tr?id=498233024192618&ev=PageView
+&noscript=1"/>
+                </noscript>
+            @endif
+        <!-- End Facebook Pixel Code -->
 
             <!--begin:: Global Mandatory Vendors -->
             <meta name="_token" content="{!! csrf_token() !!}"/>
