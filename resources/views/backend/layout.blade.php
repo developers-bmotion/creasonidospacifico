@@ -105,7 +105,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <!--end::Page Vendors Styles -->
     {{--<link rel="shortcut icon" href="/backend/assets/demo/media/img/logo/favicon.ico"/>--}}
     @stack('css')
-
+    @include('facebook-pixel::head')
 </head>
 
 <!-- end::Head -->
@@ -119,6 +119,7 @@ License: You must have a valid license purchased only from themeforest(the above
         <body
             class="cls-body m-page--fluid m--skin- m-content--skin-light m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default m-brand--minimize m-aside-left--minimize">
         @endif
+        @include('facebook-pixel::body')
         <!-- begin:: Page -->
         <div class="m-grid m-grid--hor m-grid--root m-page" id="app">
 
@@ -362,37 +363,6 @@ License: You must have a valid license purchased only from themeforest(the above
                 const lang = "{{ session("applocale") }}";
                 window.lang = lang;
             </script>
-            <!-- Facebook Pixel Code -->
-            @if(env('APP_ENV') === 'production')
-                <script>
-                    !function (f, b, e, v, n, t, s) {
-                        if (f.fbq) return;
-                        n = f.fbq = function () {
-                            n.callMethod ?
-                                n.callMethod.apply(n, arguments) : n.queue.push(arguments)
-                        };
-                        if (!f._fbq) f._fbq = n;
-                        n.push = n;
-                        n.loaded = !0;
-                        n.version = '2.0';
-                        n.queue = [];
-                        t = b.createElement(e);
-                        t.async = !0;
-                        t.src = v;
-                        s = b.getElementsByTagName(e)[0];
-                        s.parentNode.insertBefore(t, s)
-                    }(window, document, 'script',
-                        'https://connect.facebook.net/en_US/fbevents.js');
-                    fbq('init', '498233024192618');
-                    fbq('track', 'PageView');
-                </script>
-                <noscript>
-                    <img height="1" width="1"
-                         src="https://www.facebook.com/tr?id=498233024192618&ev=PageView
-&noscript=1"/>
-                </noscript>
-            @endif
-        <!-- End Facebook Pixel Code -->
 
             <!--begin:: Global Mandatory Vendors -->
             <meta name="_token" content="{!! csrf_token() !!}"/>
