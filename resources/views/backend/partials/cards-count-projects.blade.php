@@ -12,7 +12,7 @@
                             Aspirantes Registrados
                         </h4><br>
                         <span class="m-widget24__desc">Aspirantes con canción</span><br><br>
-                        <span class="m-widget24__stats m--font-black pull-right pl-4" style="float: left">{{ $projectsStateRevision }}</span>
+                        <span class="m-widget24__stats m--font-black pull-right pl-4" style="float: left">{{ $aspiranteRegistroCompleto }}</span>
 
                     </div>
                 </div>
