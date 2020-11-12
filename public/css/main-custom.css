@@ -176,6 +176,10 @@
     #table_users_wrapper .row:nth-child(2)  {       
         overflow: scroll !important;
     }
+    #table__profile_projects_management_wrapper .row:nth-child(2)  {       
+        overflow: scroll !important;
+    }
+    
     .dataTables_wrapper .dataTables_paginate .pagination .page-item {
         margin-left: 0.3rem;
     }
