@@ -408,7 +408,7 @@
                                                 @endif
                                                 @if($project->status == 5)
                                                     <span
-                                                        class="m-badge m-badge--danger m-badge--wide m-badge--rounded">{{ __('Rechazado') }}</span>
+                                                        class="m-badge m-badge--danger m-badge--wide m-badge--rounded">No subsanado</span>
                                                 @endif
                                                 @if($project->status == 6)
                                                     <span
