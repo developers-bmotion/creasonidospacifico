@@ -70,7 +70,7 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                                                     </div>
                                                     <div class="m-card-profile__pic">
                                                         <a href="{{ route('profile.managament',$gestor->slug)}}">
-                                                            <div class="m-card-profile__pic-wrapper">
+                                                            <div class="cls-gestor-admin m-card-profile__pic-wrapper">
                                                                 @if(Storage::disk('public')->exists('users/'.$gestor->picture))
                                                                     <img src="{{ $gestor->pathAttachment()}}"
                                                                          alt=""/>

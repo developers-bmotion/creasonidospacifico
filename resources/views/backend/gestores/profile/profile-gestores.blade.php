@@ -67,7 +67,7 @@
                 <div class="m-portlet m-portlet--full-height m-portlet--tabs  ">
                     <div class="m-portlet__head">
                         <div class="m-portlet__head-tools">
-                            <ul class="nav nav-tabs m-tabs m-tabs-line   m-tabs-line--left m-tabs-line--primary"
+                            <ul class="my-scroll-nav nav nav-tabs m-tabs m-tabs-line   m-tabs-line--left m-tabs-line--primary"
                                 role="tablist">
                                 <li class="nav-item m-tabs__item">
                                     @if(session()->has('new_register'))
@@ -112,7 +112,7 @@
                                 @else
                                     <div class="tab-pane active" id="m_user_profile_tab_1">
                                         @endif
-                                        <div class="m-portlet__body">
+                                        <div class="cls-my-table m-portlet__body">
                                             <div class="row">
                                                 <div class="col-md-4 col-lg-4 col-12">
                                                     <div class="form-group m-form__group">
@@ -299,7 +299,7 @@
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-lg-12">
-                                                                <div class="m-portlet__body">
+                                                                <div class="cls-my-table m-portlet__body">
                                                                     <table
                                                                         class="table table-striped- table-bordered table-hover table-checkable dataTable no-footer"
                                                                         id="table_artists">
@@ -341,6 +341,7 @@
                     "serverSide": true,
                     "data": null,
                     "order": [[0, "asc"]],
+                    "pagingType": "simple_numbers",
                     "responsive": true,
                     "ajax": {
                         url: "{{ route('artists.manager.table',$userProfile->slug )}}",
@@ -447,8 +448,8 @@
                         "oPaginate": {
                             "sFirst": "Primero",
                             "sLast": "Último",
-                            "sNext": "{{__('siguiente')}}",
-                            "sPrevious": "{{__('anterior')}}"
+                            "sNext": ">",
+                            "sPrevious": "<"
                         },
                         "oAria": {
                             "sSortAscending": ": Activar para ordenar la columna de manera ascendente",

@@ -54,7 +54,7 @@
     width: 29rem;
 }
 
-.img-artist{
+.img-artist {
     border-radius: 50%;
     width: 70px;
     height: 70px;
@@ -66,7 +66,6 @@
 
 /*Para pantalla movil*/
 @media (max-width: 480px) {
-    
     .state_mobile {
         float: left;
     }
@@ -134,10 +133,6 @@
         align-self: center;
         margin-right: 25px;
     }
-
-    #table_projects_management_wrapper {
-        overflow: scroll !important;
-    }
     .cls-body {
         margin-left: 0;
     }
@@ -148,16 +143,44 @@
         position: absolute !important;
         background: transparent !important;
         width: 50% !important;
+        z-index: 10;
+    }
+    div#m_header_topbar {
+        position: absolute;
+        z-index: 9;
     }
     .custom-item-menu {
         padding-bottom: 30px !important;
         text-align: center !important;
     }
-    .my-scroll-nav{
+    .my-scroll-nav {
         display: flex;
         /* white-space: nowrap; */
         flex-flow: nowrap;
         overflow: scroll;
+    }
+    .cls-gestor-admin {
+        width: 100px !important;
+        height: 100px !important;
+        margin: 5px !important;
+    }
+    .cls-my-table{
+        overflow: scroll !important;
+    }
+    div.dataTables_wrapper div.dataTables_info {
+        white-space: pre-wrap !important;
+    }
+    #table_artists_wrapper .row:nth-child(2)  {       
+        overflow: scroll !important;
+    }
+    #table_users_wrapper .row:nth-child(2)  {       
+        overflow: scroll !important;
+    }
+    .dataTables_wrapper .dataTables_paginate .pagination .page-item {
+        margin-left: 0.3rem;
+    }
+    div.dataTables_wrapper div.dataTables_paginate ul.pagination{
+        justify-content: space-evenly !important;
     }
 }
 
@@ -194,6 +217,9 @@
     select#category_filter {
         margin-left: 1rem;
         margin-right: -1rem;
+    }
+    .m-aside-left--fixed.m-header--static .m-aside-left, .m-aside-left--fixed.m-header--fixed .m-aside-left{
+        top: 0px !important;
     }
 }
 
