@@ -1790,7 +1790,6 @@
                             @empty
                                 <h4 class="text-center">Sin observaciones</h4>
                             @endforelse
-                            @endphp
                         </div>
                         <div class="modal-footer">
 
@@ -1800,7 +1799,7 @@
             </div>
         </div>
     </div>
-    </div>
+
 @stop
 @section('dropzonePhotoArtist')
     <script>

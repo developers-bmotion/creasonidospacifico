@@ -7,18 +7,21 @@
 		    LISTA DE OBSERVACIONES
         ======================================-->
         @if(auth()->user()->roles[0]->rol == 'Subsanador' || auth()->user()->roles[0]->rol == 'Admin')
-            <div class="m-accordion m-accordion--default m-accordion--toggle-arrow" id="m_accordion_5" role="tablist">
-                <div class="m-accordion__item m-accordion__item--warning">
-                    <div class="m-accordion__item-head collapsed" role="tab" id="m_accordion_5_item_2_head"
-                         data-toggle="collapse" href="#m_accordion_5_item_2_body" aria-expanded="false">
-                        {{--<span class="m-accordion__item-icon"><i class="fa  flaticon-placeholder"></i></span>--}}
-                        <span class="m-accordion__item-title">Observaciones luego de revisón por el subsanador</span>
-                        <span class="m-accordion__item-mode"></span>
-                    </div>
-                    <div class="m-accordion__item-body collapse" id="m_accordion_5_item_2_body" role="tabpanel"
-                         aria-labelledby="m_accordion_5_item_2_head" data-parent="#m_accordion_5" style="">
-                        <div class="m-accordion__item-content">
-                            @if(count($artist->historyReviews) != 0)
+            @if(count($artist->historyReviews) != 0)
+                <div class="m-accordion m-accordion--default m-accordion--toggle-arrow" id="m_accordion_5"
+                     role="tablist">
+                    <div class="m-accordion__item m-accordion__item--warning">
+                        <div class="m-accordion__item-head collapsed" role="tab" id="m_accordion_5_item_2_head"
+                             data-toggle="collapse" href="#m_accordion_5_item_2_body" aria-expanded="false">
+                            {{--<span class="m-accordion__item-icon"><i class="fa  flaticon-placeholder"></i></span>--}}
+                            <span
+                                class="m-accordion__item-title">Observaciones luego de revisón por el subsanador</span>
+                            <span class="m-accordion__item-mode"></span>
+                        </div>
+                        <div class="m-accordion__item-body collapse" id="m_accordion_5_item_2_body" role="tabpanel"
+                             aria-labelledby="m_accordion_5_item_2_head" data-parent="#m_accordion_5" style="">
+                            <div class="m-accordion__item-content">
+
                                 @php($count = 1 )
                                 <div class="row pt-3">
                                     <div class="col-12">
@@ -50,12 +53,14 @@
 
                                                             @if($historyReviews->pivot->state == 1)
                                                                 <td>
-                                <span
-                                    class="m-badge m-badge--warning m-badge--wide">Pendiente</span></td>
+                                                                <span
+                                                                    class="m-badge m-badge--warning m-badge--wide">Pendiente</span>
+                                                                </td>
                                                             @else
                                                                 <td>
-                                    <span
-                                        class="m-badge m-badge--success m-badge--wide">Corregido</span></td>
+                                                                <span
+                                                                    class="m-badge m-badge--success m-badge--wide">Corregido</span>
+                                                                </td>
                                                             @endif
 
                                                         </tr>
@@ -66,1101 +71,1107 @@
                                         </div>
                                     </div>
                                 </div>
-
-
-                                {{--        @forelse($artist->historyReviews as $historyReviews)--}}
-
-
-
-
-
-                                {{--            <h5 class="pb-3">{{ $count++ }}. Observación </h5>--}}
-                                {{--            <div class="row">--}}
-
-                                {{--                <div class="row">--}}
-                                {{--                    <div class="col-12 col-md-10 col-lg-10">--}}
-                                {{--                        <div class="form-group m-form__group">--}}
-                                {{--                            <div class="m-form__group-sub">--}}
-                                {{--                                <label--}}
-                                {{--                                    class="form-control-label font-weight-bold">Observación:--}}
-                                {{--                                </label>--}}
-                                {{--                                <p>{!! $historyReviews->pivot->observation !!}</p>--}}
-                                {{--                            </div>--}}
-                                {{--                        </div>--}}
-                                {{--                    </div>--}}
-                                {{--                    <div class="col-12 col-md-2 col-lg-2">--}}
-                                {{--                        <div class="form-group m-form__group">--}}
-                                {{--                            <div class="m-form__group-sub">--}}
-                                {{--                                <label--}}
-                                {{--                                    class="form-control-label font-weight-bold">Estado:--}}
-                                {{--                                </label>--}}
-                                {{--                                <br>--}}
-                                {{--                                @if($historyReviews->pivot->state == 1)--}}
-                                {{--                                    <span--}}
-                                {{--                                        class="m-badge m-badge--warning m-badge--wide">Pendiente</span>--}}
-                                {{--                                @else--}}
-                                {{--                                    <span--}}
-                                {{--                                        class="m-badge m-badge--success m-badge--wide">Corregido</span>--}}
-                                {{--                                @endif--}}
-                                {{--                            </div>--}}
-                                {{--                        </div>--}}
-                                {{--                    </div>--}}
-                                {{--                </div>--}}
-                                {{--                <hr>--}}
-                                {{--                @empty--}}
-                                {{--                    <h4 class="text-center">Sin observaciones</h4>--}}
-                                {{--                @endforelse--}}
-
-                                {{--            </div>--}}
-                            @endif
-                        </div>
-                    </div>
-                </div>
-            </div>
-        @endif
-        <div class="row">
-            <div class="col-xl-12 col-lg-12">
-                <div class="m-portlet m-portlet--full-height ">
-                    <div class="m-portlet__head">
-                        <div class="m-portlet__head-caption">
-                            <div class="m-portlet__head-title">
-                                <h3 class="m-portlet__head-text">
-                                    Información de la canción
-                                </h3>
                             </div>
                         </div>
                     </div>
-                    <div class="m-portlet__body">
-                        <div class="m-section">
-                            <div class="row">
-                                <div class="col-11 player" style="padding-right: 3rem;">
-                                    <div class="form-group">
-                                        <h5 style="font-weight: bold">Canción principal:</h5>
+                    @endif
+                    @endif
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12">
+                        <div class="m-portlet m-portlet--full-height ">
+                            <div class="m-portlet__head">
+                                <div class="m-portlet__head-caption">
+                                    <div class="m-portlet__head-title">
+                                        <h3 class="m-portlet__head-text">
+                                            Información de la canción
+                                        </h3>
                                     </div>
-                                    <audio preload="auto" controls>
-
-                                        <source src="{{ $project->audio }}">
-                                        {{-- <input name="project_id" id="project_id" type="hidden" value="{{ $project->id }}"> --}}
-                                        {{-- <source src="{{ $project->audio }}" type="video/3gpp;" codecs="mp4v.20.8, samr"> --}}
-                                    </audio>
-
                                 </div>
-                                @if(\App\User::navigation() == "Gestor")
+                            </div>
+                            <div class="m-portlet__body">
+                                <div class="m-section">
+                                    <div class="row">
+                                        <div class="col-11 player" style="padding-right: 3rem;">
+                                            <div class="form-group">
+                                                <h5 style="font-weight: bold">Canción principal:</h5>
+                                            </div>
+                                            <audio preload="auto" controls>
+
+                                                <source src="{{ $project->audio }}">
+                                                {{-- <input name="project_id" id="project_id" type="hidden" value="{{ $project->id }}"> --}}
+                                                {{-- <source src="{{ $project->audio }}" type="video/3gpp;" codecs="mp4v.20.8, samr"> --}}
+                                            </audio>
+
+                                        </div>
+                                        @if(\App\User::navigation() == "Gestor")
 
 
 
-                                    <div class="row drop_audio col-12" style="display: none">
-                                        <div
-                                            class="col-lg-12 m-form__group-sub {{$errors->has('subir_cancion')? 'has-danger':''}}">
-                                            <div class="form-group m-form__group row">
-                                                <div class="col-lg-12">
-                                                    <label class="form-control-label" form="nombreProyecto"><span
-                                                            class="text-danger">*</span>
-                                                        Subir canción:</label>
-                                                    <div class="m-dropzone dropzone-audio m-dropzone--success" action=""
-                                                         id="m-dropzone-three">
-                                                        <div class="m-dropzone__msg dz-message needsclick">
-                                                            <h3 class="m-dropzone__msg-title">
-                                                                Agregue su canción en formato MP3</h3>
-                                                            <span
-                                                                class="m-dropzone__msg-desc">Arrastra o has clic a aquí para subir</span>
+                                            <div class="row drop_audio col-12" style="display: none">
+                                                <div
+                                                    class="col-lg-12 m-form__group-sub {{$errors->has('subir_cancion')? 'has-danger':''}}">
+                                                    <div class="form-group m-form__group row">
+                                                        <div class="col-lg-12">
+                                                            <label class="form-control-label"
+                                                                   form="nombreProyecto"><span
+                                                                    class="text-danger">*</span>
+                                                                Subir canción:</label>
+                                                            <div class="m-dropzone dropzone-audio m-dropzone--success"
+                                                                 action=""
+                                                                 id="m-dropzone-three">
+                                                                <div class="m-dropzone__msg dz-message needsclick">
+                                                                    <h3 class="m-dropzone__msg-title">
+                                                                        Agregue su canción en formato MP3</h3>
+                                                                    <span
+                                                                        class="m-dropzone__msg-desc">Arrastra o has clic a aquí para subir</span>
+                                                                </div>
+                                                            </div>
+                                                            {!! $errors->first('subir_cancion','<div class="form-control-feedback">*:message
+                                                                       </div>')!!}
+                                                            <span class="m-form__help">Cargue aquí el audio de la canción en formato Mp3.</span>
+                                                            <input type="hidden" id="inputDBAudioAddProject"
+                                                                   name="subir_cancion" value="">
+                                                            <div id="erroresImagen" style="color: var(--danger)"
+                                                                 class="form-control-feedback"></div>
                                                         </div>
                                                     </div>
-                                                    {!! $errors->first('subir_cancion','<div class="form-control-feedback">*:message
-                                                               </div>')!!}
-                                                    <span class="m-form__help">Cargue aquí el audio de la canción en formato Mp3.</span>
-                                                    <input type="hidden" id="inputDBAudioAddProject"
-                                                           name="subir_cancion" value="">
-                                                    <div id="erroresImagen" style="color: var(--danger)"
-                                                         class="form-control-feedback"></div>
                                                 </div>
+
                                             </div>
-                                        </div>
+                                            <div class="col-md-1 pt-5 mt-4">
+                                                <i class="flaticon-edit ml-3 update_audio"
+                                                   style="color:#716aca; cursor:pointer;"></i>
+                                                <button type="button" class="btn btn-primary cancel_audio"
+                                                        style="display:none">
+                                                    Cancelar
+                                                </button>
 
-                                    </div>
-                                    <div class="col-md-1 pt-5 mt-4">
-                                        <i class="flaticon-edit ml-3 update_audio"
-                                           style="color:#716aca; cursor:pointer;"></i>
-                                        <button type="button" class="btn btn-primary cancel_audio" style="display:none">
-                                            Cancelar
-                                        </button>
-
-                                    </div>
-
-
-
-                                @endif
-
-                                <div class="secondary_audios col-md-12 row mt-5">
-                                    @if($project->audio_secundary_two)
-                                        <div class="col-6 player">
-                                            <div class="form-group">
-                                                <h5 style="font-weight: bold">Canción extra uno(no participa en el
-                                                    concurso):</h5>
                                             </div>
-                                            <audio preload="auto" controls>
-                                                <source src="{{ $project->audio_secundary_two}}">
-                                                {{-- <input name="project_id" id="project_id" type="hidden" value="{{ $project->id }}"> --}}
-                                            </audio>
 
-                                        </div>
-                                    @endif
-                                    @if($project->audio_secundary_one)
-                                        <div class="col-6 player">
-                                            <div class="form-group">
-                                                <h5 style="font-weight: bold">Canción extra dos(no participa en el
-                                                    concurso):</h5>
-                                            </div>
-                                            <audio preload="auto" controls>
-                                                <source src="{{ $project->audio_secundary_one }}">
-                                                {{-- <input name="project_id" id="project_id" type="hidden" value="{{ $project->id }}"> --}}
-                                            </audio>
-                                        </div>
-                                    @endif
-                                </div>
-                                {{-- @dd(\App\User::navigation()); --}}
 
-                            </div>
-                            <div class="row p-5">
-                                {{-- reproductor --}}
 
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <h5 style="font-weight: bold">{{ __('estado') }}:</h5>
-                                    </div>
-                                    <div class="form-group">
-                                        @if($project->status == 1)
-                                            <span
-                                                class="m-badge m-badge--metal m-badge--wide m-badge--rounded">{{ __('revision') }}</span>
-                                        @elseif($project->status == 2)
-                                            <span class="m-badge m-badge--brand m-badge--wide m-badge--rounded"
-                                                  style="background-color: #9816f4 !important;">{{ __('pre_aprobado') }}</span>
-                                            {{-- @elseif($project->status == 3)
-                                                <span
-                                                    class="m-badge m-badge--success m-badge--wide m-badge--rounded">{{ __('aprobado') }}</span> --}}
-                                        @elseif($project->status == 4)
-                                            <span
-                                                class="m-badge m-badge--warning m-badge--wide m-badge--rounded">Pendiente</span>
-                                        @elseif($project->status == 5)
-                                            <span
-                                                class="m-badge m-badge--danger m-badge--wide m-badge--rounded">No subsanado</span>
-                                        @elseif($project->status == 6)
-                                            <span
-                                                class="m-badge m-badge--brand m-badge--wide m-badge--rounded">Nueva revision</span>
-                                        @elseif($project->status == 7)
-                                            <span
-                                                class="m-badge m-badge--success m-badge--wide m-badge--rounded">Aceptado</span>
                                         @endif
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <h5 style="font-weight: bold">Nombre de la canción:</h5>
-                                    </div>
-                                    <div class="form-group">
 
-                                        {{ $project->title }}
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <h5 style="font-weight: bold">Autor:</h5>
-                                    </div>
-                                    <div class="form-group">
+                                        <div class="secondary_audios col-md-12 row mt-5">
+                                            @if($project->audio_secundary_two)
+                                                <div class="col-6 player">
+                                                    <div class="form-group">
+                                                        <h5 style="font-weight: bold">Canción extra uno(no participa en
+                                                            el
+                                                            concurso):</h5>
+                                                    </div>
+                                                    <audio preload="auto" controls>
+                                                        <source src="{{ $project->audio_secundary_two}}">
+                                                        {{-- <input name="project_id" id="project_id" type="hidden" value="{{ $project->id }}"> --}}
+                                                    </audio>
 
-                                        {{ $project->author }}
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <h5 style="font-weight: bold">Modalidad:</h5>
-                                    </div>
-                                    <div class="form-group">
-                                        {{ $project->category->category }}
-                                    </div>
-                                </div>
-
-                                <div class="col-md-12 mt-5">
-
-                                    <div class="form-group">
-                                        <h5 style="font-weight: bold">Descripción:</h5>
-                                    </div>
-                                    <div class="form-group" style="text-align: justify">
-
-                                        {{ $project->description }}
-                                    </div>
-                                </div>
-                                @if(auth()->user()->roles[0]->rol == "Subsanador")
-                                    @include('backend.partials.rating.'.\App\User::rating_proyect())
-                                @endif
-
-                            </div>
-
-                        </div>
-                        @if(\App\User::rating_proyect())
-                            {{-- <div id="show_assign_list_management" style="display: none">
-                                <div class="m-portlet__head">
-                                    <div class="m-portlet__head-caption">
-                                        <div class="m-portlet__head-title">
-                                            <h3 class="m-portlet__head-text">
-                                                {{ __('lista_managements') }}
-                                            </h3>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="m-section">
-                                    <br>
-                                    <div class="row">
-                                        <div class="col-xs-4 col-lg-12">
-                                            <div class="box-body table-responsive text-center">
-                                                <table class="table table-striped- table-bordered table-hover"
-                                                       id="table_assign_management">
-                                                    <thead>
-                                                    <tr>
-                                                        <th>Curador</th>
-                                                        <th>{{ __('nombre') }}</th>
-                                                        <th>{{ __('compañia') }}</th>
-                                                        <th>{{ __('email') }}</th>
-                                                        <th>{{ __('calificacion') }}</th>
-                                                        <th>{{ __('comentario') }}</th>
-                                                        <th>{{ __('acciones') }}</th>
-                                                    </tr>
-                                                    </thead>
-                                                </table>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-4 col-lg-4">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> --}}
-                        @endif
-                    </div>
-                </div>
-            </div>
-        </div>
-        <br>
-        <br>
-        <div class="row">
-            <div class="col-xl-12 col-lg-12">
-                <div class="m-portlet m-portlet--full-height ">
-                    <div class="m-portlet__head">
-                        <div class="m-portlet__head-caption">
-                            <div class="m-portlet__head-title">
-                                <h3 class="m-portlet__head-text">
-                                    {{ __('informacion_artista') }}
-                                </h3>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="m-portlet__body ">
-                        <div class="row">
-
-                            <div class="col-md-4">
-
-                                <div class="m-portlet m-portlet--full-height  ">
-                                    <div class="m-portlet__body ">
-                                        <div class="m-card-profile">
-                                            <div class="m-card-profile__title m--hide">
-                                                Your Profile
-                                            </div>
-                                            <div class="m-card-profile__pic">
-                                                <div class="m-card-profile__pic-wrapper">
-                                                    @if($artist->artists[0]->users->picture)
-                                                        <img src="{{ $artist->artists[0]->users->picture }}" alt="">
-
-                                                    @else
-                                                        <img src="/default/user.png"
-                                                             alt=""/>
-                                                    @endif
                                                 </div>
+                                            @endif
+                                            @if($project->audio_secundary_one)
+                                                <div class="col-6 player">
+                                                    <div class="form-group">
+                                                        <h5 style="font-weight: bold">Canción extra dos(no participa en
+                                                            el
+                                                            concurso):</h5>
+                                                    </div>
+                                                    <audio preload="auto" controls>
+                                                        <source src="{{ $project->audio_secundary_one }}">
+                                                        {{-- <input name="project_id" id="project_id" type="hidden" value="{{ $project->id }}"> --}}
+                                                    </audio>
+                                                </div>
+                                            @endif
+                                        </div>
+                                        {{-- @dd(\App\User::navigation()); --}}
+
+                                    </div>
+                                    <div class="row p-5">
+                                        {{-- reproductor --}}
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <h5 style="font-weight: bold">{{ __('estado') }}:</h5>
                                             </div>
-                                            <div class="m-card-profile__details">
-                                            <span
-                                                class="m-card-profile__name">{{ $artist->artists[0]->users->name }} {{ $artist->artists[0]->users->last_name }} {{ $artist->artists[0]->users->second_last_name }}</span>
-
-                                                <a href="" class="m-card-profile__email m-link"
-                                                   style="margin-left: -15px; width: 80%; word-wrap: break-word;">{{ $artist->artists[0]->users->email }}</a>
-
-                                            </div>
-
-
-                                            <div class="form-group pt-5 text-center">
-                                                <h5 style="font-weight: bold">Estado de la propuesta musical:</h5>
-                                            </div>
-                                            <div class="form-group text-center">
+                                            <div class="form-group">
                                                 @if($project->status == 1)
                                                     <span
-                                                        class="m-badge m-badge--metal m-badge--wide m-badge--rounded">{{ __('Revision') }}</span>
-                                                @endif
-                                                @if($project->status == 2)
+                                                        class="m-badge m-badge--metal m-badge--wide m-badge--rounded">{{ __('revision') }}</span>
+                                                @elseif($project->status == 2)
                                                     <span class="m-badge m-badge--brand m-badge--wide m-badge--rounded"
-                                                          style="background-color: #9816f4 !important;">Pre aprobado</span>
-                                                @endif
-                                                @if($project->status == 3)
+                                                          style="background-color: #9816f4 !important;">{{ __('pre_aprobado') }}</span>
+                                                    {{-- @elseif($project->status == 3)
+                                                        <span
+                                                            class="m-badge m-badge--success m-badge--wide m-badge--rounded">{{ __('aprobado') }}</span> --}}
+                                                @elseif($project->status == 4)
                                                     <span
-                                                        class="m-badge m-badge--success m-badge--wide m-badge--rounded">Aprobado</span>
-                                                @endif
-                                                @if($project->status == 4)
-                                                    <span class="m-badge m-badge--warning m-badge--wide"
-                                                          style="color:#fff">{{ __('Pendiente') }}</span>
-                                                @endif
-                                                @if($project->status == 5)
+                                                        class="m-badge m-badge--warning m-badge--wide m-badge--rounded">Pendiente</span>
+                                                @elseif($project->status == 5)
                                                     <span
                                                         class="m-badge m-badge--danger m-badge--wide m-badge--rounded">No subsanado</span>
-                                                @endif
-                                                @if($project->status == 6)
+                                                @elseif($project->status == 6)
                                                     <span
-                                                        class="m-badge m-badge--metal m-badge--wide m-badge--rounded">De nuevo en revisión</span>
-                                                @endif
-                                                @if($project->status == 7)
+                                                        class="m-badge m-badge--brand m-badge--wide m-badge--rounded">Nueva revision</span>
+                                                @elseif($project->status == 7)
                                                     <span
                                                         class="m-badge m-badge--success m-badge--wide m-badge--rounded">Aceptado</span>
                                                 @endif
                                             </div>
-                                            <div class="form-group pt-5 text-center">
-                                                <h5 style="font-weight: bold">Acturá como:</h5>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <h5 style="font-weight: bold">Nombre de la canción:</h5>
                                             </div>
-                                            <div class="form-group text-center">
-                                                <span>
-                                                    {{$artist->artists[0]->personType->name}}
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="biografia col-md-7">
-                                <div class="row">
+                                            <div class="form-group">
 
-                                    <div class="col-md-6 mt-2">
-                                        <label style="font-weight: bold">Tipo deidentificación:</label>
-                                        <div class="m-scrollable" data-scrollable="true" style="">
-                                            <p>{{ $artist->artists[0]->documentType->document}}</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 mt-2">
-                                        <label style="font-weight: bold">Nº identificación:</label>
-                                        <div class="m-scrollable" data-scrollable="true" style="">
-                                            <p>{{ $artist->artists[0]->identification }}</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 mt-2">
-                                        <label style="font-weight: bold">Departamento de Expedición:</label>
-                                        <div class="m-scrollable" data-scrollable="true" style="">
-                                            <p>{{$artist->artists[0]->expeditionPlace->departaments->descripcion}}</p>
-
-                                        </div>
-
-                                    </div>
-                                    <div class="col-md-6 mt-2">
-                                        <label style="font-weight: bold">Ciudad de Expedición:</label>
-                                        <div class="m-scrollable" data-scrollable="true" style="">
-                                            <p>{{$artist->artists[0]->expeditionPlace->descripcion}}</p>
-                                        </div>
-
-                                    </div>
-                                    <div class="col-md-6 mt-2">
-                                        <label style="font-weight: bold">Dirección de residencia:</label>
-                                        <div class="m-scrollable" data-scrollable="true" style="">
-                                            <p>{{ $artist->artists[0]->adress }}</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 mt-2">
-                                        <label style="font-weight: bold">Departamento de residencia:</label>
-                                        <div class="m-scrollable" data-scrollable="true" style="">
-
-                                            <p>{{$artist->artists[0]->residencePlace->departaments->descripcion}}</p>
-
-                                        </div>
-
-                                    </div>
-                                    <div class="col-md-6 mt-2">
-                                        <label style="font-weight: bold">Ciudad de residencia:</label>
-                                        <div class="m-scrollable" data-scrollable="true" style="">
-                                            <p>{{$artist->artists[0]->residencePlace->descripcion}}</p>
-                                        </div>
-                                    </div>
-                                    @if($artist->artists[0]->township)
-                                        <div class="col-md-6 mt-2">
-                                            <label style="font-weight: bold">Vereda/Corregimiento:</label>
-                                            <div class="m-scrollable" data-scrollable="true" style="">
-                                                <p>{{$artist->artists[0]->township }}</p>
+                                                {{ $project->title }}
                                             </div>
                                         </div>
-                                    @endif
-                                    <div class="col-md-6 mt-2">
-                                        <label style="font-weight: bold">Fecha de nacimiento:</label>
-                                        <div class="m-scrollable" data-scrollable="true" style="">
-                                            <p>{{ Carbon\Carbon::parse($artist->artists[0]->byrthdate)->formatLocalized('%d de %B de %Y') }}
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 mt-2">
-                                        <label style="font-weight: bold">Departamento de nacimiento:</label>
-                                        <div class="m-scrollable" data-scrollable="true" style="">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <h5 style="font-weight: bold">Autor:</h5>
+                                            </div>
+                                            <div class="form-group">
 
-                                            <p>{{$country->departaments->descripcion}}</p>
-
-                                        </div>
-
-                                    </div>
-
-                                    <div class="col-md-6 mt-2">
-                                        <label style="font-weight: bold">Ciudad de nacimiento:</label>
-                                        <div class="m-scrollable" data-scrollable="true" style="">
-                                            <p>{{$country->descripcion}}</p>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="col-md-6 mt-2">
-                                        <label style="font-weight: bold">Teléfono:</label>
-                                        <div class="m-scrollable" data-scrollable="true" style="">
-                                            <p>{{ $artist->artists[0]->users->phone_1}}</p>
-                                        </div>
-                                    </div>
-                                    @if($artist->artists[0]->users->phone_2)
-                                        <div class="col-md-6 mt-2">
-                                            <label style="font-weight: bold">Otro teléfono:</label>
-                                            <div class="m-scrollable" data-scrollable="true" style="">
-                                                <p>{{$artist->artists[0]->users->phone_2 }}</p>
+                                                {{ $project->author }}
                                             </div>
                                         </div>
-                                    @endif
-                                    <div class="col-md-6 mt-2">
-                                        <label style="font-weight: bold">Linea de convocatoria:</label>
-                                        <div class="m-scrollable" data-scrollable="true" style="">
-                                            <p>{{ $artist->artists[0]->personType->name}}</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 mt-2">
-                                        <label style="font-weight: bold">Actuara como:</label>
-                                        <div class="m-scrollable" data-scrollable="true" style="">
-                                            <p>{{ $artist->artists[0]->artistType->name}}</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 mt-2">
-                                        <label style="font-weight: bold">Documento de identificación:</label>
-                                        <br>
-                                        <button type="button" class="btn btn-primary ver_pdf_aspirante"
-                                                data-toggle="modal"
-                                                data-target="#verpdfidentificacion">
-                                            Ver documento de identidad
-                                        </button>
-                                        @if(\App\User::navigation() == "Gestor")
-
-                                            <div class="row drop_pdf_asp" style="display: none">
-
-                                                <div class="m-form__group form-group">
-                                                    <div class="col-lg-12 m-form__group-sub">
-                                                        <label for="">Seleccione el tipo de formato para subir el
-                                                            documento de identificación</label>
-                                                        <div class="m-radio-inline">
-                                                            <label class="m-radio">
-                                                                <input type="radio" name="aspirante[identificacionDoc]"
-                                                                       value="1" checked="checked"> Imagen
-                                                                <span></span>
-                                                            </label>
-                                                            <label class="m-radio">
-                                                                <input type="radio" name="aspirante[identificacionDoc]"
-                                                                       value="2"> PDF
-                                                                <span></span>
-                                                            </label>
-                                                        </div>
-                                                    </div>
-
-                                                    <div id="image-docuemnt-aspirante"
-                                                         class="form-group m-form__group row">
-                                                        <div class="col-lg-6 m-form__group-sub">
-                                                            <label for="">Imagen documento identificación frente</label>
-                                                            <div
-                                                                class="m-dropzone file-image-document-aspirante-frente m-dropzone--success"
-                                                                action="inc/api/dropzone/upload.php"
-                                                                id="m-dropzone-three">
-                                                                <div class="m-dropzone__msg dz-message needsclick">
-                                                                    <h3 class="m-dropzone__msg-title">Subir foto del
-                                                                        frente de su documento de identificación</h3>
-                                                                    <span
-                                                                        class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-6 m-form__group-sub">
-                                                            <label for="">Imagen documento identificación atras</label>
-                                                            <div
-                                                                class="m-dropzone file-image-document-aspirante-atras m-dropzone--success"
-                                                                action="inc/api/dropzone/upload.php"
-                                                                id="m-dropzone-three">
-                                                                <div class="m-dropzone__msg dz-message needsclick">
-                                                                    <h3 class="m-dropzone__msg-title">Subir foto de la
-                                                                        parte de atrás de su documento de
-                                                                        identificación</h3>
-                                                                    <span
-                                                                        class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div id="pdf-docuemnt-aspirante" style="display: none"
-                                                         class="form-group m-form__group row">
-                                                        <div class="col">
-                                                            <div class="form-group m-form__group ">
-                                                                <div class="m-dropzone dropzone m-dropzone--success"
-                                                                     action="inc/api/dropzone/upload.php"
-                                                                     id="m-dropzone-three">
-                                                                    <div
-                                                                        class="m-dropzone__msg dz-message needsclick">
-                                                                        <h3 class="m-dropzone__msg-title">{{ __('Subir documento de identificación por ambos lados') }}</h3>
-                                                                        <span
-                                                                            class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <form id="form_update_img" method="post"
-                                                      action="{{ route('update.imgdoc.artist.gestor') }}"
-                                                      enctype="multipart/form-data"
-                                                      class="m-form m-form--label-align-left- m-form--state-"
-                                                      id="actualizar_img_asp">
-                                                    @csrf {{ method_field('PUT') }}
-                                                    <input type="hidden" name="aspirante[urlImageDocumentFrente]"
-                                                           class="form-control m-input" value="">
-                                                    <input type="hidden" name="aspirante[urlImageDocumentAtras]"
-                                                           class="form-control m-input" value="">
-                                                    <input type="hidden" name="aspirante[idAspirante]"
-                                                           class="form-control m-input"
-                                                           value="{{  $artist->artists[0]->user_id}}">
-
-                                                </form>
-
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <h5 style="font-weight: bold">Modalidad:</h5>
                                             </div>
-                                            <i class="flaticon-edit ml-3 update_pdf_asp"
-                                               style="color:#716aca; cursor:pointer;"></i>
-                                            <button type="button" class="btn btn-primary cancel_pdf_asp"
-                                                    style="display:none">Cancelar
-                                            </button>
-                                            <button id="btn_enviar_asp" type="button"
-                                                    class="btn btn-primary  enviar_asp"
-                                                    style="display:none">enviar
-                                            </button>
+                                            <div class="form-group">
+                                                {{ $project->category->category }}
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 mt-5">
+
+                                            <div class="form-group">
+                                                <h5 style="font-weight: bold">Descripción:</h5>
+                                            </div>
+                                            <div class="form-group" style="text-align: justify">
+
+                                                {{ $project->description }}
+                                            </div>
+                                        </div>
+                                        @if(auth()->user()->roles[0]->rol == "Subsanador")
+                                            @include('backend.partials.rating.'.\App\User::rating_proyect())
                                         @endif
 
                                     </div>
 
+                                </div>
+                                @if(\App\User::rating_proyect())
+                                    {{-- <div id="show_assign_list_management" style="display: none">
+                                        <div class="m-portlet__head">
+                                            <div class="m-portlet__head-caption">
+                                                <div class="m-portlet__head-title">
+                                                    <h3 class="m-portlet__head-text">
+                                                        {{ __('lista_managements') }}
+                                                    </h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="m-section">
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-xs-4 col-lg-12">
+                                                    <div class="box-body table-responsive text-center">
+                                                        <table class="table table-striped- table-bordered table-hover"
+                                                               id="table_assign_management">
+                                                            <thead>
+                                                            <tr>
+                                                                <th>Curador</th>
+                                                                <th>{{ __('nombre') }}</th>
+                                                                <th>{{ __('compañia') }}</th>
+                                                                <th>{{ __('email') }}</th>
+                                                                <th>{{ __('calificacion') }}</th>
+                                                                <th>{{ __('comentario') }}</th>
+                                                                <th>{{ __('acciones') }}</th>
+                                                            </tr>
+                                                            </thead>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-4 col-lg-4">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> --}}
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12">
+                        <div class="m-portlet m-portlet--full-height ">
+                            <div class="m-portlet__head">
+                                <div class="m-portlet__head-caption">
+                                    <div class="m-portlet__head-title">
+                                        <h3 class="m-portlet__head-text">
+                                            {{ __('informacion_artista') }}
+                                        </h3>
+                                    </div>
+                                </div>
+                            </div>
 
-                                    <div class="col-md-12 pt-4">
+                            <div class="m-portlet__body ">
+                                <div class="row">
 
-                                        <label style="font-weight: bold">{{ __('biografia') }}:</label>
-                                        <div class="m-scrollable" data-scrollable="true" style="">
-                                            <p style="text-align: justify">{{ $artist->artists[0]->biography }}</p>
+                                    <div class="col-md-4">
+
+                                        <div class="m-portlet m-portlet--full-height  ">
+                                            <div class="m-portlet__body ">
+                                                <div class="m-card-profile">
+                                                    <div class="m-card-profile__title m--hide">
+                                                        Your Profile
+                                                    </div>
+                                                    <div class="m-card-profile__pic">
+                                                        <div class="m-card-profile__pic-wrapper">
+                                                            @if($artist->artists[0]->users->picture)
+                                                                <img src="{{ $artist->artists[0]->users->picture }}"
+                                                                     alt="">
+
+                                                            @else
+                                                                <img src="/default/user.png"
+                                                                     alt=""/>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                    <div class="m-card-profile__details">
+                                            <span
+                                                class="m-card-profile__name">{{ $artist->artists[0]->users->name }} {{ $artist->artists[0]->users->last_name }} {{ $artist->artists[0]->users->second_last_name }}</span>
+
+                                                        <a href="" class="m-card-profile__email m-link"
+                                                           style="margin-left: -15px; width: 80%; word-wrap: break-word;">{{ $artist->artists[0]->users->email }}</a>
+
+                                                    </div>
+
+
+                                                    <div class="form-group pt-5 text-center">
+                                                        <h5 style="font-weight: bold">Estado de la propuesta
+                                                            musical:</h5>
+                                                    </div>
+                                                    <div class="form-group text-center">
+                                                        @if($project->status == 1)
+                                                            <span
+                                                                class="m-badge m-badge--metal m-badge--wide m-badge--rounded">{{ __('Revision') }}</span>
+                                                        @endif
+                                                        @if($project->status == 2)
+                                                            <span
+                                                                class="m-badge m-badge--brand m-badge--wide m-badge--rounded"
+                                                                style="background-color: #9816f4 !important;">Pre aprobado</span>
+                                                        @endif
+                                                        @if($project->status == 3)
+                                                            <span
+                                                                class="m-badge m-badge--success m-badge--wide m-badge--rounded">Aprobado</span>
+                                                        @endif
+                                                        @if($project->status == 4)
+                                                            <span class="m-badge m-badge--warning m-badge--wide"
+                                                                  style="color:#fff">{{ __('Pendiente') }}</span>
+                                                        @endif
+                                                        @if($project->status == 5)
+                                                            <span
+                                                                class="m-badge m-badge--danger m-badge--wide m-badge--rounded">No subsanado</span>
+                                                        @endif
+                                                        @if($project->status == 6)
+                                                            <span
+                                                                class="m-badge m-badge--metal m-badge--wide m-badge--rounded">De nuevo en revisión</span>
+                                                        @endif
+                                                        @if($project->status == 7)
+                                                            <span
+                                                                class="m-badge m-badge--success m-badge--wide m-badge--rounded">Aceptado</span>
+                                                        @endif
+                                                    </div>
+                                                    <div class="form-group pt-5 text-center">
+                                                        <h5 style="font-weight: bold">Acturá como:</h5>
+                                                    </div>
+                                                    <div class="form-group text-center">
+                                                <span>
+                                                    {{$artist->artists[0]->personType->name}}
+                                                </span>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    {{-- @dd($artist) --}}
+                                    <div class="biografia col-md-7">
+                                        <div class="row">
 
-                                </div>
-                                @if($artist->artists[0]->gestor_id !== null)
-                                    <hr>
-                                    <div class="ml-2">
+                                            <div class="col-md-6 mt-2">
+                                                <label style="font-weight: bold">Tipo deidentificación:</label>
+                                                <div class="m-scrollable" data-scrollable="true" style="">
+                                                    <p>{{ $artist->artists[0]->documentType->document}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mt-2">
+                                                <label style="font-weight: bold">Nº identificación:</label>
+                                                <div class="m-scrollable" data-scrollable="true" style="">
+                                                    <p>{{ $artist->artists[0]->identification }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mt-2">
+                                                <label style="font-weight: bold">Departamento de Expedición:</label>
+                                                <div class="m-scrollable" data-scrollable="true" style="">
+                                                    <p>{{$artist->artists[0]->expeditionPlace->departaments->descripcion}}</p>
 
-                                        {{-- @dd($artist->users->name) --}}
-                                        <h5 style="font-weight: bold"
-                                            class="">Aspirante registrado por el gestor <a
-                                                href="{{ route('profile.managament', $artist->artists[0]->userGestor->slug)}}"><span>{{ $artist->artists[0]->userGestor->name }} {{$artist->artists[0]->userGestor->last_name}}</span></a>
-                                        </h5>
-                                        <div class="">
-                                            <br>
-                                            <label style="font-weight: bold">Documento de soporte:</label>
-                                            <br>
-                                            <button type="button" class="btn btn-primary btn_pdf_soporte"
-                                                    data-toggle="modal"
-                                                    data-target="#verpdfsoporte">
-                                                Ver documento de soporte
-                                            </button>
-                                            @if(\App\User::navigation() == "Gestor")
+                                                </div>
 
-                                                <div class="row drop_soporte" style="display: none">
+                                            </div>
+                                            <div class="col-md-6 mt-2">
+                                                <label style="font-weight: bold">Ciudad de Expedición:</label>
+                                                <div class="m-scrollable" data-scrollable="true" style="">
+                                                    <p>{{$artist->artists[0]->expeditionPlace->descripcion}}</p>
+                                                </div>
 
-                                                    <div class="m-form__group form-group">
+                                            </div>
+                                            <div class="col-md-6 mt-2">
+                                                <label style="font-weight: bold">Dirección de residencia:</label>
+                                                <div class="m-scrollable" data-scrollable="true" style="">
+                                                    <p>{{ $artist->artists[0]->adress }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mt-2">
+                                                <label style="font-weight: bold">Departamento de residencia:</label>
+                                                <div class="m-scrollable" data-scrollable="true" style="">
 
-                                                        <div id="pdf-soporte"
-                                                             class="form-group m-form__group row">
-                                                            <div class="col">
-                                                                <div class="form-group m-form__group ">
+                                                    <p>{{$artist->artists[0]->residencePlace->departaments->descripcion}}</p>
+
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-6 mt-2">
+                                                <label style="font-weight: bold">Ciudad de residencia:</label>
+                                                <div class="m-scrollable" data-scrollable="true" style="">
+                                                    <p>{{$artist->artists[0]->residencePlace->descripcion}}</p>
+                                                </div>
+                                            </div>
+                                            @if($artist->artists[0]->township)
+                                                <div class="col-md-6 mt-2">
+                                                    <label style="font-weight: bold">Vereda/Corregimiento:</label>
+                                                    <div class="m-scrollable" data-scrollable="true" style="">
+                                                        <p>{{$artist->artists[0]->township }}</p>
+                                                    </div>
+                                                </div>
+                                            @endif
+                                            <div class="col-md-6 mt-2">
+                                                <label style="font-weight: bold">Fecha de nacimiento:</label>
+                                                <div class="m-scrollable" data-scrollable="true" style="">
+                                                    <p>{{ Carbon\Carbon::parse($artist->artists[0]->byrthdate)->formatLocalized('%d de %B de %Y') }}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mt-2">
+                                                <label style="font-weight: bold">Departamento de nacimiento:</label>
+                                                <div class="m-scrollable" data-scrollable="true" style="">
+
+                                                    <p>{{$country->departaments->descripcion}}</p>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="col-md-6 mt-2">
+                                                <label style="font-weight: bold">Ciudad de nacimiento:</label>
+                                                <div class="m-scrollable" data-scrollable="true" style="">
+                                                    <p>{{$country->descripcion}}</p>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="col-md-6 mt-2">
+                                                <label style="font-weight: bold">Teléfono:</label>
+                                                <div class="m-scrollable" data-scrollable="true" style="">
+                                                    <p>{{ $artist->artists[0]->users->phone_1}}</p>
+                                                </div>
+                                            </div>
+                                            @if($artist->artists[0]->users->phone_2)
+                                                <div class="col-md-6 mt-2">
+                                                    <label style="font-weight: bold">Otro teléfono:</label>
+                                                    <div class="m-scrollable" data-scrollable="true" style="">
+                                                        <p>{{$artist->artists[0]->users->phone_2 }}</p>
+                                                    </div>
+                                                </div>
+                                            @endif
+                                            <div class="col-md-6 mt-2">
+                                                <label style="font-weight: bold">Linea de convocatoria:</label>
+                                                <div class="m-scrollable" data-scrollable="true" style="">
+                                                    <p>{{ $artist->artists[0]->personType->name}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mt-2">
+                                                <label style="font-weight: bold">Actuara como:</label>
+                                                <div class="m-scrollable" data-scrollable="true" style="">
+                                                    <p>{{ $artist->artists[0]->artistType->name}}</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 mt-2">
+                                                <label style="font-weight: bold">Documento de identificación:</label>
+                                                <br>
+                                                <button type="button" class="btn btn-primary ver_pdf_aspirante"
+                                                        data-toggle="modal"
+                                                        data-target="#verpdfidentificacion">
+                                                    Ver documento de identidad
+                                                </button>
+                                                @if(\App\User::navigation() == "Gestor")
+
+                                                    <div class="row drop_pdf_asp" style="display: none">
+
+                                                        <div class="m-form__group form-group">
+                                                            <div class="col-lg-12 m-form__group-sub">
+                                                                <label for="">Seleccione el tipo de formato para subir
+                                                                    el
+                                                                    documento de identificación</label>
+                                                                <div class="m-radio-inline">
+                                                                    <label class="m-radio">
+                                                                        <input type="radio"
+                                                                               name="aspirante[identificacionDoc]"
+                                                                               value="1" checked="checked"> Imagen
+                                                                        <span></span>
+                                                                    </label>
+                                                                    <label class="m-radio">
+                                                                        <input type="radio"
+                                                                               name="aspirante[identificacionDoc]"
+                                                                               value="2"> PDF
+                                                                        <span></span>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+
+                                                            <div id="image-docuemnt-aspirante"
+                                                                 class="form-group m-form__group row">
+                                                                <div class="col-lg-6 m-form__group-sub">
+                                                                    <label for="">Imagen documento identificación
+                                                                        frente</label>
                                                                     <div
-                                                                        class="m-dropzone dropzone-soporte m-dropzone--success"
+                                                                        class="m-dropzone file-image-document-aspirante-frente m-dropzone--success"
                                                                         action="inc/api/dropzone/upload.php"
                                                                         id="m-dropzone-three">
                                                                         <div
                                                                             class="m-dropzone__msg dz-message needsclick">
-                                                                            <h3 class="m-dropzone__msg-title">{{ __('Subir formulario offline en formato PDF') }}</h3>
+                                                                            <h3 class="m-dropzone__msg-title">Subir foto
+                                                                                del
+                                                                                frente de su documento de
+                                                                                identificación</h3>
+                                                                            <span
+                                                                                class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6 m-form__group-sub">
+                                                                    <label for="">Imagen documento identificación
+                                                                        atras</label>
+                                                                    <div
+                                                                        class="m-dropzone file-image-document-aspirante-atras m-dropzone--success"
+                                                                        action="inc/api/dropzone/upload.php"
+                                                                        id="m-dropzone-three">
+                                                                        <div
+                                                                            class="m-dropzone__msg dz-message needsclick">
+                                                                            <h3 class="m-dropzone__msg-title">Subir foto
+                                                                                de la
+                                                                                parte de atrás de su documento de
+                                                                                identificación</h3>
                                                                             <span
                                                                                 class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
+
+                                                            <div id="pdf-docuemnt-aspirante" style="display: none"
+                                                                 class="form-group m-form__group row">
+                                                                <div class="col">
+                                                                    <div class="form-group m-form__group ">
+                                                                        <div
+                                                                            class="m-dropzone dropzone m-dropzone--success"
+                                                                            action="inc/api/dropzone/upload.php"
+                                                                            id="m-dropzone-three">
+                                                                            <div
+                                                                                class="m-dropzone__msg dz-message needsclick">
+                                                                                <h3 class="m-dropzone__msg-title">{{ __('Subir documento de identificación por ambos lados') }}</h3>
+                                                                                <span
+                                                                                    class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
+                                                        <form id="form_update_img" method="post"
+                                                              action="{{ route('update.imgdoc.artist.gestor') }}"
+                                                              enctype="multipart/form-data"
+                                                              class="m-form m-form--label-align-left- m-form--state-"
+                                                              id="actualizar_img_asp">
+                                                            @csrf {{ method_field('PUT') }}
+                                                            <input type="hidden"
+                                                                   name="aspirante[urlImageDocumentFrente]"
+                                                                   class="form-control m-input" value="">
+                                                            <input type="hidden" name="aspirante[urlImageDocumentAtras]"
+                                                                   class="form-control m-input" value="">
+                                                            <input type="hidden" name="aspirante[idAspirante]"
+                                                                   class="form-control m-input"
+                                                                   value="{{  $artist->artists[0]->user_id}}">
+
+                                                        </form>
+
                                                     </div>
-
-
-                                                </div>
-                                                <i class="flaticon-edit ml-3 update_pdf_soporte"
-                                                   style="color:#716aca; cursor:pointer;"></i>
-                                                <button type="button" class="btn btn-primary cancel_pdf_soporte"
-                                                        style="display:none">Cancelar
-                                                </button>
-
-                                            @endif
-
-                                        </div>
-
-                                    </div>
-                                    {{-- modal soporte --}}
-                                    <div class="modal fade" id="verpdfsoporte" tabindex="-1"
-                                         role="dialog"
-                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog modal-lg" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLongTitle">
-                                                        Documento soporte
-                                                        de {{ $artist->artists[0]->users->name}} {{ $artist->artists[0]->users->last_name}} {{ $artist->artists[0]->users->second_last_name}}</h5>
-                                                    <button type="button" class="close" data-dismiss="modal"
-                                                            aria-label="Close">
-                                                        <span aria-hidden="true">×</span>
+                                                    <i class="flaticon-edit ml-3 update_pdf_asp"
+                                                       style="color:#716aca; cursor:pointer;"></i>
+                                                    <button type="button" class="btn btn-primary cancel_pdf_asp"
+                                                            style="display:none">Cancelar
                                                     </button>
-                                                </div>
-                                                <div class="modal-body">
+                                                    <button id="btn_enviar_asp" type="button"
+                                                            class="btn btn-primary  enviar_asp"
+                                                            style="display:none">enviar
+                                                    </button>
+                                                @endif
 
-                                                    @if(!$artist->artists[0]->evidence_document)
-                                                        <p>No se cargo el documento correctamente</p>
-                                                    @else
-                                                        <div>
-                                                            <embed src="{{ $artist->artists[0]->evidence_document}}"
-                                                                   frameborder="0" width="100%" height="400px">
-                                                        </div>
-                                                    @endif
-                                                </div>
-                                                <div class="modal-footer">
+                                            </div>
 
+
+                                            <div class="col-md-12 pt-4">
+
+                                                <label style="font-weight: bold">{{ __('biografia') }}:</label>
+                                                <div class="m-scrollable" data-scrollable="true" style="">
+                                                    <p style="text-align: justify">{{ $artist->artists[0]->biography }}</p>
                                                 </div>
                                             </div>
+                                            {{-- @dd($artist) --}}
+
                                         </div>
+                                        @if($artist->artists[0]->gestor_id !== null)
+                                            <hr>
+                                            <div class="ml-2">
+
+                                                {{-- @dd($artist->users->name) --}}
+                                                <h5 style="font-weight: bold"
+                                                    class="">Aspirante registrado por el gestor <a
+                                                        href="{{ route('profile.managament', $artist->artists[0]->userGestor->slug)}}"><span>{{ $artist->artists[0]->userGestor->name }} {{$artist->artists[0]->userGestor->last_name}}</span></a>
+                                                </h5>
+                                                <div class="">
+                                                    <br>
+                                                    <label style="font-weight: bold">Documento de soporte:</label>
+                                                    <br>
+                                                    <button type="button" class="btn btn-primary btn_pdf_soporte"
+                                                            data-toggle="modal"
+                                                            data-target="#verpdfsoporte">
+                                                        Ver documento de soporte
+                                                    </button>
+                                                    @if(\App\User::navigation() == "Gestor")
+
+                                                        <div class="row drop_soporte" style="display: none">
+
+                                                            <div class="m-form__group form-group">
+
+                                                                <div id="pdf-soporte"
+                                                                     class="form-group m-form__group row">
+                                                                    <div class="col">
+                                                                        <div class="form-group m-form__group ">
+                                                                            <div
+                                                                                class="m-dropzone dropzone-soporte m-dropzone--success"
+                                                                                action="inc/api/dropzone/upload.php"
+                                                                                id="m-dropzone-three">
+                                                                                <div
+                                                                                    class="m-dropzone__msg dz-message needsclick">
+                                                                                    <h3 class="m-dropzone__msg-title">{{ __('Subir formulario offline en formato PDF') }}</h3>
+                                                                                    <span
+                                                                                        class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+                                                        </div>
+                                                        <i class="flaticon-edit ml-3 update_pdf_soporte"
+                                                           style="color:#716aca; cursor:pointer;"></i>
+                                                        <button type="button" class="btn btn-primary cancel_pdf_soporte"
+                                                                style="display:none">Cancelar
+                                                        </button>
+
+                                                    @endif
+
+                                                </div>
+
+                                            </div>
+                                            {{-- modal soporte --}}
+                                            <div class="modal fade" id="verpdfsoporte" tabindex="-1"
+                                                 role="dialog"
+                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLongTitle">
+                                                                Documento soporte
+                                                                de {{ $artist->artists[0]->users->name}} {{ $artist->artists[0]->users->last_name}} {{ $artist->artists[0]->users->second_last_name}}</h5>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                    aria-label="Close">
+                                                                <span aria-hidden="true">×</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+
+                                                            @if(!$artist->artists[0]->evidence_document)
+                                                                <p>No se cargo el documento correctamente</p>
+                                                            @else
+                                                                <div>
+                                                                    <embed
+                                                                        src="{{ $artist->artists[0]->evidence_document}}"
+                                                                        frameborder="0" width="100%" height="400px">
+                                                                </div>
+                                                            @endif
+                                                        </div>
+                                                        <div class="modal-footer">
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endif
                                     </div>
-                                @endif
-                            </div>
 
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    @if( count($artist->artists[0]->teams) != 0)
-
-        <!--begin::Portlet-->
-            <div class="row">
-                <div class="col-xl-12 col-lg-12">
-                    <div class="m-portlet m-portlet--full-height">
-                        <div class="m-portlet__head">
-                            <div class="m-portlet__head-caption">
-                                <div class="m-portlet__head-title">
-                                    <h3 class="m-portlet__head-text">
-                                        Información de los integrantes
-                                    </h3>
                                 </div>
                             </div>
                         </div>
-                        <div class="m-portlet__body">
-                            <div class="row mb-4 pl-4">
+                    </div>
+                </div>
 
-                                <h5 class="mr-3">Nombre de la agrupación: </h5>
-                                <span> {{ $artist->artists[0]->name_team }}</span>
-                            </div>
-                            <div class="m-accordion m-accordion--bordered m-accordion--solid" id="m_accordion_4"
-                                 role="tablist">
+            @if( count($artist->artists[0]->teams) != 0)
 
-                                <!--begin::Item-->
-                                @foreach ($artist->artists[0]->teams as $team)
-
-                                    {{-- @dd($team) --}}
-                                    <div class="m-accordion__item">
-                                        <div class="m-accordion__item-head collapsed" role="tab"
-                                             id="m_accordion_4_item_1_head"
-                                             data-toggle="collapse" href="#m_accordion_4_item_{{ $loop->iteration }}"
-                                             aria-expanded="    false">
-                                            <span class="m-accordion__item-icon">{{ $loop->iteration }}</span>
-                                            <span class="m-accordion__item-title">{{ $team->name }}</span>
-                                            <span class="m-accordion__item-mode"></span>
+                <!--begin::Portlet-->
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12">
+                            <div class="m-portlet m-portlet--full-height">
+                                <div class="m-portlet__head">
+                                    <div class="m-portlet__head-caption">
+                                        <div class="m-portlet__head-title">
+                                            <h3 class="m-portlet__head-text">
+                                                Información de los integrantes
+                                            </h3>
                                         </div>
-                                        <div class="m-accordion__item-body collapse"
-                                             id="m_accordion_4_item_{{ $loop->iteration }}" class=" " role="tabpanel"
-                                             aria-labelledby="m_accordion_4_item_1_head" data-parent="#m_accordion_4">
-                                            <div class="m-accordion__item-content">
-                                                <div class="m-portlet__body ml-5">
-                                                    <div class="row">
+                                    </div>
+                                </div>
+                                <div class="m-portlet__body">
+                                    <div class="row mb-4 pl-4">
 
+                                        <h5 class="mr-3">Nombre de la agrupación: </h5>
+                                        <span> {{ $artist->artists[0]->name_team }}</span>
+                                    </div>
+                                    <div class="m-accordion m-accordion--bordered m-accordion--solid" id="m_accordion_4"
+                                         role="tablist">
 
-                                                        <div class="biografia col-md-12">
+                                        <!--begin::Item-->
+                                        @foreach ($artist->artists[0]->teams as $team)
+
+                                            {{-- @dd($team) --}}
+                                            <div class="m-accordion__item">
+                                                <div class="m-accordion__item-head collapsed" role="tab"
+                                                     id="m_accordion_4_item_1_head"
+                                                     data-toggle="collapse"
+                                                     href="#m_accordion_4_item_{{ $loop->iteration }}"
+                                                     aria-expanded="    false">
+                                                    <span class="m-accordion__item-icon">{{ $loop->iteration }}</span>
+                                                    <span class="m-accordion__item-title">{{ $team->name }}</span>
+                                                    <span class="m-accordion__item-mode"></span>
+                                                </div>
+                                                <div class="m-accordion__item-body collapse"
+                                                     id="m_accordion_4_item_{{ $loop->iteration }}" class=" "
+                                                     role="tabpanel"
+                                                     aria-labelledby="m_accordion_4_item_1_head"
+                                                     data-parent="#m_accordion_4">
+                                                    <div class="m-accordion__item-content">
+                                                        <div class="m-portlet__body ml-5">
                                                             <div class="row">
 
 
-                                                                <div class="col-md-4 mt-2">
-                                                                    <label style="font-weight: bold">Tipo
-                                                                        identificación:</label>
-                                                                    <div class="m-scrollable" data-scrollable="true"
-                                                                         style="">
-                                                                        <p>{{ $team->documentType->document}}</p>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-4 mt-2">
-                                                                    <label
-                                                                        style="font-weight: bold">Identificación:</label>
-                                                                    <div class="m-scrollable" data-scrollable="true"
-                                                                         style="">
-                                                                        <p>{{ $team->identification}}</p>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-4 mt-2">
-                                                                    <label style="font-weight: bold">Nombre:</label>
-                                                                    <div class="m-scrollable" data-scrollable="true"
-                                                                         style="">
-                                                                        <p>{{ $team->name}}</p>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-4 mt-2">
-                                                                    <label style="font-weight: bold">Apellidos:</label>
-                                                                    <div class="m-scrollable" data-scrollable="true"
-                                                                         style="">
-                                                                        <p>{{ $team->last_name}} {{ $team->second_last_name }}</p>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-4 mt-2">
-                                                                    <label style="font-weight: bold">Direccion:</label>
-                                                                    <div class="m-scrollable" data-scrollable="true"
-                                                                         style="">
-                                                                        <p>{{ $team->addres}}</p>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-4 mt-2">
-                                                                    <label style="font-weight: bold">Departamento de
-                                                                        residencia:</label>
-                                                                    <div class="m-scrollable" data-scrollable="true"
-                                                                         style="">
-                                                                        <p>{{ $team->residencePlace->departaments->descripcion}}</p>
-                                                                    </div>
-
-                                                                </div>
-                                                                <div class="col-md-4 mt-2">
-                                                                    <label style="font-weight: bold">Ciudad de
-                                                                        residencia:</label>
-                                                                    <div class="m-scrollable" data-scrollable="true"
-                                                                         style="">
-                                                                        <p>{{ $team->residencePlace->descripcion}}</p>
-                                                                    </div>
-
-                                                                </div>
-                                                                <div class="col-md-4 mt-2">
-                                                                    <label style="font-weight: bold">Fecha de
-                                                                        nacimiento:</label>
-                                                                    <div class="m-scrollable" data-scrollable="true"
-                                                                         style="">
-                                                                        <p>{{  Carbon\Carbon::parse($team->birthday)->formatLocalized('%d de %B de %Y') }}</p>
-                                                                    </div>
-                                                                </div>
+                                                                <div class="biografia col-md-12">
+                                                                    <div class="row">
 
 
-                                                                {{-- @if($artist->artists[0]->township)
-                                                                <div class="col-md-4 mt-2">
-                                                                <label style="font-weight: bold">Vereda/Corregimiento:</label>
-                                                                <div class="m-scrollable" data-scrollable="true" style="">
-                                                                    <p>{{ $artist->artists[0]->beneficiary[0]->township}}</p>
-                                                                </div>
-                                                                </div>
-                                                                @endif --}}
-                                                                <div class="col-md-4 mt-2">
-                                                                    <label style="font-weight: bold">Teléfono:</label>
-                                                                    <div class="m-scrollable" data-scrollable="true"
-                                                                         style="">
-                                                                        <p>{{ $team->phone1}}</p>
-                                                                    </div>
-                                                                </div>
-                                                                @if($team->phone2)
-                                                                    <div class="col-md-4 mt-2">
-                                                                        <label style="font-weight: bold">Teléfono
-                                                                            2:</label>
-                                                                        <div class="m-scrollable" data-scrollable="true"
-                                                                             style="">
-                                                                            <p>{{ $team->phone2}}</p>
+                                                                        <div class="col-md-4 mt-2">
+                                                                            <label style="font-weight: bold">Tipo
+                                                                                identificación:</label>
+                                                                            <div class="m-scrollable"
+                                                                                 data-scrollable="true"
+                                                                                 style="">
+                                                                                <p>{{ $team->documentType->document}}</p>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                @endif
-                                                                <div class="col-md-4 mt-2">
+                                                                        <div class="col-md-4 mt-2">
+                                                                            <label
+                                                                                style="font-weight: bold">Identificación:</label>
+                                                                            <div class="m-scrollable"
+                                                                                 data-scrollable="true"
+                                                                                 style="">
+                                                                                <p>{{ $team->identification}}</p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-4 mt-2">
+                                                                            <label
+                                                                                style="font-weight: bold">Nombre:</label>
+                                                                            <div class="m-scrollable"
+                                                                                 data-scrollable="true"
+                                                                                 style="">
+                                                                                <p>{{ $team->name}}</p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-4 mt-2">
+                                                                            <label
+                                                                                style="font-weight: bold">Apellidos:</label>
+                                                                            <div class="m-scrollable"
+                                                                                 data-scrollable="true"
+                                                                                 style="">
+                                                                                <p>{{ $team->last_name}} {{ $team->second_last_name }}</p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-4 mt-2">
+                                                                            <label
+                                                                                style="font-weight: bold">Direccion:</label>
+                                                                            <div class="m-scrollable"
+                                                                                 data-scrollable="true"
+                                                                                 style="">
+                                                                                <p>{{ $team->addres}}</p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-4 mt-2">
+                                                                            <label style="font-weight: bold">Departamento
+                                                                                de
+                                                                                residencia:</label>
+                                                                            <div class="m-scrollable"
+                                                                                 data-scrollable="true"
+                                                                                 style="">
+                                                                                <p>{{ $team->residencePlace->departaments->descripcion}}</p>
+                                                                            </div>
 
-                                                                    <label style="font-weight: bold">Instrumento que
-                                                                        interpreta:</label>
-                                                                    <div class="m-scrollable" data-scrollable="true"
-                                                                         style="">
-                                                                        <p style="text-align: justify">{{ $team->role}}</p>
-                                                                    </div>
-                                                                </div>
+                                                                        </div>
+                                                                        <div class="col-md-4 mt-2">
+                                                                            <label style="font-weight: bold">Ciudad de
+                                                                                residencia:</label>
+                                                                            <div class="m-scrollable"
+                                                                                 data-scrollable="true"
+                                                                                 style="">
+                                                                                <p>{{ $team->residencePlace->descripcion}}</p>
+                                                                            </div>
 
-                                                                <div class="col-md-4 mt-2">
-                                                                    <label style="font-weight: bold">Departamento de
-                                                                        expedición:</label>
-                                                                    <div class="m-scrollable" data-scrollable="true"
-                                                                         style="">
-                                                                        <p>{{ $team->expeditionPlace->departaments->descripcion}}</p>
-                                                                    </div>
+                                                                        </div>
+                                                                        <div class="col-md-4 mt-2">
+                                                                            <label style="font-weight: bold">Fecha de
+                                                                                nacimiento:</label>
+                                                                            <div class="m-scrollable"
+                                                                                 data-scrollable="true"
+                                                                                 style="">
+                                                                                <p>{{  Carbon\Carbon::parse($team->birthday)->formatLocalized('%d de %B de %Y') }}</p>
+                                                                            </div>
+                                                                        </div>
 
-                                                                </div>
-                                                                <div class="col-md-4 mt-2">
-                                                                    <label style="font-weight: bold">Ciudad de
-                                                                        expedición:</label>
-                                                                    <div class="m-scrollable" data-scrollable="true"
-                                                                         style="">
-                                                                        <p>{{ $team->expeditionPlace->descripcion}}</p>
-                                                                    </div>
 
-                                                                </div>
-                                                                <div class="col-md-4 mt-2">
-                                                                    <label style="font-weight: bold">Documento de
-                                                                        identificación:</label>
-                                                                    <br>
-                                                                    <button type="button" class="btn btn-primary"
-                                                                            data-toggle="modal"
-                                                                            data-target="#pdfidentificacion{{$loop->iteration}}">
-                                                                        Ver documento de identidad
-                                                                    </button>
-                                                                    <div
-                                                                        class="row drop_pdf_team{{ $loop->iteration }}"
-                                                                        style="display: none">
-                                                                        @if(\App\User::navigation() == "Gestor")
+                                                                        {{-- @if($artist->artists[0]->township)
+                                                                        <div class="col-md-4 mt-2">
+                                                                        <label style="font-weight: bold">Vereda/Corregimiento:</label>
+                                                                        <div class="m-scrollable" data-scrollable="true" style="">
+                                                                            <p>{{ $artist->artists[0]->beneficiary[0]->township}}</p>
+                                                                        </div>
+                                                                        </div>
+                                                                        @endif --}}
+                                                                        <div class="col-md-4 mt-2">
+                                                                            <label
+                                                                                style="font-weight: bold">Teléfono:</label>
+                                                                            <div class="m-scrollable"
+                                                                                 data-scrollable="true"
+                                                                                 style="">
+                                                                                <p>{{ $team->phone1}}</p>
+                                                                            </div>
+                                                                        </div>
+                                                                        @if($team->phone2)
+                                                                            <div class="col-md-4 mt-2">
+                                                                                <label style="font-weight: bold">Teléfono
+                                                                                    2:</label>
+                                                                                <div class="m-scrollable"
+                                                                                     data-scrollable="true"
+                                                                                     style="">
+                                                                                    <p>{{ $team->phone2}}</p>
+                                                                                </div>
+                                                                            </div>
+                                                                        @endif
+                                                                        <div class="col-md-4 mt-2">
+
+                                                                            <label style="font-weight: bold">Instrumento
+                                                                                que
+                                                                                interpreta:</label>
+                                                                            <div class="m-scrollable"
+                                                                                 data-scrollable="true"
+                                                                                 style="">
+                                                                                <p style="text-align: justify">{{ $team->role}}</p>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-md-4 mt-2">
+                                                                            <label style="font-weight: bold">Departamento
+                                                                                de
+                                                                                expedición:</label>
+                                                                            <div class="m-scrollable"
+                                                                                 data-scrollable="true"
+                                                                                 style="">
+                                                                                <p>{{ $team->expeditionPlace->departaments->descripcion}}</p>
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <div class="col-md-4 mt-2">
+                                                                            <label style="font-weight: bold">Ciudad de
+                                                                                expedición:</label>
+                                                                            <div class="m-scrollable"
+                                                                                 data-scrollable="true"
+                                                                                 style="">
+                                                                                <p>{{ $team->expeditionPlace->descripcion}}</p>
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <div class="col-md-4 mt-2">
+                                                                            <label style="font-weight: bold">Documento
+                                                                                de
+                                                                                identificación:</label>
+                                                                            <br>
+                                                                            <button type="button"
+                                                                                    class="btn btn-primary"
+                                                                                    data-toggle="modal"
+                                                                                    data-target="#pdfidentificacion{{$loop->iteration}}">
+                                                                                Ver documento de identidad
+                                                                            </button>
                                                                             <div
-                                                                                class="m-form__group form-group">
-                                                                                <div
-                                                                                    class="col-lg-12 m-form__group-sub">
-                                                                                    <label for="">Seleccione
-                                                                                        el tipo de
-                                                                                        formato para
-                                                                                        subir el
-                                                                                        documento de
-                                                                                        identificación</label>
+                                                                                class="row drop_pdf_team{{ $loop->iteration }}"
+                                                                                style="display: none">
+                                                                                @if(\App\User::navigation() == "Gestor")
                                                                                     <div
-                                                                                        class="m-radio-inline">
-                                                                                        <label
-                                                                                            class="m-radio">
-                                                                                            <input
-                                                                                                type="radio"
-                                                                                                onClick="changeOptionDocument(this, {{$loop->iteration}})"
-                                                                                                name="team[identificacionDoc]{{ $loop->iteration }}"
-                                                                                                value="1"
-                                                                                                checked="checked">
-                                                                                            Imagen
-                                                                                            <span></span>
-                                                                                        </label>
-                                                                                        <label
-                                                                                            class="m-radio">
-                                                                                            <input
-                                                                                                type="radio"
-                                                                                                onClick="changeOptionDocument(this, {{$loop->iteration}})"
-                                                                                                name="team[identificacionDoc]{{ $loop->iteration }}"
-                                                                                                value="2">
-                                                                                            PDF
-                                                                                            <span></span>
-                                                                                        </label>
-                                                                                    </div>
-                                                                                </div>
-
-                                                                                <div
-                                                                                    id="image-docuemnt-team{{ $loop->iteration }}"
-                                                                                    class="form-group m-form__group row">
-                                                                                    <div
-                                                                                        class="col-lg-6 m-form__group-sub">
-                                                                                        <label
-                                                                                            for="">Imagen
-                                                                                            documento
-                                                                                            identificación
-                                                                                            frente</label>
+                                                                                        class="m-form__group form-group">
                                                                                         <div
-                                                                                            class="m-dropzone file-image-document-team-frente{{ $loop->iteration }} m-dropzone--success"
-                                                                                            action="inc/api/dropzone/upload.php"
-                                                                                            id="m-dropzone-three">
+                                                                                            class="col-lg-12 m-form__group-sub">
+                                                                                            <label for="">Seleccione
+                                                                                                el tipo de
+                                                                                                formato para
+                                                                                                subir el
+                                                                                                documento de
+                                                                                                identificación</label>
                                                                                             <div
-                                                                                                class="m-dropzone__msg dz-message needsclick">
-                                                                                                <h3 class="m-dropzone__msg-title">
-                                                                                                    Subir foto del
-                                                                                                    frente de su
-                                                                                                    documento de
-                                                                                                    identificación</h3>
-                                                                                                <span
-                                                                                                    class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                                                                                class="m-radio-inline">
+                                                                                                <label
+                                                                                                    class="m-radio">
+                                                                                                    <input
+                                                                                                        type="radio"
+                                                                                                        onClick="changeOptionDocument(this, {{$loop->iteration}})"
+                                                                                                        name="team[identificacionDoc]{{ $loop->iteration }}"
+                                                                                                        value="1"
+                                                                                                        checked="checked">
+                                                                                                    Imagen
+                                                                                                    <span></span>
+                                                                                                </label>
+                                                                                                <label
+                                                                                                    class="m-radio">
+                                                                                                    <input
+                                                                                                        type="radio"
+                                                                                                        onClick="changeOptionDocument(this, {{$loop->iteration}})"
+                                                                                                        name="team[identificacionDoc]{{ $loop->iteration }}"
+                                                                                                        value="2">
+                                                                                                    PDF
+                                                                                                    <span></span>
+                                                                                                </label>
                                                                                             </div>
                                                                                         </div>
-                                                                                    </div>
-                                                                                    <div
-                                                                                        class="col-lg-6 m-form__group-sub">
-                                                                                        <label
-                                                                                            for="">Imagen
-                                                                                            documento
-                                                                                            identificación
-                                                                                            atras</label>
-                                                                                        <div
-                                                                                            class="m-dropzone file-image-document-team-atras{{ $loop->iteration }} m-dropzone--success"
-                                                                                            action="inc/api/dropzone/upload.php"
-                                                                                            id="m-dropzone-three">
-                                                                                            <div
-                                                                                                class="m-dropzone__msg dz-message needsclick">
-                                                                                                <h3 class="m-dropzone__msg-title">
-                                                                                                    Subir foto de la
-                                                                                                    parte de
-                                                                                                    atrás de su
-                                                                                                    documento de
-                                                                                                    identificación</h3>
-                                                                                                <span
-                                                                                                    class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
 
-                                                                                <div
-                                                                                    id="pdf-docuemnt-team{{ $loop->iteration }}"
-                                                                                    style="display: none"
-                                                                                    class="form-group m-form__group row">
-                                                                                    <div
-                                                                                        class="col">
                                                                                         <div
-                                                                                            class="form-group m-form__group ">
+                                                                                            id="image-docuemnt-team{{ $loop->iteration }}"
+                                                                                            class="form-group m-form__group row">
                                                                                             <div
-                                                                                                class="m-dropzone dropzone-team{{ $loop->iteration }} m-dropzone--success"
-                                                                                                action="inc/api/dropzone/upload.php"
-                                                                                                id="m-dropzone-three">
+                                                                                                class="col-lg-6 m-form__group-sub">
+                                                                                                <label
+                                                                                                    for="">Imagen
+                                                                                                    documento
+                                                                                                    identificación
+                                                                                                    frente</label>
                                                                                                 <div
-                                                                                                    class="m-dropzone__msg dz-message needsclick">
-                                                                                                    <h3 class="m-dropzone__msg-title">{{ __('Subir documento de identificación por ambos lados') }}</h3>
-                                                                                                    <span
-                                                                                                        class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                                                                                    class="m-dropzone file-image-document-team-frente{{ $loop->iteration }} m-dropzone--success"
+                                                                                                    action="inc/api/dropzone/upload.php"
+                                                                                                    id="m-dropzone-three">
+                                                                                                    <div
+                                                                                                        class="m-dropzone__msg dz-message needsclick">
+                                                                                                        <h3 class="m-dropzone__msg-title">
+                                                                                                            Subir foto
+                                                                                                            del
+                                                                                                            frente de su
+                                                                                                            documento de
+                                                                                                            identificación</h3>
+                                                                                                        <span
+                                                                                                            class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div
+                                                                                                class="col-lg-6 m-form__group-sub">
+                                                                                                <label
+                                                                                                    for="">Imagen
+                                                                                                    documento
+                                                                                                    identificación
+                                                                                                    atras</label>
+                                                                                                <div
+                                                                                                    class="m-dropzone file-image-document-team-atras{{ $loop->iteration }} m-dropzone--success"
+                                                                                                    action="inc/api/dropzone/upload.php"
+                                                                                                    id="m-dropzone-three">
+                                                                                                    <div
+                                                                                                        class="m-dropzone__msg dz-message needsclick">
+                                                                                                        <h3 class="m-dropzone__msg-title">
+                                                                                                            Subir foto
+                                                                                                            de la
+                                                                                                            parte de
+                                                                                                            atrás de su
+                                                                                                            documento de
+                                                                                                            identificación</h3>
+                                                                                                        <span
+                                                                                                            class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                        <div
+                                                                                            id="pdf-docuemnt-team{{ $loop->iteration }}"
+                                                                                            style="display: none"
+                                                                                            class="form-group m-form__group row">
+                                                                                            <div
+                                                                                                class="col">
+                                                                                                <div
+                                                                                                    class="form-group m-form__group ">
+                                                                                                    <div
+                                                                                                        class="m-dropzone dropzone-team{{ $loop->iteration }} m-dropzone--success"
+                                                                                                        action="inc/api/dropzone/upload.php"
+                                                                                                        id="m-dropzone-three">
+                                                                                                        <div
+                                                                                                            class="m-dropzone__msg dz-message needsclick">
+                                                                                                            <h3 class="m-dropzone__msg-title">{{ __('Subir documento de identificación por ambos lados') }}</h3>
+                                                                                                            <span
+                                                                                                                class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                                                                                        </div>
+                                                                                                    </div>
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
-                                                                                </div>
+
+
                                                                             </div>
+                                                                            <i class="flaticon-edit ml-3 update_pdf_team{{ $loop->iteration }}"
+                                                                               style="color:#716aca; cursor:pointer;"></i>
+                                                                            <form
+                                                                                id="form_update_img_team{{ $loop->iteration }}"
+                                                                                method="post"
+                                                                                action="{{ route('update.imgdoc.team') }}"
+                                                                                enctype="multipart/form-data"
+                                                                                class="m-form m-form--label-align-left- m-form--state-"
+                                                                                id="actualizar_img_team">
+                                                                                @csrf {{ method_field('PUT') }}
+                                                                                <input type="hidden"
+                                                                                       name="team[urlImageDocumentFrente]{{ $loop->iteration }}"
+                                                                                       class="form-control m-input"
+                                                                                       value="">
+                                                                                <input type="hidden"
+                                                                                       name="team[urlImageDocumentAtras]{{ $loop->iteration }}"
+                                                                                       class="form-control m-input"
+                                                                                       value="">
+                                                                                <input type="hidden"
+                                                                                       name="team[id]"
+                                                                                       class="form-control m-input"
+                                                                                       value="{{$team->id}}">
 
+                                                                            </form>
+                                                                            <button
+                                                                                type="button"
+                                                                                class="btn btn-primary cancel_pdf_team{{ $loop->iteration }}"
+                                                                                style="display:none">
+                                                                                Cancelar
+                                                                            </button>
+                                                                            <button
+                                                                                id="btn_enviar_team{{ $loop->iteration }}"
+                                                                                type="button"
+                                                                                class="btn btn-primary  enviar_team{{ $loop->iteration }}"
+                                                                                style="display:none">
+                                                                                enviar
+                                                                            </button>
+                                                                            @endif
 
+                                                                        </div>
                                                                     </div>
-                                                                    <i class="flaticon-edit ml-3 update_pdf_team{{ $loop->iteration }}"
-                                                                       style="color:#716aca; cursor:pointer;"></i>
-                                                                    <form
-                                                                        id="form_update_img_team{{ $loop->iteration }}"
-                                                                        method="post"
-                                                                        action="{{ route('update.imgdoc.team') }}"
-                                                                        enctype="multipart/form-data"
-                                                                        class="m-form m-form--label-align-left- m-form--state-"
-                                                                        id="actualizar_img_team">
-                                                                        @csrf {{ method_field('PUT') }}
-                                                                        <input type="hidden"
-                                                                               name="team[urlImageDocumentFrente]{{ $loop->iteration }}"
-                                                                               class="form-control m-input"
-                                                                               value="">
-                                                                        <input type="hidden"
-                                                                               name="team[urlImageDocumentAtras]{{ $loop->iteration }}"
-                                                                               class="form-control m-input"
-                                                                               value="">
-                                                                        <input type="hidden"
-                                                                               name="team[id]"
-                                                                               class="form-control m-input"
-                                                                               value="{{$team->id}}">
-
-                                                                    </form>
-                                                                    <button
-                                                                        type="button"
-                                                                        class="btn btn-primary cancel_pdf_team{{ $loop->iteration }}"
-                                                                        style="display:none">
-                                                                        Cancelar
-                                                                    </button>
-                                                                    <button
-                                                                        id="btn_enviar_team{{ $loop->iteration }}"
-                                                                        type="button"
-                                                                        class="btn btn-primary  enviar_team{{ $loop->iteration }}"
-                                                                        style="display:none">
-                                                                        enviar
-                                                                    </button>
-                                                                    @endif
-
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal fade" id="pdfidentificacion{{$loop->iteration}}" tabindex="-1"
-                                         role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog modal-lg" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLongTitle">
-                                                        Documento de {{ $team->name}}</h5>
-                                                    <button type="button" class="close" data-dismiss="modal"
-                                                            aria-label="Close">
-                                                        <span aria-hidden="true">×</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    @if($team->pdf_identificacion === "" || $team->pdf_identificacion === null)
-                                                        @if(!$team->img_document_front && !$team->img_document_back)
-                                                            <p>No se cargo el documento
-                                                                correctamente</p>
-                                                        @else
-                                                            <div class="form-group">
-                                                                <label for="">Parte frontal del documento:</label>
-                                                                <img style="width: 100%"
-                                                                     src="{{ $team->img_document_front}}"
-                                                                     alt="">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="">Parte trasera del documento:</label>
-                                                                <img style="width: 100%"
-                                                                     src="{{ $team->img_document_back}}"
-                                                                     alt="">
-                                                            </div>
-                                                        @endif
-                                                    @else
-                                                        @if(!$team->pdf_identificacion)
-                                                            <p>No se cargo el documento
-                                                                correctamente</p>
-                                                        @else
-                                                            <div>
-                                                                <embed
-                                                                    src="{{ $team->pdf_identificacion }}"
-                                                                    frameborder="0" width="100%"
-                                                                    height="400px">
-                                                            </div>
-                                                        @endif
-                                                    @endif
+                                            <div class="modal fade" id="pdfidentificacion{{$loop->iteration}}"
+                                                 tabindex="-1"
+                                                 role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLongTitle">
+                                                                Documento de {{ $team->name}}</h5>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                    aria-label="Close">
+                                                                <span aria-hidden="true">×</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            @if($team->pdf_identificacion === "" || $team->pdf_identificacion === null)
+                                                                @if(!$team->img_document_front && !$team->img_document_back)
+                                                                    <p>No se cargo el documento
+                                                                        correctamente</p>
+                                                                @else
+                                                                    <div class="form-group">
+                                                                        <label for="">Parte frontal del
+                                                                            documento:</label>
+                                                                        <img style="width: 100%"
+                                                                             src="{{ $team->img_document_front}}"
+                                                                             alt="">
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="">Parte trasera del
+                                                                            documento:</label>
+                                                                        <img style="width: 100%"
+                                                                             src="{{ $team->img_document_back}}"
+                                                                             alt="">
+                                                                    </div>
+                                                                @endif
+                                                            @else
+                                                                @if(!$team->pdf_identificacion)
+                                                                    <p>No se cargo el documento
+                                                                        correctamente</p>
+                                                                @else
+                                                                    <div>
+                                                                        <embed
+                                                                            src="{{ $team->pdf_identificacion }}"
+                                                                            frameborder="0" width="100%"
+                                                                            height="400px">
+                                                                    </div>
+                                                                @endif
+                                                            @endif
 
-                                                </div>
-                                                <div class="modal-footer">
+                                                        </div>
+                                                        <div class="modal-footer">
 
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        @endforeach
                                     </div>
-                                @endforeach
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
     </div>
     </div>
     </div>
