@@ -1,7 +1,7 @@
 
 <div class="m-portlet mt-1">
     <div class="m-portlet__body  m-portlet__body--no-padding">
-        <div class="row m-row--no-padding m-row--col-separator-xl">
+        <div class="row m-row--no-padding m-row--col-separator-xl d-flex ">
             <!--=====================================
                 TARJETA USUARIOR REGISTRADOS
             ======================================-->

@@ -192,7 +192,7 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                                                     <li class="m-nav__item text-center">
                                                 <span
                                                     class="changeType w-100 btn btn-danger m-btn m-btn--pill m-btn--wide btn-sm"
-                                                    data-type="{{\App\Project::REJECTED}}">{{ __('Rechazado') }}</span>
+                                                    data-type="{{\App\Project::REJECTED}}">No subsanado</span>
                                                     </li>
                                                     <li class="m-nav__item text-center">
                                                 <span style="color:white"
@@ -203,11 +203,6 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                                                 <span
                                                     class="changeType w-100 btn btn-info m-btn m-btn--pill m-btn--wide btn-sm"
                                                     data-type="{{\App\Project::REVISON_UPDATE}}">{{ __('Nueva revisión') }}</span>
-                                                    </li>
-                                                    <li class="m-nav__item text-center">
-                                                <span
-                                                    class="changeType w-100 btn btn-info m-btn m-btn--pill m-btn--wide btn-sm"
-                                                    data-type="{{\App\Project::NOT_REMEDIED}}">{{ __('No subsanado') }}</span>
                                                     </li>
                                                     <li class="m-nav__separator m-nav__separator--fit">
                                                     </li>
@@ -624,10 +619,10 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                                     info = '<span class="m-badge  m-badge--success m-badge--wide">{{ __('aprovado2') }}</span>';
                                     break;
                                 case 4:
-                                    info = '<span class="m-badge  m-badge--info m-badge--wide">{{ __('publicado2') }}</span>';
+                                    info = '<span class="m-badge  m-badge--warning m-badge--wide">Pendiente</span>';
                                     break;
                                 case 5:
-                                    info = '<span class="m-badge  m-badge--danger m-badge--wide">{{ __('rechazado') }}</span>';
+                                    info = '<span class="m-badge  m-badge--danger m-badge--wide">No subsanado</span>';
                                     break;
                             }
                             return '<div class="text-center">' + info + '</div>';
