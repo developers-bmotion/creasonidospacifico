@@ -98,115 +98,104 @@
 CONTENIDO DEL MODULO PROYECTOS ADMIN
 ======================================-->
 @section('content')
-    {{-- <div class="m-content">
-        <div class="m-portlet m-portlet--mobile">
-            <div class="m-portlet__head">
-                <div class="m-portlet__head-caption">
-                    <div class="m-portlet__head-title">
-                        <h3 class="m-portlet__head-text">
-                            Todos los proyectos
-                        </h3>
+
+    <div class="m-portlet mt-5">
+        <div class="m-portlet__body  m-portlet__body--no-padding">
+            <div class="row m-row--no-padding m-row--col-separator-xl">
+                <!--=====================================
+		            TARJETA USUARIOR REGISTRADOS
+                ======================================-->
+                <div class="col-md-12 col-lg-5 col-xl-2">
+                    <div class="m-widget24 pb-5">
+                        <div class="m-widget24__item">
+                            <h4 class="m-widget24__title">
+                                Aspirantes Registrados
+                            </h4><br>
+                            <span class="m-widget24__desc">Aspirantes con canción</span><br><br>
+                            <span class="m-widget24__stats m--font-black pull-right pl-4" style="float: left">300</span>
+
+                        </div>
                     </div>
                 </div>
-                <div class="m-portlet__head-tools">
-                    <ul class="m-portlet__nav">
+                <!--=====================================
+                       TARJETA USUARIOR PENDIENTES
+               ======================================-->
+                <div class="col-md-12 col-lg-5 col-xl-2">
+                    <div class="m-widget24 pb-5">
+                        <div class="m-widget24__item">
+                            <h4 class="m-widget24__title">
+                                Propuestas Pendientes
+                            </h4><br>
+                            <span class="m-widget24__desc">Enviadas a revisión</span><br><br>
+                            <span class="m-widget24__stats m--font-warning pull-right pl-4" style="float: left">300</span>
 
-                        <li class="m-portlet__nav-item">
-                            <h5 class="mr-2">Mostrando todos los: </h5>
-                            <span id="current_status"
-                                  class="m-badge m-badge--metal m-badge--wide m-badge--rounded">{{ __('revision') }}</span>
-                        </li>
-                        <div class="m-dropdown m-dropdown--inline  m-dropdown--arrow m-dropdown--align-right"
-                             m-dropdown-toggle="hover">
-                            <a href="#" class="m-dropdown__toggle btn btn-warning dropdown-toggle">
-                                {{ __('estado') }}
-                            </a>
-                            <div class="m-dropdown__wrapper">
-                                <span class="m-dropdown__arrow m-dropdown__arrow--right"></span>
-                                <div class="m-dropdown__inner">
-                                    <div class="m-dropdown__body">
-                                        <div class="m-dropdown__content selectType">
-                                            <ul class="m-nav">
-                                                <li class="m-nav__section m-nav__section--first">
-                                                    <span class="m-nav__section-text">{{ __('selecciona') }}</span>
-                                                </li>
-                                                <li class="m-nav__item text-center">
-                                                    <span style="background-color: #9c9ca5"
-                                                          class="changeType w-100 btn btn-metal m-btn m-btn--pill m-btn--wide btn-sm"
-                                                          data-type="{{\App\Project::REVISION}}">{{ __('revision') }}</span>
-                                                </li>
-                                                @if(\App\User::navigation() !== "Subsanador")
-                                                    <li class="m-nav__item text-center">
-                                                        <span
-                                                            class="changeType w-100 btn btn-brand m-btn m-btn--pill m-btn--wide btn-sm"
-                                                            data-type="{{\App\Project::PREAPPROVAL}}">{{ __('pre_aprovado') }}</span>
-
-                                                    </li>
-                                                @endif
-                                                <li class="m-nav__item text-center">
-                                                    <span
-                                                        class="changeType w-100 btn btn-success m-btn m-btn--pill m-btn--wide btn-sm"
-                                                        data-type="{{\App\Project::APPROVAL}}">{{ __('Aprovados') }}</span>
-                                                </li>
-                                                <li class="m-nav__item text-center">
-                                                    <span style="color:white;"
-                                                          class="changeType w-100 btn btn-warning m-btn m-btn--pill m-btn--wide btn-sm"
-                                                          data-type="{{\App\Project::PENDING}}">{{ __('Pendientes') }}</span>
-                                                </li>
-                                                <li class="m-nav__item text-center">
-                                                    <span
-                                                        class="changeType w-100 btn btn-danger m-btn m-btn--pill m-btn--wide btn-sm"
-                                                        data-type="{{\App\Project::REJECTED}}">{{ __('rechazados') }}</span>
-                                                </li>
-                                                <li class="m-nav__item text-center">
-                                                    <span style="color:white"
-                                                          class="changeType w-100 btn btn-success m-btn m-btn--pill m-btn--wide btn-sm"
-                                                          data-type="{{\App\Project::ACEPTED}}">{{ __('Aceptados') }}</span>
-                                                </li>
-                                                <li class="m-nav__item text-center">
-                                                    <span
-                                                        class="changeType w-100 btn btn-info m-btn m-btn--pill m-btn--wide btn-sm"
-                                                        data-type="{{\App\Project::REVISON_UPDATE}}">{{ __('Nueva revisión') }}</span>
-                                                </li>
-                                                <li class="m-nav__item text-center">
-                                                    <span
-                                                        class="changeType w-100 btn btn-info m-btn m-btn--pill m-btn--wide btn-sm"
-                                                        data-type="{{\App\Project::NOT_REMEDIED}}">{{ __('No subsanados') }}</span>
-                                                </li>
-                                                <li class="m-nav__separator m-nav__separator--fit">
-                                                </li>
-                                                <li class="m-nav__item">
-                                                    <span
-                                                        class="changeType w-100 btn btn-metal m-btn m-btn--pill m-btn--wide btn-block">{{ __('todos') }}</span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
-                    </ul>
+                    </div>
+                </div>
+                <!--=====================================
+                        TARJETA USUARIOR NUEVA REVISIÓN
+                ======================================-->
+                <div class="col-md-12 col-lg-5 col-xl-2">
+                    <div class="m-widget24 pb-5">
+                        <div class="m-widget24__item">
+                            <h4 class="m-widget24__title">
+                                Nueva Revisión
+                            </h4><br>
+                            <span class="m-widget24__desc">Corregidas por los aspirantes</span><br><br>
+                            <span class="m-widget24__stats m--font-info pull-right pl-4" style="float: left">300</span>
+
+                        </div>
+                    </div>
+                </div>
+                <!--=====================================
+		            TARJETA USUARIOs ACEPTADOS
+                ======================================-->
+                <div class="col-md-12 col-lg-5 col-xl-2">
+                    <div class="m-widget24 pb-5">
+                        <div class="m-widget24__item">
+                            <h4 class="m-widget24__title">
+                                Propuestas Aceptadas
+                            </h4><br>
+                            <span class="m-widget24__desc">En proceso de curaduria</span><br><br>
+                            <span class="m-widget24__stats m--font-brand pull-right pl-4" style="float: left">300</span>
+
+                        </div>
+                    </div>
+                </div>
+                <!--=====================================
+		            TARJETA USUARIOs NO SUBSANADOS
+                ======================================-->
+                <div class="col-md-12 col-lg-5 col-xl-2">
+                    <div class="m-widget24 pb-5">
+                        <div class="m-widget24__item">
+                            <h4 class="m-widget24__title">
+                                No Subsanados
+                            </h4><br>
+                            <span class="m-widget24__desc">No subsanada o corregidas</span><br><br>
+                            <span class="m-widget24__stats m--font-danger pull-right pl-4" style="float: left">300</span>
+
+                        </div>
+                    </div>
+                </div>
+                <!--=====================================
+		            TARJETA USUARIOs  APROBADAS
+                ======================================-->
+                <div class="col-md-12 col-lg-5 col-xl-2">
+                    <div class="m-widget24 pb-5">
+                        <div class="m-widget24__item">
+                            <h4 class="m-widget24__title">
+                                Aprobadas
+                            </h4><br>
+                            <span class="m-widget24__desc">Aprobadas puntaje</span><br><br>
+                            <span class="m-widget24__stats m--font-success pull-right pl-4" style="float: left">300</span>
+
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="m-portlet__body">
-                <table class="table table-striped- table-bordered table-hover table-checkable"
-                       id="table_projects_admin">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>{{ __('Aspirante') }}</th>
-                        <th>Actuará como</th>
-                        <th>Nombre de la canción</th>
-                        <th>Género musical</th>
-                        <th>{{ __('estado') }}</th>
-                        <th>{{ __('acciones') }}</th>
-                    </tr>
-                    </thead>
-                </table>
-            </div>
         </div>
-    </div> --}}
-    <div class="m-portlet m-portlet--mobile">
+    </div>
+    <div class="m-portlet m-portlet--mobile mt-3">
         <div class="m-portlet__head">
             <div class="m-portlet__head-caption">
                 <div class="m-portlet__head-title">
@@ -215,62 +204,16 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                     </h3>
                 </div>
             </div>
-
-            {{-- <div class="m-portlet__head-tools">
-                <ul class="m-portlet__nav">
-
-                    <li class="m-portlet__nav-item"></li>
-                    <div class="m-dropdown m-dropdown--inline  m-dropdown--arrow m-dropdown--align-right"
-                         m-dropdown-toggle="hover">
-                        <a href="#" class="m-dropdown__toggle btn btn-warning dropdown-toggle">
-                            {{ __('estado') }}
-                        </a>
-                        <div class="m-dropdown__wrapper">
-                            <span class="m-dropdown__arrow m-dropdown__arrow--right"></span>
-                            <div class="m-dropdown__inner">
-                                <div class="m-dropdown__body">
-                                    <div class="m-dropdown__content selectType">
-                                        <ul class="m-nav">
-                                            <li class="m-nav__section m-nav__section--first">
-                                                <span class="m-nav__section-text">{{ __('selecciona') }}</span>
-                                            </li>
-                                            <li class="m-nav__item text-center">
-                                                <span class="changeType w-100 btn btn-outline-metal m-btn m-btn--pill m-btn--wide btn-sm" data-type="{{\App\Project::REVISION}}">{{ __('revision') }}</span>
-                                            </li>
-                                            <li class="m-nav__item text-center">
-                                                <span class="changeType w-100 btn btn-outline-brand m-btn m-btn--pill m-btn--wide btn-sm" data-type="{{\App\Project::PREAPPROVAL}}">{{ __('pre_aprovado') }}</span>
-
-                                            </li>
-                                            <li class="m-nav__item text-center">
-                                                <span class="changeType w-100 btn btn-outline-success m-btn m-btn--pill m-btn--wide btn-sm" data-type="{{\App\Project::APPROVAL}}">{{ __('aprovado') }}</span>
-                                            </li>
-                                            <li class="m-nav__item text-center">
-                                            </li>
-                                            <li class="m-nav__item text-center">
-                                                <span class="changeType w-100 btn btn-outline-danger m-btn m-btn--pill m-btn--wide btn-sm" data-type="{{\App\Project::REJECTED}}">{{ __('rechazados') }}</span>
-                                            </li>
-                                            <li class="m-nav__separator m-nav__separator--fit">
-                                            </li>
-                                            <li class="m-nav__item">
-                                                <span class="changeType w-100 btn btn-outline-danger m-btn m-btn--pill m-btn--wide btn-block">{{ __('todos') }}</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </ul>
-            </div> --}}
         </div>
 
         <div class="m-portlet__body">
             {{-- filtros para datatable --}}
             <div class="row">
-                <select class="form-control m-input m-input--square col-md-3 mb-3  tipoPersona" name="tipoPersona" id="tipoPersona">
+                <select class="form-control m-input m-input--square col-md-3 mb-3  tipoPersona" name="tipoPersona"
+                        id="tipoPersona">
                     <option value="0">Filtrar por tipo persona</option>
                     @foreach ($tipoPersona as $tipoPer)
-                    <option value="{{$tipoPer->id  }}">{{ $tipoPer->name }}</option>
+                        <option value="{{$tipoPer->id  }}">{{ $tipoPer->name }}</option>
                     @endforeach
 
                 </select>
@@ -280,7 +223,7 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                 >
                     <option value="0">Filtrar por modalidad</option>
                     @foreach ($cat as $category)
-                    <option value="{{$category->id}}" >{{$category->category}}</option>
+                        <option value="{{$category->id}}">{{$category->category}}</option>
                     @endforeach
 
                 </select>
@@ -292,7 +235,8 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                         <li class="m-portlet__nav-item row mr-2" style="margin-top: 0.6rem;">
                             <h5 class="mr-2">Estado: </h5>
                             <span id="current_status"
-                                  class="m-badge m-badge--metal m-badge--wide m-badge--rounded" style="height:23px">{{ __('revision') }}</span>
+                                  class="m-badge m-badge--metal m-badge--wide m-badge--rounded"
+                                  style="height:23px">{{ __('revision') }}</span>
                         </li>
                         <div class="m-dropdown m-dropdown--inline  m-dropdown--arrow m-dropdown--align-right"
                              m-dropdown-toggle="hover">
@@ -314,13 +258,13 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                                                       data-type="{{\App\Project::REVISION}}">{{ __('revision') }}</span>
                                                 </li>
                                                 {{-- @if(\App\User::navigation() !== "Subsanador") --}}
-                                                    <li class="m-nav__item text-center">
+                                                <li class="m-nav__item text-center">
                                                     <span
                                                         style="background-color:#9C26EA"
                                                         class="changeType w-100 btn btn-brand m-btn m-btn--pill m-btn--wide btn-sm"
                                                         data-type="{{\App\Project::PREAPPROVAL}}">{{ __('pre_aprovado') }}</span>
 
-                                                    </li>
+                                                </li>
                                                 {{-- @endif --}}
                                                 <li class="m-nav__item text-center">
                                                 <span
@@ -620,7 +564,7 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
         var storeTipoProyecto = "storeTipoProyecto";
         var tipoProyecto = getStorage(storeTipoProyecto);
         var tipoPer = 0;
-        var category=0;
+        var category = 0;
         if (tipoProyecto == 11) {
             tipoProyecto = null
         }
@@ -644,8 +588,8 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                     url: "{{route('aspirants.all')}}",
                     data: {
                         tipoProyecto: tipoProyecto,
-                        tipoPer:tipoPer,
-                        category:category
+                        tipoPer: tipoPer,
+                        category: category
                     }
                 },
                 "columns": [
@@ -669,8 +613,8 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                         // data: 'person_type.name',
                         defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>',
 
-                        render:function(data,type,JsonResultRow, meta){
-                            if (JsonResultRow.person_type){
+                        render: function (data, type, JsonResultRow, meta) {
+                            if (JsonResultRow.person_type) {
                                 return JsonResultRow.person_type.name;
                             }
 
@@ -688,11 +632,9 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                                 });
                             }
 
-                           cat = category != "" ? `${category.category.category}` : '<span class="label label-danger text-center ml-4" style="color:red !important">Sin categoria</span>'
-                           return cat;
+                            cat = category != "" ? `${category.category.category}` : '<span class="label label-danger text-center ml-4" style="color:red !important">Sin categoria</span>'
+                            return cat;
                         },
-
-
 
 
                     },
@@ -719,7 +661,7 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                     //     // defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
                     // },
                     {
-                        data:'users.email',
+                        data: 'users.email',
                         render: function (data, type, JsonResultRow, meta) {
                             // console.log(JsonResultRow.users.email,'email');
 
@@ -818,16 +760,13 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                 },
 
 
-
-
-
             });
 
         };
         // filtro por categoria
-        $('#category_filter').on('change', function(){
+        $('#category_filter').on('change', function () {
             category = $(this).val();
-            console.log(category,'catt');
+            console.log(category, 'catt');
             loadTable();
             // console.log(this.value,'value---');
             // console.log(this.value,'value---');
@@ -923,12 +862,12 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
         // loadTable();
     </script>
 
-<style>
-    .m-nav .m-nav__item {
-        display: block;
-        padding-bottom: 9px;
-    }
-</style>
+    <style>
+        .m-nav .m-nav__item {
+            display: block;
+            padding-bottom: 9px;
+        }
+    </style>
 @endpush
 
 

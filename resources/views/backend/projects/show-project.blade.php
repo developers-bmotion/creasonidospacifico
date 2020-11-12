@@ -1,26 +1,123 @@
 @extends('backend.layout')
 
 @section('content')
+
     <div class="m-content">
-        {{-- <div class="row"> --}}
-        {{-- <div class="col-xl-5 col-lg-6">
-            @if(Storage::disk('public')->exists('projects/'.$project->project_picture))
-                <img width="100%" height="80%" src="{{ $project->pathAttachment() }}" alt=""/>
-            @else
-                <img class="" width="100%" src="{{ $project->project_picture }}"
-                     alt="">
-            @endif
-        </div> --}}
-        {{-- <div class="col-xs-7 col-lg-6">
-            <h3 style="font-weight: bold;">{{ $project->title }}</h3>
-            <a data-toggle="modal" data-target="#m_modal_1" class="m-link m--font-success m--font-bolder"
-               style="padding-bottom: 5px;cursor: pointer">by {{ $artist->artists[0]->nickname }} [{{__('ver_mas')}}
-                ]</a>
-            <div class="m-scrollable" data-scrollable="true" style="height: 170px">
-                <p style="text-align: justify">{{ $project->short_description }}</p>
+        <!--=====================================
+		    LISTA DE OBSERVACIONES
+        ======================================-->
+        @if(auth()->user()->roles[0]->rol == 'Subsanador' || auth()->user()->roles[0]->rol == 'Admin')
+            <div class="m-accordion m-accordion--default m-accordion--toggle-arrow" id="m_accordion_5" role="tablist">
+                <div class="m-accordion__item m-accordion__item--warning">
+                    <div class="m-accordion__item-head collapsed" role="tab" id="m_accordion_5_item_2_head"
+                         data-toggle="collapse" href="#m_accordion_5_item_2_body" aria-expanded="false">
+                        {{--<span class="m-accordion__item-icon"><i class="fa  flaticon-placeholder"></i></span>--}}
+                        <span class="m-accordion__item-title">Observaciones luego de revisón por el subsanador</span>
+                        <span class="m-accordion__item-mode"></span>
+                    </div>
+                    <div class="m-accordion__item-body collapse" id="m_accordion_5_item_2_body" role="tabpanel"
+                         aria-labelledby="m_accordion_5_item_2_head" data-parent="#m_accordion_5" style="">
+                        <div class="m-accordion__item-content">
+                            @if(count($artist->historyReviews) != 0)
+                                @php($count = 1 )
+                                <div class="row pt-3">
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <h5 style="font-weight: bold">Historial de Observaciones:</h5>
+                                            <p>Fecha última revisión por el subsanador:
+                                                <strong>{{ \Carbon\Carbon::parse($project->original_datetime)->formatLocalized('%A %d de %B de %Y %H:%M:%S') }}</strong>
+                                            </p>
+                                            <p>Fecha limite de correción por el aspirante:
+                                                <strong>{{ \Carbon\Carbon::parse($project->published_at)->formatLocalized('%A %d de %B de %Y %H:%M:%S') }}</strong>
+                                            </p>
+                                        </div>
+                                        <div class="m-section">
+                                            <div class="m-section__content">
+                                                <table class="table">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Observación</th>
+                                                        <th>Estado</th>
+
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    @foreach($artist->historyReviews as $historyReviews)
+                                                        <tr>
+                                                            <th scope="row">{{ $count++ }}</th>
+                                                            <td>{!! $historyReviews->pivot->observation !!}</td>
+
+                                                            @if($historyReviews->pivot->state == 1)
+                                                                <td>
+                                <span
+                                    class="m-badge m-badge--warning m-badge--wide">Pendiente</span></td>
+                                                            @else
+                                                                <td>
+                                    <span
+                                        class="m-badge m-badge--success m-badge--wide">Corregido</span></td>
+                                                            @endif
+
+                                                        </tr>
+                                                    @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                {{--        @forelse($artist->historyReviews as $historyReviews)--}}
+
+
+
+
+
+                                {{--            <h5 class="pb-3">{{ $count++ }}. Observación </h5>--}}
+                                {{--            <div class="row">--}}
+
+                                {{--                <div class="row">--}}
+                                {{--                    <div class="col-12 col-md-10 col-lg-10">--}}
+                                {{--                        <div class="form-group m-form__group">--}}
+                                {{--                            <div class="m-form__group-sub">--}}
+                                {{--                                <label--}}
+                                {{--                                    class="form-control-label font-weight-bold">Observación:--}}
+                                {{--                                </label>--}}
+                                {{--                                <p>{!! $historyReviews->pivot->observation !!}</p>--}}
+                                {{--                            </div>--}}
+                                {{--                        </div>--}}
+                                {{--                    </div>--}}
+                                {{--                    <div class="col-12 col-md-2 col-lg-2">--}}
+                                {{--                        <div class="form-group m-form__group">--}}
+                                {{--                            <div class="m-form__group-sub">--}}
+                                {{--                                <label--}}
+                                {{--                                    class="form-control-label font-weight-bold">Estado:--}}
+                                {{--                                </label>--}}
+                                {{--                                <br>--}}
+                                {{--                                @if($historyReviews->pivot->state == 1)--}}
+                                {{--                                    <span--}}
+                                {{--                                        class="m-badge m-badge--warning m-badge--wide">Pendiente</span>--}}
+                                {{--                                @else--}}
+                                {{--                                    <span--}}
+                                {{--                                        class="m-badge m-badge--success m-badge--wide">Corregido</span>--}}
+                                {{--                                @endif--}}
+                                {{--                            </div>--}}
+                                {{--                        </div>--}}
+                                {{--                    </div>--}}
+                                {{--                </div>--}}
+                                {{--                <hr>--}}
+                                {{--                @empty--}}
+                                {{--                    <h4 class="text-center">Sin observaciones</h4>--}}
+                                {{--                @endforelse--}}
+
+                                {{--            </div>--}}
+                            @endif
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div> --}}
+        @endif
         <div class="row">
             <div class="col-xl-12 col-lg-12">
                 <div class="m-portlet m-portlet--full-height ">

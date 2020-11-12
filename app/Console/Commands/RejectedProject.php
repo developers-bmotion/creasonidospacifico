@@ -44,7 +44,7 @@ class RejectedProject extends Command
         $project = Project::where('published_at', '<=', $date->format('Y-m-d H:i:s'))->where('rejected', '1')->with('artists.users')->first();
         if($project){
             $project->rejected = '2';
-            $project->status = 5;
+            $project->status = 8;
             $project->save();
             \Mail::to($project->artists[0]->users->email)->send(new \App\Mail\RejectProjectAspiranteCron($project->artists[0]->users->name, $project->artists[0]->users->last_name));
         }
