@@ -44,13 +44,13 @@
                             <span class="m-badge m-badge--warning m-badge--wide"
                                   style="color:#fff">{{ __('Pendiente') }}</span>
                         @endif
-                        @if($artist->projects[0]->status == 5)
+                        @if($artist->projects[0]->status == 8)
                             <span
-                                class="m-badge m-badge--danger m-badge--wide m-badge--rounded">{{ __('Rechazado') }}</span>
+                                class="m-badge m-badge--danger m-badge--wide m-badge--rounded">No subsanado</span>
                         @endif
                         @if($artist->projects[0]->status == 6)
                             <span
-                                class="m-badge m-badge--metal m-badge--wide m-badge--rounded">De nuevo en revisión</span>
+                                class="m-badge m-badge--info m-badge--wide m-badge--rounded">De nuevo en revisión</span>
                         @endif
                         @if($artist->projects[0]->status == 7)
                             <span class="m-badge m-badge--success m-badge--wide m-badge--rounded">Aceptado</span>
