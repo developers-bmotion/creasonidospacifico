@@ -25,7 +25,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
 //        $schedule->command('projects:close')->dailyAt('00:00');
-        $schedule->command('project:rejected_projects')->everyMinute()->withoutOverlapping();
+        $schedule->command('project:rejected_projects')->hourly()->withoutOverlapping();
     }
 
     /**
