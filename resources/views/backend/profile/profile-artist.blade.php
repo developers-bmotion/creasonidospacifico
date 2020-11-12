@@ -1752,6 +1752,7 @@
                         </div>
                         <div class="modal-body">
                             @php($count = 1 )
+                            @endphp
                             @forelse($artist->projects[0]->historyReviews as $historyReviews)
                                 <h5 class="pb-3">{{ $count++ }}. Observación </h5>
                                 <div class="row">
