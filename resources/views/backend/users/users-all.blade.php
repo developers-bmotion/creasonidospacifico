@@ -176,7 +176,7 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                                 <div class="m-form__group-sub">
                                     <label class="form-control-label">Rol en el sistema:<span
                                             class="text-danger">*</span></label>
-                                    <select name="document_type" class="form-control">
+                                    <select name="role_type" class="form-control">
                                         <option value="-1">Seleccione departamento</option>
                                         <option value="1">Administrador</option>
                                         <option value="2">Aspirante</option>
