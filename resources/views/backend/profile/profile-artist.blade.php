@@ -2901,8 +2901,6 @@
             });
         });
     </script>
-
-    //evento enviar revision
     <script>
 
     $('#btn_update_revision').click(function (e) {
