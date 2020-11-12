@@ -178,16 +178,16 @@
                                             <div class="m-scrollable update_asp_profile" data-scrollable="true"
                                                  style="">
                                                 @if(auth()->user()->picture == null || auth()->user()->picture == '' || auth()->user()->picture =='/images/users/')
-                                                    <img class="ml-4"
-                                                         style="border-radius:8rem; width:7rem"
+                                                    <img class="ml-4 img-artist"
+                                                         {{-- style="border-radius:8rem; width:7rem" --}}
                                                          src="/backend/assets/app/media/img/users/perfil.jpg">
                                                     @if($artist->projects[0]->status == 4 || $artist->projects[0]->status == 1)
                                                         <i class="flaticon-edit ml-3 update_img_profile_asp"
                                                            style="color:#716aca; cursor:pointer;"></i>
                                                     @endif
                                                 @else
-                                                    <img class="ml-4"
-                                                         style="border-radius:8rem; width:7rem"
+                                                    <img class="ml-4 img-artist"
+                                                         {{-- style="border-radius:8rem; width:7rem" --}}
                                                          src="{{$artist->users->picture}}">
                                                     @if($artist->projects[0]->status == 4 || $artist->projects[0]->status == 1)
                                                         <i class="flaticon-edit ml-3 update_img_profile_asp"

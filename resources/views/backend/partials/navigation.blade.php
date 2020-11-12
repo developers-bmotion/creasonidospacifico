@@ -363,9 +363,10 @@
                                                     @if(auth()->user()->picture == null || auth()->user()->picture == '' || auth()->user()->picture =='/images/users/')
 
                                                         <img src="/backend/assets/app/media/img/users/perfil.jpg"
-                                                             class="m--img-rounded m--marginless uno" alt=""/>
+                                                             class="m--img-rounded m--marginless uno" style="border-radius: 50%" alt=""/>
                                                     @else
                                                         <img src="{{ auth()->user()->picture}}"
+                                                             style="border-radius: 50%"
                                                              class="m--img-rounded m--marginless dos"
                                                              alt=""/>
                                                     @endif
