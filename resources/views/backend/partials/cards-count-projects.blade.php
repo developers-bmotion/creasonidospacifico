@@ -1,5 +1,5 @@
 
-<div class="m-portlet mt-5">
+<div class="m-portlet mt-1">
     <div class="m-portlet__body  m-portlet__body--no-padding">
         <div class="row m-row--no-padding m-row--col-separator-xl">
             <!--=====================================
@@ -41,7 +41,7 @@
                         <h4 class="m-widget24__title">
                             Nueva Revisión
                         </h4><br>
-                        <span class="m-widget24__desc">Corregidas por los aspirantes</span><br><br>
+                        <span class="m-widget24__desc">Corregidas por aspirantes</span><br><br>
                         <span class="m-widget24__stats m--font-info pull-right pl-4" style="float: left">{{ $projectsStateNuevaRevision }}</span>
 
                     </div>

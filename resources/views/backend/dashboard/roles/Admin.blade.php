@@ -6,6 +6,7 @@
 
 @section('content')
     <div class="m-content">
+    @include('backend.partials.cards-count-projects')
         <!--=====================================
 		    INFORMACIÓN NÚMERICA E IMPORTANTE
         ======================================-->

@@ -98,165 +98,166 @@
 CONTENIDO DEL MODULO PROYECTOS ADMIN
 ======================================-->
 @section('content')
-
-    <!--=====================================
-       TARJETAS CON LA CANTIDAD DE PROYECTOS
-    ======================================-->
+    <div class="m-content">
+        <!--=====================================
+           TARJETAS CON LA CANTIDAD DE PROYECTOS
+        ======================================-->
     @include('backend.partials.cards-count-projects')
 
     <!--=====================================
         TABLA CON LA LISTA DE PROPUESTAS MUSICALES
     ======================================-->
 
-    <div class="m-portlet m-portlet--mobile mt-3">
-        <div class="m-portlet__head">
-            <div class="m-portlet__head-caption">
-                <div class="m-portlet__head-title">
-                    <h3 class="m-portlet__head-text">
-                        {{ __('Propuestas musicales') }}
-                    </h3>
+        <div class="m-portlet m-portlet--mobile mt-3">
+            <div class="m-portlet__head">
+                <div class="m-portlet__head-caption">
+                    <div class="m-portlet__head-title">
+                        <h3 class="m-portlet__head-text">
+                            {{ __('Propuestas musicales') }}
+                        </h3>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="m-portlet__body">
-            {{-- filtros para datatable --}}
-            <div class="row">
-                <select class="form-control m-input m-input--square col-md-3 mb-3  tipoPersona" name="tipoPersona"
-                        id="tipoPersona">
-                    <option value="0">Filtrar por tipo persona</option>
-                    @foreach ($tipoPersona as $tipoPer)
-                        <option value="{{$tipoPer->id  }}">{{ $tipoPer->name }}</option>
-                    @endforeach
+            <div class="m-portlet__body">
+                {{-- filtros para datatable --}}
+                <div class="row">
+                    <select class="form-control m-input m-input--square col-md-3 mb-3  tipoPersona" name="tipoPersona"
+                            id="tipoPersona">
+                        <option value="0">Filtrar por tipo persona</option>
+                        @foreach ($tipoPersona as $tipoPer)
+                            <option value="{{$tipoPer->id  }}">{{ $tipoPer->name }}</option>
+                        @endforeach
 
-                </select>
-                {{-- @dd($cat) --}}
-                <select class="form-control m-input m-input--square col-md-3 mb-3" id="category_filter"
+                    </select>
+                    {{-- @dd($cat) --}}
+                    <select class="form-control m-input m-input--square col-md-3 mb-3" id="category_filter"
 
-                >
-                    <option value="0">Filtrar por modalidad</option>
-                    @foreach ($cat as $category)
-                        <option value="{{$category->id}}">{{$category->category}}</option>
-                    @endforeach
+                    >
+                        <option value="0">Filtrar por modalidad</option>
+                        @foreach ($cat as $category)
+                            <option value="{{$category->id}}">{{$category->category}}</option>
+                        @endforeach
 
-                </select>
+                    </select>
 
-                {{-- filtro estado --}}
-                <div class="m-portlet__head-tools col-md-6">
-                    <ul class="m-portlet__nav row mr-1 state_mobile">
+                    {{-- filtro estado --}}
+                    <div class="m-portlet__head-tools col-md-6">
+                        <ul class="m-portlet__nav row mr-1 state_mobile">
 
-                        <li class="m-portlet__nav-item row mr-2" style="margin-top: 0.6rem;">
-                            <h5 class="mr-2">Estado: </h5>
-                            <span id="current_status"
-                                  class="m-badge m-badge--metal m-badge--wide m-badge--rounded"
-                                  style="height:23px">{{ __('revision') }}</span>
-                        </li>
-                        <div class="m-dropdown m-dropdown--inline  m-dropdown--arrow m-dropdown--align-right"
-                             m-dropdown-toggle="hover">
-                            <a href="#" class="m-dropdown__toggle btn btn-warning dropdown-toggle">
-                                Filtrar
-                            </a>
-                            <div class="m-dropdown__wrapper">
-                                <span class="m-dropdown__arrow m-dropdown__arrow--right"></span>
-                                <div class="m-dropdown__inner">
-                                    <div class="m-dropdown__body">
-                                        <div class="m-dropdown__content selectType">
-                                            <ul class="m-nav">
-                                                <li class="m-nav__section m-nav__section--first">
-                                                    <span class="m-nav__section-text">FILTRAR POR ESTADO</span>
-                                                </li>
-                                                <li class="m-nav__item text-center">
+                            <li class="m-portlet__nav-item row mr-2" style="margin-top: 0.6rem;">
+                                <h5 class="mr-2">Estado: </h5>
+                                <span id="current_status"
+                                      class="m-badge m-badge--metal m-badge--wide m-badge--rounded"
+                                      style="height:23px">{{ __('revision') }}</span>
+                            </li>
+                            <div class="m-dropdown m-dropdown--inline  m-dropdown--arrow m-dropdown--align-right"
+                                 m-dropdown-toggle="hover">
+                                <a href="#" class="m-dropdown__toggle btn btn-warning dropdown-toggle">
+                                    Filtrar
+                                </a>
+                                <div class="m-dropdown__wrapper">
+                                    <span class="m-dropdown__arrow m-dropdown__arrow--right"></span>
+                                    <div class="m-dropdown__inner">
+                                        <div class="m-dropdown__body">
+                                            <div class="m-dropdown__content selectType">
+                                                <ul class="m-nav">
+                                                    <li class="m-nav__section m-nav__section--first">
+                                                        <span class="m-nav__section-text">FILTRAR POR ESTADO</span>
+                                                    </li>
+                                                    <li class="m-nav__item text-center">
                                                 <span style="background-color: #9c9ca5"
                                                       class="changeType w-100 btn btn-metal m-btn m-btn--pill m-btn--wide btn-sm"
                                                       data-type="{{\App\Project::REVISION}}">{{ __('revision') }}</span>
-                                                </li>
-                                                {{-- @if(\App\User::navigation() !== "Subsanador") --}}
-                                                <li class="m-nav__item text-center">
+                                                    </li>
+                                                    {{-- @if(\App\User::navigation() !== "Subsanador") --}}
+                                                    <li class="m-nav__item text-center">
                                                     <span
                                                         style="background-color:#9C26EA"
                                                         class="changeType w-100 btn btn-brand m-btn m-btn--pill m-btn--wide btn-sm"
                                                         data-type="{{\App\Project::PREAPPROVAL}}">{{ __('pre_aprovado') }}</span>
 
-                                                </li>
-                                                {{-- @endif --}}
-                                                <li class="m-nav__item text-center">
+                                                    </li>
+                                                    {{-- @endif --}}
+                                                    <li class="m-nav__item text-center">
                                                 <span
                                                     class="changeType w-100 btn btn-success m-btn m-btn--pill m-btn--wide btn-sm"
                                                     data-type="{{\App\Project::APPROVAL}}">{{ __('Aprobado') }}</span>
-                                                </li>
-                                                <li class="m-nav__item text-center">
+                                                    </li>
+                                                    <li class="m-nav__item text-center">
                                                 <span style="color:white;"
                                                       class="changeType w-100 btn btn-warning m-btn m-btn--pill m-btn--wide btn-sm"
                                                       data-type="{{\App\Project::PENDING}}">{{ __('Pendiente') }}</span>
-                                                </li>
-                                                <li class="m-nav__item text-center">
+                                                    </li>
+                                                    <li class="m-nav__item text-center">
                                                 <span
                                                     class="changeType w-100 btn btn-danger m-btn m-btn--pill m-btn--wide btn-sm"
                                                     data-type="{{\App\Project::REJECTED}}">{{ __('Rechazado') }}</span>
-                                                </li>
-                                                <li class="m-nav__item text-center">
+                                                    </li>
+                                                    <li class="m-nav__item text-center">
                                                 <span style="color:white"
                                                       class="changeType w-100 btn btn-success m-btn m-btn--pill m-btn--wide btn-sm"
                                                       data-type="{{\App\Project::ACEPTED}}">{{ __('Aceptado') }}</span>
-                                                </li>
-                                                <li class="m-nav__item text-center">
+                                                    </li>
+                                                    <li class="m-nav__item text-center">
                                                 <span
                                                     class="changeType w-100 btn btn-info m-btn m-btn--pill m-btn--wide btn-sm"
                                                     data-type="{{\App\Project::REVISON_UPDATE}}">{{ __('Nueva revisión') }}</span>
-                                                </li>
-                                                <li class="m-nav__item text-center">
+                                                    </li>
+                                                    <li class="m-nav__item text-center">
                                                 <span
                                                     class="changeType w-100 btn btn-info m-btn m-btn--pill m-btn--wide btn-sm"
                                                     data-type="{{\App\Project::NOT_REMEDIED}}">{{ __('No subsanado') }}</span>
-                                                </li>
-                                                <li class="m-nav__separator m-nav__separator--fit">
-                                                </li>
-                                                <li class="m-nav__section m-nav__section--first">
-                                                    <span class="m-nav__section-text">FILTRAR POR REGISTRO</span>
-                                                </li>
-                                                <li class="m-nav__item text-center">
+                                                    </li>
+                                                    <li class="m-nav__separator m-nav__separator--fit">
+                                                    </li>
+                                                    <li class="m-nav__section m-nav__section--first">
+                                                        <span class="m-nav__section-text">FILTRAR POR REGISTRO</span>
+                                                    </li>
+                                                    <li class="m-nav__item text-center">
                                                 <span style="color:white"
                                                       class="changeType w-100 btn btn-warning m-btn m-btn--pill m-btn--wide btn-sm"
                                                       data-type="{{\App\Project::PENDING_REGISTER}}">{{ __('Registro Pendiente') }}</span>
-                                                </li>
-                                                <li class="m-nav__item text-center">
+                                                    </li>
+                                                    <li class="m-nav__item text-center">
                                                 <span style="color:white"
                                                       class="changeType w-100 btn btn-danger m-btn m-btn--pill m-btn--wide btn-sm"
                                                       data-type="{{\App\Project::NOT_PROJECT_REGISTER}}">{{ __('Sin Proyecto Registrado') }}</span>
-                                                </li>
-                                                <li class="m-nav__item">
+                                                    </li>
+                                                    <li class="m-nav__item">
                                                     <span
                                                         class="changeType w-100 btn btn-metal m-btn m-btn--pill m-btn--wide btn-block"
                                                         data-type="0">{{ __('todos') }}</span>
-                                                </li>
+                                                    </li>
 
-                                            </ul>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </ul>
+                        </ul>
+                    </div>
+
+
                 </div>
-
-
+                <table class="table table-striped- table-bordered table-hover table-checkable "
+                       id="table_projects_management">
+                    <thead>
+                    <tr>
+                        {{-- <th>#</th> --}}
+                        <th>{{ __('Nombres y Apellidos') }}</th>
+                        <th>{{ __('Actuara como') }}</th>
+                        <th>{{ __('Categoría') }}</th>
+                        <th>{{ __('Email') }}</th>
+                        <th>{{ __('Departamento de nacimiento') }}</th>
+                        <th>{{ __('Ciudad de nacimiento') }}</th>
+                        <th>{{ __('Estado') }}</th>
+                        <th>{{ __('Acciones') }}</th>
+                    </tr>
+                    </thead>
+                </table>
             </div>
-            <table class="table table-striped- table-bordered table-hover table-checkable "
-                   id="table_projects_management">
-                <thead>
-                <tr>
-                    {{-- <th>#</th> --}}
-                    <th>{{ __('Nombres y Apellidos') }}</th>
-                    <th>{{ __('Actuara como') }}</th>
-                    <th>{{ __('Categoría') }}</th>
-                    <th>{{ __('Email') }}</th>
-                    <th>{{ __('Departamento de nacimiento') }}</th>
-                    <th>{{ __('Ciudad de nacimiento') }}</th>
-                    <th>{{ __('Estado') }}</th>
-                    <th>{{ __('Acciones') }}</th>
-                </tr>
-                </thead>
-            </table>
         </div>
     </div>
 
