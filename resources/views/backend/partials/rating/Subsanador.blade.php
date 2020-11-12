@@ -29,95 +29,7 @@
         </div>
     </div>
 @endif
-@if(count($artist->historyReviews) != 0)
-    @php($count = 1 )
-    <div class="row pt-3">
-        <div class="col-12">
-            <div class="form-group">
-                <h5 style="font-weight: bold">Historial de Observaciones:</h5>
-            </div>
-            <div class="m-section">
-                <div class="m-section__content">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Observación</th>
-                            <th>Estado</th>
 
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($artist->historyReviews as $historyReviews)
-                            <tr>
-                                <th scope="row">{{ $count++ }}</th>
-                                <td>{!! $historyReviews->pivot->observation !!}</td>
-
-                                @if($historyReviews->pivot->state == 1)
-                                    <td>
-                                <span
-                                    class="m-badge m-badge--warning m-badge--wide">Pendiente</span></td>
-                                @else
-                                    <td>
-                                    <span
-                                        class="m-badge m-badge--success m-badge--wide">Corregido</span></td>
-                                @endif
-
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    {{--        @forelse($artist->historyReviews as $historyReviews)--}}
-
-
-
-
-
-    {{--            <h5 class="pb-3">{{ $count++ }}. Observación </h5>--}}
-    {{--            <div class="row">--}}
-
-    {{--                <div class="row">--}}
-    {{--                    <div class="col-12 col-md-10 col-lg-10">--}}
-    {{--                        <div class="form-group m-form__group">--}}
-    {{--                            <div class="m-form__group-sub">--}}
-    {{--                                <label--}}
-    {{--                                    class="form-control-label font-weight-bold">Observación:--}}
-    {{--                                </label>--}}
-    {{--                                <p>{!! $historyReviews->pivot->observation !!}</p>--}}
-    {{--                            </div>--}}
-    {{--                        </div>--}}
-    {{--                    </div>--}}
-    {{--                    <div class="col-12 col-md-2 col-lg-2">--}}
-    {{--                        <div class="form-group m-form__group">--}}
-    {{--                            <div class="m-form__group-sub">--}}
-    {{--                                <label--}}
-    {{--                                    class="form-control-label font-weight-bold">Estado:--}}
-    {{--                                </label>--}}
-    {{--                                <br>--}}
-    {{--                                @if($historyReviews->pivot->state == 1)--}}
-    {{--                                    <span--}}
-    {{--                                        class="m-badge m-badge--warning m-badge--wide">Pendiente</span>--}}
-    {{--                                @else--}}
-    {{--                                    <span--}}
-    {{--                                        class="m-badge m-badge--success m-badge--wide">Corregido</span>--}}
-    {{--                                @endif--}}
-    {{--                            </div>--}}
-    {{--                        </div>--}}
-    {{--                    </div>--}}
-    {{--                </div>--}}
-    {{--                <hr>--}}
-    {{--                @empty--}}
-    {{--                    <h4 class="text-center">Sin observaciones</h4>--}}
-    {{--                @endforelse--}}
-
-    {{--            </div>--}}
-@endif
 
 {{--@else--}}
 {{--    <!-- TIEMPO ESTIMADO PARA CALIFICAR-->--}}
@@ -407,7 +319,7 @@
             });
             $("#btnSendMessage").click(function () {
                 swal({
-                    title: '¡Observación!',
+                    title: '¡Atención!',
                     text: "¿ Esta seguro de enviar a Curación ?",
                     type: 'info',
                     showCancelButton: true,

@@ -37,7 +37,7 @@ class AssignProjectManager extends Mailable
     public function build()
     {
         return $this
-            ->subject(__('Un nuevo proyecto se te ha sido asignado'))
+            ->subject(__('CREA SONIDOS PACIFICO - NUEVA PROPUESTA MUSICAL ASIGNADA'))
             ->markdown('emails.new-project-assign-manager')
             ->with('project',$this->project)
             ->with('artist',$this->artist_name)

@@ -108,18 +108,18 @@ class ProjectsAdminController extends Controller
             $management = Management::where('user_id', $data->user_id)->first();
             // dd($user_manament);
             $project->management()->attach($management->id);
+            $project->status = 7;
+            $project->save();
             $management->update([
                 'tipoCurador' => 2
-                ]);
-
-                /*$this->asignarProyectoCurador($data[0], $idProject);*/
-            }
-
-            $user_manament=User::where('id',$data->user_id)->first();
-            $artist_pro = User::where('id',$project->artists[0]->user_id)->first();
-            $artist= Artist::where('user_id',$artist_pro->id)->with('users')->first();
-            \Mail::to($artist->users->email)->send(new ArtistProjectPreAprov($project,$artist->users->name));
-            \Mail::to($user_manament->email)->send(new AssignProjectManager($project->title,$user_manament,$artist));
+            ]);
+            /*$this->asignarProyectoCurador($data[0], $idProject);*/
+            $user_manament = User::where('id', $data->user_id)->first();
+            $artist_pro = User::where('id', $project->artists[0]->user_id)->first();
+            $artist = Artist::where('user_id', $artist_pro->id)->with('users')->first();
+            \Mail::to($artist->users->email)->send(new ArtistProjectPreAprov($project, $artist->users->name));
+            \Mail::to($user_manament->email)->send(new AssignProjectManager($project->title, $user_manament, $artist));
+        }
 
 
         // $project->management()->attach($management->id);
@@ -130,7 +130,7 @@ class ProjectsAdminController extends Controller
         // ]);
         // }
         // $statusProject = Project::where('id', $request->input('project'))->update(array('status' => 7));
-        return '{"status":200, "msg":"'.__('send_project_management').'"}';
+        return '{"status":200, "msg":"' . __('send_project_management') . '"}';
 
     }
 
@@ -154,9 +154,16 @@ class ProjectsAdminController extends Controller
             /*dd($management);*/
             if ($user['tipoCurador'] == 1) {
                 $project->management()->attach($management->id);
+                $project->status = 7;
+                $project->save();
                 $management->update([
                     'tipoCurador' => 2
                 ]);
+                $user_manament = User::where('id', $user['user_id'])->first();
+                $artist_pro = User::where('id', $project->artists[0]->user_id)->first();
+                $artist = Artist::where('user_id', $artist_pro->id)->with('users')->first();
+                \Mail::to($artist->users->email)->send(new ArtistProjectPreAprov($project, $artist->users->name));
+                \Mail::to($user_manament->email)->send(new AssignProjectManager($project->title, $user_manament, $artist));
                 return;
             }
 //
@@ -176,7 +183,7 @@ class ProjectsAdminController extends Controller
     {
         $id = $request->get('rejected');
         $rejected_project = Project::where('id', $id)->update([
-            'status' => 8
+            'status' => 5
         ]);
         $project = Project::where('id', $id)->with('artists.users')->first();
 

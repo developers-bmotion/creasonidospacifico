@@ -32,7 +32,7 @@ class HomeMiddleware
             return redirect("/dashboard/profile-gestor/".auth()->user()->slug);
 
         }else if (auth()->user()->roles[0]->rol == "Manage"){
-            return redirect("/dashboard");
+            return redirect("/dashboard/profile-managament/".auth()->user()->slug);
         }else if(auth()->user()->roles[0]->rol = "Subsanador"){
             return redirect("/dashboard");
         }else if(auth()->user()->roles[0]->rol = "Admin"){

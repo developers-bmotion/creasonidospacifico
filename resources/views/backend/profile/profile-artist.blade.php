@@ -43,16 +43,19 @@
                             <div class="m-alert__icon">
                                 <i class="la la-warning"></i>
                             </div>
-                            <div class="m-alert__text" style="color:#ca8e0c !important;" data-toggle="modal" data-target="#verObservaciones">
+                            <div class="m-alert__text" style="color:#ca8e0c !important;" data-toggle="modal"
+                                 data-target="#verObservaciones">
                                 Tu propuesta musical esta en estado <strong>Pendiente</strong>, click
                                 <strong
-                                        style="cursor: pointer">aquí</strong> para ver los detalles que debes ajustar.
+                                    style="cursor: pointer">aquí</strong> para ver los detalles que debes ajustar.
                                 Al terminar y estar seguro que todo esta bien, volver a enviar.
-                                <p style="font-style: oblique;"> Nota: Recuerda que debes realizar los ajustes antes del <strong>{{ \Carbon\Carbon::parse($artist->projects[0]->published_at)->formatLocalized('%A %d de %B de %Y %H:%M:%S') }}</strong></p>
+                                <p style="font-style: oblique;"> Nota: Recuerda que debes realizar los ajustes antes del
+                                    <strong>{{ \Carbon\Carbon::parse($artist->projects[0]->published_at)->formatLocalized('%A %d de %B de %Y %H:%M:%S') }}</strong>
+                                </p>
 
 
                             </div>
-                            <div  class="m-alert__actions" style="width: 200px;">
+                            <div class="m-alert__actions" style="width: 200px;">
                                 <button id="btn_update_revision" href="{{ route('update.state.revision') }}"
                                         class="btn btn-warning btn-sm m-btn m-btn--pill m-btn--wide"
                                         style="color:#fff">Enviar propuesta musical nuevamente
@@ -1729,7 +1732,7 @@
                                     </div>
                                 @endif
                             @endif
-                                                       {{-- @endif --}}
+                            {{-- @endif --}}
                         </div>
                         <div class="modal-footer">
 
@@ -1796,7 +1799,7 @@
             </div>
         </div>
     </div>
-    </div>
+
 @stop
 @section('dropzonePhotoArtist')
     <script>
@@ -2900,11 +2903,9 @@
             });
         });
     </script>
-
-    //evento enviar revision
     <script>
 
-    $('#btn_update_revision').click(function (e) {
+        $('#btn_update_revision').click(function (e) {
             e.preventDefault();
             swal({
                 title: "{{__('Anuncio')}}",
@@ -2918,12 +2919,11 @@
                 showCancelButton: true,
 
 
-
             }).then(function (result) {
                 if (result.value) {
                     $('body').loading({
                         message: 'Enviando solicitud...',
-                        start:true,
+                        start: true,
                     });
                     $('#update_revision').submit();
                 }

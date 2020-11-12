@@ -33,7 +33,7 @@ class ArtistProjectPreAprov extends Mailable
     public function build()
     {
         return $this
-            ->subject(__('Tu proyecto ha sido Pre Aprobado'))
+            ->subject(__('CREA SONIDOS PACIFICO - PROPUESTA MUSICAL ACEPTADA'))
             ->markdown('emails.artist-project-preaproved')
             ->with('project',$this->project)
             ->with('artist',$this->artist_name);

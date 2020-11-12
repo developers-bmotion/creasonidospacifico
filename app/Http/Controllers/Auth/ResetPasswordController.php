@@ -40,7 +40,9 @@ class ResetPasswordController extends Controller
             return '/dashboard/profile-gestor/' . auth()->user()->slug;
         } else if (auth()->user()->roles[0]->rol == "Artist") {
             return '/dashboard/profile';
-        } else {
+        } else if (auth()->user()->roles[0]->rol == "Manage"){
+            return '/dashboard/profile-managament/' . auth()->user()->slug;
+        }else{
             return '/dashboard';
         }
     }
