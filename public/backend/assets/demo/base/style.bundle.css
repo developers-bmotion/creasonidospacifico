@@ -35190,7 +35190,7 @@ body.m-content--skin-light2 {
 
 @media (min-width: 1025px) {
     .m-header--fixed .m-body {
-        padding-top: 70px !important; } }
+        padding-top: 0px !important; } }
 
 @media (max-width: 1024px) {
     .m-header--fixed-mobile .m-body {

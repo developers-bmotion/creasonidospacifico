@@ -22,9 +22,9 @@ use App\Role;
 use App\User;
 
 Route::get('/datos', function () {
-    $project = Project::where('rejected', '1')->with('artists.users')->first();
+    // $project = Project::where('rejected', '1')->with('artists.users')->first();
 //    dd($project->artists[0]->users->last_name);
-    return \Illuminate\Support\Facades\Mail::to($project->artists[0]->users->email)->send(new \App\Mail\RejectProjectAspiranteCron($project->artists[0]->users->name, $project->artists[0]->users->last_name));
+    return new \App\Mail\AssignProjectManager('cancion','cancion','cancion');
 });
 
 Route::get('/represtante-menor-edad/{id}', function ($id) {

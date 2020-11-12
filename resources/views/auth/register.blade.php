@@ -85,6 +85,37 @@ License: You must have a valid license purchased only from themeforest(the above
 
     <!--end::Global Theme Styles -->
     <link rel="shortcut icon" href="/images/logo-creasonidos.png"/>
+@if(env('APP_ENV') === 'production')
+    <!-- Facebook Pixel Code -->
+        <script>
+            !function (f, b, e, v, n, t, s) {
+                if (f.fbq) return;
+                n = f.fbq = function () {
+                    n.callMethod ?
+                        n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+                };
+                if (!f._fbq) f._fbq = n;
+                n.push = n;
+                n.loaded = !0;
+                n.version = '2.0';
+                n.queue = [];
+                t = b.createElement(e);
+                t.async = !0;
+                t.src = v;
+                s = b.getElementsByTagName(e)[0];
+                s.parentNode.insertBefore(t, s)
+            }(window, document, 'script',
+                'https://connect.facebook.net/en_US/fbevents.js');
+            fbq('init', '498233024192618');
+            fbq('track', 'PageView');
+        </script>
+        <noscript>
+            <img height="1" width="1"
+                 src="https://www.facebook.com/tr?id=498233024192618&ev=PageView
+&noscript=1"/>
+        </noscript>
+    @endif
+    {{--    @include('facebook-pixel::body')--}}
 </head>
 
 <!-- end::Head -->
@@ -93,7 +124,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
 <body
     class="m--skin- m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default">
-
+{{--@include('facebook-pixel::body')--}}
 <!-- begin:: Page -->
 <div class="m-grid m-grid--hor m-grid--root m-page">
     <div
@@ -200,14 +231,15 @@ License: You must have a valid license purchased only from themeforest(the above
                                     @endif
                                 </div>
                                 @if(env('APP_ENV') === 'production')
-                                <div class="pt-5">
-                                     {!! NoCaptcha::display() !!}
-                                </div>
+                                    <div class="pt-5">
+                                        {!! NoCaptcha::display() !!}
+                                    </div>
                                 @endif
 
                                 @error ('g-recaptcha-response')
                                 <span class="help-block">
-                                        <strong class="text-danger">{{ $errors->first('g-recaptcha-response') }}</strong>
+                                        <strong
+                                            class="text-danger">{{ $errors->first('g-recaptcha-response') }}</strong>
                                     </span>
                                 @enderror
 
@@ -236,11 +268,12 @@ License: You must have a valid license purchased only from themeforest(the above
                                     </button>
                                     {{--  <button id="m_login_signup_cancel"
                                         class="btn btn-outline-focus  m-btn m-btn--pill m-btn--custom" style="display: none">Cancel</button> --}}
-                                
-                                        <a style="padding-top: 30px;" href="/login" class="m-link m-link--focus">Volver al login</a>
+
+                                    <a style="padding-top: 30px;" href="/login" class="m-link m-link--focus">Volver al
+                                        login</a>
                                 </div>
 
-                                
+
                             </form>
                         </div>
 
@@ -253,19 +286,29 @@ License: You must have a valid license purchased only from themeforest(the above
             class="background_register m-grid__item m-grid__item--fluid m-grid m-grid--center m-grid--hor m-grid__item--order-tablet-and-mobile-1	m-login__content m-grid-item--center">
             <div class="m-grid__item p-4">
                 {{-- <h3 class="title-login m-login__welcome">CREA SONIDOS PACIFICO</h3> --}}
-                <h3 class="text-white">Recuerda que para realizar la inscripción, debes disponer de los siguientes documentos:</h3>
+                <h3 class="text-white">Recuerda que para realizar la inscripción, debes disponer de los siguientes
+                    documentos:</h3>
                 <ul class="text-white pr-3">
                     <li style="font-size: 1.2rem ">Cédula de ciudadanía, en imagen (jpg) o pdf.</li>
-                    <li style="font-size: 1.2rem ">Breve reseña (máximo 300 palabras) del(la) participante solista o agrupación.</li>
-                    <li style="font-size: 1.2rem ">Un (1) audio o canción (puede ser inédita o una obra ya creada) en formato mp3.</li>
+                    <li style="font-size: 1.2rem ">Breve reseña (máximo 300 palabras) del(la) participante solista o
+                        agrupación.
+                    </li>
+                    <li style="font-size: 1.2rem ">Un (1) audio o canción (puede ser inédita o una obra ya creada) en
+                        formato mp3.
+                    </li>
                 </ul>
                 <h3 class="text-white pt-5">En caso de que la participación sea de un grupo musical, además:</h3>
                 <ul class="text-white pr-3">
-                    <li style="font-size: 1.2rem ">PDF o Foto por ambos lados del documento de identidad, de todos(as) los(las) integrantes del grupo.</li>
+                    <li style="font-size: 1.2rem ">PDF o Foto por ambos lados del documento de identidad, de todos(as)
+                        los(las) integrantes del grupo.
+                    </li>
                 </ul>
-                <h3 class="text-white pt-5">En caso de que tu inscripción sea realizada a través del gestor cultural de tu zona:</h3>
+                <h3 class="text-white pt-5">En caso de que tu inscripción sea realizada a través del gestor cultural de
+                    tu zona:</h3>
                 <ul class="text-white pr-3">
-                    <li style="font-size: 1.2rem ">Formulario Offline que corresponda (persona natural / grupo constituido), totalmente diligenciado y firmado.</li>
+                    <li style="font-size: 1.2rem ">Formulario Offline que corresponda (persona natural / grupo
+                        constituido), totalmente diligenciado y firmado.
+                    </li>
                 </ul>
             </div>
         </div>
@@ -361,7 +404,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <script src="/backend/vendors/js/framework/components/plugins/base/sweetalert2.init.js" type="text/javascript">
 </script>
 @if(env('APP_ENV') === 'production')
-{!! NoCaptcha::renderJs() !!}
+    {!! NoCaptcha::renderJs() !!}
 @endif
 
 <!--end:: Global Optional Vendors -->
