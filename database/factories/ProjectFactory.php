@@ -4,7 +4,7 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Project::class, function (Faker $faker) {
     $title = $faker->sentence;
-//    $status = $faker->randomElement([\App\Project::ACEPTED, \App\Project::PENDING, \App\Project::REVISION, \App\Project::PREAPPROVAL,\App\Project::APPROVAL,\App\Project::REJECTED, \App\Project::REVISON_UPDATE]);
+//    $status = $faker->randomElement([\App\Project::ACEPTED, \App\Project::PENDING, \App\Project::REVISION, \App\Project::QUALIFIED,\App\Project::APPROVAL,\App\Project::REJECTED, \App\Project::REVISON_UPDATE]);
     return [
         'category_id' => \App\Category::all()->random()->id,
         'title' => $title,

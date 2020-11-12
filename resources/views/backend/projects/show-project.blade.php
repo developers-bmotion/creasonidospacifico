@@ -23,6 +23,7 @@
                             <div class="m-accordion__item-content">
 
                                 @php($count = 1 )
+
                                 <div class="row pt-3">
                                     <div class="col-12">
                                         <div class="form-group">
@@ -46,12 +47,16 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                    @foreach($artist->historyReviews as $historyReviews)
+                                                        @foreach($artist->historyReviews as $historyReviews)
                                                         <tr>
                                                             <th scope="row">{{ $count++ }}</th>
                                                             <td>{!! $historyReviews->pivot->observation !!}</td>
 
                                                             @if($historyReviews->pivot->state == 1)
+                                                            <td>
+                                                                <span
+                                                                class="m-badge m-badge--warning m-badge--wide">Pendiente</span></td>
+                                                                @else
                                                                 <td>
                                                                 <span
                                                                     class="m-badge m-badge--warning m-badge--wide">Pendiente</span>
@@ -63,10 +68,15 @@
                                                                 </td>
                                                             @endif
 
-                                                        </tr>
-                                                    @endforeach
-                                                    </tbody>
-                                                </table>
+                                                                </tr>
+                                                                @endforeach
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    @endphp
+
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

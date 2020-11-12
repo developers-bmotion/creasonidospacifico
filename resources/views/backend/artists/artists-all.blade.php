@@ -127,7 +127,7 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                                                     <span class="changeType w-100 btn btn-outline-metal m-btn m-btn--pill m-btn--wide btn-sm" data-type="{{\App\Project::REVISION}}">{{ __('revision') }}</span>
                                                 </li>
                                                 <li class="m-nav__item text-center">
-                                                    <span class="changeType w-100 btn btn-outline-brand m-btn m-btn--pill m-btn--wide btn-sm" data-type="{{\App\Project::PREAPPROVAL}}">{{ __('pre_aprovado') }}</span>
+                                                    <span class="changeType w-100 btn btn-outline-brand m-btn m-btn--pill m-btn--wide btn-sm" data-type="{{\App\Project::QUALIFIED}}">{{ __('pre_aprovado') }}</span>
 
                                                 </li>
                                                 <li class="m-nav__item text-center">
@@ -239,7 +239,7 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                             orderable: false,
                             render: function(data, type, full, meta) {
                                 return `
-                       
+
                         <a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill" title="View">
                           <i class="la la-edit"></i>
                         </a>`;
