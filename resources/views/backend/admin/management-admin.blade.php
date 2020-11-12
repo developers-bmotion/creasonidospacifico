@@ -58,13 +58,8 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                                 <div class="m-widget19__shadow">
                                 </div>
                             </div>
-                            <div class="form-group">
-
-                            </div>
-
-                        </div>
-                        <div class="m-portlet__body">
-
+                            <div class="form-group"></div>
+                            {{--  --}}
                             <div class="row p-3">
                                 @forelse($managements as $management)
                                     <div class="col-lg-4">
@@ -80,7 +75,7 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
 
                                                                 @if(Storage::disk('public')->exists('users/'.$management->users->picture))
                                                                     <img src="{{ $management->users->pathAttachment()}}"
-                                                                         alt=""/>
+                                                                        alt=""/>
                                                                 @else
                                                                     <img src="{{ $management->users->picture }}" alt="">
                                                                 @endif
@@ -92,12 +87,12 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                                                             class="m-card-profile__name">{{ $management->users->name }}</span>
 
                                                         <a href="" class="m-card-profile__email m-link"
-                                                           style="margin-left: -15px">{{ $management->users->email  }}</a>
+                                                        style="margin-left: -15px">{{ $management->users->email  }}</a>
 
                                                     </div>
                                                     <div class="m-card-profile__details" style=padding-top:20px;>
                                                         <a href="{{ route('profile.curador',$management->users->slug)}}"
-                                                           class="btn btn-secondary m-btn m-btn--icon m-btn--pill">{{ __('mas_informacion') }}</a>
+                                                        class="btn btn-secondary m-btn m-btn--icon m-btn--pill">{{ __('mas_informacion') }}</a>
                                                     </div>
 
                                                 </div>
@@ -108,9 +103,13 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                                     <h4 class="text-center">{{ __('no_hay_registros') }}</h4>
                                 @endforelse
                             </div>
+
                             {{ $managements->links() }}
                             {{-- fin tab curador 1 --}}
+
+                            {{--  --}}                            
                         </div>
+                        
                     </div>
                 </div>
             </div>

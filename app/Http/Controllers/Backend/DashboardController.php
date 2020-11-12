@@ -100,9 +100,28 @@ class DashboardController extends Controller
         $tipoPersona=PersonType::All();
         $cat=Category::All();
 
+
+        /*=============================================
+            TARJETAS CONTAR PROYECTOS
+        =============================================*/
+        /* CANTIDA DE PROYECTOS EN REVISIÓN*/
+        $projectsStateRevision = Project::where('status', 1)->get()->count();
+        /* CANTIDA DE PROYECTOS PENDIENTE*/
+        $projectsStatePendiente = Project::where('status', 4)->get()->count();
+        /* CANTIDA DE PROYECTOS NUEVA REVISION*/
+        $projectsStateNuevaRevision = Project::where('status', 6)->get()->count();
+        /* CANTIDA DE PROYECTOS NUEVA ACEPTADOS*/
+        $projectsStateAceptado = Project::where('status', 7)->get()->count();
+        /* CANTIDA DE PROYECTOS NO SUBSANADAS*/
+        $projectsStateNoSubsanadas = Project::where('status', 5)->get()->count();
+        /* CANTIDA DE PROYECTOS APROBADAS*/
+        $projectsStateAprobadas = Project::where('status', 3)->get()->count();
+
         return view('backend.dashboard.dashboard', compact('aspiranteRegistroCompleto',
             'aspiranteRegistroSinCanción', 'aspirantessolocuenta',
-            'totalregistros', 'ciudades', 'total', 'categories', 'totalCategories','tipoPersona','cat'));
+            'totalregistros', 'ciudades', 'total', 'categories', 'totalCategories','tipoPersona','cat','projectsStateRevision',
+        'projectsStatePendiente', 'projectsStateNuevaRevision', 'projectsStateAceptado', 'projectsStateNoSubsanadas', 'projectsStateAprobadas'
+        ));
 
     }
 
@@ -170,4 +189,6 @@ class DashboardController extends Controller
         $pdf = PDF::loadView('backend.admin.reports.report-dashboard');
         return $pdf->stream();
     }
+
+
 }

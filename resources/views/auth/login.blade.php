@@ -106,12 +106,12 @@ License: You must have a valid license purchased only from themeforest(the above
                 s.parentNode.insertBefore(t, s)
             }(window, document, 'script',
                 'https://connect.facebook.net/en_US/fbevents.js');
-            fbq('init', '498233024192618');
+            fbq('init', '411695570006923');
             fbq('track', 'PageView');
         </script>
         <noscript>
             <img height="1" width="1"
-                 src="https://www.facebook.com/tr?id=498233024192618&ev=PageView
+                 src="https://www.facebook.com/tr?id=411695570006923&ev=PageView
 &noscript=1"/>
         </noscript>
         <!-- End Facebook Pixel Code -->

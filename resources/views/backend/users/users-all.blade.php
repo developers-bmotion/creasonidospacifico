@@ -221,6 +221,7 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
             "recordsTotal": 10000,
             "recordsFiltered": 3000,
             "order": [[1, "desc"]],
+            "pagingType": "simple_numbers",
             "ajax": '{{route('get.users.tables')}}',
             "columns": [
                 {
@@ -297,8 +298,8 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                 "oPaginate": {
                     "sFirst": "Primero",
                     "sLast": "Último",
-                    "sNext": "{{__('siguiente')}}",
-                    "sPrevious": "{{__('anterior')}}"
+                    "sNext": ">",
+                    "sPrevious": "<"
                 },
                 "oAria": {
                     "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
