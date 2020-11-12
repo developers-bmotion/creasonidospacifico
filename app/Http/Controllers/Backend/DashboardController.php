@@ -22,7 +22,7 @@ class DashboardController extends Controller
 //        $last_published = Project::where('status',Project::PENDING)->with('artists')->take(2)->get();
 //        $last_rejected = Project::where('status',Project::REJECTED)->with('artists')->take(2)->get();
 //        $last_revisions = Project::where('status',Project::REVISION)->with('artists')->take(2)->get();
-//        $last_pre_approved = Project::where('status',Project::PREAPPROVAL)->with('artists')->take(2)->get();
+//        $last_pre_approved = Project::where('status',Project::QUALIFIED)->with('artists')->take(2)->get();
 //        // numero de proyectos por estado
 //        $published = Project::where('status', 4)->with('artists')->count();
 //        $rejected = Project::where('status', 5)->with('artists')->count();

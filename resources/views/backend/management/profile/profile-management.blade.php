@@ -189,6 +189,21 @@
                             </div>
 
                         </div>
+                        <div class="form-group m-form__group row">
+                            <label class="col-form-label col-lg-3 col-sm-12">Criterio</label>
+                            <div class="col-lg-6 col-md-12 col-sm-12">
+                                <div class="row align-items-center">
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" id="m_nouislider_2_input" placeholder="Currency">
+                                    </div>
+                                    <div class="col-8">
+                                        <div id="m_nouislider_2" class="m-nouislider m-nouislider--handle-danger"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary" id="prueba">Enviar calificación</button>
+
                         <div class="tab-pane active" id="m_user_profile_tab_2">
                             <div class="m-portlet__body">
                                 <div class="m-portlet__head">
@@ -210,12 +225,10 @@
                                                    id="table__profile_projects_management">
                                                 <thead>
                                                 <tr>
-                                                    <th>#</th>
-                                                    <th>{{ __('artista') }}</th>
-                                                    <th>{{ __('titulo') }}</th>
-                                                    <th>{{ __('categoria') }}</th>
-                                                    <th>{{ __('estado') }}</th>
-                                                    <th>{{ __('acciones') }}</th>
+                                                    <th>{{ __('Canción') }}</th>
+                                                    <th>{{ __('Modalidad') }}</th>
+                                                    <th>{{ __('Estado') }}</th>
+                                                    <th>{{ __('Acciones') }}</th>
                                                 </tr>
                                                 </thead>
                                             </table>
@@ -309,6 +322,50 @@
 @stop
 
 @push('js')
+<script>
+    $('#prueba').on('click',  function(){
+    alert();
+});
+     $(document).ready(function () {
+
+
+
+            $('audio.audio').audioPlayer();
+
+
+
+        // init slider
+        var slider = document.getElementById('m_nouislider_2');
+
+        noUiSlider.create(slider, {
+            start: [ 20000 ],
+            connect: [true, false],
+            step: 1000,
+            range: {
+                'min': [ 20000 ],
+                'max': [ 80000 ]
+            },
+            format: wNumb({
+                decimals: 3,
+                thousand: '.',
+                postfix: ' (US $)',
+            })
+        });
+
+        // init slider input
+        var sliderInput = document.getElementById('m_nouislider_2_input');
+
+        slider.noUiSlider.on('update', function( values, handle ) {
+            sliderInput.value = values[handle];
+        });
+
+        sliderInput.addEventListener('change', function(){
+            slider.noUiSlider.set(this.value);
+        });
+
+
+    });
+</script>
     <script>
         var tipoProyecto = null;
         var table = null;
@@ -321,6 +378,7 @@
                 "serverSide": true,
                 "data": null,
                 "order": [[ 0, "desc" ]],
+                "pagginType":"simple_numbers",
                 "ajax": {
                     url: "{{route('datatables.projects.profile.manage')}}",
                     data: {
@@ -329,18 +387,7 @@
                     }
                 },
                 "columns": [
-                    {
-                        "width": "1%",
-                        data: 'id',
-                        defaultContent: '<span class="label label-danger text-center">Ningún valor por defecto</span>'
-                    },
-                    {
-                        data: 'artists.nickname',
-                        defaultContent: '<span class="label label-danger text-center">Ningún valor por defecto</span>',
-                        render : function (data, type, JsonResultRow, meta){
-                            return JsonResultRow.artists[0].nickname;
-                        }
-                    },
+
                     {
                         data: 'title',
                         defaultContent: '<span class="label label-danger text-center">Ningún valor por defecto</span>'
@@ -352,30 +399,108 @@
                     {"width": "15%",
                         data: 'status',
                         render:function (data) {
-                            let info = '<span class="m-badge m-badge--danger m-badge--wide">Hola</span>';
+                            let info = '<span class="m-badge m-badge--danger m-badge--wide">N/A</span>';
                             switch(parseInt(data)){
                                 case 1:
-                                    info = '<span class="m-badge m-badge--brand m-badge--wide" style="background-color:#C4C5D4 !important" >{{ __('revision') }}</span>';
+                                    info = '<span class="m-badge m-badge--brand m-badge--wide" style="background-color:#C4C5D4 !important" >{{ __('Revision') }}</span>';
                                     break;
                                 case 2:
-                                    info = '<span class="m-badge m-badge--brand m-badge--wide" style="background-color:#9C26EA !important;font-size:7px" >{{ __('pre_aprovado') }}</span>';
+                                    info = '<span class="m-badge m-badge--brand m-badge--wide" style="background-color:#9C26EA !important;font-size:7px" >{{ __('Calificado') }}</span>';
                                     break;
                                 case 3:
-                                    info = '<span class="m-badge  m-badge--success m-badge--wide">{{ __('aprovado2') }}</span>';
+                                    info = '<span class="m-badge  m-badge--success m-badge--wide">{{ __('Aprobado') }}</span>';
                                     break;
                                 case 4:
-                                    info = '<span class="m-badge  m-badge--info m-badge--wide">{{ __('publicado2') }}</span>';
+                                    info = '<span class="m-badge  m-badge--warning m-badge--wide">{{ __('Pendiente') }}</span>';
                                     break;
                                 case 5:
-                                    info = '<span class="m-badge  m-badge--danger m-badge--wide">{{ __('rechazado') }}</span>';
+                                    info = '<span class="m-badge  m-badge--danger m-badge--wide">{{ __('Rechazado') }}</span>';
+                                    break;
+                                case 6:
+                                    info = '<span class="m-badge  m-badge--info m-badge--wide">{{ __('Nueva revisión') }}</span>';
+                                    break;
+                                case 7:
+                                    info = '<span class="m-badge  m-badge--brand m-badge--wide">{{ __('Aceptado') }}</span>';
+                                    break;
+                                case 8:
+                                    info = '<span class="m-badge  m-badge--danger m-badge--wide">{{ __('No subsanado') }}</span>';
+                                    break;
+                                case 9:
+                                    info = '<span class="m-badge  m-badge--danger m-badge--wide">{{ __('Registro pendiente') }}</span>';
+                                    break;
+                                case 10:
+                                    info = '<span class="m-badge  m-badge--danger m-badge--wide">{{ __('Sin propuesta') }}</span>';
                                     break;
                             }
                             return '<div class="text-center">'+info+'</div>';
                         }
                     },
                     {
+
+
                         render:function (data,type, JsonResultRow,meta) {
-                            return '<div class="text-center"><a href="/dashboard/project/'+JsonResultRow.slug+'" class="btn m-btn--pill btn-secondary"><i class="fa fa-eye"></i></a></div>'
+                            // {{-- modal calificacion --}}
+                            console.log(JsonResultRow);
+
+
+                    return `<span type="button" class="btn m-btn--pill btn-secondary text-center" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-eye"></i></span>
+
+
+                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">${JsonResultRow.title}</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+
+                                    <audio class="audio" preload="auto" controls>
+                                       <source src="${JsonResultRow.audio}">
+                                       </audio>
+                                       <div class="form-group m-form__group row">
+                            <label class="col-form-label col-lg-3 col-sm-12">Criterio</label>
+                            <div class="col-lg-6 col-md-12 col-sm-12">
+                                <div class="row align-items-center">
+                                    <div class="col-4">
+                                        <input type="text" class="form-control" id="m_nouislider_2_input" placeholder="Currency">
+                                    </div>
+                                    <div class="col-8">
+                                        <div id="m_nouislider_2" class="m-nouislider m-nouislider--handle-danger"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                                       <div class="form-group m-form__group row">
+										<label class="col-form-label col-lg-3 col-sm-12">Criterio</label>
+										<div class="col-lg-6 col-md-12 col-sm-12">
+											<div class="row align-items-center">
+												<div class="col-4">
+													<input type="text" class="form-control" id="m_nouislider_2_input" placeholder="Currency">
+												</div>
+												<div class="col-8">
+													<div id="m_nouislider_2" class="m-nouislider m-nouislider--handle-danger"></div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+                                    </div>
+
+
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-primary" id="prueba">Enviar calificación</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>`;
+
+
+
+
                         }
                     },
                 ],
@@ -395,8 +520,8 @@
                     "oPaginate": {
                         "sFirst": "Primero",
                         "sLast": "Último",
-                        "sNext": "{{__('siguiente')}}",
-                        "sPrevious": "{{__('anterior')}}"
+                        "sNext": ">",
+                        "sPrevious": "<"
                     },
                     "oAria": {
                         "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
@@ -413,9 +538,13 @@
             tipoProyecto = tipo;
             loadTable();
         });
+
         loadTable();
+
     </script>
     <script>
+
+
         new Dropzone('.dropzone-management', {
             url: '{{ route('profile.photo.management') }}',
             acceptedFiles: 'image/*',

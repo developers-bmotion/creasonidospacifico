@@ -50,7 +50,7 @@ class CloseProjects extends Command
         $endProjects = Project::with("reviews","artists.users", "management.users")->whereHas('endProject', function ($query){
             $query->where('end_time', '<=', Carbon::now()->toDateString());
         })
-        ->whereIn("status", [Project::PREAPPROVAL, Project::REVISION])
+        ->whereIn("status", [Project::QUALIFIED, Project::REVISION])
         ->get();
 
         foreach($endProjects as $project){
@@ -60,7 +60,7 @@ class CloseProjects extends Command
         $endProjects = Project::whereHas("reviews", function ($query){
             $query->groupBy("project_id")->havingRaw("count(project_id) = count(rating)");
         })
-        ->whereIn("status", [Project::PREAPPROVAL, Project::REVISION])
+        ->whereIn("status", [Project::QUALIFIED, Project::REVISION])
         ->get();
 
         foreach($endProjects as $project){

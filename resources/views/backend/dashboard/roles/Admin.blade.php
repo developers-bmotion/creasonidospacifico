@@ -372,7 +372,7 @@
                                                     <span class="changeType w-100 btn btn-outline-metal m-btn m-btn--pill m-btn--wide btn-sm" data-type="{{\App\Project::REVISION}}">{{ __('revision') }}</span>
                                                 </li>
                                                 <li class="m-nav__item text-center">
-                                                    <span class="changeType w-100 btn btn-outline-brand m-btn m-btn--pill m-btn--wide btn-sm" data-type="{{\App\Project::PREAPPROVAL}}">{{ __('pre_aprovado') }}</span>
+                                                    <span class="changeType w-100 btn btn-outline-brand m-btn m-btn--pill m-btn--wide btn-sm" data-type="{{\App\Project::QUALIFIED}}">{{ __('pre_aprovado') }}</span>
 
                                                 </li>
                                                 <li class="m-nav__item text-center">
@@ -452,7 +452,7 @@
                                                         <span
                                                             style="background-color:#9C26EA"
                                                             class="changeType w-100 btn btn-brand m-btn m-btn--pill m-btn--wide btn-sm"
-                                                            data-type="{{\App\Project::PREAPPROVAL}}">{{ __('pre_aprovado') }}</span>
+                                                            data-type="{{\App\Project::QUALIFIED}}">{{ __('pre_aprovado') }}</span>
 
                                                         </li>
                                                     @endif

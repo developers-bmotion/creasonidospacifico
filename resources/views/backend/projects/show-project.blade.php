@@ -20,6 +20,7 @@
                         <div class="m-accordion__item-content">
                             @if(count($artist->historyReviews) != 0)
                                 @php($count = 1 )
+
                                 <div class="row pt-3">
                                     <div class="col-12">
                                         <div class="form-group">
@@ -43,180 +44,183 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                    @foreach($artist->historyReviews as $historyReviews)
+                                                        @foreach($artist->historyReviews as $historyReviews)
                                                         <tr>
                                                             <th scope="row">{{ $count++ }}</th>
                                                             <td>{!! $historyReviews->pivot->observation !!}</td>
 
                                                             @if($historyReviews->pivot->state == 1)
+                                                            <td>
+                                                                <span
+                                                                class="m-badge m-badge--warning m-badge--wide">Pendiente</span></td>
+                                                                @else
                                                                 <td>
-                                <span
-                                    class="m-badge m-badge--warning m-badge--wide">Pendiente</span></td>
-                                                            @else
-                                                                <td>
-                                    <span
-                                        class="m-badge m-badge--success m-badge--wide">Corregido</span></td>
-                                                            @endif
+                                                                    <span
+                                                                    class="m-badge m-badge--success m-badge--wide">Corregido</span></td>
+                                                                    @endif
 
-                                                        </tr>
-                                                    @endforeach
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                                                </tr>
+                                                                @endforeach
 
-
-                                {{--        @forelse($artist->historyReviews as $historyReviews)--}}
-
-
-
-
-
-                                {{--            <h5 class="pb-3">{{ $count++ }}. Observación </h5>--}}
-                                {{--            <div class="row">--}}
-
-                                {{--                <div class="row">--}}
-                                {{--                    <div class="col-12 col-md-10 col-lg-10">--}}
-                                {{--                        <div class="form-group m-form__group">--}}
-                                {{--                            <div class="m-form__group-sub">--}}
-                                {{--                                <label--}}
-                                {{--                                    class="form-control-label font-weight-bold">Observación:--}}
-                                {{--                                </label>--}}
-                                {{--                                <p>{!! $historyReviews->pivot->observation !!}</p>--}}
-                                {{--                            </div>--}}
-                                {{--                        </div>--}}
-                                {{--                    </div>--}}
-                                {{--                    <div class="col-12 col-md-2 col-lg-2">--}}
-                                {{--                        <div class="form-group m-form__group">--}}
-                                {{--                            <div class="m-form__group-sub">--}}
-                                {{--                                <label--}}
-                                {{--                                    class="form-control-label font-weight-bold">Estado:--}}
-                                {{--                                </label>--}}
-                                {{--                                <br>--}}
-                                {{--                                @if($historyReviews->pivot->state == 1)--}}
-                                {{--                                    <span--}}
-                                {{--                                        class="m-badge m-badge--warning m-badge--wide">Pendiente</span>--}}
-                                {{--                                @else--}}
-                                {{--                                    <span--}}
-                                {{--                                        class="m-badge m-badge--success m-badge--wide">Corregido</span>--}}
-                                {{--                                @endif--}}
-                                {{--                            </div>--}}
-                                {{--                        </div>--}}
-                                {{--                    </div>--}}
-                                {{--                </div>--}}
-                                {{--                <hr>--}}
-                                {{--                @empty--}}
-                                {{--                    <h4 class="text-center">Sin observaciones</h4>--}}
-                                {{--                @endforelse--}}
-
-                                {{--            </div>--}}
-                            @endif
-                        </div>
-                    </div>
-                </div>
-            </div>
-        @endif
-        <div class="row">
-            <div class="col-xl-12 col-lg-12">
-                <div class="m-portlet m-portlet--full-height ">
-                    <div class="m-portlet__head">
-                        <div class="m-portlet__head-caption">
-                            <div class="m-portlet__head-title">
-                                <h3 class="m-portlet__head-text">
-                                    Información de la canción
-                                </h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="m-portlet__body">
-                        <div class="m-section">
-                            <div class="row">
-                                <div class="col-11 player" style="padding-right: 3rem;">
-                                    <div class="form-group">
-                                        <h5 style="font-weight: bold">Canción principal:</h5>
-                                    </div>
-                                    <audio preload="auto" controls>
-
-                                        <source src="{{ $project->audio }}">
-                                        {{-- <input name="project_id" id="project_id" type="hidden" value="{{ $project->id }}"> --}}
-                                        {{-- <source src="{{ $project->audio }}" type="video/3gpp;" codecs="mp4v.20.8, samr"> --}}
-                                    </audio>
-
-                                </div>
-                                @if(\App\User::navigation() == "Gestor")
-
-
-
-                                    <div class="row drop_audio col-12" style="display: none">
-                                        <div
-                                            class="col-lg-12 m-form__group-sub {{$errors->has('subir_cancion')? 'has-danger':''}}">
-                                            <div class="form-group m-form__group row">
-                                                <div class="col-lg-12">
-                                                    <label class="form-control-label" form="nombreProyecto"><span
-                                                            class="text-danger">*</span>
-                                                        Subir canción:</label>
-                                                    <div class="m-dropzone dropzone-audio m-dropzone--success" action=""
-                                                         id="m-dropzone-three">
-                                                        <div class="m-dropzone__msg dz-message needsclick">
-                                                            <h3 class="m-dropzone__msg-title">
-                                                                Agregue su canción en formato MP3</h3>
-                                                            <span
-                                                                class="m-dropzone__msg-desc">Arrastra o has clic a aquí para subir</span>
-                                                        </div>
+                                                            </tbody>
+                                                        </table>
                                                     </div>
-                                                    {!! $errors->first('subir_cancion','<div class="form-control-feedback">*:message
-                                                               </div>')!!}
-                                                    <span class="m-form__help">Cargue aquí el audio de la canción en formato Mp3.</span>
-                                                    <input type="hidden" id="inputDBAudioAddProject"
-                                                           name="subir_cancion" value="">
-                                                    <div id="erroresImagen" style="color: var(--danger)"
-                                                         class="form-control-feedback"></div>
+                                                    @endphp
+
                                                 </div>
                                             </div>
                                         </div>
 
-                                    </div>
-                                    <div class="col-md-1 pt-5 mt-4">
-                                        <i class="flaticon-edit ml-3 update_audio"
-                                           style="color:#716aca; cursor:pointer;"></i>
-                                        <button type="button" class="btn btn-primary cancel_audio" style="display:none">
-                                            Cancelar
-                                        </button>
-
-                                    </div>
+                                        {{--        @forelse($artist->historyReviews as $historyReviews)--}}
 
 
 
-                                @endif
 
-                                <div class="secondary_audios col-md-12 row mt-5">
-                                    @if($project->audio_secundary_two)
-                                        <div class="col-6 player">
-                                            <div class="form-group">
-                                                <h5 style="font-weight: bold">Canción extra uno(no participa en el
-                                                    concurso):</h5>
-                                            </div>
-                                            <audio preload="auto" controls>
-                                                <source src="{{ $project->audio_secundary_two}}">
-                                                {{-- <input name="project_id" id="project_id" type="hidden" value="{{ $project->id }}"> --}}
-                                            </audio>
 
-                                        </div>
-                                    @endif
-                                    @if($project->audio_secundary_one)
-                                        <div class="col-6 player">
-                                            <div class="form-group">
+                                        {{--            <h5 class="pb-3">{{ $count++ }}. Observación </h5>--}}
+                                        {{--            <div class="row">--}}
+
+                                            {{--                <div class="row">--}}
+                                                {{--                    <div class="col-12 col-md-10 col-lg-10">--}}
+                                                    {{--                        <div class="form-group m-form__group">--}}
+                                                        {{--                            <div class="m-form__group-sub">--}}
+                                                            {{--                                <label--}}
+                                                            {{--                                    class="form-control-label font-weight-bold">Observación:--}}
+                                                            {{--                                </label>--}}
+                                                            {{--                                <p>{!! $historyReviews->pivot->observation !!}</p>--}}
+                                                            {{--                            </div>--}}
+                                                            {{--                        </div>--}}
+                                                            {{--                    </div>--}}
+                                                            {{--                    <div class="col-12 col-md-2 col-lg-2">--}}
+                                                                {{--                        <div class="form-group m-form__group">--}}
+                                                                    {{--                            <div class="m-form__group-sub">--}}
+                                                                        {{--                                <label--}}
+                                                                        {{--                                    class="form-control-label font-weight-bold">Estado:--}}
+                                                                        {{--                                </label>--}}
+                                                                        {{--                                <br>--}}
+                                                                        {{--                                @if($historyReviews->pivot->state == 1)--}}
+                                                                        {{--                                    <span--}}
+                                                                        {{--                                        class="m-badge m-badge--warning m-badge--wide">Pendiente</span>--}}
+                                                                        {{--                                @else--}}
+                                                                        {{--                                    <span--}}
+                                                                        {{--                                        class="m-badge m-badge--success m-badge--wide">Corregido</span>--}}
+                                                                        {{--                                @endif--}}
+                                                                        {{--                            </div>--}}
+                                                                        {{--                        </div>--}}
+                                                                        {{--                    </div>--}}
+                                                                        {{--                </div>--}}
+                                                                        {{--                <hr>--}}
+                                                                        {{--                @empty--}}
+                                                                        {{--                    <h4 class="text-center">Sin observaciones</h4>--}}
+                                                                        {{--                @endforelse--}}
+
+                                                                        {{--            </div>--}}
+
+                                                                        @endif
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        @endif
+                                                        <div class="row">
+                                                            <div class="col-xl-12 col-lg-12">
+                                                                <div class="m-portlet m-portlet--full-height ">
+                                                                    <div class="m-portlet__head">
+                                                                        <div class="m-portlet__head-caption">
+                                                                            <div class="m-portlet__head-title">
+                                                                                <h3 class="m-portlet__head-text">
+                                                                                    Información de la canción
+                                                                                </h3>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="m-portlet__body">
+                                                                        <div class="m-section">
+                                                                            <div class="row">
+                                                                                <div class="col-11 player" style="padding-right: 3rem;">
+                                                                                    <div class="form-group">
+                                                                                        <h5 style="font-weight: bold">Canción principal:</h5>
+                                                                                    </div>
+                                                                                    <audio preload="auto" controls>
+
+                                                                                        <source src="{{ $project->audio }}">
+                                                                                            {{-- <input name="project_id" id="project_id" type="hidden" value="{{ $project->id }}"> --}}
+                                                                                            {{-- <source src="{{ $project->audio }}" type="video/3gpp;" codecs="mp4v.20.8, samr"> --}}
+                                                                                            </audio>
+
+                                                                                        </div>
+                                                                                        @if(\App\User::navigation() == "Gestor")
+
+
+
+                                                                                        <div class="row drop_audio col-12" style="display: none">
+                                                                                            <div
+                                                                                            class="col-lg-12 m-form__group-sub {{$errors->has('subir_cancion')? 'has-danger':''}}">
+                                                                                            <div class="form-group m-form__group row">
+                                                                                                <div class="col-lg-12">
+                                                                                                    <label class="form-control-label" form="nombreProyecto"><span
+                                                                                                        class="text-danger">*</span>
+                                                                                                        Subir canción:</label>
+                                                                                                        <div class="m-dropzone dropzone-audio m-dropzone--success" action=""
+                                                                                                        id="m-dropzone-three">
+                                                                                                        <div class="m-dropzone__msg dz-message needsclick">
+                                                                                                            <h3 class="m-dropzone__msg-title">
+                                                                                                                Agregue su canción en formato MP3</h3>
+                                                                                                                <span
+                                                                                                                class="m-dropzone__msg-desc">Arrastra o has clic a aquí para subir</span>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        {!! $errors->first('subir_cancion','<div class="form-control-feedback">*:message
+                                                                                                            </div>')!!}
+                                                                                                            <span class="m-form__help">Cargue aquí el audio de la canción en formato Mp3.</span>
+                                                                                                            <input type="hidden" id="inputDBAudioAddProject"
+                                                                                                            name="subir_cancion" value="">
+                                                                                                            <div id="erroresImagen" style="color: var(--danger)"
+                                                                                                            class="form-control-feedback"></div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+
+                                                                                            </div>
+                                                                                            <div class="col-md-1 pt-5 mt-4">
+                                                                                                <i class="flaticon-edit ml-3 update_audio"
+                                                                                                style="color:#716aca; cursor:pointer;"></i>
+                                                                                                <button type="button" class="btn btn-primary cancel_audio" style="display:none">
+                                                                                                    Cancelar
+                                                                                                </button>
+
+                                                                                            </div>
+
+
+
+                                                                                            @endif
+
+                                                                                            <div class="secondary_audios col-md-12 row mt-5">
+                                                                                                @if($project->audio_secundary_two)
+                                                                                                <div class="col-6 player">
+                                                                                                    <div class="form-group">
+                                                                                                        <h5 style="font-weight: bold">Canción extra uno(no participa en el
+                                                                                                            concurso):</h5>
+                                                                                                        </div>
+                                                                                                        <audio preload="auto" controls>
+                                                                                                            <source src="{{ $project->audio_secundary_two}}">
+                                                                                                                {{-- <input name="project_id" id="project_id" type="hidden" value="{{ $project->id }}"> --}}
+                                                                                                            </audio>
+
+                                                                                                        </div>
+                                                                                                        @endif
+                                                                                                        @if($project->audio_secundary_one)
+                                                                                                        <div class="col-6 player">
+                                                                                                            <div class="form-group">
                                                 <h5 style="font-weight: bold">Canción extra dos(no participa en el
                                                     concurso):</h5>
                                             </div>
                                             <audio preload="auto" controls>
                                                 <source src="{{ $project->audio_secundary_one }}">
-                                                {{-- <input name="project_id" id="project_id" type="hidden" value="{{ $project->id }}"> --}}
-                                            </audio>
+                                                    {{-- <input name="project_id" id="project_id" type="hidden" value="{{ $project->id }}"> --}}
+                                                </audio>
                                         </div>
-                                    @endif
+                                        @endif
                                 </div>
                                 {{-- @dd(\App\User::navigation()); --}}
 
@@ -230,27 +234,27 @@
                                     </div>
                                     <div class="form-group">
                                         @if($project->status == 1)
-                                            <span
-                                                class="m-badge m-badge--metal m-badge--wide m-badge--rounded">{{ __('revision') }}</span>
+                                        <span
+                                        class="m-badge m-badge--metal m-badge--wide m-badge--rounded">{{ __('revision') }}</span>
                                         @elseif($project->status == 2)
-                                            <span class="m-badge m-badge--brand m-badge--wide m-badge--rounded"
-                                                  style="background-color: #9816f4 !important;">{{ __('pre_aprobado') }}</span>
-                                            {{-- @elseif($project->status == 3)
-                                                <span
-                                                    class="m-badge m-badge--success m-badge--wide m-badge--rounded">{{ __('aprobado') }}</span> --}}
-                                        @elseif($project->status == 4)
+                                        <span class="m-badge m-badge--brand m-badge--wide m-badge--rounded"
+                                        style="background-color: #9816f4 !important;">{{ __('pre_aprobado') }}</span>
+                                        {{-- @elseif($project->status == 3)
                                             <span
-                                                class="m-badge m-badge--warning m-badge--wide m-badge--rounded">Pendiente</span>
-                                        @elseif($project->status == 5)
+                                            class="m-badge m-badge--success m-badge--wide m-badge--rounded">{{ __('aprobado') }}</span> --}}
+                                            @elseif($project->status == 4)
                                             <span
-                                                class="m-badge m-badge--danger m-badge--wide m-badge--rounded">{{ __('rechazado') }}</span>
-                                        @elseif($project->status == 6)
+                                            class="m-badge m-badge--warning m-badge--wide m-badge--rounded">Pendiente</span>
+                                            @elseif($project->status == 5)
                                             <span
-                                                class="m-badge m-badge--brand m-badge--wide m-badge--rounded">Nueva revision</span>
-                                        @elseif($project->status == 7)
+                                            class="m-badge m-badge--danger m-badge--wide m-badge--rounded">{{ __('rechazado') }}</span>
+                                            @elseif($project->status == 6)
                                             <span
-                                                class="m-badge m-badge--success m-badge--wide m-badge--rounded">Aceptado</span>
-                                        @elseif($project->status == 8)
+                                            class="m-badge m-badge--brand m-badge--wide m-badge--rounded">Nueva revision</span>
+                                            @elseif($project->status == 7)
+                                            <span
+                                            class="m-badge m-badge--success m-badge--wide m-badge--rounded">Aceptado</span>
+                                            @elseif($project->status == 8)
                                             <span
                                                 class="m-badge m-badge--warning m-badge--wide m-badge--rounded">No subsanado</span>
                                         @endif
