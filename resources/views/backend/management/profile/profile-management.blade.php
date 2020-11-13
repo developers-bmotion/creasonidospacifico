@@ -377,6 +377,26 @@
     <script>
 
         $(document).ready(function () {
+            $(".btnOpenProject").on('click',function () {
+
+                let title = $(this).attr('titleProject');
+                let audioProject = $(this).attr('audioProject');
+                console.log(audioProject);
+                $(".tileProjectQualifie").text(title);
+                $('.audioProject').attr('src', audioProject);
+
+//                 let audioHtml = `
+//                     <audio class="audioProject" preload="auto" controls>
+//                         <source class="srcAudio" src="${audioProject}">
+//                     </audio>
+// `
+//                 // $(".bodyAppendAudio").append(audioHtml);
+                //     $(audioHtml).insertBefore(".sliderCalificadorUno");
+
+                // $('#modal2').on('hidden.bs.modal', function (e) {
+                //     $(".audioProject").remove();
+                // })
+            });
 
             // init slider
 
@@ -444,28 +464,6 @@
 
             sliderInput2.addEventListener('change', function () {
                 slider2.noUiSlider.set(this.value);
-            });
-
-
-            $(".btnOpenProject").on('click',function () {
-
-                let title = $(this).attr('titleProject');
-                let audioProject = $(this).attr('audioProject');
-                console.log(audioProject);
-                $(".tileProjectQualifie").text(title);
-                $('.audioProject').attr('src', audioProject);
-
-//                 let audioHtml = `
-//                     <audio class="audioProject" preload="auto" controls>
-//                         <source class="srcAudio" src="${audioProject}">
-//                     </audio>
-// `
-//                 // $(".bodyAppendAudio").append(audioHtml);
-                //     $(audioHtml).insertBefore(".sliderCalificadorUno");
-
-                // $('#modal2').on('hidden.bs.modal', function (e) {
-                //     $(".audioProject").remove();
-                // })
             });
         });
 
