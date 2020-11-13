@@ -71,7 +71,7 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                                                     </div>
                                                     <div class="m-card-profile__pic">
                                                         <a href="{{ route('profile.curador',$management->users->slug)}}">
-                                                            <div class="m-card-profile__pic-wrapper">
+                                                            <div class="cls-gestor-admin m-card-profile__pic-wrapper">
 
                                                                 @if(Storage::disk('public')->exists('users/'.$management->users->picture))
                                                                     <img src="{{ $management->users->pathAttachment()}}"

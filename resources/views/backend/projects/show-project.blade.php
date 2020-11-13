@@ -80,7 +80,7 @@
 
                 <div class="row">
                     <div class="col-xl-12 col-lg-12">
-                        <div class="m-portlet m-portlet--full-height ">
+                        <div class="m-portlet m-portlet--full-height " style="margin-bottom: 0px;">
                             <div class="m-portlet__head">
                                 <div class="m-portlet__head-caption">
                                     <div class="m-portlet__head-title">
@@ -91,9 +91,9 @@
                                 </div>
                             </div>
                             <div class="m-portlet__body">
-                                <div class="m-section">
+                                <div class="m-section section-movil">
                                     <div class="row">
-                                        <div class="col-11 player" style="padding-right: 3rem;">
+                                        <div class="col-12 player" style="padding-right: 2.5rem;">
                                             <div class="form-group">
                                                 <h5 style="font-weight: bold">Canción principal:</h5>
                                             </div>
@@ -186,7 +186,7 @@
                                         {{-- @dd(\App\User::navigation()); --}}
 
                                     </div>
-                                    <div class="row p-5">
+                                    <div class="row p-2" style="margin-right: 0px;">
                                         {{-- reproductor --}}
 
                                         <div class="col-md-3">
@@ -245,7 +245,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-12 mt-5">
+                                        <div class="col-md-12 mt-3">
 
                                             <div class="form-group">
                                                 <h5 style="font-weight: bold">Descripción:</h5>
@@ -634,7 +634,7 @@
                                             </div>
 
 
-                                            <div class="col-md-12 pt-4">
+                                            <div class="col-md-12 pt-4" style="margin-right: 1.5rem;">
 
                                                 <label style="font-weight: bold">{{ __('biografia') }}:</label>
                                                 <div class="m-scrollable" data-scrollable="true" style="">
