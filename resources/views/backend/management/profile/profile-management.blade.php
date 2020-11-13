@@ -378,7 +378,7 @@
 
         $(document).ready(function () {
             $(".btnOpenProject").on('click',function () {
-
+                alert('Nata hagamolo otra vez')
                 let title = $(this).attr('titleProject');
                 let audioProject = $(this).attr('audioProject');
                 console.log(audioProject);
