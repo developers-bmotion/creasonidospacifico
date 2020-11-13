@@ -16,27 +16,25 @@
                 </button>
                 <input type="hidden" name="rejected" value="{{ $project->id }}">
             </form>
-            <form method="post" action="{{ route('project.admin.pendiente.soporte') }}" class="" style="display: inline"
-                  id="frm_pendiente_soporte_admin">
-                @csrf {{ method_field('PUT') }}
-                <button id="btn_pendiente_soporte_admin" class="btn btn-info m-btn m-btn--icon">
-                        <span>
-                            <i class="la la-close"></i>
-                            <span>Enviar a soporte</span>
-                        </span>
-                </button>
-                <input type="hidden" name="pendiente_soporte" value="{{ $project->id }}">
-            </form>
             <button type="button" data-toggle="modal" data-target="#revision"
-                    class="btn btn-warning m-btn m-btn--icon">
+                    class="btn btn-warning m-btn m-btn--icon btn-revision">
             <span style="color: white">
                 <i class="la la-exclamation-triangle"></i>
                 <span>Enviar a revisión</span>
             </span>
             </button>
+
+            <button type="button" data-toggle="modal" data-target="#revision"
+                    class="btn btn-info m-btn m-btn--icon btn-revision-soporte">
+            <span style="color: white">
+                <i class="la la-exclamation-triangle"></i>
+                <span>Enviar a soporte</span>
+            </span>
+            </button>
             <button type="button" class="btn btn-success m-btn m-btn--icon">
                 <span><i class="la la-user"></i><span id="btnSendMessage">{{ __('Aceptar y enviar a curador') }}</span></span>
             </button>
+            <input type="hidden" value="" class="valueTipoRevision">
         </div>
     </div>
 @endif
@@ -156,7 +154,17 @@
     </div>
 </div>
 
+
 @section('table.admin.management')
+    <script>
+        $(".btn-revision-soporte").click(function (){
+            $('.valueTipoRevision').val(1)
+        });
+        $(".btn-revision").click(function (){
+            $('.valueTipoRevision').val(0)
+        });
+
+    </script>
     <script>
         let usuarios = [];
         var DatatablesBasicBasic = function () {
@@ -412,13 +420,15 @@
                         if ($('#m_summernote_1').summernote('code') !== '') {
                             const
                                 mesage = $('#m_summernote_1').summernote('code'),
+                                tipoRevision = $('.valueTipoRevision').val(),
                                 token = '{{ csrf_token() }}',
                                 url = '{{route("project.admin.revision")}}';
 
                             let data = {
                                 __token: token,
                                 observation: mesage,
-                                project: {{ $project->id }}
+                                project: {{ $project->id }},
+                                tipoRevision: tipoRevision
                             };
                             const success = function (r) {
                                 console.log(r);

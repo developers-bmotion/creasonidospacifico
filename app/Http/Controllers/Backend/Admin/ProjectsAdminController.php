@@ -209,36 +209,38 @@ class ProjectsAdminController extends Controller
     {
 
         $id = $request->input('project');
+        $tipoRevision = $request->input('tipoRevision');
 
-        $nowDate = Carbon::now();
-        $dateNow = Carbon::parse($nowDate);
-        $holidays = [
-            "2020-11-14", "2020-11-15", "2020-11-16",
-            "2020-11-21", "2020-11-22", "2020-11-28",
-            "2020-11-29", "2020-12-05", "2020-12-06",
-            "2020-12-08", "2020-12-12", "2020-12-13"
-        ];
+        if ($tipoRevision == 0) {
+            $nowDate = Carbon::now();
+            $dateNow = Carbon::parse($nowDate);
+            $holidays = [
+                "2020-11-14", "2020-11-15", "2020-11-16",
+                "2020-11-21", "2020-11-22", "2020-11-28",
+                "2020-11-29", "2020-12-05", "2020-12-06",
+                "2020-12-08", "2020-12-12", "2020-12-13"
+            ];
 
-        $date = Carbon::now();
-        $MyDateCarbon = Carbon::parse($date);
+            $date = Carbon::now();
+            $MyDateCarbon = Carbon::parse($date);
 
-        $MyDateCarbon->addWeekdays(3);
+            $MyDateCarbon->addWeekdays(3);
 
-        for ($i = 1; $i <= 3; $i++) {
+            for ($i = 1; $i <= 3; $i++) {
 
-            if (in_array(Carbon::parse($date)->addWeekdays($i)->toDateString(), $holidays)) {
+                if (in_array(Carbon::parse($date)->addWeekdays($i)->toDateString(), $holidays)) {
 
-                $MyDateCarbon->addDay();
+                    $MyDateCarbon->addDay();
 
+                }
             }
+            $projectDate = Project::where('id', $id)->update([
+                'timezone' => config('app.timezone'),
+                'original_datetime' => $dateNow,
+                'published_at' => $MyDateCarbon,
+                'rejected' => '1'
+            ]);
         }
-        $projectDate = Project::where('id', $id)->update([
-            'timezone' => config('app.timezone'),
-            'original_datetime' => $dateNow,
-            'published_at' => $MyDateCarbon,
-            'rejected' => '1'
-        ]);
-
         $revision_project = Project::where('id', $id)->update([
             'status' => 4,
         ]);
@@ -249,7 +251,12 @@ class ProjectsAdminController extends Controller
             'project_id' => $id,
             'observation' => $request->input('observation')
         ]);
-        $artistSendEmail = \Mail::to($project->artists[0]->users->email)->send(new ArtistProjectRevision($project->title, $project->artists[0]->users->name, $request->input('observation'), $MyDateCarbon->formatLocalized('%A %d de %B de %Y %H:%M:%S')));
+        if($tipoRevision == 0){
+            $artistSendEmail = \Mail::to($project->artists[0]->users->email)->send(new ArtistProjectRevision($project->title, $project->artists[0]->users->name, $request->input('observation'), $MyDateCarbon->formatLocalized('%A %d de %B de %Y %H:%M:%S')));
+
+        }else{
+            $artistSendEmail = \Mail::to('developer@bmotion.co')->send(new ArtistProjectRevision($project->title, $project->artists[0]->users->name, $request->input('observation'), Carbon::today()));
+        }
 
         // alert()->success( 'Enviado a revisión',__('Ok'))->autoClose(3000);
 
