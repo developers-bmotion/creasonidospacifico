@@ -372,9 +372,10 @@
     <script>
         $(document).ready(function () {
 
+
             setTimeout(function(){
                 $('audio').audioPlayer();
-             }, 3000);
+            }, 3000);
 
             // init slider
 
@@ -459,8 +460,10 @@
                     </audio>
 `
                 // $(".bodyAppendAudio").append(audioHtml);
-                $(audioHtml).insertBefore(".sliderCalificadorUno");
-
+                setTimeout(function(){
+                    $(audioHtml).insertBefore(".sliderCalificadorUno");
+                }, 3000);
+                
                 $('#modal2').on('hidden.bs.modal', function (e) {
                     $(".audioProject").remove();
                 })
