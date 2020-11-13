@@ -43,11 +43,7 @@
                         <h4 class="m-widget24__title">
                             Nueva Revisión
                         </h4><br>
-<<<<<<< HEAD
-                        <span class="m-widget24__desc card-text">Corregidas por los aspirantes</span><br><br>
-=======
-                        <span class="m-widget24__desc">Corregidas por aspirantes</span><br><br>
->>>>>>> 6cea720ce3b4d29aeee7e152856f352eb0d3b413
+                        <span class="m-widget24__desc card-text">Corregidas por aspirantes</span><br><br>
                         <span class="m-widget24__stats m--font-info pull-right pl-4" style="float: left">{{ $projectsStateNuevaRevision }}</span>
 
                     </div>
