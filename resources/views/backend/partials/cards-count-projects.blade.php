@@ -11,13 +11,10 @@
                         <h4 class="m-widget24__title">
                             Aspirantes Registrados
                         </h4><br>
-<<<<<<< HEAD
+
                         <span class="m-widget24__desc card-text">Aspirantes con canción</span><br><br>
-                        <span class="m-widget24__stats m--font-black pull-right pl-4" style="float: left">{{ $projectsStateRevision }}</span>
-=======
-                        <span class="m-widget24__desc">Aspirantes con canción</span><br><br>
                         <span class="m-widget24__stats m--font-black pull-right pl-4" style="float: left">{{ $aspiranteRegistroCompleto }}</span>
->>>>>>> 6cea720ce3b4d29aeee7e152856f352eb0d3b413
+
 
                     </div>
                 </div>
