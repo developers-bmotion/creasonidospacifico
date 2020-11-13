@@ -193,6 +193,11 @@
     .section-movil{
         margin-bottom: 0px !important;
     }
+    .my-form-control{
+        padding-left: 1rem !important;
+        padding-right: 0px !important;
+        width: 3rem !important;
+    }
     
 }
 

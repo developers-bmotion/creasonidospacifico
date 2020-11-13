@@ -22,9 +22,9 @@ use App\Role;
 use App\User;
 
 Route::get('/datos', function () {
-    // $project = Project::where('rejected', '1')->with('artists.users')->first();
-//    dd($project->artists[0]->users->last_name);
-    return new \App\Mail\AssignProjectManager('cancion','cancion','cancion');
+
+    $listAspirant = Artist::with('users','personType','projects.category','documentType','city.departaments')->get();
+    return $listAspirant;
 });
 
 Route::get('/represtante-menor-edad/{id}', function ($id) {
@@ -221,6 +221,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'dashboard', 'middleware' =>
         //Lista proyectos managements
         Route::get('/projects-admin', 'Admin\ProjectsAdminController@index')->name('projects.admin');
         Route::put('/project-rejected-admin', 'Admin\ProjectsAdminController@rejected_project')->name('project.admin.rejected');
+        Route::put('/project-pendiente-soporte-admin', 'Admin\ProjectsAdminController@pediente_soporte_project')->name('project.admin.pendiente.soporte');
         Route::post('/project-revision-admin', 'Admin\ProjectsAdminController@revision_project')->name('project.admin.revision');
         Route::get('/datatables-projects-admin', 'Admin\ProjectsAdminController@table_projects')->name('datatables.projects.admin');
         Route::get('/datatables-projects-admin-approved', 'Admin\ProjectsAdminController@table_projects_approved')->name('datatables.projects.admin.approved');

@@ -17,15 +17,24 @@
                 <input type="hidden" name="rejected" value="{{ $project->id }}">
             </form>
             <button type="button" data-toggle="modal" data-target="#revision"
-                    class="btn btn-warning m-btn m-btn--icon">
+                    class="btn btn-warning m-btn m-btn--icon btn-revision">
             <span style="color: white">
                 <i class="la la-exclamation-triangle"></i>
                 <span>Enviar a revisión</span>
             </span>
             </button>
+
+            <button type="button" data-toggle="modal" data-target="#revision"
+                    class="btn btn-info m-btn m-btn--icon btn-revision-soporte">
+            <span style="color: white">
+                <i class="la la-exclamation-triangle"></i>
+                <span>Enviar a soporte</span>
+            </span>
+            </button>
             <button type="button" class="btn btn-success m-btn m-btn--icon">
                 <span><i class="la la-user"></i><span id="btnSendMessage">{{ __('Aceptar y enviar a curador') }}</span></span>
             </button>
+            <input type="hidden" value="" class="valueTipoRevision">
         </div>
     </div>
 @endif
@@ -145,7 +154,17 @@
     </div>
 </div>
 
+
 @section('table.admin.management')
+    <script>
+        $(".btn-revision-soporte").click(function (){
+            $('.valueTipoRevision').val(1)
+        });
+        $(".btn-revision").click(function (){
+            $('.valueTipoRevision').val(0)
+        });
+
+    </script>
     <script>
         let usuarios = [];
         var DatatablesBasicBasic = function () {
@@ -401,13 +420,15 @@
                         if ($('#m_summernote_1').summernote('code') !== '') {
                             const
                                 mesage = $('#m_summernote_1').summernote('code'),
+                                tipoRevision = $('.valueTipoRevision').val(),
                                 token = '{{ csrf_token() }}',
                                 url = '{{route("project.admin.revision")}}';
 
                             let data = {
                                 __token: token,
                                 observation: mesage,
-                                project: {{ $project->id }}
+                                project: {{ $project->id }},
+                                tipoRevision: tipoRevision
                             };
                             const success = function (r) {
                                 console.log(r);
@@ -458,16 +479,37 @@
                 title: "{{__('porfavor')}}",
                 text: "{{ __('esta_seguro_rechazar') }}",
                 icon: "success",
-
-                confirmButtonText: "<span><i class='la la-thumbs-o-up'></i><span>{{ __('si') }}</span></span>",
-                confirmButtonClass: "btn btn-danger m-btn m-btn--pill m-btn--air m-btn--icon",
-
+                reverseButtons: true,
+                confirmButtonText: 'Aceptar',
+                cancelButtonText: 'Cancelar',
                 showCancelButton: true,
-                cancelButtonText: "<span><i class='la la-thumbs-down'></i><span>{{ __('cancelar') }}</span></span>",
-                cancelButtonClass: "btn btn-secondary m-btn m-btn--pill m-btn--icon"
             }).then(function (result) {
                 if (result.value) {
+                    $('body').loading({
+                        message: 'Enviando...',
+                        start: true,
+                    });
                     $('#frm_rejected_admin').submit();
+                }
+            })
+        });
+        $('#btn_pendiente_soporte_admin').click(function (e) {
+            e.preventDefault();
+            swal({
+                title: "{{__('porfavor')}}",
+                text: "¿Esta seguro de enviar a soporte?",
+                icon: "success",
+                reverseButtons: true,
+                confirmButtonText: 'Aceptar',
+                cancelButtonText: 'Cancelar',
+                showCancelButton: true,
+            }).then(function (result) {
+                if (result.value) {
+                    $('body').loading({
+                        message: 'Enviando...',
+                        start: true,
+                    });
+                    $('#frm_pendiente_soporte_admin').submit();
                 }
             })
         });
