@@ -189,21 +189,6 @@
                             </div>
 
                         </div>
-                        <div class="form-group m-form__group row">
-                            <label class="col-form-label col-lg-3 col-sm-12">Criterio</label>
-                            <div class="col-lg-6 col-md-12 col-sm-12">
-                                <div class="row align-items-center">
-                                    <div class="col-4">
-                                        <input type="text" class="form-control" id="m_nouislider_2_input" placeholder="Currency">
-                                    </div>
-                                    <div class="col-8">
-                                        <div id="m_nouislider_2" class="m-nouislider m-nouislider--handle-danger"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <button type="button" class="btn btn-primary" id="prueba">Enviar calificación</button>
-
                         <div class="tab-pane active" id="m_user_profile_tab_2">
                             <div class="m-portlet__body">
                                 <div class="m-portlet__head">
@@ -221,8 +206,9 @@
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="m-portlet__body">
-                                            <table class="table table-striped- table-bordered table-hover table-checkable"
-                                                   id="table__profile_projects_management">
+                                            <table
+                                                class="table table-striped- table-bordered table-hover table-checkable"
+                                                id="table__profile_projects_management">
                                                 <thead>
                                                 <tr>
                                                     <th>{{ __('Canción') }}</th>
@@ -319,66 +305,180 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title tileProjectQualifie" id="exampleModalLabel"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body bodyAppendAudio">
+                    <div class="sliderCalificadorUno">
+                        <!--=====================================
+                            SLIDER CRITERIO # 1
+                        ======================================-->
+                        <div class="form-group m-form__group row" style="padding-top: 2rem">
+                            <label class="col-form-label col-lg-2 col-sm-12">Cristerio #1</label>
+                            <div class="col-lg-10 col-md-12 col-sm-12">
+                                <div class="row align-items-center" style="margin-bottom: 1rem">
+                                    <div class="col-2">
+                                        <input type="text" class="form-control" id="criterio_1_input"
+                                               placeholder="Quantity">
+                                    </div>
+                                    <div class="col-10">
+                                        <div id="criterio_1" class="m-nouislider--drag-danger"></div>
+                                    </div>
+                                </div>
+                                <span class="m-form__help" style="margin-top: 5rem">Aspectos técnicos musicales: afinación, ritmo, fraseo, tiempo - dinámica, equilibrio sonoro, dicción y articulación.</span>
+                            </div>
+                        </div>
+                        <hr>
+                        <!--=====================================
+                            SLIDER CRITERIO # 2
+                        ======================================-->
+                        <div class="form-group m-form__group row" style="padding-top: 2rem">
+                            <label class="col-form-label col-lg-2 col-sm-12">Cristerio #2</label>
+                            <div class="col-lg-10 col-md-12 col-sm-12">
+                                <div class="row align-items-center" style="margin-bottom: 1rem">
+                                    <div class="col-2">
+                                        <input type="text" class="form-control" id="criterio_2_input"
+                                               placeholder="Quantity">
+                                    </div>
+                                    <div class="col-10">
+                                        <div id="criterio_2" class="m-nouislider--drag-danger"></div>
+                                    </div>
+                                </div>
+                                <span class="m-form__help" style="margin-top: 5rem">Aporte creativo: realización vocal e instrumental. Originalidad, y fidelidad a las formas y estilos tradicionales, cuando sea aplicable al contexto.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-send-rating" id="prueba">Enviar calificación
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 @stop
 
 @push('js')
-<script>
-    $('#prueba').on('click',  function(){
-    alert();
-});
-     $(document).ready(function () {
+    <script>
+        $(document).ready(function () {
 
 
+            $('audio').audioPlayer();
 
-            $('audio.audio').audioPlayer();
+            // init slider
+
+            /*=============================================
+            CRITERIO # 1
+            =============================================*/
+            var slider1 = document.getElementById('criterio_1');
+
+            noUiSlider.create(slider1, {
+                start: [0],
+                step: 1,
+                range: {
+                    'min': [0],
+                    'max': [35]
+                },
+                format: wNumb({
+                    decimals: 0
+                })
+            });
+
+            // init slider input
+            var sliderInput = document.getElementById('criterio_1_input');
+
+            slider1.noUiSlider.on('update', function (values, handle) {
+                sliderInput.value = values[handle];
+            });
+
+            sliderInput.addEventListener('change', function () {
+                slider1.noUiSlider.set(this.value);
+            });
 
 
+            sliderInput.addEventListener('change', function () {
+                slider1.noUiSlider.set(this.value);
+            });
 
-        // init slider
-        var slider = document.getElementById('m_nouislider_2');
+            /*=============================================
+            CRITERIO # 2
+            =============================================*/
+            var slider2 = document.getElementById('criterio_2');
 
-        noUiSlider.create(slider, {
-            start: [ 20000 ],
-            connect: [true, false],
-            step: 1000,
-            range: {
-                'min': [ 20000 ],
-                'max': [ 80000 ]
-            },
-            format: wNumb({
-                decimals: 3,
-                thousand: '.',
-                postfix: ' (US $)',
-            })
+            noUiSlider.create(slider2, {
+                start: [0],
+                step: 1,
+                range: {
+                    'min': [0],
+                    'max': [35]
+                },
+                format: wNumb({
+                    decimals: 0
+                })
+            });
+
+            // init slider input
+            var sliderInput = document.getElementById('criterio_2_input');
+
+            slider2.noUiSlider.on('update', function (values, handle) {
+                sliderInput.value = values[handle];
+            });
+
+            sliderInput.addEventListener('change', function () {
+                slider2.noUiSlider.set(this.value);
+            });
+
+
+            sliderInput.addEventListener('change', function () {
+                slider2.noUiSlider.set(this.value);
+            });
+
+
+            $(".btnOpenProject").click(function () {
+
+                let title = $(this).attr('titleProject');
+                let audioProject = $(this).attr('audioProject');
+                console.log(audioProject);
+                $(".tileProjectQualifie").text(title);
+                $('.audioplayer embed').attr('src', audioProject).trigger("play");
+
+                let audioHtml = `
+                    <audio class="audioProject" preload="auto" controls>
+                        <source class="srcAudio" src="${audioProject}">
+                    </audio>
+`
+                // $(".bodyAppendAudio").append(audioHtml);
+                $(audioHtml).insertBefore(".sliderCalificadorUno");
+
+                $('#modal2').on('hidden.bs.modal', function (e) {
+                    $(".audioProject").remove();
+                })
+            });
         });
-
-        // init slider input
-        var sliderInput = document.getElementById('m_nouislider_2_input');
-
-        slider.noUiSlider.on('update', function( values, handle ) {
-            sliderInput.value = values[handle];
-        });
-
-        sliderInput.addEventListener('change', function(){
-            slider.noUiSlider.set(this.value);
-        });
-
-
-    });
-</script>
+    </script>
     <script>
         var tipoProyecto = null;
         var table = null;
-        const loadTable = function (){
-            if (table !== null){
+        const loadTable = function () {
+            if (table !== null) {
                 table.destroy();
             }
             table = $('#table__profile_projects_management').DataTable({
                 "processing": true,
                 "serverSide": true,
                 "data": null,
-                "order": [[ 0, "desc" ]],
-                "pagginType":"simple_numbers",
+                "order": [[0, "desc"]],
+                "pagginType": "simple_numbers",
                 "ajax": {
                     url: "{{route('datatables.projects.profile.manage')}}",
                     data: {
@@ -396,11 +496,12 @@
                         data: 'category.category',
                         defaultContent: '<span class="label label-danger text-center">Ningún valor por defecto</span>'
                     },
-                    {"width": "15%",
+                    {
+                        "width": "15%",
                         data: 'status',
-                        render:function (data) {
+                        render: function (data) {
                             let info = '<span class="m-badge m-badge--danger m-badge--wide">N/A</span>';
-                            switch(parseInt(data)){
+                            switch (parseInt(data)) {
                                 case 1:
                                     info = '<span class="m-badge m-badge--brand m-badge--wide" style="background-color:#C4C5D4 !important" >{{ __('Revision') }}</span>';
                                     break;
@@ -432,18 +533,18 @@
                                     info = '<span class="m-badge  m-badge--danger m-badge--wide">{{ __('Sin propuesta') }}</span>';
                                     break;
                             }
-                            return '<div class="text-center">'+info+'</div>';
+                            return '<div class="text-center">' + info + '</div>';
                         }
                     },
                     {
 
 
-                        render:function (data,type, JsonResultRow,meta) {
+                        render: function (data, type, JsonResultRow, meta) {
                             // {{-- modal calificacion --}}
                             console.log(JsonResultRow);
 
 
-                    return `<span type="button" class="btn m-btn--pill btn-secondary text-center" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-eye"></i></span>
+                            return `<span type="button"  class="btnOpenProject btn m-btn--pill btn-secondary text-center" audioProject="${JsonResultRow.audio}" titleProject="${JsonResultRow.title}"  data-toggle="modal" data-target="#modal2"><i class="fa fa-eye"></i></span>
 
 
                      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -460,45 +561,17 @@
                                     <audio class="audio" preload="auto" controls>
                                        <source src="${JsonResultRow.audio}">
                                        </audio>
-                                       <div class="form-group m-form__group row">
-                            <label class="col-form-label col-lg-3 col-sm-12">Criterio</label>
-                            <div class="col-lg-6 col-md-12 col-sm-12">
-                                <div class="row align-items-center">
-                                    <div class="col-4">
-                                        <input type="text" class="form-control" id="m_nouislider_2_input" placeholder="Currency">
-                                    </div>
-                                    <div class="col-8">
-                                        <div id="m_nouislider_2" class="m-nouislider m-nouislider--handle-danger"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
-                                       <div class="form-group m-form__group row">
-										<label class="col-form-label col-lg-3 col-sm-12">Criterio</label>
-										<div class="col-lg-6 col-md-12 col-sm-12">
-											<div class="row align-items-center">
-												<div class="col-4">
-													<input type="text" class="form-control" id="m_nouislider_2_input" placeholder="Currency">
-												</div>
-												<div class="col-8">
-													<div id="m_nouislider_2" class="m-nouislider m-nouislider--handle-danger"></div>
-												</div>
-											</div>
-										</div>
-									</div>
 
                                     </div>
 
 
                                 <div class="modal-footer">
-                                  <button type="button" class="btn btn-primary" id="prueba">Enviar calificación</button>
+                                  <button type="button" class="btn btn-primary btn-send-rating" id="prueba">Enviar calificación</button>
                                 </div>
                               </div>
                             </div>
                           </div>`;
-
-
 
 
                         }
@@ -530,9 +603,9 @@
                 }
             });
         };
-        $(".selectType").on('click', '.changeType', function(){
+        $(".selectType").on('click', '.changeType', function () {
             let tipo = parseInt($(this).attr("data-type"));
-            if (!(tipo >  0)){
+            if (!(tipo > 0)) {
                 tipo = null;
             }
             tipoProyecto = tipo;
@@ -540,6 +613,7 @@
         });
 
         loadTable();
+
 
     </script>
     <script>
@@ -564,3 +638,4 @@
         Dropzone.autoDiscover = false;
     </script>
 @endpush
+
