@@ -317,11 +317,11 @@
                     </button>
                 </div>
                 <div class="modal-body bodyAppendAudio">
-{{--                    <audio class="audioProject" preload="auto" controls>--}}
-{{--                                                 <source class="srcAudio" >--}}
-{{--                        --}}
-{{--                    </audio>--}}
-                    <audio src="" class="audioProject" controls> este es un elemento de audio no soportado por tu navegador, prueba con otro </audio>
+                    {{--                    <audio class="audioProject" preload="auto" controls>--}}
+                    {{--                                                 <source class="srcAudio" >--}}
+
+                    {{--                    </audio>--}}
+
                     <div class="sliderCalificadorUno">
                         <!--=====================================
                             SLIDER CRITERIO # 1
@@ -378,13 +378,22 @@
 
         $(document).ready(function () {
 
-            $(document).on('click', '.btnOpenProject', function(){            
+            $(document).on('click', '.btnOpenProject', function () {
+                $(".audioProject").show();
                 let title = $(this).attr('titleProject');
                 let audioProject = $(this).attr('audioProject');
                 console.log(audioProject);
                 $(".tileProjectQualifie").text(title);
-                $('.audioProject').attr('src', audioProject);
-            }); 
+                // $('.audioProject').attr('src', audioProject);
+
+                let audioHtml = `
+                   <audio src="${audioProject}" class="audioProject" controls> este es un elemento de audio no soportado por tu navegador, prueba con otro </audio> `;
+                $(audioHtml).insertBefore(".sliderCalificadorUno");
+
+                $('#modal2').on('hidden.bs.modal', function (e) {
+                    $(".audioProject").remove();
+                })
+            });
 
             // $(".btnOpenProject").on('click','id',function () {
             //     alert('Nata hagamolo otra vez')
@@ -400,11 +409,11 @@
 //                     </audio>
 // `
 //                 // $(".bodyAppendAudio").append(audioHtml);
-                //     $(audioHtml).insertBefore(".sliderCalificadorUno");
+            //     $(audioHtml).insertBefore(".sliderCalificadorUno");
 
-                // $('#modal2').on('hidden.bs.modal', function (e) {
-                //     $(".audioProject").remove();
-                // })
+            // $('#modal2').on('hidden.bs.modal', function (e) {
+            //     $(".audioProject").remove();
+            // })
             // });
 
             // init slider
