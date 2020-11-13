@@ -60,6 +60,10 @@
     height: 70px;
 }
 
+.card-text{
+    display: flex !important;
+}
+
 /* .menu-top-botones{
     display: none !important;
 } */
@@ -113,7 +117,6 @@
     #img-desktop {
         display: none;
     }
-
     .m-aside-header-menu-mobile.m-aside-header-menu-mobile--on {
         -webkit-transition: all 0.3s ease;
         transition: all 0.3s ease;
@@ -125,8 +128,7 @@
     .m-aside-header-menu-mobile-close.m-aside-header-menu-mobile-close--skin-dark {
         background-color: transparent;
     }
-    .m-aside-header-menu-mobile-close.m-aside-header-menu-mobile-close--skin-dark
-        > i {
+    .m-aside-header-menu-mobile-close.m-aside-header-menu-mobile-close--skin-dark > i {
         color: #fff;
     }
     .img-item-menu {
@@ -179,13 +181,19 @@
     #table__profile_projects_management_wrapper .row:nth-child(2)  {       
         overflow: scroll !important;
     }
-    
     .dataTables_wrapper .dataTables_paginate .pagination .page-item {
         margin-left: 0.3rem;
     }
     div.dataTables_wrapper div.dataTables_paginate ul.pagination{
         justify-content: space-evenly !important;
     }
+    div#table_ciudades_wrapper {
+        padding-bottom: 50px !important;
+    }
+    .section-movil{
+        margin-bottom: 0px !important;
+    }
+    
 }
 
 @media (max-width: 653px) and (min-width: 481px) {

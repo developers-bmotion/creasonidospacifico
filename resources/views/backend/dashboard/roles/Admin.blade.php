@@ -606,6 +606,7 @@
                 "processing": true,
                 "serverSide": true,
                 "scrollX": true,
+                "pageLength": 10,
                 "data": null,
                 "pagingType": "simple_numbers",
                 "order": [[0, "asc"]],
@@ -905,6 +906,7 @@
         $('#table_ciudades').DataTable({
             "processing": true,
             "order": [[2, "desc"]],
+            "pagingType": "simple_numbers",
             "ajax": '{{route('get.aspirants.cities')}}',
             "columns": [
                 {
@@ -937,8 +939,8 @@
                 "oPaginate": {
                     "sFirst": "Primero",
                     "sLast": "Último",
-                    "sNext": "{{__('siguiente')}}",
-                    "sPrevious": "{{__('anterior')}}"
+                    "sNext": ">",
+                    "sPrevious": "<"
                 },
                 "oAria": {
                     "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
@@ -995,8 +997,8 @@
                 "oPaginate": {
                     "sFirst": "Primero",
                     "sLast": "Último",
-                    "sNext": "{{__('siguiente')}}",
-                    "sPrevious": "{{__('anterior')}}"
+                    "sNext": ">",
+                    "sPrevious": "<"
                 },
                 "oAria": {
                     "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
