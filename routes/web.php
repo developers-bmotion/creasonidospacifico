@@ -22,9 +22,11 @@ use App\Role;
 use App\User;
 
 Route::get('/datos', function () {
-    // $project = Project::where('rejected', '1')->with('artists.users')->first();
-//    dd($project->artists[0]->users->last_name);
-    return new \App\Mail\AssignProjectManager('cancion','cancion','cancion');
+    $id= 1;
+    $listAspirant = Artist::with('users','personType','documentType','city.departaments')->whereHas('projects', function ($q) use($id){
+        $q->where('status', $id);
+    })->with('projects.category')->get();
+    return $listAspirant;
 });
 
 Route::get('/represtante-menor-edad/{id}', function ($id) {
