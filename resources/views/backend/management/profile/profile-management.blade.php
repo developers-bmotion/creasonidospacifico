@@ -56,7 +56,7 @@
                 <div class="m-portlet m-portlet--full-height m-portlet--tabs  ">
                     <div class="m-portlet__head">
                         <div class="m-portlet__head-tools">
-                            <ul class="nav nav-tabs m-tabs m-tabs-line   m-tabs-line--left m-tabs-line--primary"
+                            <ul class="nav my-scroll-nav nav-tabs m-tabs m-tabs-line   m-tabs-line--left m-tabs-line--primary"
                                 role="tablist">
                                 <li class="nav-item m-tabs__item">
                                     <a class="nav-link m-tabs__link active" data-toggle="tab"
@@ -322,45 +322,94 @@
 
                     {{--                    </audio>--}}
 
-                    <div class="sliderCalificadorUno">
-                        <!--=====================================
-                            SLIDER CRITERIO # 1
-                        ======================================-->
-                        <div class="form-group m-form__group row" style="padding-top: 2rem">
-                            <label class="col-form-label col-lg-2 col-sm-12">Criterio #1</label>
-                            <div class="col-lg-10 col-md-12 col-sm-12">
-                                <div class="row align-items-center" style="margin-bottom: 1rem">
-                                    <div class="col-2">
-                                        <input type="text" class="form-control" id="criterio_1_input"
-                                               placeholder="Quantity">
+                    <form method="post" action="{{ route('add.review') }}" class="" style="display: inline"
+                    id="frm_qualification">
+                    @csrf
+
+                        <input type="hidden"  class="idProject" value="" name="idProject">
+                        <div class="sliderCalificadorUno">
+                            <!--=====================================
+                                SLIDER CRITERIO # 1
+                            ======================================-->
+                            <div class="form-group m-form__group row" style="padding-top: 2rem">
+                                <label class="col-form-label col-lg-3 col-sm-12">Aspectos técnicos musicales:</label>
+                                <div class="col-lg-9 col-md-12 col-sm-12">
+                                    <div class="row align-items-center" style="margin-bottom: 1rem">
+                                        <div class="col-2">
+                                            <input type="text" class="form-control my-form-control" name="criterio_1" id="criterio_1_input"
+                                                placeholder="Quantity">
+                                        </div>
+                                        <div class="col-10">
+                                            <div id="criterio_1" class="m-nouislider--drag-danger"></div>
+                                        </div>
                                     </div>
-                                    <div class="col-10">
-                                        <div id="criterio_1" class="m-nouislider--drag-danger"></div>
-                                    </div>
+                                    <span class="m-form__help" style="margin-top: 5rem">afinación, ritmo, fraseo, tiempo - dinámica, equilibrio sonoro, dicción y articulación.</span>
                                 </div>
-                                <span class="m-form__help" style="margin-top: 5rem">Aspectos técnicos musicales: afinación, ritmo, fraseo, tiempo - dinámica, equilibrio sonoro, dicción y articulación.</span>
+                            </div>
+                            <hr>
+                            <!--=====================================
+                                SLIDER CRITERIO # 2
+                            ======================================-->
+                            <div class="form-group m-form__group row" style="padding-top: 2rem">
+                                <label class="col-form-label col-lg-3 col-sm-12">Aporte creativo:</label>
+                                <div class="col-lg-9 col-md-12 col-sm-12">
+                                    <div class="row align-items-center" style="margin-bottom: 1rem">
+                                        <div class="col-2">
+                                            <input type="text" class="form-control my-form-control" name="criterio_2" id="criterio_2_input"
+                                                placeholder="Quantity">
+                                        </div>
+                                        <div class="col-10">
+                                            <div id="criterio_2" class="m-nouislider--drag-danger"></div>
+                                        </div>
+                                    </div>
+                                    <span class="m-form__help" style="margin-top: 5rem"> realización vocal e instrumental. Originalidad, y fidelidad a las formas y estilos tradicionales, cuando sea aplicable al contexto.</span>
+                                </div>
+                            </div>
+                            <!--=====================================
+                                SLIDER CRITERIO # 3
+                            ======================================-->
+
+                            <div class="form-group m-form__group row" style="padding-top: 2rem">
+                                <label class="col-form-label col-lg-3 col-sm-12">Calidad interpretativa:</label>
+                                <div class="col-lg-9 col-md-12 col-sm-12">
+                                    <div class="row align-items-center" style="margin-bottom: 1rem">
+                                        <div class="col-2">
+                                            <input type="text" class="form-control my-form-control" name="criterio_3" id="criterio_3_input"
+                                                placeholder="Quantity">
+                                        </div>
+                                        <div class="col-10">
+                                            <div id="criterio_3" class="m-nouislider--drag-danger"></div>
+                                        </div>
+                                    </div>
+                                    <span class="m-form__help" style="margin-top: 5rem">comunicación, proyección, dicción.</span>
+                                </div>
+                            </div>
+                            <!--=====================================
+                                SLIDER CRITERIO # 4
+                            ======================================-->
+
+                            <div class="form-group m-form__group row" style="padding-top: 2rem">
+                                <label class="col-form-label col-lg-3 col-sm-12">Calidad del repertorio escogido:</label>
+                                <div class="col-lg-9 col-md-12 col-sm-12">
+                                    <div class="row align-items-center" style="margin-bottom: 1rem">
+                                        <div class="col-2">
+                                            <input type="text" class="form-control my-form-control" name="criterio_4" id="criterio_4_input"
+                                                placeholder="Quantity">
+                                        </div>
+                                        <div class="col-10">
+                                            <div id="criterio_4" class="m-nouislider--drag-danger"></div>
+                                        </div>
+                                    </div>
+                                    <span class="m-form__help" style="margin-top: 5rem">selección de la obra con relación a la diversidad de ritmos, tonalidades y formas.</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group m-form__group row" style="padding-top: 2rem">
+                                <label class="col-form-label col-lg-12 col-sm-12">Comentario:</label>
+                                <textarea  class="col-form-label col-lg-11 col-sm-11 ml-3" placeholder="" name="comment" id="comment"></textarea>
                             </div>
                         </div>
-                        <hr>
-                        <!--=====================================
-                            SLIDER CRITERIO # 2
-                        ======================================-->
-                        <div class="form-group m-form__group row" style="padding-top: 2rem">
-                            <label class="col-form-label col-lg-2 col-sm-12">Criterio #2</label>
-                            <div class="col-lg-10 col-md-12 col-sm-12">
-                                <div class="row align-items-center" style="margin-bottom: 1rem">
-                                    <div class="col-2">
-                                        <input type="text" class="form-control" id="criterio_2_input"
-                                               placeholder="Quantity">
-                                    </div>
-                                    <div class="col-10">
-                                        <div id="criterio_2" class="m-nouislider--drag-danger"></div>
-                                    </div>
-                                </div>
-                                <span class="m-form__help" style="margin-top: 5rem">Aporte creativo: realización vocal e instrumental. Originalidad, y fidelidad a las formas y estilos tradicionales, cuando sea aplicable al contexto.</span>
-                            </div>
-                        </div>
-                    </div>
+                    </form>
                 </div>
 
 
@@ -378,13 +427,22 @@
 
         $(document).ready(function () {
 
+            $('.btn-send-rating').click(function(){
+
+                $('#frm_qualification').submit();
+
+
+            });
+
             $(document).on('click', '.btnOpenProject', function () {
                 $(".audioProject").show();
                 let title = $(this).attr('titleProject');
                 let audioProject = $(this).attr('audioProject');
-                console.log(audioProject);
+                let idProject = $(this).attr('idProject');
+
                 $(".tileProjectQualifie").text(title);
-                // $('.audioProject').attr('src', audioProject);
+                $(".idProject").val(idProject);
+
 
                 let audioHtml = `
                    <audio src="${audioProject}" class="audioProject" controls> este es un elemento de audio no soportado por tu navegador, prueba con otro </audio> `;
@@ -461,7 +519,7 @@
                 step: 1,
                 range: {
                     'min': [0],
-                    'max': [35]
+                    'max': [30]
                 },
                 format: wNumb({
                     decimals: 0
@@ -482,6 +540,70 @@
 
             sliderInput2.addEventListener('change', function () {
                 slider2.noUiSlider.set(this.value);
+            });
+            /*=============================================
+            CRITERIO # 3
+            =============================================*/
+            var slider3 = document.getElementById('criterio_3');
+
+            noUiSlider.create(slider3, {
+                start: [0],
+                step: 1,
+                range: {
+                    'min': [0],
+                    'max': [25]
+                },
+                format: wNumb({
+                    decimals: 0
+                })
+            });
+
+            // init slider input
+            var sliderInput3 = document.getElementById('criterio_3_input');
+
+            slider3.noUiSlider.on('update', function (values, handle) {
+                sliderInput3.value = values[handle];
+            });
+
+            sliderInput3.addEventListener('change', function () {
+                slider3.noUiSlider.set(this.value);
+            });
+
+
+            sliderInput3.addEventListener('change', function () {
+                slider3.noUiSlider.set(this.value);
+            });
+            /*=============================================
+            CRITERIO # 4
+            =============================================*/
+            var slider4 = document.getElementById('criterio_4');
+
+            noUiSlider.create(slider4, {
+                start: [0],
+                step: 1,
+                range: {
+                    'min': [0],
+                    'max': [10]
+                },
+                format: wNumb({
+                    decimals: 0
+                })
+            });
+
+            // init slider input
+            var sliderInput4 = document.getElementById('criterio_4_input');
+
+            slider4.noUiSlider.on('update', function (values, handle) {
+                sliderInput4.value = values[handle];
+            });
+
+            sliderInput4.addEventListener('change', function () {
+                slider4.noUiSlider.set(this.value);
+            });
+
+
+            sliderInput4.addEventListener('change', function () {
+                slider4.noUiSlider.set(this.value);
             });
         });
 
@@ -564,7 +686,7 @@
                             console.log(JsonResultRow);
 
 
-                            return `<span type="button"  id="id" class="btnOpenProject btn m-btn--pill btn-secondary text-center" audioProject="${JsonResultRow.audio}" titleProject="${JsonResultRow.title}"  data-toggle="modal" data-target="#modal2"><i class="fa fa-eye"></i></span>
+                            return `<span type="button"  id="id" class="btnOpenProject btn m-btn--pill btn-secondary text-center" idProject="${JsonResultRow.id}" audioProject="${JsonResultRow.audio}" titleProject="${JsonResultRow.title}"  data-toggle="modal" data-target="#modal2"><i class="fa fa-eye"></i></span>
 
 
                      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -602,7 +724,7 @@
                     "sLengthMenu": "{{__('mostrar')}} _MENU_ {{__('registros')}}",
                     "sZeroRecords": "No se encontraron resultados",
                     "sEmptyTable": "{{__('nigun_dato_tabla')}}",
-                    "sInfo": "{{__('mostrando_registros') }} _START_ {{__('from')}} _END_ {{__('total_de')}} _TOTAL_ {{__('registros')}}",
+                    "sInfo": "{{__('mostrando_registros') }} _START_ {{__('al')}} _END_ {{__('total_de')}} _TOTAL_ {{__('registros')}}",
                     "sInfoEmpty": "{{ __('mostrando_registros_del_cero') }}",
                     "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
                     "sInfoPostFix": "",
