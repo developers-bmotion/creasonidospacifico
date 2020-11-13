@@ -126,7 +126,7 @@ class DashboardAdminController extends Controller
 
                 }else{
 
-                    $listAspirant = Artist::with('users','personType','projects.category','documentType','city.departaments');
+                    $listAspirant = Artist::with('users','personType','projects.category','documentType','city.departaments', 'projects');
                 }
 
             }

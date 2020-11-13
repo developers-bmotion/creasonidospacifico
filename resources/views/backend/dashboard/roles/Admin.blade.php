@@ -350,53 +350,6 @@
                         </h3>
                     </div>
                 </div>
-
-                {{-- <div class="m-portlet__head-tools">
-                    <ul class="m-portlet__nav">
-
-                        <li class="m-portlet__nav-item"></li>
-                        <div class="m-dropdown m-dropdown--inline  m-dropdown--arrow m-dropdown--align-right"
-                             m-dropdown-toggle="hover">
-                            <a href="#" class="m-dropdown__toggle btn btn-warning dropdown-toggle">
-                                {{ __('estado') }}
-                            </a>
-                            <div class="m-dropdown__wrapper">
-                                <span class="m-dropdown__arrow m-dropdown__arrow--right"></span>
-                                <div class="m-dropdown__inner">
-                                    <div class="m-dropdown__body">
-                                        <div class="m-dropdown__content selectType">
-                                            <ul class="m-nav">
-                                                <li class="m-nav__section m-nav__section--first">
-                                                    <span class="m-nav__section-text">{{ __('selecciona') }}</span>
-                                                </li>
-                                                <li class="m-nav__item text-center">
-                                                    <span class="changeType w-100 btn btn-outline-metal m-btn m-btn--pill m-btn--wide btn-sm" data-type="{{\App\Project::REVISION}}">{{ __('revision') }}</span>
-                                                </li>
-                                                <li class="m-nav__item text-center">
-                                                    <span class="changeType w-100 btn btn-outline-brand m-btn m-btn--pill m-btn--wide btn-sm" data-type="{{\App\Project::QUALIFIED}}">{{ __('pre_aprovado') }}</span>
-
-                                                </li>
-                                                <li class="m-nav__item text-center">
-                                                    <span class="changeType w-100 btn btn-outline-success m-btn m-btn--pill m-btn--wide btn-sm" data-type="{{\App\Project::APPROVAL}}">{{ __('aprovado') }}</span>
-                                                </li>
-                                                <li class="m-nav__item text-center">
-                                                </li>
-                                                <li class="m-nav__item text-center">
-                                                    <span class="changeType w-100 btn btn-outline-danger m-btn m-btn--pill m-btn--wide btn-sm" data-type="{{\App\Project::REJECTED}}">{{ __('rechazados') }}</span>
-                                                </li>
-                                                <li class="m-nav__separator m-nav__separator--fit">
-                                                </li>
-                                                <li class="m-nav__item">
-                                                    <span class="changeType w-100 btn btn-outline-danger m-btn m-btn--pill m-btn--wide btn-block">{{ __('todos') }}</span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </ul>
-                </div> --}}
             </div>
 
             <div class="m-portlet__body">
@@ -666,7 +619,7 @@
                                 });
                             }
 
-                           cat = category != "" ? `${category.category.category}` : '<span class="label label-danger text-center ml-4" style="color:red !important">Sin categoria</span>'
+                           cat = category != "" ? `${category.category.category}` : '<span class="label label-danger text-center ml-4" style="color:#ff0000 !important">Sin categoria</span>'
                            return cat;
                         },
 
@@ -733,7 +686,7 @@
                                 });
 
                             }
-
+                            console.log(status);
                             let info = '<span class="label label-danger text-center ml-4" style="color:red !important">Sin propuesta</span>';
                             switch (parseInt(status)) {
                                 case 1:
@@ -750,6 +703,12 @@
                                     break;
                                 case 5:
                                     info = '<span class="m-badge  m-badge--danger m-badge--wide">No subsanado</span>';
+                                    break;
+                                case 6:
+                                    info = '<span class="m-badge  m-badge--info m-badge--wide">Nueva revisión</span>';
+                                    break;
+                                case 7:
+                                    info = '<span class="m-badge  m-badge--info m-badge--wide">Aceptado</span>';
                                     break;
                             }
                             return '<div class="text-center">' + info + '</div>';
