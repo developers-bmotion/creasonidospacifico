@@ -322,7 +322,7 @@
                             SLIDER CRITERIO # 1
                         ======================================-->
                         <div class="form-group m-form__group row" style="padding-top: 2rem">
-                            <label class="col-form-label col-lg-2 col-sm-12">Cristerio #1</label>
+                            <label class="col-form-label col-lg-2 col-sm-12">Criterio #1</label>
                             <div class="col-lg-10 col-md-12 col-sm-12">
                                 <div class="row align-items-center" style="margin-bottom: 1rem">
                                     <div class="col-2">
@@ -341,7 +341,7 @@
                             SLIDER CRITERIO # 2
                         ======================================-->
                         <div class="form-group m-form__group row" style="padding-top: 2rem">
-                            <label class="col-form-label col-lg-2 col-sm-12">Cristerio #2</label>
+                            <label class="col-form-label col-lg-2 col-sm-12">Criterio #2</label>
                             <div class="col-lg-10 col-md-12 col-sm-12">
                                 <div class="row align-items-center" style="margin-bottom: 1rem">
                                     <div class="col-2">
@@ -372,8 +372,9 @@
     <script>
         $(document).ready(function () {
 
-
-            $('audio').audioPlayer();
+            setTimeout(function(){
+                $('audio').audioPlayer();
+             }, 3000);
 
             // init slider
 
@@ -428,18 +429,18 @@
             });
 
             // init slider input
-            var sliderInput = document.getElementById('criterio_2_input');
+            var sliderInput2 = document.getElementById('criterio_2_input');
 
             slider2.noUiSlider.on('update', function (values, handle) {
-                sliderInput.value = values[handle];
+                sliderInput2.value = values[handle];
             });
 
-            sliderInput.addEventListener('change', function () {
+            sliderInput2.addEventListener('change', function () {
                 slider2.noUiSlider.set(this.value);
             });
 
 
-            sliderInput.addEventListener('change', function () {
+            sliderInput2.addEventListener('change', function () {
                 slider2.noUiSlider.set(this.value);
             });
 
