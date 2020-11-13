@@ -51,7 +51,7 @@ Vue.component('player-component', require('./components/player/player.vue'));
 Vue.component('aspirants-admin', require('./components/admin/AspirantsAdmin.vue'));
 
 
-const app = new Vue({
-    el: '#app'
-});
+// const app = new Vue({
+//     el: '#app'
+// });
 

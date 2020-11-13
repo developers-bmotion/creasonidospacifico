@@ -26,10 +26,19 @@ class ProjectsManageController extends Controller
     }
 
     public function add_review(Request $request){
-        $rating = $request->get('rating_input');
-        $comment = $request->get('comment');
-        $review = Review::where(['project_id' => $request->get('project_id'),'user_id' => auth()->user()->id])->update(array('rating' => $rating,'comment' => $comment));
-        \Artisan::call('projects:close');
-        return $review;
+
+        echo $request;
+        die();
+        Review::create([
+            'project_id' => $request->idProject,
+            'user_id'=>auth()->user()->id,
+            'lyric'=>$request->criterio_4, //Calidad del repertorio escogido:
+            'melody_rhythm'=>$request->criterio_1, //Aspectos técnicos musicales:
+            'arrangements'=>$request->criterio_3, //Calidad interpretativa:
+            'originality'=> $request->criterio_2, //aporte creativo
+            'comment'=>$request->comment
+         ]);
+
+        return $request;
     }
 }
