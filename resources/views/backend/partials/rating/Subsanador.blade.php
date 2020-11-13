@@ -5,7 +5,7 @@
             <h5 style="font-weight: bold">{{ __('Acciones') }}:</h5>
         </div>
         <div class="form-group">
-            <form method="post" action="{{ route('project.admin.rejected') }}" class="" style="display: inline"
+            <form method="post" action="{{ route('project.admin.rejected') }}" class="btn-subsanador" style="display: inline"
                   id="frm_rejected_admin">
                 @csrf {{ method_field('PUT') }}
                 <button id="btn_rejected_admin" class="btn btn-danger m-btn m-btn--icon">
@@ -17,22 +17,21 @@
                 <input type="hidden" name="rejected" value="{{ $project->id }}">
             </form>
             <button type="button" data-toggle="modal" data-target="#revision"
-                    class="btn btn-warning m-btn m-btn--icon btn-revision">
+                    class="btn-subsanador btn btn-warning m-btn m-btn--icon btn-revision">
             <span style="color: white">
                 <i class="la la-exclamation-triangle"></i>
                 <span>Enviar a revisión</span>
             </span>
             </button>
-
             <button type="button" data-toggle="modal" data-target="#revision"
-                    class="btn btn-info m-btn m-btn--icon btn-revision-soporte">
+                    class="btn-subsanador btn btn-info m-btn m-btn--icon btn-revision-soporte">
             <span style="color: white">
                 <i class="la la-exclamation-triangle"></i>
                 <span>Enviar a soporte</span>
             </span>
             </button>
-            <button type="button" class="btn btn-success m-btn m-btn--icon">
-                <span><i class="la la-user"></i><span id="btnSendMessage">{{ __('Aceptar y enviar a curador') }}</span></span>
+            <button type="button" class="btn-subsanador btn btn-success m-btn m-btn--icon">
+                <span><i class="la la-user"></i><span id="btnSendMessage">{{ __('Enviar a curador') }}</span></span>
             </button>
             <input type="hidden" value="" class="valueTipoRevision">
         </div>
