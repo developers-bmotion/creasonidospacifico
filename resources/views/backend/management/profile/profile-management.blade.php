@@ -317,6 +317,11 @@
                     </button>
                 </div>
                 <div class="modal-body bodyAppendAudio">
+{{--                    <audio class="audioProject" preload="auto" controls>--}}
+{{--                                                 <source class="srcAudio" >--}}
+{{--                        --}}
+{{--                    </audio>--}}
+                    <audio src="" class="audioProject" controls> este es un elemento de audio no soportado por tu navegador, prueba con otro </audio>
                     <div class="sliderCalificadorUno">
                         <!--=====================================
                             SLIDER CRITERIO # 1
@@ -370,12 +375,16 @@
 
 @push('js')
     <script>
+        // $(document).ready(function () {
+        //
+        //     $(function () {
+        //         $('audio').audioPlayer();
+        //     });
+        //
+        // });
         $(document).ready(function () {
 
 
-            setTimeout(function(){
-                $('audio').audioPlayer();
-            }, 3000);
 
             // init slider
 
@@ -452,23 +461,22 @@
                 let audioProject = $(this).attr('audioProject');
                 console.log(audioProject);
                 $(".tileProjectQualifie").text(title);
-                $('.audioplayer embed').attr('src', audioProject).trigger("play");
+                $('.audioProject').attr('src', audioProject);
 
-                let audioHtml = `
-                    <audio class="audioProject" preload="auto" controls>
-                        <source class="srcAudio" src="${audioProject}">
-                    </audio>
-`
-                // $(".bodyAppendAudio").append(audioHtml);
-                setTimeout(function(){
-                    $(audioHtml).insertBefore(".sliderCalificadorUno");
-                }, 3000);
-                
-                $('#modal2').on('hidden.bs.modal', function (e) {
-                    $(".audioProject").remove();
-                })
+//                 let audioHtml = `
+//                     <audio class="audioProject" preload="auto" controls>
+//                         <source class="srcAudio" src="${audioProject}">
+//                     </audio>
+// `
+//                 // $(".bodyAppendAudio").append(audioHtml);
+                //     $(audioHtml).insertBefore(".sliderCalificadorUno");
+
+                // $('#modal2').on('hidden.bs.modal', function (e) {
+                //     $(".audioProject").remove();
+                // })
             });
         });
+
     </script>
     <script>
         var tipoProyecto = null;
