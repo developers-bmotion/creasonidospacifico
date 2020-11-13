@@ -375,16 +375,8 @@
 
 @push('js')
     <script>
-        // $(document).ready(function () {
-        //
-        //     $(function () {
-        //         $('audio').audioPlayer();
-        //     });
-        //
-        // });
+
         $(document).ready(function () {
-
-
 
             // init slider
 
@@ -455,7 +447,7 @@
             });
 
 
-            $(".btnOpenProject").click(function () {
+            $(".btnOpenProject").on('click',function () {
 
                 let title = $(this).attr('titleProject');
                 let audioProject = $(this).attr('audioProject');
