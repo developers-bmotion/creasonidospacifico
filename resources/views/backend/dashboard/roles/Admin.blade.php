@@ -619,7 +619,7 @@
                                 });
                             }
 
-                           cat = category != "" ? `${category.category.category}` : '<span class="label label-danger text-center ml-4" style="color:red !important">Sin categoria</span>'
+                           cat = category != "" ? `${category.category.category}` : '<span class="label label-danger text-center ml-4" style="color:#ff0000 !important">Sin categoria</span>'
                            return cat;
                         },
 
@@ -686,7 +686,7 @@
                                 });
 
                             }
-
+                            console.log(status);
                             let info = '<span class="label label-danger text-center ml-4" style="color:red !important">Sin propuesta</span>';
                             switch (parseInt(status)) {
                                 case 1:
@@ -703,6 +703,12 @@
                                     break;
                                 case 5:
                                     info = '<span class="m-badge  m-badge--danger m-badge--wide">No subsanado</span>';
+                                    break;
+                                case 6:
+                                    info = '<span class="m-badge  m-badge--info m-badge--wide">Nueva revisión</span>';
+                                    break;
+                                case 7:
+                                    info = '<span class="m-badge  m-badge--info m-badge--wide">Aceptado</span>';
                                     break;
                             }
                             return '<div class="text-center">' + info + '</div>';

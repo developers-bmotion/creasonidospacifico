@@ -194,6 +194,17 @@ class ProjectsAdminController extends Controller
         return back();
     }
 
+    public function pediente_soporte_project(Request $request)
+    {
+        $id = $request->get('pendiente_soporte');
+        $rejected_project = Project::where('id', $id)->update([
+            'status' => 4
+        ]);
+
+        alert()->success("Propuesta enviada a soporte", __('Ok'))->autoClose(3000);
+
+        return back();
+    }
     public function revision_project(Request $request)
     {
 

@@ -16,6 +16,17 @@
                 </button>
                 <input type="hidden" name="rejected" value="{{ $project->id }}">
             </form>
+            <form method="post" action="{{ route('project.admin.pendiente.soporte') }}" class="" style="display: inline"
+                  id="frm_pendiente_soporte_admin">
+                @csrf {{ method_field('PUT') }}
+                <button id="btn_pendiente_soporte_admin" class="btn btn-info m-btn m-btn--icon">
+                        <span>
+                            <i class="la la-close"></i>
+                            <span>Enviar a soporte</span>
+                        </span>
+                </button>
+                <input type="hidden" name="pendiente_soporte" value="{{ $project->id }}">
+            </form>
             <button type="button" data-toggle="modal" data-target="#revision"
                     class="btn btn-warning m-btn m-btn--icon">
             <span style="color: white">
@@ -458,16 +469,37 @@
                 title: "{{__('porfavor')}}",
                 text: "{{ __('esta_seguro_rechazar') }}",
                 icon: "success",
-
-                confirmButtonText: "<span><i class='la la-thumbs-o-up'></i><span>{{ __('si') }}</span></span>",
-                confirmButtonClass: "btn btn-danger m-btn m-btn--pill m-btn--air m-btn--icon",
-
+                reverseButtons: true,
+                confirmButtonText: 'Aceptar',
+                cancelButtonText: 'Cancelar',
                 showCancelButton: true,
-                cancelButtonText: "<span><i class='la la-thumbs-down'></i><span>{{ __('cancelar') }}</span></span>",
-                cancelButtonClass: "btn btn-secondary m-btn m-btn--pill m-btn--icon"
             }).then(function (result) {
                 if (result.value) {
+                    $('body').loading({
+                        message: 'Enviando...',
+                        start: true,
+                    });
                     $('#frm_rejected_admin').submit();
+                }
+            })
+        });
+        $('#btn_pendiente_soporte_admin').click(function (e) {
+            e.preventDefault();
+            swal({
+                title: "{{__('porfavor')}}",
+                text: "¿Esta seguro de enviar a soporte?",
+                icon: "success",
+                reverseButtons: true,
+                confirmButtonText: 'Aceptar',
+                cancelButtonText: 'Cancelar',
+                showCancelButton: true,
+            }).then(function (result) {
+                if (result.value) {
+                    $('body').loading({
+                        message: 'Enviando...',
+                        start: true,
+                    });
+                    $('#frm_pendiente_soporte_admin').submit();
                 }
             })
         });
