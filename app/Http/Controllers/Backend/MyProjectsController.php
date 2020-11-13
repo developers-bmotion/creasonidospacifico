@@ -20,7 +20,7 @@ MyProjectsController extends Controller
                 'projects' => function ($q){
                     $q->select('*')
                         ->where('status',Project::REVISION)
-                        ->OrWhere('status',Project::PREAPPROVAL);
+                        ->OrWhere('status',Project::QUALIFIED);
                 }
             ])->latest()
             ->first();

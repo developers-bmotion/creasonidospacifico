@@ -20,7 +20,7 @@ class CreateProjectsTable extends Migration
             $table->longText('description')->nullable();
             $table->enum('status',[
                 \App\Project::REVISION,
-                \App\Project::PREAPPROVAL,
+                \App\Project::QUALIFIED,
                 \App\Project::APPROVAL,
                 \App\Project::PENDING,
                 \App\Project::REJECTED,

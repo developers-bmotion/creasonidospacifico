@@ -206,16 +206,15 @@
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="m-portlet__body">
-                                            <table class="table table-striped- table-bordered table-hover table-checkable"
-                                                   id="table__profile_projects_management">
+                                            <table
+                                                class="table table-striped- table-bordered table-hover table-checkable"
+                                                id="table__profile_projects_management">
                                                 <thead>
                                                 <tr>
-                                                    <th>#</th>
-                                                    <th>{{ __('artista') }}</th>
-                                                    <th>{{ __('titulo') }}</th>
-                                                    <th>{{ __('categoria') }}</th>
-                                                    <th>{{ __('estado') }}</th>
-                                                    <th>{{ __('acciones') }}</th>
+                                                    <th>{{ __('Canción') }}</th>
+                                                    <th>{{ __('Modalidad') }}</th>
+                                                    <th>{{ __('Estado') }}</th>
+                                                    <th>{{ __('Acciones') }}</th>
                                                 </tr>
                                                 </thead>
                                             </table>
@@ -306,22 +305,180 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title tileProjectQualifie" id="exampleModalLabel"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body bodyAppendAudio">
+                    <div class="sliderCalificadorUno">
+                        <!--=====================================
+                            SLIDER CRITERIO # 1
+                        ======================================-->
+                        <div class="form-group m-form__group row" style="padding-top: 2rem">
+                            <label class="col-form-label col-lg-2 col-sm-12">Cristerio #1</label>
+                            <div class="col-lg-10 col-md-12 col-sm-12">
+                                <div class="row align-items-center" style="margin-bottom: 1rem">
+                                    <div class="col-2">
+                                        <input type="text" class="form-control" id="criterio_1_input"
+                                               placeholder="Quantity">
+                                    </div>
+                                    <div class="col-10">
+                                        <div id="criterio_1" class="m-nouislider--drag-danger"></div>
+                                    </div>
+                                </div>
+                                <span class="m-form__help" style="margin-top: 5rem">Aspectos técnicos musicales: afinación, ritmo, fraseo, tiempo - dinámica, equilibrio sonoro, dicción y articulación.</span>
+                            </div>
+                        </div>
+                        <hr>
+                        <!--=====================================
+                            SLIDER CRITERIO # 2
+                        ======================================-->
+                        <div class="form-group m-form__group row" style="padding-top: 2rem">
+                            <label class="col-form-label col-lg-2 col-sm-12">Cristerio #2</label>
+                            <div class="col-lg-10 col-md-12 col-sm-12">
+                                <div class="row align-items-center" style="margin-bottom: 1rem">
+                                    <div class="col-2">
+                                        <input type="text" class="form-control" id="criterio_2_input"
+                                               placeholder="Quantity">
+                                    </div>
+                                    <div class="col-10">
+                                        <div id="criterio_2" class="m-nouislider--drag-danger"></div>
+                                    </div>
+                                </div>
+                                <span class="m-form__help" style="margin-top: 5rem">Aporte creativo: realización vocal e instrumental. Originalidad, y fidelidad a las formas y estilos tradicionales, cuando sea aplicable al contexto.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-send-rating" id="prueba">Enviar calificación
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 @stop
 
 @push('js')
     <script>
+        $(document).ready(function () {
+
+
+            $('audio').audioPlayer();
+
+            // init slider
+
+            /*=============================================
+            CRITERIO # 1
+            =============================================*/
+            var slider1 = document.getElementById('criterio_1');
+
+            noUiSlider.create(slider1, {
+                start: [0],
+                step: 1,
+                range: {
+                    'min': [0],
+                    'max': [35]
+                },
+                format: wNumb({
+                    decimals: 0
+                })
+            });
+
+            // init slider input
+            var sliderInput = document.getElementById('criterio_1_input');
+
+            slider1.noUiSlider.on('update', function (values, handle) {
+                sliderInput.value = values[handle];
+            });
+
+            sliderInput.addEventListener('change', function () {
+                slider1.noUiSlider.set(this.value);
+            });
+
+
+            sliderInput.addEventListener('change', function () {
+                slider1.noUiSlider.set(this.value);
+            });
+
+            /*=============================================
+            CRITERIO # 2
+            =============================================*/
+            var slider2 = document.getElementById('criterio_2');
+
+            noUiSlider.create(slider2, {
+                start: [0],
+                step: 1,
+                range: {
+                    'min': [0],
+                    'max': [35]
+                },
+                format: wNumb({
+                    decimals: 0
+                })
+            });
+
+            // init slider input
+            var sliderInput = document.getElementById('criterio_2_input');
+
+            slider2.noUiSlider.on('update', function (values, handle) {
+                sliderInput.value = values[handle];
+            });
+
+            sliderInput.addEventListener('change', function () {
+                slider2.noUiSlider.set(this.value);
+            });
+
+
+            sliderInput.addEventListener('change', function () {
+                slider2.noUiSlider.set(this.value);
+            });
+
+
+            $(".btnOpenProject").click(function () {
+
+                let title = $(this).attr('titleProject');
+                let audioProject = $(this).attr('audioProject');
+                console.log(audioProject);
+                $(".tileProjectQualifie").text(title);
+                $('.audioplayer embed').attr('src', audioProject).trigger("play");
+
+                let audioHtml = `
+                    <audio class="audioProject" preload="auto" controls>
+                        <source class="srcAudio" src="${audioProject}">
+                    </audio>
+`
+                // $(".bodyAppendAudio").append(audioHtml);
+                $(audioHtml).insertBefore(".sliderCalificadorUno");
+
+                $('#modal2').on('hidden.bs.modal', function (e) {
+                    $(".audioProject").remove();
+                })
+            });
+        });
+    </script>
+    <script>
         var tipoProyecto = null;
         var table = null;
-        const loadTable = function (){
-            if (table !== null){
+        const loadTable = function () {
+            if (table !== null) {
                 table.destroy();
             }
             table = $('#table__profile_projects_management').DataTable({
                 "processing": true,
                 "serverSide": true,
                 "data": null,
-                "pagingType": "simple_numbers",
-                "order": [[ 0, "desc" ]],
+                "order": [[0, "desc"]],
+                "pagginType": "simple_numbers",
                 "ajax": {
                     url: "{{route('datatables.projects.profile.manage')}}",
                     data: {
@@ -330,18 +487,7 @@
                     }
                 },
                 "columns": [
-                    {
-                        "width": "1%",
-                        data: 'id',
-                        defaultContent: '<span class="label label-danger text-center">Ningún valor por defecto</span>'
-                    },
-                    {
-                        data: 'artists.nickname',
-                        defaultContent: '<span class="label label-danger text-center">Ningún valor por defecto</span>',
-                        render : function (data, type, JsonResultRow, meta){
-                            return JsonResultRow.artists[0].nickname;
-                        }
-                    },
+
                     {
                         data: 'title',
                         defaultContent: '<span class="label label-danger text-center">Ningún valor por defecto</span>'
@@ -350,33 +496,84 @@
                         data: 'category.category',
                         defaultContent: '<span class="label label-danger text-center">Ningún valor por defecto</span>'
                     },
-                    {"width": "15%",
+                    {
+                        "width": "15%",
                         data: 'status',
-                        render:function (data) {
-                            let info = '<span class="m-badge m-badge--danger m-badge--wide">Hola</span>';
-                            switch(parseInt(data)){
+                        render: function (data) {
+                            let info = '<span class="m-badge m-badge--danger m-badge--wide">N/A</span>';
+                            switch (parseInt(data)) {
                                 case 1:
-                                    info = '<span class="m-badge m-badge--brand m-badge--wide" style="background-color:#C4C5D4 !important" >{{ __('revision') }}</span>';
+                                    info = '<span class="m-badge m-badge--brand m-badge--wide" style="background-color:#C4C5D4 !important" >{{ __('Revision') }}</span>';
                                     break;
                                 case 2:
-                                    info = '<span class="m-badge m-badge--brand m-badge--wide" style="background-color:#9C26EA !important;font-size:7px" >{{ __('pre_aprovado') }}</span>';
+                                    info = '<span class="m-badge m-badge--brand m-badge--wide" style="background-color:#9C26EA !important;font-size:7px" >{{ __('Calificado') }}</span>';
                                     break;
                                 case 3:
-                                    info = '<span class="m-badge  m-badge--success m-badge--wide">{{ __('aprovado2') }}</span>';
+                                    info = '<span class="m-badge  m-badge--success m-badge--wide">{{ __('Aprobado') }}</span>';
                                     break;
                                 case 4:
-                                    info = '<span class="m-badge  m-badge--info m-badge--wide">{{ __('publicado2') }}</span>';
+                                    info = '<span class="m-badge  m-badge--warning m-badge--wide">{{ __('Pendiente') }}</span>';
                                     break;
                                 case 5:
-                                    info = '<span class="m-badge  m-badge--danger m-badge--wide">{{ __('rechazado') }}</span>';
+                                    info = '<span class="m-badge  m-badge--danger m-badge--wide">{{ __('Rechazado') }}</span>';
+                                    break;
+                                case 6:
+                                    info = '<span class="m-badge  m-badge--info m-badge--wide">{{ __('Nueva revisión') }}</span>';
+                                    break;
+                                case 7:
+                                    info = '<span class="m-badge  m-badge--brand m-badge--wide">{{ __('Aceptado') }}</span>';
+                                    break;
+                                case 8:
+                                    info = '<span class="m-badge  m-badge--danger m-badge--wide">{{ __('No subsanado') }}</span>';
+                                    break;
+                                case 9:
+                                    info = '<span class="m-badge  m-badge--danger m-badge--wide">{{ __('Registro pendiente') }}</span>';
+                                    break;
+                                case 10:
+                                    info = '<span class="m-badge  m-badge--danger m-badge--wide">{{ __('Sin propuesta') }}</span>';
                                     break;
                             }
-                            return '<div class="text-center">'+info+'</div>';
+                            return '<div class="text-center">' + info + '</div>';
                         }
                     },
                     {
-                        render:function (data,type, JsonResultRow,meta) {
-                            return '<div class="text-center"><a href="/dashboard/project/'+JsonResultRow.slug+'" class="btn m-btn--pill btn-secondary"><i class="fa fa-eye"></i></a></div>'
+
+
+                        render: function (data, type, JsonResultRow, meta) {
+                            // {{-- modal calificacion --}}
+                            console.log(JsonResultRow);
+
+
+                            return `<span type="button"  class="btnOpenProject btn m-btn--pill btn-secondary text-center" audioProject="${JsonResultRow.audio}" titleProject="${JsonResultRow.title}"  data-toggle="modal" data-target="#modal2"><i class="fa fa-eye"></i></span>
+
+
+                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">${JsonResultRow.title}</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+
+                                    <audio class="audio" preload="auto" controls>
+                                       <source src="${JsonResultRow.audio}">
+                                       </audio>
+
+
+                                    </div>
+
+
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-primary btn-send-rating" id="prueba">Enviar calificación</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>`;
+
+
                         }
                     },
                 ],
@@ -406,17 +603,22 @@
                 }
             });
         };
-        $(".selectType").on('click', '.changeType', function(){
+        $(".selectType").on('click', '.changeType', function () {
             let tipo = parseInt($(this).attr("data-type"));
-            if (!(tipo >  0)){
+            if (!(tipo > 0)) {
                 tipo = null;
             }
             tipoProyecto = tipo;
             loadTable();
         });
+
         loadTable();
+
+
     </script>
     <script>
+
+
         new Dropzone('.dropzone-management', {
             url: '{{ route('profile.photo.management') }}',
             acceptedFiles: 'image/*',
@@ -436,3 +638,4 @@
         Dropzone.autoDiscover = false;
     </script>
 @endpush
+

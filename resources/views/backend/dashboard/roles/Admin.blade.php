@@ -6,6 +6,7 @@
 
 @section('content')
     <div class="m-content">
+    @include('backend.partials.cards-count-projects')
         <!--=====================================
 		    INFORMACIÓN NÚMERICA E IMPORTANTE
         ======================================-->
@@ -372,7 +373,7 @@
                                                     <span class="changeType w-100 btn btn-outline-metal m-btn m-btn--pill m-btn--wide btn-sm" data-type="{{\App\Project::REVISION}}">{{ __('revision') }}</span>
                                                 </li>
                                                 <li class="m-nav__item text-center">
-                                                    <span class="changeType w-100 btn btn-outline-brand m-btn m-btn--pill m-btn--wide btn-sm" data-type="{{\App\Project::PREAPPROVAL}}">{{ __('pre_aprovado') }}</span>
+                                                    <span class="changeType w-100 btn btn-outline-brand m-btn m-btn--pill m-btn--wide btn-sm" data-type="{{\App\Project::QUALIFIED}}">{{ __('pre_aprovado') }}</span>
 
                                                 </li>
                                                 <li class="m-nav__item text-center">
@@ -452,7 +453,7 @@
                                                         <span
                                                             style="background-color:#9C26EA"
                                                             class="changeType w-100 btn btn-brand m-btn m-btn--pill m-btn--wide btn-sm"
-                                                            data-type="{{\App\Project::PREAPPROVAL}}">{{ __('pre_aprovado') }}</span>
+                                                            data-type="{{\App\Project::QUALIFIED}}">{{ __('pre_aprovado') }}</span>
 
                                                         </li>
                                                     @endif
@@ -469,7 +470,7 @@
                                                     <li class="m-nav__item text-center">
                                                     <span
                                                         class="changeType w-100 btn btn-danger m-btn m-btn--pill m-btn--wide btn-sm"
-                                                        data-type="{{\App\Project::REJECTED}}">{{ __('Rechazado') }}</span>
+                                                        data-type="{{\App\Project::REJECTED}}">{{ __('No subsanado') }}</span>
                                                     </li>
                                                     <li class="m-nav__item text-center">
                                                     <span style="color:white"
@@ -481,11 +482,11 @@
                                                         class="changeType w-100 btn btn-info m-btn m-btn--pill m-btn--wide btn-sm"
                                                         data-type="{{\App\Project::REVISON_UPDATE}}">{{ __('Nueva revisión') }}</span>
                                                     </li>
-                                                    <li class="m-nav__item text-center">
-                                                    <span
-                                                        class="changeType w-100 btn btn-info m-btn m-btn--pill m-btn--wide btn-sm"
-                                                        data-type="{{\App\Project::NOT_REMEDIED}}">{{ __('No subsanado') }}</span>
-                                                    </li>
+{{--                                                    <li class="m-nav__item text-center">--}}
+{{--                                                    <span--}}
+{{--                                                        class="changeType w-100 btn btn-info m-btn m-btn--pill m-btn--wide btn-sm"--}}
+{{--                                                        data-type="{{\App\Project::NOT_REMEDIED}}">{{ __('No subsanado') }}</span>--}}
+{{--                                                    </li>--}}
                                                     <li class="m-nav__separator m-nav__separator--fit">
                                                     </li>
                                                     <li class="m-nav__section m-nav__section--first">
@@ -572,7 +573,7 @@
             preaprobados: {name: 'Pre Aprobados', color: '#9C26EA'},
             aprobados: {name: 'Aprobados', color: '#34bfa3'},
             pendientes: {name: 'Pendientes', color: '#ffb822'},
-            rechazados: {name: 'Rechazados', color: '#f4516c'},
+            rechazados: {name: 'No subsanado', color: '#f4516c'},
             aceptados: {name: 'Aceptados', color: '#34bfa3'},
             nuevarevision: {name: 'Nueva Revición', color: '#36a3f7'},
             nosubsanados: {name: 'No Subsanados', color: '#36a3f7'},
@@ -745,10 +746,10 @@
                                     info = '<span class="m-badge  m-badge--success m-badge--wide">{{ __('aprovado2') }}</span>';
                                     break;
                                 case 4:
-                                    info = '<span class="m-badge  m-badge--info m-badge--wide">{{ __('publicado2') }}</span>';
+                                    info = '<span class="m-badge  m-badge--warning m-badge--wide">Pendiente</span>';
                                     break;
                                 case 5:
-                                    info = '<span class="m-badge  m-badge--danger m-badge--wide">{{ __('rechazado') }}</span>';
+                                    info = '<span class="m-badge  m-badge--danger m-badge--wide">No subsanado</span>';
                                     break;
                             }
                             return '<div class="text-center">' + info + '</div>';
