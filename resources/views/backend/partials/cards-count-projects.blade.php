@@ -5,8 +5,8 @@
             <!--=====================================
                 TARJETA USUARIOR REGISTRADOS
             ======================================-->
-            <div class="col-6 col-md-12 col-lg-5 col-xl-2">
-                <div class="m-widget24 pb-5">
+            <div class="col-6 col-md-4 col-lg-5 col-xl-2">
+                <div class="m-widget24 pb-5 pr-2">
                     <div class="m-widget24__item">
                         <h4 class="m-widget24__title">
                             Aspirantes Registrados
@@ -22,8 +22,8 @@
             <!--=====================================
                    TARJETA USUARIOR PENDIENTES
            ======================================-->
-            <div class="col-6 col-md-12 col-lg-5 col-xl-2">
-                <div class="m-widget24 pb-5">
+            <div class="col-6 col-md-4 col-lg-5 col-xl-2">
+                <div class="m-widget24 pb-5 pr-2">
                     <div class="m-widget24__item">
                         <h4 class="m-widget24__title">
                             Propuestas Pendientes
@@ -37,8 +37,8 @@
             <!--=====================================
                     TARJETA USUARIOR NUEVA REVISIÓN
             ======================================-->
-            <div class="col-6 col-md-12 col-lg-5 col-xl-2">
-                <div class="m-widget24 pb-5">
+            <div class="col-6 col-md-4 col-lg-5 col-xl-2">
+                <div class="m-widget24 pb-5 pr-2">
                     <div class="m-widget24__item">
                         <h4 class="m-widget24__title">
                             Nueva Revisión
@@ -52,8 +52,8 @@
             <!--=====================================
                 TARJETA USUARIOs ACEPTADOS
             ======================================-->
-            <div class="col-6 col-md-12 col-lg-5 col-xl-2">
-                <div class="m-widget24 pb-5">
+            <div class="col-6 col-md-4 col-lg-5 col-xl-2">
+                <div class="m-widget24 pb-5 pr-2">
                     <div class="m-widget24__item">
                         <h4 class="m-widget24__title">
                             Propuestas Aceptadas
@@ -67,8 +67,8 @@
             <!--=====================================
                 TARJETA USUARIOs NO SUBSANADOS
             ======================================-->
-            <div class="col-6 col-md-12 col-lg-5 col-xl-2">
-                <div class="m-widget24 pb-5">
+            <div class="col-6 col-md-4 col-lg-5 col-xl-2">
+                <div class="m-widget24 pb-5 pr-2">
                     <div class="m-widget24__item">
                         <h4 class="m-widget24__title">
                             No Subsanados
@@ -82,8 +82,8 @@
             <!--=====================================
                 TARJETA USUARIOs  APROBADAS
             ======================================-->
-            <div class="col-6 col-md-12 col-lg-5 col-xl-2">
-                <div class="m-widget24 pb-5">
+            <div class="col-6 col-md-4 col-lg-5 col-xl-2">
+                <div class="m-widget24 pb-5 pr-2">
                     <div class="m-widget24__item">
                         <h4 class="m-widget24__title">
                             Propuestas Aprobadas
