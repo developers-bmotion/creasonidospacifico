@@ -377,13 +377,22 @@
     <script>
 
         $(document).ready(function () {
-            $(".btnOpenProject").on('click',function () {
-                alert('Nata hagamolo otra vez')
+
+            $(document).on('click', '.btnOpenProject', function(){            
                 let title = $(this).attr('titleProject');
                 let audioProject = $(this).attr('audioProject');
                 console.log(audioProject);
                 $(".tileProjectQualifie").text(title);
                 $('.audioProject').attr('src', audioProject);
+            }); 
+
+            // $(".btnOpenProject").on('click','id',function () {
+            //     alert('Nata hagamolo otra vez')
+            //     let title = $(this).attr('titleProject');
+            //     let audioProject = $(this).attr('audioProject');
+            //     console.log(audioProject);
+            //     $(".tileProjectQualifie").text(title);
+            //     $('.audioProject').attr('src', audioProject);
 
 //                 let audioHtml = `
 //                     <audio class="audioProject" preload="auto" controls>
@@ -396,7 +405,7 @@
                 // $('#modal2').on('hidden.bs.modal', function (e) {
                 //     $(".audioProject").remove();
                 // })
-            });
+            // });
 
             // init slider
 
@@ -546,7 +555,7 @@
                             console.log(JsonResultRow);
 
 
-                            return `<span type="button"  class="btnOpenProject btn m-btn--pill btn-secondary text-center" audioProject="${JsonResultRow.audio}" titleProject="${JsonResultRow.title}"  data-toggle="modal" data-target="#modal2"><i class="fa fa-eye"></i></span>
+                            return `<span type="button"  id="id" class="btnOpenProject btn m-btn--pill btn-secondary text-center" audioProject="${JsonResultRow.audio}" titleProject="${JsonResultRow.title}"  data-toggle="modal" data-target="#modal2"><i class="fa fa-eye"></i></span>
 
 
                      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
