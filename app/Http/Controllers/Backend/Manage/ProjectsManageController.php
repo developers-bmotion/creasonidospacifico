@@ -26,6 +26,7 @@ class ProjectsManageController extends Controller
     }
 
     public function add_review(Request $request){
+        
         $review = new Review;
         $review->project_id = $request->idProject;
         $review->user_id = auth()->user()->id;
