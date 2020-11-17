@@ -26,19 +26,16 @@ class ProjectsManageController extends Controller
     }
 
     public function add_review(Request $request){
+        $review = new Review;
+        $review->project_id = $request->idProject;
+        $review->user_id = auth()->user()->id;
+        $review->lyric = $request->criterio_4; //Calidad del repertorio escogido:
+        $review->melody_rhythm = $request->criterio_1; //Aspectos técnicos musicales:
+        $review->arrangements = $request->criterio_3; //Calidad interpretativa:
+        $review->originality = $request->criterio_2; //aporte creativo
+        $review->comment = $request->comment;
+        $review->save();
 
-        echo $request;
-        die();
-        Review::create([
-            'project_id' => $request->idProject,
-            'user_id'=>auth()->user()->id,
-            'lyric'=>$request->criterio_4, //Calidad del repertorio escogido:
-            'melody_rhythm'=>$request->criterio_1, //Aspectos técnicos musicales:
-            'arrangements'=>$request->criterio_3, //Calidad interpretativa:
-            'originality'=> $request->criterio_2, //aporte creativo
-            'comment'=>$request->comment
-         ]);
-
-        return $request;
+        return '{"status":200, "msg":"Propuesta musical calificada"}';
     }
 }

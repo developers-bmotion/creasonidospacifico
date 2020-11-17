@@ -306,7 +306,8 @@
         </div>
     </div>
 
-    <div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" data-backdrop="static" data-keyboard="false" id="modal2" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -322,99 +323,104 @@
 
                     {{--                    </audio>--}}
 
-                    <form method="post" action="{{ route('add.review') }}" class="" style="display: inline"
-                    id="frm_qualification">
-                    @csrf
-
-                        <input type="hidden"  class="idProject" value="" name="idProject">
-                        <div class="sliderCalificadorUno">
-                            <!--=====================================
-                                SLIDER CRITERIO # 1
-                            ======================================-->
-                            <div class="form-group m-form__group row" style="padding-top: 2rem">
-                                <label class="col-form-label col-lg-3 col-sm-12">Aspectos técnicos musicales:</label>
-                                <div class="col-lg-9 col-md-12 col-sm-12">
-                                    <div class="row align-items-center" style="margin-bottom: 1rem">
-                                        <div class="col-2">
-                                            <input type="text" class="form-control my-form-control" name="criterio_1" id="criterio_1_input"
-                                                placeholder="Quantity">
-                                        </div>
-                                        <div class="col-10">
-                                            <div id="criterio_1" class="m-nouislider--drag-danger"></div>
-                                        </div>
+                    <input type="hidden" class="idProject" value="" name="idProject">
+                    <div class="sliderCalificadorUno">
+                        <!--=====================================
+                            SLIDER CRITERIO # 1
+                        ======================================-->
+                        <div class="form-group m-form__group row" style="padding-top: 2rem">
+                            <label class="col-form-label col-lg-3 col-sm-12">Aspectos técnicos musicales: <span class="text-danger">*</span></label>
+                            <div class="col-lg-9 col-md-12 col-sm-12">
+                                <div class="row align-items-center" style="margin-bottom: 1rem">
+                                    <div class="col-2">
+                                        <input type="text" required class="form-control my-form-control"
+                                               name="criterio_1" id="criterio_1_input"
+                                               placeholder="Quantity">
                                     </div>
-                                    <span class="m-form__help" style="margin-top: 5rem">afinación, ritmo, fraseo, tiempo - dinámica, equilibrio sonoro, dicción y articulación.</span>
-                                </div>
-                            </div>
-                            <hr>
-                            <!--=====================================
-                                SLIDER CRITERIO # 2
-                            ======================================-->
-                            <div class="form-group m-form__group row" style="padding-top: 2rem">
-                                <label class="col-form-label col-lg-3 col-sm-12">Aporte creativo:</label>
-                                <div class="col-lg-9 col-md-12 col-sm-12">
-                                    <div class="row align-items-center" style="margin-bottom: 1rem">
-                                        <div class="col-2">
-                                            <input type="text" class="form-control my-form-control" name="criterio_2" id="criterio_2_input"
-                                                placeholder="Quantity">
-                                        </div>
-                                        <div class="col-10">
-                                            <div id="criterio_2" class="m-nouislider--drag-danger"></div>
-                                        </div>
+                                    <div class="col-10">
+                                        <div id="criterio_1" class="m-nouislider--drag-danger"></div>
                                     </div>
-                                    <span class="m-form__help" style="margin-top: 5rem"> realización vocal e instrumental. Originalidad, y fidelidad a las formas y estilos tradicionales, cuando sea aplicable al contexto.</span>
                                 </div>
-                            </div>
-                            <!--=====================================
-                                SLIDER CRITERIO # 3
-                            ======================================-->
-
-                            <div class="form-group m-form__group row" style="padding-top: 2rem">
-                                <label class="col-form-label col-lg-3 col-sm-12">Calidad interpretativa:</label>
-                                <div class="col-lg-9 col-md-12 col-sm-12">
-                                    <div class="row align-items-center" style="margin-bottom: 1rem">
-                                        <div class="col-2">
-                                            <input type="text" class="form-control my-form-control" name="criterio_3" id="criterio_3_input"
-                                                placeholder="Quantity">
-                                        </div>
-                                        <div class="col-10">
-                                            <div id="criterio_3" class="m-nouislider--drag-danger"></div>
-                                        </div>
-                                    </div>
-                                    <span class="m-form__help" style="margin-top: 5rem">comunicación, proyección, dicción.</span>
-                                </div>
-                            </div>
-                            <!--=====================================
-                                SLIDER CRITERIO # 4
-                            ======================================-->
-
-                            <div class="form-group m-form__group row" style="padding-top: 2rem">
-                                <label class="col-form-label col-lg-3 col-sm-12">Calidad del repertorio escogido:</label>
-                                <div class="col-lg-9 col-md-12 col-sm-12">
-                                    <div class="row align-items-center" style="margin-bottom: 1rem">
-                                        <div class="col-2">
-                                            <input type="text" class="form-control my-form-control" name="criterio_4" id="criterio_4_input"
-                                                placeholder="Quantity">
-                                        </div>
-                                        <div class="col-10">
-                                            <div id="criterio_4" class="m-nouislider--drag-danger"></div>
-                                        </div>
-                                    </div>
-                                    <span class="m-form__help" style="margin-top: 5rem">selección de la obra con relación a la diversidad de ritmos, tonalidades y formas.</span>
-                                </div>
-                            </div>
-
-                            <div class="form-group m-form__group row" style="padding-top: 2rem">
-                                <label class="col-form-label col-lg-12 col-sm-12">Comentario:</label>
-                                <textarea  class="col-form-label col-lg-11 col-sm-11 ml-3" placeholder="" name="comment" id="comment"></textarea>
+                                <span class="m-form__help" style="margin-top: 5rem">afinación, ritmo, fraseo, tiempo - dinámica, equilibrio sonoro, dicción y articulación.</span>
                             </div>
                         </div>
-                    </form>
+                        <hr>
+                        <!--=====================================
+                            SLIDER CRITERIO # 2
+                        ======================================-->
+                        <div class="form-group m-form__group row" style="padding-top: 2rem">
+                            <label class="col-form-label col-lg-3 col-sm-12">Aporte creativo:<span class="text-danger">*</span></label>
+                            <div class="col-lg-9 col-md-12 col-sm-12">
+                                <div class="row align-items-center" style="margin-bottom: 1rem">
+                                    <div class="col-2">
+                                        <input type="text" required class="form-control my-form-control"
+                                               name="criterio_2" id="criterio_2_input"
+                                               placeholder="Quantity">
+                                    </div>
+                                    <div class="col-10">
+                                        <div id="criterio_2" class="m-nouislider--drag-danger"></div>
+                                    </div>
+                                </div>
+                                <span class="m-form__help" style="margin-top: 5rem"> realización vocal e instrumental. Originalidad, y fidelidad a las formas y estilos tradicionales, cuando sea aplicable al contexto.</span>
+                            </div>
+                        </div>
+                        <!--=====================================
+                            SLIDER CRITERIO # 3
+                        ======================================-->
+
+                        <div class="form-group m-form__group row" style="padding-top: 2rem">
+                            <label class="col-form-label col-lg-3 col-sm-12">Calidad interpretativa:<span class="text-danger">*</span></label>
+                            <div class="col-lg-9 col-md-12 col-sm-12">
+                                <div class="row align-items-center" style="margin-bottom: 1rem">
+                                    <div class="col-2">
+                                        <input type="text" required class="form-control my-form-control"
+                                               name="criterio_3" id="criterio_3_input"
+                                               placeholder="Quantity">
+                                    </div>
+                                    <div class="col-10">
+                                        <div id="criterio_3" class="m-nouislider--drag-danger"></div>
+                                    </div>
+                                </div>
+                                <span class="m-form__help"
+                                      style="margin-top: 5rem">comunicación, proyección, dicción.</span>
+                            </div>
+                        </div>
+                        <!--=====================================
+                            SLIDER CRITERIO # 4
+                        ======================================-->
+
+                        <div class="form-group m-form__group row" style="padding-top: 2rem">
+                            <label class="col-form-label col-lg-3 col-sm-12">Calidad del repertorio escogido:<span class="text-danger">*</span></label>
+                            <div class="col-lg-9 col-md-12 col-sm-12">
+                                <div class="row align-items-center" style="margin-bottom: 1rem">
+                                    <div class="col-2">
+                                        <input type="text" required class="form-control my-form-control"
+                                               name="criterio_4" id="criterio_4_input"
+                                               placeholder="Quantity">
+                                    </div>
+                                    <div class="col-10">
+                                        <div id="criterio_4" class="m-nouislider--drag-danger"></div>
+                                    </div>
+                                </div>
+                                <span class="m-form__help" style="margin-top: 5rem">selección de la obra con relación a la diversidad de ritmos, tonalidades y formas.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group m-form__group" style="padding-top: 2rem">
+                                <label class="col-form-label">Comentario:<span class="text-danger">*</span></label>
+                                <div class="summernote" id="m_summernote_1"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary btn-send-rating" id="prueba">Enviar calificación
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary btn-send-rating" id="btnSeendReview">Enviar
+                        calificación
                     </button>
                 </div>
             </div>
@@ -427,7 +433,7 @@
 
         $(document).ready(function () {
 
-            $('.btn-send-rating').click(function(){
+            $('.btn-send-rating').click(function () {
 
                 $('#frm_qualification').submit();
 
@@ -686,34 +692,10 @@
                             console.log(JsonResultRow);
 
 
-                            return `<span type="button"  id="id" class="btnOpenProject btn m-btn--pill btn-secondary text-center" idProject="${JsonResultRow.id}" audioProject="${JsonResultRow.audio}" titleProject="${JsonResultRow.title}"  data-toggle="modal" data-target="#modal2"><i class="fa fa-eye"></i></span>
-
-
-                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <h5 class="modal-title" id="exampleModalLabel">${JsonResultRow.title}</h5>
-                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                  </button>
-                                </div>
-                                <div class="modal-body">
-
-                                    <audio class="audio" preload="auto" controls>
-                                       <source src="${JsonResultRow.audio}">
-                                       </audio>
-
-
-                                    </div>
-
-
-                                <div class="modal-footer">
-                                  <button type="button" class="btn btn-primary btn-send-rating" id="prueba">Enviar calificación</button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>`;
+                            return `
+<span  type="button"  id="id" class="btnOpenProject btn m-btn--pill btn-secondary text-center" idProject="${JsonResultRow.id}" audioProject="${JsonResultRow.audio}" titleProject="${JsonResultRow.title}"  data-toggle="modal" data-target="#modal2"><i data-toggle="tooltip" data-placement="top" title="Calificar propuesta musical" class="fa fa-check"></i></span>
+<span  type="button"  id="" class="btnHistorialReview btn m-btn--pill btn-secondary text-center" idProject="${JsonResultRow.id}" titleProject="${JsonResultRow.title}"  data-toggle="modal" data-target="#historial"><i data-toggle="tooltip" data-placement="top" title="Ver historial de calificación" class="fa fa-eye"></i></span>
+`;
 
 
                         }
@@ -778,6 +760,98 @@
         });
 
         Dropzone.autoDiscover = false;
+    </script>
+    <script src="/backend/assets/demo/custom/crud/forms/widgets/summernote.js" type="text/javascript"></script>
+    <script src="/js/ajax.js"></script>
+    <script>
+
+        (function () {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $("#btnSeendReview").click(function () {
+                //
+                swal({
+                    title: '¡Atención!',
+                    text: "¿Esta seguro de enviar calificación?",
+                    type: 'info',
+                    showCancelButton: true,
+                    confirmButtonText: 'Aceptar',
+                    cancelButtonText: 'Cancelar',
+                    reverseButtons: true
+                }).then(function (result) {
+                    if (result.value) {
+                        $('body').loading({
+                            message: 'Enviando...',
+                            start: true,
+                        });
+
+                        if ($('#m_summernote_1').summernote('code') !== '') {
+                            const
+                                mesage = $('#m_summernote_1').summernote('code'),
+                                cristerio1 = $('#criterio_1_input').val(),
+                                cristerio2 = $('#criterio_2_input').val(),
+                                cristerio3 = $('#criterio_3_input').val(),
+                                cristerio4 = $('#criterio_3_input').val(),
+                                idProject = $('.idProject').val(),
+                                token = '{{ csrf_token() }}',
+                                url = '{{ route('add.review') }}';
+
+                            let data = {
+                                __token: token,
+                                comment: mesage,
+                                idProject: idProject,
+                                criterio_1:cristerio1,
+                                criterio_2:cristerio2,
+                                criterio_3:cristerio3,
+                                criterio_4:cristerio4,
+                            };
+                            const success = function (r) {
+                                console.log(r);
+                                if (r.status === 200) {
+                                    swal({
+                                        "title": "",
+                                        "text": r.msg,
+                                        "type": "success",
+                                        "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
+                                    }).then((result) => {
+                                        document.location.reload();
+                                    });
+                                }
+                            };
+                            const error = function (e) {
+                                $('body').loading({
+                                    start: false,
+                                });
+                                swal({
+                                    "title": "",
+                                    "text": "No se ha enviado su calificación.",
+                                    "type": "error",
+                                    "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
+                                });
+                            };
+
+
+                            ajax(url, data, success, "post", error, true, "#list_modal_manage");
+                            /*$('body').loading({
+                                start: false,
+                            });*/
+                        } else {
+                            swal({
+                                "title": "",
+                                "text": "Sra/Sr Curador, debe agregar un comentario.",
+                                "type": "error",
+                                "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
+                            });
+                        }
+                    }
+
+                });
+
+            });
+        })();
     </script>
 @endpush
 

@@ -1,17 +1,17 @@
 //== Class definition
 
-var SummernoteDemo = function () {    
+var SummernoteDemo = function () {
     //== Private functions
     var demos = function () {
         $('.summernote').summernote({
-            height: 150
+            height: 200
         });
     }
 
     return {
         // public functions
         init: function() {
-            demos(); 
+            demos();
         }
     };
 }();
