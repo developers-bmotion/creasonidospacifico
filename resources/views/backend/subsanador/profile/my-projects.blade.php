@@ -90,6 +90,7 @@
                 "processing": true,
                 "serverSide": true,
                 "data": null,
+                "pagingType": "simple_numbers",
                 "order": [[ 0, "desc" ]],
                 "ajax": {
                     url: "{{route('datatables.projects.profile.manage')}}",
@@ -166,8 +167,8 @@
                     "oPaginate": {
                         "sFirst": "Primero",
                         "sLast": "Último",
-                        "sNext": "{{__('siguiente')}}",
-                        "sPrevious": "{{__('anterior')}}"
+                        "sNext": ">",
+                        "sPrevious": "<"
                     },
                     "oAria": {
                         "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
