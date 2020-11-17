@@ -37,7 +37,7 @@ class Review extends Model
          'arrangements', 'originality', 'comment'
     ];
     public function projects(){
-        return $this->belongsTo(Project::class);
+        return $this->hasMany(Project::class, 'id','project_id');
     }
 
     public function users(){

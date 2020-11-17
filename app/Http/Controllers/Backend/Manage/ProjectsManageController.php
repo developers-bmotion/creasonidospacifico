@@ -26,7 +26,7 @@ class ProjectsManageController extends Controller
     }
 
     public function add_review(Request $request){
-        
+
         $review = new Review;
         $review->project_id = $request->idProject;
         $review->user_id = auth()->user()->id;
@@ -38,5 +38,10 @@ class ProjectsManageController extends Controller
         $review->save();
 
         return '{"status":200, "msg":"Propuesta musical calificada"}';
+    }
+
+    public function history_review($id){
+        $reviews = Review::where('project_id', $id)->with('projects')->get();
+        return response()->json($reviews);
     }
 }

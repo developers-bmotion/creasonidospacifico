@@ -853,5 +853,16 @@
             });
         })();
     </script>
+    <script>
+        $(function () {
+            $('#table__profile_projects_management tbody').on('click','.btnHistorialReview',function (e) {
+                var data = table.row($(this).parents('tr')).data();
+                $.get('/api/historial-review/'+data.id+'',function (respuesta) {
+
+                });
+            });
+
+        });
+    </script>
 @endpush
 
