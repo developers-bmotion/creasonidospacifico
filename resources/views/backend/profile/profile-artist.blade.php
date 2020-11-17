@@ -190,7 +190,7 @@
                                                  style="">
 
                                                 @if(auth()->user()->picture == null || auth()->user()->picture == '' || auth()->user()->picture =='/images/users/')
-                                                    @if(!$artist->projects)
+                                                    @if($artist->projects)
                                                         <img class="ml-4 img-artist"
                                                              {{-- style="border-radius:8rem; width:7rem" --}}
                                                              src="/backend/assets/app/media/img/users/perfil.jpg">
@@ -204,7 +204,7 @@
                                                     <img class="ml-4 img-artist"
                                                          {{-- style="border-radius:8rem; width:7rem" --}}
                                                          src="{{$artist->users->picture}}">
-                                                    @if(!$artist->projects)
+                                                    @if($artist->projects)
                                                         @if($artist->projects[0]->status == 4 || $artist->projects[0]->status == 1)
                                                             <i class="flaticon-edit ml-3 update_img_profile_asp"
                                                                style="color:#716aca; cursor:pointer;"></i>
@@ -503,7 +503,7 @@
                                             </form>
 
                                         </div>
-                                        @if(!$artist->projects)
+                                        @if($artist->projects)
                                             @if($artist->projects[0]->status == 4 || $artist->projects[0]->status == 1)
                                                 <i class="flaticon-edit ml-3 update_pdf_asp"
                                                    style="color:#716aca; cursor:pointer;"></i>

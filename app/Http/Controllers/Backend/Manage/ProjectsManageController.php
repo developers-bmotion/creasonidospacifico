@@ -27,8 +27,7 @@ class ProjectsManageController extends Controller
 
     public function add_review(Request $request){
 
-        echo $request;
-        die();
+
         Review::create([
             'project_id' => $request->idProject,
             'user_id'=>auth()->user()->id,
