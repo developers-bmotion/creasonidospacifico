@@ -6,6 +6,7 @@ use App\Management;
 use App\Review;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Project;
 use Illuminate\Support\Facades\DB;
 
 class ProjectsManageController extends Controller
@@ -27,6 +28,7 @@ class ProjectsManageController extends Controller
 
     public function add_review(Request $request){
 
+        // return $request;
         $review = new Review;
         $review->project_id = $request->idProject;
         $review->user_id = auth()->user()->id;
@@ -37,11 +39,15 @@ class ProjectsManageController extends Controller
         $review->comment = $request->comment;
         $review->save();
 
+        Project::where('id', $request->idProject)->update([
+            'status' => 2
+        ]);
+
         return '{"status":200, "msg":"Propuesta musical calificada"}';
     }
 
     public function history_review($id){
-        $reviews = Review::where('project_id', $id)->with('projects')->get();
+        $reviews = Review::where('project_id', $id)->with('projects.category')->get();
         return response()->json($reviews);
     }
 }

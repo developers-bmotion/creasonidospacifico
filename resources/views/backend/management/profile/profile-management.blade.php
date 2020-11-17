@@ -426,6 +426,37 @@
             </div>
         </div>
     </div>
+
+
+      <!-- Modal -->
+      <div class="modal fade" id="reviews" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Historial de calificación</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body ">
+                <div class="reviews_content">
+
+                </div>
+
+                <label class="value_lyric"></label>
+
+            </div>
+            <div class="modal-footer">
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
 @stop
 
 @push('js')
@@ -459,26 +490,6 @@
                 })
             });
 
-            // $(".btnOpenProject").on('click','id',function () {
-            //     alert('Nata hagamolo otra vez')
-            //     let title = $(this).attr('titleProject');
-            //     let audioProject = $(this).attr('audioProject');
-            //     console.log(audioProject);
-            //     $(".tileProjectQualifie").text(title);
-            //     $('.audioProject').attr('src', audioProject);
-
-//                 let audioHtml = `
-//                     <audio class="audioProject" preload="auto" controls>
-//                         <source class="srcAudio" src="${audioProject}">
-//                     </audio>
-// `
-//                 // $(".bodyAppendAudio").append(audioHtml);
-            //     $(audioHtml).insertBefore(".sliderCalificadorUno");
-
-            // $('#modal2').on('hidden.bs.modal', function (e) {
-            //     $(".audioProject").remove();
-            // })
-            // });
 
             // init slider
 
@@ -688,14 +699,12 @@
 
 
                         render: function (data, type, JsonResultRow, meta) {
-                            // {{-- modal calificacion --}}
-                            console.log(JsonResultRow);
 
-
+                             // {{-- modal calificacion --}}
                             return `
-<span  type="button"  id="id" class="btnOpenProject btn m-btn--pill btn-secondary text-center" idProject="${JsonResultRow.id}" audioProject="${JsonResultRow.audio}" titleProject="${JsonResultRow.title}"  data-toggle="modal" data-target="#modal2"><i data-toggle="tooltip" data-placement="top" title="Calificar propuesta musical" class="fa fa-check"></i></span>
-<span  type="button"  id="" class="btnHistorialReview btn m-btn--pill btn-secondary text-center" idProject="${JsonResultRow.id}" titleProject="${JsonResultRow.title}"  data-toggle="modal" data-target="#historial"><i data-toggle="tooltip" data-placement="top" title="Ver historial de calificación" class="fa fa-eye"></i></span>
-`;
+                                    <span  type="button"  id="id" class="btnOpenProject btn m-btn--pill btn-secondary text-center" idProject="${JsonResultRow.id}" audioProject="${JsonResultRow.audio}" titleProject="${JsonResultRow.title}"  data-toggle="modal" data-target="#modal2"><i data-toggle="tooltip" data-placement="top" title="Calificar propuesta musical" class="fa fa-check"></i></span>
+                                    <span  type="button"  id="" class="btnHistorialReview btn m-btn--pill btn-secondary text-center" data-toggle="modal" data-target="#reviews" ><i data-toggle="tooltip" data-placement="top" title="Ver historial de calificación" class="fa fa-eye"></i></span>
+                                    `;
 
 
                         }
@@ -783,7 +792,7 @@
                     reverseButtons: true
                 }).then(function (result) {
                     if (result.value) {
-                        $('body').loading({
+                        $('.modal.show').loading({
                             message: 'Enviando...',
                             start: true,
                         });
@@ -794,7 +803,7 @@
                                 cristerio1 = $('#criterio_1_input').val(),
                                 cristerio2 = $('#criterio_2_input').val(),
                                 cristerio3 = $('#criterio_3_input').val(),
-                                cristerio4 = $('#criterio_3_input').val(),
+                                cristerio4 = $('#criterio_4_input').val(),
                                 idProject = $('.idProject').val(),
                                 token = '{{ csrf_token() }}',
                                 url = '{{ route('add.review') }}';
@@ -809,7 +818,7 @@
                                 criterio_4:cristerio4,
                             };
                             const success = function (r) {
-                                console.log(r);
+
                                 if (r.status === 200) {
                                     swal({
                                         "title": "",
@@ -822,7 +831,7 @@
                                 }
                             };
                             const error = function (e) {
-                                $('body').loading({
+                                $('.modal.show').loading({
                                     start: false,
                                 });
                                 swal({
@@ -839,11 +848,16 @@
                                 start: false,
                             });*/
                         } else {
+
                             swal({
                                 "title": "",
                                 "text": "Sra/Sr Curador, debe agregar un comentario.",
                                 "type": "error",
                                 "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
+                            });
+
+                            $('.modal.show').loading({
+                              start: false,
                             });
                         }
                     }
@@ -857,9 +871,71 @@
         $(function () {
             $('#table__profile_projects_management tbody').on('click','.btnHistorialReview',function (e) {
                 var data = table.row($(this).parents('tr')).data();
-                $.get('/api/historial-review/'+data.id+'',function (respuesta) {
+                if(data.status != 2){
+                    $('.value_lyric').empty();
+                    $(".reviews_content").html("<label>No hay calificaciones disponibles</label>");
+                }else{
 
-                });
+                    $('#reviews').loading({
+                                message: 'Cargando...',
+                                start: true,
+                            });
+                    $('.value_lyric').empty();
+                    $.get('/api/historial-review/'+data.id+'',function (respuesta) {
+                        $('#reviews').loading({
+                                start:false,
+                            });
+                        $.each(respuesta , function( index, value ) {
+
+                                    // reviews=response;
+                                $(".reviews_content").html(
+                                    "<h4>"+ value.projects[0].title +"</h4>"+
+                                    "<h6>"+ value.projects[0].category.category+"</h6>"+
+                                    "<br>"+
+                                    "<h6>Descripción:</h6>"+
+                                    "<label>"+value.projects[0].description+"</label>"+
+                                    "<br>"+
+                                    "<hr>"
+                                );
+
+                                $('.value_lyric').append(
+                                    "<h6>"+(index+1)+". Calificación:</h6>"+
+                                    "<br>"+
+                                    "<table class='table table-striped review_table'>"+
+                                        " <thead>"+
+                                                "<tr>"+
+                                                "<th scope='col'>Aspectos técnicos musicales</th>"+
+                                                "<th scope='col'>Aporte creativo</th>"+
+                                                "<th scope='col'>Calidad interpretativa</th>"+
+                                                "<th scope='col'>Calidad del repertorio escogido</th>"+
+                                                "<th scope='col'>Total</th>"+
+                                            " </tr>"+
+                                        " </thead>"+
+                                            "<tbody style='text-align: center;font-weight:500;'>"+
+                                            " <tr>"+
+                                                    "<th>"+value.melody_rhythm+"</th>"+
+                                                    "<td>"+value.originality+"</td>"+
+                                                    "<td>"+value.arrangements+"</td>"+
+                                                    "<td>"+value.lyric+"</td>"+
+                                                    "<td>"+(value.melody_rhythm+value.originality+value.arrangements+value.lyric)+"</td>"+
+                                                "</tr>"+
+                                        " </tbody>"+
+                                    " </table>"+
+                                    "<br>"+
+                                    "<h6>Observaciones:</h6>"+
+                                    "<div>"+value.comment+"</div>"+
+                                    "<br>"+
+                                    "<hr>"
+
+                                );
+
+                        });
+
+
+
+
+                    });
+                }
             });
 
         });
