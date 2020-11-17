@@ -6,7 +6,24 @@
 
 @section('content')
     <div class="m-content">
-    @include('backend.partials.cards-count-projects')
+
+        <div class="m-accordion m-accordion--default m-accordion--solid" id="m_accordion_3" role="tablist">
+
+            <!--begin::Item-->
+            <div class="m-accordion__item">
+                <div class="m-accordion__item-head collapsed" role="tab" id="m_accordion_3_item_1_head" data-toggle="collapse" href="#m_accordion_3_item_1_body" aria-expanded="false">
+                    <span class="m-accordion__item-icon"><i class="fa flaticon-music"></i></span>
+                    <span class="m-accordion__item-title">Información por estados</span>
+                    <span class="m-accordion__item-mode"></span>
+                </div>
+                <div class="m-accordion__item-body collapse" id="m_accordion_3_item_1_body" role="tabpanel" aria-labelledby="m_accordion_3_item_1_head" data-parent="#m_accordion_3" style="">
+                    <div class="m-accordion__item-content">
+                        @include('backend.partials.cards-count-projects')
+                    </div>
+                </div>
+            </div>
+
+        </div>
         <!--=====================================
 		    INFORMACIÓN NÚMERICA E IMPORTANTE
         ======================================-->
