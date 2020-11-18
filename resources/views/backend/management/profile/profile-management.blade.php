@@ -343,8 +343,11 @@
                             <div class="form-group m-form__group">
                                 <div id="content-aspirante_name" class="m-form__group-sub">
                                     <label
-                                        class="form-control-label font-weight-bold">Estado:</label><br>
-                                    <span class="m-badge  m-badge--brand m-badge--wide">Aceptado</span>
+                                        class="form-control-label font-weight-bold titleStatusProject">Estado:</label><br>
+                                    <div id="titleStatusProject">
+
+                                    </div>
+{{--                                    <span class="m-badge  m-badge--brand m-badge--wide">Aceptado</span>--}}
 
                                 </div>
                             </div>
@@ -388,7 +391,8 @@
                             SLIDER CRITERIO # 1
                         ======================================-->
                         <div class="form-group m-form__group row" style="padding-top: 2rem">
-                            <label class="col-form-label col-lg-3 col-sm-12">Aspectos técnicos musicales: <span class="text-danger">*</span></label>
+                            <label class="col-form-label col-lg-3 col-sm-12">Aspectos técnicos musicales: <span
+                                    class="text-danger">*</span></label>
                             <div class="col-lg-9 col-md-12 col-sm-12">
                                 <div class="row align-items-center" style="margin-bottom: 1rem">
                                     <div class="col-2">
@@ -408,7 +412,8 @@
                             SLIDER CRITERIO # 2
                         ======================================-->
                         <div class="form-group m-form__group row" style="padding-top: 2rem">
-                            <label class="col-form-label col-lg-3 col-sm-12">Aporte creativo:<span class="text-danger">*</span></label>
+                            <label class="col-form-label col-lg-3 col-sm-12">Aporte creativo:<span
+                                    class="text-danger">*</span></label>
                             <div class="col-lg-9 col-md-12 col-sm-12">
                                 <div class="row align-items-center" style="margin-bottom: 1rem">
                                     <div class="col-2">
@@ -428,7 +433,8 @@
                         ======================================-->
 
                         <div class="form-group m-form__group row" style="padding-top: 2rem">
-                            <label class="col-form-label col-lg-3 col-sm-12">Calidad interpretativa:<span class="text-danger">*</span></label>
+                            <label class="col-form-label col-lg-3 col-sm-12">Calidad interpretativa:<span
+                                    class="text-danger">*</span></label>
                             <div class="col-lg-9 col-md-12 col-sm-12">
                                 <div class="row align-items-center" style="margin-bottom: 1rem">
                                     <div class="col-2">
@@ -449,7 +455,8 @@
                         ======================================-->
 
                         <div class="form-group m-form__group row" style="padding-top: 2rem">
-                            <label class="col-form-label col-lg-3 col-sm-12">Calidad del repertorio escogido:<span class="text-danger">*</span></label>
+                            <label class="col-form-label col-lg-3 col-sm-12">Calidad del repertorio escogido:<span
+                                    class="text-danger">*</span></label>
                             <div class="col-lg-9 col-md-12 col-sm-12">
                                 <div class="row align-items-center" style="margin-bottom: 1rem">
                                     <div class="col-2">
@@ -487,30 +494,31 @@
     </div>
 
 
-      <!-- Modal -->
-      <div class="modal fade" id="reviews" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- Modal -->
+    <div class="modal fade" id="reviews" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Historial de calificación</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body ">
-                <div class="reviews_content">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Historial de calificación</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body ">
+                    <div class="reviews_content">
+
+                    </div>
+
+                    <label class="value_lyric"></label>
 
                 </div>
-
-                <label class="value_lyric"></label>
-
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
             </div>
-            <div class="modal-footer">
-
-            </div>
-          </div>
         </div>
-      </div>
+    </div>
 
 
 
@@ -527,13 +535,13 @@
 
                 var data = table.row($(this).parents('tr')).data();
 
-                $.get('/api/historial-review/'+data.id+'',function (respuesta) {
+                $.get('/api/historial-review/' + data.id + '', function (respuesta) {
 
-                    console.log(respuesta.length,'count')
-                    if(respuesta.length <2){
+                    console.log(respuesta.length, 'count')
+                    if (respuesta.length < 2) {
 
                         $('#modal2').modal('show');
-                    }else{
+                    } else {
 
                         toastr.options = {
                             "closeButton": false,
@@ -554,18 +562,22 @@
                         };
 
                         toastr.warning("Este aspirante ya tiene 2 calificaciones", "Información");
+                        $(".audioProject").remove();
+                        $(".spanStatusProject").remove();
                     }
 
 
                 });
 
                 $(".audioProject").show();
+                console.log(data);
                 let title = data.title;
                 let audioProject = data.audio
                 let idProject = data.id
                 let modalidad = data.category.category
                 let descripcion = data.description
                 let sobreartista = data.artists[0].biography
+                let status = data.status
 
                 $(".tileProjectQualifie").text(title);
                 $(".modalidadProject").text(modalidad);
@@ -573,13 +585,20 @@
                 $(".sobreartista").text(sobreartista);
                 $(".idProject").val(idProject);
 
+                if (status == 7 ){
+                    $('#titleStatusProject').append(`<span class="m-badge  m-badge--success m-badge--wide spanStatusProject">Aceptado</span>`);
+                }else if(status == 2){
+                    $('#titleStatusProject').append(`<span class="m-badge  m-badge--success m-badge--wide spanStatusProject">Calificado</span>`);
+                }
+
                 let audioHtml = `
                   <audio src="${audioProject}" class="audioProject" controls> este es un elemento de audio no soportado por tu navegador, prueba con otro </audio> `;
-                  $(audioHtml).insertBefore(".sliderCalificadorUno");
+                $(audioHtml).insertBefore(".sliderCalificadorUno");
 
-                     $('#modal2').on('hidden.bs.modal', function (e) {
-                         $(".audioProject").remove();
-                     })
+                $('#modal2').on('hidden.bs.modal', function (e) {
+                    $(".audioProject").remove();
+                    $(".spanStatusProject").remove();
+                })
             });
         });
         $(document).ready(function () {
@@ -747,6 +766,7 @@
     </script>
     <script>
         var tipoProyecto = null;
+        var role = "{{ auth()->user()->roles[0]->id}}";
         var table = null;
         const loadTable = function () {
             if (table !== null) {
@@ -800,7 +820,7 @@
                                     info = '<span class="m-badge  m-badge--info m-badge--wide">{{ __('Nueva revisión') }}</span>';
                                     break;
                                 case 7:
-                                    info = '<span class="m-badge  m-badge--brand m-badge--wide">{{ __('Aceptado') }}</span>';
+                                    info = '<span class="m-badge  m-badge--success m-badge--wide">{{ __('Aceptado') }}</span>';
                                     break;
                                 case 8:
                                     info = '<span class="m-badge  m-badge--danger m-badge--wide">{{ __('No subsanado') }}</span>';
@@ -819,14 +839,18 @@
 
 
                         render: function (data, type, JsonResultRow, meta) {
-
-                             // {{-- modal calificacion --}}
-                            return `
-                                    <span  type="button"  id="id" class="btnOpenProject btn m-btn--pill btn-secondary text-center"  idProject="${JsonResultRow.id}" audioProject="${JsonResultRow.audio}" titleProject="${JsonResultRow.title}"><i data-toggle="tooltip" data-placement="top" title="Calificar propuesta musical" class="fa fa-check"></i></span>
+                            let info = '<span class="m-badge m-badge--danger m-badge--wide">N/A</span>';
+                            switch (parseInt(role)) {
+                                case 1:
+                                    info = `<span  type="button"  id="" class="btnHistorialReview btn m-btn--pill btn-secondary text-center" ><i data-toggle="tooltip" data-placement="top" title="Ver historial de calificación" class="fa fa-eye"></i></span>`
+                                    break;
+                                case 3:
+                                    info = `<span  type="button"  id="id" class="btnOpenProject btn m-btn--pill btn-secondary text-center"  idProject="${JsonResultRow.id}" audioProject="${JsonResultRow.audio}" titleProject="${JsonResultRow.title}"><i data-toggle="tooltip" data-placement="top" title="Calificar propuesta musical" class="fa fa-check"></i></span>
                                     <span  type="button"  id="" class="btnHistorialReview btn m-btn--pill btn-secondary text-center" ><i data-toggle="tooltip" data-placement="top" title="Ver historial de calificación" class="fa fa-eye"></i></span>
-                                    `;
-
-
+                                    `
+                                    break;
+                            }
+                            return '<div class="text-center">' + info + '</div>';
                         }
                     },
                 ],
@@ -932,10 +956,10 @@
                                 __token: token,
                                 comment: mesage,
                                 idProject: idProject,
-                                criterio_1:cristerio1,
-                                criterio_2:cristerio2,
-                                criterio_3:cristerio3,
-                                criterio_4:cristerio4,
+                                criterio_1: cristerio1,
+                                criterio_2: cristerio2,
+                                criterio_3: cristerio3,
+                                criterio_4: cristerio4,
                             };
                             const success = function (r) {
 
@@ -977,7 +1001,7 @@
                             });
 
                             $('.modal.show').loading({
-                              start: false,
+                                start: false,
                             });
                         }
                     }
@@ -989,23 +1013,22 @@
     </script>
     <script>
         $(function () {
-            $('#table__profile_projects_management tbody').on('click','.btnHistorialReview',function (e) {
+            $('#table__profile_projects_management tbody').on('click', '.btnHistorialReview', function (e) {
                 var data = table.row($(this).parents('tr')).data();
 
 
+                $('#reviews').loading({
+                    message: 'Cargando...',
+                    start: true,
+                });
+                $('.value_lyric').empty();
+                $.get('/api/historial-review/' + data.id + '', function (respuesta) {
 
-                    $('#reviews').loading({
-                                message: 'Cargando...',
-                                start: true,
-                            });
-                    $('.value_lyric').empty();
-                    $.get('/api/historial-review/'+data.id+'',function (respuesta) {
+                    if (respuesta.length != 0) {
+                        $('#reviews').modal('show');
 
-                        if(respuesta.length != 0){
-                           $('#reviews').modal('show');
-
-                        }else{
-                            toastr.options = {
+                    } else {
+                        toastr.options = {
                             "closeButton": false,
                             "debug": false,
                             "newestOnTop": false,
@@ -1024,62 +1047,66 @@
                         };
 
                         toastr.warning("No hay calificaciones disponibles", "Información");
+                        $('#reviews').on('hidden.bs.modal', function (e) {
+                            $(".audioProject").remove();
+                        })
 
-                        }
-                           $('#reviews').loading({
-                                start:false,
-                            });
-                        $.each(respuesta , function( index, value ) {
+                    }
+                    $('#reviews').loading({
+                        start: false,
+                    });
+                    $.each(respuesta, function (index, value) {
 
-                                    // reviews=response;
-                                $(".reviews_content").html(
-                                    "<h4>"+ value.projects[0].title +"</h4>"+
-                                    "<h6>"+ value.projects[0].category.category+"</h6>"+
-                                    "<br>"+
-                                    "<h6>Descripción:</h6>"+
-                                    "<label>"+value.projects[0].description+"</label>"+
-                                    "<br>"+
-                                    "<hr>"
-                                );
+                        // reviews=response;
+                        $(".reviews_content").html(
+                            "<h4>" + value.projects[0].title + "</h4>" +
+                            "<h6>" + value.projects[0].category.category + "</h6>" +
+                            "<br>" +
+                            "<h6>Descripción:</h6>" +
+                            "<label>" + value.projects[0].description + "</label>" +
+                            "<br>" +
+                            "<br>" +
+                            " <audio src="+value.projects[0].audio+" class='audioProject' controls> este es un elemento de audio no soportado por tu navegador, prueba con otro </audio>"+
+                            "<hr>"
+                        );
 
-                                $('.value_lyric').append(
-                                    "<h6>"+(index+1)+". Calificación:</h6>"+
-                                    "<br>"+
-                                    "<table class='table table-striped review_table'>"+
-                                        " <thead>"+
-                                                "<tr>"+
-                                                "<th scope='col'>Aspectos técnicos musicales</th>"+
-                                                "<th scope='col'>Aporte creativo</th>"+
-                                                "<th scope='col'>Calidad interpretativa</th>"+
-                                                "<th scope='col'>Calidad del repertorio escogido</th>"+
-                                                "<th scope='col'>Total</th>"+
-                                            " </tr>"+
-                                        " </thead>"+
-                                            "<tbody style='text-align: center;font-weight:500;'>"+
-                                            " <tr>"+
-                                                    "<th>"+value.melody_rhythm+"</th>"+
-                                                    "<td>"+value.originality+"</td>"+
-                                                    "<td>"+value.arrangements+"</td>"+
-                                                    "<td>"+value.lyric+"</td>"+
-                                                    "<td>"+(value.melody_rhythm+value.originality+value.arrangements+value.lyric)+"</td>"+
-                                                "</tr>"+
-                                        " </tbody>"+
-                                    " </table>"+
-                                    "<br>"+
-                                    "<h6>Observaciones:</h6>"+
-                                    "<div>"+value.comment+"</div>"+
-                                    "<br>"+
-                                    "<hr>"
-
-                                );
-
-                        });
-
-
-
+                        $('.value_lyric').append(
+                            "<h6>" + (index + 1) + ". Calificación:</h6>" +
+                            "<br>" +
+                            "<table class='table table-striped review_table'>" +
+                            " <thead>" +
+                            "<tr>" +
+                            "<th scope='col'>Aspectos técnicos musicales</th>" +
+                            "<th scope='col'>Aporte creativo</th>" +
+                            "<th scope='col'>Calidad interpretativa</th>" +
+                            "<th scope='col'>Calidad del repertorio escogido</th>" +
+                            "<th scope='col'>Total</th>" +
+                            " </tr>" +
+                            " </thead>" +
+                            "<tbody style='text-align: center;font-weight:500;'>" +
+                            " <tr>" +
+                            "<th>" + value.melody_rhythm + "</th>" +
+                            "<td>" + value.originality + "</td>" +
+                            "<td>" + value.arrangements + "</td>" +
+                            "<td>" + value.lyric + "</td>" +
+                            "<td>" + (value.melody_rhythm + value.originality + value.arrangements + value.lyric) + "</td>" +
+                            "</tr>" +
+                            " </tbody>" +
+                            " </table>" +
+                            "<br>" +
+                            "<h6>Observaciones:</h6>" +
+                            "<div>" + value.comment + "</div>" +
+                            "<br>" +
+                            "<hr>"
+                        );
 
                     });
 
+
+                });
+                $('#reviews').on('hidden.bs.modal', function (e) {
+                    $(".audioProject").remove();
+                })
             });
 
         });
