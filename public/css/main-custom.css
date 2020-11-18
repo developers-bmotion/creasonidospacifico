@@ -21,7 +21,6 @@
 .cls-body {
     margin-left: 5rem;
 }
-
 .background_login {
     background-image: url(/images/logo-pacifico.png);
     background-size: cover !important;
@@ -41,7 +40,6 @@
     font-size: 75px !important;
     padding: 0 3rem;
 }
-
 .dz-success-mark {
     display: none;
 }
@@ -53,25 +51,37 @@
     font-size: 45px !important;
     padding: 0 3rem;
 }
-
 .img-logo {
     width: 29rem;
 }
-
 .img-artist {
     border-radius: 50%;
     width: 70px;
     height: 70px;
 }
-
-.card-text{
+.card-text {
     display: flex !important;
 }
-
 /* .menu-top-botones{
     display: none !important;
 } */
-
+.subsanador-content {
+    padding-top: 0px !important;
+}
+.my-links ul li .page-link {
+    border-radius: 50%;
+}
+.page-item:first-child .page-link {
+    margin-left: 0;
+    border-top-left-radius: 1.3rem;
+    border-bottom-left-radius: 1.3rem;
+    width: 36px;
+    height: 36px;
+}
+.page-item:last-child .page-link {
+    border-top-right-radius: 1.3rem;
+    border-bottom-right-radius: 1.3rem;
+}
 /*Para pantalla movil*/
 @media (max-width: 480px) {
     .state_mobile {
@@ -132,7 +142,8 @@
     .m-aside-header-menu-mobile-close.m-aside-header-menu-mobile-close--skin-dark {
         background-color: transparent;
     }
-    .m-aside-header-menu-mobile-close.m-aside-header-menu-mobile-close--skin-dark > i {
+    .m-aside-header-menu-mobile-close.m-aside-header-menu-mobile-close--skin-dark
+        > i {
         color: #fff;
     }
     .img-item-menu {
@@ -163,41 +174,47 @@
         display: flex;
         /* white-space: nowrap; */
         flex-flow: nowrap;
-        overflow: scroll;
+        overflow-x: scroll;
+    }
+    .my-scroll-nav-2 {
+        display: flex;
+        white-space: nowrap;
+        flex-flow: nowrap;
+        overflow-x: scroll;
     }
     .cls-gestor-admin {
         width: 100px !important;
         height: 100px !important;
         margin: 5px !important;
     }
-    .cls-my-table{
+    .cls-my-table {
         overflow: scroll !important;
     }
     div.dataTables_wrapper div.dataTables_info {
         white-space: pre-wrap !important;
     }
-    #table_artists_wrapper .row:nth-child(2)  {
+    #table_artists_wrapper .row:nth-child(2) {
         overflow: scroll !important;
     }
-    #table_users_wrapper .row:nth-child(2)  {
+    #table_users_wrapper .row:nth-child(2) {
         overflow: scroll !important;
     }
-    #table__profile_projects_management_wrapper .row:nth-child(2)  {
+    #table__profile_projects_management_wrapper .row:nth-child(2) {
         overflow: scroll !important;
     }
     .dataTables_wrapper .dataTables_paginate .pagination .page-item {
         margin-left: 0.3rem;
     }
-    div.dataTables_wrapper div.dataTables_paginate ul.pagination{
+    div.dataTables_wrapper div.dataTables_paginate ul.pagination {
         justify-content: space-evenly !important;
     }
     div#table_ciudades_wrapper {
         padding-bottom: 50px !important;
     }
-    .section-movil{
+    .section-movil {
         margin-bottom: 0px !important;
     }
-    .my-form-control{
+    .my-form-control {
         padding-left: 1rem !important;
         padding-right: 0px !important;
         width: 3rem !important;
@@ -205,7 +222,10 @@
     .btn-subsanador {
         margin: 2px;
     }
-
+    .new-col-7 {
+        max-width: 100% !important;
+        flex: auto;
+    }
 }
 
 @media (max-width: 653px) and (min-width: 481px) {
@@ -218,6 +238,9 @@
 }
 
 @media (min-width: 1025px) {
+    .new-col-10 {
+        max-width: 58.33333%;
+    }
     .img-item-menu {
         display: none;
     }
@@ -242,7 +265,8 @@
         margin-left: 1rem;
         margin-right: -1rem;
     }
-    .m-aside-left--fixed.m-header--static .m-aside-left, .m-aside-left--fixed.m-header--fixed .m-aside-left{
+    .m-aside-left--fixed.m-header--static .m-aside-left,
+    .m-aside-left--fixed.m-header--fixed .m-aside-left {
         top: 0px !important;
     }
 }

@@ -106,7 +106,7 @@
 
 @section('content')
 
-    <div class="m-content">
+    <div class="m-content subsanador-content">
         <!--=====================================
 		    LISTA DE OBSERVACIONES
         ======================================-->
@@ -264,7 +264,7 @@
 
                             <div class="secondary_audios col-md-12 row mt-5">
                                 @if($project->audio_secundary_two)
-                                    <div class="col-6 player">
+                                    <div class="col-12 col-md-6 col-lg-6 player">
                                         <div class="form-group">
                                             <h5 style="font-weight: bold">Canción extra uno(no participa en
                                                 el
@@ -278,7 +278,7 @@
                                     </div>
                                 @endif
                                 @if($project->audio_secundary_one)
-                                    <div class="col-6 player">
+                                    <div class="col-12 col-md-6 col-lg-6 player">
                                         <div class="form-group">
                                             <h5 style="font-weight: bold">Canción extra dos(no participa en
                                                 el

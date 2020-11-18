@@ -121,7 +121,9 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                                 @endforelse
                             </div>
 
-                            {{ $managements->links() }}
+                            <div class="my-links">
+                                {{ $managements->links() }}
+                            </div>
                             {{-- fin tab curador 1 --}}
 
                             {{--  --}}
