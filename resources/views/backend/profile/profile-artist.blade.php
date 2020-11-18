@@ -10,7 +10,6 @@
             </div>
         </div>
     </div>
-
     <div class="row pt-4">
         <div class="col-12">
             @if(count(\App\Artist::projects_artist(auth()->user()->id)) === 0)
@@ -75,6 +74,7 @@
         </div>
 
     </div>
+
 @stop
 @section('content')
     <div class="m-content">
@@ -107,6 +107,7 @@
                 </div>
             </div>
         @endif
+
     <!--=====================================
         ALERTA LUEGO CREAR LA CUENTA
     ======================================-->
@@ -139,7 +140,7 @@
                                         Información del aspirante o representante
                                     </a>
                                 </li>
-                                {{-- @dd($artist); --}}
+
 
                                     @if(count($artist->projects) !== 0 && $artist->projects)
                                         <li class="nav-item m-tabs__item">
@@ -150,7 +151,6 @@
                                             </a>
                                         </li>
                                     @endif
-
                                     @if(count($artist->beneficiary) !== 0 && $artist->projects)
                                         <li class="nav-item m-tabs__item">
                                             <a class="nav-link m-tabs__link" data-toggle="tab"
@@ -169,6 +169,7 @@
                                             </a>
                                         </li>
                                     @endif
+
                             </ul>
                         </div>
                         {{-- @include('backend.profile.partials.actions-perfil') --}}
@@ -204,7 +205,7 @@
                                                     <img class="ml-4 img-artist"
                                                          {{-- style="border-radius:8rem; width:7rem" --}}
                                                          src="{{$artist->users->picture}}">
-                                                    @if($artist->projects)
+                                                    @if($artist->projects && count($artist->projects ) > 0)
                                                         @if($artist->projects[0]->status == 4 || $artist->projects[0]->status == 1)
                                                             <i class="flaticon-edit ml-3 update_img_profile_asp"
                                                                style="color:#716aca; cursor:pointer;"></i>
@@ -212,8 +213,8 @@
                                                     @endif
 
                                                 @endif
-
                                             </div>
+
                                             <div class="col-md-4 drop_prof_asp" style="display: none">
                                                 <div class="form-group m-form__group ">
 
@@ -489,6 +490,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+
                                             <form id="form_update_img" method="post"
                                                   action="{{ route('update.imgdoc.artist') }}"
                                                   enctype="multipart/form-data"
@@ -503,13 +505,14 @@
                                             </form>
 
                                         </div>
-                                        @if($artist->projects)
+
+                                        @if($artist->projects && count($artist->projects) > 0)
                                             @if($artist->projects[0]->status == 4 || $artist->projects[0]->status == 1)
                                                 <i class="flaticon-edit ml-3 update_pdf_asp"
                                                    style="color:#716aca; cursor:pointer;"></i>
                                             @endif
                                         @endif
-
+                                        
                                         <button type="button" class="btn btn-primary cancel_pdf_asp"
                                                 style="display:none">Cancelar
                                         </button>
@@ -1864,6 +1867,7 @@
                 </div>
             </div>
         </div>
+
     </div>
 
 @stop
