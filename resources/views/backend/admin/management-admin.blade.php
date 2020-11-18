@@ -84,10 +84,18 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                                                     </div>
                                                     <div class="m-card-profile__details">
                                                         <span
-                                                            class="m-card-profile__name">{{ $management->users->name }}</span>
+                                                            class="m-card-profile__name">{{ $management->users->name }} {{ $management->users->last_name }}</span>
 
                                                         <a href="" class="m-card-profile__email m-link"
                                                         style="margin-left: -15px">{{ $management->users->email  }}</a>
+{{--                                                        <div class="m-demo__preview m-demo__preview--badge pt-3">--}}
+{{--                                                            @forelse($managements->categories as $insteres)--}}
+{{--                                                                <span class="m-badge m-badge-- m-badge--wide"--}}
+{{--                                                                      style="font-size: 13px;">{{ $insteres->category }}</span>--}}
+{{--                                                            @empty--}}
+{{--                                                                <p>{{ __('aun_no_registrado') }}</p>--}}
+{{--                                                            @endforelse--}}
+{{--                                                        </div>--}}
 
                                                     </div>
                                                     <div class="m-card-profile__details" style=padding-top:20px;>
@@ -107,9 +115,9 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                             {{ $managements->links() }}
                             {{-- fin tab curador 1 --}}
 
-                            {{--  --}}                            
+                            {{--  --}}
                         </div>
-                        
+
                     </div>
                 </div>
             </div>

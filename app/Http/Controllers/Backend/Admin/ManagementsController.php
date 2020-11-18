@@ -16,7 +16,7 @@ class ManagementsController extends Controller
 {
     public function index(){
 
-        $managements = Management::with('users')->paginate(6);
+        $managements = Management::with('users', 'categories')->paginate(6);
 //        $managementstwo = Management::where('tipoCurador', '=' , 2)->with('users')->paginate(6);
         // $managements = Management::with('users')->paginate(6);
         // $countries = Country::all();

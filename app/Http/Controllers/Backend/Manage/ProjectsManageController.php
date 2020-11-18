@@ -19,7 +19,7 @@ class ProjectsManageController extends Controller
 
         $project = \App\Project::where('status','!=',1)->whereHas('management', function ($query) {
             $query->where('managements.user_id', '=', auth()->user()->id);
-        })->with('category','artists');
+        })->with('category','artists.users');
         if ($request->input("tipoProyecto")){
             $project->where('status', "=", $request->input("tipoProyecto"));
         }

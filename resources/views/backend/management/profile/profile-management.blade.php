@@ -312,12 +312,71 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title tileProjectQualifie" id="exampleModalLabel"></h5>
+                    <h3 class="modal-title" id="exampleModalLabel">Calificar Propuesta Musical</h3>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body bodyAppendAudio">
+                    <div class="row pb-2">
+                        <div class="col-md-4 col-lg-4 col-12">
+                            <div class="form-group m-form__group">
+                                <div id="content-aspirante_name" class="m-form__group-sub">
+                                    <label
+                                        class="form-control-label font-weight-bold">Titulo:</label>
+                                    <p style="font-size: 1.1rem" class="tileProjectQualifie"></p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-5 col-lg-5 col-12">
+                            <div class="form-group m-form__group">
+                                <div id="content-aspirante_name" class="m-form__group-sub">
+                                    <label
+                                        class="form-control-label font-weight-bold">Modalidad:</label>
+                                    <p style="font-size: 1.1rem" class="modalidadProject"></p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-lg-3 col-12">
+                            <div class="form-group m-form__group">
+                                <div id="content-aspirante_name" class="m-form__group-sub">
+                                    <label
+                                        class="form-control-label font-weight-bold">Estado:</label><br>
+                                    <span class="m-badge  m-badge--brand m-badge--wide">Aceptado</span>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row pb-3">
+                        <div class="col-md-12 col-lg-12 col-12">
+                            <div class="form-group m-form__group">
+                                <div id="content-aspirante_name" class="m-form__group-sub">
+                                    <label
+                                        class="form-control-label font-weight-bold">Sobre la canción:</label>
+                                    <p style="font-size: 1rem; text-align: justify" class="descripcion"></p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                    <div class="row pb-3">
+                        <div class="col-md-12 col-lg-12 col-12">
+                            <div class="form-group m-form__group">
+                                <div id="content-aspirante_name" class="m-form__group-sub">
+                                    <label
+                                        class="form-control-label font-weight-bold">Sobre el artista:</label>
+                                    <p style="font-size: 1rem; text-align: justify" class="sobreartista"></p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+
                     {{--                    <audio class="audioProject" preload="auto" controls>--}}
                     {{--                                                 <source class="srcAudio" >--}}
 
@@ -462,6 +521,32 @@
 @push('js')
     <script>
 
+        $(function () {
+            $('#table__profile_projects_management tbody').on('click', '.btnOpenProject', function (e) {
+                var data = table.row($(this).parents('tr')).data();
+                $(".audioProject").show();
+                let title = data.title;
+                let audioProject = data.audio
+                let idProject = data.id
+                let modalidad = data.category.category
+                let descripcion = data.description
+                let sobreartista = data.artists[0].biography
+
+                $(".tileProjectQualifie").text(title);
+                $(".modalidadProject").text(modalidad);
+                $(".descripcion").text(descripcion);
+                $(".sobreartista").text(sobreartista);
+                $(".idProject").val(idProject);
+
+                let audioHtml = `
+                  <audio src="${audioProject}" class="audioProject" controls> este es un elemento de audio no soportado por tu navegador, prueba con otro </audio> `;
+                  $(audioHtml).insertBefore(".sliderCalificadorUno");
+
+                     $('#modal2').on('hidden.bs.modal', function (e) {
+                         $(".audioProject").remove();
+                     })
+            });
+        });
         $(document).ready(function () {
 
             $('.btn-send-rating').click(function () {
@@ -471,24 +556,24 @@
 
             });
 
-            $(document).on('click', '.btnOpenProject', function () {
-                $(".audioProject").show();
-                let title = $(this).attr('titleProject');
-                let audioProject = $(this).attr('audioProject');
-                let idProject = $(this).attr('idProject');
-
-                $(".tileProjectQualifie").text(title);
-                $(".idProject").val(idProject);
-
-
-                let audioHtml = `
-                   <audio src="${audioProject}" class="audioProject" controls> este es un elemento de audio no soportado por tu navegador, prueba con otro </audio> `;
-                $(audioHtml).insertBefore(".sliderCalificadorUno");
-
-                $('#modal2').on('hidden.bs.modal', function (e) {
-                    $(".audioProject").remove();
-                })
-            });
+            // $(document).on('click', '.btnOpenProject', function () {
+            //     $(".audioProject").show();
+            //     let title = $(this).attr('titleProject');
+            //     let audioProject = $(this).attr('audioProject');
+            //     let idProject = $(this).attr('idProject');
+            //
+            //     $(".tileProjectQualifie").text(title);
+            //     $(".idProject").val(idProject);
+            //
+            //
+            //     let audioHtml = `
+            //        <audio src="${audioProject}" class="audioProject" controls> este es un elemento de audio no soportado por tu navegador, prueba con otro </audio> `;
+            //     $(audioHtml).insertBefore(".sliderCalificadorUno");
+            //
+            //     $('#modal2').on('hidden.bs.modal', function (e) {
+            //         $(".audioProject").remove();
+            //     })
+            // });
 
 
             // init slider
@@ -702,7 +787,7 @@
 
                              // {{-- modal calificacion --}}
                             return `
-                                    <span  type="button"  id="id" class="btnOpenProject btn m-btn--pill btn-secondary text-center" idProject="${JsonResultRow.id}" audioProject="${JsonResultRow.audio}" titleProject="${JsonResultRow.title}"  data-toggle="modal" data-target="#modal2"><i data-toggle="tooltip" data-placement="top" title="Calificar propuesta musical" class="fa fa-check"></i></span>
+                                    <span  type="button"  id="id" class="btnOpenProject btn m-btn--pill btn-secondary text-center"  idProject="${JsonResultRow.id}" audioProject="${JsonResultRow.audio}" titleProject="${JsonResultRow.title}"  data-toggle="modal" data-target="#modal2"><i data-toggle="tooltip" data-placement="top" title="Calificar propuesta musical" class="fa fa-check"></i></span>
                                     <span  type="button"  id="" class="btnHistorialReview btn m-btn--pill btn-secondary text-center" data-toggle="modal" data-target="#reviews" ><i data-toggle="tooltip" data-placement="top" title="Ver historial de calificación" class="fa fa-eye"></i></span>
                                     `;
 
