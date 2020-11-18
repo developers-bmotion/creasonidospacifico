@@ -423,7 +423,7 @@
                                                         <span
                                                             style="background-color:#9C26EA"
                                                             class="changeType w-100 btn btn-brand m-btn m-btn--pill m-btn--wide btn-sm"
-                                                            data-type="{{\App\Project::QUALIFIED}}">{{ __('pre_aprovado') }}</span>
+                                                            data-type="{{\App\Project::QUALIFIED}}">Calificado</span>
 
                                                         </li>
                                                     @endif

@@ -155,6 +155,9 @@ class Project extends Model
     public function reviews(){
         return $this->hasMany(Review::class)->select('id','user_id','project_id','rating','comment','created_at');
     }
+    public function reviews_curador(){
+        return $this->belongsTo(Review::class,'id');
+    }
 
     public function rewards(){
         return $this->hasMany(Reward::class)->select('id','title','description','price','shipments','estimated','project_id','created_at');

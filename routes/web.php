@@ -22,9 +22,12 @@ use App\Role;
 use App\User;
 
 Route::get('/datos', function () {
+    $managements = App\Management::with('users.reviews', 'categories', 'projects')->paginate(6);
+    return $managements;
 
-    $listAspirant = Artist::with('users','personType','projects.category','documentType','city.departaments')->get();
-    return $listAspirant;
+
+//     $listAspirant = Artist::with('users','personType','projects.category','documentType','city.departaments')->get();
+//     return $listAspirant;
 });
 
 Route::get('/represtante-menor-edad/{id}', function ($id) {

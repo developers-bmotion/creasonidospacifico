@@ -10,16 +10,18 @@ use App\Management;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Review;
 use Illuminate\Support\Str;
 
 class ManagementsController extends Controller
 {
     public function index(){
 
-        $managements = Management::with('users', 'categories')->paginate(6);
+        $managements = Management::with('categories', 'projects','users.reviews')->paginate(6);
 //        $managementstwo = Management::where('tipoCurador', '=' , 2)->with('users')->paginate(6);
         // $managements = Management::with('users')->paginate(6);
         // $countries = Country::all();
+      ;
         $categories = Category::all();
         // return view('backend.admin.management-admin',compact('managements','countries','categories'));
         return view('backend.admin.management-admin',compact('managements','categories'));

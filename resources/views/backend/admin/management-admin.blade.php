@@ -61,6 +61,7 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                             <div class="form-group"></div>
                             {{--  --}}
                             <div class="row p-3">
+                                {{-- @dd($managements); --}}
                                 @forelse($managements as $management)
                                     <div class="col-lg-4">
                                         <div class="m-portlet m-portlet--full-height  ">
@@ -88,6 +89,14 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
 
                                                         <a href="" class="m-card-profile__email m-link"
                                                         style="margin-left: -15px">{{ $management->users->email  }}</a>
+                                                        <label style="font-weight:600;">Proyectos asignados: </label> {{ count($management->projects) }}
+
+                                                        <label style="font-weight:600;">Proyectos calificados: </label> {{ count($management->users->reviews->groupBy('project_id')) }}
+
+                                                        @foreach ($management->categories as $cat)
+                                                        <span class="m-badge m-badge-- m-badge--wide mt-2"
+                                                          style="font-size: 13px;">{{ $cat->category }}</span>
+                                                        @endforeach
 {{--                                                        <div class="m-demo__preview m-demo__preview--badge pt-3">--}}
 {{--                                                            @forelse($managements->categories as $insteres)--}}
 {{--                                                                <span class="m-badge m-badge-- m-badge--wide"--}}

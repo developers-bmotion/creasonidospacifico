@@ -86,10 +86,10 @@
                 <div class="m-widget24 pb-5 pr-2">
                     <div class="m-widget24__item">
                         <h4 class="m-widget24__title">
-                            Propuestas Aprobadas
+                            Propuestas Calificadas
                         </h4><br>
                         <span class="m-widget24__desc card-text">Aprobadas puntaje</span><br><br>
-                        <span class="m-widget24__stats m--font-success pull-right pl-4" style="float: left">{{ $projectsStateAprobadas }}</span>
+                        <span class="m-widget24__stats pull-right pl-4" style="float: left; color:#9C26EA">{{ $projectsStateAprobadas }}</span>
 
                     </div>
                 </div>
