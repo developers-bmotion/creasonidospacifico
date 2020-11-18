@@ -33,10 +33,11 @@ use Illuminate\Database\Eloquent\Model;
 class Review extends Model
 {
     protected $fillable = [
-        'project_id','user_id','rating','comment','end_time'
+        'project_id','user_id','lyric','comment','end_time', 'melody_rhythm',
+         'arrangements', 'originality', 'comment'
     ];
     public function projects(){
-        return $this->belongsTo(Project::class);
+        return $this->hasMany(Project::class, 'id','project_id');
     }
 
     public function users(){

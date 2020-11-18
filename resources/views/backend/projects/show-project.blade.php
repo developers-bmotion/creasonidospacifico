@@ -1,5 +1,109 @@
 @extends('backend.layout')
 
+@section('header')
+    <div class="row pt-4">
+        <div class="col-12">
+        @if(auth()->user()->roles[0]->rol == 'Gestor')
+            @if( $project->status == 4  )
+
+                <!--=====================================
+		        ALERTA PARA MOSTRAR EL ESTADO PENDIENTE
+            ======================================-->
+                    <form id="update_revision" action="{{ route('update.state.revision') }}" method="post">
+                        @csrf {{ method_field('PUT') }}
+                        <input type="hidden" name="state_revision" value="6">
+                        <input type="hidden" name="project_id" value="{{ $project->id }}">
+                        <div class="m-alert m-alert--icon m-alert--outline alert alert-warning" role="alert">
+                            <div class="m-alert__icon">
+                                <i class="la la-warning"></i>
+                            </div>
+                            <div class="m-alert__text" style="color:#ca8e0c !important;" data-toggle="modal"
+                                 data-target="#verObservaciones">
+                                Propuesta musical esta en estado <strong>Pendiente</strong>, click
+                                <strong
+                                    style="cursor: pointer">aquí</strong> para ver los detalles que debes ajustar.
+                                Al terminar y estar seguro que todo esta bien, volver a enviar.
+                                <p style="font-style: oblique;"> Nota: Recuerda que debes realizar los ajustes antes
+                                    del
+                                    <strong>{{ \Carbon\Carbon::parse($project->published_at)->formatLocalized('%A %d de %B de %Y %H:%M:%S') }}</strong>
+                                </p>
+
+
+                            </div>
+                            <div class="m-alert__actions" style="width: 200px;">
+                                <button id="btn_update_revision" href="{{ route('update.state.revision') }}"
+                                        class="btn btn-warning btn-sm m-btn m-btn--pill m-btn--wide"
+                                        style="color:#fff">Enviar propuesta musical nuevamente
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="modal fade" id="verObservaciones" tabindex="-1" role="dialog"
+                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">
+                                        Observaciones </h5>
+                                    <button type="button" class="close" data-dismiss="modal"
+                                            aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    @php($count = 1 )
+                                    @if(count($artist->historyReviews) != 0)
+                                        @forelse($artist->historyReviews as $historyReviews)
+                                            <h5 class="pb-3">{{ $count++ }}. Observación </h5>
+                                            <div class="row">
+                                                <div class="col-12 col-md-10 col-lg-10">
+                                                    <div class="form-group m-form__group">
+                                                        <div class="m-form__group-sub">
+                                                            <label
+                                                                class="form-control-label font-weight-bold">Observación:
+                                                            </label>
+                                                            <p>{!! $historyReviews->pivot->observation !!}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-2 col-lg-2">
+                                                    <div class="form-group m-form__group">
+                                                        <div class="m-form__group-sub">
+                                                            <label
+                                                                class="form-control-label font-weight-bold">Estado:
+                                                            </label>
+                                                            <br>
+                                                            @if($historyReviews->pivot->state == 1)
+                                                                <span
+                                                                    class="m-badge m-badge--warning m-badge--wide">Pendiente</span>
+                                                            @else
+                                                                <span
+                                                                    class="m-badge m-badge--success m-badge--wide">Corregido</span>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                        @empty
+                                            <h4 class="text-center">Sin observaciones</h4>
+                                        @endforelse
+                                    @endif
+                                </div>
+                                <div class="modal-footer">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+            @endif
+
+        </div>
+    </div>
+@stop
+
 @section('content')
 
     <div class="m-content subsanador-content">
@@ -54,7 +158,8 @@
 
                                                             @if($historyReviews->pivot->state == 1)
                                                                 <td>
-                                                                <span class="m-badge m-badge--warning m-badge--wide">Pendiente</span>
+                                                                    <span
+                                                                        class="m-badge m-badge--warning m-badge--wide">Pendiente</span>
                                                                 </td>
                                                             @elseif($historyReviews->pivot->state == 2)
                                                                 <td>

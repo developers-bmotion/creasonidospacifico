@@ -1,3 +1,7 @@
+/* texto tabla review */
+.review_table th {
+    font-size: 0.96rem;
+}
 /* quita un poco de margen al formulario */
 .login-top {
     padding: 25% 2rem 2rem 2rem !important;

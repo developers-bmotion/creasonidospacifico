@@ -43,4 +43,10 @@ class Category extends Model
     public function managements(){
         return $this->belongsToMany(Management::class);
     }
+
+    public function categoriesManage($id){
+        \DB::table('categories_management')
+            ->where('management_id', $id)
+            ->get();
+    }
 }

@@ -775,7 +775,7 @@ function dropzoneError(nameField, msg, inputField) {
 var imageDocumentFrenteAspirant = new Dropzone('.file-image-document-aspirante-frente', {
     acceptedFiles: "image/*",
     maxFiles: 1,
-    timeout: 180000,
+    timeout: 360000,
     paramName: 'file',
     addRemoveLinks: true,
     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
@@ -793,7 +793,7 @@ var imageDocumentFrenteAspirant = new Dropzone('.file-image-document-aspirante-f
 var imageDocumentAtrasAspirant = new Dropzone('.file-image-document-aspirante-atras', {
     acceptedFiles: "image/*",
     maxFiles: 1,
-    timeout: 180000,
+    timeout: 360000,
     paramName: 'file',
     addRemoveLinks: true,
     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
@@ -811,7 +811,7 @@ var imageDocumentAtrasAspirant = new Dropzone('.file-image-document-aspirante-at
 var pdfDocumentAspirant = new Dropzone('.file-pdf-document-aspirante', {
     acceptedFiles: "application/pdf",
     maxFiles: 1,
-    timeout: 180000,
+    timeout: 360000,
     paramName: 'file',
     addRemoveLinks: true,
     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
@@ -829,7 +829,7 @@ var pdfDocumentAspirant = new Dropzone('.file-pdf-document-aspirante', {
 var imageProfileAspirant = new Dropzone(".file-image-profile-aspirante", {
     paramName: "file",
     maxFiles: 1,
-    timeout: 180000,
+    timeout: 360000,
     maxFilesize: 5,
     addRemoveLinks: true,
     acceptedFiles: "image/*",
@@ -850,7 +850,7 @@ var imageProfileAspirant = new Dropzone(".file-image-profile-aspirante", {
 var imageDocumentFrenteBeneficiario = new Dropzone('.file-image-document-beneficiario-frente', {
     acceptedFiles: "image/*",
     maxFiles: 1,
-    timeout: 180000,
+    timeout: 360000,
     paramName: 'file',
     addRemoveLinks: true,
     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
@@ -868,7 +868,7 @@ var imageDocumentFrenteBeneficiario = new Dropzone('.file-image-document-benefic
 var imageDocumentAtrasBeneficiario = new Dropzone('.file-image-document-beneficiario-atras', {
     acceptedFiles: "image/*",
     maxFiles: 1,
-    timeout: 180000,
+    timeout: 360000,
     paramName: 'file',
     addRemoveLinks: true,
     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
@@ -886,7 +886,7 @@ var imageDocumentAtrasBeneficiario = new Dropzone('.file-image-document-benefici
 var pdfDocumentBeneficiario = new Dropzone('.file-pdf-document-beneficiario', {
     acceptedFiles: "application/pdf",
     maxFiles: 1,
-    timeout: 180000,
+    timeout: 360000,
     paramName: 'file',
     addRemoveLinks: true,
     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
@@ -904,7 +904,7 @@ var pdfDocumentBeneficiario = new Dropzone('.file-pdf-document-beneficiario', {
 var imageProfileBeneficiario = new Dropzone(".file-image-profile-beneficiario", {
     paramName: "file",
     maxFiles: 1,
-    timeout: 180000,
+    timeout: 360000,
     maxFilesize: 5, // MB
     addRemoveLinks: true,
     acceptedFiles: "image/*",
@@ -925,7 +925,7 @@ var imageProfileBeneficiario = new Dropzone(".file-image-profile-beneficiario", 
 var uploadSong = new Dropzone('.upload-song', {
     acceptedFiles: 'audio/*',
     maxFiles: 1,
-    timeout: 180000,
+    timeout: 360000,
     maxFilesize: 15, // MB
     paramName: 'image',
     addRemoveLinks: true,
@@ -937,7 +937,7 @@ var uploadSong = new Dropzone('.upload-song', {
         dropzoneSuccess(response, 'song_urlSong', 'song[urlSong]')
     },
     error: function (file, responce) {
-        dropzoneError('song_urlSong', 'Recuerda que solo se admiten archivos en formato MP3 con un peso máximo de 12 MB.', 'song[urlSong]')
+        dropzoneError('song_urlSong', 'Recuerda que solo se admiten archivos en formato MP3.', 'song[urlSong]')
         setTimeout( () => { uploadSong.removeFile(file) }, 2000 )
     }
 });
@@ -947,7 +947,7 @@ var fileAdditionalSongOne, fileAdditionalSongTwo;
 var dropzoneAdditionalSongOne = new Dropzone('.additional-song-one', {
     acceptedFiles: 'audio/*',
     maxFiles: 1,
-    timeout: 180000,
+    timeout: 360000,
     maxFilesize: 15, // MB
     paramName: 'image',
     addRemoveLinks: true,
@@ -967,7 +967,7 @@ var dropzoneAdditionalSongOne = new Dropzone('.additional-song-one', {
 var dropzoneAdditionalSongTwo = new Dropzone('.additional-song-two', {
     acceptedFiles: 'audio/*',
     maxFiles: 1,
-    timeout: 180000,
+    timeout: 360000,
     maxFilesize: 15, // MB
     paramName: 'image',
     addRemoveLinks: true,
@@ -989,7 +989,7 @@ var dropzoneAdditionalSongTwo = new Dropzone('.additional-song-two', {
 var dropzoneEvidenceDocument = new Dropzone('.evidence-document', {
     acceptedFiles: 'application/pdf',
     maxFiles: 1,
-    timeout: 180000,
+    timeout: 360000,
     paramName: 'doc',
     addRemoveLinks: true,
     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
