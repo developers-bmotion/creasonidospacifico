@@ -57,21 +57,21 @@
                     @if(auth()->user()->roles[0]->rol == "Admin")
                         <div class="m-portlet__head">
                             <div class="m-portlet__head-tools">
-                                <ul class="nav nav-tabs m-tabs m-tabs-line   m-tabs-line--left m-tabs-line--primary"
+                                <ul class="my-scroll-nav-2 nav nav-tabs m-tabs m-tabs-line   m-tabs-line--left m-tabs-line--primary"
                                     role="tablist">
                                     <li class="nav-item m-tabs__item">
                                         <a class="nav-link m-tabs__link active" data-toggle="tab"
                                            href="#m_user_profile_tab_1" role="tab">
                                             <i class="flaticon-share m--hide"></i>
-                                            {{ __('actualizar_perfil') }}
+                                            Información de Perfil
                                         </a>
                                     </li>
-                                    <li class="nav-item m-tabs__item">
+                                    {{-- <li class="nav-item m-tabs__item">
                                         <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_2"
                                            role="tab">
                                             {{ __('mensajes') }}
                                         </a>
-                                    </li>
+                                    </li> --}}
                                     <li class="nav-item m-tabs__item">
                                         <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_3"
                                            role="tab">
@@ -90,11 +90,11 @@
                                       class="m-form m-form--fit m-form--label-align-right">
                                     @csrf {{method_field('PUT')}}
                                     <div class="m-portlet__body">
-                                        <div class="form-group m-form__group row">
+                                        {{-- <div class="form-group m-form__group row">
                                             <div class="col-10 ml-auto">
                                                 <h3 class="m-form__section">1. Info {{ __('Admin') }}</h3>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <div class="form-group m-form__group row {{$errors->has('company')? 'has-danger':''}}">
                                             <label for="example-text-input"
                                                    class="col-2 col-form-label">{{ __('empresa') }}</label>
@@ -109,7 +109,7 @@
                                         <div class="form-group m-form__group row {{$errors->has('descripcion')? 'has-danger':''}}">
                                             <label for="example-text-input"
                                                    class="col-2 col-form-label">{{ __('descripcion') }}</label>
-                                            <div class="col-7">
+                                            <div class="new-col-7 col-7">
                                             <textarea class="form-control m-input m-input--solid" id="exampleTextarea"
                                                       name="descripcion"
                                                       rows="9"></textarea>
@@ -120,7 +120,7 @@
                                         <div class="form-group m-form__group row {{$errors->has('web_site')? 'has-danger':''}}">
                                             <label for="example-text-input"
                                                    class="col-2 col-form-label">Web Site</label>
-                                            <div class="col-7">
+                                            <div class="col-10 new-col-10">
                                                 <input class="form-control m-input" type="text" name="web_site"
                                                        value="">
                                                 {!! $errors->first('web_site','<div class="form-control-feedback">*:message</div>')!!}
@@ -134,7 +134,7 @@
                                                 </div>
                                                 <div class="col-7 text-center">
                                                     <button type="submit"
-                                                            class="btn btn-accent m-btn m-btn--air m-btn--custom">{{ __('guardar_cambios') }}</button>
+                                                            class="btn btn-primary m-btn m-btn--air m-btn--custom">{{ __('guardar_cambios') }}</button>
 
                                                 </div>
                                             </div>
