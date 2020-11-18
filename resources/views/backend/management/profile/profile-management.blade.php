@@ -523,7 +523,42 @@
 
         $(function () {
             $('#table__profile_projects_management tbody').on('click', '.btnOpenProject', function (e) {
+                // $('#modal2').modal('show');
+
                 var data = table.row($(this).parents('tr')).data();
+
+                $.get('/api/historial-review/'+data.id+'',function (respuesta) {
+
+                    console.log(respuesta.length,'count')
+                    if(respuesta.length <2){
+
+                        $('#modal2').modal('show');
+                    }else{
+
+                        toastr.options = {
+                            "closeButton": false,
+                            "debug": false,
+                            "newestOnTop": false,
+                            "progressBar": false,
+                            "positionClass": "toast-top-right",
+                            "preventDuplicates": false,
+                            "onclick": null,
+                            "showDuration": "3000",
+                            "hideDuration": "1000",
+                            "timeOut": "5000",
+                            "extendedTimeOut": "1000",
+                            "showEasing": "swing",
+                            "hideEasing": "linear",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut"
+                        };
+
+                        toastr.warning("Este aspirante ya tiene 2 calificaciones", "Información");
+                    }
+
+
+                });
+
                 $(".audioProject").show();
                 let title = data.title;
                 let audioProject = data.audio
@@ -787,8 +822,8 @@
 
                              // {{-- modal calificacion --}}
                             return `
-                                    <span  type="button"  id="id" class="btnOpenProject btn m-btn--pill btn-secondary text-center"  idProject="${JsonResultRow.id}" audioProject="${JsonResultRow.audio}" titleProject="${JsonResultRow.title}"  data-toggle="modal" data-target="#modal2"><i data-toggle="tooltip" data-placement="top" title="Calificar propuesta musical" class="fa fa-check"></i></span>
-                                    <span  type="button"  id="" class="btnHistorialReview btn m-btn--pill btn-secondary text-center" data-toggle="modal" data-target="#reviews" ><i data-toggle="tooltip" data-placement="top" title="Ver historial de calificación" class="fa fa-eye"></i></span>
+                                    <span  type="button"  id="id" class="btnOpenProject btn m-btn--pill btn-secondary text-center"  idProject="${JsonResultRow.id}" audioProject="${JsonResultRow.audio}" titleProject="${JsonResultRow.title}"><i data-toggle="tooltip" data-placement="top" title="Calificar propuesta musical" class="fa fa-check"></i></span>
+                                    <span  type="button"  id="" class="btnHistorialReview btn m-btn--pill btn-secondary text-center" ><i data-toggle="tooltip" data-placement="top" title="Ver historial de calificación" class="fa fa-eye"></i></span>
                                     `;
 
 
@@ -956,10 +991,8 @@
         $(function () {
             $('#table__profile_projects_management tbody').on('click','.btnHistorialReview',function (e) {
                 var data = table.row($(this).parents('tr')).data();
-                if(data.status != 2){
-                    $('.value_lyric').empty();
-                    $(".reviews_content").html("<label>No hay calificaciones disponibles</label>");
-                }else{
+
+
 
                     $('#reviews').loading({
                                 message: 'Cargando...',
@@ -967,7 +1000,33 @@
                             });
                     $('.value_lyric').empty();
                     $.get('/api/historial-review/'+data.id+'',function (respuesta) {
-                        $('#reviews').loading({
+
+                        if(respuesta.length != 0){
+                           $('#reviews').modal('show');
+
+                        }else{
+                            toastr.options = {
+                            "closeButton": false,
+                            "debug": false,
+                            "newestOnTop": false,
+                            "progressBar": false,
+                            "positionClass": "toast-top-right",
+                            "preventDuplicates": false,
+                            "onclick": null,
+                            "showDuration": "3000",
+                            "hideDuration": "1000",
+                            "timeOut": "5000",
+                            "extendedTimeOut": "1000",
+                            "showEasing": "swing",
+                            "hideEasing": "linear",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut"
+                        };
+
+                        toastr.warning("No hay calificaciones disponibles", "Información");
+
+                        }
+                           $('#reviews').loading({
                                 start:false,
                             });
                         $.each(respuesta , function( index, value ) {
@@ -1020,7 +1079,7 @@
 
 
                     });
-                }
+
             });
 
         });
