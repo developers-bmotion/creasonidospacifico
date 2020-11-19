@@ -119,23 +119,21 @@ class DashboardAdminController extends Controller
 
             }else{
                 if($category > 0){
-
                     $listAspirant = Artist::with('users','personType','documentType','city.departaments')
                     ->whereHas('projects.category', function ($q) use($category){
                         $q->where('category_id', $category);
                     })->with('projects.category')->get();
+
+                }else{
+
+                    $listAspirant = Artist::with('users','personType','projects.category','documentType','city.departaments', 'projects');
                 }
 
-                // }else{
-
-                //     $listAspirant = Artist::with('users','personType','projects.category','documentType','city.departaments', 'projects')->get();
-                // }
-
             }
+            $listAspirant = Artist::with('users','personType','projects.category','documentType','city.departaments', 'projects')->get();
+
 
         }
-
-        $listAspirant = Artist::with('users','personType','projects.category','documentType','city.departaments', 'projects')->get();
 
 
 
