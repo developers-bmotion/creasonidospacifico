@@ -84,19 +84,24 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                                                         </a>
                                                     </div>
                                                     <div class="m-card-profile__details">
-                                                        <span
-                                                            class="m-card-profile__name">{{ $management->users->name }} {{ $management->users->last_name }}</span>
+                                                        <div class="row">
+                                                            <span
+                                                                class="m-card-profile__name col-md-12">{{ $management->users->name }} {{ $management->users->last_name }}</span>
 
-                                                        <a href="" class="m-card-profile__email m-link"
-                                                        style="margin-left: -15px">{{ $management->users->email  }}</a>
-                                                        <label style="font-weight:600;">Proyectos asignados: </label> {{ count($management->projects) }}
+                                                        <a href="" class="m-card-profile__email m-link col-md-12"
+                                                        style="">{{ $management->users->email  }}</a>
+                                                        <label class="col-md-12" style="font-weight:600;">Proyectos asignados: {{ count($management->projects) }}</label>
 
-                                                        <label style="font-weight:600;">Proyectos calificados: </label> {{ count($management->users->reviews->groupBy('project_id')) }}
+                                                        <label class="col-md-12" style="font-weight:600;">Proyectos calificados: {{ count($management->users->reviews->groupBy('project_id')) }}</label>
 
                                                         @foreach ($management->categories as $cat)
-                                                        <span class="m-badge m-badge-- m-badge--wide mt-2"
-                                                          style="font-size: 13px;">{{ $cat->category }}</span>
+                                                        <div class="col-md-12">
+
+                                                            <span class="m-badge m-badge-- m-badge--wide mt-2"
+                                                              style="font-size: 13px;">{{ $cat->category }}</span>
+                                                        </div>
                                                         @endforeach
+                                                    </div>
 {{--                                                        <div class="m-demo__preview m-demo__preview--badge pt-3">--}}
 {{--                                                            @forelse($managements->categories as $insteres)--}}
 {{--                                                                <span class="m-badge m-badge-- m-badge--wide"--}}
