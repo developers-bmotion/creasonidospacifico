@@ -130,6 +130,8 @@ class DashboardAdminController extends Controller
                 }
 
             }
+            $listAspirant = Artist::with('users','personType','projects.category','documentType','city.departaments', 'projects')->get();
+
 
         }
 

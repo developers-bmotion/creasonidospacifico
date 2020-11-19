@@ -155,6 +155,10 @@ class User extends Authenticatable
         return $this->belongsTo(City::class, 'id_city');
     }
 
+    public function reviews(){
+        return $this->hasMany(Review::class);
+    }
+
     public function artist_user($id){
         return User::select('*')
             ->where('id',$id)

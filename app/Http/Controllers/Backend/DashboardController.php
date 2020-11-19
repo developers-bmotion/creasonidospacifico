@@ -115,7 +115,7 @@ class DashboardController extends Controller
         /* CANTIDA DE PROYECTOS NO SUBSANADAS*/
         $projectsStateNoSubsanadas = Project::where('status', 5)->get()->count();
         /* CANTIDA DE PROYECTOS APROBADAS*/
-        $projectsStateAprobadas = Project::where('status', 3)->get()->count();
+        $projectsStateAprobadas = Project::where('status', 2)->get()->count();
 
         return view('backend.dashboard.dashboard', compact('aspiranteRegistroCompleto',
             'aspiranteRegistroSinCanción', 'aspirantessolocuenta',
