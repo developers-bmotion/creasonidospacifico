@@ -78,6 +78,7 @@
 @stop
 @section('content')
     <div class="m-content">
+
         <!--=====================================
             MOSTAR ALERTA PARA CREAR PROYECTO
         ======================================-->
@@ -142,33 +143,33 @@
                                 </li>
 
 
-                                    @if(count($artist->projects) !== 0 && $artist->projects)
-                                        <li class="nav-item m-tabs__item">
-                                            <a class="nav-link m-tabs__link" data-toggle="tab"
-                                               href="#m_user_profile_tab_2"
-                                               role="tab">
-                                                Propuesta Musical
-                                            </a>
-                                        </li>
-                                    @endif
-                                    @if(count($artist->beneficiary) !== 0 && $artist->projects)
-                                        <li class="nav-item m-tabs__item">
-                                            <a class="nav-link m-tabs__link" data-toggle="tab"
-                                               href="#m_user_profile_tab_4"
-                                               role="tab">Información del menor de edad
-                                            </a>
-                                        </li>
-                                    @endif
+                                @if(count($artist->projects) !== 0 && $artist->projects)
+                                    <li class="nav-item m-tabs__item">
+                                        <a class="nav-link m-tabs__link" data-toggle="tab"
+                                           href="#m_user_profile_tab_2"
+                                           role="tab">
+                                            Propuesta Musical
+                                        </a>
+                                    </li>
+                                @endif
+                                @if(count($artist->beneficiary) !== 0 && $artist->projects)
+                                    <li class="nav-item m-tabs__item">
+                                        <a class="nav-link m-tabs__link" data-toggle="tab"
+                                           href="#m_user_profile_tab_4"
+                                           role="tab">Información del menor de edad
+                                        </a>
+                                    </li>
+                                @endif
 
 
-                                    @if(count($artist->teams) !== 0 && $artist->projects)
-                                        <li class="nav-item m-tabs__item">
-                                            <a class="nav-link m-tabs__link" data-toggle="tab"
-                                               href="#m_user_profile_tab_3"
-                                               role="tab">Información del grupo musical
-                                            </a>
-                                        </li>
-                                    @endif
+                                @if(count($artist->teams) !== 0 && $artist->projects)
+                                    <li class="nav-item m-tabs__item">
+                                        <a class="nav-link m-tabs__link" data-toggle="tab"
+                                           href="#m_user_profile_tab_3"
+                                           role="tab">Información del grupo musical
+                                        </a>
+                                    </li>
+                                @endif
 
                             </ul>
                         </div>
@@ -180,6 +181,7 @@
                         <!--=====================================
                             ACTUALIZAR PERFIL DEL USUARIO
                             ======================================-->
+
                         <div class="tab-pane active" id="m_user_profile_tab_1">
                             <div class="biografia col-md-10 ml-5 mt-5">
                                 <div class="row">
@@ -307,6 +309,7 @@
                                         <div class="m-scrollable" data-scrollable="true" style="">
 
                                             @if($artist->expeditionPlace->departaments)
+
                                                 <p style="text-align: justify">{{ $artist->expeditionPlace->departaments->descripcion }}</p>
                                             @else
                                                 <p>No registrado</p>
@@ -340,6 +343,7 @@
                                     <div class="col-md-4">
                                         <label style="font-weight: bold">Ciudad de residencia:</label>
                                         <div class="m-scrollable" data-scrollable="true" style="">
+
                                             @if($artist->residencePlace)
                                             {{$artist->residencePlace->descripcion}}</p>
                                             @endif
@@ -354,6 +358,7 @@
                                             </div>
                                         </div>
                                     @endif
+
                                     <div class="col-md-4">
                                         <label style="font-weight: bold">Departamento de nacimiento:</label>
                                         <div class="m-scrollable" data-scrollable="true" style="">
@@ -379,6 +384,7 @@
                                             </p>
                                         </div>
                                     </div>
+
                                     <div class="col-md-4">
                                         <label style="font-weight: bold">Teléfono:</label>
                                         <div class="m-scrollable" data-scrollable="true" style="">
@@ -512,7 +518,7 @@
                                                    style="color:#716aca; cursor:pointer;"></i>
                                             @endif
                                         @endif
-                                        
+
                                         <button type="button" class="btn btn-primary cancel_pdf_asp"
                                                 style="display:none">Cancelar
                                         </button>
@@ -536,6 +542,7 @@
 
                             {{-- @dd($artist) --}}
                             @if($artist->gestor_id !== null)
+
                                 <hr>
                                 <div class="ml-4">
 
@@ -766,6 +773,7 @@
                                        CONFIGURACIONES
                                         ======================================-->
                         @if($artist->teams  && count($artist->teams) > 0)
+
                             @if(count($artist->teams) !== 0 || $artist->teams)
 
                                 <div class="tab-pane " id="m_user_profile_tab_3">
@@ -887,7 +895,9 @@
                                                                                                     class="m-scrollable"
                                                                                                     data-scrollable="true"
                                                                                                     style="">
+
                                                                                                     @if($team->expeditionPlace)
+
                                                                                                         <p>{{ $team->expeditionPlace->departaments->descripcion}}</p>
                                                                                                     @else
                                                                                                         <p>No
@@ -942,6 +952,7 @@
                                                                                                     style="">
 
                                                                                                     <p>{{ $team->residencePlace->departaments->descripcion}}</p>
+
                                                                                                 </div>
                                                                                             </div>
                                                                                             <div
@@ -956,6 +967,7 @@
                                                                                                     style="">
 
                                                                                                     <p>{{ $team->residencePlace->descripcion}}</p>
+
                                                                                                 </div>
                                                                                             </div>
                                                                                             <div
@@ -970,6 +982,7 @@
                                                                                                     style="">
 
                                                                                                     <p>{{ $team->city->departaments->descripcion}}</p>
+
                                                                                                 </div>
                                                                                             </div>
                                                                                             <div
@@ -983,6 +996,7 @@
                                                                                                     data-scrollable="true"
                                                                                                     style="">
                                                                                                     <p>{{ $team->city->descripcion}}</p>
+
                                                                                                 </div>
                                                                                             </div>
                                                                                             {{--                                                                                        <div--}}
@@ -1019,7 +1033,9 @@
                                                                                                     <p>{{ $team->phone1}}</p>
                                                                                                 </div>
                                                                                             </div>
+
                                                                                             @if($team->phone2)
+
                                                                                                 <div
                                                                                                     class="col-md-4 mt-2">
                                                                                                     <label
@@ -1033,6 +1049,7 @@
                                                                                                     </div>
                                                                                                 </div>
                                                                                             @endif
+
                                                                                             <div
                                                                                                 class="col-md-4 mt-2">
 
@@ -1048,6 +1065,7 @@
                                                                                                         <p style="text-align: justify">{{ $team->role}}</p>
                                                                                                     </div>
                                                                                                 @else
+
                                                                                                     <div
                                                                                                         class="m-scrollable"
                                                                                                         data-scrollable="true"
@@ -1057,6 +1075,7 @@
                                                                                                             registrado</p>
                                                                                                     </div>
                                                                                                 @endif
+
                                                                                             </div>
 
                                                                                             <div
@@ -1207,9 +1226,11 @@
 
 
                                                                                                 </div>
-                                                                                                @if($artist->projects[0]->status == 4 || $artist->projects[0]->status == 1)
-                                                                                                    <i class="flaticon-edit ml-3 update_pdf_team{{ $loop->iteration }}"
-                                                                                                       style="color:#716aca; cursor:pointer;"></i>
+                                                                                                @if($artist->projects && count($artist->projects) > 0)
+                                                                                                    @if( $artist->projects[0]->status == 4 || $artist->projects[0]->status == 1)
+                                                                                                        <i class="flaticon-edit ml-3 update_pdf_team{{ $loop->iteration }}"
+                                                                                                           style="color:#716aca; cursor:pointer;"></i>
+                                                                                                    @endif
                                                                                                 @endif
                                                                                                 <form
                                                                                                     id="form_update_img_team{{ $loop->iteration }}"
@@ -1333,6 +1354,7 @@
                                     </div>
                                 </div>
                             @endif
+
                         @endif
 
                         @if( $artist->beneficiary && count($artist->beneficiary) > 0)
