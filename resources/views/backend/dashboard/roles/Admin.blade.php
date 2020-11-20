@@ -502,7 +502,7 @@
                                    id="table_projects_management">
                                 <thead>
                                 <tr>
-                                    {{-- <th>#</th> --}}
+                                    <th></th>
                                     <th>{{ __('Nombres y Apellidos') }}</th>
                                     <th>{{ __('Actuara como') }}</th>
                                     <th>{{ __('Categoría') }}</th>
@@ -598,7 +598,7 @@
     <script>
         var listStatus = {
             revision: {name: 'En Revisión', color: '#9c9ca5'},
-            preaprobados: {name: 'Pre Aprobados', color: '#9C26EA'},
+            preaprobados: {name: 'Calificado', color: '#9C26EA'},
             aprobados: {name: 'Aprobados', color: '#34bfa3'},
             pendientes: {name: 'Pendientes', color: '#ffb822'},
             rechazados: {name: 'No subsanado', color: '#f4516c'},
@@ -630,15 +630,16 @@
             }
             var cont = 1;
             var cat;
+                console.log(tipoProyecto,'el tipo');
             table = $('#table_projects_management').DataTable({
+
                 "processing": true,
                 "serverSide": true,
                 "scrollX": true,
                 "pageLength": 10,
                 "data": null,
                 "pagingType": "simple_numbers",
-                "order": [[0, "asc"]],
-
+                "order": [[0, "desc"]],
                 "ajax": {
                     url: "{{route('aspirants.all')}}",
                     data: {
@@ -649,12 +650,13 @@
                 },
                 "columns": [
 
-                    // {
-                    //     render: function(h) {
-                    //         return cont++;
-                    //     },
+                    {
 
-                    // },
+                     data:'users.id',
+                     visible:false,
+                     searchable:false
+
+                    },
 
                     {
                         data: 'users.name',
@@ -768,7 +770,7 @@
                                     info = '<span class="m-badge m-badge--metal m-badge--wide m-badge--rounded">Revisión</span>';
                                     break;
                                 case 2:
-                                    info = '<span class="m-badge m-badge--brand m-badge--wide" style="background-color:#9C26EA !important;font-size:9px" >{{ __('pre_aprovado') }}</span>';
+                                    info = '<span class="m-badge m-badge--brand m-badge--wide" style="background-color:#9C26EA !important;font-size:9px" >{{ __('Calificado') }}</span>';
                                     break;
                                 case 3:
                                     info = '<span class="m-badge  m-badge--success m-badge--wide">{{ __('aprovado2') }}</span>';
@@ -848,6 +850,7 @@
         // filtro por tipo
         $(".selectType").on('click', '.changeType', function () {
             let tipo = parseInt($(this).attr("data-type"));
+            console.log(tipo,'otro tipo');
             if (!(tipo > 0)) {
                 tipo = null;
             }
@@ -1070,7 +1073,7 @@
                 "pageLength": 10,
                 "data": null,
                 "pagingType": "simple_numbers",
-                "order": [[0, "asc"]],
+                "order": [[6, "desc"]],
 
                 "ajax": {
                     url: "{{route('list.ratings')}}",

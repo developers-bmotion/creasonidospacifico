@@ -22,12 +22,8 @@ use App\Role;
 use App\User;
 
 Route::get('/datos', function () {
-    $listRating = Artist::with('users','personType','projects.category','documentType','city.departaments','users.reviews','projects.reviews_curador')
-    ->whereHas('projects', function($q){
-        $q->where('status',2);
-    })->get();
-
-    return $listRating;
+    $listAspirant = Artist::with('users','personType','projects.category','documentType','city.departaments', 'projects')->get();
+    return $listAspirant;
 
 
 //     $listAspirant = Artist::with('users','personType','projects.category','documentType','city.departaments')->get();
