@@ -368,150 +368,208 @@
                     </div>
                 </div>
             </div>
-
+            {{-- inicio --}}
             <div class="m-portlet__body">
-                {{-- filtros para datatable --}}
-                <div class="row">
-                    <select class="form-control m-input m-input--square col-md-3 mb-3  tipoPersona" name="tipoPersona" id="tipoPersona">
-                        <option value="0">Filtrar por tipo persona</option>
-                        @foreach ($tipoPersona as $tipoPer)
-                        <option value="{{$tipoPer->id  }}">{{ $tipoPer->name }}</option>
-                        @endforeach
+                <ul class="nav nav-tabs  m-tabs-line m-tabs-line--2x m-tabs-line--success" role="tablist">
+                    <li class="nav-item m-tabs__item">
+                        <a class="nav-link m-tabs__link active" data-toggle="tab" href="#m_tabs_6_1" role="tab">Todas las propuestas</a>
+                    </li>
 
-                    </select>
-                    {{-- @dd($cat) --}}
-                    <select class="form-control m-input m-input--square col-md-3 mb-3" id="category_filter"
+                    <li class="nav-item m-tabs__item">
+                        <a class="nav-link m-tabs__link" id="tab_rating" data-toggle="tab" href="#m_tabs_6_3" role="tab">Propuestas calificadas</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    {{-- iniciotab1 --}}
+                    <div class="tab-pane active" id="m_tabs_6_1" role="tabpanel">
+                        <div class="m-portlet__body">
+                            {{-- filtros para datatable --}}
+                            <div class="row">
+                                <select class="form-control m-input m-input--square col-md-3 mb-3  tipoPersona" name="tipoPersona" id="tipoPersona">
+                                    <option value="0">Filtrar por tipo persona</option>
+                                    @foreach ($tipoPersona as $tipoPer)
+                                    <option value="{{$tipoPer->id  }}">{{ $tipoPer->name }}</option>
+                                    @endforeach
 
-                    >
-                        <option value="0">Filtrar por modalidad</option>
-                        @foreach ($cat as $category)
-                        <option value="{{$category->id}}" >{{$category->category}}</option>
-                        @endforeach
+                                </select>
+                                {{-- @dd($cat) --}}
+                                <select class="form-control m-input m-input--square col-md-3 mb-3" id="category_filter"
 
-                    </select>
+                                >
+                                    <option value="0">Filtrar por modalidad</option>
+                                    @foreach ($cat as $category)
+                                    <option value="{{$category->id}}" >{{$category->category}}</option>
+                                    @endforeach
 
-                    {{-- filtro estado --}}
-                    <div class="m-portlet__head-tools col-md-6">
-                        <ul class="m-portlet__nav row mr-1 state_mobile">
+                                </select>
 
-                            <li class="m-portlet__nav-item row mr-2" style="margin-top: 0.6rem;">
-                                <h5 class="mr-2">Estado: </h5>
-                                <span id="current_status"
-                                      class="m-badge m-badge--metal m-badge--wide m-badge--rounded" style="height:23px">{{ __('revision') }}</span>
-                            </li>
-                            <div class="m-dropdown m-dropdown--inline  m-dropdown--arrow m-dropdown--align-right"
-                                 m-dropdown-toggle="hover">
-                                <a href="#" class="m-dropdown__toggle btn btn-warning dropdown-toggle">
-                                    Filtrar
-                                </a>
-                                <div class="m-dropdown__wrapper">
-                                    <span class="m-dropdown__arrow m-dropdown__arrow--right"></span>
-                                    <div class="m-dropdown__inner">
-                                        <div class="m-dropdown__body">
-                                            <div class="m-dropdown__content selectType">
-                                                <ul class="m-nav">
-                                                    <li class="m-nav__section m-nav__section--first">
-                                                        <span class="m-nav__section-text">FILTRAR POR ESTADO</span>
-                                                    </li>
-                                                    <li class="m-nav__item text-center">
-                                                    <span style="background-color: #9c9ca5"
-                                                          class="changeType w-100 btn btn-metal m-btn m-btn--pill m-btn--wide btn-sm"
-                                                          data-type="{{\App\Project::REVISION}}">{{ __('revision') }}</span>
-                                                    </li>
-                                                    @if(\App\User::navigation() !== "Subsanador")
-                                                        <li class="m-nav__item text-center">
-                                                        <span
-                                                            style="background-color:#9C26EA"
-                                                            class="changeType w-100 btn btn-brand m-btn m-btn--pill m-btn--wide btn-sm"
-                                                            data-type="{{\App\Project::QUALIFIED}}">Calificado</span>
+                                {{-- filtro estado --}}
+                                <div class="m-portlet__head-tools col-md-6">
+                                    <ul class="m-portlet__nav row mr-1 state_mobile">
 
-                                                        </li>
-                                                    @endif
-                                                    <li class="m-nav__item text-center">
-                                                    <span
-                                                        class="changeType w-100 btn btn-success m-btn m-btn--pill m-btn--wide btn-sm"
-                                                        data-type="{{\App\Project::APPROVAL}}">{{ __('Aprobado') }}</span>
-                                                    </li>
-                                                    <li class="m-nav__item text-center">
-                                                    <span style="color:white;"
-                                                          class="changeType w-100 btn btn-warning m-btn m-btn--pill m-btn--wide btn-sm"
-                                                          data-type="{{\App\Project::PENDING}}">{{ __('Pendiente') }}</span>
-                                                    </li>
-                                                    <li class="m-nav__item text-center">
-                                                    <span
-                                                        class="changeType w-100 btn btn-danger m-btn m-btn--pill m-btn--wide btn-sm"
-                                                        data-type="{{\App\Project::REJECTED}}">{{ __('No subsanado') }}</span>
-                                                    </li>
-                                                    <li class="m-nav__item text-center">
-                                                    <span style="color:white"
-                                                          class="changeType w-100 btn btn-success m-btn m-btn--pill m-btn--wide btn-sm"
-                                                          data-type="{{\App\Project::ACEPTED}}">{{ __('Aceptado') }}</span>
-                                                    </li>
-                                                    <li class="m-nav__item text-center">
-                                                    <span
-                                                        class="changeType w-100 btn btn-info m-btn m-btn--pill m-btn--wide btn-sm"
-                                                        data-type="{{\App\Project::REVISON_UPDATE}}">{{ __('Nueva revisión') }}</span>
-                                                    </li>
-{{--                                                    <li class="m-nav__item text-center">--}}
-{{--                                                    <span--}}
-{{--                                                        class="changeType w-100 btn btn-info m-btn m-btn--pill m-btn--wide btn-sm"--}}
-{{--                                                        data-type="{{\App\Project::NOT_REMEDIED}}">{{ __('No subsanado') }}</span>--}}
-{{--                                                    </li>--}}
-                                                    <li class="m-nav__separator m-nav__separator--fit">
-                                                    </li>
-                                                    <li class="m-nav__section m-nav__section--first">
-                                                        <span class="m-nav__section-text">FILTRAR POR REGISTRO</span>
-                                                    </li>
-                                                    <li class="m-nav__item text-center">
-                                                    <span style="color:white"
-                                                          class="changeType w-100 btn btn-warning m-btn m-btn--pill m-btn--wide btn-sm"
-                                                          data-type="{{\App\Project::PENDING_REGISTER}}">{{ __('Registro Pendiente') }}</span>
-                                                    </li>
-                                                    <li class="m-nav__item text-center">
-                                                    <span style="color:white"
-                                                          class="changeType w-100 btn btn-danger m-btn m-btn--pill m-btn--wide btn-sm"
-                                                          data-type="{{\App\Project::NOT_PROJECT_REGISTER}}">{{ __('Sin Proyecto Registrado') }}</span>
-                                                    </li>
-                                                    <li class="m-nav__item">
-                                                        <span
-                                                            class="changeType w-100 btn btn-metal m-btn m-btn--pill m-btn--wide btn-block"
-                                                            data-type="0">{{ __('todos') }}</span>
-                                                    </li>
+                                        <li class="m-portlet__nav-item row mr-2" style="margin-top: 0.6rem;">
+                                            <h5 class="mr-2">Estado: </h5>
+                                            <span id="current_status"
+                                                  class="m-badge m-badge--metal m-badge--wide m-badge--rounded" style="height:23px">{{ __('revision') }}</span>
+                                        </li>
+                                        <div class="m-dropdown m-dropdown--inline  m-dropdown--arrow m-dropdown--align-right"
+                                             m-dropdown-toggle="hover">
+                                            <a href="#" class="m-dropdown__toggle btn btn-warning dropdown-toggle">
+                                                Filtrar
+                                            </a>
+                                            <div class="m-dropdown__wrapper">
+                                                <span class="m-dropdown__arrow m-dropdown__arrow--right"></span>
+                                                <div class="m-dropdown__inner">
+                                                    <div class="m-dropdown__body">
+                                                        <div class="m-dropdown__content selectType">
+                                                            <ul class="m-nav">
+                                                                <li class="m-nav__section m-nav__section--first">
+                                                                    <span class="m-nav__section-text">FILTRAR POR ESTADO</span>
+                                                                </li>
+                                                                <li class="m-nav__item text-center">
+                                                                <span style="background-color: #9c9ca5"
+                                                                      class="changeType w-100 btn btn-metal m-btn m-btn--pill m-btn--wide btn-sm"
+                                                                      data-type="{{\App\Project::REVISION}}">{{ __('revision') }}</span>
+                                                                </li>
+                                                                @if(\App\User::navigation() !== "Subsanador")
+                                                                    <li class="m-nav__item text-center">
+                                                                    <span
+                                                                        style="background-color:#9C26EA"
+                                                                        class="changeType w-100 btn btn-brand m-btn m-btn--pill m-btn--wide btn-sm"
+                                                                        data-type="{{\App\Project::QUALIFIED}}">Calificado</span>
 
-                                                </ul>
+                                                                    </li>
+                                                                @endif
+                                                                <li class="m-nav__item text-center">
+                                                                <span
+                                                                    class="changeType w-100 btn btn-success m-btn m-btn--pill m-btn--wide btn-sm"
+                                                                    data-type="{{\App\Project::APPROVAL}}">{{ __('Aprobado') }}</span>
+                                                                </li>
+                                                                <li class="m-nav__item text-center">
+                                                                <span style="color:white;"
+                                                                      class="changeType w-100 btn btn-warning m-btn m-btn--pill m-btn--wide btn-sm"
+                                                                      data-type="{{\App\Project::PENDING}}">{{ __('Pendiente') }}</span>
+                                                                </li>
+                                                                <li class="m-nav__item text-center">
+                                                                <span
+                                                                    class="changeType w-100 btn btn-danger m-btn m-btn--pill m-btn--wide btn-sm"
+                                                                    data-type="{{\App\Project::REJECTED}}">{{ __('No subsanado') }}</span>
+                                                                </li>
+                                                                <li class="m-nav__item text-center">
+                                                                <span style="color:white"
+                                                                      class="changeType w-100 btn btn-success m-btn m-btn--pill m-btn--wide btn-sm"
+                                                                      data-type="{{\App\Project::ACEPTED}}">{{ __('Aceptado') }}</span>
+                                                                </li>
+                                                                <li class="m-nav__item text-center">
+                                                                <span
+                                                                    class="changeType w-100 btn btn-info m-btn m-btn--pill m-btn--wide btn-sm"
+                                                                    data-type="{{\App\Project::REVISON_UPDATE}}">{{ __('Nueva revisión') }}</span>
+                                                                </li>
+
+                                                                <li class="m-nav__separator m-nav__separator--fit">
+                                                                </li>
+                                                                <li class="m-nav__section m-nav__section--first">
+                                                                    <span class="m-nav__section-text">FILTRAR POR REGISTRO</span>
+                                                                </li>
+                                                                <li class="m-nav__item text-center">
+                                                                <span style="color:white"
+                                                                      class="changeType w-100 btn btn-warning m-btn m-btn--pill m-btn--wide btn-sm"
+                                                                      data-type="{{\App\Project::PENDING_REGISTER}}">{{ __('Registro Pendiente') }}</span>
+                                                                </li>
+                                                                <li class="m-nav__item text-center">
+                                                                <span style="color:white"
+                                                                      class="changeType w-100 btn btn-danger m-btn m-btn--pill m-btn--wide btn-sm"
+                                                                      data-type="{{\App\Project::NOT_PROJECT_REGISTER}}">{{ __('Sin Proyecto Registrado') }}</span>
+                                                                </li>
+                                                                <li class="m-nav__item">
+                                                                    <span
+                                                                        class="changeType w-100 btn btn-metal m-btn m-btn--pill m-btn--wide btn-block"
+                                                                        data-type="0">{{ __('todos') }}</span>
+                                                                </li>
+
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </ul>
                                 </div>
+
+
                             </div>
-                        </ul>
+                            <table class="table table-striped- table-bordered table-hover table-checkable "
+                                   id="table_projects_management">
+                                <thead>
+                                <tr>
+                                    {{-- <th>#</th> --}}
+                                    <th>{{ __('Nombres y Apellidos') }}</th>
+                                    <th>{{ __('Actuara como') }}</th>
+                                    <th>{{ __('Categoría') }}</th>
+                                    <th>{{ __('Email') }}</th>
+                                    <th>{{ __('Departamento de nacimiento') }}</th>
+                                    <th>{{ __('Ciudad de nacimiento') }}</th>
+                                    <th>{{ __('Estado') }}</th>
+                                    <th>{{ __('Acciones') }}</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                    {{-- fintab1 --}}
+                    <div class="tab-pane" id="m_tabs_6_3" role="tabpanel">
+                        <div class="m-portlet__body">
+                            {{-- filtros para datatable --}}
+                            <div class="row">
+                                <select class="form-control m-input m-input--square col-md-3 mb-3  tipoPersona" name="tipoPersona" id="tipoPersona">
+                                    <option value="0">Filtrar por tipo persona</option>
+                                    @foreach ($tipoPersona as $tipoPer)
+                                    <option value="{{$tipoPer->id  }}">{{ $tipoPer->name }}</option>
+                                    @endforeach
+
+                                </select>
+                                {{-- @dd($cat) --}}
+                                <select class="form-control m-input m-input--square col-md-3 mb-3" id="category_filter"
+
+                                >
+                                    <option value="0">Filtrar por modalidad</option>
+                                    @foreach ($cat as $category)
+                                    <option value="{{$category->id}}" >{{$category->category}}</option>
+                                    @endforeach
+
+                                </select>
+
+
+
+                            </div>
+                            <table class="table table-striped- table-bordered table-hover table-checkable "
+                                   id="table_qualified">
+                                <thead>
+                                <tr>
+                                    {{-- <th>#</th> --}}
+                                    <th>{{ __('Nombres y Apellidos') }}</th>
+                                    <th>{{ __('Actuara como') }}</th>
+                                    <th>{{ __('Categoría') }}</th>
+                                    <th>{{ __('Departamento de nacimiento') }}</th>
+                                    <th>{{ __('Ciudad de nacimiento') }}</th>
+                                    <th>{{ __('Calificación') }}</th>
+                                    <th>{{ __('Acciones') }}</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+
                     </div>
 
-
                 </div>
-                <table class="table table-striped- table-bordered table-hover table-checkable "
-                       id="table_projects_management">
-                    <thead>
-                    <tr>
-                        {{-- <th>#</th> --}}
-                        <th>{{ __('Nombres y Apellidos') }}</th>
-                        <th>{{ __('Actuara como') }}</th>
-                        <th>{{ __('Categoría') }}</th>
-                        <th>{{ __('Email') }}</th>
-                        <th>{{ __('Departamento de nacimiento') }}</th>
-                        <th>{{ __('Ciudad de nacimiento') }}</th>
-                        <th>{{ __('Estado') }}</th>
-                        <th>{{ __('Acciones') }}</th>
-                    </tr>
-                    </thead>
-                </table>
             </div>
-        </div>
-    </div>
-    {{-- <div id="app">
 
-        <aspirants-admin></aspirants-admin>
-    </div> --}}
+            {{-- fin tab --}}
+
+
 @stop
 
 @push('js')
@@ -984,6 +1042,197 @@
 
         });
     </script>
+
+    {{-- tabla calificaciones --}}
+<script>
+
+        // var estado = getStorage('storeTipoProyecto');
+
+
+        // var storeTipoProyecto = "storeTipoProyecto";
+        // var tipoProyecto = getStorage(storeTipoProyecto);
+        var tipoPerQual = 0;
+        var categoryQual=0;
+
+
+        var tableQuailified = null;
+
+        const loadTableQual = function () {
+            if (tableQuailified !== null) {
+                tableQuailified.destroy();
+            }
+            var cont = 1;
+            var cat;
+            tableQuailified = $('#table_qualified').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "scrollX": true,
+                "pageLength": 10,
+                "data": null,
+                "pagingType": "simple_numbers",
+                "order": [[0, "asc"]],
+
+                "ajax": {
+                    url: "{{route('list.ratings')}}",
+                    data: {
+                        tipoPerQual:tipoPerQual,
+                        categoryQual:categoryQual
+                    }
+                },
+                "columns": [
+
+                    {
+                        data: 'users.name',
+                        defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>',
+
+                        render: function (data, type, JsonResultRow, meta) {
+                            // console.log(JsonResultRow,'data****');
+                            if (JsonResultRow.users.last_name === null) {
+                                return '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
+                            } else {
+
+                                return '<span class="label label-danger text-center">' + JsonResultRow.users.name + '</span>  <span class="label label-danger text-center">' + JsonResultRow.users.last_name + '</span>';
+                            }
+                            // return '<img src="' + JsonResultRow + '" width="50px"  style="border-radius: 100%;margin-right: auto;margin-left: auto;display: block; width:50px; height:50px"/>';
+                        }
+                    },
+                    {
+                        // data: 'person_type.name',
+                        defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>',
+
+                        render:function(data,type,JsonResultRow, meta){
+                            if (JsonResultRow.person_type){
+                                return JsonResultRow.person_type.name;
+                            }
+
+                        }
+                    },
+                    {
+
+
+                        render: function (data, type, JsonResultRow, meta) {
+                            var category = "";
+                            if (JsonResultRow.projects) {
+
+                                JsonResultRow.projects.map(item => {
+                                    category = item;
+                                });
+                            }
+
+                           cat = category != "" ? `${category.category.category}` : '<span class="label label-danger text-center ml-4" style="color:#ff0000 !important">Sin categoria</span>'
+                           return cat;
+                        },
+
+
+
+
+                    },
+
+                    {
+                        data: 'city.departaments.descripcion',
+                        defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
+                    },
+                    {
+                        data: 'city.descripcion',
+                        defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
+                    },
+                    {
+                        render: function (data, type, JsonResultRow, meta) {
+
+                        //   console.log(JsonResultRow,'data rating')
+
+                           JsonResultRow.projects[0].reviews_curador;
+
+                          var cal = "";
+                            if (JsonResultRow.projects[0].reviews_curador) {
+
+                                JsonResultRow.projects[0].reviews_curador.map(value => {
+                                    cal = value;
+                                    console.log(cal,'callificacion')
+                                });
+                            }
+
+                            var sum= cal.lyric+cal.melody_rhythm+cal.arrangements+cal.originality;
+                            return cal != "" ? '<div class="text-center">'+(sum)+'</div>': ' ';
+                        }
+
+                    },
+
+                    {
+                        render: function (data, type, JsonResultRow, meta) {
+                            var items = "";
+                            if (JsonResultRow.projects) {
+
+                                JsonResultRow.projects.map(item => {
+                                    items = item;
+                                });
+                            }
+
+                            return items != "" ? `<div class="text-center"><a href="/dashboard/project/${items.slug}" class="btn m-btn--pill btn-secondary"><i class="fa fa-eye"></i></a></div>` : '<span class="label label-danger text-center ml-4" style="color:red !important">Sin propuesta</span>'
+                        }
+                    },
+                ],
+                "language": {
+                    "sProcessing": "{{__('procesando')}}",
+                    "sLengthMenu": "{{__('mostrar')}} _MENU_ {{__('registros')}}",
+                    "sZeroRecords": "No se encontraron resultados",
+                    "sEmptyTable": "{{__('nigun_dato_tabla')}}",
+                    "sInfo": "{{__('mostrando_registros') }} _START_ {{__('from')}} _END_ {{__('total_de')}} _TOTAL_ {{__('registros')}}",
+                    "sInfoEmpty": "{{ __('mostrando_registros_del_cero') }}",
+                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "sInfoPostFix": "",
+                    "sSearch": "{{__('buscar')}}:",
+                    "sUrl": "",
+                    "sInfoThousands": ",",
+                    "sLoadingRecords": "{{__('cargando')}}",
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sLast": "Último",
+                        "sNext": ">",
+                        "sPrevious": "<"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    }
+                },
+
+
+
+
+
+            });
+
+        };
+        // filtro por categoria
+        $('#category_filter').on('change', function(){
+            categoryQual = $(this).val();
+            console.log(categoryQual,'catt');
+            loadTableQual();
+            // console.log(this.value,'value---');
+            // console.log(this.value,'value---');
+            //     table.search(this.value).draw();
+        });
+        // filtro por tipo
+
+        $(".tipoPersona").on('change', function () {
+
+            tipoPerQual = $(this).val();
+            console.log(tipoPerQual);
+            loadTableQual();
+        });
+
+        $("#tab_rating").on('click', function () {
+
+            loadTableQual();
+        });
+
+
+
+        loadTableQual();
+
+
+</script>
 <style>
     .m-nav .m-nav__item {
         display: block;

@@ -307,7 +307,7 @@
                                             class="m-badge m-badge--metal m-badge--wide m-badge--rounded">{{ __('revision') }}</span>
                                     @elseif($project->status == 2)
                                         <span class="m-badge m-badge--brand m-badge--wide m-badge--rounded"
-                                              style="background-color: #9816f4 !important;">{{ __('pre_aprobado') }}</span>
+                                              style="background-color: #9816f4 !important;">Calificado</span>
                                         {{-- @elseif($project->status == 3)
                                             <span
                                                 class="m-badge m-badge--success m-badge--wide m-badge--rounded">{{ __('aprobado') }}</span> --}}
@@ -472,7 +472,7 @@
                                             @if($project->status == 2)
                                                 <span
                                                     class="m-badge m-badge--brand m-badge--wide m-badge--rounded"
-                                                    style="background-color: #9816f4 !important;">Pre aprobado</span>
+                                                    style="background-color: #9816f4 !important;">Calificado</span>
                                             @endif
                                             @if($project->status == 3)
                                                 <span

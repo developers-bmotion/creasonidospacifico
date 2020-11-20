@@ -139,7 +139,19 @@ class DashboardAdminController extends Controller
 
         return datatables()->of($listAspirant)->toJson();
 
+
     }
+
+
+    public function ratings(){
+        $listRating = Artist::with('users','personType','projects.category','documentType','city.departaments','projects.reviews_curador')
+        ->whereHas('projects', function($q){
+            $q->where('status',2);
+        })->get();
+        return datatables()->of($listRating)->toJson();
+    }
+
+
     public function showProyect (Request $request){
 
         $data = Project::select(array(

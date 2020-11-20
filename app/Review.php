@@ -36,6 +36,7 @@ class Review extends Model
         'project_id','user_id','lyric','comment','end_time', 'melody_rhythm',
          'arrangements', 'originality', 'comment'
     ];
+
     public function projects(){
         return $this->hasMany(Project::class, 'id','project_id');
     }

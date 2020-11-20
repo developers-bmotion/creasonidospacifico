@@ -187,7 +187,7 @@ class ProjectsAdminController extends Controller
         ]);
         $project = Project::where('id', $id)->with('artists.users')->first();
 
-        $artistSendEmail = \Mail::to($project->artists[0]->users->email)->send(new ArtistProjectRejected($project, $project->artists[0]->users->name));
+        // $artistSendEmail = \Mail::to($project->artists[0]->users->email)->send(new ArtistProjectRejected($project, $project->artists[0]->users->name));
 
         alert()->success(__("proyecto_rechazado"), __('Ok'))->autoClose(3000);
 
