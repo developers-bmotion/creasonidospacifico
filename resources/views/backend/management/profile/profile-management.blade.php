@@ -1073,7 +1073,7 @@
                         $('.value_lyric').append(
                             "<h6>" + (index + 1) + ". Calificación:</h6>" +
                             "<br>" +
-                            "<table class='table table-striped review_table'>" +
+                            "<table class='my-table table-striped review_table'>" +
                             " <thead>" +
                             "<tr>" +
                             "<th scope='col'>Aspectos técnicos musicales</th>" +
