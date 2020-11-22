@@ -32,4 +32,8 @@ class ProjectsManageController extends Controller
         \Artisan::call('projects:close');
         return $review;
     }
+    public function history_review($id){
+        $reviews = Review::where('project_id', $id)->with('projects.category')->get();
+        return response()->json($reviews);
+    }
 }

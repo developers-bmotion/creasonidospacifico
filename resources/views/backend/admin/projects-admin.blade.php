@@ -240,7 +240,7 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                        id="table_projects_management">
                     <thead>
                     <tr>
-                        {{-- <th>#</th> --}}
+                        <th></th>
                         <th>{{ __('Nombres y Apellidos') }}</th>
                         <th>{{ __('Actuara como') }}</th>
                         <th>{{ __('Categoría') }}</th>
@@ -487,22 +487,31 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
             var cont = 0;
             var cat;
             table = $('#table_projects_management').DataTable({
+
                 "processing": true,
                 "serverSide": true,
                 "scrollX": true,
                 "data": null,
                 "pagingType": "simple_numbers",
-                "order": [[0, "asc"]],
+                "order": [[0, "desc"]],
 
                 "ajax": {
                     url: "{{route('aspirants.all')}}",
                     data: {
+
                         tipoProyecto: tipoProyecto,
                         tipoPer: tipoPer,
                         category: category
                     }
                 },
                 "columns": [
+                    {
+
+                    data:'users.id',
+                    visible:false,
+                    searchable:false
+
+                    },
 
                     {
                         data: 'users.name',
@@ -685,6 +694,7 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
         // filtro por tipo
         $(".selectType").on('click', '.changeType', function () {
             let tipo = parseInt($(this).attr("data-type"));
+
             if (!(tipo > 0)) {
                 tipo = null;
             }
@@ -715,7 +725,7 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
             if (status == null) {
                 status = 11
             }
-            console.log(status, 'prueba')
+            // console.log(status, 'prueba')
             console.log(typeof (status));
             switch (status) {
                 case 1:

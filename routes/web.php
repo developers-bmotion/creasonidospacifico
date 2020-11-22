@@ -23,7 +23,6 @@ use App\User;
 
 Route::get('/datos', function () {
     $listAspirant = Artist::with('users','personType','projects.category','documentType','city.departaments', 'projects')->get();
-
     return $listAspirant;
 
 
@@ -249,6 +248,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'dashboard', 'middleware' =>
 
         Route::post("/projects-news", "Admin\DashboardAdminController@showProyect")->name("admin.projects_news");
         Route::get("/aspirants-all", "Admin\DashboardAdminController@AspirantsAll")->name("aspirants.all");
+        Route::get("/list-ratings", "Admin\DashboardAdminController@ratings")->name("list.ratings");
         Route::post("/top-countries", "Admin\DashboardAdminController@showTopCountry")->name("admin.top_country");
 
         Route::get('/aspirants-cities', 'DashboardController@getCitiesAspirants')->name('get.aspirants.cities');

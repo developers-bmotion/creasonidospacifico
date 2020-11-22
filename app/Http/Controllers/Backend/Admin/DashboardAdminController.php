@@ -17,42 +17,142 @@ class DashboardAdminController extends Controller
       $idstatus=$request->input("tipoProyecto");
       $tipoPer=$request->input("tipoPer");
       $category=$request->input("category");
+      $listAspirant="";
         // dd($request->input("tipoPer"));
         // if($tipoPer == 0){
         //     echo 'hola***';
         // }else{
         //     echo 'no hola';
-        // }
-        if ($idstatus){
+        if($idstatus == null){
+
+            if($tipoPer > 0){
+
+                if($category > 0){
+
+                    $listAspirant = Artist::with('users','documentType','city.departaments')
+                    ->whereHas('personType', function ($q) use($tipoPer){
+                        $q->where('id', $tipoPer);
+                    })->whereHas('projects.category', function ($q) use($category){
+                        $q->where('category_id', $category);
+                    })->with('personType','projects.category')->get();
+
+                }else{
+                    // $listAspirant = Artist::with('users','documentType','city.departaments')
+                    //         ->whereHas('personType', function ($q) use($tipoPer){
+                        //             $q->where('id', $tipoPer);
+                    //         })->with('projects.category','personType')->get();
+
+                   $listAspirant = Artist::with('users','documentType','city.departaments','projects.category')
+                    ->whereHas('personType', function ($q) use($tipoPer){
+                        $q->where('id', $tipoPer);
+                    })->with('personType')->get();
+                    // return datatables()->of($listAspirant)->toJson();
 
 
-             if($idstatus==9){
+                }
+
+            }else{
+
+                if($category > 0){
+                    // dd('hola');
+                    $listAspirant = Artist::with('users','personType','documentType','city.departaments')
+                    ->whereHas('projects.category', function ($q) use($category){
+                        $q->where('category_id', $category);
+                    })->with('projects.category')->get();
+                    return datatables()->of($listAspirant)->toJson();
+
+                }
+                // }else{
+
+
+                //     // $listAspirant = Artist::with('users','personType','projects.category','documentType','city.departaments', 'projects');
+                // }
+                $listAspirant = Artist::with('users','personType','projects.category','documentType','city.departaments', 'projects')->get();
+
+            }
+            // $listAspirant = Artist::with('users','personType','projects.category','documentType','city.departaments', 'projects')->get();
+
+            // dd($listAspirant);
+            // dd($listAspirant);
+        }else if($idstatus){
+
+             // $listAspirant = Artist::with('users','personType','projects.category','documentType','city.departaments', 'projects')->get();
+
+            // registro pendiente
+
+            if($idstatus==9){
 
 
                 if($tipoPer > 0){
+                    if($category > 0){
+                        $listAspirant = Artist::with('users','documentType','city.departaments')
+                        ->whereHas('personType', function ($q) use($tipoPer){
+                            $q->where('id', $tipoPer);
+                        })->whereHas('projects', function ($q) use($idstatus){
+                            $q->where('status', $idstatus);
+                        })->whereHas('projects.category', function ($q) use($category){
+                            $q->where('category_id', $category);
+                        })->with('projects.category','personType')->get();
+                    }else{
                     $listAspirant = Artist::with('users','documentType','city.departaments')
                     ->whereHas('personType', function ($q) use($tipoPer){
                         $q->where('id', $tipoPer);
                     })->with('personType')->whereNull('nickname')->whereDoesntHave('projects')->get();
+                }
 
                 }else{
-                    $listAspirant = Artist::with('users','personType','documentType','city.departaments')->whereNull('nickname')->whereDoesntHave('projects')->get();
+                    if($category > 0){
+                        $listAspirant = Artist::with('users','personType','documentType','city.departaments')->whereHas('projects', function ($q) use($idstatus){
+                            $q->where('status', $idstatus);
+                        })->whereHas('projects.category', function ($q) use($category){
+                            $q->where('category_id', $category);
+                        })->with('projects.category')->get();
 
+                    }else{
+
+                            $listAspirant = Artist::with('users','personType','documentType','city.departaments')->whereNull('nickname')->whereDoesntHave('projects')->get();
+                    }
                 }
+                // sin proyecto registrado
              }else if($idstatus==10){
 
                 if($tipoPer > 0){
-                    $listAspirant = Artist::with('users','documentType','city.departaments')
-                    ->whereHas('personType', function ($q) use($tipoPer){
-                        $q->where('id', $tipoPer);
-                    })->with('personType')->whereNotNull('document_type')->doesnthave('projects.category')->get();
+
+                    if($category > 0){
+                        $listAspirant = Artist::with('users','documentType','city.departaments')
+                        ->whereHas('personType', function ($q) use($tipoPer){
+                            $q->where('id', $tipoPer);
+                        })->whereHas('projects', function ($q) use($idstatus){
+                            $q->where('status', $idstatus);
+                        })->whereHas('projects.category', function ($q) use($category){
+                            $q->where('category_id', $category);
+                        })->with('projects.category','personType')->get();
+                    }else{
+
+                        $listAspirant = Artist::with('users','documentType','city.departaments')
+                        ->whereHas('personType', function ($q) use($tipoPer){
+                            $q->where('id', $tipoPer);
+                        })->with('personType')->whereNotNull('document_type')->doesnthave('projects.category')->get();
+                    }
 
                 }else{
 
-                    $listAspirant = Artist::with('users','personType','documentType','city.departaments')->whereNotNull('document_type')->doesnthave('projects.category')->get();
+                    if($category > 0){
+                        $listAspirant = Artist::with('users','personType','documentType','city.departaments')->whereHas('projects', function ($q) use($idstatus){
+                            $q->where('status', $idstatus);
+                        })->whereHas('projects.category', function ($q) use($category){
+                            $q->where('category_id', $category);
+                        })->with('projects.category')->get();
+
+                    }else{
+                      $listAspirant = Artist::with('users','personType','documentType','city.departaments')->whereNotNull('document_type')->doesnthave('projects.category')->get();
+
+                    }
                 }
 
+
             }else{
+
 
                 if($tipoPer > 0){
 
@@ -67,13 +167,22 @@ class DashboardAdminController extends Controller
                         })->with('projects.category','personType')->get();
 
                     }else{
-                        $listAspirant = Artist::with('users','documentType','city.departaments')
-                        ->whereHas('personType', function ($q) use($tipoPer){
-                            $q->where('id', $tipoPer);
-                        })->whereHas('projects', function ($q) use($idstatus){
-                            $q->where('status', $idstatus);
-                        })->with('projects.category','personType')->get();
-                    }
+                        if($category > 0){
+                            $listAspirant = Artist::with('users','personType','documentType','city.departaments')->whereHas('projects', function ($q) use($idstatus){
+                                $q->where('status', $idstatus);
+                            })->whereHas('projects.category', function ($q) use($category){
+                                $q->where('category_id', $category);
+                            })->with('projects.category')->get();
+
+                        }else{
+                            $listAspirant = Artist::with('users','documentType','city.departaments')
+                            ->whereHas('personType', function ($q) use($tipoPer){
+                                $q->where('id', $tipoPer);
+                            })->whereHas('projects', function ($q) use($idstatus){
+                                $q->where('status', $idstatus);
+                            })->with('projects.category','personType')->get();
+                         }
+                }
 
 
 
@@ -95,51 +204,71 @@ class DashboardAdminController extends Controller
 
                 }
              }
-
-
-        }else{
-
-            if($tipoPer > 0){
-
-                if($category > 0){
-
-                    $listAspirant = Artist::with('users','documentType','city.departaments')
-                    ->whereHas('personType', function ($q) use($tipoPer){
-                        $q->where('id', $tipoPer);
-                    })->whereHas('projects.category', function ($q) use($category){
-                        $q->where('category_id', $category);
-                    })->with('personType','projects.category')->get();
-                }else{
-
-                    $listAspirant = Artist::with('users','documentType','city.departaments','projects.category')
-                    ->whereHas('personType', function ($q) use($tipoPer){
-                        $q->where('id', $tipoPer);
-                    })->with('personType')->get();
-                }
-
-            }else{
-                if($category > 0){
-                    $listAspirant = Artist::with('users','personType','documentType','city.departaments')
-                    ->whereHas('projects.category', function ($q) use($category){
-                        $q->where('category_id', $category);
-                    })->with('projects.category')->get();
-
-                }else{
-
-                    $listAspirant = Artist::with('users','personType','projects.category','documentType','city.departaments', 'projects');
-                }
-
             }
-            $listAspirant = Artist::with('users','personType','projects.category','documentType','city.departaments', 'projects')->get();
+
+        // }else{
+        //     // dd($tipoPer);
+
+        //     if($tipoPer > 0){
 
 
-        }
+        //         if($category > 0){
+
+        //             $listAspirant = Artist::with('users','documentType','city.departaments')
+        //             ->whereHas('personType', function ($q) use($tipoPer){
+        //                 $q->where('id', $tipoPer);
+        //             })->whereHas('projects.category', function ($q) use($category){
+        //                 $q->where('category_id', $category);
+        //             })->with('personType','projects.category')->get();
+
+        //         }else{
+
+        //             $listAspirant = Artist::with('users','documentType','city.departaments','projects.category')
+        //             ->whereHas('personType', function ($q) use($tipoPer){
+        //                 $q->where('id', $tipoPer);
+        //             })->with('personType')->get();
+        //         }
+
+        //     }else{
+
+        //         if($category > 0){
+        //             $listAspirant = Artist::with('users','personType','documentType','city.departaments')
+        //             ->whereHas('projects.category', function ($q) use($category){
+        //                 $q->where('category_id', $category);
+        //             })->with('projects.category')->get();
+
+        //         }else{
+
+
+        //             $listAspirant = Artist::with('users','personType','projects.category','documentType','city.departaments', 'projects');
+        //         }
+
+        //     }
+
+
+        //     $listAspirant = Artist::with('users','personType','projects.category','documentType','city.departaments', 'projects')->get();
+
+
+        // }
+
 
 
 
         return datatables()->of($listAspirant)->toJson();
 
+
     }
+
+
+    public function ratings(){
+        $listRating = Artist::with('users','personType','projects.category','documentType','city.departaments','projects.reviews_curador')
+        ->whereHas('projects', function($q){
+            $q->where('status',2);
+        })->get();
+        return datatables()->of($listRating)->toJson();
+    }
+
+
     public function showProyect (Request $request){
 
         $data = Project::select(array(
