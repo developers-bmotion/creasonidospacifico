@@ -830,7 +830,7 @@
                                                     <p>No se cargo el documento correctamente</p>
                                                 @else
                                                     <div>
-                                                        <embed
+                                                        <object
                                                             src="{{ $artist->artists[0]->evidence_document}}"
                                                             frameborder="0" width="100%" height="400px">
                                                     </div>
@@ -1259,7 +1259,7 @@
                                                             correctamente</p>
                                                     @else
                                                         <div>
-                                                            <embed
+                                                            <object
                                                                 src="{{ $team->pdf_identificacion }}"
                                                                 frameborder="0" width="100%"
                                                                 height="400px">
@@ -1601,7 +1601,7 @@
                                 <p>No se cargo el documento correctamente</p>
                             @else
                                 <div>
-                                    <embed src="{{$artist->artists[0]->beneficiary[0]->pdf_documento}}"
+                                    <object src="{{$artist->artists[0]->beneficiary[0]->pdf_documento}}"
                                            frameborder="0" width="100%" height="400px">
                                 </div>
                             @endif
@@ -1658,7 +1658,7 @@
                                     correctamente</p>
                             @else
                                 <div>
-                                    <embed
+                                    <object
                                         src="{{$artist->artists[0]->users->pdf_cedula}}"
                                         frameborder="0" width="100%"
                                         height="400px">
