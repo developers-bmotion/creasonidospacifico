@@ -520,16 +520,16 @@
                     <div class="tab-pane" id="m_tabs_6_3" role="tabpanel">
                         <div class="m-portlet__body">
                             {{-- filtros para datatable --}}
-                            {{-- <div class="row">
-                                <select class="form-control m-input m-input--square col-md-3 mb-3  tipoPersona" name="tipoPersona" id="tipoPersona">
+                            <div class="row">
+                                <select class="form-control m-input m-input--square col-md-3 mb-3  tipoPersona_cualified" name="tipoPersonaCualified" id="tipoPersona_cualified">
                                     <option value="0">Filtrar por tipo persona</option>
                                     @foreach ($tipoPersona as $tipoPer)
                                     <option value="{{$tipoPer->id  }}">{{ $tipoPer->name }}</option>
-                                    @endforeach --}}
+                                    @endforeach
 
-                                {{-- </select> --}}
+                                </select>
                                 {{-- @dd($cat) --}}
-                                {{-- <select class="form-control m-input m-input--square col-md-3 mb-3" id="category_filter"
+                                <select class="form-control m-input m-input--square col-md-3 mb-3 ml-3" id="category_filter_cualified"
 
                                 >
                                     <option value="0">Filtrar por modalidad</option>
@@ -537,7 +537,7 @@
                                     <option value="{{$category->id}}" >{{$category->category}}</option>
                                     @endforeach
 
-                                </select> --}}
+                                </select>
 
 
 
@@ -1073,8 +1073,7 @@
                 "pageLength": 10,
                 "data": null,
                 "pagingType": "simple_numbers",
-                "order": [[6, "desc"]],
-
+                "order":[5,"desc"],
                 "ajax": {
                     url: "{{route('list.ratings')}}",
                     data: {
@@ -1085,46 +1084,49 @@
                 "columns": [
 
                     {
-                        data: 'users.name',
+                        data: 'names',
                         defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>',
 
                         render: function (data, type, JsonResultRow, meta) {
                             // console.log(JsonResultRow,'data****');
-                            if (JsonResultRow.users.last_name === null) {
+                            if (JsonResultRow.last_name === null) {
                                 return '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
                             } else {
 
-                                return '<span class="label label-danger text-center">' + JsonResultRow.users.name + '</span>  <span class="label label-danger text-center">' + JsonResultRow.users.last_name + '</span>';
+                                return '<span class="label label-danger text-center">' + JsonResultRow.names + '</span>  <span class="label label-danger text-center">' + JsonResultRow.last_name + '</span>';
                             }
                             // return '<img src="' + JsonResultRow + '" width="50px"  style="border-radius: 100%;margin-right: auto;margin-left: auto;display: block; width:50px; height:50px"/>';
                         }
                     },
                     {
-                        // data: 'person_type.name',
+                        data: 'act_like',
                         defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>',
 
-                        render:function(data,type,JsonResultRow, meta){
-                            if (JsonResultRow.person_type){
-                                return JsonResultRow.person_type.name;
-                            }
+                        // render:function(data,type,JsonResultRow, meta){
+                        //     if (JsonResultRow.person_type){
+                        //         return JsonResultRow.act_like;
+                        //     }
 
-                        }
+                        // }
                     },
                     {
+                        data: 'category',
+                        defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>',
 
 
-                        render: function (data, type, JsonResultRow, meta) {
-                            var category = "";
-                            if (JsonResultRow.projects) {
 
-                                JsonResultRow.projects.map(item => {
-                                    category = item;
-                                });
-                            }
+                        // render: function (data, type, JsonResultRow, meta) {
+                        //     var category = "";
+                        //     if (JsonResultRow.projects) {
 
-                           cat = category != "" ? `${category.category.category}` : '<span class="label label-danger text-center ml-4" style="color:#ff0000 !important">Sin categoria</span>'
-                           return cat;
-                        },
+                        //         JsonResultRow.projects.map(item => {
+                        //             category = item;
+                        //         });
+                        //     }
+
+                        //    cat = category != "" ? `${category.category.category}` : '<span class="label label-danger text-center ml-4" style="color:#ff0000 !important">Sin categoria</span>'
+                        //    return cat;
+                        // },
 
 
 
@@ -1132,46 +1134,51 @@
                     },
 
                     {
-                        data: 'city.departaments.descripcion',
+                        data: 'departament',
                         defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
                     },
                     {
-                        data: 'city.descripcion',
+                        data: 'city',
                         defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
                     },
                     {
-                        render: function (data, type, JsonResultRow, meta) {
 
-                        //   console.log(JsonResultRow,'data rating')
+                        data: 'rating',
+                        defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>',
+                        // orderSequence: [ "desc", "asc"],
+                        // targets:"descendFirst"
+                        // render: function (data, type, JsonResultRow, meta) {
 
-                           JsonResultRow.projects[0].reviews_curador;
+                        // //   console.log(JsonResultRow,'data rating')
 
-                          var cal = "";
-                            if (JsonResultRow.projects[0].reviews_curador) {
+                        //    JsonResultRow.projects[0].reviews_curador;
 
-                                JsonResultRow.projects[0].reviews_curador.map(value => {
-                                    cal = value;
-                                    console.log(cal,'callificacion')
-                                });
-                            }
+                        //   var cal = "";
+                        //     if (JsonResultRow.projects[0].reviews_curador) {
 
-                            var sum= cal.lyric+cal.melody_rhythm+cal.arrangements+cal.originality;
-                            return cal != "" ? '<div class="text-center">'+(sum)+'</div>': ' ';
-                        }
+                        //         JsonResultRow.projects[0].reviews_curador.map(value => {
+                        //             cal = value;
+                        //             console.log(cal,'callificacion')
+                        //         });
+                        //     }
+
+                        //     var sum= cal.lyric+cal.melody_rhythm+cal.arrangements+cal.originality;
+                        //     return cal != "" ? '<div class="text-center">'+(sum)+'</div>': ' ';
+                        // }
 
                     },
 
                     {
                         render: function (data, type, JsonResultRow, meta) {
-                            var items = "";
-                            if (JsonResultRow.projects) {
+                            // var items = "";
+                            // if (JsonResultRow.projects) {
 
-                                JsonResultRow.projects.map(item => {
-                                    items = item;
-                                });
-                            }
+                            //     JsonResultRow.projects.map(item => {
+                            //         items = item;
+                            //     });
+                            // }
 
-                            return items != "" ? `<div class="text-center"><a href="/dashboard/project/${items.slug}" class="btn m-btn--pill btn-secondary"><i class="fa fa-eye"></i></a></div>` : '<span class="label label-danger text-center ml-4" style="color:red !important">Sin propuesta</span>'
+                            return JsonResultRow.slug != "" ? `<div class="text-center"><a href="/dashboard/project/${JsonResultRow.slug}" class="btn m-btn--pill btn-secondary"><i class="fa fa-eye"></i></a></div>` : '<span class="label label-danger text-center ml-4" style="color:red !important">Sin propuesta</span>'
                         }
                     },
                 ],
@@ -1208,9 +1215,9 @@
 
         };
         // filtro por categoria
-        $('#category_filter').on('change', function(){
+        $('#category_filter_cualified').on('change', function(){
             categoryQual = $(this).val();
-            console.log(categoryQual,'catt');
+            console.log(categoryQual,'cattCual');
             loadTableQual();
             // console.log(this.value,'value---');
             // console.log(this.value,'value---');
@@ -1218,10 +1225,10 @@
         });
         // filtro por tipo
 
-        $(".tipoPersona").on('change', function () {
-
+        $("#tipoPersona_cualified").on('change', function () {
+            // alert();
             tipoPerQual = $(this).val();
-            console.log(tipoPerQual);
+            console.log(tipoPerQual,'tipopercual');
             loadTableQual();
         });
 

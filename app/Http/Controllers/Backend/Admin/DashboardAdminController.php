@@ -216,12 +216,76 @@ class DashboardAdminController extends Controller
     }
 
 
-    public function ratings(){
-        $listRating = Artist::with('users','personType','projects.category','documentType','city.departaments')
+    public function ratings(Request $request){
+
+        $idstatus= 2;
+        $tipoPer=$request->input("tipoPerQual");
+        $category=$request->input("categoryQual");
+        $listRating="";
+
+        // inicio
+        if($tipoPer > 0){
+
+            if($category > 0){
+
+                $listRating = Artist::with('users','documentType','city.departaments')
+                ->whereHas('personType', function ($q) use($tipoPer){
+                    $q->where('id', $tipoPer);
+                })->whereHas('projects', function ($q) use($idstatus){
+                    $q->where('status', $idstatus);
+                })->whereHas('projects.category', function ($q) use($category){
+                    $q->where('category_id', $category);
+                })->with('projects.category','personType')->get();
+
+            }else{
+                if($category > 0){
+                    $listRating = Artist::with('users','personType','documentType','city.departaments')->whereHas('projects', function ($q) use($idstatus){
+                        $q->where('status', $idstatus);
+                    })->whereHas('projects.category', function ($q) use($category){
+                        $q->where('category_id', $category);
+                    })->with('projects.category')->get();
+
+                }else{
+
+                    // dd($tipoPer);
+                    $listRating = Artist::with('users','documentType','city.departaments')
+                    ->whereHas('personType', function ($q) use($tipoPer){
+                        $q->where('id', $tipoPer);
+                    })->whereHas('projects', function ($q) use($idstatus){
+                        $q->where('status', $idstatus);
+                    })->with('projects.category','personType')->get();
+                 }
+        }
+
+
+
+        }else{
+
+            if($category > 0){
+                $listRating = Artist::with('users','personType','documentType','city.departaments')->whereHas('projects', function ($q) use($idstatus){
+                    $q->where('status', $idstatus);
+                })->whereHas('projects.category', function ($q) use($category){
+                    $q->where('category_id', $category);
+                })->with('projects.category')->get();
+
+            }else{
+
+
+            $listRating = Artist::with('users','personType','projects.category','documentType','city.departaments')
             ->whereHas('projects', function($q){
                 $q->where('status',2);
             })->get();
-    
+        }
+        }
+
+        // fin
+
+
+        // $listRating = Artist::with('users','personType','projects.category','documentType','city.departaments')
+        //     ->whereHas('projects', function($q){
+        //         $q->where('status',2);
+        //     })->get();
+
         $aspirantRating = [];
         foreach ($listRating as $aspirants) {
             array_push($aspirantRating, (object)[
@@ -233,6 +297,7 @@ class DashboardAdminController extends Controller
                 'departament' => $aspirants->city->departaments->descripcion,
                 'city' => $aspirants->city->descripcion,
                 'id_project'=> $aspirants->projects[0]->id,
+                'slug'=> $aspirants->projects[0]->slug,
                 'rating' => Project::sumRating( $aspirants->projects[0]->id)
             ]);
         }

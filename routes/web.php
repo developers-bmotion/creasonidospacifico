@@ -39,6 +39,7 @@ Route::get('/datos', function () {
             'departament' => $aspirants->city->departaments->descripcion,
             'city' => $aspirants->city->descripcion,
             'id_project'=> $aspirants->projects[0]->id,
+            'slug'=> $aspirants->projects[0]->slug,
             'rating' => Project::sumRating( $aspirants->projects[0]->id)
         ]);
     }
