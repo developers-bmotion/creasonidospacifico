@@ -623,7 +623,7 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                                     info = '<span class="m-badge m-badge--metal m-badge--wide m-badge--rounded">Revisión</span>';
                                     break;
                                 case 2:
-                                    info = '<span class="m-badge m-badge--brand m-badge--wide" style="background-color:#9C26EA !important;font-size:9px" >{{ __('pre_aprovado') }}</span>';
+                                    info = '<span class="m-badge m-badge--brand m-badge--wide" style="background-color:#9C26EA !important;font-size:9px" >{{ __('Calificado') }}</span>';
                                     break;
                                 case 3:
                                     info = '<span class="m-badge  m-badge--success m-badge--wide">{{ __('aprovado2') }}</span>';
@@ -633,6 +633,12 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                                     break;
                                 case 5:
                                     info = '<span class="m-badge  m-badge--danger m-badge--wide">No subsanado</span>';
+                                    break;
+                                case 6:
+                                    info = '<span class="m-badge  m-badge--info m-badge--wide">Nueva revisión</span>';
+                                    break;
+                                case 7:
+                                    info = '<span class="m-badge  m-badge--info m-badge--wide">Aceptado</span>';
                                     break;
                             }
                             return '<div class="text-center">' + info + '</div>';
