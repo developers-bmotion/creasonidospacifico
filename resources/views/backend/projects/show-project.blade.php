@@ -831,8 +831,8 @@
                                                 @else
                                                     <div>
                                                         <object
-                                                            src="{{ $artist->artists[0]->evidence_document}}"
-                                                            frameborder="0" width="100%" height="400px">
+                                                            data="{{ $artist->artists[0]->evidence_document}}"
+                                                            frameborder="0" width="100%" height="400px"></object>
                                                     </div>
                                                 @endif
                                             </div>
@@ -1260,9 +1260,9 @@
                                                     @else
                                                         <div>
                                                             <object
-                                                                src="{{ $team->pdf_identificacion }}"
+                                                                data="{{ $team->pdf_identificacion }}"
                                                                 frameborder="0" width="100%"
-                                                                height="400px">
+                                                                height="400px"></object>
                                                         </div>
                                                     @endif
                                                 @endif
@@ -1601,8 +1601,8 @@
                                 <p>No se cargo el documento correctamente</p>
                             @else
                                 <div>
-                                    <object src="{{$artist->artists[0]->beneficiary[0]->pdf_documento}}"
-                                           frameborder="0" width="100%" height="400px">
+                                    <object data="{{$artist->artists[0]->beneficiary[0]->pdf_documento}}"
+                                           frameborder="0" width="100%" height="400px"></object>
                                 </div>
                             @endif
                         @endif
@@ -1659,9 +1659,9 @@
                             @else
                                 <div>
                                     <object
-                                        src="{{$artist->artists[0]->users->pdf_cedula}}"
+                                        data="{{$artist->artists[0]->users->pdf_cedula}}"
                                         frameborder="0" width="100%"
-                                        height="400px">
+                                        height="400px"></object>
                                 </div>
                             @endif
                         @endif
