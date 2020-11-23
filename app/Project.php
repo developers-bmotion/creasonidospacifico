@@ -264,8 +264,14 @@ class Project extends Model
     public static function sumRating($id)
     {
         $review = Review::select(['lyric', 'melody_rhythm', 'originality', 'arrangements'])->where('project_id', $id)->get();
-        $lyric = $review[0]->lyric;
-        $sum = collect([$review[0]->lyric, $review[0]->melody_rhythm, $review[0]->originality, $review[0]->arrangements])->sum();
-        return $sum;
+        $valueMayor = 0;
+        foreach ($review as $rating){
+            $value = collect([$rating->lyric, $rating->melody_rhythm, $rating->originality, $rating->arrangements])->sum();
+            if($value > $valueMayor ){
+                $valueMayor =  $value;
+            }
+        }
+
+        return $valueMayor;
     }
 }
