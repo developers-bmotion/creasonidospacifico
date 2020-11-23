@@ -520,16 +520,16 @@
                     <div class="tab-pane" id="m_tabs_6_3" role="tabpanel">
                         <div class="m-portlet__body">
                             {{-- filtros para datatable --}}
-                            <div class="row">
+                            {{-- <div class="row">
                                 <select class="form-control m-input m-input--square col-md-3 mb-3  tipoPersona" name="tipoPersona" id="tipoPersona">
                                     <option value="0">Filtrar por tipo persona</option>
                                     @foreach ($tipoPersona as $tipoPer)
                                     <option value="{{$tipoPer->id  }}">{{ $tipoPer->name }}</option>
-                                    @endforeach
+                                    @endforeach --}}
 
-                                </select>
+                                {{-- </select> --}}
                                 {{-- @dd($cat) --}}
-                                <select class="form-control m-input m-input--square col-md-3 mb-3" id="category_filter"
+                                {{-- <select class="form-control m-input m-input--square col-md-3 mb-3" id="category_filter"
 
                                 >
                                     <option value="0">Filtrar por modalidad</option>
@@ -537,7 +537,7 @@
                                     <option value="{{$category->id}}" >{{$category->category}}</option>
                                     @endforeach
 
-                                </select>
+                                </select> --}}
 
 
 

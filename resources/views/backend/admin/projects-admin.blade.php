@@ -454,7 +454,7 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
     <script>
         var listStatus = {
             revision: {name: 'En Revisión', color: '#9c9ca5'},
-            preaprobados: {name: 'Pre Aprobados', color: '#9C26EA'},
+            preaprobados: {name: 'Calificado', color: '#9C26EA'},
             aprobados: {name: 'Aprobados', color: '#34bfa3'},
             pendientes: {name: 'Pendientes', color: '#ffb822'},
             rechazados: {name: 'Rechazados', color: '#f4516c'},
