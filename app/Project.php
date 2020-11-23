@@ -71,23 +71,22 @@ class Project extends Model
     ];
 
 
-
     const REVISION = 1;
     const QUALIFIED = 2;
     const APPROVAL = 3;
     // const PUBLISHED = 4;
     const PENDING = 4;
     const REJECTED = 5;
-    const REVISON_UPDATE=6;
-    const ACEPTED=7;
+    const REVISON_UPDATE = 6;
+    const ACEPTED = 7;
 
-    const PENDING_REGISTER=9;
-    const NOT_PROJECT_REGISTER=10;
+    const PENDING_REGISTER = 9;
+    const NOT_PROJECT_REGISTER = 10;
     // const NOPUBLISHED = 6;
 
 //    const PERCENTAGE_APPROVAL = 3;
 
-    protected $withCount = ['reviews','updates'];
+    protected $withCount = ['reviews', 'updates'];
     protected $fillable = [
         'title',
         'short_description',
@@ -105,93 +104,114 @@ class Project extends Model
         'rejected'
     ];
 
-    public function getRejectedAttribute($value){
+    public function getRejectedAttribute($value)
+    {
         return $value ? 'Si' : 'No';
     }
 
-    public static function card($arrayProject, $artist = null){
-        return $arrayProject->map(function ($project) use ($artist){
-            if ($artist == null){
+    public static function card($arrayProject, $artist = null)
+    {
+        return $arrayProject->map(function ($project) use ($artist) {
+            if ($artist == null) {
                 $artist = $project->artists[0];
             }
             $project->nameLimit = str_limit($project->title, 35);
             $project->img = $project->pathAttachment();
-            $project->url = route('projects.show',$project->slug);
+            $project->url = route('projects.show', $project->slug);
             $project->fotoUsuario = $artist->users->pathAttachment();
-            $project->rutaPro = route('projects.artist',$artist->users->slug);
+            $project->rutaPro = route('projects.artist', $artist->users->slug);
             $project->totalDonations = $project->donations->sum('amount');
             return $project;
         });
     }
 
-    public function teams(){
-        return $this->belongsToMany(Team::class,'teams_project','project_id','team_id');
+    public function teams()
+    {
+        return $this->belongsToMany(Team::class, 'teams_project', 'project_id', 'team_id');
     }
 
-    public function getRouteKeyName(){
+    public function getRouteKeyName()
+    {
         return 'slug';
     }
 
-    public function pathAttachment(){
-        return '/images/projects/'. $this->project_picture;
+    public function pathAttachment()
+    {
+        return '/images/projects/' . $this->project_picture;
     }
 
-    public function category(){
-        return $this->belongsTo(Category::class)->select('id','category', 'description');
+    public function category()
+    {
+        return $this->belongsTo(Category::class)->select('id', 'category', 'description');
     }
 
-    public function type_category(){
+    public function type_category()
+    {
         return $this->belongsTo(typeCategories::class);
     }
 
-    public function updates(){
-        return $this->hasMany(Update::class)->select('id','project_id','title','description','media','created_at');
+    public function updates()
+    {
+        return $this->hasMany(Update::class)->select('id', 'project_id', 'title', 'description', 'media', 'created_at');
     }
 
-    public function donations(){
-        return $this->hasMany(Donation::class)->select('id','user_id','project_id','amount','created_at');
+    public function donations()
+    {
+        return $this->hasMany(Donation::class)->select('id', 'user_id', 'project_id', 'amount', 'created_at');
     }
 
-    public function reviews(){
-        return $this->hasMany(Review::class)->select('id','user_id','project_id','rating','comment','created_at');
-    }
-    public function reviews_curador(){
-        return $this->hasMany(Review::class)->select('id','user_id','project_id','lyric','melody_rhythm','arrangements','originality');
+    public function reviews()
+    {
+        return $this->hasMany(Review::class)->select('id', 'user_id', 'project_id', 'rating', 'comment', 'created_at');
     }
 
-    public function rewards(){
-        return $this->hasMany(Reward::class)->select('id','title','description','price','shipments','estimated','project_id','created_at');
+    public function reviews_curador()
+    {
+        return $this->hasMany(Review::class)->select('id', 'user_id', 'project_id', 'lyric', 'melody_rhythm', 'arrangements', 'originality');
     }
 
-    public function observations(){
+    public function rewards()
+    {
+        return $this->hasMany(Reward::class)->select('id', 'title', 'description', 'price', 'shipments', 'estimated', 'project_id', 'created_at');
+    }
+
+    public function observations()
+    {
         return $this->hasMany(ProjectObservation::class);
     }
 
-    public function artists(){
-        return $this->belongsToMany(Artist::class,'artist_projects','project_id','artist_id');
+    public function artists()
+    {
+        return $this->belongsToMany(Artist::class, 'artist_projects', 'project_id', 'artist_id');
     }
 
-    public function management(){
-        return $this->belongsToMany(Management::class,'management_project','project_id','management_id');
+    public function management()
+    {
+        return $this->belongsToMany(Management::class, 'management_project', 'project_id', 'management_id');
     }
 
-    public function getRatingAttribute(){
+    public function getRatingAttribute()
+    {
         return $this->reviews->avg('rating');
     }
 
-    public function historyReviews(){
-        return $this->belongsToMany(User::class,'history_revisions','project_id', 'user_id')->withPivot('observation','state');
+    public function historyReviews()
+    {
+        return $this->belongsToMany(User::class, 'history_revisions', 'project_id', 'user_id')->withPivot('observation', 'state');
     }
 
-    public function images(){
+    public function images()
+    {
         return $this->hasMany(ProjectImage::class);
     }
 
-    public function endProject(){
+    public function endProject()
+    {
         return $this->hasOne(EndProject::class);
     }
 
-    public function messages(){
+    public function messages()
+    {
         return $this->hasMany(ProjectMessage::class, 'id_projects');
     }
     /*
@@ -203,35 +223,49 @@ class Project extends Model
     //         ->count('id');
     // }
 
-    public function levelArtist($id){
+    public function levelArtist($id)
+    {
         return DB::table('levels')
             ->select('level')
-            ->where('id',$id)
+            ->where('id', $id)
             ->first();
     }
 
-    public function countryArtist($id){
+    public function countryArtist($id)
+    {
         return DB::table('countries')
             ->select('*')
-            ->where('id',$id)
+            ->where('id', $id)
             ->first();
     }
 
-    public function artist_user($id){
+    public function artist_user($id)
+    {
         return User::select('*')
-            ->where('id',$id)
+            ->where('id', $id)
             ->first();
     }
 
-    public static function countProjects($id){
+    public static function countProjects($id)
+    {
 
-        $count=Project::where('status', $id)->count();
+        $count = Project::where('status', $id)->count();
     }
-    public static function countbyCategories($id){
+
+    public static function countbyCategories($id)
+    {
         return DB::table('projects')
-            ->where('category_id',$id)
+            ->where('category_id', $id)
             ->orderBy('category_id', 'desc')
             ->count('id');
 
+    }
+
+    public static function sumRating($id)
+    {
+        $review = Review::select(['lyric', 'melody_rhythm', 'originality', 'arrangements'])->where('project_id', $id)->get();
+        $lyric = $review[0]->lyric;
+        $sum = collect([$review[0]->lyric, $review[0]->melody_rhythm, $review[0]->originality, $review[0]->arrangements])->sum();
+        return $sum;
     }
 }
