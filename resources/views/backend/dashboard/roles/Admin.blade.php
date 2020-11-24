@@ -659,7 +659,7 @@
                 "serverSide": true,
                 "scrollX": true,
                 "dom": 'Bfrtip',
-                "pageLength": 100,
+                "pageLength": 500,
                 "data": null,
                 "lengthMenu": [[10, 25, 100, -1], [10,25, 100, "All"]],
                 "pagingType": "simple_numbers",
