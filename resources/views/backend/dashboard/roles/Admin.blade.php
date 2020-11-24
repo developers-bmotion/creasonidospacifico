@@ -507,8 +507,8 @@
                                 <tr>
                                     <th></th>
                                     <th>{{ __('Nombres y Apellidos') }}</th>
-                                    <th>{{ __('Actuara como') }}</th>
-                                    <th>{{ __('Categoría') }}</th>
+                                    <th>{{ __('Actuará Como') }}</th>
+                                    <th>{{ __('Modalidad') }}</th>
                                     <th>{{ __('Email') }}</th>
                                     <th>{{ __('Departamento de nacimiento') }}</th>
                                     <th>{{ __('Ciudad de nacimiento') }}</th>
