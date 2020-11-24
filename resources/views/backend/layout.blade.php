@@ -82,6 +82,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <link href="/backend/vendors/vendors/flaticon/css/flaticon.css" rel="stylesheet" type="text/css"/>
     <link href="/backend/vendors/vendors/metronic/css/styles.css" rel="stylesheet" type="text/css"/>
     <link href="/backend/vendors/vendors/fontawesome5/css/all.min.css" rel="stylesheet" type="text/css"/>
+    <link href="https://cdn.datatables.net/buttons/1.6.4/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css"/>
 
     <!--end:: Global Optional Vendors -->
 
