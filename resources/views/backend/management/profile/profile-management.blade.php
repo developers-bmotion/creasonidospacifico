@@ -385,7 +385,9 @@
 
                     {{--                    </audio>--}}
 
+
                     <input type="hidden" class="idProject" value="" name="idProject">
+
                     <div class="sliderCalificadorUno">
                         <!--=====================================
                             SLIDER CRITERIO # 1
@@ -570,7 +572,7 @@
                 });
 
                 $(".audioProject").show();
-                console.log(data);
+                console.log(data,' se puede');
                 let title = data.title;
                 let audioProject = data.audio
                 let idProject = data.id
@@ -592,11 +594,31 @@
                 }
 
                 let audioHtml = `
-                  <audio src="${audioProject}" class="audioProject" controls> este es un elemento de audio no soportado por tu navegador, prueba con otro </audio> `;
+                  <audio style="width: 354px;" src="${audioProject}" class="audioProject" controls> este es un elemento de audio no soportado por tu navegador, prueba con otro </audio> `;
                 $(audioHtml).insertBefore(".sliderCalificadorUno");
+
+                let secondAudio = `<div class="row" id="second_song" class="mt-3 mb-2 ml-3">
+                                      <label class="col-md-12 font-weight-bold ml-2" for="">Otras canciones</label>
+                                      <audio src="${data.audio_secundary_one}" class="audioProjectOne col-6" controls> este es un elemento de audio no soportado por tu navegador, prueba con otro </audio>
+
+                                   </div>`
+                        if(data.audio_secundary_one != null){
+
+                            $(secondAudio).insertAfter(".audioProject");
+
+                        }
+
+                        if(data.audio_secundary_two != null){
+                            let secondAudioTwo = `<audio src="${data.audio_secundary_two}" class="audioProjectTwo col-6" controls> este es un elemento de audio no soportado por tu navegador, prueba con otro </audio>`
+
+                            $(secondAudioTwo).insertBefore(".audioProjectOne");
+                        }
 
                 $('#modal2').on('hidden.bs.modal', function (e) {
                     $(".audioProject").remove();
+                    $("#second_song").remove();
+                    $(".audioProjectOne").remove();
+                    $(".audioProjectTwo").remove();
                     $(".spanStatusProject").remove();
                 })
             });
@@ -1022,6 +1044,7 @@
                     start: true,
                 });
                 $('.value_lyric').empty();
+
                 $.get('/api/historial-review/' + data.id + '', function (respuesta) {
 
                     if (respuesta.length != 0) {
@@ -1057,6 +1080,18 @@
                     });
                     $.each(respuesta, function (index, value) {
 
+                        var hiden='';
+
+                    if(value.projects[0].audio_secundary_one == null && value.projects[0].audio_secundary_two == null){
+
+                        hiden='none';
+
+                    }
+
+                    var hidenSecond='';
+                    if(value.projects[0].audio_secundary_two == null){
+                            hidenSecond='none';
+                        }
                         // reviews=response;
                         $(".reviews_content").html(
                             "<h4>" + value.projects[0].title + "</h4>" +
@@ -1066,7 +1101,12 @@
                             "<label>" + value.projects[0].description + "</label>" +
                             "<br>" +
                             "<br>" +
-                            " <audio src="+value.projects[0].audio+" class='audioProject' controls> este es un elemento de audio no soportado por tu navegador, prueba con otro </audio>"+
+                            " <audio style='width:357px' src="+value.projects[0].audio+" class='audioProject' controls> este es un elemento de audio no soportado por tu navegador, prueba con otro </audio>"+
+                            " <div class='row ' id='otherSong' style='display:"+hiden+"'>"+
+                            " <label class='col-md-12 font-weight-bold ml-2 mt-3'>Otras canciones</label>"+
+                            " <audio src="+value.projects[0].audio_secundary_one+" class='audioProject secondOne col-md-6' controls> este es un elemento de audio no soportado por tu navegador, prueba con otro </audio>"+
+                            " <audio style='display:"+hidenSecond+"' src="+value.projects[0].audio_secundary_two+" class='audioProject secondTwo col-md-6' controls> este es un elemento de audio no soportado por tu navegador, prueba con otro </audio>"+
+                            " </div>"+
                             "<hr>"
                         );
 
