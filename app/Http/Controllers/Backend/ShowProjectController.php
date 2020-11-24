@@ -26,16 +26,18 @@ class ShowProjectController extends Controller
         $end_time = EndProject::where('project_id',$project->id)->first();
         $artist= Project::where('id',$project->id)->with('historyReviews', 'artists.users','artists.artistType','artists.personType','artists.documentType','artists.beneficiary.documentType','artists.beneficiary.city','artists.beneficiary.expeditionPlace','artists.beneficiary.residencePlace.departaments','artists.teams','artists.teams.documentType','artists.teams.expeditionPlace','artists.teams.residencePlace.departaments','artists.expeditionPlace.departaments','artists.residencePlace.departaments','artists.userGestor')->first();
         $country = City::where('id',$artist->artists[0]->cities_id)->with('departaments')->first();
+
         // $location = Location::where('id',$artist->artists[0]->location_id)->first();
         // dd($artist);
         $team = Project::where('id',$project->id)->with('teams')->first();
+        $qual = Review::where("project_id","=", $project->id)->get();
         if (in_array('Admin', $rol)) {
             $review = Review::where("project_id","=", $project->id)->get();
             $asignado = count($review);
 
 
             // $currentRaing = $review->avg("rating");
-            return view('backend.projects.show-project', compact("asignado",'project','end_time','artist','team','country'));
+            return view('backend.projects.show-project', compact("asignado",'project','end_time','artist','team','country','qual'));
             // return view('backend.projects.show-project', compact("asignado",'project','end_time','artist','country', "currentRaing",'location','team'));
         }else if(in_array('Subsanador', $rol)) {
             $review = Review::where("project_id","=", $project->id)->get();
@@ -63,7 +65,7 @@ class ShowProjectController extends Controller
             $project->first();
 
             if (in_array($seacharSlug, $array)) {
-                return view('backend.projects.show-project', compact('project','end_time','artist','team','country'));
+                return view('backend.projects.show-project', compact('project','end_time','artist','team','country','qual'));
                 // return view('backend.projects.show-project', compact('project','end_time','artist','country','location','team'));
             } else {
                 return response('No puedes continuar', 404);
