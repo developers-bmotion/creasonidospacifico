@@ -428,6 +428,11 @@
                                                     <i class="m-nav__link-icon flaticon-user"></i>
                                                     <span class="m-nav__link-text">Perfil</span>
                                                 </a>
+                                            @elseif(auth()->user()->roles[0]->rol == "Manage")
+                                                <a href="{{ route('profile.curador',auth()->user()->slug) }}" class="m-nav__link">
+                                                    <i class="m-nav__link-icon flaticon-user"></i>
+                                                    <span class="m-nav__link-text">Perfil</span>
+                                                </a>
                                             @endif
                                         </li>
                                         {{--                                        <li class="m-nav__item">--}}
