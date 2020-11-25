@@ -84,6 +84,9 @@
 }
 /*Para pantalla movil*/
 @media (max-width: 480px) {
+    .m-accordion__item-content {
+        overflow: scroll;
+    }
     .state_mobile {
         float: left;
     }
