@@ -5,66 +5,69 @@
         <div class="col-12">
 
             @if(auth()->user()->roles[0]->rol == 'Admin')
-            @if( $project->status == 2 )
-            <div  class="m-accordion m-accordion--default m-accordion--toggle-arrow" id="m_accordion_5"
-                     role="tablist">
-                    <div class="m-accordion__item " >
-                        <div style="background-color: #739594" class="m-accordion__item-head collapsed" role="tab" id="m_accordion_5_item_2_head"
-                             data-toggle="collapse" href="#m_accordion_5_item_2_body" aria-expanded="false">
-                            {{--<span class="m-accordion__item-icon"><i class="fa  flaticon-placeholder"></i></span>--}}
-                            <span
-                                class="m-accordion__item-title" style="color: white">Historial de calificaciones</span>
-                            <span class="m-accordion__item-mode"></span>
-                        </div>
-                        <div class="m-accordion__item-body collapse" id="m_accordion_5_item_2_body" role="tabpanel"
-                             aria-labelledby="m_accordion_5_item_2_head" data-parent="#m_accordion_5" style="">
-                            <div class="m-accordion__item-content">
-                                @foreach ($qual as $cal)
-                                {{-- @dd($cal) --}}
-                                <h6> {{ $loop->iteration }} .Calificación:</h6>
-                                <br>
-                                <table style="text-align: center" class='my-table-admin my-table table-striped review_table'>
-                                <thead>
-                                <tr>
-                                <th scope='col'>Aspectos técnicos musicales</th>
-                                <th scope='col'>Aporte creativo</th>
-                                <th scope='col'>Calidad interpretativa</th>
-                                <th scope='col'>Calidad del repertorio escogido</th>
-                                <th scope='col'>Total</th>
-                                </tr>
-                                </thead>
-                                <tbody style='font-weight:500;'>
-                                <tr>
-                                <th>{{ $cal->melody_rhythm }} </th>
-                                <td>{{ $cal->originality }}</td>
-                                <td>{{ $cal->arrangements }}</td>
-                                <td>{{ $cal->lyric }}</td>
-                                <td>{{ $cal->melody_rhythm + $cal->originality + $cal->arrangements + $cal->lyric }}</td>
-                                </tr>
-                                </tbody>
-                                </table>
-                                <br>
-                                <h6>Observaciones:</h6>
-                                <div>{!! $cal->comment !!}</div>
-                                <br>
-                                <hr>
+                @if( $project->status == 2 )
+                    <div class="m-accordion m-accordion--default m-accordion--toggle-arrow" id="m_accordion_5"
+                         role="tablist">
+                        <div class="m-accordion__item ">
+                            <div style="background-color: #739594" class="m-accordion__item-head collapsed" role="tab"
+                                 id="m_accordion_5_item_2_head"
+                                 data-toggle="collapse" href="#m_accordion_5_item_2_body" aria-expanded="false">
+                                {{--<span class="m-accordion__item-icon"><i class="fa  flaticon-placeholder"></i></span>--}}
+                                <span
+                                    class="m-accordion__item-title"
+                                    style="color: white">Historial de calificaciones</span>
+                                <span class="m-accordion__item-mode"></span>
+                            </div>
+                            <div class="m-accordion__item-body collapse" id="m_accordion_5_item_2_body" role="tabpanel"
+                                 aria-labelledby="m_accordion_5_item_2_head" data-parent="#m_accordion_5" style="">
+                                <div class="m-accordion__item-content">
+                                    @foreach ($qual as $cal)
+                                        {{-- @dd($cal) --}}
+                                        <h6> {{ $loop->iteration }} .Calificación:</h6>
+                                        <br>
+                                        <table style="text-align: center"
+                                               class='my-table-admin my-table table-striped review_table'>
+                                            <thead>
+                                            <tr>
+                                                <th scope='col'>Aspectos técnicos musicales</th>
+                                                <th scope='col'>Aporte creativo</th>
+                                                <th scope='col'>Calidad interpretativa</th>
+                                                <th scope='col'>Calidad del repertorio escogido</th>
+                                                <th scope='col'>Total</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody style='font-weight:500;'>
+                                            <tr>
+                                                <th>{{ $cal->melody_rhythm }} </th>
+                                                <td>{{ $cal->originality }}</td>
+                                                <td>{{ $cal->arrangements }}</td>
+                                                <td>{{ $cal->lyric }}</td>
+                                                <td>{{ $cal->melody_rhythm + $cal->originality + $cal->arrangements + $cal->lyric }}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <br>
+                                        <h6>Observaciones:</h6>
+                                        <div>{!! $cal->comment !!}</div>
+                                        <br>
+                                        <hr>
 
-                                @endforeach
-                                <span style="font-size:1.1rem;color:#739594;float:right;" class="font-weight-bold mb-3">Calificación final: {{ $sumRating }}</span>
+                                    @endforeach
+                                    <span style="font-size:1.1rem;color:#739594;float:right;"
+                                          class="font-weight-bold mb-3">Calificación final: {{ $sumRating }}</span>
 
 
+                                </div>
 
                             </div>
-
                         </div>
                     </div>
-                </div>
 
-              @endif
+                @endif
             @endif
             {{-- @dd($qual) --}}
-        @if(auth()->user()->roles[0]->rol == 'Gestor')
-            @if( $project->status == 4  )
+            @if(auth()->user()->roles[0]->rol == 'Gestor')
+                @if( $project->status == 4  )
 
                 <!--=====================================
 		        ALERTA PARA MOSTRAR EL ESTADO PENDIENTE
@@ -257,7 +260,9 @@
                             </h3>
                         </div>
                     </div>
-                    <span style="font-size:1.1rem;color:#739594;margin-top: 1.9rem;" class="font-weight-bold">Calificación final: {{ $sumRating }}</span>
+                    @if(auth()->user()->roles[0]->rol == "Admin")
+                        <span style="font-size:1.1rem;color:#739594;margin-top: 1.9rem;" class="font-weight-bold">Calificación final: {{ $sumRating }}</span>
+                    @endif
                 </div>
                 <div class="m-portlet__body">
                     <div class="m-section section-movil">
@@ -1663,7 +1668,7 @@
                             @else
                                 <div>
                                     <object data="{{$artist->artists[0]->beneficiary[0]->pdf_documento}}"
-                                           frameborder="0" width="100%" height="400px"></object>
+                                            frameborder="0" width="100%" height="400px"></object>
                                 </div>
                             @endif
                         @endif
