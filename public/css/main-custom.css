@@ -229,10 +229,21 @@
         max-width: 100% !important;
         flex: auto;
     }
-    .my-table th{
+    .my-table th {
         font-weight: 500;
         padding: 0.2rem;
     }
+    .another-lyric {
+        display: inline-grid;
+        overflow-x: scroll;
+        width: 100%;
+    }
+
+    .m-badge.m-badge--wide {
+        margin: 2px;
+        letter-spacing: 0.4px;
+    }
+    /* Fin max 1024 */
 }
 
 @media (max-width: 653px) and (min-width: 481px) {
@@ -245,18 +256,16 @@
 }
 
 @media (min-width: 1025px) {
-
-
-    .my-table-admin{
-        width: 100%;
-
+    .my-audio {
+        width: 48%;
     }
-
-    .my-table th{
+    .my-table-admin {
+        width: 100%;
+    }
+    .my-table th {
         font-weight: 500;
         padding: 0.75rem;
     }
-
     .new-col-10 {
         max-width: 58.33333%;
     }
@@ -293,6 +302,14 @@
 @media (max-width: 767px) {
     div#image-docuemnt-aspirante {
         margin-right: 50px;
+    }
+    div#otherSong audio {
+        margin: 5px 0px;
+    }
+}
+@media (max-width: 991px) {
+    .my-audio {
+        width: 100%;
     }
 }
 
