@@ -29,6 +29,7 @@ class ShowProjectController extends Controller
 
         // $location = Location::where('id',$artist->artists[0]->location_id)->first();
         // dd($artist);
+        $sumRating=Project::sumRating($project->id);
         $team = Project::where('id',$project->id)->with('teams')->first();
         $qual = Review::where("project_id","=", $project->id)->get();
         if (in_array('Admin', $rol)) {
@@ -37,7 +38,7 @@ class ShowProjectController extends Controller
 
 
             // $currentRaing = $review->avg("rating");
-            return view('backend.projects.show-project', compact("asignado",'project','end_time','artist','team','country','qual'));
+            return view('backend.projects.show-project', compact("asignado",'project','end_time','artist','team','country','qual','sumRating'));
             // return view('backend.projects.show-project', compact("asignado",'project','end_time','artist','country', "currentRaing",'location','team'));
         }else if(in_array('Subsanador', $rol)) {
             $review = Review::where("project_id","=", $project->id)->get();

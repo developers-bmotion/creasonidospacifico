@@ -50,7 +50,7 @@
                                 <hr>
 
                                 @endforeach
-
+                                <span style="font-size:1.1rem;color:#739594;float:right;" class="font-weight-bold mb-3">Calificación final: {{ $sumRating }}</span>
 
 
 
@@ -257,6 +257,7 @@
                             </h3>
                         </div>
                     </div>
+                    <span style="font-size:1.1rem;color:#739594;margin-top: 1.9rem;" class="font-weight-bold">Calificación final: {{ $sumRating }}</span>
                 </div>
                 <div class="m-portlet__body">
                     <div class="m-section section-movil">
