@@ -260,7 +260,7 @@
                             </h3>
                         </div>
                     </div>
-                    @if(auth()->user()->roles[0]->rol == "Admin")
+                    @if(auth()->user()->roles[0]->rol == "Admin" && $project->status == 2)
                         <span style="font-size:1.1rem;color:#739594;margin-top: 1.9rem;" class="font-weight-bold">Calificación final: {{ $sumRating }}</span>
                     @endif
                 </div>
