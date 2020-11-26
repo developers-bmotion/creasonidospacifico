@@ -512,7 +512,7 @@
 
                     </div>
 
-                    <label class="value_lyric"></label>
+                    <label class="value_lyric another-lyric"></label>
 
                 </div>
                 <div class="modal-footer">
@@ -594,7 +594,7 @@
                 }
 
                 let audioHtml = `
-                  <audio style="width: 354px;" src="${audioProject}" class="audioProject" controls> este es un elemento de audio no soportado por tu navegador, prueba con otro </audio> `;
+                  <audio class='my-audio' src="${audioProject}" class="audioProject" controls> este es un elemento de audio no soportado por tu navegador, prueba con otro </audio> `;
                 $(audioHtml).insertBefore(".sliderCalificadorUno");
 
                 let secondAudio = `<div class="row" id="second_song" class="mt-3 mb-2 ml-3">
@@ -827,7 +827,7 @@
                                     info = '<span class="m-badge m-badge--brand m-badge--wide" style="background-color:#C4C5D4 !important" >{{ __('Revision') }}</span>';
                                     break;
                                 case 2:
-                                    info = '<span class="m-badge m-badge--brand m-badge--wide" style="background-color:#9C26EA !important;font-size:7px" >{{ __('Calificado') }}</span>';
+                                    info = '<span class="m-badge m-badge--brand m-badge--wide" style="background-color:#9C26EA !important;" >{{ __('Calificado') }}</span>';
                                     break;
                                 case 3:
                                     info = '<span class="m-badge  m-badge--success m-badge--wide">{{ __('Aprobado') }}</span>';
@@ -1101,7 +1101,7 @@
                             "<label>" + value.projects[0].description + "</label>" +
                             "<br>" +
                             "<br>" +
-                            " <audio style='width:357px' src="+value.projects[0].audio+" class='audioProject' controls> este es un elemento de audio no soportado por tu navegador, prueba con otro </audio>"+
+                            " <audio class='my-audio' src="+value.projects[0].audio+" class='audioProject' controls> este es un elemento de audio no soportado por tu navegador, prueba con otro </audio>"+
                             " <div class='row ' id='otherSong' style='display:"+hiden+"'>"+
                             " <label class='col-md-12 font-weight-bold ml-2 mt-3'>Otras canciones</label>"+
                             " <audio src="+value.projects[0].audio_secundary_one+" class='audioProject secondOne col-md-6' controls> este es un elemento de audio no soportado por tu navegador, prueba con otro </audio>"+

@@ -412,7 +412,7 @@
                                                     <i class="m-nav__link-icon flaticon-user"></i>
                                                     <span class="m-nav__link-text">Perfil</span>
                                                 </a>
-                                            @elseif(auth()->user()->roles[0]->rol == "Manage")
+                                            @elseif(auth()->user()->roles[0]->rol == "Gestor")
                                                 <a href="{{ route('profile.managament',auth()->user()->slug) }}"
                                                    class="m-nav__link">
                                                     <i class="m-nav__link-icon flaticon-user"></i>
