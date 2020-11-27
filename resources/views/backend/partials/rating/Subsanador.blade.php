@@ -47,7 +47,7 @@
                     class="btn-subsanador btn btn-success m-btn m-btn--icon btn-revision-curador-aspirantes">
             <span style="color: white">
                 <i class="la la-check"></i>
-                <span>Aceptar y enviar mensaje de correcón al aspirante</span>
+                <span>Aceptar y enviar mensaje de correción al aspirante</span>
             </span>
             </button>
             <input type="hidden" value="" class="valueTipoRevision">
