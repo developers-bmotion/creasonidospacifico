@@ -7,6 +7,7 @@ use App\Category;
 use App\EndProject;
 use App\Mail\ArtistProjectPreAprov;
 use App\Mail\ArtistProjectRejected;
+use App\Mail\AspiringCorrection;
 use App\Mail\AssignProjectManager;
 use App\Mail\NewProjectArtist;
 use App\Management;
@@ -254,8 +255,18 @@ class ProjectsAdminController extends Controller
         if($tipoRevision == 0){
             $artistSendEmail = \Mail::to($project->artists[0]->users->email)->send(new ArtistProjectRevision($project->title, $project->artists[0]->users->name, $request->input('observation'), $MyDateCarbon->formatLocalized('%A %d de %B de %Y %H:%M:%S')));
 
-        }else{
+        }else if($tipoRevision == 1){
             $artistSendEmail = \Mail::to('developer@bmotion.co')->send(new ArtistProjectRevision($project->title, $project->artists[0]->users->name, $request->input('observation'), Carbon::today()));
+
+        }else if($tipoRevision == 2){
+            Project::where('id', $id)->update([
+                'rejected' => '0',
+                'status' => 7
+            ]);
+            DB::table('history_revisions')->where('project_id', $id)->update([
+                    'state' => 2
+            ]);
+            \Mail::to($project->artists[0]->users->email)->send(new AspiringCorrection($project->artists[0]->users->name, $project->artists[0]->users->last_name, $project->title, $request->input('observation')));
         }
 
         // alert()->success( 'Enviado a revisión',__('Ok'))->autoClose(3000);

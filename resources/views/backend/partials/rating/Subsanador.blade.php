@@ -37,96 +37,23 @@
         </div>
     </div>
 @endif
-
-
-{{--@else--}}
-{{--    <!-- TIEMPO ESTIMADO PARA CALIFICAR-->--}}
-{{--    @if(! $project->status == 5)--}}
-{{--        <div class="form-group">--}}
-{{--            <h5 style="font-weight: bold">{{ __('tiempo_calificar') }}:</h5>--}}
-{{--        </div>--}}
-{{--        <div class="form-group">--}}
-{{--            @if(!$end_time == null)--}}
-{{--                <span class="m--font-bold m--font-primary"--}}
-{{--                      style="font-weight: bold; font-size: 16px">{{ $end_time->end_time->toFormattedDateString() }}</span>--}}
-{{--            @endif--}}
-{{--        </div>--}}
-{{--    @endif--}}
-{{-- @if($project->status == 2)
-    <!-- Rating Project -->
-    <div class="form-group">
-        <h5 style="font-weight: bold">{{ __('calificacion') }}:</h5>
-    </div> --}}
-{{-- <div class="form-group">
-    <ul id="list_rating" class="list-inline" style="font-size: 20px">
-        <li class="list-inline-item star" data-number="1"><i
-                class="fa fa-star fa-1x {{$currentRaing>=1?"yellow-rating":""}}"></i></li>
-        <li class="list-inline-item star" data-number="2"><i
-                class="fa fa-star fa-1x {{$currentRaing>=2?"yellow-rating":""}}"></i></li>
-        <li class="list-inline-item star" data-number="3"><i
-                class="fa fa-star fa-1x {{$currentRaing>=3?"yellow-rating":""}}"></i></li>
-        <li class="list-inline-item star" data-number="4"><i
-                class="fa fa-star fa-1x {{$currentRaing>=4?"yellow-rating":""}}"></i></li>
-        <li class="list-inline-item star" data-number="5"><i
-                class="fa fa-star fa-1x {{$currentRaing==5?"yellow-rating":""}}"></i></li>
-    </ul>
-</div> --}}
-{{-- @endif --}}
-<!-- VER A QUIEN SE ASIGNO EL PROYECTO-->
-{{-- @if( ($project->status !== 1 && $asignado !== 0))
-@if($project->status != 4)
-<div class="col-md-12 mt-5">
-    <div class="row">
-
-
-    <div class="form-group col-md-3">
-        <h5 style="font-weight: bold">{{ __('asignado_a') }}: </h5>
-    </div>
-    <div class="form-group col-md-6">
-        <button type="button" id="mostrar_managements_asignados" class="btn btn-danger m-btn m-btn--icon">
-    <span>
-        <i class="la la-users"></i>
-        <span>{{ __('mostrar') }}</span>
-    </span>
-        </button>
-
-    </div>
-</div>
-</div>
- @endif
-@endif --}}
-
-<!-- MODAL, BUSCAR MANAGEMENT-->
-{{-- <div class="modal fade" id="list_modal_manage" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Curadores</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <table class="table table-striped- table-bordered table-hover table-checkable" id="m_table_managements">
-                    <thead>
-                    <tr>
-                        <th>Order ID</th>
-                        <th>Curador</th>
-                        <th>Email</th>
-                        <th>{{ __('intereses') }}</th>
-
-                    </tr>
-                    </thead>
-                </table>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="btnSendMessage">{{ __('enviar') }}</button>
-            </div>
+@if($project->status == 4)
+    <div class="col-md-12 mt-5">
+        <div class="form-group">
+            <h5 style="font-weight: bold">{{ __('Acciones') }}:</h5>
+        </div>
+        <div class="form-group">
+            <button type="button" data-toggle="modal" data-target="#revision"
+                    class="btn-subsanador btn btn-success m-btn m-btn--icon btn-revision-curador-aspirantes">
+            <span style="color: white">
+                <i class="la la-check"></i>
+                <span>Aceptar y enviar mensaje de correcón al aspirante</span>
+            </span>
+            </button>
+            <input type="hidden" value="" class="valueTipoRevision">
         </div>
     </div>
-</div> --}}
+@endif
 <!-- MODAL REVISIÓN PROJECTO-->
 <div class="modal fade" id="revision" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
@@ -156,9 +83,15 @@
 
 @section('table.admin.management')
     <script>
+        /*Boton que permite enviar a curador y al aspirante con mensaje de correo*/
+        $(".btn-revision-curador-aspirantes").click(function (){
+            $('.valueTipoRevision').val(2)
+        });
+        /*Boton que permite enviar a soporte*/
         $(".btn-revision-soporte").click(function (){
             $('.valueTipoRevision').val(1)
         });
+        /*Boton que permite enviar a revisión*/
         $(".btn-revision").click(function (){
             $('.valueTipoRevision').val(0)
         });
@@ -399,10 +332,11 @@
                 }
             });
             $("#btnSendObservation").click(function () {
-                //
+                let tipoRevisión = $('.valueTipoRevision').val();
                 swal({
                     title: '¡Observación!',
-                    text: "¿Esta seguro de enviar a correción?",
+                    // text: "¿Esta seguro de enviar a correción?",
+                    text: tipoRevisión == 0 || tipoRevisión == 1 ? '¿Esta seguro de enviar a correción?' : 'Esta seguro de aceptar y enviar mensaje de correción',
                     type: 'info',
                     showCancelButton: true,
                     confirmButtonText: 'Aceptar',
@@ -512,5 +446,6 @@
                 }
             })
         });
+
     </script>
 @endpush

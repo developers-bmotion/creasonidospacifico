@@ -68,7 +68,7 @@ Route::get('/offline', function () {
 });
 
 Route::get('/prueba-email', function () {
-    return new \App\Mail\NewRevisionProjectSubsanador('Mauricio', 'Gutierrez', 'Estoy contigo', 'Dario', 'Gonzales');
+    return new \App\Mail\AspiringCorrection('Mauricio','Gutierrez', 'Pedors', 'holas');
 });
 
 Route::get('/')->middleware('');
