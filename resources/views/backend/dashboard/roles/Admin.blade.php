@@ -258,43 +258,43 @@
                                                         </div>
                                                         <div class="col m--align-right">
                                                         <span class="m-widget1__number m--font-brand"
-                                                              style="font-size: 2rem">{{ $aspiranteRegistroCompleto }}</span>
+                                                              style="font-size: 2rem">{{ $personaNatural }}</span>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="m-widget1__item">
                                                     <div class="row m-row--no-padding align-items-center">
                                                         <div class="col">
-                                                            <h3 class="m-widget1__title">Integrantes en grupos</h3>
+                                                            <h3 class="m-widget1__title">Grupos constituido</h3>
                                                             {{-- <span class="m-widget1__desc">Aquellos que son integrantes de un grupo</span> --}}
                                                         </div>
                                                         <div class="col m--align-right">
                                                         <span class="m-widget1__number "
-                                                              style="font-size: 2rem;color:#36a3f7">{{ $integrantes }}</span>
+                                                              style="font-size: 2rem;color:#36a3f7">{{ $grupoConstituido }}</span>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="m-widget1__item">
                                                     <div class="row m-row--no-padding align-items-center">
                                                         <div class="col">
-                                                            <h3 class="m-widget1__title">Sin propuesta musical</h3>
+                                                            <h3 class="m-widget1__title">Representantes de un menor de edad</h3>
                                                             {{-- <span class="m-widget1__desc">Aquellos registros sin canción</span> --}}
                                                         </div>
                                                         <div class="col m--align-right">
                                                         <span class="m-widget1__number m--font-danger"
-                                                              style="font-size: 2rem">{{ $aspiranteRegistroSinCanción }}</span>
+                                                              style="font-size: 2rem">{{ $representanteMenor  }}</span>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="m-widget1__item">
                                                     <div class="row m-row--no-padding align-items-center">
                                                         <div class="col">
-                                                            <h3 class="m-widget1__title">Sin completar el registro</h3>
+                                                            <h3 class="m-widget1__title">Integrantes de un grupo</h3>
                                                             {{-- <span class="m-widget1__desc">Aquellos que solo han creado la cuenta</span> --}}
                                                         </div>
                                                         <div class="col m--align-right">
                                                         <span class="m-widget1__number m--font-warning"
-                                                              style="font-size: 2rem">{{ $aspirantessolocuenta }}</span>
+                                                              style="font-size: 2rem">{{ $integrantes }}</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -306,7 +306,7 @@
                                                     </div>
                                                     <div class="col m--align-right">
                                                         <span class="m-widget1__number m--font-"
-                                                              style="font-size: 2rem">{{ $totalregistros + $integrantes}}</span>
+                                                              style="font-size: 2rem">{{$integrantes+$representanteMenor+$grupoConstituido+$personaNatural}}</span>
                                                     </div>
                                                 </div>
                                             </div>

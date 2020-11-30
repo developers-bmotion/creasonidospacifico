@@ -40,6 +40,9 @@ class DashboardController extends Controller
         $aspiranteRegistroCompleto = Artist::whereHas('projects')->count();
         $aspiranteRegistroSinCanción = $listAspirant = Artist::whereNotNull('document_type')->doesnthave('projects')->count();
         $aspirantessolocuenta = Artist::whereNull('nickname')->whereDoesntHave('projects')->count();
+        $personaNatural = Artist::where('person_types_id',1)->count();
+        $grupoConstituido = Artist::where('person_types_id',3)->count();
+        $representanteMenor = Artist::where('person_types_id',2)->count();
         $integrantes = Team::whereNull('user_id')->count();
         $totalregistros = User::whereHas('roles', function ($q) {
             $q->where('rol', 'Artist');
@@ -119,7 +122,7 @@ class DashboardController extends Controller
         /* CANTIDA DE PROYECTOS APROBADAS*/
         $projectsStateAprobadas = Project::where('status', 2)->get()->count();
 
-        return view('backend.dashboard.dashboard', compact('integrantes','aspiranteRegistroCompleto',
+        return view('backend.dashboard.dashboard', compact('representanteMenor','grupoConstituido','personaNatural','integrantes','aspiranteRegistroCompleto',
             'aspiranteRegistroSinCanción', 'aspirantessolocuenta',
             'totalregistros', 'ciudades', 'total', 'categories', 'totalCategories','tipoPersona','cat','projectsStateRevision',
         'projectsStatePendiente', 'projectsStateNuevaRevision', 'projectsStateAceptado', 'projectsStateNoSubsanadas', 'projectsStateAprobadas'
