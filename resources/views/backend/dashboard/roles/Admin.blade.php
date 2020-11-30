@@ -54,6 +54,18 @@
                                 <div class="m-widget1__item">
                                     <div class="row m-row--no-padding align-items-center">
                                         <div class="col">
+                                            <h3 class="m-widget1__title">Registrados en grupos</h3>
+                                            <span class="m-widget1__desc">Aquellos que son integrantes de un grupo</span>
+                                        </div>
+                                        <div class="col m--align-right">
+                                        <span class="m-widget1__number "
+                                              style="font-size: 2rem;color:#36a3f7">{{ $integrantes }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="m-widget1__item">
+                                    <div class="row m-row--no-padding align-items-center">
+                                        <div class="col">
                                             <h3 class="m-widget1__title">Registros sin canción</h3>
                                             <span class="m-widget1__desc">Aquellos registros sin canción</span>
                                         </div>
@@ -83,7 +95,7 @@
                                     </div>
                                     <div class="col m--align-right">
                                         <span class="m-widget1__number m--font-"
-                                              style="font-size: 2rem">{{ $totalregistros }}</span>
+                                              style="font-size: 2rem">{{ $totalregistros+$integrantes }}</span>
                                     </div>
                                 </div>
                                 <div class="row pt-2">
