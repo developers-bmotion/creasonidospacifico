@@ -51,8 +51,11 @@
                                         <h6>Observaciones:</h6>
                                         <div>{!! $cal->comment !!}</div>
                                         <br>
-                                        <span style="font-size:1.1rem;color:#739594;"
-                                          class="font-weight-bold mb-3">Calificado por: {{ $cal->users->name }}  {{ $cal->users->last_name }}</span>
+                                        <a href="{{ route('profile.curador',$cal->users->slug)}}">
+
+                                            <span  style="font-size:1.1rem;color:#739594;"
+                                              class="font-weight-bold mb-3">Calificado por: {{ $cal->users->name }}  {{ $cal->users->last_name }}</span>
+                                        </a>
                                           <br>
                                         <hr>
 
