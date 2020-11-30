@@ -31,7 +31,7 @@ class ShowProjectController extends Controller
         // dd($artist);
         $sumRating=Project::sumRating($project->id);
         $team = Project::where('id',$project->id)->with('teams')->first();
-        $qual = Review::where("project_id","=", $project->id)->get();
+        $qual = Review::with('users')->where("project_id","=", $project->id)->get();
         if (in_array('Admin', $rol)) {
             $review = Review::where("project_id","=", $project->id)->get();
             $asignado = count($review);

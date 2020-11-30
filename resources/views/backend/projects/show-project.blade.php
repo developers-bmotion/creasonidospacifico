@@ -6,6 +6,7 @@
 
             @if(auth()->user()->roles[0]->rol == 'Admin')
                 @if( $project->status == 2 )
+                {{-- @dd($qual) --}}
                     <div class="m-accordion m-accordion--default m-accordion--toggle-arrow" id="m_accordion_5"
                          role="tablist">
                         <div class="m-accordion__item ">
@@ -50,9 +51,14 @@
                                         <h6>Observaciones:</h6>
                                         <div>{!! $cal->comment !!}</div>
                                         <br>
+                                        <span style="font-size:1.1rem;color:#739594;"
+                                          class="font-weight-bold mb-3">Calificado por: {{ $cal->users->name }}  {{ $cal->users->last_name }}</span>
+                                          <br>
                                         <hr>
 
+
                                     @endforeach
+
                                     <span style="font-size:1.1rem;color:#739594;float:right;"
                                           class="font-weight-bold mb-3">Calificación final: {{ $sumRating }}</span>
 
