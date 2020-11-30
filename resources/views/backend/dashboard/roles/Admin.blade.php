@@ -235,7 +235,7 @@
                         <div class="m-accordion__item-head collapsed" role="tab" id="m_accordion_3_item_1_head"
                              data-toggle="collapse" href="#m_accordion_3_item_1_body" aria-expanded="false">
                             <span class="m-accordion__item-icon"><i class="fa flaticon-user-ok"></i></span>
-                            <span class="m-accordion__item-title">Información de ciudades & modalidades (Clic para más información)</span>
+                            <span class="m-accordion__item-title">Información General</span>
                             <span class="m-accordion__item-mode"></span>
                         </div>
                         <div class="m-accordion__item-body collapse" id="m_accordion_3_item_1_body" role="tabpanel"
@@ -244,17 +244,17 @@
                                 <div class="row">
                                     <div class="col-12 col-md-4 col-lg-4">
 
-                                        {{-- <div class="m-widget1">
+                                        <div class="m-widget1 conteo">
                                             <h5 class="m-portlet__head-text">
                                                 Cantidad de aspirantes registrados
                                             </h5>
                                             <hr>
-                                            <div class="displayNoneRegistros" style="display: none">
+                                            <div class="displayNoneRegistros">
                                                 <div class="m-widget1__item">
                                                     <div class="row m-row--no-padding align-items-center">
                                                         <div class="col">
-                                                            <h3 class="m-widget1__title">Registrados</h3>
-                                                            <span class="m-widget1__desc">Aquellos que han hecho todo el proceso</span>
+                                                            <h3 class="m-widget1__title">Personas naturales</h3>
+                                                            {{-- <span class="m-widget1__desc">Aquellos que han hecho todo el proceso</span> --}}
                                                         </div>
                                                         <div class="col m--align-right">
                                                         <span class="m-widget1__number m--font-brand"
@@ -265,8 +265,8 @@
                                                 <div class="m-widget1__item">
                                                     <div class="row m-row--no-padding align-items-center">
                                                         <div class="col">
-                                                            <h3 class="m-widget1__title">Registrados en grupos</h3>
-                                                            <span class="m-widget1__desc">Aquellos que son integrantes de un grupo</span>
+                                                            <h3 class="m-widget1__title">Integrantes en grupos</h3>
+                                                            {{-- <span class="m-widget1__desc">Aquellos que son integrantes de un grupo</span> --}}
                                                         </div>
                                                         <div class="col m--align-right">
                                                         <span class="m-widget1__number "
@@ -277,8 +277,8 @@
                                                 <div class="m-widget1__item">
                                                     <div class="row m-row--no-padding align-items-center">
                                                         <div class="col">
-                                                            <h3 class="m-widget1__title">Registros sin canción</h3>
-                                                            <span class="m-widget1__desc">Aquellos registros sin canción</span>
+                                                            <h3 class="m-widget1__title">Sin propuesta musical</h3>
+                                                            {{-- <span class="m-widget1__desc">Aquellos registros sin canción</span> --}}
                                                         </div>
                                                         <div class="col m--align-right">
                                                         <span class="m-widget1__number m--font-danger"
@@ -289,8 +289,8 @@
                                                 <div class="m-widget1__item">
                                                     <div class="row m-row--no-padding align-items-center">
                                                         <div class="col">
-                                                            <h3 class="m-widget1__title">Sin Registro</h3>
-                                                            <span class="m-widget1__desc">Aquellos que solo han creado la cuenta</span>
+                                                            <h3 class="m-widget1__title">Sin completar el registro</h3>
+                                                            {{-- <span class="m-widget1__desc">Aquellos que solo han creado la cuenta</span> --}}
                                                         </div>
                                                         <div class="col m--align-right">
                                                         <span class="m-widget1__number m--font-warning"
@@ -309,18 +309,8 @@
                                                               style="font-size: 2rem">{{ $totalregistros + $integrantes}}</span>
                                                     </div>
                                                 </div>
-                                                <div class="row pt-2">
-                                                    <div class="col-12 text-center conteBtn1" style="display: block">
-                                                        <button type="button" class="btn btn-secondary btnMasInfoRegis1">Más información
-                                                        </button>
-                                                    </div>
-                                                    <div class="col-12 text-center conteBtn2"  style="display: none">
-                                                        <button type="button" class="btn btn-secondary btnMasInfoRegis2">Ocultar Información
-                                                        </button>
-                                                    </div>
-                                                </div>
                                             </div>
-                                        </div> --}}
+                                        </div>
 
                                         {{--                                        <h5 class="m-portlet__head-text" style="text-align: center;">--}}
                                         {{--                                            Últimos aspirantes registrados--}}
