@@ -242,10 +242,10 @@
                              aria-labelledby="m_accordion_3_item_1_head" data-parent="#m_accordion_3" style="">
                             <div class="m-accordion__item-content">
                                 <div class="row">
-                                    <div class="col-12 col-md-4 col-lg-4">
+                                    <div class="col-12 col-md-3 col-lg-3">
 
                                         <div class="m-widget1 conteo">
-                                            <h5 class="m-portlet__head-text">
+                                            <h5 class="m-portlet__head-text" style="text-align: center;">
                                                 Cantidad de aspirantes registrados
                                             </h5>
                                             <hr>
@@ -257,8 +257,7 @@
                                                             {{-- <span class="m-widget1__desc">Aquellos que han hecho todo el proceso</span> --}}
                                                         </div>
                                                         <div class="col m--align-right">
-                                                        <span class="m-widget1__number m--font-brand"
-                                                              style="font-size: 2rem">{{ $personaNatural }}</span>
+                                                        <span class="m-widget1__number m--font-brand">{{ $personaNatural }}</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -270,7 +269,7 @@
                                                         </div>
                                                         <div class="col m--align-right">
                                                         <span class="m-widget1__number "
-                                                              style="font-size: 2rem;color:#36a3f7">{{ $grupoConstituido }}</span>
+                                                              style="color:#36a3f7">{{ $grupoConstituido }}</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -281,8 +280,7 @@
                                                             {{-- <span class="m-widget1__desc">Aquellos registros sin canción</span> --}}
                                                         </div>
                                                         <div class="col m--align-right">
-                                                        <span class="m-widget1__number m--font-danger"
-                                                              style="font-size: 2rem">{{ $representanteMenor  }}</span>
+                                                        <span class="m-widget1__number m--font-danger">{{ $representanteMenor  }}</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -293,8 +291,7 @@
                                                             {{-- <span class="m-widget1__desc">Aquellos que solo han creado la cuenta</span> --}}
                                                         </div>
                                                         <div class="col m--align-right">
-                                                        <span class="m-widget1__number m--font-warning"
-                                                              style="font-size: 2rem">{{ $integrantes }}</span>
+                                                        <span class="m-widget1__number m--font-warning">{{ $integrantes }}</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -305,8 +302,7 @@
                                                         <h3 class="m-widget1__title">Total</h3>
                                                     </div>
                                                     <div class="col m--align-right">
-                                                        <span class="m-widget1__number m--font-"
-                                                              style="font-size: 2rem">{{$integrantes+$representanteMenor+$grupoConstituido+$personaNatural}}</span>
+                                                        <span class="m-widget1__number m--font-">{{$integrantes+$representanteMenor+$grupoConstituido+$personaNatural}}</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -398,7 +394,7 @@
                                         {{--                                            </div>--}}
                                         {{--                                        </div>--}}
                                     </div>
-                                    <div class="col-12 col-md-4 col-lg-4">
+                                    <div class="col-12 col-md-4 col-lg-4 ">
                                         <h5 class="m-portlet__head-text" style="text-align: center;">
                                             Cantidad de aspirantes por ciudad o municipio
                                         </h5>
@@ -415,7 +411,7 @@
                                             </thead>
                                         </table>
                                     </div>
-                                    <div class="col-12 col-md-4 col-lg-4">
+                                    <div class="col-12 col-md-4 col-lg-4 canModalidad">
                                         <h5 class="m-portlet__head-text" style="text-align: center;">
                                             Cantidad de aspirantes por modalidad
                                         </h5>
