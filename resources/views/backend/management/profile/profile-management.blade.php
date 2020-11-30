@@ -594,19 +594,23 @@
                 }
 
                 let audioHtml = `
-                  <audio class='my-audio' src="${audioProject}" class="audioProject" controls> este es un elemento de audio no soportado por tu navegador, prueba con otro </audio> `;
+                  <audio class='my-audio audioProject' src="${audioProject}"  controls> este es un elemento de audio no soportado por tu navegador, prueba con otro </audio> `;
                 $(audioHtml).insertBefore(".sliderCalificadorUno");
 
                 let secondAudio = `<div class="row" id="second_song" class="mt-3 mb-2 ml-3">
                                       <label class="col-md-12 font-weight-bold ml-2" for="">Otras canciones</label>
                                       <audio src="${data.audio_secundary_one}" class="audioProjectOne col-6" controls> este es un elemento de audio no soportado por tu navegador, prueba con otro </audio>
 
-                                   </div>`
+                                   </div>`;
+                                   console.log(data.audio_secundary_one,'data one');
+                                   console.log(data.audio_secundary_two,'data two');
+
                         if(data.audio_secundary_one != null){
 
                             $(secondAudio).insertAfter(".audioProject");
 
                         }
+
 
                         if(data.audio_secundary_two != null){
                             let secondAudioTwo = `<audio src="${data.audio_secundary_two}" class="audioProjectTwo col-6" controls> este es un elemento de audio no soportado por tu navegador, prueba con otro </audio>`
@@ -1092,6 +1096,8 @@
                     if(value.projects[0].audio_secundary_two == null){
                             hidenSecond='none';
                         }
+
+
                         // reviews=response;
                         $(".reviews_content").html(
                             "<h4>" + value.projects[0].title + "</h4>" +
@@ -1101,7 +1107,7 @@
                             "<label>" + value.projects[0].description + "</label>" +
                             "<br>" +
                             "<br>" +
-                            " <audio class='my-audio' src="+value.projects[0].audio+" class='audioProject' controls> este es un elemento de audio no soportado por tu navegador, prueba con otro </audio>"+
+                            " <audio class='my-audio audioProject' src="+value.projects[0].audio+" controls> este es un elemento de audio no soportado por tu navegador, prueba con otro </audio>"+
                             " <div class='row ' id='otherSong' style='display:"+hiden+"'>"+
                             " <label class='col-md-12 font-weight-bold ml-2 mt-3'>Otras canciones</label>"+
                             " <audio src="+value.projects[0].audio_secundary_one+" class='audioProject secondOne col-md-6' controls> este es un elemento de audio no soportado por tu navegador, prueba con otro </audio>"+
