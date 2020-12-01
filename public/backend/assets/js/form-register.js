@@ -410,6 +410,8 @@ const fieldsInputs = {
     beneficiario_vereda: false,
 }
 
+msgErrorValidateForm = "Algunos datos son requeridos";
+
 /* Evento para enviar los datos del formulario */
 $("#send-info").click( function(e) {
     e.preventDefault();
@@ -459,7 +461,8 @@ function viewAlertError() {
         "showMethod": "fadeIn",
         "hideMethod": "fadeOut"
     };
-    toastr.error("Algunos datos son requeridos", "¡Recuerda!");
+    //toastr.error("Algunos datos son requeridos", "¡Recuerda!");
+    toastr.error(msgErrorValidateForm, "¡Recuerda!");
 }
 
 /* evento para realizar las validaciones del formulario */
@@ -511,6 +514,7 @@ function validationForm() {
     } else {
         validate = validateAspirante();
         validateFormInputs('aspirante', 'nameTeam');
+        
         // validar el rol que desempeña en el grupo
         if ($('input:radio[name="aspirante[partGroup]"]:checked').val() === '1') {
             validateFormInputs('aspirante', 'rolMember');
@@ -518,6 +522,19 @@ function validationForm() {
                 validate =  false;
             }
         }
+
+        // validación de integrantes del grupo
+        if ($("#input-max-members").val() === '') {
+            msgErrorValidateForm = "Debes agregar al menos un integrante del grupo musical";
+            validateNumberMin( $("#input-max-members").val() );
+            validate =  false;
+        } else {
+            if (typeof $("input[name='integrantes[0][nameMember]']").val() === 'undefined' || $("input[name='integrantes[0][nameMember]']").val() === '') {
+                msgErrorValidateForm = "Debes agregar al menos un integrante del grupo musical, dando clic en el boton agregar integrantes.";
+                validate = false;
+            } 
+        }        
+
         // falta validar el grupo
     }
 
