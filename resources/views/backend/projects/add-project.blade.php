@@ -522,13 +522,15 @@
 
     </script>
     <script>
-        $('.add-song').click(function(){
+        $('.add-song').click(function(e){
+            e.preventDefault();
             // $(this).hide();
             $('.add-song-drop').show();
             $('.cancel-song').show();
 
         });
-        $('.cancel-song').click(function(){
+        $('.cancel-song').click(function(e){
+            e.preventDefault();
             // console.log(fileOne,'fileOne');
             $(this).hide();
             $('.add-song-drop').hide();
