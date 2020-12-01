@@ -2801,7 +2801,8 @@
 
         var dropzone = new Dropzone('.dropzone-audio', {
             url: '{{route('update.audio')}}',
-            acceptedFiles: 'audio/*,video/*',
+            acceptedFiles: '.mp3',
+            addRemoveLinks: true,
             maxFiles: 1,
             timeout: 180000,
             paramName: 'audio',
@@ -2853,10 +2854,29 @@
             },
             error: function (file, e, i, o, u) {
 
-                $('body').loading({
-                    start: false,
-                });
-                toastr.options = {
+                if(file.accepted == false){
+                    toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "3000",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+
+                toastr.warning("Formato de audio incorrecto, solo se acepta formato mp3", "Información");
+                    // alert('asi no pri')
+                }else{
+                    toastr.options = {
                     "closeButton": false,
                     "debug": false,
                     "newestOnTop": false,
@@ -2875,6 +2895,12 @@
                 };
 
                 toastr.warning("El audio no se cargó correctamente, inténtalo más tarde", "Información");
+            }
+
+                $('body').loading({
+                    start: false,
+                });
+
 
                 $("#erroresImagen").text('');
                 if (file.xhr.status === 413) {
