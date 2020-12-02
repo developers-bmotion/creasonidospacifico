@@ -325,12 +325,15 @@ class ProfileController extends Controller
             if ($request->actuaraComo == '1'){
                 // solo se guarda el aspirante
                 $idArtist = $this->saveNewAspirant($request);
+                if ($idArtist == -1) return back()->with('error_register', 'Ya existe un usuario registrado con ese correo.');
             } else { // se debe guardar los datos del representante
                 $idArtist = $this->saveNewAspirant($request);
+                if ($idArtist == -1) return back()->with('error_register', 'Ya existe un usuario registrado con ese correo.');
                 $this->createBeneficiario($request, $idArtist);
             }
         } else { // Para este caso se debe guardar el representante
             $idArtist = $this->saveNewAspirant($request);
+            if ($idArtist == -1) return back()->with('error_register', 'Ya existe un usuario registrado con ese correo.');
             $this->registerAspiranteGroup($request, $idArtist);
             $this->insertGroupMembers($request, $idArtist);
         }
@@ -346,30 +349,44 @@ class ProfileController extends Controller
         if ($aspirante->urlImageProfile == '' || $aspirante->urlImageProfile == null){
             $aspirante->urlImageProfile = '/backend/assets/app/media/img/users/perfil.jpg';
         }
-        // crear el usuario
-        $user = new User();
-        $user->name = ucwords($aspirante->name);
-        $user->last_name = ucwords($aspirante->lastname);
-        $user->second_last_name = ucwords($aspirante->secondLastname);
-        $user->phone_1 = $aspirante->phone;
-        $user->pdf_cedula = $aspirante->urlPdfDocument;
-        $user->img_document_front = $aspirante->urlImageDocumentFrente;
-        $user->img_document_back = $aspirante->urlImageDocumentAtras;
-        $user->picture = $aspirante->urlImageProfile;
-        $user->slug = Str::slug($aspirante->name.'-'.str_random(100000), '-');
+        
+        if ( isset($aspirante->email) ) { // si existe un correo            
+            if ($aspirante->email != auth()->user()->email){ // debe ser diferente al del usuario gestor                                
+                // verificar si no existe un usuario con ese correo
+                $oldUser = User::where('email', $aspirante->email)->first();
 
-        if ( isset($aspirante->email) ) { // si existe un correo
-            if ($aspirante->email != auth()->user()->email){ // debe ser diferente al del usuario gestor
-                $password = trim(str_random(8));
-                $pass = bcrypt($password);
-                $user->email = $aspirante->email;
-                $user->password = $pass;
-                \Mail::to($user->email)->send(new NewGestorAdmin($user->email, $password)); // credenciales de acceso
-                \Mail::to($user->email)->send(new NewArtistRegisterGestor($aspirante->name, $aspirante->lastname, $song->nameProject )); // registro exitoso
+                if ($oldUser == null) {
+                    // se crea un nuevo usuario
+                    $user = $this->createUser($aspirante);
+
+                    $password = trim(str_random(8));
+                    $pass = bcrypt($password);
+                    $user->email = $aspirante->email;
+                    $user->password = $pass;
+                    \Mail::to($user->email)->send(new NewGestorAdmin($user->email, $password)); // credenciales de acceso
+                    \Mail::to($user->email)->send(new NewArtistRegisterGestor($aspirante->name, $aspirante->lastname, $song->nameProject )); // registro exitoso
+                    $user->save(); // guardar datos del usuario
+                } else {                    
+                    // revisar si tiene datos de nombre, apellido y identificacion
+                    if (($oldUser->name == null || $oldUser->name == "") && ($oldUser->last_name == null || $oldUser->last_name == "") && ($oldUser->identification == null || $oldUser->identification == "")) {
+                        // actualizar los datos del usuario
+                        $this->updateUser($aspirante, $oldUser->id);
+                        $user = User::where('email', $aspirante->email)->first();
+                        //\Mail::to($oldUser->email)->send(new NewArtistRegisterGestor($aspirante->name, $aspirante->lastname, $song->nameProject )); // registro exitoso
+                    } else {
+                        // tiene datos
+                        return -1;
+                    }
+                }  
+            } else {
+                $user = $this->createUser($aspirante);
+                $user->save(); // guardar datos del usuario
             }
-        }
-        $user->save(); // guardar datos del usuario
-
+        } else {
+            $user = $this->createUser($aspirante);
+            $user->save(); // guardar datos del usuario
+        }      
+        
         $personType = 3;
         if (isset($request->actuaraComo)) { $personType = $request->actuaraComo; }
 
@@ -394,8 +411,38 @@ class ProfileController extends Controller
         $aspirant->save();
 
         $user->roles()->attach(['2']);
-        \Mail::to(auth()->user()->email)->send(new NewAspirantGestor($user->name, $user->last_name, auth()->user()->name, auth()->user()->last_name)); // correo para el gestor
+        //\Mail::to(auth()->user()->email)->send(new NewAspirantGestor($user->name, $user->last_name, auth()->user()->name, auth()->user()->last_name)); // correo para el gestor
         return $aspirant->id;
+    }
+
+    public function createUser($aspirante) {
+        // crear el usuario
+        $user = new User();
+        $user->name = ucwords($aspirante->name);
+        $user->last_name = ucwords($aspirante->lastname);
+        $user->second_last_name = ucwords($aspirante->secondLastname);
+        $user->phone_1 = $aspirante->phone;
+        $user->pdf_cedula = $aspirante->urlPdfDocument;
+        $user->img_document_front = $aspirante->urlImageDocumentFrente;
+        $user->img_document_back = $aspirante->urlImageDocumentAtras;
+        $user->picture = $aspirante->urlImageProfile;
+        $user->slug = Str::slug($aspirante->name.'-'.str_random(100000), '-');
+
+        return $user;
+    }
+
+    public function updateUser($aspirante, $id_user) {
+        $user = User::where('id', '=', $id_user)->update([
+            'name' => ucwords($aspirante->name),
+            'last_name' => ucwords($aspirante->lastname),
+            'second_last_name' => ucwords($aspirante->secondLastname),
+            'phone_1' => $aspirante->phone,
+            'pdf_cedula' => $aspirante->urlPdfDocument,
+            'img_document_front' => $aspirante->urlImageDocumentFrente,
+            'img_document_back' => $aspirante->urlImageDocumentAtras,
+            'picture' => $aspirante->urlImageProfile,
+            'slug' => Str::slug($aspirante->name.'-'.str_random(100000), '-')
+        ]);
     }
 
     /* metodo para registrar un proyecto y asociarlo con un aspirante en la base de datos */

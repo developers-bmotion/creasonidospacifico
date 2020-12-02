@@ -44,6 +44,17 @@
             </div>
     @endif
 
+    @if(session()->has('error_register'))
+        <div class="m-alert m-alert--icon m-alert--outline alert alert-danger" role="alert">
+            <div class="m-alert__icon">
+                <i class="la la-check"></i>
+            </div>
+            <div class="m-alert__text">
+                <strong>¡Algo salio mal!</strong> {{session('error_register')}}
+            </div>
+        </div>
+    @endif
+
     <!--=====================================
             alerta de confirmacion de datos
         ======================================-->
