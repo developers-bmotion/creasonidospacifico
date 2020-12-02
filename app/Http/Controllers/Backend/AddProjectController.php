@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class AddProjectController extends Controller
 {
@@ -94,8 +95,8 @@ class AddProjectController extends Controller
             'subir_cancion' => 'required'
         ]);
 
-        $slug = str_slug($request->get('title'));
-        $ramdoNum = mt_rand(1, 100000);
+        $ramdoNum = Str::random(10);
+        $slug = Str::slug($request->get('name_project').'-'.$ramdoNum, '-');
 
         $artist = Artist::where('user_id', auth()->user()->id)->with('users')->first();
         $email_artist =  $artist->users->email;
@@ -109,7 +110,7 @@ class AddProjectController extends Controller
             'audio_secundary_two' => $request->get('audio_two'),
             'category_id' => $request->get('tCategory_id'),
             'status' => $request->get('status'),
-            'slug' => $slug . '-' . $ramdoNum
+            'slug' => $slug
         ]);
 
         $project->artists()->attach($request->get('artist_id'));

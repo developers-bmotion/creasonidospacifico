@@ -50,7 +50,7 @@ class UserController extends Controller
             'email' => $request->get('email'),
             'password' => $pass,
             'phone_1' => $request->get('phone'),
-            'slug' => Str::slug($request->get('name').'-'.str_random(1000),'-')
+            'slug' => Str::slug($request->get('name').'-'.(1000),'-')
         ]);
         $add_user->roles()->attach($request->role_type);
         if ($request->role_type == 4){
