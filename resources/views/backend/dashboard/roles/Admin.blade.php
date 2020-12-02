@@ -51,6 +51,18 @@
                                         </div>
                                     </div>
                                 </div>
+                                {{-- <div class="m-widget1__item">
+                                    <div class="row m-row--no-padding align-items-center">
+                                        <div class="col">
+                                            <h3 class="m-widget1__title">Registrados en grupos</h3>
+                                            <span class="m-widget1__desc">Aquellos que son integrantes de un grupo</span>
+                                        </div>
+                                        <div class="col m--align-right">
+                                        <span class="m-widget1__number "
+                                              style="font-size: 2rem;color:#36a3f7">{{ $integrantes }}</span>
+                                        </div>
+                                    </div>
+                                </div> --}}
                                 <div class="m-widget1__item">
                                     <div class="row m-row--no-padding align-items-center">
                                         <div class="col">
@@ -83,7 +95,7 @@
                                     </div>
                                     <div class="col m--align-right">
                                         <span class="m-widget1__number m--font-"
-                                              style="font-size: 2rem">{{ $totalregistros }}</span>
+                                              style="font-size: 2rem">{{ $totalregistros}}</span>
                                     </div>
                                 </div>
                                 <div class="row pt-2">
@@ -223,14 +235,79 @@
                         <div class="m-accordion__item-head collapsed" role="tab" id="m_accordion_3_item_1_head"
                              data-toggle="collapse" href="#m_accordion_3_item_1_body" aria-expanded="false">
                             <span class="m-accordion__item-icon"><i class="fa flaticon-user-ok"></i></span>
-                            <span class="m-accordion__item-title">Información de ciudades & modalidades (Clic para más información)</span>
+                            <span class="m-accordion__item-title">Información General</span>
                             <span class="m-accordion__item-mode"></span>
                         </div>
                         <div class="m-accordion__item-body collapse" id="m_accordion_3_item_1_body" role="tabpanel"
                              aria-labelledby="m_accordion_3_item_1_head" data-parent="#m_accordion_3" style="">
                             <div class="m-accordion__item-content">
                                 <div class="row">
-                                    <div class="col-12 col-md-4 col-lg-4">
+                                    <div class="col-12 col-md-3 col-lg-3">
+
+                                        <div class="m-widget1 conteo">
+                                            <h5 class="m-portlet__head-text" style="text-align: center;">
+                                                Cantidad de aspirantes registrados
+                                            </h5>
+                                            <hr>
+                                            <div class="displayNoneRegistros">
+                                                <div class="m-widget1__item">
+                                                    <div class="row m-row--no-padding align-items-center">
+                                                        <div class="col">
+                                                            <h3 class="m-widget1__title">Personas naturales</h3>
+                                                            {{-- <span class="m-widget1__desc">Aquellos que han hecho todo el proceso</span> --}}
+                                                        </div>
+                                                        <div class="col m--align-right">
+                                                        <span class="m-widget1__number m--font-brand">{{ $personaNatural }}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="m-widget1__item">
+                                                    <div class="row m-row--no-padding align-items-center">
+                                                        <div class="col">
+                                                            <h3 class="m-widget1__title">Grupos constituido</h3>
+                                                            {{-- <span class="m-widget1__desc">Aquellos que son integrantes de un grupo</span> --}}
+                                                        </div>
+                                                        <div class="col m--align-right">
+                                                        <span class="m-widget1__number "
+                                                              style="color:#36a3f7">{{ $grupoConstituido }}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="m-widget1__item">
+                                                    <div class="row m-row--no-padding align-items-center">
+                                                        <div class="col">
+                                                            <h3 class="m-widget1__title">Representantes de un menor de edad</h3>
+                                                            {{-- <span class="m-widget1__desc">Aquellos registros sin canción</span> --}}
+                                                        </div>
+                                                        <div class="col m--align-right">
+                                                        <span class="m-widget1__number m--font-danger">{{ $representanteMenor  }}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="m-widget1__item">
+                                                    <div class="row m-row--no-padding align-items-center">
+                                                        <div class="col">
+                                                            <h3 class="m-widget1__title">Integrantes de un grupo</h3>
+                                                            {{-- <span class="m-widget1__desc">Aquellos que solo han creado la cuenta</span> --}}
+                                                        </div>
+                                                        <div class="col m--align-right">
+                                                        <span class="m-widget1__number m--font-warning">{{ $integrantes }}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="m-widget1__item">
+                                                <div class="row m-row--no-padding align-items-center">
+                                                    <div class="col">
+                                                        <h3 class="m-widget1__title">Total</h3>
+                                                    </div>
+                                                    <div class="col m--align-right">
+                                                        <span class="m-widget1__number m--font-">{{$integrantes+$representanteMenor+$grupoConstituido+$personaNatural}}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         {{--                                        <h5 class="m-portlet__head-text" style="text-align: center;">--}}
                                         {{--                                            Últimos aspirantes registrados--}}
                                         {{--                                        </h5>--}}
@@ -317,7 +394,7 @@
                                         {{--                                            </div>--}}
                                         {{--                                        </div>--}}
                                     </div>
-                                    <div class="col-12 col-md-4 col-lg-4">
+                                    <div class="col-12 col-md-4 col-lg-4 ">
                                         <h5 class="m-portlet__head-text" style="text-align: center;">
                                             Cantidad de aspirantes por ciudad o municipio
                                         </h5>
@@ -334,7 +411,7 @@
                                             </thead>
                                         </table>
                                     </div>
-                                    <div class="col-12 col-md-4 col-lg-4">
+                                    <div class="col-12 col-md-4 col-lg-4 canModalidad">
                                         <h5 class="m-portlet__head-text" style="text-align: center;">
                                             Cantidad de aspirantes por modalidad
                                         </h5>

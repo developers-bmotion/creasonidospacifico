@@ -6,6 +6,7 @@
 
             @if(auth()->user()->roles[0]->rol == 'Admin')
                 @if( $project->status == 2 )
+                {{-- @dd($qual) --}}
                     <div class="m-accordion m-accordion--default m-accordion--toggle-arrow" id="m_accordion_5"
                          role="tablist">
                         <div class="m-accordion__item ">
@@ -50,9 +51,17 @@
                                         <h6>Observaciones:</h6>
                                         <div>{!! $cal->comment !!}</div>
                                         <br>
+                                        <a href="{{ route('profile.curador',$cal->users->slug)}}">
+
+                                            <span  style="font-size:1.1rem;color:#739594;"
+                                              class="font-weight-bold mb-3">Calificado por: {{ $cal->users->name }}  {{ $cal->users->last_name }}</span>
+                                        </a>
+                                        <br>
                                         <hr>
 
+
                                     @endforeach
+
                                     <span style="font-size:1.1rem;color:#739594;float:right;"
                                           class="font-weight-bold mb-3">Calificación final: {{ $sumRating }}</span>
 
@@ -2738,7 +2747,8 @@
     <script>
         var dropzone = new Dropzone('.dropzone-audio', {
             url: '{{route('update.audio')}}',
-            acceptedFiles: 'audio/*,video/*',
+            acceptedFiles: '.mp3',
+            addRemoveLinks: true,
             maxFiles: 1,
             paramName: 'audio',
             headers: {
@@ -2785,10 +2795,29 @@
             },
             error: function (file, e, i, o, u) {
 
-                $('body').loading({
-                    start: false,
-                });
-                toastr.options = {
+                if(file.accepted == false){
+                    toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "3000",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+
+                toastr.warning("Formato de audio incorrecto, solo se acepta formato mp3", "Información");
+                    // alert('asi no pri')
+                }else{
+                    toastr.options = {
                     "closeButton": false,
                     "debug": false,
                     "newestOnTop": false,
@@ -2807,6 +2836,13 @@
                 };
 
                 toastr.warning("El audio no se cargó correctamente, inténtalo más tarde", "Información");
+            }
+
+
+                $('body').loading({
+                    start: false,
+                });
+
 
                 $("#erroresImagen").text('');
                 if (file.xhr.status === 413) {

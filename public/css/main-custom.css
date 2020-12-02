@@ -11,6 +11,11 @@
     margin: 2rem 0 !important;
 }
 
+.m-widget1.conteo {
+    padding: 0rem !important;
+}
+
+
 /* div#app {
     flex: 0.1 !important;
 }
@@ -261,6 +266,10 @@
     }
     .my-table-admin {
         width: 100%;
+    }
+    .canModalidad{
+        padding: 1.5rem;
+        margin-left: 3rem;
     }
     .my-table th {
         font-weight: 500;

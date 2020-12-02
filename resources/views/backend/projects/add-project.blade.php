@@ -336,14 +336,17 @@
     <script>
         var dropzone = new Dropzone('.dropzone', {
             url: '{{route('add.project.audio')}}',
-            acceptedFiles: 'audio/*,video/*',
+            acceptedFiles: '.mp3',
             timeout: 180000,
             maxFiles: 1,
             paramName: 'image',
+            addRemoveLinks: true,
             headers: {
+
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
             processing: function(file, response){
+                // console.log(file,'prosesing')
                 $('body').loading({
                     message: 'Subiendo canción...',
                     start:true,
@@ -359,10 +362,29 @@
                 $('#img_add_proyect').attr('src', response);
             },
             error: function (file, e, i, o, u) {
-                $('body').loading({
-                    start:false,
-                });
-                toastr.options = {
+                if(file.accepted == false){
+                    toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "3000",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+
+                toastr.warning("Formato de audio incorrecto, solo se acepta formato mp3", "Información");
+                    // alert('asi no pri')
+                }else{
+                    toastr.options = {
                     "closeButton": false,
                     "debug": false,
                     "newestOnTop": false,
@@ -382,13 +404,20 @@
 
                 toastr.warning("El audio no se cargó correctamente, inténtalo más tarde", "Información");
                 $("#erroresImagen").text('');
-                if (file.xhr.status === 413) {
-                    $("#erroresImagen").text('{{__("imagen_grande")}}');
-                    $(file.previewElement).addClass("dz-error").find('.dz-error-message').text('{{__("imagen_grande")}}');
-                    setTimeout(() => {
-                        dropzone.removeFile(file)
-                    }, 1000)
+
                 }
+                console.log(file,'file');
+                $('body').loading({
+                    start:false,
+                });
+
+                // if (file.xhr.status === 413) {
+                //     $("#erroresImagen").text('{{__("imagen_grande")}}');
+                //     $(file.previewElement).addClass("dz-error").find('.dz-error-message').text('{{__("imagen_grande")}}');
+                //     setTimeout(() => {
+                //         dropzone.removeFile(file)
+                //     }, 1000)
+                // }
             }
         });
 
@@ -396,7 +425,8 @@
         var fileOne;
         var dropzoneOne = new Dropzone('.dropzone-one', {
             url: '{{route('add.audio.one')}}',
-            acceptedFiles: 'audio/*',
+            acceptedFiles: '.mp3',
+            addRemoveLinks: true,
             timeout: 360000,
             maxFiles: 1,
             paramName: 'image',
@@ -419,10 +449,29 @@
                 $('#img_add_proyect').attr('src', response);
             },
             error: function (file, e, i, o, u) {
-                $('body').loading({
-                    start:false,
-                });
-                toastr.options = {
+                if(file.accepted == false){
+                    toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "3000",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+
+                toastr.warning("Formato de audio incorrecto, solo se acepta formato mp3", "Información");
+                    // alert('asi no pri')
+                }else{
+                    toastr.options = {
                     "closeButton": false,
                     "debug": false,
                     "newestOnTop": false,
@@ -442,6 +491,13 @@
 
                 toastr.warning("El audio no se cargó correctamente, inténtalo más tarde", "Información");
                 $("#erroresImagen").text('');
+
+                }
+                $('body').loading({
+                    start:false,
+                });
+
+                $("#erroresImagen").text('');
                 if (file.xhr.status === 413) {
                     $("#erroresImagen").text('{{__("imagen_grande")}}');
                     $(file.previewElement).addClass("dz-error").find('.dz-error-message').text('{{__("imagen_grande")}}');
@@ -456,7 +512,8 @@
         var fileTwo;
         var dropzoneTwo = new Dropzone('.dropzone-two', {
             url: '{{route('add.audio.two')}}',
-            acceptedFiles: 'audio/*',
+            acceptedFiles: '.mp3',
+            addRemoveLinks: true,
             timeout: 360000,
             maxFiles: 1,
             paramName: 'image',
@@ -480,10 +537,30 @@
                 $('#img_add_proyect').attr('src', response);
             },
             error: function (file, e, i, o, u) {
-                $('body').loading({
-                    start:false,
-                });
-                toastr.options = {
+
+                if(file.accepted == false){
+                    toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "3000",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+
+                toastr.warning("Formato de audio incorrecto, solo se acepta formato mp3", "Información");
+                    // alert('asi no pri')
+                }else{
+                    toastr.options = {
                     "closeButton": false,
                     "debug": false,
                     "newestOnTop": false,
@@ -502,6 +579,13 @@
                 };
 
                 toastr.warning("El audio no se cargó correctamente, inténtalo más tarde", "Información");
+                $("#erroresImagen").text('');
+
+                }
+                $('body').loading({
+                    start:false,
+                });
+
                 $("#erroresImagen").text('');
                 if (file.xhr.status === 413) {
                     $("#erroresImagen").text('{{__("imagen_grande")}}');
@@ -522,19 +606,21 @@
 
     </script>
     <script>
-        $('.add-song').click(function(){
+        $('.add-song').click(function(e){
+            e.preventDefault();
             // $(this).hide();
             $('.add-song-drop').show();
             $('.cancel-song').show();
 
         });
-        $('.cancel-song').click(function(){
+        $('.cancel-song').click(function(e){
+            e.preventDefault();
             // console.log(fileOne,'fileOne');
             $(this).hide();
             $('.add-song-drop').hide();
             $('.add-song').show();
-            $('#inputDropOne').val(" ");
-            $('#inputDropTwo').val(" ");
+            $('#inputDropOne').val(null);
+            $('#inputDropTwo').val(null);
             if(fileOne){
 
                 dropzoneOne.removeFile(fileOne);
