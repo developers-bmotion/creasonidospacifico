@@ -701,7 +701,7 @@
                                                     @if($artist->projects[0]->status == 2)
                                                         <span
                                                             class="m-badge m-badge--brand m-badge--wide m-badge--rounded"
-                                                            style="background-color: #9816f4 !important;">Pre aprobado</span>
+                                                            style="background-color: #9816f4 !important;">Calificado</span>
                                                     @endif
                                                     @if($artist->projects[0]->status == 3)
                                                         <span
