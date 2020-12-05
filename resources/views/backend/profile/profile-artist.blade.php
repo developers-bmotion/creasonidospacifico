@@ -1704,7 +1704,7 @@
                                                                    style="color:#716aca; cursor:pointer;"></i>
                                                             @endif
                                                         @endif
-                                    
+
                                                         <button type="button" class="btn btn-primary cancel_pdf_ben"
                                                                 style="display:none">Cancelar
                                                         </button>
@@ -1757,33 +1757,35 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
+                                                    @if(count($artist->beneficiary) > 0)
+                                                        @if($artist->beneficiary[0]->pdf_documento === null)
+                                                            @if(!$artist->beneficiary[0]->img_document_front && !$artist->beneficiary[0]->img_document_back)
+                                                                <p>No se cargo el documento correctamente</p>
+                                                            @else
+                                                                <div class="form-group">
+                                                                    <label for="">Parte frontal del documetno:</label>
+                                                                    <img style="width: 100%"
+                                                                         src="{{ $artist->beneficiary[0]->img_document_front }}"
+                                                                         alt="">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="">Parte trasera del documento:</label>
+                                                                    <img style="width: 100%"
+                                                                         src="{{ $artist->beneficiary[0]->img_document_back }}"
+                                                                         alt="">
+                                                                </div>
 
-                                                    @if($artist->beneficiary[0]->pdf_documento === null)
-                                                        @if(!$artist->beneficiary[0]->img_document_front && !$artist->beneficiary[0]->img_document_back)
-                                                            <p>No se cargo el documento correctamente</p>
+                                                            @endif
                                                         @else
-                                                            <div class="form-group">
-                                                                <label for="">Parte frontal del documetno:</label>
-                                                                <img style="width: 100%"
-                                                                     src="{{ $artist->beneficiary[0]->img_document_front }}"
-                                                                     alt="">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="">Parte trasera del documento:</label>
-                                                                <img style="width: 100%"
-                                                                     src="{{ $artist->beneficiary[0]->img_document_back }}"
-                                                                     alt="">
-                                                            </div>
-
-                                                        @endif
-                                                    @else
-                                                        @if(!$artist->beneficiary[0]->pdf_documento)
-                                                            <p>No se cargo el documento correctamente</p>
-                                                        @else
-                                                            <div>
-                                                                <embed src="{{ $artist->beneficiary[0]->pdf_documento}}"
-                                                                       frameborder="0" width="100%" height="400px">
-                                                            </div>
+                                                            @if(!$artist->beneficiary[0]->pdf_documento)
+                                                                <p>No se cargo el documento correctamente</p>
+                                                            @else
+                                                                <div>
+                                                                    <embed
+                                                                        src="{{ $artist->beneficiary[0]->pdf_documento}}"
+                                                                        frameborder="0" width="100%" height="400px">
+                                                                </div>
+                                                            @endif
                                                         @endif
                                                     @endif
                                                 </div>
