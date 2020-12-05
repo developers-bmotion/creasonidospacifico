@@ -18,7 +18,7 @@
                     <div
                         v-for="status in props.row.artista.projects"
                         :key="status.id"
-                    >
+                    >c
                         <span
                             v-if="status.status == 1"
                             class="m-badge m-badge--metal m-badge--wide m-badge--rounded"
@@ -27,7 +27,7 @@
                             v-if="status.status == 2"
                             class="m-badge m-badge--brand m-badge--wide m-badge--rounded"
                             style="background-color: #9816f4 !important"
-                            >Pre aprobado</span
+                            >Calificado</span
                         >
 
                         <span

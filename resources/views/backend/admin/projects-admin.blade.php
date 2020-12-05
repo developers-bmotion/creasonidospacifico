@@ -655,7 +655,7 @@ CONTENIDO DEL MODULO PROYECTOS ADMIN
                                 });
                             }
 
-                            return items != "" ? `<div class="text-center"><a href="/dashboard/project/${items.slug}" class="btn m-btn--pill btn-secondary"><i class="fa fa-eye"></i></a></div>` : '<span class="label label-danger text-center ml-4" style="color:red !important">Sin propuesta</span>'
+                            return items != "" ? `<div class="text-center" ><a target="_blank" href="/dashboard/project/${items.slug}" class="btn m-btn--pill btn-secondary"><i class="fa fa-eye"></i></a></div>` : '<span class="label label-danger text-center ml-4" style="color:red !important">Sin propuesta</span>'
                         }
                     },
                 ],
