@@ -1428,9 +1428,11 @@
                                                                 <img class="ml-4 "
                                                                      style="border-radius:8rem; width:7rem"
                                                                      src="/default/user.png">
-                                                                @if($artist->projects[0]->status == 4 || $artist->projects[0]->status == 1)
-                                                                    <i class="flaticon-edit ml-3 update_img_profile_ben"
-                                                                       style="color:#716aca; cursor:pointer;"></i>
+                                                                @if(count($artist->projects) > 0)
+                                                                    @if($artist->projects[0]->status == 4 || $artist->projects[0]->status == 1)
+                                                                        <i class="flaticon-edit ml-3 update_img_profile_ben"
+                                                                           style="color:#716aca; cursor:pointer;"></i>
+                                                                    @endif
                                                                 @endif
                                                             </div>
                                                             <div class="col-md-4 drop_prof_ben" style="display: none">
