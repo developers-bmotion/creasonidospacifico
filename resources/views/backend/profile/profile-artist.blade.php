@@ -12,6 +12,7 @@
     </div>
     <div class="row pt-4">
         <div class="col-12">
+
             @if(count(\App\Artist::projects_artist(auth()->user()->id)) === 0)
                 <div class="m-alert m-alert--icon m-alert--outline alert alert-warning" role="alert">
                     <div class="m-alert__icon">
@@ -602,6 +603,7 @@
                             </div>
 
                         </div>
+
                         @if($artist->projects && count($artist->projects) > 0 )
                             @if(count($artist->projects) !== 0 || $artist->projects)
                                 <div class="tab-pane " id="m_user_profile_tab_2">
@@ -772,6 +774,7 @@
                     <!--=====================================
                                        CONFIGURACIONES
                                         ======================================-->
+
                         @if($artist->teams  && count($artist->teams) > 0)
 
                             @if(count($artist->teams) !== 0 || $artist->teams)
@@ -1357,7 +1360,9 @@
 
                         @endif
 
+
                         @if( $artist->beneficiary && count($artist->beneficiary) > 0)
+
                             @if(count($artist->beneficiary) !== 0 || $artist->beneficiary)
 
                                 <div class="tab-pane " id="m_user_profile_tab_4">
@@ -1370,6 +1375,7 @@
 
                                                     @if ($artist->beneficiary[0]->picture)
 
+
                                                         <div class="col-md-4 mb-5 ">
                                                             <div class="m-scrollable update_ben_profile"
                                                                  data-scrollable="true"
@@ -1377,11 +1383,17 @@
                                                                 <img class="ml-4"
                                                                      style="border-radius:8rem; width:7rem"
                                                                      src="{{$artist->beneficiary[0]->picture}}">
-                                                                @if($artist->projects[0]->status == 4 || $artist->projects[0]->status == 1)
-                                                                    <i class="flaticon-edit ml-3 update_img_profile_ben"
-                                                                       style="color:#716aca; cursor:pointer;"></i>
+
+                                                                @if(count($artist->projects) > 0)
+                                                                    @if($artist->projects[0]->status == 4 || $artist->projects[0]->status == 1)
+
+                                                                        <i class="flaticon-edit ml-3 update_img_profile_ben"
+                                                                           style="color:#716aca; cursor:pointer;"></i>
+                                                                    @endif
                                                                 @endif
+
                                                             </div>
+
                                                             <div class="col-md-4 drop_prof_ben" style="display: none">
                                                                 <div class="form-group m-form__group ">
 
@@ -1406,6 +1418,7 @@
                                                             </div>
 
                                                         </div>
+
                                                     @else
 
                                                         <div class="col-md-4 mb-5">
@@ -1486,6 +1499,7 @@
                                                             @else
                                                                 <p style="text-align: justify">No registrado</p>
                                                             @endif
+
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4 mt-2">
@@ -1499,6 +1513,7 @@
                                                             @else
                                                                 <p style="text-align: justify">No registrado</p>
                                                             @endif
+
                                                         </div>
                                                     </div>
 
@@ -1546,6 +1561,7 @@
 
                                                     </div>
                                                     @if($artist->beneficiary[0]->township)
+
                                                         <div class="col-md-4 mt-2">
                                                             <label
                                                                 style="font-weight: bold">Vereda/Corregimiento:</label>
@@ -1572,7 +1588,9 @@
                                                                 <p>{{ $artist->beneficiary[0]->township}}</p>
                                                             </div>
                                                         </div>
+
                                                     @endif
+
                                                     <div class="col-md-4 mt-2">
                                                         <label style="font-weight: bold">Teléfono:</label>
                                                         <div class="m-scrollable" data-scrollable="true" style="">
@@ -1679,10 +1697,14 @@
                                                             </div>
 
                                                         </div>
-                                                        @if($artist->projects[0]->status == 4 || $artist->projects[0]->status == 1)
-                                                            <i class="flaticon-edit ml-3 update_pdf_ben"
-                                                               style="color:#716aca; cursor:pointer;"></i>
+
+                                                        @if(count($artist->projects) > 0 )
+                                                            @if($artist->projects[0]->status == 4 || $artist->projects[0]->status == 1)
+                                                                <i class="flaticon-edit ml-3 update_pdf_ben"
+                                                                   style="color:#716aca; cursor:pointer;"></i>
+                                                            @endif
                                                         @endif
+                                    
                                                         <button type="button" class="btn btn-primary cancel_pdf_ben"
                                                                 style="display:none">Cancelar
                                                         </button>
@@ -2854,48 +2876,48 @@
             },
             error: function (file, e, i, o, u) {
 
-                if(file.accepted == false){
+                if (file.accepted == false) {
                     toastr.options = {
-                    "closeButton": false,
-                    "debug": false,
-                    "newestOnTop": false,
-                    "progressBar": false,
-                    "positionClass": "toast-top-right",
-                    "preventDuplicates": false,
-                    "onclick": null,
-                    "showDuration": "3000",
-                    "hideDuration": "1000",
-                    "timeOut": "5000",
-                    "extendedTimeOut": "1000",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut"
-                };
+                        "closeButton": false,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": false,
+                        "positionClass": "toast-top-right",
+                        "preventDuplicates": false,
+                        "onclick": null,
+                        "showDuration": "3000",
+                        "hideDuration": "1000",
+                        "timeOut": "5000",
+                        "extendedTimeOut": "1000",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
+                    };
 
-                toastr.warning("Formato de audio incorrecto, solo se acepta formato mp3", "Información");
+                    toastr.warning("Formato de audio incorrecto, solo se acepta formato mp3", "Información");
                     // alert('asi no pri')
-                }else{
+                } else {
                     toastr.options = {
-                    "closeButton": false,
-                    "debug": false,
-                    "newestOnTop": false,
-                    "progressBar": false,
-                    "positionClass": "toast-top-right",
-                    "preventDuplicates": false,
-                    "onclick": null,
-                    "showDuration": "3000",
-                    "hideDuration": "1000",
-                    "timeOut": "5000",
-                    "extendedTimeOut": "1000",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut"
-                };
+                        "closeButton": false,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": false,
+                        "positionClass": "toast-top-right",
+                        "preventDuplicates": false,
+                        "onclick": null,
+                        "showDuration": "3000",
+                        "hideDuration": "1000",
+                        "timeOut": "5000",
+                        "extendedTimeOut": "1000",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
+                    };
 
-                toastr.warning("El audio no se cargó correctamente, inténtalo más tarde", "Información");
-            }
+                    toastr.warning("El audio no se cargó correctamente, inténtalo más tarde", "Información");
+                }
 
                 $('body').loading({
                     start: false,
