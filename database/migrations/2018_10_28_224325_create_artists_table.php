@@ -58,7 +58,7 @@ class CreateArtistsTable extends Migration
             $table->string('nickname')->nullable();
             $table->longText('biography')->nullable();
             $table->longText('adress')->nullable();
-            $table->timestamp('byrthdate')->nullable();
+            $table->dateTime('byrthdate')->nullable();
             $table->integer('age')->nullable();
             $table->unsignedInteger('level_id')->nullable();
             $table->foreign('level_id')->references('id')->on('levels');
@@ -67,10 +67,10 @@ class CreateArtistsTable extends Migration
             $table->string('township')->nullable();
             $table->string('name_team')->nullable();
             $table->string('permission')->nullable();
-            $table->string('evidence_document')->nullable(); 
+            $table->string('evidence_document')->nullable();
             $table->unsignedInteger('expedition_place')->nullable();
             $table->foreign('expedition_place')->references('id')->on('ciudad');
-            
+
             $table->unsignedInteger('place_residence')->nullable();
             $table->foreign('place_residence')->references('id')->on('ciudad');
 
