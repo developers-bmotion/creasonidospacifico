@@ -295,9 +295,8 @@ License: You must have a valid license purchased only from themeforest(the above
                         </div>
                 </div>
                 <!-- end:: Body -->
-
                 <!-- begin::Footer -->
-                <footer class="m-grid__item m-footer ">
+                <footer class="m-grid__item m-footer {{request()->is('dashboard/project/*') ? 'd-lg-none' : '' }}" >
                     <div class="m-container m-container--fluid m-container--full-height m-page__container">
                         <div
                             class="footer-display-custom m-stack m-stack--flex-tablet-and-mobile m-stack--ver m-stack--desktop">
@@ -318,11 +317,6 @@ License: You must have a valid license purchased only from themeforest(the above
                                             <span class="term-footer m-nav__link-text">Términos y Condiciones</span>
                                         </a>
                                     </li>
-                                    {{--                        <li class="m-nav__item">--}}
-                                    {{--                            <a href="#" class="m-nav__link">--}}
-                                    {{--                                <span class="m-nav__link-text">Política de Privacidad</span>--}}
-                                    {{--                            </a>--}}
-                                    {{--                        </li>--}}
                                 </ul>
                                 <ul class="m-footer__nav m-nav m-nav--inline pt-2 pr-5">
                                     <li class="m-nav__item">

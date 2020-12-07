@@ -6,7 +6,7 @@
 
             @if(auth()->user()->roles[0]->rol == 'Admin')
                 @if( $project->status == 2 )
-                {{-- @dd($qual) --}}
+                    {{-- @dd($qual) --}}
                     <div class="m-accordion m-accordion--default m-accordion--toggle-arrow" id="m_accordion_5"
                          role="tablist">
                         <div class="m-accordion__item ">
@@ -53,8 +53,8 @@
                                         <br>
                                         <a href="{{ route('profile.curador',$cal->users->slug)}}">
 
-                                            <span  style="font-size:1.1rem;color:#739594;"
-                                              class="font-weight-bold mb-3">Calificado por: {{ $cal->users->name }}  {{ $cal->users->last_name }}</span>
+                                            <span style="font-size:1.1rem;color:#739594;"
+                                                  class="font-weight-bold mb-3">Calificado por: {{ $cal->users->name }}  {{ $cal->users->last_name }}</span>
                                         </a>
                                         <br>
                                         <hr>
@@ -1057,14 +1057,6 @@
                                                             </div>
 
 
-                                                            {{-- @if($artist->artists[0]->township)
-                                                            <div class="col-md-4 mt-2">
-                                                            <label style="font-weight: bold">Vereda/Corregimiento:</label>
-                                                            <div class="m-scrollable" data-scrollable="true" style="">
-                                                                <p>{{ $artist->artists[0]->beneficiary[0]->township}}</p>
-                                                            </div>
-                                                            </div>
-                                                            @endif --}}
                                                             <div class="col-md-4 mt-2">
                                                                 <label
                                                                     style="font-weight: bold">Teléfono:</label>
@@ -1352,17 +1344,8 @@
                                     </div>
                                 </div>
                             @endforeach
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        </div>
-        </div>
-        </div>
-        </div>
-        </div>
-        </div>
+
+
     @endif
     {{-- informacion de beneficiario --}}
     @if(count($artist->artists[0]->beneficiary) != 0)
@@ -2795,48 +2778,48 @@
             },
             error: function (file, e, i, o, u) {
 
-                if(file.accepted == false){
+                if (file.accepted == false) {
                     toastr.options = {
-                    "closeButton": false,
-                    "debug": false,
-                    "newestOnTop": false,
-                    "progressBar": false,
-                    "positionClass": "toast-top-right",
-                    "preventDuplicates": false,
-                    "onclick": null,
-                    "showDuration": "3000",
-                    "hideDuration": "1000",
-                    "timeOut": "5000",
-                    "extendedTimeOut": "1000",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut"
-                };
+                        "closeButton": false,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": false,
+                        "positionClass": "toast-top-right",
+                        "preventDuplicates": false,
+                        "onclick": null,
+                        "showDuration": "3000",
+                        "hideDuration": "1000",
+                        "timeOut": "5000",
+                        "extendedTimeOut": "1000",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
+                    };
 
-                toastr.warning("Formato de audio incorrecto, solo se acepta formato mp3", "Información");
+                    toastr.warning("Formato de audio incorrecto, solo se acepta formato mp3", "Información");
                     // alert('asi no pri')
-                }else{
+                } else {
                     toastr.options = {
-                    "closeButton": false,
-                    "debug": false,
-                    "newestOnTop": false,
-                    "progressBar": false,
-                    "positionClass": "toast-top-right",
-                    "preventDuplicates": false,
-                    "onclick": null,
-                    "showDuration": "3000",
-                    "hideDuration": "1000",
-                    "timeOut": "5000",
-                    "extendedTimeOut": "1000",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut"
-                };
+                        "closeButton": false,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": false,
+                        "positionClass": "toast-top-right",
+                        "preventDuplicates": false,
+                        "onclick": null,
+                        "showDuration": "3000",
+                        "hideDuration": "1000",
+                        "timeOut": "5000",
+                        "extendedTimeOut": "1000",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
+                    };
 
-                toastr.warning("El audio no se cargó correctamente, inténtalo más tarde", "Información");
-            }
+                    toastr.warning("El audio no se cargó correctamente, inténtalo más tarde", "Información");
+                }
 
 
                 $('body').loading({
