@@ -100,7 +100,7 @@
                          </ul>
                      </div>
                  </li>--}}
-               {{-- logos blanco y oscuro para movil y web --}}
+                {{-- logos blanco y oscuro para movil y web --}}
                 <li id="img-mobile" class="m-menu__item custom-item-menu">
                     <img width="170" src="/images/logo-blanco.png" alt="">
                 </li>
@@ -177,13 +177,16 @@
                     {{--                        </a>--}}
                     {{--                    </li>--}}
                 @endif
-                @if(auth()->user()->roles[1]->rol == "Director Curadores")
-                    <li class="m-menu__item ">
-                        <a href="{{ route('managements.admin')}}" class="m-menu__link">
-                            <i class="m-menu__link-icon la la-user"></i>
-                            <span class="m-menu__link-text">Curadores</span>
-                        </a>
-                    </li>
+                
+                @if(count(auth()->user()->roles) > 1)
+                    @if(auth()->user()->roles[1]->rol == "Director Curadores")
+                        <li class="m-menu__item ">
+                            <a href="{{ route('managements.admin')}}" class="m-menu__link">
+                                <i class="m-menu__link-icon la la-user"></i>
+                                <span class="m-menu__link-text">Curadores</span>
+                            </a>
+                        </li>
+                    @endif
                 @endif
             </ul>
 
@@ -372,7 +375,8 @@
                                                     @if(auth()->user()->picture == null || auth()->user()->picture == '' || auth()->user()->picture =='/images/users/')
 
                                                         <img src="/backend/assets/app/media/img/users/perfil.jpg"
-                                                             class="m--img-rounded m--marginless uno" style="border-radius: 50%" alt=""/>
+                                                             class="m--img-rounded m--marginless uno"
+                                                             style="border-radius: 50%" alt=""/>
                                                     @else
                                                         <img src="{{ auth()->user()->picture}}"
                                                              style="border-radius: 50%"
@@ -433,12 +437,14 @@
                                                     <span class="m-nav__link-text">Perfil</span>
                                                 </a>
                                             @elseif(auth()->user()->roles[0]->rol == "Subsanador")
-                                                <a href="{{ route('profile.subsanador',auth()->user()->slug) }}" class="m-nav__link">
+                                                <a href="{{ route('profile.subsanador',auth()->user()->slug) }}"
+                                                   class="m-nav__link">
                                                     <i class="m-nav__link-icon flaticon-user"></i>
                                                     <span class="m-nav__link-text">Perfil</span>
                                                 </a>
                                             @elseif(auth()->user()->roles[0]->rol == "Manage")
-                                                <a href="{{ route('profile.curador',auth()->user()->slug) }}" class="m-nav__link">
+                                                <a href="{{ route('profile.curador',auth()->user()->slug) }}"
+                                                   class="m-nav__link">
                                                     <i class="m-nav__link-icon flaticon-user"></i>
                                                     <span class="m-nav__link-text">Perfil</span>
                                                 </a>
