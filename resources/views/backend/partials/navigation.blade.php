@@ -177,6 +177,14 @@
                     {{--                        </a>--}}
                     {{--                    </li>--}}
                 @endif
+                @if(auth()->user()->roles[1]->rol == "Director Curadores")
+                    <li class="m-menu__item ">
+                        <a href="{{ route('managements.admin')}}" class="m-menu__link">
+                            <i class="m-menu__link-icon la la-user"></i>
+                            <span class="m-menu__link-text">Curadores</span>
+                        </a>
+                    </li>
+                @endif
             </ul>
 
         @endif
@@ -203,6 +211,7 @@
                 </li>
             </ul>
         @endif
+
     </div>
 
     <!-- END: Horizontal Menu -->
