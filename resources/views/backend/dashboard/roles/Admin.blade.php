@@ -587,6 +587,7 @@
                                     <th>{{ __('Actuará Como') }}</th>
                                     <th>{{ __('Modalidad') }}</th>
                                     <th>{{ __('Email') }}</th>
+                                    <th>{{ __('Teléfono') }}</th>
                                     <th>{{ __('Departamento de nacimiento') }}</th>
                                     <th>{{ __('Ciudad de nacimiento') }}</th>
                                     <th>{{ __('Estado') }}</th>
@@ -844,6 +845,22 @@
                             // console.log(JsonResultRow.users.email,'email');
 
                             return JsonResultRow.users.email ? '<span class="label label-danger text-center">' + JsonResultRow.users.email + '</span>' : '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>';
+
+                        }
+                        // render: function (data, type, JsonResultRow, meta) {
+                        //     // console.log(JsonResultRow,'data t');
+                        //     let artista = JsonResultRow.artists[0];
+                        //     return `<span target="_blank">${artista.users.email}</span>`;
+                        // }
+                        // data: 'email',
+                        // defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
+                    },
+                    {
+                        data:'users.phone_1',
+                        render: function (data, type, JsonResultRow, meta) {
+                            // console.log(JsonResultRow.users.email,'email');
+
+                            return JsonResultRow.users.phone_1 ? '<span class="label label-danger text-center">' + JsonResultRow.users.phone_1 + '</span>' : '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>';
 
                         }
                         // render: function (data, type, JsonResultRow, meta) {
