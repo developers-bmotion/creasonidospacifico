@@ -285,7 +285,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'dashboard', 'middleware' =>
     });
 
     //RUTAS PARA EL MANAGEMENT -------------------------------------------------------------------------------------------
-    Route::group(['middleware' => 'manage_permisos'], function () {
+    Route::group(['middleware' => 'manage_permisos', 'admin_permisos'], function () {
         Route::get('/projects-management', 'Manage\ProjectsManageController@index')->name('projects.manage');
         Route::get('datatables-projects-manage', 'Manage\ProjectsManageController@table_projects')->name('datatables.projects.manage');
         //CALIFICAR PROYECTO POR EL MANAGEMENT

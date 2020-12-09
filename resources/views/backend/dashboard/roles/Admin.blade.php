@@ -1182,10 +1182,23 @@
                 "processing": true,
                 "serverSide": true,
                 "scrollX": true,
-                "pageLength": 10,
+                "pageLength": 1000,
+                "dom": 'Bfrtip',
                 "data": null,
                 "pagingType": "simple_numbers",
+                "lengthMenu": [[10, 25, 100, -1], [10,25, 100, "All"]],
                 "order":[5,"desc"],
+                "buttons": [
+                    {
+                        extend: 'excelHtml5',
+                        filename:'Listas de aspirantes'
+                    },
+                    {
+                        extend: 'pdfHtml5',
+                        pageSize: "A3",
+                        filename:'Listas de aspirantes'
+                    }
+                ],
                 "ajax": {
                     url: "{{route('list.ratings')}}",
                     data: {

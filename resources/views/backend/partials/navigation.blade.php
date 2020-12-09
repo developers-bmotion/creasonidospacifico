@@ -177,7 +177,7 @@
                     {{--                        </a>--}}
                     {{--                    </li>--}}
                 @endif
-                
+
                 @if(count(auth()->user()->roles) > 1)
                     @if(auth()->user()->roles[1]->rol == "Director Curadores")
                         <li class="m-menu__item ">
