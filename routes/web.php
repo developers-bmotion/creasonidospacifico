@@ -292,7 +292,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'dashboard', 'middleware' =>
         // Route::post('/update-review-management', 'Manage\ProjectsManageController@add_review')->name('update.review.management');
         //Calificar propuestas
         Route::post('/add-review', 'Manage\ProjectsManageController@add_review')->name('add.review');
-        Route::get('/managements-admin', 'Admin\ManagementsController@index')->name('managements.admin')->middleware('admin_permisos');
+//        Route::get('/managements-admin', 'Admin\ManagementsController@index')->name('managements.admin')->middleware('admin_permisos');
     });
     Route::get('/profile-managament/{user}', 'Manage\ProfileController@index')->name('profile.curador');
     Route::get('/profile-my_proyects/{user}', 'Manage\ProfileController@my_proyects')->name('profile.managament.myProyects');
