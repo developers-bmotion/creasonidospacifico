@@ -691,46 +691,46 @@
                                         </div>
 
                                         <div class="row pt-4">
-                                            <div class="col-md-2 col-lg-2 col-12">
-                                                <div class="form-group">
-                                                    <h5 style="font-weight: bold">Estado:</h5>
-                                                </div>
-                                                <div class="form-group">
-                                                    @if($artist->projects[0]->status == 1)
-                                                        <span
-                                                            class="m-badge m-badge--metal m-badge--wide m-badge--rounded">{{ __('Revision') }}</span>
-                                                    @endif
-                                                    @if($artist->projects[0]->status == 2)
-                                                        <span
-                                                            class="m-badge m-badge--brand m-badge--wide m-badge--rounded"
-                                                            style="background-color: #9816f4 !important;">Calificado</span>
-                                                    @endif
-                                                    @if($artist->projects[0]->status == 3)
-                                                        <span
-                                                            class="m-badge m-badge--success m-badge--wide m-badge--rounded">Aprobado</span>
-                                                    @endif
-                                                    @if($artist->projects[0]->status == 4)
-                                                        <span class="m-badge m-badge--warning m-badge--wide"
-                                                              style="color:#fff">{{ __('Pendiente') }}</span>
-                                                    @endif
-                                                    @if($artist->projects[0]->status == 5)
-                                                        <span
-                                                            class="m-badge m-badge--danger m-badge--wide m-badge--rounded">{{ __('Rechazado') }}</span>
-                                                    @endif
-                                                    @if($artist->projects[0]->status == 6)
-                                                        <span
-                                                            class="m-badge m-badge--metal m-badge--wide m-badge--rounded">De nuevo en revisión</span>
-                                                    @endif
-                                                    @if($artist->projects[0]->status == 7)
-                                                        <span
-                                                            class="m-badge m-badge--success m-badge--wide m-badge--rounded">Aceptado</span>
-                                                    @endif
-                                                    @if($artist->projects[0]->status == 8)
-                                                        <span
-                                                            class="m-badge m-badge--success m-badge--wide m-badge--rounded">No subsanado</span>
-                                                    @endif
-                                                </div>
-                                            </div>
+{{--                                            <div class="col-md-2 col-lg-2 col-12">--}}
+{{--                                                <div class="form-group">--}}
+{{--                                                    <h5 style="font-weight: bold">Estado:</h5>--}}
+{{--                                                </div>--}}
+{{--                                                <div class="form-group">--}}
+{{--                                                    @if($artist->projects[0]->status == 1)--}}
+{{--                                                        <span--}}
+{{--                                                            class="m-badge m-badge--metal m-badge--wide m-badge--rounded">{{ __('Revision') }}</span>--}}
+{{--                                                    @endif--}}
+{{--                                                    @if($artist->projects[0]->status == 2)--}}
+{{--                                                        <span--}}
+{{--                                                            class="m-badge m-badge--brand m-badge--wide m-badge--rounded"--}}
+{{--                                                            style="background-color: #9816f4 !important;">Calificado</span>--}}
+{{--                                                    @endif--}}
+{{--                                                    @if($artist->projects[0]->status == 3)--}}
+{{--                                                        <span--}}
+{{--                                                            class="m-badge m-badge--success m-badge--wide m-badge--rounded">Aprobado</span>--}}
+{{--                                                    @endif--}}
+{{--                                                    @if($artist->projects[0]->status == 4)--}}
+{{--                                                        <span class="m-badge m-badge--warning m-badge--wide"--}}
+{{--                                                              style="color:#fff">{{ __('Pendiente') }}</span>--}}
+{{--                                                    @endif--}}
+{{--                                                    @if($artist->projects[0]->status == 5)--}}
+{{--                                                        <span--}}
+{{--                                                            class="m-badge m-badge--danger m-badge--wide m-badge--rounded">{{ __('Rechazado') }}</span>--}}
+{{--                                                    @endif--}}
+{{--                                                    @if($artist->projects[0]->status == 6)--}}
+{{--                                                        <span--}}
+{{--                                                            class="m-badge m-badge--metal m-badge--wide m-badge--rounded">De nuevo en revisión</span>--}}
+{{--                                                    @endif--}}
+{{--                                                    @if($artist->projects[0]->status == 7)--}}
+{{--                                                        <span--}}
+{{--                                                            class="m-badge m-badge--success m-badge--wide m-badge--rounded">Aceptado</span>--}}
+{{--                                                    @endif--}}
+{{--                                                    @if($artist->projects[0]->status == 8)--}}
+{{--                                                        <span--}}
+{{--                                                            class="m-badge m-badge--success m-badge--wide m-badge--rounded">No subsanado</span>--}}
+{{--                                                    @endif--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
                                             <div class="col-md-3 col-lg-3 col-12">
                                                 <div class="form-group">
                                                     <h5 style="font-weight: bold">Nombre de la canción:</h5>
