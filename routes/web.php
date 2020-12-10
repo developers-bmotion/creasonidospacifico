@@ -238,7 +238,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'dashboard', 'middleware' =>
         return datatables()->of($teams)->toJson();
     })->name('team-artist');
 
-
+    Route::get('/managements-admin', 'Admin\ManagementsController@index')->name('managements.admin');
     //RUTAS PARA EL ADMINISTRADOR DEL SISTEMA -------------------------------------------------------------------------------------------
 
     //Todos los proyectos....
@@ -256,7 +256,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'dashboard', 'middleware' =>
         Route::get('/datatables-projects-admin-approved', 'Admin\ProjectsAdminController@table_projects_approved')->name('datatables.projects.admin.approved');
         Route::get('/datatables-managements-admin', 'Admin\ProjectsAdminController@table_managements')->name('datatables.management.admin');
         //Lista de managaments
-        Route::get('/managements-admin', 'Admin\ManagementsController@index')->name('managements.admin');
+
         Route::get('/gestores-admin', 'Admin\ManagementsController@gestores')->name('gestores.admin');
 
         Route::post('/add-management-admin', 'Admin\ManagementsController@store')->name('add.management.admin');
@@ -292,7 +292,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'dashboard', 'middleware' =>
         // Route::post('/update-review-management', 'Manage\ProjectsManageController@add_review')->name('update.review.management');
         //Calificar propuestas
         Route::post('/add-review', 'Manage\ProjectsManageController@add_review')->name('add.review');
-        Route::get('/managements-admin', 'Admin\ManagementsController@index')->name('managements.admin');
+        
     });
     Route::get('/profile-managament/{user}', 'Manage\ProfileController@index')->name('profile.curador');
     Route::get('/profile-my_proyects/{user}', 'Manage\ProfileController@my_proyects')->name('profile.managament.myProyects');
