@@ -864,9 +864,12 @@
                     },
                     {
                         render: function (data, type, JsonResultRow, meta) {
-                          return JsonResultRow.reviews.lyric + JsonResultRow.reviews.melody_rhythm + JsonResultRow.reviews.originality + JsonResultRow.reviews.arrangements
+                            if(JsonResultRow.reviews){
+                                return JsonResultRow.reviews.lyric + JsonResultRow.reviews.melody_rhythm + JsonResultRow.reviews.originality + JsonResultRow.reviews.arrangements
+                            }else{
+                                return '<span class="label label-danger text-center">Ningún valor por defecto</span>'
+                            }
                         },
-
                     },
                     {
 
