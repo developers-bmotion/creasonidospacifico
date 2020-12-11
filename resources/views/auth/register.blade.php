@@ -143,9 +143,9 @@ License: You must have a valid license purchased only from themeforest(the above
                         @if(session('message'))
                             <div class="row justify-content-center">
                                 <div class="col-md-10">
-                                    <div class="alert alert-{{session('message')[0]}}">
-                                        <h4 class="alert-heading">{{__("Mensaje Informativo")}}</h4>
-                                        <p>{{session('message')[1]}}</p>
+                                    <div class="alert alert-{{session('message')}}">
+                                        <h4 class="alert-heading"></h4>
+                                        <p>{{session('message')}}</p>
                                     </div>
                                 </div>
                             </div>
