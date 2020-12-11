@@ -193,89 +193,89 @@ License: You must have a valid license purchased only from themeforest(the above
                             {{--  <form class="m-login__form m-form" method="POST" action="{{ route('register') }}">
                                  @csrf --}}
 
-                            <form method="POST" class="m-login__form m-form"
-                                  action="{{ route('register.artist') }}">
-                                @csrf
-                                {{--  <div class="form-group m-form__group">
-                                    <input class="form-control m-input" type="text" placeholder="Fullname"
-                                        name="fullname">
-                                </div> --}}
-                                <div class="form-group m-form__group pb-3">
-                                    <input
-                                        class="form-control m-input {{ $errors->has('email') ? ' is-invalid' : '' }}"
-                                        type="text" placeholder="Correo eléctronico" name="email" autocomplete="off"
-                                        value="{{ old('email') }}" required>
+{{--                            <form method="POST" class="m-login__form m-form"--}}
+{{--                                  action="{{ route('register.artist') }}">--}}
+{{--                                @csrf--}}
+{{--                                --}}{{--  <div class="form-group m-form__group">--}}
+{{--                                    <input class="form-control m-input" type="text" placeholder="Fullname"--}}
+{{--                                        name="fullname">--}}
+{{--                                </div> --}}
+{{--                                <div class="form-group m-form__group pb-3">--}}
+{{--                                    <input--}}
+{{--                                        class="form-control m-input {{ $errors->has('email') ? ' is-invalid' : '' }}"--}}
+{{--                                        type="text" placeholder="Correo eléctronico" name="email" autocomplete="off"--}}
+{{--                                        value="{{ old('email') }}" required>--}}
 
-                                    @if ($errors->has('email'))
-                                        <span class="invalid-feedback">
-                                            <strong>{{ $errors->first('email') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                                <div class="form-group m-form__group pb-3">
-                                    <input
-                                        class="form-control m-input {{ $errors->has('password') ? ' is-invalid' : '' }}"
-                                        type="password" placeholder="Contraseña" name="password">
-                                    @if ($errors->has('password'))
-                                        <span class="invalid-feedback">
-                                            <strong>{{ $errors->first('password') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                                <div class="form-group m-form__group pb-3">
-                                    <input class="form-control m-input" type="password"
-                                           placeholder="Confirmar contraseña" name="password_confirmation">
-                                    @if ($errors->has('password_confirmation'))
-                                        <span class="invalid-feedback">
-                                            <strong>{{ $errors->first('password_confirmation') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                                @if(env('APP_ENV') === 'production')
-                                    <div class="pt-5">
-                                        {!! NoCaptcha::display() !!}
-                                    </div>
-                                @endif
+{{--                                    @if ($errors->has('email'))--}}
+{{--                                        <span class="invalid-feedback">--}}
+{{--                                            <strong>{{ $errors->first('email') }}</strong>--}}
+{{--                                        </span>--}}
+{{--                                    @endif--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group m-form__group pb-3">--}}
+{{--                                    <input--}}
+{{--                                        class="form-control m-input {{ $errors->has('password') ? ' is-invalid' : '' }}"--}}
+{{--                                        type="password" placeholder="Contraseña" name="password">--}}
+{{--                                    @if ($errors->has('password'))--}}
+{{--                                        <span class="invalid-feedback">--}}
+{{--                                            <strong>{{ $errors->first('password') }}</strong>--}}
+{{--                                        </span>--}}
+{{--                                    @endif--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group m-form__group pb-3">--}}
+{{--                                    <input class="form-control m-input" type="password"--}}
+{{--                                           placeholder="Confirmar contraseña" name="password_confirmation">--}}
+{{--                                    @if ($errors->has('password_confirmation'))--}}
+{{--                                        <span class="invalid-feedback">--}}
+{{--                                            <strong>{{ $errors->first('password_confirmation') }}</strong>--}}
+{{--                                        </span>--}}
+{{--                                    @endif--}}
+{{--                                </div>--}}
+{{--                                @if(env('APP_ENV') === 'production')--}}
+{{--                                    <div class="pt-5">--}}
+{{--                                        {!! NoCaptcha::display() !!}--}}
+{{--                                    </div>--}}
+{{--                                @endif--}}
 
-                                @error ('g-recaptcha-response')
-                                <span class="help-block">
-                                        <strong
-                                            class="text-danger">{{ $errors->first('g-recaptcha-response') }}</strong>
-                                    </span>
-                                @enderror
+{{--                                @error ('g-recaptcha-response')--}}
+{{--                                <span class="help-block">--}}
+{{--                                        <strong--}}
+{{--                                            class="text-danger">{{ $errors->first('g-recaptcha-response') }}</strong>--}}
+{{--                                    </span>--}}
+{{--                                @enderror--}}
 
-                                <p class="text-justify pt-3 pb-3">Confirma que tu dirección de correo eléctronico es
-                                    correcta, porque a esta dirección enviaremos información de tu registro.</p>
+{{--                                <p class="text-justify pt-3 pb-3">Confirma que tu dirección de correo eléctronico es--}}
+{{--                                    correcta, porque a esta dirección enviaremos información de tu registro.</p>--}}
 
-                                <div class="row form-group m-form__group m-login__form-sub">
-                                    <div class="col m--align-left">
-                                        <label class="m-checkbox m-checkbox--focus color-rojo-terminos">
-                                            <input type="checkbox" id="check-acepto-terminos" name="agree">Clic aquí
-                                            para aceptar
-                                            los <a href="https://creasonidos.com/terminos-y-condiciones/"
-                                                   target="_blank" class="m-link m-link--focus">términos y
-                                                condiciones.</a> y continuar con el registro.
-                                            <span></span>
-                                        </label>
-                                        <span class="m-form__help"></span>
-                                    </div>
-                                </div>
+{{--                                <div class="row form-group m-form__group m-login__form-sub">--}}
+{{--                                    <div class="col m--align-left">--}}
+{{--                                        <label class="m-checkbox m-checkbox--focus color-rojo-terminos">--}}
+{{--                                            <input type="checkbox" id="check-acepto-terminos" name="agree">Clic aquí--}}
+{{--                                            para aceptar--}}
+{{--                                            los <a href="https://creasonidos.com/terminos-y-condiciones/"--}}
+{{--                                                   target="_blank" class="m-link m-link--focus">términos y--}}
+{{--                                                condiciones.</a> y continuar con el registro.--}}
+{{--                                            <span></span>--}}
+{{--                                        </label>--}}
+{{--                                        <span class="m-form__help"></span>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
 
-                                <div class="m-login__form-action">
-                                    <button type="submit" id="btn-register"
-                                            class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air"
-                                            disabled>Comenzar
-                                        registro en el concurso
-                                    </button>
-                                    {{--  <button id="m_login_signup_cancel"
-                                        class="btn btn-outline-focus  m-btn m-btn--pill m-btn--custom" style="display: none">Cancel</button> --}}
+{{--                                <div class="m-login__form-action">--}}
+{{--                                    <button type="submit" id="btn-register"--}}
+{{--                                            class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air"--}}
+{{--                                            disabled>Comenzar--}}
+{{--                                        registro en el concurso--}}
+{{--                                    </button>--}}
+{{--                                    --}}{{--  <button id="m_login_signup_cancel"--}}
+{{--                                        class="btn btn-outline-focus  m-btn m-btn--pill m-btn--custom" style="display: none">Cancel</button> --}}
 
-                                    <a style="padding-top: 30px;" href="/login" class="m-link m-link--focus">Volver al
-                                        login</a>
-                                </div>
+{{--                                    <a style="padding-top: 30px;" href="/login" class="m-link m-link--focus">Volver al--}}
+{{--                                        login</a>--}}
+{{--                                </div>--}}
 
 
-                            </form>
+{{--                            </form>--}}
                         </div>
 
 
