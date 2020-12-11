@@ -56,6 +56,10 @@ Route::get('/datos', function () {
 //     return $listAspirant;
 });
 
+Route::get('/register', function (){
+   return redirect('/login');
+});
+
 Route::get('/tabla-curadores', function (){
     $project = \App\Project::where('status','!=',1)->whereHas('management', function ($query) {
         $query->where('managements.user_id', '=', 398);
