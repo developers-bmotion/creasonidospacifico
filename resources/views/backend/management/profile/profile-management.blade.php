@@ -214,6 +214,7 @@
                                                     <th>{{ __('Canción') }}</th>
                                                     <th>{{ __('Modalidad') }}</th>
                                                     <th>{{ __('Estado') }}</th>
+                                                    <th>{{ __('Calificación 1') }}</th>
                                                     <th>{{ __('Acciones') }}</th>
                                                 </tr>
                                                 </thead>
@@ -860,6 +861,12 @@
                             }
                             return '<div class="text-center">' + info + '</div>';
                         }
+                    },
+                    {
+                        render: function (data, type, JsonResultRow, meta) {
+                          return JsonResultRow.reviews.lyric + JsonResultRow.reviews.melody_rhythm + JsonResultRow.reviews.originality + JsonResultRow.reviews.arrangements
+                        },
+
                     },
                     {
 
