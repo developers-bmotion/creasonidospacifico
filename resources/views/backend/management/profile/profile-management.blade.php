@@ -803,7 +803,20 @@
                 "processing": true,
                 "serverSide": true,
                 "data": null,
+                "dom": 'Bfrtip',
                 "order": [[0, "desc"]],
+                "pageLength": 500,
+                "buttons": [
+                    {
+                        extend: 'excelHtml5',
+                        filename:'Proyectos asignados al curador '+`{{ $user->name }}`+' '+`{{ $user->last_name }}`
+                    },
+                    {
+                        extend: 'pdfHtml5',
+                        pageSize: "A3",
+                        filename:'Listas de aspirantes'
+                    }
+                ],
                 "pagginType": "simple_numbers",
                 "ajax": {
                     url: "{{route('datatables.projects.profile.manage')}}",
