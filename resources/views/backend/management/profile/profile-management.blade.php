@@ -814,7 +814,7 @@
                     {
                         extend: 'pdfHtml5',
                         pageSize: "A3",
-                        filename:'Listas de aspirantes'
+                        filename:'Proyectos asignados al curador '+`{{ $user->name }}`+' '+`{{ $user->last_name }}`
                     }
                 ],
                 "pagginType": "simple_numbers",
