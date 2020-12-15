@@ -56,6 +56,18 @@ Route::get('/datos', function () {
 //     return $listAspirant;
 });
 
+Route::get('/register', function (){
+   return redirect('/login');
+});
+
+Route::get('/tabla-curadores', function (){
+    $project = \App\Project::where('status','!=',1)->whereHas('management', function ($query) {
+        $query->where('managements.user_id', '=', 398);
+    })->with('category','artists.users', 'reviews');
+
+    return datatables()->of($project)->toJson();
+});
+
 Route::get('/represtante-menor-edad/{id}', function ($id) {
     $artist = Artist::where('id', $id)
         ->with('users', 'beneficiary.documentType', 'beneficiary.city.departaments', 'beneficiary.expeditionPlace.departaments', 'personType', 'artistType', 'documentType')
@@ -292,6 +304,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'dashboard', 'middleware' =>
         // Route::post('/update-review-management', 'Manage\ProjectsManageController@add_review')->name('update.review.management');
         //Calificar propuestas
         Route::post('/add-review-second', 'Manage\ProjectsManageController@add_review_second')->name('add.review.second');
+        Route::post('/add-review', 'Manage\ProjectsManageController@add_review')->name('add.review');
 
     });
     Route::get('/profile-managament/{user}', 'Manage\ProfileController@index')->name('profile.curador');
@@ -299,6 +312,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'dashboard', 'middleware' =>
     Route::put('/update-info-profile-manage/{id}', 'Manage\ProfileController@update_profile_management')->name('update.profile.management');
     Route::post('/profile-photo-management', 'Manage\ProfileController@photo_management')->name('profile.photo.management');
     Route::get('datatables-projects-profile-manage', 'Manage\ProfileController@table_proyects')->name('datatables.projects.profile.manage');
+    Route::get('/datatables-projects-profile-manage-rating', 'Manage\ManageRatingController@table_project_rating')->name('datatables.projects.profile.manage.rating');
     Route::post('/update-password-management', 'Manage\ProfileController@update_password_management')->name('update.password.management');
     Route::get('/backings-made-magement/{user}', 'Manage\BackingsMadeController@index')->name('backings.made.manage');
 

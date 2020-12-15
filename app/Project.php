@@ -162,7 +162,7 @@ class Project extends Model
 
     public function reviews()
     {
-        return $this->hasMany(Review::class)->select('id', 'user_id', 'project_id', 'rating', 'comment', 'created_at');
+        return $this->hasOne(Review::class, 'project_id');
     }
 
     public function reviews_curador()

@@ -132,7 +132,18 @@ License: You must have a valid license purchased only from themeforest(the above
     <div
         class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-grid--tablet-and-mobile m-grid--hor-tablet-and-mobile m-login m-login--1 m-login--signin"
         id="m_login">
+
         <div class="m-grid__item m-grid__item--order-tablet-and-mobile-2 m-login__aside">
+            @if(session('message'))
+                <div class="row justify-content-center">
+                    <div class="col-md-10">
+                        <div class="alert alert-danger">
+                            <h4 class="alert-heading"></h4>
+                            <p>{{session('message')}}</p>
+                        </div>
+                    </div>
+                </div>
+            @endif
             <div class="m-stack m-stack--hor m-stack--desktop">
                 <div class="m-stack__item m-stack__item--fluid">
                     <div class="m-login__wrapper login-top">
@@ -141,16 +152,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <img class="img-logo" src="/images/logo-creasonidos.png">
                             </a>
                         </div>
-                        @if(session('message'))
-                            <div class="row justify-content-center">
-                                <div class="col-md-10">
-                                    <div class="alert alert-{{session('message')[0]}}">
-                                        <h4 class="alert-heading">{{__("Mensaje Informativo")}}</h4>
-                                        <p>{{session('message')[1]}}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        @endif
+
                         <div class="m-login__signin">
                             <div class="m-login__head">
                                 <h3 class="m-login__title">Iniciar sesión</h3>
@@ -214,14 +216,14 @@ License: You must have a valid license purchased only from themeforest(the above
                     </div>
                 </div>
                 {{-- <div class="m-stack__item m-stack__item--center"> --}}
-                <div>
-                    <div class="m-login__account">
-                            <span class="m-login__account-msg">
-                                Para registrarte como aspirante al concurso has
-                            </span>
-                        <a href="/register" class="m-link m-link--focus m-login__account-link">Clic aquí</a>
-                    </div>
-                </div>
+{{--                <div>--}}
+{{--                    <div class="m-login__account">--}}
+{{--                            <span class="m-login__account-msg">--}}
+{{--                                Para registrarte como aspirante al concurso has--}}
+{{--                            </span>--}}
+{{--                        <a href="/register" class="m-link m-link--focus m-login__account-link">Clic aquí</a>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
             </div>
         </div>
         <div

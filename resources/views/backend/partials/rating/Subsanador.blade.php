@@ -1,5 +1,5 @@
 <!-- Acciones para el Admin -->
-@if($project->status == 1 || $project->status == 6)
+@if($project->status == 1 || $project->status == 6 || $project->status == 5)
     <div class="col-md-12 mt-5">
         <div class="form-group">
             <h5 style="font-weight: bold">{{ __('Acciones') }}:</h5>
@@ -37,6 +37,7 @@
         </div>
     </div>
 @endif
+
 @if($project->status == 4)
     <div class="col-md-12 mt-5">
         <div class="form-group">

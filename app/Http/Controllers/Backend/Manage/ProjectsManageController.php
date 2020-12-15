@@ -17,38 +17,27 @@ class ProjectsManageController extends Controller
     }
 
     public function table_projects(Request $request){
-
         $project = \App\Project::where('status','!=',1)->whereHas('management', function ($query) {
             $query->where('managements.user_id', '=', auth()->user()->id);
-        })->with('category','artists.users');
+        })->with('category','artists.users', 'reviews');
         if ($request->input("tipoProyecto")){
             $project->where('status', "=", $request->input("tipoProyecto"));
         }
      return datatables()->of($project)->toJson();
     }
 
-    // public function add_review(Request $request){
+    public function table_project_rating(Request $request){
 
-    //     // return $request;
-    //     $review = new Review;
-    //     $review->project_id = $request->idProject;
-    //     $review->user_id = auth()->user()->id;
-    //     $review->lyric = $request->criterio_4; //Calidad del repertorio escogido:
-    //     $review->melody_rhythm = $request->criterio_1; //Aspectos técnicos musicales:
-    //     $review->arrangements = $request->criterio_3; //Calidad interpretativa:
-    //     $review->originality = $request->criterio_2; //aporte creativo
-    //     $review->comment = $request->comment;
-    //     $review->save();
+        $project = \App\Project::where('status','!=',1)->whereHas('management', function ($query) {
+            $query->where('managements.user_id', '=', auth()->user()->id);
+        })->with('category','artists.users', 'reviews');
+        if ($request->input("tipoProyecto")){
+            $project->where('status', "=", $request->input("tipoProyecto"));
+        }
+        return datatables()->of($project)->toJson();
+    }
 
-    //     Project::where('id', $request->idProject)->update([
-    //         'status' => 2
-    //     ]);
-
-    //     return '{"status":200, "msg":"Propuesta musical calificada"}';
-    // }
-
-    // segunda version de las calificaciones
-    public function add_review_second(Request $request){
+    public function add_review(Request $request){
 
         // return $request;
         dd('holas');

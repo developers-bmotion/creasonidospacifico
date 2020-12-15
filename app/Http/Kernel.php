@@ -67,6 +67,7 @@ class Kernel extends HttpKernel
         'manage_permisos' => \App\Http\Middleware\ManagePermisos::class,
         'subsanador_permisos' => \App\Http\Middleware\SubsanadorPermisos::class,
         'verifyProjectUser' => \App\Http\Middleware\VerifyProjectForUser::class,
+        'registerRoute' => \App\Http\Middleware\RegisterRoute::class,
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
