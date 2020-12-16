@@ -20,9 +20,9 @@ class ManageRatingController extends Controller
     }
 
     public function get_table_calification_two(Request $request){
-        $manage = Management::where('user_id', 349)->first();
+        $manage = Management::where('user_id', auth()->user()->id)->first();
         $id_user = $request->input('id_user');
-        $project = \App\Project::where('manager_id',$manage->id)->with('category','artists.users', 'reviews')->get();
+        $project = \App\Project::where('manager_id',$manage->id)->with('category','artists.users', 'reviews_second')->get();
         if ($request->input("tipoProyecto")){
             $project->where('status', "=", $request->input("tipoProyecto"));
         }

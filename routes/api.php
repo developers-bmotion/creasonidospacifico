@@ -22,6 +22,8 @@ Route::get('/proyectos',function (){
 });
 
 Route::get('/historial-review/{id}', 'Backend\Manage\ProjectsManageController@history_review');
+Route::get('/historial-review-second/{id}', 'Backend\Manage\ProjectsManageController@history_review_second');
+
 Route::get('/change-status-user/{id}/{status}',function ($id, $status){
 
     if ($status == 1){

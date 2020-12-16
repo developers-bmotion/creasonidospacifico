@@ -25,7 +25,6 @@ class ProjectsManageController extends Controller
      return datatables()->of($project)->toJson();
     }
 
-<<<<<<< HEAD
     public function table_project_rating(Request $request){
 
         $project = \App\Project::where('status','!=',1)->whereHas('management', function ($query) {
@@ -37,8 +36,6 @@ class ProjectsManageController extends Controller
         return datatables()->of($project)->toJson();
     }
 
-=======
->>>>>>> parent of 971d9a3... segunda calificacion
     public function add_review(Request $request){
 
         // return $request;

@@ -300,17 +300,13 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'dashboard', 'middleware' =>
     Route::group(['middleware' => 'manage_permisos'], function () {
         Route::get('/projects-management', 'Manage\ProjectsManageController@index')->name('projects.manage');
         Route::get('datatables-projects-manage', 'Manage\ProjectsManageController@table_projects')->name('datatables.projects.manage');
+        Route::post('/add-review-second', 'Manage\ProjectsManageController@add_review_second')->name('add.review.second');
+
         //CALIFICAR PROYECTO POR EL MANAGEMENT
         // Route::post('/update-review-management', 'Manage\ProjectsManageController@add_review')->name('update.review.management');
         //Calificar propuestas
-<<<<<<< HEAD
-        Route::post('/add-review-second', 'Manage\ProjectsManageController@add_review_second')->name('add.review.second');
         Route::post('/add-review', 'Manage\ProjectsManageController@add_review')->name('add.review');
 
-=======
-        Route::post('/add-review', 'Manage\ProjectsManageController@add_review')->name('add.review');
-        
->>>>>>> parent of 971d9a3... segunda calificacion
     });
     Route::get('/profile-managament/{user}', 'Manage\ProfileController@index')->name('profile.curador');
     Route::get('/profile-my_proyects/{user}', 'Manage\ProfileController@my_proyects')->name('profile.managament.myProyects');
