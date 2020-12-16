@@ -145,6 +145,11 @@ class Project extends Model
         return $this->belongsTo(Category::class)->select('id', 'category', 'description');
     }
 
+    public function manages()
+    {
+        return $this->belongsTo(Management::class, 'manager_id');
+    }
+
     public function type_category()
     {
         return $this->belongsTo(typeCategories::class);

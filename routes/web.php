@@ -313,6 +313,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'dashboard', 'middleware' =>
     Route::post('/profile-photo-management', 'Manage\ProfileController@photo_management')->name('profile.photo.management');
     Route::get('datatables-projects-profile-manage', 'Manage\ProfileController@table_proyects')->name('datatables.projects.profile.manage');
     Route::get('/datatables-projects-profile-manage-rating', 'Manage\ManageRatingController@table_project_rating')->name('datatables.projects.profile.manage.rating');
+    Route::get('/datatables-projects-manage-calification-two', 'Manage\ManageRatingController@get_table_calification_two')->name('datatables.projects.calification.manage.two');
     Route::post('/update-password-management', 'Manage\ProfileController@update_password_management')->name('update.password.management');
     Route::get('/backings-made-magement/{user}', 'Manage\BackingsMadeController@index')->name('backings.made.manage');
 

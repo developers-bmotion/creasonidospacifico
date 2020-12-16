@@ -62,7 +62,14 @@
                                     <a class="nav-link m-tabs__link active" data-toggle="tab"
                                        href="#m_user_profile_tab_2"
                                        role="tab">
-                                        Canciones Asignadas
+                                        Proyectos Calificación 1
+                                    </a>
+                                </li>
+                                <li class="nav-item m-tabs__item">
+                                    <a class="nav-link m-tabs__link" data-toggle="tab"
+                                       href="#m_tabla_calificacion_2"
+                                       role="tab">
+                                        Proyectos Calificación 2
                                     </a>
                                 </li>
                                 <li class="nav-item m-tabs__item">
@@ -87,6 +94,79 @@
                         <!--=====================================
                          INFORMACIÓN DEL CURADOR
                         ======================================-->
+
+                        <div class="tab-pane active" id="m_user_profile_tab_2">
+                            <div class="m-portlet__body">
+                                <div class="m-portlet__head">
+                                    <div class="m-portlet__head-caption">
+                                        <div class="m-portlet__head-title">
+                                            <h3 class="m-portlet__head-text">
+                                                Todos los aspirantes
+                                            </h3>
+                                        </div>
+                                    </div>
+                                    <div class="m-portlet__head-tools">
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="m-portlet__body">
+                                            <table
+                                                class="table table-striped- table-bordered table-hover table-checkable"
+                                                id="table__profile_projects_management">
+                                                <thead>
+                                                <tr>
+                                                    <th>{{ __('Canción') }}</th>
+                                                    <th>{{ __('Modalidad') }}</th>
+                                                    <th>{{ __('Estado') }}</th>
+                                                    <th>{{ __('Calificación 1') }}</th>
+                                                    <th>{{ __('Acciones') }}</th>
+                                                </tr>
+                                                </thead>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="m_tabla_calificacion_2">
+                            <div class="m-portlet__body">
+                                <div class="m-portlet__head">
+                                    <div class="m-portlet__head-caption">
+                                        <div class="m-portlet__head-title">
+                                            <h3 class="m-portlet__head-text">
+                                                Todos los aspirantes
+                                            </h3>
+                                        </div>
+                                    </div>
+                                    <div class="m-portlet__head-tools">
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="m-portlet__body">
+                                            <table
+                                                class="table table-striped- table-bordered table-hover table-checkable"
+                                                id="table__profile_projects_management_calificacion_dos">
+                                                <thead>
+                                                <tr>
+                                                    <th>{{ __('Canción') }}</th>
+                                                    <th>{{ __('Modalidad') }}</th>
+                                                    <th>{{ __('Estado') }}</th>
+                                                    <th>{{ __('Calificación 2') }}</th>
+                                                    <th>{{ __('Acciones') }}</th>
+                                                </tr>
+                                                </thead>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="tab-pane" id="m_user_profile_tab_1">
 
                             <div class="m-portlet__body">
@@ -189,41 +269,7 @@
                             </div>
 
                         </div>
-                        <div class="tab-pane active" id="m_user_profile_tab_2">
-                            <div class="m-portlet__body">
-                                <div class="m-portlet__head">
-                                    <div class="m-portlet__head-caption">
-                                        <div class="m-portlet__head-title">
-                                            <h3 class="m-portlet__head-text">
-                                                Todos los aspirantes
-                                            </h3>
-                                        </div>
-                                    </div>
-                                    <div class="m-portlet__head-tools">
 
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="m-portlet__body">
-                                            <table
-                                                class="table table-striped- table-bordered table-hover table-checkable"
-                                                id="table__profile_projects_management">
-                                                <thead>
-                                                <tr>
-                                                    <th>{{ __('Canción') }}</th>
-                                                    <th>{{ __('Modalidad') }}</th>
-                                                    <th>{{ __('Estado') }}</th>
-                                                    <th>{{ __('Calificación 1') }}</th>
-                                                    <th>{{ __('Acciones') }}</th>
-                                                </tr>
-                                                </thead>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         <!--=====================================
                          CONFIGURACIÓN PARA EL CURADOR
                         ======================================-->
@@ -942,6 +988,159 @@
 
 
     </script>
+
+    <script>
+        var tipoProyecto = null;
+        var role = "{{ auth()->user()->roles[0]->id}}";
+        var table = null;
+        const loadTableCalificacion = function () {
+            if (table !== null) {
+                table.destroy();
+            }
+            table = $('#table__profile_projects_management_calificacion_dos').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "data": null,
+                "dom": 'Bfrtip',
+                "order": [[0, "desc"]],
+                "pageLength": 500,
+                "buttons": [
+                    {
+                        extend: 'excelHtml5',
+                        filename:'Proyectos asignados al curador '+`{{ $user->name }}`+' '+`{{ $user->last_name }}`
+                    },
+                    {
+                        extend: 'pdfHtml5',
+                        pageSize: "A3",
+                        filename:'Proyectos asignados al curador '+`{{ $user->name }}`+' '+`{{ $user->last_name }}`
+                    }
+                ],
+                "pagginType": "simple_numbers",
+                "ajax": {
+                    url: "{{route('datatables.projects.calification.manage.two')}}",
+                    data: {
+                        tipoProyecto: tipoProyecto,
+                        id_user: {{ $user->id }}
+                    }
+                },
+                "columns": [
+
+                    {
+                        data: 'title',
+                        defaultContent: '<span class="label label-danger text-center">Ningún valor por defecto</span>'
+                    },
+                    {
+                        data: 'category.category',
+                        defaultContent: '<span class="label label-danger text-center">Ningún valor por defecto</span>'
+                    },
+                    {
+                        "width": "15%",
+                        data: 'status',
+                        render: function (data) {
+                            let info = '<span class="m-badge m-badge--danger m-badge--wide">N/A</span>';
+                            switch (parseInt(data)) {
+                                case 1:
+                                    info = '<span class="m-badge m-badge--brand m-badge--wide" style="background-color:#C4C5D4 !important" >{{ __('Revision') }}</span>';
+                                    break;
+                                case 2:
+                                    info = '<span class="m-badge m-badge--brand m-badge--wide" style="background-color:#9C26EA !important;" >{{ __('Calificado') }}</span>';
+                                    break;
+                                case 3:
+                                    info = '<span class="m-badge  m-badge--success m-badge--wide">{{ __('Aprobado') }}</span>';
+                                    break;
+                                case 4:
+                                    info = '<span class="m-badge  m-badge--warning m-badge--wide">{{ __('Pendiente') }}</span>';
+                                    break;
+                                case 5:
+                                    info = '<span class="m-badge  m-badge--danger m-badge--wide">{{ __('Rechazado') }}</span>';
+                                    break;
+                                case 6:
+                                    info = '<span class="m-badge  m-badge--info m-badge--wide">{{ __('Nueva revisión') }}</span>';
+                                    break;
+                                case 7:
+                                    info = '<span class="m-badge  m-badge--success m-badge--wide">{{ __('Aceptado') }}</span>';
+                                    break;
+                                case 8:
+                                    info = '<span class="m-badge  m-badge--danger m-badge--wide">{{ __('No subsanado') }}</span>';
+                                    break;
+                                case 9:
+                                    info = '<span class="m-badge  m-badge--danger m-badge--wide">{{ __('Registro pendiente') }}</span>';
+                                    break;
+                                case 10:
+                                    info = '<span class="m-badge  m-badge--danger m-badge--wide">{{ __('Sin propuesta') }}</span>';
+                                    break;
+                            }
+                            return '<div class="text-center">' + info + '</div>';
+                        }
+                    },
+                    {
+                        render: function (data, type, JsonResultRow, meta) {
+                            if(JsonResultRow.reviews){
+                                return JsonResultRow.reviews.lyric + JsonResultRow.reviews.melody_rhythm + JsonResultRow.reviews.originality + JsonResultRow.reviews.arrangements
+                            }else{
+                                return '<span class="label label-danger text-center">Ningún valor por defecto</span>'
+                            }
+                        },
+                    },
+                    {
+
+
+                        render: function (data, type, JsonResultRow, meta) {
+                            let info = '<span class="m-badge m-badge--danger m-badge--wide">N/A</span>';
+                            switch (parseInt(role)) {
+                                case 1:
+                                    info = `<span  type="button"  id="" class="btnHistorialReview btn m-btn--pill btn-secondary text-center" ><i data-toggle="tooltip" data-placement="top" title="Ver historial de calificación" class="fa fa-eye"></i></span>`
+                                    break;
+                                case 3:
+                                    info = `<span  type="button"  id="id" class="btnOpenProject btn m-btn--pill btn-secondary text-center"  idProject="${JsonResultRow.id}" audioProject="${JsonResultRow.audio}" titleProject="${JsonResultRow.title}"><i data-toggle="tooltip" data-placement="top" title="Calificar propuesta musical" class="fa fa-check"></i></span>
+                                    <span  type="button"  id="" class="btnHistorialReview btn m-btn--pill btn-secondary text-center" ><i data-toggle="tooltip" data-placement="top" title="Ver historial de calificación" class="fa fa-eye"></i></span>
+                                    `
+                                    break;
+                            }
+                            return '<div class="text-center">' + info + '</div>';
+                        }
+                    },
+                ],
+                "language": {
+                    "sProcessing": "{{__('procesando')}}",
+                    "sLengthMenu": "{{__('mostrar')}} _MENU_ {{__('registros')}}",
+                    "sZeroRecords": "No se encontraron resultados",
+                    "sEmptyTable": "{{__('nigun_dato_tabla')}}",
+                    "sInfo": "{{__('mostrando_registros') }} _START_ {{__('al')}} _END_ {{__('total_de')}} _TOTAL_ {{__('registros')}}",
+                    "sInfoEmpty": "{{ __('mostrando_registros_del_cero') }}",
+                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "sInfoPostFix": "",
+                    "sSearch": "{{__('buscar')}}:",
+                    "sUrl": "",
+                    "sInfoThousands": ",",
+                    "sLoadingRecords": "{{__('cargando')}}",
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sLast": "Último",
+                        "sNext": ">",
+                        "sPrevious": "<"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    }
+                }
+            });
+        };
+        $(".selectType").on('click', '.changeType', function () {
+            let tipo = parseInt($(this).attr("data-type"));
+            if (!(tipo > 0)) {
+                tipo = null;
+            }
+            tipoProyecto = tipo;
+            loadTableCalificacion();
+        });
+
+        loadTableCalificacion();
+
+
+    </script>
+
     <script>
 
 
