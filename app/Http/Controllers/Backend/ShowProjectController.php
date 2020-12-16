@@ -13,7 +13,6 @@ use App\User;
 use App\Review;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\SecondStage;
 use Illuminate\Support\Facades\DB;
 
 class ShowProjectController extends Controller
@@ -33,14 +32,13 @@ class ShowProjectController extends Controller
         $sumRating=Project::sumRating($project->id);
         $team = Project::where('id',$project->id)->with('teams')->first();
         $qual = Review::with('users')->where("project_id","=", $project->id)->get();
-        $qual_second= SecondStage::with('users')->where("project_id","=", $project->id)->first();
         if (in_array('Admin', $rol)) {
             $review = Review::where("project_id","=", $project->id)->get();
             $asignado = count($review);
 
 
             // $currentRaing = $review->avg("rating");
-            return view('backend.projects.show-project', compact("asignado",'project','end_time','artist','team','country','qual','qual_second','sumRating'));
+            return view('backend.projects.show-project', compact("asignado",'project','end_time','artist','team','country','qual','sumRating'));
             // return view('backend.projects.show-project', compact("asignado",'project','end_time','artist','country', "currentRaing",'location','team'));
         }else if(in_array('Subsanador', $rol)) {
             $review = Review::where("project_id","=", $project->id)->get();
