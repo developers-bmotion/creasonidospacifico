@@ -62,16 +62,16 @@
                                     <a class="nav-link m-tabs__link active" data-toggle="tab"
                                        href="#m_user_profile_tab_2"
                                        role="tab">
-                                        Proyectos Calificación 1
+                                        Proyectos Calificación
                                     </a>
                                 </li>
-                                <li class="nav-item m-tabs__item">
+                                {{-- <li class="nav-item m-tabs__item">
                                     <a class="nav-link m-tabs__link" data-toggle="tab"
                                        href="#m_tabla_calificacion_2"
                                        role="tab">
-                                        Proyectos Calificación 2
+                                        Proyectos Calificación
                                     </a>
-                                </li>
+                                </li> --}}
                                 <li class="nav-item m-tabs__item">
                                     <a class="nav-link m-tabs__link" data-toggle="tab"
                                        href="#m_user_profile_tab_1" role="tab">
@@ -95,7 +95,7 @@
                          INFORMACIÓN DEL CURADOR
                         ======================================-->
 
-                        <div class="tab-pane active" id="m_user_profile_tab_2">
+                        {{-- <div class="tab-pane active" id="m_user_profile_tab_2">
                             <div class="m-portlet__body">
                                 <div class="m-portlet__head">
                                     <div class="m-portlet__head-caption">
@@ -120,18 +120,19 @@
                                                     <th>{{ __('Canción') }}</th>
                                                     <th>{{ __('Modalidad') }}</th>
                                                     <th>{{ __('Estado') }}</th>
-                                                    <th>{{ __('Calificación 1') }}</th>
+                                                    <th>{{ __('Calificación 1') }}</th> --}}
                                                     {{-- <th>{{ __('Acciones') }}</th> --}}
-                                                </tr>
+                                                {{-- </tr>
                                                 </thead>
                                             </table>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
 
-                        <div class="tab-pane" id="m_tabla_calificacion_2">
+                        {{-- <div class="tab-pane" id="m_tabla_calificacion_2"> --}}
+                        <div class="tab-pane active" id="m_user_profile_tab_2">
                             <div class="m-portlet__body">
                                 <div class="m-portlet__head">
                                     <div class="m-portlet__head-caption">
