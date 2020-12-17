@@ -7,6 +7,7 @@ use App\Review;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Project;
+use App\SecondStage;
 use Illuminate\Support\Facades\DB;
 
 class ProjectsManageController extends Controller
@@ -58,6 +59,11 @@ class ProjectsManageController extends Controller
 
     public function history_review($id){
         $reviews = Review::where('project_id', $id)->with('projects.category')->get();
+        return response()->json($reviews);
+    }
+
+    public function history_review_second($id){
+        $reviews = SecondStage::where('project_id', $id)->with('projects.category')->first();
         return response()->json($reviews);
     }
 }
