@@ -170,6 +170,11 @@ class Project extends Model
         return $this->hasOne(Review::class, 'project_id');
     }
 
+    public function reviews_second()
+    {
+        return $this->hasOne(SecondStage::class, 'project_id');
+    }
+
     public function reviews_curador()
     {
         return $this->hasMany(Review::class)->select('id', 'user_id', 'project_id', 'lyric', 'melody_rhythm', 'arrangements', 'originality');

@@ -302,6 +302,8 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'dashboard', 'middleware' =>
     Route::group(['middleware' => 'manage_permisos'], function () {
         Route::get('/projects-management', 'Manage\ProjectsManageController@index')->name('projects.manage');
         Route::get('datatables-projects-manage', 'Manage\ProjectsManageController@table_projects')->name('datatables.projects.manage');
+        Route::post('/add-review-second', 'Manage\ProjectsManageController@add_review_second')->name('add.review.second');
+
         //CALIFICAR PROYECTO POR EL MANAGEMENT
         // Route::post('/update-review-management', 'Manage\ProjectsManageController@add_review')->name('update.review.management');
         //Calificar propuestas

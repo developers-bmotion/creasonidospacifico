@@ -62,16 +62,16 @@
                                     <a class="nav-link m-tabs__link active" data-toggle="tab"
                                        href="#m_user_profile_tab_2"
                                        role="tab">
-                                        Proyectos Calificación 1
+                                        Proyectos Calificación
                                     </a>
                                 </li>
-                                <li class="nav-item m-tabs__item">
+                                {{-- <li class="nav-item m-tabs__item">
                                     <a class="nav-link m-tabs__link" data-toggle="tab"
                                        href="#m_tabla_calificacion_2"
                                        role="tab">
-                                        Proyectos Calificación 2
+                                        Proyectos Calificación
                                     </a>
-                                </li>
+                                </li> --}}
                                 <li class="nav-item m-tabs__item">
                                     <a class="nav-link m-tabs__link" data-toggle="tab"
                                        href="#m_user_profile_tab_1" role="tab">
@@ -95,7 +95,7 @@
                          INFORMACIÓN DEL CURADOR
                         ======================================-->
 
-                        <div class="tab-pane active" id="m_user_profile_tab_2">
+                        {{-- <div class="tab-pane active" id="m_user_profile_tab_2">
                             <div class="m-portlet__body">
                                 <div class="m-portlet__head">
                                     <div class="m-portlet__head-caption">
@@ -120,18 +120,19 @@
                                                     <th>{{ __('Canción') }}</th>
                                                     <th>{{ __('Modalidad') }}</th>
                                                     <th>{{ __('Estado') }}</th>
-                                                    <th>{{ __('Calificación 1') }}</th>
-                                                    <th>{{ __('Acciones') }}</th>
-                                                </tr>
+                                                    <th>{{ __('Calificación 1') }}</th> --}}
+                                                    {{-- <th>{{ __('Acciones') }}</th> --}}
+                                                {{-- </tr>
                                                 </thead>
                                             </table>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
 
-                        <div class="tab-pane" id="m_tabla_calificacion_2">
+                        {{-- <div class="tab-pane" id="m_tabla_calificacion_2"> --}}
+                        <div class="tab-pane active" id="m_user_profile_tab_2">
                             <div class="m-portlet__body">
                                 <div class="m-portlet__head">
                                     <div class="m-portlet__head-caption">
@@ -353,194 +354,247 @@
         </div>
     </div>
 
-    <div class="modal fade" data-backdrop="static" data-keyboard="false" id="modal2" tabindex="-1" role="dialog"
-         aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title" id="exampleModalLabel">Calificar Propuesta Musical</h3>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body bodyAppendAudio">
-                    <div class="row pb-2">
-                        <div class="col-md-4 col-lg-4 col-12">
-                            <div class="form-group m-form__group">
-                                <div id="content-aspirante_name" class="m-form__group-sub">
-                                    <label
-                                        class="form-control-label font-weight-bold">Titulo:</label>
-                                    <p style="font-size: 1.1rem" class="tileProjectQualifie"></p>
+   {{-- modal segunda calificacion --}}
+   <div class="modal fade" data-backdrop="static" data-keyboard="false" id="modal3" tabindex="-1" role="dialog"
+   aria-labelledby="exampleModalLabel"
+   aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h3 class="modal-title" id="exampleModalLabel">Calificar Propuesta Musical</h3>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body bodyAppendAudio">
+              <div class="row pb-2">
+                  <div class="col-md-4 col-lg-4 col-12">
+                      <div class="form-group m-form__group">
+                          <div id="content-aspirante_name" class="m-form__group-sub">
+                              <label
+                                  class="form-control-label font-weight-bold">Nombres:</label>
+                              <p style="font-size: 1.1rem" class="txtNombres"></p>
 
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-5 col-lg-5 col-12">
-                            <div class="form-group m-form__group">
-                                <div id="content-aspirante_name" class="m-form__group-sub">
-                                    <label
-                                        class="form-control-label font-weight-bold">Modalidad:</label>
-                                    <p style="font-size: 1.1rem" class="modalidadProject"></p>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-md-4 col-lg-4 col-12">
+                      <div class="form-group m-form__group">
+                          <div id="content-aspirante_name" class="m-form__group-sub">
+                              <label
+                                  class="form-control-label font-weight-bold">Titulo:</label>
+                              <p style="font-size: 1.1rem" class="tileProjectQualifie"></p>
 
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-lg-3 col-12">
-                            <div class="form-group m-form__group">
-                                <div id="content-aspirante_name" class="m-form__group-sub">
-                                    <label
-                                        class="form-control-label font-weight-bold titleStatusProject">Estado:</label><br>
-                                    <div id="titleStatusProject">
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-md-5 col-lg-5 col-12">
+                      <div class="form-group m-form__group">
+                          <div id="content-aspirante_name" class="m-form__group-sub">
+                              <label
+                                  class="form-control-label font-weight-bold">Modalidad:</label>
+                              <p style="font-size: 1.1rem" class="modalidadProject"></p>
 
-                                    </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-md-3 col-lg-3 col-12">
+                      <div class="form-group m-form__group">
+                          <div id="content-aspirante_name" class="m-form__group-sub">
+                              <label
+                                  class="form-control-label font-weight-bold titleStatusProject">Estado:</label><br>
+                              <div id="titleStatusProject">
+
+                              </div>
 {{--                                    <span class="m-badge  m-badge--brand m-badge--wide">Aceptado</span>--}}
 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row pb-3">
-                        <div class="col-md-12 col-lg-12 col-12">
-                            <div class="form-group m-form__group">
-                                <div id="content-aspirante_name" class="m-form__group-sub">
-                                    <label
-                                        class="form-control-label font-weight-bold">Sobre la canción:</label>
-                                    <p style="font-size: 1rem; text-align: justify" class="descripcion"></p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="row pb-3">
+                  <div class="col-md-12 col-lg-12 col-12">
+                      <div class="form-group m-form__group">
+                          <div id="content-aspirante_name" class="m-form__group-sub">
+                              <label
+                                  class="form-control-label font-weight-bold">Sobre la canción:</label>
+                              <p style="font-size: 1rem; text-align: justify" class="descripcion"></p>
 
-                                </div>
-                            </div>
-                        </div>
-                        <hr>
-                    </div>
-                    <div class="row pb-3">
-                        <div class="col-md-12 col-lg-12 col-12">
-                            <div class="form-group m-form__group">
-                                <div id="content-aspirante_name" class="m-form__group-sub">
-                                    <label
-                                        class="form-control-label font-weight-bold">Sobre el artista:</label>
-                                    <p style="font-size: 1rem; text-align: justify" class="sobreartista"></p>
+                          </div>
+                      </div>
+                  </div>
+                  <hr>
+              </div>
+              <div class="row pb-3">
+                  <div class="col-md-12 col-lg-12 col-12">
+                      <div class="form-group m-form__group">
+                          <div id="content-aspirante_name" class="m-form__group-sub">
+                              <label
+                                  class="form-control-label font-weight-bold">Sobre el artista:</label>
+                              <p style="font-size: 1rem; text-align: justify" class="sobreartista"></p>
 
-                                </div>
-                            </div>
-                        </div>
-                        <hr>
-                    </div>
+                          </div>
+                      </div>
+                  </div>
+                  <hr>
+              </div>
 
-                    {{--                    <audio class="audioProject" preload="auto" controls>--}}
-                    {{--                                                 <source class="srcAudio" >--}}
+              {{--                    <audio class="audioProject" preload="auto" controls>--}}
+              {{--                                                 <source class="srcAudio" >--}}
 
-                    {{--                    </audio>--}}
-
-
-                    <input type="hidden" class="idProject" value="" name="idProject">
-
-                    <div class="sliderCalificadorUno">
-                        <!--=====================================
-                            SLIDER CRITERIO # 1
-                        ======================================-->
-                        <div class="form-group m-form__group row" style="padding-top: 2rem">
-                            <label class="col-form-label col-lg-3 col-sm-12">Aspectos técnicos musicales: <span
-                                    class="text-danger">*</span></label>
-                            <div class="col-lg-9 col-md-12 col-sm-12">
-                                <div class="row align-items-center" style="margin-bottom: 1rem">
-                                    <div class="col-2">
-                                        <input type="text" required class="form-control my-form-control"
-                                               name="criterio_1" id="criterio_1_input"
-                                               placeholder="Quantity">
-                                    </div>
-                                    <div class="col-10">
-                                        <div id="criterio_1" class="m-nouislider--drag-danger"></div>
-                                    </div>
-                                </div>
-                                <span class="m-form__help" style="margin-top: 5rem">afinación, ritmo, fraseo, tiempo - dinámica, equilibrio sonoro, dicción y articulación.</span>
-                            </div>
-                        </div>
-                        <hr>
-                        <!--=====================================
-                            SLIDER CRITERIO # 2
-                        ======================================-->
-                        <div class="form-group m-form__group row" style="padding-top: 2rem">
-                            <label class="col-form-label col-lg-3 col-sm-12">Aporte creativo:<span
-                                    class="text-danger">*</span></label>
-                            <div class="col-lg-9 col-md-12 col-sm-12">
-                                <div class="row align-items-center" style="margin-bottom: 1rem">
-                                    <div class="col-2">
-                                        <input type="text" required class="form-control my-form-control"
-                                               name="criterio_2" id="criterio_2_input"
-                                               placeholder="Quantity">
-                                    </div>
-                                    <div class="col-10">
-                                        <div id="criterio_2" class="m-nouislider--drag-danger"></div>
-                                    </div>
-                                </div>
-                                <span class="m-form__help" style="margin-top: 5rem"> realización vocal e instrumental. Originalidad, y fidelidad a las formas y estilos tradicionales, cuando sea aplicable al contexto.</span>
-                            </div>
-                        </div>
-                        <!--=====================================
-                            SLIDER CRITERIO # 3
-                        ======================================-->
-
-                        <div class="form-group m-form__group row" style="padding-top: 2rem">
-                            <label class="col-form-label col-lg-3 col-sm-12">Calidad interpretativa:<span
-                                    class="text-danger">*</span></label>
-                            <div class="col-lg-9 col-md-12 col-sm-12">
-                                <div class="row align-items-center" style="margin-bottom: 1rem">
-                                    <div class="col-2">
-                                        <input type="text" required class="form-control my-form-control"
-                                               name="criterio_3" id="criterio_3_input"
-                                               placeholder="Quantity">
-                                    </div>
-                                    <div class="col-10">
-                                        <div id="criterio_3" class="m-nouislider--drag-danger"></div>
-                                    </div>
-                                </div>
-                                <span class="m-form__help"
-                                      style="margin-top: 5rem">comunicación, proyección, dicción.</span>
-                            </div>
-                        </div>
-                        <!--=====================================
-                            SLIDER CRITERIO # 4
-                        ======================================-->
-
-                        <div class="form-group m-form__group row" style="padding-top: 2rem">
-                            <label class="col-form-label col-lg-3 col-sm-12">Calidad del repertorio escogido:<span
-                                    class="text-danger">*</span></label>
-                            <div class="col-lg-9 col-md-12 col-sm-12">
-                                <div class="row align-items-center" style="margin-bottom: 1rem">
-                                    <div class="col-2">
-                                        <input type="text" required class="form-control my-form-control"
-                                               name="criterio_4" id="criterio_4_input"
-                                               placeholder="Quantity">
-                                    </div>
-                                    <div class="col-10">
-                                        <div id="criterio_4" class="m-nouislider--drag-danger"></div>
-                                    </div>
-                                </div>
-                                <span class="m-form__help" style="margin-top: 5rem">selección de la obra con relación a la diversidad de ritmos, tonalidades y formas.</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="form-group m-form__group" style="padding-top: 2rem">
-                                <label class="col-form-label">Comentario:<span class="text-danger">*</span></label>
-                                <div class="summernote" id="m_summernote_1"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+              {{--                    </audio>--}}
 
 
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary btn-send-rating" id="btnSeendReview">Enviar
-                        calificación
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
+              <input type="hidden" class="idProject" value="" name="idProject">
+
+              <div class="sliderCalificadorUno">
+                  <!--=====================================
+                      SLIDER CRITERIO # 1
+                  ======================================-->
+                  <div class="form-group m-form__group row" style="padding-top: 2rem">
+                      <label class="col-form-label col-lg-3 col-sm-12">Aspectos técnicos musicales: <span
+                              class="text-danger">*</span></label>
+                      <div class="col-lg-9 col-md-12 col-sm-12">
+                          <div class="row align-items-center" style="margin-bottom: 1rem">
+                              <div class="col-2">
+                                  <input type="text" required class="form-control my-form-control"
+                                         name="criterio_1" id="criterio_1_input"
+                                         placeholder="Quantity">
+                              </div>
+                              <div class="col-10">
+                                  <div id="criterio_1" class="m-nouislider--drag-danger"></div>
+                              </div>
+                          </div>
+                          <span class="m-form__help" style="margin-top: 5rem">afinación, ritmo, fraseo, tiempo - dinámica, equilibrio sonoro, dicción y articulación.</span>
+                      </div>
+                  </div>
+                  <hr>
+                  <!--=====================================
+                      SLIDER CRITERIO # 2
+                  ======================================-->
+                  <div class="form-group m-form__group row" style="padding-top: 2rem">
+                      <label class="col-form-label col-lg-3 col-sm-12">Aporte creativo:<span
+                              class="text-danger">*</span></label>
+                      <div class="col-lg-9 col-md-12 col-sm-12">
+                          <div class="row align-items-center" style="margin-bottom: 1rem">
+                              <div class="col-2">
+                                  <input type="text" required class="form-control my-form-control"
+                                         name="criterio_2" id="criterio_2_input"
+                                         placeholder="Quantity">
+                              </div>
+                              <div class="col-10">
+                                  <div id="criterio_2" class="m-nouislider--drag-danger"></div>
+                              </div>
+                          </div>
+                          <span class="m-form__help" style="margin-top: 5rem"> realización vocal e instrumental. Originalidad, y fidelidad a las formas y estilos tradicionales, cuando sea aplicable al contexto.</span>
+                      </div>
+                  </div>
+                  <!--=====================================
+                      SLIDER CRITERIO # 3
+                  ======================================-->
+
+                  <div class="form-group m-form__group row" style="padding-top: 2rem">
+                      <label class="col-form-label col-lg-3 col-sm-12">Calidad interpretativa:<span
+                              class="text-danger">*</span></label>
+                      <div class="col-lg-9 col-md-12 col-sm-12">
+                          <div class="row align-items-center" style="margin-bottom: 1rem">
+                              <div class="col-2">
+                                  <input type="text" required class="form-control my-form-control"
+                                         name="criterio_3" id="criterio_3_input"
+                                         placeholder="Quantity">
+                              </div>
+                              <div class="col-10">
+                                  <div id="criterio_3" class="m-nouislider--drag-danger"></div>
+                              </div>
+                          </div>
+                          <span class="m-form__help"
+                                style="margin-top: 5rem">comunicación, proyección, dicción.</span>
+                      </div>
+                  </div>
+                  <!--=====================================
+                      SLIDER CRITERIO # 4
+                  ======================================-->
+
+                  <div class="form-group m-form__group row" style="padding-top: 2rem">
+                      <label class="col-form-label col-lg-3 col-sm-12">Calidad del repertorio escogido:<span
+                              class="text-danger">*</span></label>
+                      <div class="col-lg-9 col-md-12 col-sm-12">
+                          <div class="row align-items-center" style="margin-bottom: 1rem">
+                              <div class="col-2">
+                                  <input type="text" required class="form-control my-form-control"
+                                         name="criterio_4" id="criterio_4_input"
+                                         placeholder="Quantity">
+                              </div>
+                              <div class="col-10">
+                                  <div id="criterio_4" class="m-nouislider--drag-danger"></div>
+                              </div>
+                          </div>
+                          <span class="m-form__help" style="margin-top: 5rem">selección de la obra con relación a la diversidad de ritmos, tonalidades y formas.</span>
+                      </div>
+                  </div>
+                  <!--=====================================
+                      SLIDER CRITERIO # 5
+                  ======================================-->
+
+                  <div class="form-group m-form__group row" style="padding-top: 2rem">
+                      <label class="col-form-label col-lg-3 col-sm-12">Trayectoria del proyecto musical:<span
+                              class="text-danger">*</span></label>
+                      <div class="col-lg-9 col-md-12 col-sm-12">
+                          <div class="row align-items-center" style="margin-bottom: 1rem">
+                              <div class="col-2">
+                                  <input type="text" required class="form-control my-form-control"
+                                         name="criterio_5" id="criterio_5_input"
+                                         placeholder="Quantity">
+                              </div>
+                              <div class="col-10">
+                                  <div id="criterio_5" class="m-nouislider--drag-danger"></div>
+                              </div>
+                          </div>
+                          <span class="m-form__help" style="margin-top: 5rem">Valore según su modalidad, la trayectoria del proyecto musical.</span>
+                      </div>
+                  </div>
+                  <!--=====================================
+                      SLIDER CRITERIO # 6
+                  ======================================-->
+
+                  <div class="form-group m-form__group row" style="padding-top: 2rem">
+                      <label class="col-form-label col-lg-3 col-sm-12">Capacidad e interés del proyecto:<span
+                              class="text-danger">*</span></label>
+                      <div class="col-lg-9 col-md-12 col-sm-12">
+                          <div class="row align-items-center" style="margin-bottom: 1rem">
+                              <div class="col-2">
+                                  <input type="text" required class="form-control my-form-control"
+                                         name="criterio_6" id="criterio_6_input"
+                                         placeholder="Quantity">
+                              </div>
+                              <div class="col-10">
+                                  <div id="criterio_6" class="m-nouislider--drag-danger"></div>
+                              </div>
+                          </div>
+                          <span class="m-form__help" style="margin-top: 5rem">Capacidad e interés del proyecto musical para ser emprendimiento cultural.</span>
+                      </div>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-12">
+                      <div class="form-group m-form__group" style="padding-top: 2rem">
+                          <label class="col-form-label">Comentario:<span class="text-danger">*</span></label>
+                          <div class="summernote" id="m_summernote_1"></div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+              <button type="button" class="btn btn-primary btn-send-rating" id="btnSeendReview">Enviar
+                  calificación
+              </button>
+          </div>
+      </div>
+  </div>
+</div>
 
 
     <!-- Modal -->
@@ -560,6 +614,7 @@
                     </div>
 
                     <label class="value_lyric another-lyric"></label>
+                    <label class="value_lyric_second another-lyric"></label>
 
                 </div>
                 <div class="modal-footer">
@@ -579,44 +634,79 @@
     <script>
 
         $(function () {
-            $('#table__profile_projects_management tbody').on('click', '.btnOpenProject', function (e) {
+            $('#table__profile_projects_management_calificacion_dos tbody').on('click', '.btnOpenProject', function (e) {
                 // $('#modal2').modal('show');
 
                 var data = table.row($(this).parents('tr')).data();
 
-                $.get('/api/historial-review/' + data.id + '', function (respuesta) {
+                $.get('/api/historial-review-second/' + data.id + '', function (respuesta) {
 
-                    console.log(respuesta.length, 'count')
-                    if (respuesta.length < 2) {
+console.log(respuesta,'second');
+if (!respuesta.id) {
 
-                        $('#modal2').modal('show');
-                    } else {
+        $('#modal3').modal('show');
 
-                        toastr.options = {
-                            "closeButton": false,
-                            "debug": false,
-                            "newestOnTop": false,
-                            "progressBar": false,
-                            "positionClass": "toast-top-right",
-                            "preventDuplicates": false,
-                            "onclick": null,
-                            "showDuration": "3000",
-                            "hideDuration": "1000",
-                            "timeOut": "5000",
-                            "extendedTimeOut": "1000",
-                            "showEasing": "swing",
-                            "hideEasing": "linear",
-                            "showMethod": "fadeIn",
-                            "hideMethod": "fadeOut"
-                        };
+    } else {
 
-                        toastr.warning("Este aspirante ya tiene 2 calificaciones", "Información");
-                        $(".audioProject").remove();
-                        $(".spanStatusProject").remove();
-                    }
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "3000",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+
+        toastr.warning("Este aspirante ya tiene 2 calificaciones", "Información");
+        $(".audioProject").remove();
+        $(".spanStatusProject").remove();
+        $("#second_song").remove();
+        $(".audioProjectOne").remove();
+        $(".audioProjectTwo").remove();
+    }
+});
+                // $.get('/api/historial-review/' + data.id + '', function (respuesta) {
+
+                //     console.log(respuesta.length, 'count')
+                //     if (respuesta.length < 2) {
+
+                //         $('#modal2').modal('show');
+                //     } else {
+
+                //         toastr.options = {
+                //             "closeButton": false,
+                //             "debug": false,
+                //             "newestOnTop": false,
+                //             "progressBar": false,
+                //             "positionClass": "toast-top-right",
+                //             "preventDuplicates": false,
+                //             "onclick": null,
+                //             "showDuration": "3000",
+                //             "hideDuration": "1000",
+                //             "timeOut": "5000",
+                //             "extendedTimeOut": "1000",
+                //             "showEasing": "swing",
+                //             "hideEasing": "linear",
+                //             "showMethod": "fadeIn",
+                //             "hideMethod": "fadeOut"
+                //         };
+
+                //         toastr.warning("Este aspirante ya tiene 2 calificaciones", "Información");
+                //         $(".audioProject").remove();
+                //         $(".spanStatusProject").remove();
+                //     }
 
 
-                });
+                // });
 
                 $(".audioProject").show();
                 console.log(data,' se puede');
@@ -627,7 +717,9 @@
                 let descripcion = data.description
                 let sobreartista = data.artists[0].biography
                 let status = data.status
+                let nombres = data.artists[0].users.name+" "+data.artists[0].users.last_name +" "+ data.artists[0].users.second_last_name
 
+                $(".txtNombres").text(nombres);
                 $(".tileProjectQualifie").text(title);
                 $(".modalidadProject").text(modalidad);
                 $(".descripcion").text(descripcion);
@@ -652,7 +744,7 @@
                                    console.log(data.audio_secundary_one,'data one');
                                    console.log(data.audio_secundary_two,'data two');
 
-                        if(data.audio_secundary_one != null){
+                        if(data.audio_secundary_one != null || data.audio_secundary_two != null){
 
                             $(secondAudio).insertAfter(".audioProject");
 
@@ -665,7 +757,8 @@
                             $(secondAudioTwo).insertBefore(".audioProjectOne");
                         }
 
-                $('#modal2').on('hidden.bs.modal', function (e) {
+                $('#modal3').on('hidden.bs.modal', function (e) {
+                    // alert();
                     $(".audioProject").remove();
                     $("#second_song").remove();
                     $(".audioProjectOne").remove();
@@ -712,13 +805,13 @@
 
             noUiSlider.create(slider1, {
                 start: [0],
-                step: 1,
+                step: 0.01,
                 range: {
                     'min': [0],
-                    'max': [35]
+                    'max': [100]
                 },
                 format: wNumb({
-                    decimals: 0
+                    decimals: 1,
                 })
             });
 
@@ -745,13 +838,13 @@
 
             noUiSlider.create(slider2, {
                 start: [0],
-                step: 1,
+                step: 0.01,
                 range: {
                     'min': [0],
-                    'max': [30]
+                    'max': [100]
                 },
                 format: wNumb({
-                    decimals: 0
+                    decimals: 1
                 })
             });
 
@@ -777,13 +870,13 @@
 
             noUiSlider.create(slider3, {
                 start: [0],
-                step: 1,
+                step: 0.01,
                 range: {
                     'min': [0],
-                    'max': [25]
+                    'max': [100]
                 },
                 format: wNumb({
-                    decimals: 0
+                    decimals: 1
                 })
             });
 
@@ -809,13 +902,13 @@
 
             noUiSlider.create(slider4, {
                 start: [0],
-                step: 1,
+                step: 0.01,
                 range: {
                     'min': [0],
-                    'max': [10]
+                    'max': [100]
                 },
                 format: wNumb({
-                    decimals: 0
+                    decimals: 1
                 })
             });
 
@@ -833,6 +926,70 @@
 
             sliderInput4.addEventListener('change', function () {
                 slider4.noUiSlider.set(this.value);
+            });
+            /*=============================================
+            CRITERIO # 5
+            =============================================*/
+            var slider5 = document.getElementById('criterio_5');
+
+            noUiSlider.create(slider5, {
+                start: [0],
+                step: 0.01,
+                range: {
+                    'min': [0],
+                    'max': [100]
+                },
+                format: wNumb({
+                    decimals: 1
+                })
+            });
+
+            // init slider input
+            var sliderInput5 = document.getElementById('criterio_5_input');
+
+            slider5.noUiSlider.on('update', function (values, handle) {
+                sliderInput5.value = values[handle];
+            });
+
+            sliderInput5.addEventListener('change', function () {
+                slider5.noUiSlider.set(this.value);
+            });
+
+
+            sliderInput5.addEventListener('change', function () {
+                slider5.noUiSlider.set(this.value);
+            });
+            /*=============================================
+            CRITERIO # 6
+            =============================================*/
+            var slider6 = document.getElementById('criterio_6');
+
+            noUiSlider.create(slider6, {
+                start: [0],
+                step: 0.01,
+                range: {
+                    'min': [0],
+                    'max': [100]
+                },
+                format: wNumb({
+                    decimals: 1
+                })
+            });
+
+            // init slider input
+            var sliderInput6 = document.getElementById('criterio_6_input');
+
+            slider6.noUiSlider.on('update', function (values, handle) {
+                sliderInput6.value = values[handle];
+            });
+
+            sliderInput6.addEventListener('change', function () {
+                slider6.noUiSlider.set(this.value);
+            });
+
+
+            sliderInput6.addEventListener('change', function () {
+                slider6.noUiSlider.set(this.value);
             });
         });
 
@@ -930,24 +1087,24 @@
                             }
                         },
                     },
-                    {
+                    // {
 
 
-                        render: function (data, type, JsonResultRow, meta) {
-                            let info = '<span class="m-badge m-badge--danger m-badge--wide">N/A</span>';
-                            switch (parseInt(role)) {
-                                case 1:
-                                    info = `<span  type="button"  id="" class="btnHistorialReview btn m-btn--pill btn-secondary text-center" ><i data-toggle="tooltip" data-placement="top" title="Ver historial de calificación" class="fa fa-eye"></i></span>`
-                                    break;
-                                case 3:
-                                    info = `<span  type="button"  id="id" class="btnOpenProject btn m-btn--pill btn-secondary text-center"  idProject="${JsonResultRow.id}" audioProject="${JsonResultRow.audio}" titleProject="${JsonResultRow.title}"><i data-toggle="tooltip" data-placement="top" title="Calificar propuesta musical" class="fa fa-check"></i></span>
-                                    <span  type="button"  id="" class="btnHistorialReview btn m-btn--pill btn-secondary text-center" ><i data-toggle="tooltip" data-placement="top" title="Ver historial de calificación" class="fa fa-eye"></i></span>
-                                    `
-                                    break;
-                            }
-                            return '<div class="text-center">' + info + '</div>';
-                        }
-                    },
+                    //     render: function (data, type, JsonResultRow, meta) {
+                    //         let info = '<span class="m-badge m-badge--danger m-badge--wide">N/A</span>';
+                    //         switch (parseInt(role)) {
+                    //             case 1:
+                    //                 info = `<span  type="button"  id="" class="btnHistorialReview btn m-btn--pill btn-secondary text-center" ><i data-toggle="tooltip" data-placement="top" title="Ver historial de calificación" class="fa fa-eye"></i></span>`
+                    //                 break;
+                    //             case 3:
+                    //                 info = `<span style="display:none" type="button"  id="id" class="btnOpenProject btn m-btn--pill btn-secondary text-center"  idProject="${JsonResultRow.id}" audioProject="${JsonResultRow.audio}" titleProject="${JsonResultRow.title}"><i data-toggle="tooltip" data-placement="top" title="Calificar propuesta musical" class="fa fa-check"></i></span>
+                    //                 <span  type="button"  id="" class="btnHistorialReview btn m-btn--pill btn-secondary text-center" ><i data-toggle="tooltip" data-placement="top" title="Ver historial de calificación" class="fa fa-eye"></i></span>
+                    //                 `
+                    //                 break;
+                    //         }
+                    //         return '<div class="text-center">' + info + '</div>';
+                    //     }
+                    // },
                 ],
                 "language": {
                     "sProcessing": "{{__('procesando')}}",
@@ -1075,8 +1232,10 @@
                     },
                     {
                         render: function (data, type, JsonResultRow, meta) {
-                            if(JsonResultRow.reviews){
-                                return JsonResultRow.reviews.lyric + JsonResultRow.reviews.melody_rhythm + JsonResultRow.reviews.originality + JsonResultRow.reviews.arrangements
+
+                            console.log('second review', JsonResultRow.reviews_second);
+                            if(JsonResultRow.reviews_second){
+                                return ((JsonResultRow.reviews_second.lyric + JsonResultRow.reviews_second.melody_rhythm + JsonResultRow.reviews_second.originality + JsonResultRow.reviews_second.arrangements + JsonResultRow.reviews_second.trajectory +JsonResultRow.reviews_second.project_interest)/6).toFixed(2)
                             }else{
                                 return '<span class="label label-danger text-center">Ningún valor por defecto</span>'
                             }
@@ -1189,16 +1348,18 @@
                             start: true,
                         });
 
-                        if ($('#m_summernote_1').summernote('code') !== '') {
+                        if ($('#m_summernote_1').summernote('code') !== "<p><br></p>" && $('#m_summernote_1').summernote('code') !== "") {
                             const
                                 mesage = $('#m_summernote_1').summernote('code'),
                                 cristerio1 = $('#criterio_1_input').val(),
                                 cristerio2 = $('#criterio_2_input').val(),
                                 cristerio3 = $('#criterio_3_input').val(),
                                 cristerio4 = $('#criterio_4_input').val(),
+                                cristerio5 = $('#criterio_5_input').val(),
+                                cristerio6 = $('#criterio_6_input').val(),
                                 idProject = $('.idProject').val(),
                                 token = '{{ csrf_token() }}',
-                                url = '{{ route('add.review') }}';
+                                url = '/dashboard/add-review-second';
 
                             let data = {
                                 __token: token,
@@ -1208,6 +1369,8 @@
                                 criterio_2: cristerio2,
                                 criterio_3: cristerio3,
                                 criterio_4: cristerio4,
+                                criterio_5: cristerio5,
+                                criterio_6: cristerio6,
                             };
                             const success = function (r) {
 
@@ -1261,15 +1424,17 @@
     </script>
     <script>
         $(function () {
-            $('#table__profile_projects_management tbody').on('click', '.btnHistorialReview', function (e) {
+            $('#table__profile_projects_management_calificacion_dos tbody').on('click', '.btnHistorialReview', function (e) {
+
                 var data = table.row($(this).parents('tr')).data();
-
-
+                console.log(data,'datos tabla');
+                // alert();
                 $('#reviews').loading({
                     message: 'Cargando...',
                     start: true,
                 });
                 $('.value_lyric').empty();
+                $('.value_lyric_second').empty();
 
                 $.get('/api/historial-review/' + data.id + '', function (respuesta) {
 
@@ -1372,6 +1537,51 @@
 
 
                 });
+
+                 // segunda calificacion
+                 $.get('/api/historial-review-second/' + data.id + '', function (respuesta) {
+
+console.log(respuesta);
+
+if(respuesta.id){
+    $('.value_lyric_second').append(
+        "<h6>2. Calificación:</h6>" +
+        "<br>" +
+        "<table class='my-table table-striped review_table'>" +
+        " <thead>" +
+        "<tr>" +
+        "<th scope='col'>Aspectos técnicos musicales</th>" +
+        "<th scope='col'>Aporte creativo</th>" +
+        "<th scope='col'>Calidad interpretativa</th>" +
+        "<th scope='col'>Calidad del repertorio escogido</th>" +
+        "<th scope='col'>Trayectoria</th>" +
+        "<th scope='col'>Capacidad e interès</th>" +
+        "<th scope='col'>Total</th>" +
+        " </tr>" +
+        " </thead>" +
+        "<tbody style='text-align: center;font-weight:500;'>" +
+        " <tr>" +
+        "<th>" + respuesta.melody_rhythm + "</th>" +
+        "<td>" + respuesta.originality + "</td>" +
+        "<td>" + respuesta.arrangements + "</td>" +
+        "<td>" + respuesta.lyric + "</td>" +
+        "<td>" + respuesta.trajectory + "</td>" +
+        "<td>" + respuesta.project_interest + "</td>" +
+        "<td>" + ((respuesta.melody_rhythm + respuesta.originality + respuesta.arrangements + respuesta.lyric + respuesta.trajectory + respuesta.project_interest)/6).toFixed(2) + "</td>" +
+        "</tr>" +
+        " </tbody>" +
+        " </table>" +
+        "<br>" +
+        "<h6>Observaciones:</h6>" +
+        "<div>" + respuesta.comment + "</div>" +
+        "<br>" +
+        "<hr>"
+    );
+
+}
+
+    // $(pri).val(Math.round((data * 19 / 100),2));
+});
                 $('#reviews').on('hidden.bs.modal', function (e) {
                     $(".audioProject").remove();
                 })

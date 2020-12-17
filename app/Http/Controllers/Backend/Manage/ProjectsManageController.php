@@ -7,6 +7,7 @@ use App\Review;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Project;
+use App\SecondStage;
 use Illuminate\Support\Facades\DB;
 
 class ProjectsManageController extends Controller
@@ -25,7 +26,6 @@ class ProjectsManageController extends Controller
      return datatables()->of($project)->toJson();
     }
 
-<<<<<<< HEAD
     public function table_project_rating(Request $request){
 
         $project = \App\Project::where('status','!=',1)->whereHas('management', function ($query) {
@@ -37,8 +37,6 @@ class ProjectsManageController extends Controller
         return datatables()->of($project)->toJson();
     }
 
-=======
->>>>>>> parent of 971d9a3... segunda calificacion
     public function add_review(Request $request){
 
         // return $request;
@@ -61,6 +59,11 @@ class ProjectsManageController extends Controller
 
     public function history_review($id){
         $reviews = Review::where('project_id', $id)->with('projects.category')->get();
+        return response()->json($reviews);
+    }
+
+    public function history_review_second($id){
+        $reviews = SecondStage::where('project_id', $id)->with('projects.category')->first();
         return response()->json($reviews);
     }
 }
