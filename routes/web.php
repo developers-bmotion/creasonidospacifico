@@ -20,7 +20,9 @@ use App\Mail\NewArtist;
 use App\Project;
 use App\Role;
 use App\User;
-
+Route::get('/curadores', function (){
+   return \App\Management::with('users')->get();
+});
 Route::get('/datos', function () {
 
     $listRating = Artist::with('users','personType','projects.category','documentType','city.departaments')
@@ -303,14 +305,11 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'dashboard', 'middleware' =>
         //CALIFICAR PROYECTO POR EL MANAGEMENT
         // Route::post('/update-review-management', 'Manage\ProjectsManageController@add_review')->name('update.review.management');
         //Calificar propuestas
-<<<<<<< HEAD
         Route::post('/add-review-second', 'Manage\ProjectsManageController@add_review_second')->name('add.review.second');
         Route::post('/add-review', 'Manage\ProjectsManageController@add_review')->name('add.review');
 
-=======
         Route::post('/add-review', 'Manage\ProjectsManageController@add_review')->name('add.review');
-        
->>>>>>> parent of 971d9a3... segunda calificacion
+
     });
     Route::get('/profile-managament/{user}', 'Manage\ProfileController@index')->name('profile.curador');
     Route::get('/profile-my_proyects/{user}', 'Manage\ProfileController@my_proyects')->name('profile.managament.myProyects');

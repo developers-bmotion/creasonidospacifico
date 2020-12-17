@@ -27,11 +27,8 @@ class ProfileController extends Controller
         $id_user = $request->input('id_user');
         $project = \App\Project::whereHas('management', function ($query) use ($id_user) {
             $query->where('managements.user_id', '=', $id_user);
-<<<<<<< HEAD
+
         })->with('category','artists', 'reviews','artists.users');
-=======
-        })->with('category','artists');
->>>>>>> parent of 971d9a3... segunda calificacion
         if ($request->input("tipoProyecto")){
             $project->where('status', "=", $request->input("tipoProyecto"));
         }
