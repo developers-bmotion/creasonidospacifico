@@ -221,7 +221,7 @@
 
     <div class="m-content subsanador-content">
         <!--=====================================
-		    LISTA DE OBSERVACIONES
+		    LISTA DE OBSERVACIONES c
         ======================================-->
         @if(auth()->user()->roles[0]->rol == 'Subsanador' || auth()->user()->roles[0]->rol == 'Admin')
             @if(count($artist->historyReviews) != 0)
