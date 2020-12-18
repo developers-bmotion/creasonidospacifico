@@ -284,4 +284,22 @@ class Project extends Model
 
         return $valueMayor;
     }
+
+    public static function sumRatingSecond($id)
+    {
+        $review = SecondStage::where('project_id', $id)->first();
+        $valor = 0;
+        // foreach ($review as $rating){
+            if($review){
+
+                $value = collect([$review->lyric, $review->melody_rhythm, $review->originality, $review->arrangements,$review->trajectory,$review->project_interest])->sum();
+                $valor=round(($value/6), 2);
+            }
+        //     if($value > $valueMayor ){
+        //         $valueMayor =  $value;
+        //     }
+        // }
+
+        return $valor;
+    }
 }

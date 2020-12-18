@@ -455,6 +455,9 @@
                     <li class="nav-item m-tabs__item">
                         <a class="nav-link m-tabs__link" id="tab_rating" data-toggle="tab" href="#m_tabs_6_3" role="tab">Propuestas calificadas</a>
                     </li>
+                    <li class="nav-item m-tabs__item">
+                        <a class="nav-link m-tabs__link" id="tab_rating" data-toggle="tab" href="#m_tabs_6_4" role="tab">Segunda calificación</a>
+                    </li>
                 </ul>
                 <div class="tab-content">
                     {{-- iniciotab1 --}}
@@ -585,6 +588,7 @@
                                     <th></th>
                                     <th>{{ __('Nombres y Apellidos') }}</th>
                                     <th>{{ __('Actuará Como') }}</th>
+                                    <th>{{ __('Identificación') }}</th>
                                     <th>{{ __('Modalidad') }}</th>
                                     <th>{{ __('Email') }}</th>
                                     <th>{{ __('Teléfono') }}</th>
@@ -630,7 +634,51 @@
                                     {{-- <th>#</th> --}}
                                     <th>{{ __('Nombres y Apellidos') }}</th>
                                     <th>{{ __('Actuara como') }}</th>
-                                    <th>{{ __('Categoría') }}</th>
+                                    <th>{{ __('Modalidad') }}</th>
+                                    <th>{{ __('Departamento de nacimiento') }}</th>
+                                    <th>{{ __('Ciudad de nacimiento') }}</th>
+                                    <th>{{ __('Calificación') }}</th>
+                                    <th>{{ __('Acciones') }}</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+
+                    </div>
+                    {{-- tab para la segunda calificacion  --}}
+                    <div class="tab-pane" id="m_tabs_6_4" role="tabpanel">
+                        <div class="m-portlet__body">
+                            {{-- filtros para datatable --}}
+                            <div class="row">
+                                <select class="form-control m-input m-input--square col-md-3 mb-3  tipoPersona_cualified" name="tipoPersonaCualified" id="tipoPersona_cualified">
+                                    <option value="0">Filtrar por tipo persona</option>
+                                    @foreach ($tipoPersona as $tipoPer)
+                                    <option value="{{$tipoPer->id  }}">{{ $tipoPer->name }}</option>
+                                    @endforeach
+
+                                </select>
+                                {{-- @dd($cat) --}}
+                                <select class="form-control m-input m-input--square col-md-3 mb-3 ml-3" id="category_filter_cualified"
+
+                                >
+                                    <option value="0">Filtrar por modalidad</option>
+                                    @foreach ($cat as $category)
+                                    <option value="{{$category->id}}" >{{$category->category}}</option>
+                                    @endforeach
+
+                                </select>
+
+
+
+                            </div>
+                            <table class="table table-striped- table-bordered table-hover table-checkable "
+                                   id="table_qualified_second">
+                                <thead>
+                                <tr>
+                                    {{-- <th>#</th> --}}
+                                    <th>{{ __('Nombres y Apellidos') }}</th>
+                                    <th>{{ __('Actuara como') }}</th>
+                                    <th>{{ __('Modalidad') }}</th>
                                     <th>{{ __('Departamento de nacimiento') }}</th>
                                     <th>{{ __('Ciudad de nacimiento') }}</th>
                                     <th>{{ __('Calificación') }}</th>
@@ -737,7 +785,7 @@
                 "serverSide": true,
                 "scrollX": true,
                 "dom": 'Bfrtip',
-                "pageLength": 500,
+                "pageLength": 3000,
                 "data": null,
                 "lengthMenu": [[10, 25, 100, -1], [10,25, 100, "All"]],
                 "pagingType": "simple_numbers",
@@ -796,6 +844,14 @@
                             }
 
                         }
+                    },
+                    {
+
+                        data:'identification',
+                        // defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
+
+
+
                     },
                     {
 
@@ -1382,6 +1438,216 @@
 
 
         loadTableQual();
+
+
+</script>
+    {{-- tabla segundas calificaciones --}}
+<script>
+
+        // var estado = getStorage('storeTipoProyecto');
+
+
+        // var storeTipoProyecto = "storeTipoProyecto";
+        // var tipoProyecto = getStorage(storeTipoProyecto);
+        var tipoPerQualSec = 0;
+        var categoryQualSec=0;
+
+
+        var tableQuailifiedSec = null;
+
+        const loadTableQualSec = function () {
+            if (tableQuailifiedSec !== null) {
+                tableQuailifiedSec.destroy();
+            }
+            var cont = 1;
+            var cat;
+            tableQuailifiedSec = $('#table_qualified_second').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "scrollX": true,
+                "pageLength": 1000,
+                "dom": 'Bfrtip',
+                "data": null,
+                "pagingType": "simple_numbers",
+                "lengthMenu": [[10, 25, 100, -1], [10,25, 100, "All"]],
+                "order":[5,"desc"],
+                "buttons": [
+                    {
+                        extend: 'excelHtml5',
+                        filename:'Listas de aspirantes'
+                    },
+                    {
+                        extend: 'pdfHtml5',
+                        pageSize: "A3",
+                        filename:'Listas de aspirantes'
+                    }
+                ],
+                "ajax": {
+                    url: "{{route('list.ratings.second')}}",
+                    data: {
+                        tipoPerQualSec:tipoPerQualSec,
+                        categoryQualSec:categoryQualSec
+                    }
+                },
+                "columns": [
+
+                    {
+                        data: 'names',
+                        defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>',
+
+                        render: function (data, type, JsonResultRow, meta) {
+                            // console.log(JsonResultRow,'data****');
+                            if (JsonResultRow.last_name === null) {
+                                return '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
+                            } else {
+
+                                return '<span class="label label-danger text-center">' + JsonResultRow.names + '</span>  <span class="label label-danger text-center">' + JsonResultRow.last_name + '</span>';
+                            }
+                            // return '<img src="' + JsonResultRow + '" width="50px"  style="border-radius: 100%;margin-right: auto;margin-left: auto;display: block; width:50px; height:50px"/>';
+                        }
+                    },
+                    {
+                        data: 'act_like',
+                        defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>',
+
+                        // render:function(data,type,JsonResultRow, meta){
+                        //     if (JsonResultRow.person_type){
+                        //         return JsonResultRow.act_like;
+                        //     }
+
+                        // }
+                    },
+                    {
+                        data: 'category',
+                        defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>',
+
+
+
+                        // render: function (data, type, JsonResultRow, meta) {
+                        //     var category = "";
+                        //     if (JsonResultRow.projects) {
+
+                        //         JsonResultRow.projects.map(item => {
+                        //             category = item;
+                        //         });
+                        //     }
+
+                        //    cat = category != "" ? `${category.category.category}` : '<span class="label label-danger text-center ml-4" style="color:#ff0000 !important">Sin categoria</span>'
+                        //    return cat;
+                        // },
+
+
+
+
+                    },
+
+                    {
+                        data: 'departament',
+                        defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
+                    },
+                    {
+                        data: 'city',
+                        defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
+                    },
+                    {
+
+                        data: 'rating',
+                        defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>',
+                        // orderSequence: [ "desc", "asc"],
+                        // targets:"descendFirst"
+                        // render: function (data, type, JsonResultRow, meta) {
+
+                        // //   console.log(JsonResultRow,'data rating')
+
+                        //    JsonResultRow.projects[0].reviews_curador;
+
+                        //   var cal = "";
+                        //     if (JsonResultRow.projects[0].reviews_curador) {
+
+                        //         JsonResultRow.projects[0].reviews_curador.map(value => {
+                        //             cal = value;
+                        //             console.log(cal,'callificacion')
+                        //         });
+                        //     }
+
+                        //     var sum= cal.lyric+cal.melody_rhythm+cal.arrangements+cal.originality;
+                        //     return cal != "" ? '<div class="text-center">'+(sum)+'</div>': ' ';
+                        // }
+
+                    },
+
+                    {
+                        render: function (data, type, JsonResultRow, meta) {
+                            // var items = "";
+                            // if (JsonResultRow.projects) {
+
+                            //     JsonResultRow.projects.map(item => {
+                            //         items = item;
+                            //     });
+                            // }
+
+                            return JsonResultRow.slug != "" ? `<div class="text-center"><a href="/dashboard/project/${JsonResultRow.slug}" class="btn m-btn--pill btn-secondary"><i class="fa fa-eye"></i></a></div>` : '<span class="label label-danger text-center ml-4" style="color:red !important">Sin propuesta</span>'
+                        }
+                    },
+                ],
+                "language": {
+                    "sProcessing": "{{__('procesando')}}",
+                    "sLengthMenu": "{{__('mostrar')}} _MENU_ {{__('registros')}}",
+                    "sZeroRecords": "No se encontraron resultados",
+                    "sEmptyTable": "{{__('nigun_dato_tabla')}}",
+                    "sInfo": "{{__('mostrando_registros') }} _START_ {{__('from')}} _END_ {{__('total_de')}} _TOTAL_ {{__('registros')}}",
+                    "sInfoEmpty": "{{ __('mostrando_registros_del_cero') }}",
+                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "sInfoPostFix": "",
+                    "sSearch": "{{__('buscar')}}:",
+                    "sUrl": "",
+                    "sInfoThousands": ",",
+                    "sLoadingRecords": "{{__('cargando')}}",
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sLast": "Último",
+                        "sNext": ">",
+                        "sPrevious": "<"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    }
+                },
+
+
+
+
+
+            });
+
+        };
+        // filtro por categoria
+        $('#category_filter_cualified_sec').on('change', function(){
+            categoryQualSec = $(this).val();
+            console.log(categoryQualSec,'cattCual');
+            loadTableQualSec();
+            // console.log(this.value,'value---');
+            // console.log(this.value,'value---');
+            //     table.search(this.value).draw();
+        });
+        // filtro por tipo
+
+        $("#tipoPersona_cualified_sec").on('change', function () {
+            // alert();
+            tipoPerQualSec = $(this).val();
+            console.log(tipoPerQualSec,'tipopercual');
+            loadTableQualSec();
+        });
+
+        // $("#tab_rating").on('click', function () {
+
+        //     loadTableQual();
+        // });
+
+
+
+        loadTableQualSec();
 
 
 </script>
