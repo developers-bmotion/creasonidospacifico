@@ -27,8 +27,8 @@ class ProfileController extends Controller
         $id_user = $request->input('id_user');
         $project = \App\Project::whereHas('management', function ($query) use ($id_user) {
             $query->where('managements.user_id', '=', $id_user);
-        })->with('category','artists', 'reviews','artists.users');
-        if ($request->input("tipoProyecto")){
+      })->with('category','artists', 'reviews','artists.users');
+       if ($request->input("tipoProyecto")){
             $project->where('status', "=", $request->input("tipoProyecto"));
         }
         return datatables()->of($project)->toJson();
