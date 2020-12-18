@@ -291,6 +291,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'dashboard', 'middleware' =>
         Route::get("/aspirants-all", "Admin\DashboardAdminController@AspirantsAll")->name("aspirants.all");
         Route::get("/list-ratings", "Admin\DashboardAdminController@ratings")->name("list.ratings");
         Route::get("/list-ratings-second", "Admin\DashboardAdminController@ratings_second")->name("list.ratings.second");
+        Route::get("/list-ratings-finalist", "Admin\DashboardAdminController@ratings_finalist")->name("list.ratings.finalist");
         Route::post("/top-countries", "Admin\DashboardAdminController@showTopCountry")->name("admin.top_country");
 
         Route::get('/aspirants-cities', 'DashboardController@getCitiesAspirants')->name('get.aspirants.cities');
