@@ -496,7 +496,7 @@
 
                             @if(auth()->user()->roles[0]->rol == "Admin")
 
-                                <form method="post" action="{{ route('project.admin.rejected') }}" class="btn-subsanador" style="display: inline"
+                                {{-- <form method="post" action="{{ route('project.admin.rejected') }}" class="btn-subsanador" style="display: inline"
                                     id="frm_rejected_admin">
                                     @csrf {{ method_field('PUT') }}
                                     @if($qual_second->finalist == 1)
@@ -509,18 +509,18 @@
                                     <input type="hidden" name="rejected" value="{{ $project->id }}">
                                 </form>
                             @else
-                            <form method="post" action="{{ route('project.admin.rejected') }}" class="btn-subsanador" style="display: inline"
-                                id="frm_rejected_admin">
-                                    @csrf {{ method_field('PUT') }}
-                                    @if($qual_second->finalist == 1)
-                                    <button id="btn_rejected_admin" class="btn btn-danger m-btn m-btn--icon">
-                                            <span>
-                                                <i class="la la-close"></i>
-                                                <span>{{ __('No subsanado') }}</span>
-                                            </span>
-                                        </button>
-                                        <input type="hidden" name="rejected" value="{{ $project->id }}">
-                            </form>
+                                <form method="post" action="{{ route('project.admin.rejected') }}" class="btn-subsanador" style="display: inline"
+                                    id="frm_rejected_admin">
+                                        @csrf {{ method_field('PUT') }}
+                                        @if($qual_second->finalist == 1)
+                                        <button id="btn_rejected_admin" class="btn btn-danger m-btn m-btn--icon">
+                                                <span>
+                                                    <i class="la la-close"></i>
+                                                    <span>{{ __('No subsanado') }}</span>
+                                                </span>
+                                            </button>
+                                            <input type="hidden" name="rejected" value="{{ $project->id }}">
+                                </form> --}}
                             @endif
 
                         </div>
