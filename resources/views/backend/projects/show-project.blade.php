@@ -496,31 +496,34 @@
 
                             @if(auth()->user()->roles[0]->rol == "Admin")
 
-                                {{-- <form method="post" action="{{ route('project.admin.rejected') }}" class="btn-subsanador" style="display: inline"
+                                <form method="post" action="{{ route('project.admin.finalist') }}" class="btn-subsanador ml-3" style="display: inline"
                                     id="frm_rejected_admin">
                                     @csrf {{ method_field('PUT') }}
+                                    <br>
+                                    @if($qual_second)
                                     @if($qual_second->finalist == 1)
-                                    <button id="btn_rejected_admin" class="btn btn-danger m-btn m-btn--icon">
-                                            <span>
-                                                <i class="la la-close"></i>
-                                                <span>{{ __('No subsanado') }}</span>
-                                            </span>
-                                    </button>
-                                    <input type="hidden" name="rejected" value="{{ $project->id }}">
-                                </form>
-                            @else
-                                <form method="post" action="{{ route('project.admin.rejected') }}" class="btn-subsanador" style="display: inline"
-                                    id="frm_rejected_admin">
-                                        @csrf {{ method_field('PUT') }}
-                                        @if($qual_second->finalist == 1)
-                                        <button id="btn_rejected_admin" class="btn btn-danger m-btn m-btn--icon">
+                                        <button id="btn_finalist_admin" class="btn btn-danger m-btn m-btn--icon">
                                                 <span>
                                                     <i class="la la-close"></i>
-                                                    <span>{{ __('No subsanado') }}</span>
+                                                    <span>Quitar como finalista</span>
                                                 </span>
-                                            </button>
-                                            <input type="hidden" name="rejected" value="{{ $project->id }}">
-                                </form> --}}
+                                        </button>
+                                        <input type="hidden" name="finalist" value="0">
+                                        <input type="hidden" name="idProject" value="{{ $project->id }}">
+                                    @else
+                                        <button id="btn_finalist_admin" class="btn btn-success m-btn m-btn--icon">
+                                                <span>
+                                                    <i class="la la-close"></i>
+                                                    <span>Poner cono finalista</span>
+                                                </span>
+                                        </button>
+                                        <input type="hidden" name="idProject" value="{{ $project->id }}">
+                                        <input type="hidden" name="finalist" value="1">
+
+                                    @endif
+                                    @endif
+                                </form>
+
                             @endif
 
                         </div>

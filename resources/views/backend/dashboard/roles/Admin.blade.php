@@ -589,6 +589,7 @@
                                     <th>{{ __('Nombres y Apellidos') }}</th>
                                     <th>{{ __('Actuará Como') }}</th>
                                     <th>{{ __('Identificación') }}</th>
+                                    <th>{{ __('Edad') }}</th>
                                     <th>{{ __('Modalidad') }}</th>
                                     <th>{{ __('Email') }}</th>
                                     <th>{{ __('Teléfono') }}</th>
@@ -849,6 +850,24 @@
 
                         data:'identification',
                         // defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
+
+
+
+                    },
+                    {
+
+                    render:function(data,type,JsonResultRow, meta){
+                        // console.log(JsonResultRow,'fecha');
+                        var today = new Date();
+                        var birthDate = new Date(JsonResultRow.byrthdate);
+                        var age = today.getFullYear() - birthDate.getFullYear();
+                        var m = today.getMonth() - birthDate.getMonth();
+                        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate()))
+                        {
+                            age--;
+                        }
+                        return age;
+                    }
 
 
 
