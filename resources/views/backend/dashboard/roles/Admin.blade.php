@@ -638,6 +638,8 @@
                                     {{-- <th>#</th> --}}
                                     <th>{{ __('Nombres y Apellidos') }}</th>
                                     <th>{{ __('Actuara como') }}</th>
+                                    <th>Identificación</th>
+                                    <th>Edad</th>
                                     <th>{{ __('Modalidad') }}</th>
                                     <th>{{ __('Departamento de nacimiento') }}</th>
                                     <th>{{ __('Ciudad de nacimiento') }}</th>
@@ -682,6 +684,8 @@
                                     {{-- <th>#</th> --}}
                                     <th>{{ __('Nombres y Apellidos') }}</th>
                                     <th>{{ __('Actuara como') }}</th>
+                                    <th>Identificación</th>
+                                    <th>Edad</th>
                                     <th>{{ __('Modalidad') }}</th>
                                     <th>{{ __('Departamento de nacimiento') }}</th>
                                     <th>{{ __('Ciudad de nacimiento') }}</th>
@@ -704,6 +708,8 @@
                                     {{-- <th>#</th> --}}
                                     <th>{{ __('Nombres y Apellidos') }}</th>
                                     <th>{{ __('Actuara como') }}</th>
+                                    <th>Identificación</th>
+                                    <th>Edad</th>
                                     <th>{{ __('Modalidad') }}</th>
                                     <th>{{ __('Departamento de nacimiento') }}</th>
                                     <th>{{ __('Ciudad de nacimiento') }}</th>
@@ -1330,7 +1336,7 @@
                         defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>',
 
                         render: function (data, type, JsonResultRow, meta) {
-                            // console.log(JsonResultRow,'data****');
+
                             if (JsonResultRow.last_name === null) {
                                 return '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
                             } else {
@@ -1350,6 +1356,32 @@
                         //     }
 
                         // }
+                    },
+                    {
+
+                     data:'identification',
+                    // defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
+
+
+
+                    },
+                    {
+
+                        render:function(data,type,JsonResultRow, meta){
+                        // console.log(JsonResultRow,'fecha');
+                            var today = new Date();
+                            var birthDate = new Date(JsonResultRow.fecha);
+                            var age = today.getFullYear() - birthDate.getFullYear();
+                            var m = today.getMonth() - birthDate.getMonth();
+                            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate()))
+                        {
+                            age--;
+                        }
+                            return age;
+                        }
+
+
+
                     },
                     {
                         data: 'category',
@@ -1419,6 +1451,7 @@
                             //         items = item;
                             //     });
                             // }
+                            // console.log(JsonResultRow,'data****');
 
                             return JsonResultRow.slug != "" ? `<div class="text-center"><a href="/dashboard/project/${JsonResultRow.slug}" class="btn m-btn--pill btn-secondary"><i class="fa fa-eye"></i></a></div>` : '<span class="label label-danger text-center ml-4" style="color:red !important">Sin propuesta</span>'
                         }
@@ -1551,6 +1584,32 @@
                     {
                         data: 'act_like',
                         defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>',
+
+                    },
+                    {
+
+                         data:'identification',
+                    // defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
+
+
+
+                    },
+                    {
+
+                        render:function(data,type,JsonResultRow, meta){
+                        // console.log(JsonResultRow,'fecha');
+                            var today = new Date();
+                            var birthDate = new Date(JsonResultRow.fecha);
+                            var age = today.getFullYear() - birthDate.getFullYear();
+                            var m = today.getMonth() - birthDate.getMonth();
+                            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate()))
+                        {
+                            age--;
+                        }
+                            return age;
+                        }
+
+
 
                     },
                     {
@@ -1711,6 +1770,32 @@
                     {
                         data: 'act_like',
                         defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>',
+
+                    },
+                    {
+
+                        data:'identification',
+                    // defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
+
+
+
+                    },
+                    {
+
+                        render:function(data,type,JsonResultRow, meta){
+                        // console.log(JsonResultRow,'fecha');
+                            var today = new Date();
+                            var birthDate = new Date(JsonResultRow.fecha);
+                            var age = today.getFullYear() - birthDate.getFullYear();
+                            var m = today.getMonth() - birthDate.getMonth();
+                            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate()))
+                        {
+                            age--;
+                        }
+                            return age;
+                        }
+
+
 
                     },
                     {

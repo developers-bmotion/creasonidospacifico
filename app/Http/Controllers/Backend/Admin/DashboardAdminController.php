@@ -299,6 +299,8 @@ class DashboardAdminController extends Controller
                 'city' => $aspirants->city->descripcion,
                 'id_project'=> $aspirants->projects[0]->id,
                 'slug'=> $aspirants->projects[0]->slug,
+                'identification'=> $aspirants->identification,
+                'fecha'=> $aspirants->byrthdate,
                 'rating' => Project::sumRating( $aspirants->projects[0]->id)
             ]);
         }
@@ -394,6 +396,8 @@ class DashboardAdminController extends Controller
                 'city' => $aspirants->city->descripcion,
                 'id_project'=> $aspirants->projects[0]->id,
                 'slug'=> $aspirants->projects[0]->slug,
+                'identification'=> $aspirants->identification,
+                'fecha'=> $aspirants->byrthdate,
                 'rating' => Project::sumRatingSecond( $aspirants->projects[0]->id)
             ]);
         }
@@ -486,6 +490,7 @@ class DashboardAdminController extends Controller
         //     })->get();
 
         $aspirantRating = [];
+        // dd($listRating);
         foreach ($listRating as $aspirants) {
             // $suma= $second->trajectory;
             array_push($aspirantRating, (object)[
@@ -498,7 +503,9 @@ class DashboardAdminController extends Controller
                 'city' => $aspirants->city->descripcion,
                 'id_project'=> $aspirants->projects[0]->id,
                 'slug'=> $aspirants->projects[0]->slug,
-                'rating' => Project::sumRatingSecond( $aspirants->projects[0]->id)
+                'identification'=> $aspirants->identification,
+                'fecha'=> $aspirants->byrthdate,
+                'rating' => Project::sumRatingSecond( $aspirants->projects[0]->id),
             ]);
         }
 
