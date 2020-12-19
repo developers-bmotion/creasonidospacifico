@@ -456,10 +456,10 @@
                         <a class="nav-link m-tabs__link" id="tab_rating" data-toggle="tab" href="#m_tabs_6_3" role="tab">Propuestas calificadas</a>
                     </li>
                     <li class="nav-item m-tabs__item">
-                        <a class="nav-link m-tabs__link" id="tab_rating" data-toggle="tab" href="#m_tabs_6_4" role="tab">Segunda calificación</a>
+                        <a class="nav-link m-tabs__link" id="tab_rating_sec" data-toggle="tab" href="#m_tabs_6_4" role="tab">Segunda calificación</a>
                     </li>
                     <li class="nav-item m-tabs__item">
-                        <a class="nav-link m-tabs__link" id="tab_rating" data-toggle="tab" href="#m_tabs_6_5" role="tab">Finalistas</a>
+                        <a class="nav-link m-tabs__link" id="tab_final" data-toggle="tab" href="#m_tabs_6_5" role="tab">Finalistas</a>
                     </li>
                 </ul>
                 <div class="tab-content">
@@ -1540,45 +1540,22 @@
                         defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>',
 
                         render: function (data, type, JsonResultRow, meta) {
-                            // console.log(JsonResultRow,'data****');
                             if (JsonResultRow.last_name === null) {
                                 return '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
                             } else {
 
                                 return '<span class="label label-danger text-center">' + JsonResultRow.names + '</span>  <span class="label label-danger text-center">' + JsonResultRow.last_name + '</span>';
                             }
-                            // return '<img src="' + JsonResultRow + '" width="50px"  style="border-radius: 100%;margin-right: auto;margin-left: auto;display: block; width:50px; height:50px"/>';
                         }
                     },
                     {
                         data: 'act_like',
                         defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>',
 
-                        // render:function(data,type,JsonResultRow, meta){
-                        //     if (JsonResultRow.person_type){
-                        //         return JsonResultRow.act_like;
-                        //     }
-
-                        // }
                     },
                     {
                         data: 'category',
                         defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>',
-
-
-
-                        // render: function (data, type, JsonResultRow, meta) {
-                        //     var category = "";
-                        //     if (JsonResultRow.projects) {
-
-                        //         JsonResultRow.projects.map(item => {
-                        //             category = item;
-                        //         });
-                        //     }
-
-                        //    cat = category != "" ? `${category.category.category}` : '<span class="label label-danger text-center ml-4" style="color:#ff0000 !important">Sin categoria</span>'
-                        //    return cat;
-                        // },
 
 
 
@@ -1597,38 +1574,13 @@
 
                         data: 'rating',
                         defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>',
-                        // orderSequence: [ "desc", "asc"],
-                        // targets:"descendFirst"
-                        // render: function (data, type, JsonResultRow, meta) {
 
-                        // //   console.log(JsonResultRow,'data rating')
-
-                        //    JsonResultRow.projects[0].reviews_curador;
-
-                        //   var cal = "";
-                        //     if (JsonResultRow.projects[0].reviews_curador) {
-
-                        //         JsonResultRow.projects[0].reviews_curador.map(value => {
-                        //             cal = value;
-                        //             console.log(cal,'callificacion')
-                        //         });
-                        //     }
-
-                        //     var sum= cal.lyric+cal.melody_rhythm+cal.arrangements+cal.originality;
-                        //     return cal != "" ? '<div class="text-center">'+(sum)+'</div>': ' ';
-                        // }
 
                     },
 
                     {
                         render: function (data, type, JsonResultRow, meta) {
-                            // var items = "";
-                            // if (JsonResultRow.projects) {
 
-                            //     JsonResultRow.projects.map(item => {
-                            //         items = item;
-                            //     });
-                            // }
 
                             return JsonResultRow.slug != "" ? `<div class="text-center"><a href="/dashboard/project/${JsonResultRow.slug}" class="btn m-btn--pill btn-secondary"><i class="fa fa-eye"></i></a></div>` : '<span class="label label-danger text-center ml-4" style="color:red !important">Sin propuesta</span>'
                         }
@@ -1671,23 +1623,20 @@
             categoryQualSec = $(this).val();
             console.log(categoryQualSec,'cattCual');
             loadTableQualSec();
-            // console.log(this.value,'value---');
-            // console.log(this.value,'value---');
-            //     table.search(this.value).draw();
+
         });
         // filtro por tipo
 
         $("#tipoPersona_cualified_sec").on('change', function () {
-            // alert();
             tipoPerQualSec = $(this).val();
             console.log(tipoPerQualSec,'tipopercual');
             loadTableQualSec();
         });
 
-        // $("#tab_rating").on('click', function () {
+        $("#tab_rating_sec").on('click', function () {
 
-        //     loadTableQual();
-        // });
+            loadTableQualSec();
+        });
 
 
 
@@ -1750,46 +1699,23 @@
                         defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>',
 
                         render: function (data, type, JsonResultRow, meta) {
-                            // console.log(JsonResultRow,'data****');
                             if (JsonResultRow.last_name === null) {
                                 return '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
                             } else {
 
                                 return '<span class="label label-danger text-center">' + JsonResultRow.names + '</span>  <span class="label label-danger text-center">' + JsonResultRow.last_name + '</span>';
                             }
-                            // return '<img src="' + JsonResultRow + '" width="50px"  style="border-radius: 100%;margin-right: auto;margin-left: auto;display: block; width:50px; height:50px"/>';
+
                         }
                     },
                     {
                         data: 'act_like',
                         defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>',
 
-                        // render:function(data,type,JsonResultRow, meta){
-                        //     if (JsonResultRow.person_type){
-                        //         return JsonResultRow.act_like;
-                        //     }
-
-                        // }
                     },
                     {
                         data: 'category',
                         defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>',
-
-
-
-                        // render: function (data, type, JsonResultRow, meta) {
-                        //     var category = "";
-                        //     if (JsonResultRow.projects) {
-
-                        //         JsonResultRow.projects.map(item => {
-                        //             category = item;
-                        //         });
-                        //     }
-
-                        //    cat = category != "" ? `${category.category.category}` : '<span class="label label-danger text-center ml-4" style="color:#ff0000 !important">Sin categoria</span>'
-                        //    return cat;
-                        // },
-
 
 
 
@@ -1807,38 +1733,13 @@
 
                         data: 'rating',
                         defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>',
-                        // orderSequence: [ "desc", "asc"],
-                        // targets:"descendFirst"
-                        // render: function (data, type, JsonResultRow, meta) {
 
-                        // //   console.log(JsonResultRow,'data rating')
-
-                        //    JsonResultRow.projects[0].reviews_curador;
-
-                        //   var cal = "";
-                        //     if (JsonResultRow.projects[0].reviews_curador) {
-
-                        //         JsonResultRow.projects[0].reviews_curador.map(value => {
-                        //             cal = value;
-                        //             console.log(cal,'callificacion')
-                        //         });
-                        //     }
-
-                        //     var sum= cal.lyric+cal.melody_rhythm+cal.arrangements+cal.originality;
-                        //     return cal != "" ? '<div class="text-center">'+(sum)+'</div>': ' ';
-                        // }
 
                     },
 
                     {
                         render: function (data, type, JsonResultRow, meta) {
-                            // var items = "";
-                            // if (JsonResultRow.projects) {
 
-                            //     JsonResultRow.projects.map(item => {
-                            //         items = item;
-                            //     });
-                            // }
 
                             return JsonResultRow.slug != "" ? `<div class="text-center"><a href="/dashboard/project/${JsonResultRow.slug}" class="btn m-btn--pill btn-secondary"><i class="fa fa-eye"></i></a></div>` : '<span class="label label-danger text-center ml-4" style="color:red !important">Sin propuesta</span>'
                         }
@@ -1881,23 +1782,20 @@
             categoryFin = $(this).val();
             console.log(categoryFin,'cattCual');
             loadTableFin();
-            // console.log(this.value,'value---');
-            // console.log(this.value,'value---');
-            //     table.search(this.value).draw();
+               table.search(this.value).draw();
         });
         // filtro por tipo
 
         $("#tipoPersona_fin").on('change', function () {
-            // alert();
             tipoPerFin = $(this).val();
             console.log(tipoPerFin,'tipopercual');
             loadTableFin();
         });
 
-        // $("#tab_rating").on('click', function () {
+        $("#tab_final").on('click', function () {
 
-        //     loadTableQual();
-        // });
+            loadTableFin();
+        });
 
 
 

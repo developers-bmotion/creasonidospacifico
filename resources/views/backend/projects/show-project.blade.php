@@ -497,7 +497,7 @@
                             @if(auth()->user()->roles[0]->rol == "Admin")
 
                                 <form method="post" action="{{ route('project.admin.finalist') }}" class="btn-subsanador ml-3" style="display: inline"
-                                    id="frm_rejected_admin">
+                                    id="frm_finalist">
                                     @csrf {{ method_field('PUT') }}
                                     <br>
                                     @if($qual_second)
@@ -1828,6 +1828,30 @@
     </style>
 
     <script>
+         // boton acciones delfinalista
+
+         $('#btn_finalist_admin').click(function(e){
+            // alert();
+            e.preventDefault();
+            swal({
+                    title: '¡Atención!',
+                    text: "¿ Esta seguro de realizar la acción ?",
+                    type: 'info',
+                    showCancelButton: true,
+                    confirmButtonText: 'Aceptar',
+                    cancelButtonText: 'Cancelar',
+                    reverseButtons: true
+                }).then(function (result) {
+                    console.log(result);
+                    if (result.value) {
+                        frm_finalist
+                        $('#frm_finalist').submit();
+
+                    }
+
+    });
+
+});
         $(document).ready(function () {
 
             $('[data-toggle="tooltip"]').tooltip();
@@ -2800,6 +2824,9 @@
             }
 
         });
+
+
+
 
 
     </script>
