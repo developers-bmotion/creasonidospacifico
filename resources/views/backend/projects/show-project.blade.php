@@ -505,7 +505,7 @@
                                         <button id="btn_finalist_admin" class="btn btn-danger m-btn m-btn--icon">
                                                 <span>
                                                     <i class="la la-close"></i>
-                                                    <span>Quitar como finalista</span>
+                                                    <span>Quitar de tercera curaduría</span>
                                                 </span>
                                         </button>
                                         <input type="hidden" name="finalist" value="0">
@@ -513,8 +513,8 @@
                                     @else
                                         <button id="btn_finalist_admin" class="btn btn-success m-btn m-btn--icon">
                                                 <span>
-                                                    <i class="la la-close"></i>
-                                                    <span>Poner cono finalista</span>
+                                                    <i class="la la-check"></i>
+                                                    <span>Agregar a tercera curaduría</span>
                                                 </span>
                                         </button>
                                         <input type="hidden" name="idProject" value="{{ $project->id }}">

@@ -459,10 +459,10 @@
                         <a class="nav-link m-tabs__link" id="tab_rating_sec" data-toggle="tab" href="#m_tabs_6_4" role="tab">Segunda calificación</a>
                     </li>
                     <li class="nav-item m-tabs__item">
-                        <a class="nav-link m-tabs__link" id="tab_esc" data-toggle="tab" href="#m_tabs_6_5" role="tab">100 Mejores</a>
+                        <a class="nav-link m-tabs__link" id="tab_final" data-toggle="tab" href="#m_tabs_6_6" role="tab">Tercera Curaduría</a>
                     </li>
                     <li class="nav-item m-tabs__item">
-                        <a class="nav-link m-tabs__link" id="tab_final" data-toggle="tab" href="#m_tabs_6_6" role="tab">Finalistas</a>
+                        <a class="nav-link m-tabs__link" id="tab_esc" data-toggle="tab" href="#m_tabs_6_5" role="tab">100 Mejores</a>
                     </li>
                 </ul>
                 <div class="tab-content">
