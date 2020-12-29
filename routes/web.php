@@ -174,7 +174,7 @@ Route::group(['namespace' => 'Frontend'], function () {
 /*=============================================
 BACKEND
 =============================================*/
-Route::group(['namespace' => 'Backend', 'prefix' => 'dashboard', 'middleware' => 'auth'], function () {
+Route::group(['namespace' => 'Backend', 'prefix' => 'dashboard', 'middleware' => ['auth', 'acceso_login']], function () {
     //Rutas para el modulo Dashboard
     Route::get('/', 'DashboardController@index')->name('dashboard');
 
