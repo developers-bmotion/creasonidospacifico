@@ -251,7 +251,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'dashboard', 'middleware' =>
         $teams = \App\Project::where('id', $id)->with('teams')->get()[0]->teams;
         return datatables()->of($teams)->toJson();
     })->name('team-artist');
-
+    Route::post('/add-review-yuri', 'Manage\ProjectsManageController@add_review_yuri')->name('add.review.yuri');
     Route::get('/managements-admin', 'Admin\ManagementsController@index')->name('managements.admin');
     //RUTAS PARA EL ADMINISTRADOR DEL SISTEMA -------------------------------------------------------------------------------------------
 
@@ -259,12 +259,14 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'dashboard', 'middleware' =>
     Route::get('/managements', 'ShowProjectController@table_assing_management')->name('assign.managements');
     Route::group(['middleware' => 'admin_permisos'], function () {
 
+        // Route::post('/add-review-yuri', 'Manage\ProjectsManageController@add_review_yuri')->name('add.review.yuri');
         Route::get('/projects-approved', 'Admin\ProjectsApprovedController@index')->name('projects.approved');
         Route::post('publicarProject', 'Admin\ProjectsApprovedController@togglePublish');
         //Lista proyectos managements
         Route::get('/projects-admin', 'Admin\ProjectsAdminController@index')->name('projects.admin');
         Route::put('/project-rejected-admin', 'Admin\ProjectsAdminController@rejected_project')->name('project.admin.rejected');
         Route::put('/project-finalist-admin', 'Admin\ProjectsAdminController@finalist_project')->name('project.admin.finalist');
+        Route::put('/project-finalist-admin-yuri', 'Admin\ProjectsAdminController@finalist_project_yuri')->name('project.admin.finalist.yuri');
         Route::put('/project-pendiente-soporte-admin', 'Admin\ProjectsAdminController@pediente_soporte_project')->name('project.admin.pendiente.soporte');
         Route::post('/project-revision-admin', 'Admin\ProjectsAdminController@revision_project')->name('project.admin.revision');
         Route::get('/datatables-projects-admin', 'Admin\ProjectsAdminController@table_projects')->name('datatables.projects.admin');
@@ -292,6 +294,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'dashboard', 'middleware' =>
         Route::get("/list-ratings", "Admin\DashboardAdminController@ratings")->name("list.ratings");
         Route::get("/list-ratings-second", "Admin\DashboardAdminController@ratings_second")->name("list.ratings.second");
         Route::get("/list-ratings-finalist", "Admin\DashboardAdminController@ratings_finalist")->name("list.ratings.finalist");
+        Route::get("/list-finalist-yuri", "Admin\DashboardAdminController@ratings_yuri")->name("list.finalist.yuri");
         Route::get("/list-finalist", "Admin\DashboardAdminController@list_finalist")->name("list.finalist");
         Route::post("/top-countries", "Admin\DashboardAdminController@showTopCountry")->name("admin.top_country");
 
@@ -307,6 +310,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'dashboard', 'middleware' =>
         Route::get('/projects-management', 'Manage\ProjectsManageController@index')->name('projects.manage');
         Route::get('datatables-projects-manage', 'Manage\ProjectsManageController@table_projects')->name('datatables.projects.manage');
         Route::post('/add-review-second', 'Manage\ProjectsManageController@add_review_second')->name('add.review.second');
+        // Route::post('/add-review-yuri', 'Manage\ProjectsManageController@add_review_yuri')->name('add.review.yuri');
 
         //CALIFICAR PROYECTO POR EL MANAGEMENT
         // Route::post('/update-review-management', 'Manage\ProjectsManageController@add_review')->name('update.review.management');

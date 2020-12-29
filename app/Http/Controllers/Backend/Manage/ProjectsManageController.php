@@ -6,6 +6,7 @@ use App\Management;
 use App\Review;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\LastCalification;
 use App\Project;
 use App\SecondStage;
 use Illuminate\Support\Facades\DB;
@@ -78,6 +79,30 @@ class ProjectsManageController extends Controller
         Project::where('id', $request->idProject)->update([
             'status' => 2
         ]);
+
+        return '{"status":200, "msg":"Propuesta musical calificada"}';
+    }
+
+    public function add_review_yuri(Request $request){
+
+        // return $request;
+        // dd('holas');
+        $review = new LastCalification();
+        $review->project_id = $request->idProject;
+        $review->user_id = auth()->user()->id;
+        $review->musicality = $request->criterio_1; //musicalidad
+        $review->sonority = $request->criterio_2; //sonoridad:
+        $review->coloratura = $request->criterio_3; //coloratura:
+        $review->spokesperson = $request->criterio_4; //voceria del proyecto
+        $review->finalist = 1; //interes comercial del proyecto
+        $review->comment = $request->comment;
+        $review->save();
+
+        // return $request;
+
+        // Project::where('id', $request->idProject)->update([
+        //     'status' => 2
+        // ]);
 
         return '{"status":200, "msg":"Propuesta musical calificada"}';
     }

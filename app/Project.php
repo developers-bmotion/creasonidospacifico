@@ -174,6 +174,10 @@ class Project extends Model
     {
         return $this->hasOne(SecondStage::class, 'project_id');
     }
+    public function reviews_yuri()
+    {
+        return $this->hasOne(LastCalification::class, 'project_id');
+    }
 
     public function reviews_curador()
     {
@@ -294,6 +298,24 @@ class Project extends Model
 
                 $value = collect([$review->lyric, $review->melody_rhythm, $review->originality, $review->arrangements,$review->trajectory,$review->project_interest])->sum();
                 $valor=round(($value/6), 2);
+            }
+        //     if($value > $valueMayor ){
+        //         $valueMayor =  $value;
+        //     }
+        // }
+
+        return $valor;
+    }
+
+    public static function sumRatingYuri($id)
+    {
+        $review = LastCalification::where('project_id', $id)->first();
+        $valor = 0;
+        // foreach ($review as $rating){
+            if($review){
+
+                $value = collect([$review->musicality, $review->sonority, $review->coloratura, $review->spokesperson])->sum();
+                $valor=round(($value/4), 2);
             }
         //     if($value > $valueMayor ){
         //         $valueMayor =  $value;

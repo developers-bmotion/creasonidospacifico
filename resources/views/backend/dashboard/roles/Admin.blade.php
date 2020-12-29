@@ -464,6 +464,9 @@
                     <li class="nav-item m-tabs__item">
                         <a class="nav-link m-tabs__link" id="tab_esc" data-toggle="tab" href="#m_tabs_6_5" role="tab">100 Mejores</a>
                     </li>
+                    <li class="nav-item m-tabs__item">
+                        <a class="nav-link m-tabs__link" id="tab_yuri" data-toggle="tab" href="#m_tabs_6_7" role="tab">Finalistas</a>
+                    </li>
                 </ul>
                 <div class="tab-content">
                     {{-- iniciotab1 --}}
@@ -729,6 +732,29 @@
 
                             <table class="table table-striped- table-bordered table-hover table-checkable "
                                    id="table_finalist">
+                                <thead>
+                                <tr>
+                                    {{-- <th>#</th> --}}
+                                    <th>{{ __('Nombres y Apellidos') }}</th>
+                                    <th>{{ __('Actuara como') }}</th>
+                                    <th>Identificación</th>
+                                    <th>Edad</th>
+                                    <th>{{ __('Modalidad') }}</th>
+                                    <th>{{ __('Departamento de nacimiento') }}</th>
+                                    <th>{{ __('Ciudad de nacimiento') }}</th>
+                                    <th>{{ __('Calificación') }}</th>
+                                    <th>{{ __('Acciones') }}</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+
+                    </div>
+                    <div class="tab-pane" id="m_tabs_6_7" role="tabpanel">
+                        <div class="m-portlet__body">
+
+                            <table class="table table-striped- table-bordered table-hover table-checkable "
+                                   id="table_finalist_yuri">
                                 <thead>
                                 <tr>
                                     {{-- <th>#</th> --}}
@@ -1911,6 +1937,191 @@
 
 
         loadTableFin();
+
+
+</script>
+{{-- tabla finalistas yuri --}}
+<script>
+
+        // var estado = getStorage('storeTipoProyecto');
+
+
+        // var storeTipoProyecto = "storeTipoProyecto";
+        // var tipoProyecto = getStorage(storeTipoProyecto);
+        var tipoPerFinY = 0;
+        var categoryFinY=0;
+
+
+        var tableFinY = null;
+
+        const loadTableFinY = function () {
+            if (tableFinY !== null) {
+                tableFinY.destroy();
+            }
+            var cont = 1;
+            var cat;
+            tableFinY = $('#table_finalist_yuri').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "scrollX": true,
+                "pageLength": 1000,
+                "dom": 'Bfrtip',
+                "data": null,
+                "pagingType": "simple_numbers",
+                "lengthMenu": [[10, 25, 100, -1], [10,25, 100, "All"]],
+                "order":[5,"desc"],
+                "buttons": [
+                    {
+                        extend: 'excelHtml5',
+                        filename:'Listas de aspirantes'
+                    },
+                    {
+                        extend: 'pdfHtml5',
+                        pageSize: "A3",
+                        filename:'Listas de aspirantes'
+                    }
+                ],
+                "ajax": {
+                    url: "{{route('list.finalist.yuri')}}",
+                    data: {
+                        tipoPerFinY:tipoPerFinY,
+                        categoryFinY:categoryFinY
+                    }
+                },
+                "columns": [
+
+                    {
+                        data: 'names',
+                        defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>',
+
+                        render: function (data, type, JsonResultRow, meta) {
+                            if (JsonResultRow.last_name === null) {
+                                return '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
+                            } else {
+
+                                return '<span class="label label-danger text-center">' + JsonResultRow.names + '</span>  <span class="label label-danger text-center">' + JsonResultRow.last_name + '</span>';
+                            }
+
+                        }
+                    },
+                    {
+                        data: 'act_like',
+                        defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>',
+
+                    },
+                    {
+
+                        data:'identification',
+                    // defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
+
+
+
+                    },
+                    {
+
+                        render:function(data,type,JsonResultRow, meta){
+                        // console.log(JsonResultRow,'fecha');
+                            var today = new Date();
+                            var birthDate = new Date(JsonResultRow.fecha);
+                            var age = today.getFullYear() - birthDate.getFullYear();
+                            var m = today.getMonth() - birthDate.getMonth();
+                            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate()))
+                        {
+                            age--;
+                        }
+                            return age;
+                        }
+
+
+
+                    },
+                    {
+                        data: 'category',
+                        defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>',
+
+
+
+                    },
+
+                    {
+                        data: 'departament',
+                        defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
+                    },
+                    {
+                        data: 'city',
+                        defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
+                    },
+                    {
+
+                        data: 'rating',
+                        defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>',
+
+
+                    },
+
+                    {
+                        render: function (data, type, JsonResultRow, meta) {
+
+
+                            return JsonResultRow.slug != "" ? `<div class="text-center"><a href="/dashboard/project/${JsonResultRow.slug}" class="btn m-btn--pill btn-secondary"><i class="fa fa-eye"></i></a></div>` : '<span class="label label-danger text-center ml-4" style="color:red !important">Sin propuesta</span>'
+                        }
+                    },
+                ],
+                "language": {
+                    "sProcessing": "{{__('procesando')}}",
+                    "sLengthMenu": "{{__('mostrar')}} _MENU_ {{__('registros')}}",
+                    "sZeroRecords": "No se encontraron resultados",
+                    "sEmptyTable": "{{__('nigun_dato_tabla')}}",
+                    "sInfo": "{{__('mostrando_registros') }} _START_ {{__('from')}} _END_ {{__('total_de')}} _TOTAL_ {{__('registros')}}",
+                    "sInfoEmpty": "{{ __('mostrando_registros_del_cero') }}",
+                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "sInfoPostFix": "",
+                    "sSearch": "{{__('buscar')}}:",
+                    "sUrl": "",
+                    "sInfoThousands": ",",
+                    "sLoadingRecords": "{{__('cargando')}}",
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sLast": "Último",
+                        "sNext": ">",
+                        "sPrevious": "<"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    }
+                },
+
+
+
+
+
+            });
+
+        };
+        // filtro por categoria
+        $('#category_filter_fin').on('change', function(){
+            categoryFinY = $(this).val();
+            console.log(categoryFin,'cattCual');
+            loadTableFin();
+               table.search(this.value).draw();
+        });
+        // filtro por tipo
+
+        $("#tipoPersona_fin").on('change', function () {
+            tipoPerFinY = $(this).val();
+            console.log(tipoPerFin,'tipopercual');
+            loadTableFin();
+        });
+
+        $("#tab_yuri").on('click', function () {
+
+            loadTableFinY();
+        });
+
+
+
+        loadTableFinY();
 
 
 </script>

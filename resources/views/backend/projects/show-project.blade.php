@@ -102,9 +102,49 @@
                                         <br>
                                         <hr>
                                         @endif
-                                        @if($qual_second != null)
+                                        {{-- calificaciòn final  --}}
+                                    @if($qual_yuri != null)
+                                    {{-- @dd($qual_yuri) --}}
+                                    <h6>3. Calificación final:</h6>
+                                        <br>
+                                        <table style="text-align: center"
+                                               class='my-table-admin my-table table-striped review_table'>
+                                            <thead>
+                                            <tr>
+                                                <th scope='col'>Musicalidad</th>
+                                                <th scope='col'>Sonoridad</th>
+                                                <th scope='col'>Coloratura</th>
+                                                <th scope='col'>Vocería del proyecto</th>
+                                                <th scope='col'>Total</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody style='font-weight:500;'>
+                                            <tr>
+                                                <th>{{ $qual_yuri->musicality }} </th>
+                                                <td>{{ $qual_yuri->sonority }}</td>
+                                                <td>{{ $qual_yuri->coloratura }}</td>
+                                                <td>{{ $qual_yuri->spokesperson }}</td>
+                                                <td>{{ round(($qual_yuri->musicality + $qual_yuri->sonority + $qual_yuri->coloratura + $qual_yuri->spokesperson )/4, 2) }}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <br>
+                                        <h6>Observaciones:</h6>
+                                        <div>{!! $qual_yuri->comment !!}</div>
+                                        <br>
+                                        <a href="{{ route('profile.curador',$qual_yuri->users->slug)}}">
+
+                                            <span style="font-size:1.1rem;color:#739594;"
+                                                  class="font-weight-bold mb-3">Calificado por: {{ $qual_yuri->users->name }}  {{ $qual_yuri->users->last_name }}</span>
+                                        </a>
+                                        <br>
+                                        <hr>
+                                        @endif
+                                        @if($qual_yuri != null)
                                             <span style="font-size:1.1rem;color:#739594;float:right;"
-                                                class="font-weight-bold mb-3">Calificación final: {{ round(($qual_second->melody_rhythm + $qual_second->originality + $qual_second->arrangements + $qual_second->lyric + $qual_second->trajectory +$qual_second->project_interest)/6, 2) }}</span>
+                                                class="font-weight-bold mb-3">Calificación final: {{ round(($qual_yuri->musicality + $qual_yuri->sonority + $qual_yuri->coloratura + $qual_yuri->spokesperson )/4, 2) }}</span>
+                                            {{-- <span style="font-size:1.1rem;color:#739594;float:right;"
+                                                class="font-weight-bold mb-3">Calificación final: {{ round(($qual_second->melody_rhythm + $qual_second->originality + $qual_second->arrangements + $qual_second->lyric + $qual_second->trajectory +$qual_second->project_interest)/6, 2) }}</span> --}}
                                         @endif
 
                                 </div>
@@ -313,9 +353,9 @@
                     @if(auth()->user()->roles[0]->rol == "Admin")
                     {{-- @dd($qual_second) --}}
                         @if( $project->status == 2 )
-                        @if($qual_second != null)
+                        @if($qual_yuri != null)
 
-                            <span style="font-size:1.1rem;color:#739594;margin-top: 1.9rem;" class="font-weight-bold">Calificación final: {{ round(($qual_second->melody_rhythm + $qual_second->originality + $qual_second->arrangements + $qual_second->lyric + $qual_second->trajectory +$qual_second->project_interest)/6, 2) }}</span>
+                            <span style="font-size:1.1rem;color:#739594;margin-top: 1.9rem;" class="font-weight-bold">Calificación final: {{ round(($qual_yuri->musicality + $qual_yuri->sonority + $qual_yuri->coloratura + $qual_yuri->spokesperson )/4, 2) }}</span>
                         @endif
                         @endif
                     @endif
@@ -495,13 +535,16 @@
                             @endif
 
                             @if(auth()->user()->roles[0]->rol == "Admin")
-
+                            @if($qual_yuri == null)
                                 <form method="post" action="{{ route('project.admin.finalist') }}" class="btn-subsanador ml-3" style="display: inline"
                                     id="frm_finalist">
                                     @csrf {{ method_field('PUT') }}
                                     <br>
                                     @if($qual_second)
+                                    {{-- @dd($qual_second) --}}
                                     @if($qual_second->finalist == 1)
+
+
                                         <button id="btn_finalist_admin" class="btn btn-danger m-btn m-btn--icon">
                                                 <span>
                                                     <i class="la la-close"></i>
@@ -509,7 +552,14 @@
                                                 </span>
                                         </button>
                                         <input type="hidden" name="finalist" value="0">
-                                        <input type="hidden" name="idProject" value="{{ $project->id }}">
+                                        <input type="hidden" class="idProject" name="idProject" value="{{ $project->id }}">
+                                        <button id="modal_calification" class="btn btn-success m-btn m-btn--icon">
+                                                <span>
+                                                    <i class="la la-close"></i>
+                                                    <span>Calificar propuesta</span>
+                                                </span>
+                                        </button>
+
                                     @else
                                         <button id="btn_finalist_admin" class="btn btn-success m-btn m-btn--icon">
                                                 <span>
@@ -523,6 +573,42 @@
                                     @endif
                                     @endif
                                 </form>
+                                @else
+                                <form method="post" action="{{ route('project.admin.finalist.yuri') }}" class="btn-subsanador ml-3" style="display: inline"
+                                    id="frm_finalist_yuri">
+                                    @csrf {{ method_field('PUT') }}
+                                    <br>
+                                    @if($qual_yuri)
+                                    {{-- @dd($qual_second) --}}
+                                    @if($qual_yuri->finalist == 1)
+
+
+                                        <button id="btn_finalist_admin_yuri" class="btn btn-danger m-btn m-btn--icon">
+                                                <span>
+                                                    <i class="la la-close"></i>
+                                                    <span>Quitar como finalista</span>
+                                                </span>
+                                        </button>
+                                        <input type="hidden" name="finalist" value="0">
+                                        <input type="hidden" class="idProject" name="idProject" value="{{ $project->id }}">
+
+
+                                    @else
+                                        <button id="btn_finalist_admin_yuri" class="btn btn-success m-btn m-btn--icon">
+                                                <span>
+                                                    <i class="la la-check"></i>
+                                                    <span>Poner como finalista</span>
+                                                </span>
+                                        </button>
+                                        <input type="hidden" name="idProject" value="{{ $project->id }}">
+                                        <input type="hidden" name="finalist" value="1">
+
+                                    @endif
+                                    @endif
+                                </form>
+
+                                @endif
+
 
                             @endif
 
@@ -1814,11 +1900,146 @@
                 </div>
             </div>
         </div>
+{{-- modal segunda calificacion --}}
+   <div class="modal fade" data-backdrop="static" data-keyboard="false" id="modal3" tabindex="-1" role="dialog"
+   aria-labelledby="exampleModalLabel"
+   aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h3 class="modal-title" id="exampleModalLabel">Calificar Propuesta Musical</h3>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body bodyAppendAudio">
+
+
+
+
+              {{--                    <audio class="audioProject" preload="auto" controls>--}}
+              {{--                                                 <source class="srcAudio" >--}}
+
+              {{--                    </audio>--}}
+
+
+              <input type="hidden" class="idProject" value="" name="idProject">
+
+              <div class="sliderCalificadorUno">
+                  <!--=====================================
+                      SLIDER CRITERIO # 1
+                  ======================================-->
+                  <div class="form-group m-form__group row" style="padding-top: 2rem">
+                      <label class="col-form-label col-lg-3 col-sm-12">Musicalidad: <span
+                              class="text-danger">*</span></label>
+                      <div class="col-lg-9 col-md-12 col-sm-12">
+                          <div class="row align-items-center" style="margin-bottom: 1rem">
+                              <div class="col-2">
+                                  <input type="text" required class="form-control my-form-control"
+                                         name="criterio_1" id="criterio_1_input"
+                                         placeholder="Quantity">
+                              </div>
+                              <div class="col-10">
+                                  <div id="criterio_1" class="m-nouislider--drag-danger"></div>
+                              </div>
+                          </div>
+                          <span class="m-form__help" style="margin-top: 5rem">Capacidad para hacer musica.</span>
+                      </div>
+                  </div>
+                  <hr>
+                  <!--=====================================
+                      SLIDER CRITERIO # 2
+                  ======================================-->
+                  <div class="form-group m-form__group row" style="padding-top: 2rem">
+                      <label class="col-form-label col-lg-3 col-sm-12">Sonoridad:<span
+                              class="text-danger">*</span></label>
+                      <div class="col-lg-9 col-md-12 col-sm-12">
+                          <div class="row align-items-center" style="margin-bottom: 1rem">
+                              <div class="col-2">
+                                  <input type="text" required class="form-control my-form-control"
+                                         name="criterio_2" id="criterio_2_input"
+                                         placeholder="Quantity">
+                              </div>
+                              <div class="col-10">
+                                  <div id="criterio_2" class="m-nouislider--drag-danger"></div>
+                              </div>
+                          </div>
+                          <span class="m-form__help" style="margin-top: 5rem"> Como suena la musica.</span>
+                      </div>
+                  </div>
+                  <!--=====================================
+                      SLIDER CRITERIO # 3
+                  ======================================-->
+
+                  <div class="form-group m-form__group row" style="padding-top: 2rem">
+                      <label class="col-form-label col-lg-3 col-sm-12">Coloratura:<span
+                              class="text-danger">*</span></label>
+                      <div class="col-lg-9 col-md-12 col-sm-12">
+                          <div class="row align-items-center" style="margin-bottom: 1rem">
+                              <div class="col-2">
+                                  <input type="text" required class="form-control my-form-control"
+                                         name="criterio_3" id="criterio_3_input"
+                                         placeholder="Quantity">
+                              </div>
+                              <div class="col-10">
+                                  <div id="criterio_3" class="m-nouislider--drag-danger"></div>
+                              </div>
+                          </div>
+                          <span class="m-form__help"
+                                style="margin-top: 5rem">Como es el color de la musica.</span>
+                      </div>
+                  </div>
+                  <!--=====================================
+                      SLIDER CRITERIO # 4
+                  ======================================-->
+
+                  <div class="form-group m-form__group row" style="padding-top: 2rem">
+                      <label class="col-form-label col-lg-3 col-sm-12">Vocería de su proyecto:<span
+                              class="text-danger">*</span></label>
+                      <div class="col-lg-9 col-md-12 col-sm-12">
+                          <div class="row align-items-center" style="margin-bottom: 1rem">
+                              <div class="col-2">
+                                  <input type="text" required class="form-control my-form-control"
+                                         name="criterio_4" id="criterio_4_input"
+                                         placeholder="Quantity">
+                              </div>
+                              <div class="col-10">
+                                  <div id="criterio_4" class="m-nouislider--drag-danger"></div>
+                              </div>
+                          </div>
+                          {{-- <span class="m-form__help" style="margin-top: 5rem">selección de la obra con relación a la diversidad de ritmos, tonalidades y formas.</span> --}}
+                      </div>
+                  </div>
+
+
+              </div>
+              <div class="row">
+                  <div class="col-12">
+                      <div class="form-group m-form__group" style="padding-top: 2rem">
+                          <label class="col-form-label">Comentario:<span class="text-danger">*</span></label>
+                          <div class="summernote" id="m_summernote_1"></div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+              <button type="button" class="btn btn-primary btn-send-rating" id="btnSeendReview">Enviar
+                  calificación
+              </button>
+          </div>
+      </div>
+  </div>
+</div>
 
 
 @stop
 
 @section('rating.projects')
+<script src="/backend/assets/demo/custom/crud/forms/widgets/summernote.js" type="text/javascript"></script>
+    <script src="/js/ajax.js"></script>
     <style>
         .swal2-popup .swal2-file:focus,
         .swal2-popup .swal2-input:focus,
@@ -1828,6 +2049,232 @@
     </style>
 
     <script>
+        // acciones para calificacion por yuri
+
+        $('#modal_calification').click(function (e){
+            e.preventDefault();
+
+            $('#modal3').modal('show');
+
+        });
+
+        $("#btnSeendReview").click(function () {
+                //
+                swal({
+                    title: '¡Atención!',
+                    text: "¿Esta seguro de enviar calificación?",
+                    type: 'info',
+                    showCancelButton: true,
+                    confirmButtonText: 'Aceptar',
+                    cancelButtonText: 'Cancelar',
+                    reverseButtons: true
+                }).then(function (result) {
+                    if (result.value) {
+                        $('.modal.show').loading({
+                            message: 'Enviando...',
+                            start: true,
+                        });
+
+                        if ($('#m_summernote_1').summernote('code') !== "<p><br></p>" && $('#m_summernote_1').summernote('code') !== "") {
+                            const
+                                mesage = $('#m_summernote_1').summernote('code'),
+                                cristerio1 = $('#criterio_1_input').val(),
+                                cristerio2 = $('#criterio_2_input').val(),
+                                cristerio3 = $('#criterio_3_input').val(),
+                                cristerio4 = $('#criterio_4_input').val(),
+                                idProject = $('.idProject').val(),
+                                token = '{{ csrf_token() }}',
+                                url = "{{ route('add.review.yuri') }}";
+
+                            let data = {
+                                __token: token,
+                                comment: mesage,
+                                idProject: idProject,
+                                criterio_1: cristerio1,
+                                criterio_2: cristerio2,
+                                criterio_3: cristerio3,
+                                criterio_4: cristerio4,
+                            };
+                            const success = function (r) {
+
+                                if (r.status === 200) {
+                                    swal({
+                                        "title": "",
+                                        "text": r.msg,
+                                        "type": "success",
+                                        "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
+                                    }).then((result) => {
+                                        document.location.reload();
+                                    });
+                                }
+                            };
+                            const error = function (e) {
+                                $('.modal.show').loading({
+                                    start: false,
+                                });
+                                swal({
+                                    "title": "",
+                                    "text": "No se ha enviado su calificación.",
+                                    "type": "error",
+                                    "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
+                                });
+                            };
+
+
+                            ajax(url, data, success, "post", error, true, "#list_modal_manage");
+                            /*$('body').loading({
+                                start: false,
+                            });*/
+                        } else {
+
+                            swal({
+                                "title": "",
+                                "text": "Sra/Sr Curador, debe agregar un comentario.",
+                                "type": "error",
+                                "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
+                            });
+
+                            $('.modal.show').loading({
+                                start: false,
+                            });
+                        }
+                    }
+
+                });
+
+            });
+
+        // init slider
+
+            /*=============================================
+            CRITERIO # 1
+            =============================================*/
+            var slider1 = document.getElementById('criterio_1');
+
+            noUiSlider.create(slider1, {
+                start: [0],
+                step: 0.01,
+                range: {
+                    'min': [0],
+                    'max': [100]
+                },
+                format: wNumb({
+                    decimals: 1,
+                })
+            });
+
+            // init slider input
+            var sliderInput = document.getElementById('criterio_1_input');
+
+            slider1.noUiSlider.on('update', function (values, handle) {
+                sliderInput.value = values[handle];
+            });
+
+            sliderInput.addEventListener('change', function () {
+                slider1.noUiSlider.set(this.value);
+            });
+
+
+            sliderInput.addEventListener('change', function () {
+                slider1.noUiSlider.set(this.value);
+            });
+
+            /*=============================================
+            CRITERIO # 2
+            =============================================*/
+            var slider2 = document.getElementById('criterio_2');
+
+            noUiSlider.create(slider2, {
+                start: [0],
+                step: 0.01,
+                range: {
+                    'min': [0],
+                    'max': [100]
+                },
+                format: wNumb({
+                    decimals: 1
+                })
+            });
+
+            // init slider input
+            var sliderInput2 = document.getElementById('criterio_2_input');
+
+            slider2.noUiSlider.on('update', function (values, handle) {
+                sliderInput2.value = values[handle];
+            });
+
+            sliderInput2.addEventListener('change', function () {
+                slider2.noUiSlider.set(this.value);
+            });
+
+
+            sliderInput2.addEventListener('change', function () {
+                slider2.noUiSlider.set(this.value);
+            });
+            /*=============================================
+            CRITERIO # 3
+            =============================================*/
+            var slider3 = document.getElementById('criterio_3');
+
+            noUiSlider.create(slider3, {
+                start: [0],
+                step: 0.01,
+                range: {
+                    'min': [0],
+                    'max': [100]
+                },
+                format: wNumb({
+                    decimals: 1
+                })
+            });
+
+            // init slider input
+            var sliderInput3 = document.getElementById('criterio_3_input');
+
+            slider3.noUiSlider.on('update', function (values, handle) {
+                sliderInput3.value = values[handle];
+            });
+
+            sliderInput3.addEventListener('change', function () {
+                slider3.noUiSlider.set(this.value);
+            });
+
+
+            sliderInput3.addEventListener('change', function () {
+                slider3.noUiSlider.set(this.value);
+            });
+            /*=============================================
+            CRITERIO # 4
+            =============================================*/
+            var slider4 = document.getElementById('criterio_4');
+
+            noUiSlider.create(slider4, {
+                start: [0],
+                step: 0.01,
+                range: {
+                    'min': [0],
+                    'max': [100]
+                },
+                format: wNumb({
+                    decimals: 1
+                })
+            });
+
+            // init slider input
+            var sliderInput4 = document.getElementById('criterio_4_input');
+
+            slider4.noUiSlider.on('update', function (values, handle) {
+                sliderInput4.value = values[handle];
+            });
+
+            sliderInput4.addEventListener('change', function () {
+                slider4.noUiSlider.set(this.value);
+            });
+
+
+            sliderInput4.addEventListener('change', function () {
+                slider4.noUiSlider.set(this.value);
+            });
          // boton acciones delfinalista
 
          $('#btn_finalist_admin').click(function(e){
@@ -1846,6 +2293,29 @@
                     if (result.value) {
                         frm_finalist
                         $('#frm_finalist').submit();
+
+                    }
+
+    });
+
+});
+
+ $('#btn_finalist_admin_yuri').click(function(e){
+            // alert();
+            e.preventDefault();
+            swal({
+                    title: '¡Atención!',
+                    text: "¿ Esta seguro de realizar la acción ?",
+                    type: 'info',
+                    showCancelButton: true,
+                    confirmButtonText: 'Aceptar',
+                    cancelButtonText: 'Cancelar',
+                    reverseButtons: true
+                }).then(function (result) {
+                    console.log(result);
+                    if (result.value) {
+                        // frm_finalist
+                        $('#frm_finalist_yuri').submit();
 
                     }
 

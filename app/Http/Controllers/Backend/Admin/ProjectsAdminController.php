@@ -18,6 +18,7 @@ use Carbon\Carbon;
 use foo\Foo;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\LastCalification;
 use App\Mail\ArtistProjectRevision;
 use App\SecondStage;
 use Illuminate\Support\Facades\DB;
@@ -208,6 +209,22 @@ class ProjectsAdminController extends Controller
         // $artistSendEmail = \Mail::to($project->artists[0]->users->email)->send(new ArtistProjectRejected($project, $project->artists[0]->users->name));
 
         alert()->success(__("Cambio exitoso"), __('Ok'))->autoClose(3000);
+
+        return back();
+    }
+
+    public function finalist_project_yuri(Request $request)
+    {
+        $id = $request->get('idProject');
+        $finalist = $request->get('finalist');
+        $finalist_project = LastCalification::where('project_id', $id)->update([
+            'finalist' => $finalist
+        ]);
+        // $project = Project::where('id', $id)->with('artists.users')->first();
+
+        // $artistSendEmail = \Mail::to($project->artists[0]->users->email)->send(new ArtistProjectRejected($project, $project->artists[0]->users->name));
+
+        // alert()->success(__("Cambio exitoso"), __('Ok'))->autoClose(3000);
 
         return back();
     }

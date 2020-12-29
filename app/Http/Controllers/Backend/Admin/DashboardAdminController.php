@@ -409,6 +409,7 @@ class DashboardAdminController extends Controller
 
         return datatables()->of($aspirantRating)->toJson();
     }
+
     public function ratings_finalist(Request $request){
 
         $idstatus= 2;
@@ -506,6 +507,113 @@ class DashboardAdminController extends Controller
                 'identification'=> $aspirants->identification,
                 'fecha'=> $aspirants->byrthdate,
                 'rating' => Project::sumRatingSecond( $aspirants->projects[0]->id),
+            ]);
+        }
+
+        usort($aspirantRating, function ($a, $b) {
+            $diff = $b->rating - $a->rating;
+            return $diff;
+        });
+
+        return datatables()->of($aspirantRating)->toJson();
+    }
+    public function ratings_yuri(Request $request){
+
+        $idstatus= 2;
+        $tipoPer=$request->input("tipoPerQualSec");
+        $category=$request->input("categoryQualSec");
+        $listRating="";
+
+        // inicio
+        if($tipoPer > 0){
+
+            if($category > 0){
+
+                $listRating = Artist::with('users','documentType','city.departaments')
+                ->whereHas('personType', function ($q) use($tipoPer){
+                    $q->where('id', $tipoPer);
+                })->whereHas('projects', function ($q) use($idstatus){
+                    $q->where('manager_id','<>',0);
+                })->whereHas('projects.category', function ($q) use($category){
+                    $q->where('category_id', $category);
+                })->whereHas('projects.reviews_yuri', function ($q){
+                    $q->where('finalist', 1);
+                })->with('projects.category','personType')->get();
+
+            }else{
+                if($category > 0){
+                    $listRating = Artist::with('users','personType','documentType','city.departaments')->whereHas('projects', function ($q) use($idstatus){
+                        $q->where('manager_id','<>',0);
+                    })->whereHas('projects.category', function ($q) use($category){
+                        $q->where('category_id', $category);
+                    })->whereHas('projects.reviews_yuri', function ($q){
+                        $q->where('finalist', 1);
+                    })->with('projects.category')->get();
+
+                }else{
+
+                    // dd($tipoPer);
+                    $listRating = Artist::with('users','documentType','city.departaments')
+                    ->whereHas('personType', function ($q) use($tipoPer){
+                        $q->where('id', $tipoPer);
+                    })->whereHas('projects', function ($q) use($idstatus){
+                        $q->where('manager_id','<>',0);
+                    })->whereHas('projects.reviews_yuri', function ($q){
+                        $q->where('finalist', 1);
+                    })->with('projects.category','personType')->get();
+                 }
+        }
+
+
+
+        }else{
+
+            if($category > 0){
+                $listRating = Artist::with('users','personType','documentType','city.departaments')->whereHas('projects', function ($q) use($idstatus){
+                    $q->where('manager_id','<>',0);
+                })->whereHas('projects.category', function ($q) use($category){
+                    $q->where('category_id', $category);
+                })->whereHas('projects.reviews_yuri', function ($q){
+                    $q->where('finalist', 1);
+                })->with('projects.category')->get();
+
+            }else{
+
+
+            $listRating = Artist::with('users','personType','projects.category','documentType','city.departaments')
+            ->whereHas('projects', function($q){
+                $q->where('manager_id','<>',0);
+            })->whereHas('projects.reviews_yuri', function ($q){
+                $q->where('finalist', 1);
+            })->get();
+        }
+        }
+
+        // fin
+
+
+        // $listRating = Artist::with('users','personType','projects.category','documentType','city.departaments')
+        //     ->whereHas('projects', function($q){
+        //         $q->where('status',2);
+        //     })->get();
+
+        $aspirantRating = [];
+        // dd($listRating);
+        foreach ($listRating as $aspirants) {
+            // $suma= $second->trajectory;
+            array_push($aspirantRating, (object)[
+                'id' => $aspirants->id,
+                'names' => ucwords($aspirants->users->name),
+                'last_name' => ucwords($aspirants->users->last_name),
+                'act_like' => $aspirants->personType->name,
+                'category' => $aspirants->projects[0]->category->category,
+                'departament' => $aspirants->city->departaments->descripcion,
+                'city' => $aspirants->city->descripcion,
+                'id_project'=> $aspirants->projects[0]->id,
+                'slug'=> $aspirants->projects[0]->slug,
+                'identification'=> $aspirants->identification,
+                'fecha'=> $aspirants->byrthdate,
+                'rating' => Project::sumRatingYuri( $aspirants->projects[0]->id),
             ]);
         }
 
