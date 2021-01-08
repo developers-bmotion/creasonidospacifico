@@ -63,7 +63,7 @@
                                     @endforeach
 
                                     @if($qual_second != null)
-                                    <h6>2. Calificación:</h6>
+                                        <h6>2. Calificación:</h6>
                                         <br>
                                         <table style="text-align: center"
                                                class='my-table-admin my-table table-striped review_table'>
@@ -101,11 +101,11 @@
                                         </a>
                                         <br>
                                         <hr>
-                                        @endif
-                                        {{-- calificaciòn final  --}}
+                                    @endif
+                                    {{-- calificaciòn final  --}}
                                     @if($qual_yuri != null)
-                                    {{-- @dd($qual_yuri) --}}
-                                    <h6>3. Calificación final:</h6>
+                                        {{-- @dd($qual_yuri) --}}
+                                        <h6>3. Calificación final:</h6>
                                         <br>
                                         <table style="text-align: center"
                                                class='my-table-admin my-table table-striped review_table'>
@@ -139,13 +139,13 @@
                                         </a>
                                         <br>
                                         <hr>
-                                        @endif
-                                        @if($qual_yuri != null)
-                                            <span style="font-size:1.1rem;color:#739594;float:right;"
-                                                class="font-weight-bold mb-3">Calificación final: {{ round(($qual_yuri->musicality + $qual_yuri->sonority + $qual_yuri->coloratura + $qual_yuri->spokesperson )/4, 2) }}</span>
-                                            {{-- <span style="font-size:1.1rem;color:#739594;float:right;"
-                                                class="font-weight-bold mb-3">Calificación final: {{ round(($qual_second->melody_rhythm + $qual_second->originality + $qual_second->arrangements + $qual_second->lyric + $qual_second->trajectory +$qual_second->project_interest)/6, 2) }}</span> --}}
-                                        @endif
+                                    @endif
+                                    @if($qual_yuri != null)
+                                        <span style="font-size:1.1rem;color:#739594;float:right;"
+                                              class="font-weight-bold mb-3">Calificación final: {{ round(($qual_yuri->musicality + $qual_yuri->sonority + $qual_yuri->coloratura + $qual_yuri->spokesperson )/4, 2) }}</span>
+                                        {{-- <span style="font-size:1.1rem;color:#739594;float:right;"
+                                            class="font-weight-bold mb-3">Calificación final: {{ round(($qual_second->melody_rhythm + $qual_second->originality + $qual_second->arrangements + $qual_second->lyric + $qual_second->trajectory +$qual_second->project_interest)/6, 2) }}</span> --}}
+                                    @endif
 
                                 </div>
 
@@ -351,12 +351,13 @@
                         </div>
                     </div>
                     @if(auth()->user()->roles[0]->rol == "Admin")
-                    {{-- @dd($qual_second) --}}
+                        {{-- @dd($qual_second) --}}
                         @if( $project->status == 2 )
-                        @if($qual_yuri != null)
+                            @if($qual_yuri != null)
 
-                            <span style="font-size:1.1rem;color:#739594;margin-top: 1.9rem;" class="font-weight-bold">Calificación final: {{ round(($qual_yuri->musicality + $qual_yuri->sonority + $qual_yuri->coloratura + $qual_yuri->spokesperson )/4, 2) }}</span>
-                        @endif
+                                <span style="font-size:1.1rem;color:#739594;margin-top: 1.9rem;"
+                                      class="font-weight-bold">Calificación final: {{ round(($qual_yuri->musicality + $qual_yuri->sonority + $qual_yuri->coloratura + $qual_yuri->spokesperson )/4, 2) }}</span>
+                            @endif
                         @endif
                     @endif
                     {{-- @if(auth()->user()->roles[0]->rol == "Admin")
@@ -535,81 +536,140 @@
                             @endif
 
                             @if(auth()->user()->roles[0]->rol == "Admin")
-                            @if($qual_yuri == null)
-                                <form method="post" action="{{ route('project.admin.finalist') }}" class="btn-subsanador ml-3" style="display: inline"
-                                    id="frm_finalist">
-                                    @csrf {{ method_field('PUT') }}
-                                    <br>
-                                    @if($qual_second)
-                                    {{-- @dd($qual_second) --}}
-                                    @if($qual_second->finalist == 1)
+                                @if($project->third_curaduria === 1 )
+                                    @if($qual_yuri == null)
+                                        <form method="post" action="{{ route('project.admin.finalist') }}"
+                                              class="btn-subsanador ml-3" style="display: inline"
+                                              id="frm_finalist">
+                                            @csrf {{ method_field('PUT') }}
+                                            <br>
+                                            @if($qual_second)
+                                                {{-- @dd($qual_second) --}}
+                                                @if($qual_second->finalist == 1)
 
 
-                                        <button id="btn_finalist_admin" class="btn btn-danger m-btn m-btn--icon">
+                                                    <button id="btn_finalist_admin"
+                                                            class="btn btn-danger m-btn m-btn--icon">
                                                 <span>
                                                     <i class="la la-close"></i>
-                                                    <span>Quitar de tercera curaduría</span>
+                                                    <span>Quitar de la tercera curaduria</span>
                                                 </span>
-                                        </button>
-                                        <input type="hidden" name="finalist" value="0">
-                                        <input type="hidden" class="idProject" name="idProject" value="{{ $project->id }}">
-                                        <button id="modal_calification" class="btn btn-success m-btn m-btn--icon">
+                                                    </button>
+                                                    <input type="hidden" name="finalist" value="0">
+                                                    <input type="hidden" class="idProject" name="idProject"
+                                                           value="{{ $project->id }}">
+                                                    <button id="modal_calification"
+                                                            class="btn btn-success m-btn m-btn--icon">
                                                 <span>
                                                     <i class="la la-close"></i>
                                                     <span>Calificar propuesta</span>
                                                 </span>
-                                        </button>
+                                                    </button>
 
-                                    @else
-                                        <button id="btn_finalist_admin" class="btn btn-success m-btn m-btn--icon">
+                                                @else
+                                                    <button id="btn_finalist_admin"
+                                                            class="btn btn-success m-btn m-btn--icon">
                                                 <span>
                                                     <i class="la la-check"></i>
                                                     <span>Agregar a tercera curaduría</span>
                                                 </span>
-                                        </button>
-                                        <input type="hidden" name="idProject" value="{{ $project->id }}">
-                                        <input type="hidden" name="finalist" value="1">
+                                                    </button>
+                                                    <input type="hidden" name="idProject" value="{{ $project->id }}">
+                                                    <input type="hidden" name="finalist" value="1">
 
-                                    @endif
-                                    @endif
-                                </form>
-                                @else
-                                <form method="post" action="{{ route('project.admin.finalist.yuri') }}" class="btn-subsanador ml-3" style="display: inline"
-                                    id="frm_finalist_yuri">
-                                    @csrf {{ method_field('PUT') }}
-                                    <br>
-                                    @if($qual_yuri)
-                                    {{-- @dd($qual_second) --}}
-                                    @if($qual_yuri->finalist == 1)
+                                                @endif
+                                            @endif
+                                        </form>
+                                    @else
+                                        <form method="post" action="{{ route('project.admin.finalist.yuri') }}"
+                                              class="btn-subsanador ml-3" style="display: inline"
+                                              id="frm_finalist_yuri">
+                                            @csrf {{ method_field('PUT') }}
+                                            <br>
+                                            @if($qual_yuri)
+                                                {{-- @dd($qual_second) --}}
+                                                @if($qual_yuri->finalist == 1)
 
 
-                                        <button id="btn_finalist_admin_yuri" class="btn btn-danger m-btn m-btn--icon">
+                                                    <button id="btn_finalist_admin_yuri"
+                                                            class="btn btn-danger m-btn m-btn--icon">
                                                 <span>
                                                     <i class="la la-close"></i>
                                                     <span>Quitar como finalista</span>
                                                 </span>
-                                        </button>
-                                        <input type="hidden" name="finalist" value="0">
-                                        <input type="hidden" class="idProject" name="idProject" value="{{ $project->id }}">
+                                                    </button>
+                                                    <input type="hidden" name="finalist" value="0">
+                                                    <input type="hidden" class="idProject" name="idProject"
+                                                           value="{{ $project->id }}">
 
 
-                                    @else
-                                        <button id="btn_finalist_admin_yuri" class="btn btn-success m-btn m-btn--icon">
+                                                @else
+                                                    <button id="btn_finalist_admin_yuri"
+                                                            class="btn btn-success m-btn m-btn--icon">
                                                 <span>
                                                     <i class="la la-check"></i>
                                                     <span>Poner como finalista</span>
                                                 </span>
-                                        </button>
-                                        <input type="hidden" name="idProject" value="{{ $project->id }}">
-                                        <input type="hidden" name="finalist" value="1">
+                                                    </button>
+                                                    <input type="hidden" name="idProject" value="{{ $project->id }}">
+                                                    <input type="hidden" name="finalist" value="1">
+
+                                                @endif
+                                            @endif
+                                        </form>
 
                                     @endif
-                                    @endif
-                                </form>
-
                                 @endif
 
+                                @if($qual_second)
+                                    {{-- @dd($qual_second) --}}
+                                    @if($qual_second->finalist == 1 )
+                                        <div class="pt-3">
+                                            @if($project->third_curaduria == 0 )
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-md-5 pr-5">
+                                                        <form method="post"
+                                                              action="{{ route('project.admin.sacar.cien') }}"
+                                                              id="frm_sacar_cien">
+                                                            @csrf {{ method_field('PUT') }}
+                                                            <button id="btn_sacar_de_los_cien"
+                                                                    class="btn btn-danger m-btn m-btn--icon">
+                                                <span>
+                                                    <i class="la la-close"></i>
+                                                    <span>Sacar de los 100 mejores</span>
+                                                </span>
+                                                            </button>
+                                                            <input type="hidden" name="valSacarCien" value="0">
+                                                            <input type="hidden" class="idProject" name="idProject"
+                                                                   value="{{ $project->id }}">
+                                                        </form>
+                                                    </div>
+                                                    <div class="col-md-5 pl-4">
+                                                        <form method="post"
+                                                              action="{{ route('project.admin.agregar.tercera.curaduria') }}"
+                                                              id="frm_agregar_tercera_curaduria">
+                                                            @csrf {{ method_field('PUT') }}
+                                                            <button id="btn_agregar_tercera_curaduria"
+                                                                    class="btn btn-success m-btn m-btn--icon">
+                                                <span>
+                                                    <i class="la la-check"></i>
+                                                    <span>Agregar a tercera curaduria</span>
+                                                </span>
+                                                            </button>
+                                                            <input type="hidden" name="valAgregarTerceraCuraduria"
+                                                                   value="1">
+                                                            <input type="hidden" class="idProject" name="idProject"
+                                                                   value="{{ $project->id }}">
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                                @endif
+                                        </div>
 
+                                    @endif
+                                @endif
                             @endif
 
                         </div>
@@ -1514,874 +1574,980 @@
                             @endforeach
 
 
-    @endif
-    {{-- informacion de beneficiario --}}
-    @if(count($artist->artists[0]->beneficiary) != 0)
-        <div class="row">
-            <div class="col-xl-12 col-lg-12">
-                <div class="m-portlet m-portlet--full-height ">
-                    <div class="m-portlet__head">
-                        <div class="m-portlet__head-caption">
-                            <div class="m-portlet__head-title">
-                                <h3 class="m-portlet__head-text">
-                                    Información del beneficiario
-                                </h3>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="m-portlet__body ml-5">
-                        <div class="row">
-                            <div class="biografia col-md-12">
+                            @endif
+                            {{-- informacion de beneficiario --}}
+                            @if(count($artist->artists[0]->beneficiary) != 0)
                                 <div class="row">
-                                    @if ($artist->artists[0]->beneficiary[0]->picture)
-                                        <div class="col-md-4 mb-5">
-                                            <div class="m-scrollable" data-scrollable="true" style="">
-                                                <img style="border-radius:8rem; width:7rem"
-                                                     src="{{$artist->artists[0]->beneficiary[0]->picture}}">
-                                            </div>
-
-                                        </div>
-                                    @else
-                                        <div class="col-md-4 mb-5">
-                                            <div class="m-scrollable" data-scrollable="true" style="">
-                                                <img style="border-radius:8rem; width:7rem" src="/default/user.png">
-                                            </div>
-
-                                        </div>
-                                    @endif
-                                    <div class="col-md-4 mt-5">
-                                        <label style="font-weight: bold">Nombre:</label>
-                                        <div class="m-scrollable" data-scrollable="true" style="">
-                                            <p>{{ $artist->artists[0]->beneficiary[0]->name}}</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 mt-5">
-                                        <label style="font-weight: bold">Apellidos:</label>
-                                        <div class="m-scrollable" data-scrollable="true" style="">
-                                            <p>{{ $artist->artists[0]->beneficiary[0]->last_name}} {{ $artist->artists[0]->beneficiary[0]->second_last_name}}</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 mt-2">
-                                        <label style="font-weight: bold">Tipo identificación:</label>
-                                        <div class="m-scrollable" data-scrollable="true" style="">
-                                            <p>{{ $artist->artists[0]->beneficiary[0]->documentType->document}}</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 mt-2">
-                                        <label style="font-weight: bold">Nº identificación:</label>
-                                        <div class="m-scrollable" data-scrollable="true" style="">
-                                            <p>{{ $artist->artists[0]->beneficiary[0]->identification}}</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 mt-2">
-
-                                        <label style="font-weight: bold">{{ __('Departamento de expedición') }}
-                                            :</label>
-                                        <div class="m-scrollable" data-scrollable="true" style="">
-                                            <p style="text-align: justify">{{ $artist->artists[0]->beneficiary[0]->expeditionPlace->departaments->descripcion}}</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 mt-2">
-
-                                        <label style="font-weight: bold">{{ __('Ciudad de expedición') }}:</label>
-                                        <div class="m-scrollable" data-scrollable="true" style="">
-                                            <p style="text-align: justify">{{ $artist->artists[0]->beneficiary[0]->expeditionPlace->descripcion}}</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 mt-2">
-                                        <label style="font-weight: bold">Dirección de residencia:</label>
-                                        <div class="m-scrollable" data-scrollable="true" style="">
-                                            <p>{{ $artist->artists[0]->beneficiary[0]->adress}}</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 mt-2">
-                                        <label style="font-weight: bold">Departamento de residencia:</label>
-                                        <div class="m-scrollable" data-scrollable="true" style="">
-
-                                            @if($artist->artists[0]->beneficiary[0]->residencePlace)
-                                                <p>{{ $artist->artists[0]->beneficiary[0]->residencePlace->departaments->descripcion}}</p>
-                                            @else
-                                                <p>No registrado</p>
-                                            @endif
-
-                                        </div>
-
-                                    </div>
-                                    <div class="col-md-4 mt-2">
-                                        <label style="font-weight: bold">Ciudad de residencia:</label>
-                                        <div class="m-scrollable" data-scrollable="true" style="">
-                                            @if($artist->artists[0]->beneficiary[0]->residencePlace)
-                                                <p>{{ $artist->artists[0]->beneficiary[0]->residencePlace->descripcion}}</p>
-                                            @else
-                                                <p>No registrado</p>
-                                            @endif
-                                        </div>
-
-                                    </div>
-                                    <div class="col-md-4 mt-2">
-                                        <label style="font-weight: bold">Fecha de nacimiento:</label>
-                                        <div class="m-scrollable" data-scrollable="true" style="">
-                                            <p>{{  Carbon\Carbon::parse($artist->artists[0]->beneficiary[0]->birthday)->formatLocalized('%d de %B de %Y') }}</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 mt-2">
-                                        <label style="font-weight: bold">Departamento de nacimiento:</label>
-                                        <div class="m-scrollable" data-scrollable="true" style="">
-                                            <p>{{ $artist->artists[0]->beneficiary[0]->city->departaments->descripcion}}</p>
-                                        </div>
-
-                                    </div>
-                                    <div class="col-md-4 mt-2">
-                                        <label style="font-weight: bold">Ciudad de nacimiento:</label>
-                                        <div class="m-scrollable" data-scrollable="true" style="">
-                                            <p>{{ $artist->artists[0]->beneficiary[0]->city->descripcion}}</p>
-                                        </div>
-
-                                    </div>
-
-
-                                    @if($artist->artists[0]->township)
-                                        <div class="col-md-4 mt-2">
-                                            <label style="font-weight: bold">Vereda/Corregimiento:</label>
-                                            <div class="m-scrollable" data-scrollable="true" style="">
-                                                <p>{{ $artist->artists[0]->beneficiary[0]->township}}</p>
-                                            </div>
-                                        </div>
-                                    @endif
-                                    <div class="col-md-4 mt-2">
-                                        <label style="font-weight: bold">Teléfono:</label>
-                                        <div class="m-scrollable" data-scrollable="true" style="">
-                                            <p>{{ $artist->artists[0]->beneficiary[0]->phone}}</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 mt-2 " style="margin-right: -1rem;">
-                                        <label style="font-weight: bold">Documento de identificación:</label>
-                                        <button type="button" class="btn btn-primary ver_pdf-ben"
-                                                data-toggle="modal"
-                                                data-target="#pdfidentificacionBeneficiario">
-                                            Ver documento de identidad
-                                        </button>
-
-                                        @if(\App\User::navigation() == "Gestor")
-                                            <div class="row drop_pdf_ben" style="display: none">
-
-                                                <div class="m-form__group form-group">
-                                                    <div class="col-lg-12 m-form__group-sub">
-                                                        <label for="">Seleccione el tipo de formato para subir
-                                                            el documento de identificación</label>
-                                                        <div class="m-radio-inline">
-                                                            <label class="m-radio">
-                                                                <input type="radio"
-                                                                       name="beneficiario[identificacionDoc]"
-                                                                       value="1" checked="checked"> Imagen
-                                                                <span></span>
-                                                            </label>
-                                                            <label class="m-radio">
-                                                                <input type="radio"
-                                                                       name="beneficiario[identificacionDoc]"
-                                                                       value="2"> PDF
-                                                                <span></span>
-                                                            </label>
-                                                        </div>
-                                                    </div>
-
-                                                    <div id="image-docuemnt-beneficiario"
-                                                         class="form-group m-form__group row">
-                                                        <div class="col-lg-6 m-form__group-sub">
-                                                            <label for="">Imagen documento identificación
-                                                                frente</label>
-                                                            <div
-                                                                class="m-dropzone file-image-document-beneficiario-frente m-dropzone--success"
-                                                                action="inc/api/dropzone/upload.php"
-                                                                id="m-dropzone-three">
-                                                                <div
-                                                                    class="m-dropzone__msg dz-message needsclick">
-                                                                    <h3 class="m-dropzone__msg-title">Subir foto del
-                                                                        frente de su documento de
-                                                                        identificación</h3>
-                                                                    <span
-                                                                        class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-6 m-form__group-sub">
-                                                            <label for="">Imagen documento identificación
-                                                                atras</label>
-                                                            <div
-                                                                class="m-dropzone file-image-document-beneficiario-atras m-dropzone--success"
-                                                                action="inc/api/dropzone/upload.php"
-                                                                id="m-dropzone-three">
-                                                                <div
-                                                                    class="m-dropzone__msg dz-message needsclick">
-                                                                    <h3 class="m-dropzone__msg-title">Subir foto de
-                                                                        la parte de atrás de su documento de
-                                                                        identificación</h3>
-                                                                    <span
-                                                                        class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div id="pdf-docuemnt-beneficiario" style="display: none"
-                                                         class="form-group m-form__group row">
-                                                        <div class="col">
-                                                            <div class="form-group m-form__group ">
-                                                                <div
-                                                                    class="m-dropzone dropzone-ben m-dropzone--success"
-                                                                    action="inc/api/dropzone/upload.php"
-                                                                    id="m-dropzone-three">
-                                                                    <div
-                                                                        class="m-dropzone__msg dz-message needsclick">
-
-                                                                        <h3 class="m-dropzone__msg-title">{{ __('Subir documento de identificación por ambos lados') }}</h3>
-                                                                        <span
-                                                                            class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
+                                    <div class="col-xl-12 col-lg-12">
+                                        <div class="m-portlet m-portlet--full-height ">
+                                            <div class="m-portlet__head">
+                                                <div class="m-portlet__head-caption">
+                                                    <div class="m-portlet__head-title">
+                                                        <h3 class="m-portlet__head-text">
+                                                            Información del beneficiario
+                                                        </h3>
                                                     </div>
                                                 </div>
+                                            </div>
+
+                                            <div class="m-portlet__body ml-5">
+                                                <div class="row">
+                                                    <div class="biografia col-md-12">
+                                                        <div class="row">
+                                                            @if ($artist->artists[0]->beneficiary[0]->picture)
+                                                                <div class="col-md-4 mb-5">
+                                                                    <div class="m-scrollable" data-scrollable="true"
+                                                                         style="">
+                                                                        <img style="border-radius:8rem; width:7rem"
+                                                                             src="{{$artist->artists[0]->beneficiary[0]->picture}}">
+                                                                    </div>
+
+                                                                </div>
+                                                            @else
+                                                                <div class="col-md-4 mb-5">
+                                                                    <div class="m-scrollable" data-scrollable="true"
+                                                                         style="">
+                                                                        <img style="border-radius:8rem; width:7rem"
+                                                                             src="/default/user.png">
+                                                                    </div>
+
+                                                                </div>
+                                                            @endif
+                                                            <div class="col-md-4 mt-5">
+                                                                <label style="font-weight: bold">Nombre:</label>
+                                                                <div class="m-scrollable" data-scrollable="true"
+                                                                     style="">
+                                                                    <p>{{ $artist->artists[0]->beneficiary[0]->name}}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4 mt-5">
+                                                                <label style="font-weight: bold">Apellidos:</label>
+                                                                <div class="m-scrollable" data-scrollable="true"
+                                                                     style="">
+                                                                    <p>{{ $artist->artists[0]->beneficiary[0]->last_name}} {{ $artist->artists[0]->beneficiary[0]->second_last_name}}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4 mt-2">
+                                                                <label style="font-weight: bold">Tipo
+                                                                    identificación:</label>
+                                                                <div class="m-scrollable" data-scrollable="true"
+                                                                     style="">
+                                                                    <p>{{ $artist->artists[0]->beneficiary[0]->documentType->document}}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4 mt-2">
+                                                                <label style="font-weight: bold">Nº
+                                                                    identificación:</label>
+                                                                <div class="m-scrollable" data-scrollable="true"
+                                                                     style="">
+                                                                    <p>{{ $artist->artists[0]->beneficiary[0]->identification}}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4 mt-2">
+
+                                                                <label
+                                                                    style="font-weight: bold">{{ __('Departamento de expedición') }}
+                                                                    :</label>
+                                                                <div class="m-scrollable" data-scrollable="true"
+                                                                     style="">
+                                                                    <p style="text-align: justify">{{ $artist->artists[0]->beneficiary[0]->expeditionPlace->departaments->descripcion}}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4 mt-2">
+
+                                                                <label
+                                                                    style="font-weight: bold">{{ __('Ciudad de expedición') }}
+                                                                    :</label>
+                                                                <div class="m-scrollable" data-scrollable="true"
+                                                                     style="">
+                                                                    <p style="text-align: justify">{{ $artist->artists[0]->beneficiary[0]->expeditionPlace->descripcion}}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4 mt-2">
+                                                                <label style="font-weight: bold">Dirección de
+                                                                    residencia:</label>
+                                                                <div class="m-scrollable" data-scrollable="true"
+                                                                     style="">
+                                                                    <p>{{ $artist->artists[0]->beneficiary[0]->adress}}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4 mt-2">
+                                                                <label style="font-weight: bold">Departamento de
+                                                                    residencia:</label>
+                                                                <div class="m-scrollable" data-scrollable="true"
+                                                                     style="">
+
+                                                                    @if($artist->artists[0]->beneficiary[0]->residencePlace)
+                                                                        <p>{{ $artist->artists[0]->beneficiary[0]->residencePlace->departaments->descripcion}}</p>
+                                                                    @else
+                                                                        <p>No registrado</p>
+                                                                    @endif
+
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="col-md-4 mt-2">
+                                                                <label style="font-weight: bold">Ciudad de
+                                                                    residencia:</label>
+                                                                <div class="m-scrollable" data-scrollable="true"
+                                                                     style="">
+                                                                    @if($artist->artists[0]->beneficiary[0]->residencePlace)
+                                                                        <p>{{ $artist->artists[0]->beneficiary[0]->residencePlace->descripcion}}</p>
+                                                                    @else
+                                                                        <p>No registrado</p>
+                                                                    @endif
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="col-md-4 mt-2">
+                                                                <label style="font-weight: bold">Fecha de
+                                                                    nacimiento:</label>
+                                                                <div class="m-scrollable" data-scrollable="true"
+                                                                     style="">
+                                                                    <p>{{  Carbon\Carbon::parse($artist->artists[0]->beneficiary[0]->birthday)->formatLocalized('%d de %B de %Y') }}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4 mt-2">
+                                                                <label style="font-weight: bold">Departamento de
+                                                                    nacimiento:</label>
+                                                                <div class="m-scrollable" data-scrollable="true"
+                                                                     style="">
+                                                                    <p>{{ $artist->artists[0]->beneficiary[0]->city->departaments->descripcion}}</p>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="col-md-4 mt-2">
+                                                                <label style="font-weight: bold">Ciudad de
+                                                                    nacimiento:</label>
+                                                                <div class="m-scrollable" data-scrollable="true"
+                                                                     style="">
+                                                                    <p>{{ $artist->artists[0]->beneficiary[0]->city->descripcion}}</p>
+                                                                </div>
+
+                                                            </div>
+
+
+                                                            @if($artist->artists[0]->township)
+                                                                <div class="col-md-4 mt-2">
+                                                                    <label style="font-weight: bold">Vereda/Corregimiento:</label>
+                                                                    <div class="m-scrollable" data-scrollable="true"
+                                                                         style="">
+                                                                        <p>{{ $artist->artists[0]->beneficiary[0]->township}}</p>
+                                                                    </div>
+                                                                </div>
+                                                            @endif
+                                                            <div class="col-md-4 mt-2">
+                                                                <label style="font-weight: bold">Teléfono:</label>
+                                                                <div class="m-scrollable" data-scrollable="true"
+                                                                     style="">
+                                                                    <p>{{ $artist->artists[0]->beneficiary[0]->phone}}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4 mt-2 " style="margin-right: -1rem;">
+                                                                <label style="font-weight: bold">Documento de
+                                                                    identificación:</label>
+                                                                <button type="button"
+                                                                        class="btn btn-primary ver_pdf-ben"
+                                                                        data-toggle="modal"
+                                                                        data-target="#pdfidentificacionBeneficiario">
+                                                                    Ver documento de identidad
+                                                                </button>
+
+                                                                @if(\App\User::navigation() == "Gestor")
+                                                                    <div class="row drop_pdf_ben" style="display: none">
+
+                                                                        <div class="m-form__group form-group">
+                                                                            <div class="col-lg-12 m-form__group-sub">
+                                                                                <label for="">Seleccione el tipo de
+                                                                                    formato para subir
+                                                                                    el documento de
+                                                                                    identificación</label>
+                                                                                <div class="m-radio-inline">
+                                                                                    <label class="m-radio">
+                                                                                        <input type="radio"
+                                                                                               name="beneficiario[identificacionDoc]"
+                                                                                               value="1"
+                                                                                               checked="checked"> Imagen
+                                                                                        <span></span>
+                                                                                    </label>
+                                                                                    <label class="m-radio">
+                                                                                        <input type="radio"
+                                                                                               name="beneficiario[identificacionDoc]"
+                                                                                               value="2"> PDF
+                                                                                        <span></span>
+                                                                                    </label>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div id="image-docuemnt-beneficiario"
+                                                                                 class="form-group m-form__group row">
+                                                                                <div class="col-lg-6 m-form__group-sub">
+                                                                                    <label for="">Imagen documento
+                                                                                        identificación
+                                                                                        frente</label>
+                                                                                    <div
+                                                                                        class="m-dropzone file-image-document-beneficiario-frente m-dropzone--success"
+                                                                                        action="inc/api/dropzone/upload.php"
+                                                                                        id="m-dropzone-three">
+                                                                                        <div
+                                                                                            class="m-dropzone__msg dz-message needsclick">
+                                                                                            <h3 class="m-dropzone__msg-title">
+                                                                                                Subir foto del
+                                                                                                frente de su documento
+                                                                                                de
+                                                                                                identificación</h3>
+                                                                                            <span
+                                                                                                class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-lg-6 m-form__group-sub">
+                                                                                    <label for="">Imagen documento
+                                                                                        identificación
+                                                                                        atras</label>
+                                                                                    <div
+                                                                                        class="m-dropzone file-image-document-beneficiario-atras m-dropzone--success"
+                                                                                        action="inc/api/dropzone/upload.php"
+                                                                                        id="m-dropzone-three">
+                                                                                        <div
+                                                                                            class="m-dropzone__msg dz-message needsclick">
+                                                                                            <h3 class="m-dropzone__msg-title">
+                                                                                                Subir foto de
+                                                                                                la parte de atrás de su
+                                                                                                documento de
+                                                                                                identificación</h3>
+                                                                                            <span
+                                                                                                class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div id="pdf-docuemnt-beneficiario"
+                                                                                 style="display: none"
+                                                                                 class="form-group m-form__group row">
+                                                                                <div class="col">
+                                                                                    <div
+                                                                                        class="form-group m-form__group ">
+                                                                                        <div
+                                                                                            class="m-dropzone dropzone-ben m-dropzone--success"
+                                                                                            action="inc/api/dropzone/upload.php"
+                                                                                            id="m-dropzone-three">
+                                                                                            <div
+                                                                                                class="m-dropzone__msg dz-message needsclick">
+
+                                                                                                <h3 class="m-dropzone__msg-title">{{ __('Subir documento de identificación por ambos lados') }}</h3>
+                                                                                                <span
+                                                                                                    class="m-dropzone__msg-desc">{{ __('arrastra_click_subir') }}</span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <i class="flaticon-edit ml-3 update_pdf_ben"
+                                                                       style="color:#716aca; cursor:pointer;"></i>
+                                                                    <button type="button"
+                                                                            class="btn btn-primary cancel_pdf_ben"
+                                                                            style="display:none">Cancelar
+                                                                    </button>
+                                                                    <button id="btn_enviar_ben" type="button"
+                                                                            class="btn btn-primary  enviar_ben"
+                                                                            style="display:none">enviar
+                                                                    </button>
+                                                                    <form id="form_update_img_ben" method="post"
+                                                                          action="{{ route('update.imgdoc.ben.gestor') }}"
+                                                                          enctype="multipart/form-data"
+                                                                          class="m-form m-form--label-align-left- m-form--state-"
+                                                                          id="actualizar_img_asp">
+                                                                        @csrf {{ method_field('PUT') }}
+                                                                        <input type="hidden"
+                                                                               name="beneficiario[urlImageDocumentFrente]"
+                                                                               class="form-control m-input" value="">
+                                                                        <input type="hidden"
+                                                                               name="beneficiario[urlImageDocumentAtras]"
+                                                                               class="form-control m-input" value="">
+                                                                        <input type="hidden"
+                                                                               name="beneficiario[idBeneficiario]"
+                                                                               class="form-control m-input"
+                                                                               value="{{$artist->artists[0]->beneficiary[0]->id}}">
+
+                                                                    </form>
+                                                                @endif
+
+                                                            </div>
+
+                                                            <div class="col-md-12 pt-4">
+
+                                                                <label style="font-weight: bold">{{ __('biografia') }}
+                                                                    :</label>
+                                                                <div class="m-scrollable" data-scrollable="true"
+                                                                     style="">
+                                                                    <p style="text-align: justify">{{ $artist->artists[0]->beneficiary[0]->biography}}</p>
+                                                                </div>
+                                                            </div>
+
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="modal fade" id="pdfidentificacionBeneficiario" tabindex="-1" role="dialog"
+                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">
+                                                    Documento de {{ $artist->artists[0]->beneficiary[0]->name}}</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                @if($artist->artists[0]->beneficiary[0]->pdf_documento === null)
+                                                    @if(!$artist->artists[0]->beneficiary[0]->img_document_front && !$artist->artists[0]->beneficiary[0]->img_document_back)
+                                                        <p>No se cargo el documento correctamente</p>
+                                                    @else
+                                                        <div class="form-group">
+                                                            <label for="">Parte frontal del documetno:</label>
+                                                            <img style="width: 100%"
+                                                                 src="{{$artist->artists[0]->beneficiary[0]->img_document_front }}"
+                                                                 alt="">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="">Parte trasera del documento:</label>
+                                                            <img style="width: 100%"
+                                                                 src="{{ $artist->artists[0]->beneficiary[0]->img_document_back }}"
+                                                                 alt="">
+                                                        </div>
+
+                                                    @endif
+                                                @else
+                                                    @if(!$artist->artists[0]->beneficiary[0]->pdf_documento)
+                                                        <p>No se cargo el documento correctamente</p>
+                                                    @else
+                                                        <div>
+                                                            <object
+                                                                data="{{$artist->artists[0]->beneficiary[0]->pdf_documento}}"
+                                                                frameborder="0" width="100%" height="400px"></object>
+                                                        </div>
+                                                    @endif
+                                                @endif
 
                                             </div>
-                                            <i class="flaticon-edit ml-3 update_pdf_ben"
-                                               style="color:#716aca; cursor:pointer;"></i>
-                                            <button type="button" class="btn btn-primary cancel_pdf_ben"
-                                                    style="display:none">Cancelar
-                                            </button>
-                                            <button id="btn_enviar_ben" type="button"
-                                                    class="btn btn-primary  enviar_ben"
-                                                    style="display:none">enviar
-                                            </button>
-                                            <form id="form_update_img_ben" method="post"
-                                                  action="{{ route('update.imgdoc.ben.gestor') }}"
-                                                  enctype="multipart/form-data"
-                                                  class="m-form m-form--label-align-left- m-form--state-"
-                                                  id="actualizar_img_asp">
-                                                @csrf {{ method_field('PUT') }}
-                                                <input type="hidden" name="beneficiario[urlImageDocumentFrente]"
-                                                       class="form-control m-input" value="">
-                                                <input type="hidden" name="beneficiario[urlImageDocumentAtras]"
-                                                       class="form-control m-input" value="">
-                                                <input type="hidden" name="beneficiario[idBeneficiario]"
-                                                       class="form-control m-input"
-                                                       value="{{$artist->artists[0]->beneficiary[0]->id}}">
+                                            <div class="modal-footer">
 
-                                            </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
+                        <!--=====================================
+                            MODAL INFORMACION DEL ARTISTA
+                        ======================================-->
+
+                        <div class="modal fade" id="verpdfidentificacion" tabindex="-1" role="dialog"
+                             aria-labelledby="exampleModalLabel"
+                             aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">
+                                            Documento de {{ $artist->artists[0]->nickname }}</h5>
+                                        <button type="button" class="close" data-dismiss="modal"
+                                                aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        @if(!$artist->artists[0]->users->pdf_cedula || $artist->artists[0]->users->pdf_cedula === null)
+                                            @if(!$artist->artists[0]->users->img_document_front && !$artist->artists[0]->users->img_document_back)
+                                                <p>No se cargo el documento
+                                                    correctamente</p>
+                                            @else
+                                                <div class="form-group">
+                                                    <label for="">Parte frontal del documento:</label>
+                                                    <img style="width: 100%"
+                                                         src="{{ $artist->artists[0]->users->img_document_front}}"
+                                                         alt="">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="">Parte trasera del documento:</label>
+                                                    <img style="width: 100%"
+                                                         src="{{$artist->artists[0]->users->img_document_back}}"
+                                                         alt="">
+                                                </div>
+                                            @endif
+                                        @else
+                                            @if(!$artist->artists[0]->users->pdf_cedula)
+                                                <p>No se cargo el documento
+                                                    correctamente</p>
+                                            @else
+                                                <div>
+                                                    <object
+                                                        data="{{$artist->artists[0]->users->pdf_cedula}}"
+                                                        frameborder="0" width="100%"
+                                                        height="400px"></object>
+                                                </div>
+                                            @endif
                                         @endif
+                                    </div>
+                                    <div class="modal-footer">
 
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{-- modal segunda calificacion --}}
+                        <div class="modal fade" data-backdrop="static" data-keyboard="false" id="modal3" tabindex="-1"
+                             role="dialog"
+                             aria-labelledby="exampleModalLabel"
+                             aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h3 class="modal-title" id="exampleModalLabel">Calificar Propuesta Musical</h3>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body bodyAppendAudio">
 
-                                    <div class="col-md-12 pt-4">
 
-                                        <label style="font-weight: bold">{{ __('biografia') }}:</label>
-                                        <div class="m-scrollable" data-scrollable="true" style="">
-                                            <p style="text-align: justify">{{ $artist->artists[0]->beneficiary[0]->biography}}</p>
+                                        {{--                    <audio class="audioProject" preload="auto" controls>--}}
+                                        {{--                                                 <source class="srcAudio" >--}}
+
+                                        {{--                    </audio>--}}
+
+
+                                        <input type="hidden" class="idProject" value="" name="idProject">
+
+                                        <div class="sliderCalificadorUno">
+                                            <!--=====================================
+                                                SLIDER CRITERIO # 1
+                                            ======================================-->
+                                            <div class="form-group m-form__group row" style="padding-top: 2rem">
+                                                <label class="col-form-label col-lg-3 col-sm-12">Musicalidad: <span
+                                                        class="text-danger">*</span></label>
+                                                <div class="col-lg-9 col-md-12 col-sm-12">
+                                                    <div class="row align-items-center" style="margin-bottom: 1rem">
+                                                        <div class="col-2">
+                                                            <input type="text" required
+                                                                   class="form-control my-form-control"
+                                                                   name="criterio_1" id="criterio_1_input"
+                                                                   placeholder="Quantity">
+                                                        </div>
+                                                        <div class="col-10">
+                                                            <div id="criterio_1"
+                                                                 class="m-nouislider--drag-danger"></div>
+                                                        </div>
+                                                    </div>
+                                                    <span class="m-form__help" style="margin-top: 5rem">Capacidad para hacer musica.</span>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <!--=====================================
+                                                SLIDER CRITERIO # 2
+                                            ======================================-->
+                                            <div class="form-group m-form__group row" style="padding-top: 2rem">
+                                                <label class="col-form-label col-lg-3 col-sm-12">Sonoridad:<span
+                                                        class="text-danger">*</span></label>
+                                                <div class="col-lg-9 col-md-12 col-sm-12">
+                                                    <div class="row align-items-center" style="margin-bottom: 1rem">
+                                                        <div class="col-2">
+                                                            <input type="text" required
+                                                                   class="form-control my-form-control"
+                                                                   name="criterio_2" id="criterio_2_input"
+                                                                   placeholder="Quantity">
+                                                        </div>
+                                                        <div class="col-10">
+                                                            <div id="criterio_2"
+                                                                 class="m-nouislider--drag-danger"></div>
+                                                        </div>
+                                                    </div>
+                                                    <span class="m-form__help" style="margin-top: 5rem"> Como suena la musica.</span>
+                                                </div>
+                                            </div>
+                                            <!--=====================================
+                                                SLIDER CRITERIO # 3
+                                            ======================================-->
+
+                                            <div class="form-group m-form__group row" style="padding-top: 2rem">
+                                                <label class="col-form-label col-lg-3 col-sm-12">Coloratura:<span
+                                                        class="text-danger">*</span></label>
+                                                <div class="col-lg-9 col-md-12 col-sm-12">
+                                                    <div class="row align-items-center" style="margin-bottom: 1rem">
+                                                        <div class="col-2">
+                                                            <input type="text" required
+                                                                   class="form-control my-form-control"
+                                                                   name="criterio_3" id="criterio_3_input"
+                                                                   placeholder="Quantity">
+                                                        </div>
+                                                        <div class="col-10">
+                                                            <div id="criterio_3"
+                                                                 class="m-nouislider--drag-danger"></div>
+                                                        </div>
+                                                    </div>
+                                                    <span class="m-form__help"
+                                                          style="margin-top: 5rem">Como es el color de la musica.</span>
+                                                </div>
+                                            </div>
+                                            <!--=====================================
+                                                SLIDER CRITERIO # 4
+                                            ======================================-->
+
+                                            <div class="form-group m-form__group row" style="padding-top: 2rem">
+                                                <label class="col-form-label col-lg-3 col-sm-12">Vocería de su proyecto:<span
+                                                        class="text-danger">*</span></label>
+                                                <div class="col-lg-9 col-md-12 col-sm-12">
+                                                    <div class="row align-items-center" style="margin-bottom: 1rem">
+                                                        <div class="col-2">
+                                                            <input type="text" required
+                                                                   class="form-control my-form-control"
+                                                                   name="criterio_4" id="criterio_4_input"
+                                                                   placeholder="Quantity">
+                                                        </div>
+                                                        <div class="col-10">
+                                                            <div id="criterio_4"
+                                                                 class="m-nouislider--drag-danger"></div>
+                                                        </div>
+                                                    </div>
+                                                    {{-- <span class="m-form__help" style="margin-top: 5rem">selección de la obra con relación a la diversidad de ritmos, tonalidades y formas.</span> --}}
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="form-group m-form__group" style="padding-top: 2rem">
+                                                    <label class="col-form-label">Comentario:<span
+                                                            class="text-danger">*</span></label>
+                                                    <div class="summernote" id="m_summernote_1"></div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
 
 
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar
+                                        </button>
+                                        <button type="button" class="btn btn-primary btn-send-rating"
+                                                id="btnSeendReview">Enviar
+                                            calificación
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
 
-        <div class="modal fade" id="pdfidentificacionBeneficiario" tabindex="-1" role="dialog"
-             aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">
-                            Documento de {{ $artist->artists[0]->beneficiary[0]->name}}</h5>
-                        <button type="button" class="close" data-dismiss="modal"
-                                aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        @if($artist->artists[0]->beneficiary[0]->pdf_documento === null)
-                            @if(!$artist->artists[0]->beneficiary[0]->img_document_front && !$artist->artists[0]->beneficiary[0]->img_document_back)
-                                <p>No se cargo el documento correctamente</p>
-                            @else
-                                <div class="form-group">
-                                    <label for="">Parte frontal del documetno:</label>
-                                    <img style="width: 100%"
-                                         src="{{$artist->artists[0]->beneficiary[0]->img_document_front }}"
-                                         alt="">
-                                </div>
-                                <div class="form-group">
-                                    <label for="">Parte trasera del documento:</label>
-                                    <img style="width: 100%"
-                                         src="{{ $artist->artists[0]->beneficiary[0]->img_document_back }}"
-                                         alt="">
-                                </div>
+                        @stop
 
-                            @endif
-                        @else
-                            @if(!$artist->artists[0]->beneficiary[0]->pdf_documento)
-                                <p>No se cargo el documento correctamente</p>
-                            @else
-                                <div>
-                                    <object data="{{$artist->artists[0]->beneficiary[0]->pdf_documento}}"
-                                            frameborder="0" width="100%" height="400px"></object>
-                                </div>
-                            @endif
-                        @endif
-
-                    </div>
-                    <div class="modal-footer">
-
-                    </div>
-                </div>
-            </div>
-        </div>
-        @endif
-        </div>
-        <!--=====================================
-            MODAL INFORMACION DEL ARTISTA
-        ======================================-->
-
-        <div class="modal fade" id="verpdfidentificacion" tabindex="-1" role="dialog"
-             aria-labelledby="exampleModalLabel"
-             aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">
-                            Documento de {{ $artist->artists[0]->nickname }}</h5>
-                        <button type="button" class="close" data-dismiss="modal"
-                                aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        @if(!$artist->artists[0]->users->pdf_cedula || $artist->artists[0]->users->pdf_cedula === null)
-                            @if(!$artist->artists[0]->users->img_document_front && !$artist->artists[0]->users->img_document_back)
-                                <p>No se cargo el documento
-                                    correctamente</p>
-                            @else
-                                <div class="form-group">
-                                    <label for="">Parte frontal del documento:</label>
-                                    <img style="width: 100%"
-                                         src="{{ $artist->artists[0]->users->img_document_front}}"
-                                         alt="">
-                                </div>
-                                <div class="form-group">
-                                    <label for="">Parte trasera del documento:</label>
-                                    <img style="width: 100%"
-                                         src="{{$artist->artists[0]->users->img_document_back}}"
-                                         alt="">
-                                </div>
-                            @endif
-                        @else
-                            @if(!$artist->artists[0]->users->pdf_cedula)
-                                <p>No se cargo el documento
-                                    correctamente</p>
-                            @else
-                                <div>
-                                    <object
-                                        data="{{$artist->artists[0]->users->pdf_cedula}}"
-                                        frameborder="0" width="100%"
-                                        height="400px"></object>
-                                </div>
-                            @endif
-                        @endif
-                    </div>
-                    <div class="modal-footer">
-
-                    </div>
-                </div>
-            </div>
-        </div>
-{{-- modal segunda calificacion --}}
-   <div class="modal fade" data-backdrop="static" data-keyboard="false" id="modal3" tabindex="-1" role="dialog"
-   aria-labelledby="exampleModalLabel"
-   aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-          <div class="modal-header">
-              <h3 class="modal-title" id="exampleModalLabel">Calificar Propuesta Musical</h3>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-              </button>
-          </div>
-          <div class="modal-body bodyAppendAudio">
-
-
-
-
-              {{--                    <audio class="audioProject" preload="auto" controls>--}}
-              {{--                                                 <source class="srcAudio" >--}}
-
-              {{--                    </audio>--}}
-
-
-              <input type="hidden" class="idProject" value="" name="idProject">
-
-              <div class="sliderCalificadorUno">
-                  <!--=====================================
-                      SLIDER CRITERIO # 1
-                  ======================================-->
-                  <div class="form-group m-form__group row" style="padding-top: 2rem">
-                      <label class="col-form-label col-lg-3 col-sm-12">Musicalidad: <span
-                              class="text-danger">*</span></label>
-                      <div class="col-lg-9 col-md-12 col-sm-12">
-                          <div class="row align-items-center" style="margin-bottom: 1rem">
-                              <div class="col-2">
-                                  <input type="text" required class="form-control my-form-control"
-                                         name="criterio_1" id="criterio_1_input"
-                                         placeholder="Quantity">
-                              </div>
-                              <div class="col-10">
-                                  <div id="criterio_1" class="m-nouislider--drag-danger"></div>
-                              </div>
-                          </div>
-                          <span class="m-form__help" style="margin-top: 5rem">Capacidad para hacer musica.</span>
-                      </div>
-                  </div>
-                  <hr>
-                  <!--=====================================
-                      SLIDER CRITERIO # 2
-                  ======================================-->
-                  <div class="form-group m-form__group row" style="padding-top: 2rem">
-                      <label class="col-form-label col-lg-3 col-sm-12">Sonoridad:<span
-                              class="text-danger">*</span></label>
-                      <div class="col-lg-9 col-md-12 col-sm-12">
-                          <div class="row align-items-center" style="margin-bottom: 1rem">
-                              <div class="col-2">
-                                  <input type="text" required class="form-control my-form-control"
-                                         name="criterio_2" id="criterio_2_input"
-                                         placeholder="Quantity">
-                              </div>
-                              <div class="col-10">
-                                  <div id="criterio_2" class="m-nouislider--drag-danger"></div>
-                              </div>
-                          </div>
-                          <span class="m-form__help" style="margin-top: 5rem"> Como suena la musica.</span>
-                      </div>
-                  </div>
-                  <!--=====================================
-                      SLIDER CRITERIO # 3
-                  ======================================-->
-
-                  <div class="form-group m-form__group row" style="padding-top: 2rem">
-                      <label class="col-form-label col-lg-3 col-sm-12">Coloratura:<span
-                              class="text-danger">*</span></label>
-                      <div class="col-lg-9 col-md-12 col-sm-12">
-                          <div class="row align-items-center" style="margin-bottom: 1rem">
-                              <div class="col-2">
-                                  <input type="text" required class="form-control my-form-control"
-                                         name="criterio_3" id="criterio_3_input"
-                                         placeholder="Quantity">
-                              </div>
-                              <div class="col-10">
-                                  <div id="criterio_3" class="m-nouislider--drag-danger"></div>
-                              </div>
-                          </div>
-                          <span class="m-form__help"
-                                style="margin-top: 5rem">Como es el color de la musica.</span>
-                      </div>
-                  </div>
-                  <!--=====================================
-                      SLIDER CRITERIO # 4
-                  ======================================-->
-
-                  <div class="form-group m-form__group row" style="padding-top: 2rem">
-                      <label class="col-form-label col-lg-3 col-sm-12">Vocería de su proyecto:<span
-                              class="text-danger">*</span></label>
-                      <div class="col-lg-9 col-md-12 col-sm-12">
-                          <div class="row align-items-center" style="margin-bottom: 1rem">
-                              <div class="col-2">
-                                  <input type="text" required class="form-control my-form-control"
-                                         name="criterio_4" id="criterio_4_input"
-                                         placeholder="Quantity">
-                              </div>
-                              <div class="col-10">
-                                  <div id="criterio_4" class="m-nouislider--drag-danger"></div>
-                              </div>
-                          </div>
-                          {{-- <span class="m-form__help" style="margin-top: 5rem">selección de la obra con relación a la diversidad de ritmos, tonalidades y formas.</span> --}}
-                      </div>
-                  </div>
-
-
-              </div>
-              <div class="row">
-                  <div class="col-12">
-                      <div class="form-group m-form__group" style="padding-top: 2rem">
-                          <label class="col-form-label">Comentario:<span class="text-danger">*</span></label>
-                          <div class="summernote" id="m_summernote_1"></div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-
-
-          <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-              <button type="button" class="btn btn-primary btn-send-rating" id="btnSeendReview">Enviar
-                  calificación
-              </button>
-          </div>
-      </div>
-  </div>
-</div>
-
-
-@stop
-
-@section('rating.projects')
-<script src="/backend/assets/demo/custom/crud/forms/widgets/summernote.js" type="text/javascript"></script>
-    <script src="/js/ajax.js"></script>
-    <style>
-        .swal2-popup .swal2-file:focus,
-        .swal2-popup .swal2-input:focus,
-        .swal2-popup .swal2-textarea:focus {
-            border-color: #716aca;
-        }
-    </style>
-
-    <script>
-        // acciones para calificacion por yuri
-
-        $('#modal_calification').click(function (e){
-            e.preventDefault();
-
-            $('#modal3').modal('show');
-
-        });
-
-        $("#btnSeendReview").click(function () {
-                //
-                swal({
-                    title: '¡Atención!',
-                    text: "¿Esta seguro de enviar calificación?",
-                    type: 'info',
-                    showCancelButton: true,
-                    confirmButtonText: 'Aceptar',
-                    cancelButtonText: 'Cancelar',
-                    reverseButtons: true
-                }).then(function (result) {
-                    if (result.value) {
-                        $('.modal.show').loading({
-                            message: 'Enviando...',
-                            start: true,
-                        });
-
-                        if ($('#m_summernote_1').summernote('code') !== "<p><br></p>" && $('#m_summernote_1').summernote('code') !== "") {
-                            const
-                                mesage = $('#m_summernote_1').summernote('code'),
-                                cristerio1 = $('#criterio_1_input').val(),
-                                cristerio2 = $('#criterio_2_input').val(),
-                                cristerio3 = $('#criterio_3_input').val(),
-                                cristerio4 = $('#criterio_4_input').val(),
-                                idProject = $('.idProject').val(),
-                                token = '{{ csrf_token() }}',
-                                url = "{{ route('add.review.yuri') }}";
-
-                            let data = {
-                                __token: token,
-                                comment: mesage,
-                                idProject: idProject,
-                                criterio_1: cristerio1,
-                                criterio_2: cristerio2,
-                                criterio_3: cristerio3,
-                                criterio_4: cristerio4,
-                            };
-                            const success = function (r) {
-
-                                if (r.status === 200) {
-                                    swal({
-                                        "title": "",
-                                        "text": r.msg,
-                                        "type": "success",
-                                        "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
-                                    }).then((result) => {
-                                        document.location.reload();
-                                    });
+                        @section('rating.projects')
+                            <script src="/backend/assets/demo/custom/crud/forms/widgets/summernote.js"
+                                    type="text/javascript"></script>
+                            <script src="/js/ajax.js"></script>
+                            <style>
+                                .swal2-popup .swal2-file:focus,
+                                .swal2-popup .swal2-input:focus,
+                                .swal2-popup .swal2-textarea:focus {
+                                    border-color: #716aca;
                                 }
-                            };
-                            const error = function (e) {
-                                $('.modal.show').loading({
-                                    start: false,
+                            </style>
+
+                            <script>
+                                // acciones para calificacion por yuri
+
+                                $('#modal_calification').click(function (e) {
+                                    e.preventDefault();
+
+                                    $('#modal3').modal('show');
+
                                 });
-                                swal({
-                                    "title": "",
-                                    "text": "No se ha enviado su calificación.",
-                                    "type": "error",
-                                    "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
+
+                                $("#btnSeendReview").click(function () {
+                                    //
+                                    swal({
+                                        title: '¡Atención!',
+                                        text: "¿Esta seguro de enviar calificación?",
+                                        type: 'info',
+                                        showCancelButton: true,
+                                        confirmButtonText: 'Aceptar',
+                                        cancelButtonText: 'Cancelar',
+                                        reverseButtons: true
+                                    }).then(function (result) {
+                                        if (result.value) {
+                                            $('.modal.show').loading({
+                                                message: 'Enviando...',
+                                                start: true,
+                                            });
+
+                                            if ($('#m_summernote_1').summernote('code') !== "<p><br></p>" && $('#m_summernote_1').summernote('code') !== "") {
+                                                const
+                                                    mesage = $('#m_summernote_1').summernote('code'),
+                                                    cristerio1 = $('#criterio_1_input').val(),
+                                                    cristerio2 = $('#criterio_2_input').val(),
+                                                    cristerio3 = $('#criterio_3_input').val(),
+                                                    cristerio4 = $('#criterio_4_input').val(),
+                                                    idProject = $('.idProject').val(),
+                                                    token = '{{ csrf_token() }}',
+                                                    url = "{{ route('add.review.yuri') }}";
+
+                                                let data = {
+                                                    __token: token,
+                                                    comment: mesage,
+                                                    idProject: idProject,
+                                                    criterio_1: cristerio1,
+                                                    criterio_2: cristerio2,
+                                                    criterio_3: cristerio3,
+                                                    criterio_4: cristerio4,
+                                                };
+                                                const success = function (r) {
+
+                                                    if (r.status === 200) {
+                                                        swal({
+                                                            "title": "",
+                                                            "text": r.msg,
+                                                            "type": "success",
+                                                            "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
+                                                        }).then((result) => {
+                                                            document.location.reload();
+                                                        });
+                                                    }
+                                                };
+                                                const error = function (e) {
+                                                    $('.modal.show').loading({
+                                                        start: false,
+                                                    });
+                                                    swal({
+                                                        "title": "",
+                                                        "text": "No se ha enviado su calificación.",
+                                                        "type": "error",
+                                                        "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
+                                                    });
+                                                };
+
+
+                                                ajax(url, data, success, "post", error, true, "#list_modal_manage");
+                                                /*$('body').loading({
+                                                    start: false,
+                                                });*/
+                                            } else {
+
+                                                swal({
+                                                    "title": "",
+                                                    "text": "Sra/Sr Curador, debe agregar un comentario.",
+                                                    "type": "error",
+                                                    "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
+                                                });
+
+                                                $('.modal.show').loading({
+                                                    start: false,
+                                                });
+                                            }
+                                        }
+
+                                    });
+
                                 });
-                            };
+
+                                // init slider
+
+                                /*=============================================
+                                CRITERIO # 1
+                                =============================================*/
+                                var slider1 = document.getElementById('criterio_1');
+
+                                noUiSlider.create(slider1, {
+                                    start: [0],
+                                    step: 0.01,
+                                    range: {
+                                        'min': [0],
+                                        'max': [100]
+                                    },
+                                    format: wNumb({
+                                        decimals: 1,
+                                    })
+                                });
+
+                                // init slider input
+                                var sliderInput = document.getElementById('criterio_1_input');
+
+                                slider1.noUiSlider.on('update', function (values, handle) {
+                                    sliderInput.value = values[handle];
+                                });
+
+                                sliderInput.addEventListener('change', function () {
+                                    slider1.noUiSlider.set(this.value);
+                                });
 
 
-                            ajax(url, data, success, "post", error, true, "#list_modal_manage");
-                            /*$('body').loading({
-                                start: false,
-                            });*/
-                        } else {
+                                sliderInput.addEventListener('change', function () {
+                                    slider1.noUiSlider.set(this.value);
+                                });
 
-                            swal({
-                                "title": "",
-                                "text": "Sra/Sr Curador, debe agregar un comentario.",
-                                "type": "error",
-                                "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
-                            });
+                                /*=============================================
+                                CRITERIO # 2
+                                =============================================*/
+                                var slider2 = document.getElementById('criterio_2');
 
-                            $('.modal.show').loading({
-                                start: false,
-                            });
-                        }
-                    }
+                                noUiSlider.create(slider2, {
+                                    start: [0],
+                                    step: 0.01,
+                                    range: {
+                                        'min': [0],
+                                        'max': [100]
+                                    },
+                                    format: wNumb({
+                                        decimals: 1
+                                    })
+                                });
 
-                });
+                                // init slider input
+                                var sliderInput2 = document.getElementById('criterio_2_input');
 
-            });
+                                slider2.noUiSlider.on('update', function (values, handle) {
+                                    sliderInput2.value = values[handle];
+                                });
 
-        // init slider
-
-            /*=============================================
-            CRITERIO # 1
-            =============================================*/
-            var slider1 = document.getElementById('criterio_1');
-
-            noUiSlider.create(slider1, {
-                start: [0],
-                step: 0.01,
-                range: {
-                    'min': [0],
-                    'max': [100]
-                },
-                format: wNumb({
-                    decimals: 1,
-                })
-            });
-
-            // init slider input
-            var sliderInput = document.getElementById('criterio_1_input');
-
-            slider1.noUiSlider.on('update', function (values, handle) {
-                sliderInput.value = values[handle];
-            });
-
-            sliderInput.addEventListener('change', function () {
-                slider1.noUiSlider.set(this.value);
-            });
+                                sliderInput2.addEventListener('change', function () {
+                                    slider2.noUiSlider.set(this.value);
+                                });
 
 
-            sliderInput.addEventListener('change', function () {
-                slider1.noUiSlider.set(this.value);
-            });
+                                sliderInput2.addEventListener('change', function () {
+                                    slider2.noUiSlider.set(this.value);
+                                });
+                                /*=============================================
+                                CRITERIO # 3
+                                =============================================*/
+                                var slider3 = document.getElementById('criterio_3');
 
-            /*=============================================
-            CRITERIO # 2
-            =============================================*/
-            var slider2 = document.getElementById('criterio_2');
+                                noUiSlider.create(slider3, {
+                                    start: [0],
+                                    step: 0.01,
+                                    range: {
+                                        'min': [0],
+                                        'max': [100]
+                                    },
+                                    format: wNumb({
+                                        decimals: 1
+                                    })
+                                });
 
-            noUiSlider.create(slider2, {
-                start: [0],
-                step: 0.01,
-                range: {
-                    'min': [0],
-                    'max': [100]
-                },
-                format: wNumb({
-                    decimals: 1
-                })
-            });
+                                // init slider input
+                                var sliderInput3 = document.getElementById('criterio_3_input');
 
-            // init slider input
-            var sliderInput2 = document.getElementById('criterio_2_input');
+                                slider3.noUiSlider.on('update', function (values, handle) {
+                                    sliderInput3.value = values[handle];
+                                });
 
-            slider2.noUiSlider.on('update', function (values, handle) {
-                sliderInput2.value = values[handle];
-            });
-
-            sliderInput2.addEventListener('change', function () {
-                slider2.noUiSlider.set(this.value);
-            });
-
-
-            sliderInput2.addEventListener('change', function () {
-                slider2.noUiSlider.set(this.value);
-            });
-            /*=============================================
-            CRITERIO # 3
-            =============================================*/
-            var slider3 = document.getElementById('criterio_3');
-
-            noUiSlider.create(slider3, {
-                start: [0],
-                step: 0.01,
-                range: {
-                    'min': [0],
-                    'max': [100]
-                },
-                format: wNumb({
-                    decimals: 1
-                })
-            });
-
-            // init slider input
-            var sliderInput3 = document.getElementById('criterio_3_input');
-
-            slider3.noUiSlider.on('update', function (values, handle) {
-                sliderInput3.value = values[handle];
-            });
-
-            sliderInput3.addEventListener('change', function () {
-                slider3.noUiSlider.set(this.value);
-            });
+                                sliderInput3.addEventListener('change', function () {
+                                    slider3.noUiSlider.set(this.value);
+                                });
 
 
-            sliderInput3.addEventListener('change', function () {
-                slider3.noUiSlider.set(this.value);
-            });
-            /*=============================================
-            CRITERIO # 4
-            =============================================*/
-            var slider4 = document.getElementById('criterio_4');
+                                sliderInput3.addEventListener('change', function () {
+                                    slider3.noUiSlider.set(this.value);
+                                });
+                                /*=============================================
+                                CRITERIO # 4
+                                =============================================*/
+                                var slider4 = document.getElementById('criterio_4');
 
-            noUiSlider.create(slider4, {
-                start: [0],
-                step: 0.01,
-                range: {
-                    'min': [0],
-                    'max': [100]
-                },
-                format: wNumb({
-                    decimals: 1
-                })
-            });
+                                noUiSlider.create(slider4, {
+                                    start: [0],
+                                    step: 0.01,
+                                    range: {
+                                        'min': [0],
+                                        'max': [100]
+                                    },
+                                    format: wNumb({
+                                        decimals: 1
+                                    })
+                                });
 
-            // init slider input
-            var sliderInput4 = document.getElementById('criterio_4_input');
+                                // init slider input
+                                var sliderInput4 = document.getElementById('criterio_4_input');
 
-            slider4.noUiSlider.on('update', function (values, handle) {
-                sliderInput4.value = values[handle];
-            });
+                                slider4.noUiSlider.on('update', function (values, handle) {
+                                    sliderInput4.value = values[handle];
+                                });
 
-            sliderInput4.addEventListener('change', function () {
-                slider4.noUiSlider.set(this.value);
-            });
+                                sliderInput4.addEventListener('change', function () {
+                                    slider4.noUiSlider.set(this.value);
+                                });
 
 
-            sliderInput4.addEventListener('change', function () {
-                slider4.noUiSlider.set(this.value);
-            });
-         // boton acciones delfinalista
+                                sliderInput4.addEventListener('change', function () {
+                                    slider4.noUiSlider.set(this.value);
+                                });
+                                // boton acciones delfinalista
 
-         $('#btn_finalist_admin').click(function(e){
-            // alert();
-            e.preventDefault();
-            swal({
-                    title: '¡Atención!',
-                    text: "¿ Esta seguro de realizar la acción ?",
-                    type: 'info',
-                    showCancelButton: true,
-                    confirmButtonText: 'Aceptar',
-                    cancelButtonText: 'Cancelar',
-                    reverseButtons: true
-                }).then(function (result) {
-                    console.log(result);
-                    if (result.value) {
-                        frm_finalist
-                        $('#frm_finalist').submit();
+                                $('#btn_finalist_admin').click(function (e) {
+                                    // alert();
+                                    e.preventDefault();
+                                    swal({
+                                        title: '¡Atención!',
+                                        text: "¿ Esta seguro de realizar la acción ?",
+                                        type: 'info',
+                                        showCancelButton: true,
+                                        confirmButtonText: 'Aceptar',
+                                        cancelButtonText: 'Cancelar',
+                                        reverseButtons: true
+                                    }).then(function (result) {
+                                        console.log(result);
+                                        if (result.value) {
+                                            frm_finalist
+                                            $('#frm_finalist').submit();
 
-                    }
+                                        }
 
-    });
+                                    });
 
-});
+                                });
+                                //Boton sacar de los 100 mejores
+                                $('#btn_sacar_de_los_cien').click(function (e) {
+                                    // alert();
+                                    e.preventDefault();
+                                    swal({
+                                        title: '¡Atención!',
+                                        text: "¿ Esta seguro de realizar la acción ?",
+                                        type: 'info',
+                                        showCancelButton: true,
+                                        confirmButtonText: 'Aceptar',
+                                        cancelButtonText: 'Cancelar',
+                                        reverseButtons: true
+                                    }).then(function (result) {
+                                        console.log(result);
+                                        if (result.value) {
+                                            // frm_finalist
+                                            $('#frm_sacar_cien').submit();
 
- $('#btn_finalist_admin_yuri').click(function(e){
-            // alert();
-            e.preventDefault();
-            swal({
-                    title: '¡Atención!',
-                    text: "¿ Esta seguro de realizar la acción ?",
-                    type: 'info',
-                    showCancelButton: true,
-                    confirmButtonText: 'Aceptar',
-                    cancelButtonText: 'Cancelar',
-                    reverseButtons: true
-                }).then(function (result) {
-                    console.log(result);
-                    if (result.value) {
-                        // frm_finalist
-                        $('#frm_finalist_yuri').submit();
+                                        }
 
-                    }
+                                    });
 
-    });
+                                });
 
-});
-        $(document).ready(function () {
+                                //Agregar a tercera curaduria
+                                $('#btn_agregar_tercera_curaduria').click(function (e) {
+                                    // alert();
+                                    e.preventDefault();
+                                    swal({
+                                        title: '¡Atención!',
+                                        text: "¿ Esta seguro de realizar la acción ?",
+                                        type: 'info',
+                                        showCancelButton: true,
+                                        confirmButtonText: 'Aceptar',
+                                        cancelButtonText: 'Cancelar',
+                                        reverseButtons: true
+                                    }).then(function (result) {
+                                        console.log(result);
+                                        if (result.value) {
+                                            // frm_finalist
+                                            $('#frm_agregar_tercera_curaduria').submit();
 
-            $('[data-toggle="tooltip"]').tooltip();
-            $(function () {
-                $('audio').audioPlayer();
-            });
+                                        }
 
-        });
+                                    });
 
-        function mostrarComentario(texto) {
-            swal({
-                title: "{{__('mensaje')}}",
-                text: texto,
-                icon: "success",
-            })
-        }
+                                });
 
-        function getRating(rating, star) {
-            if (rating == null) {
-                return "";
-            } else if (star <= rating) {
-                return "yellow-rating"
-            }
-            return "";
-        }
+                                $('#btn_finalist_admin_yuri').click(function (e) {
+                                    // alert();
+                                    e.preventDefault();
+                                    swal({
+                                        title: '¡Atención!',
+                                        text: "¿ Esta seguro de realizar la acción ?",
+                                        type: 'info',
+                                        showCancelButton: true,
+                                        confirmButtonText: 'Aceptar',
+                                        cancelButtonText: 'Cancelar',
+                                        reverseButtons: true
+                                    }).then(function (result) {
+                                        console.log(result);
+                                        if (result.value) {
+                                            // frm_finalist
+                                            $('#frm_finalist_yuri').submit();
 
-        $('#table_assign_management').DataTable({
-            "processing": true,
-            "serverSide": true,
-            "data": null,
-            "ajax": {
-                url: "{{ route('assign.managements') }}",
-                data: {
-                    id_project: {{ $project->id }}
-                }
-            },
-            "columns": [
-                {
-                    render: function (data, type, JsonResultRow, meta) {
-                        return '<img src="' + JsonResultRow.users.picture + '" width="60px" style="border-radius: 100%;margin-right: auto;margin-left: auto;display: block"/>';
-                    }
-                },
-                {
-                    data: 'users.name',
-                    render: function (data, type, JsonResultRow, meta) {
-                        return JsonResultRow.users.name + ' ' + JsonResultRow.users.last_name + '' + JsonResultRow.users.second_last_name;
-                    },
-                    defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
-                },
-                {
-                    data: 'company',
-                    defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
-                },
-                {
-                    data: 'users.email',
-                    defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
-                },
-                {
-                    render: function (data, type, JsonResultRow, meta) {
-                        return `
+                                        }
+
+                                    });
+
+                                });
+                                $(document).ready(function () {
+
+                                    $('[data-toggle="tooltip"]').tooltip();
+                                    $(function () {
+                                        $('audio').audioPlayer();
+                                    });
+
+                                });
+
+                                function mostrarComentario(texto) {
+                                    swal({
+                                        title: "{{__('mensaje')}}",
+                                        text: texto,
+                                        icon: "success",
+                                    })
+                                }
+
+                                function getRating(rating, star) {
+                                    if (rating == null) {
+                                        return "";
+                                    } else if (star <= rating) {
+                                        return "yellow-rating"
+                                    }
+                                    return "";
+                                }
+
+                                $('#table_assign_management').DataTable({
+                                    "processing": true,
+                                    "serverSide": true,
+                                    "data": null,
+                                    "ajax": {
+                                        url: "{{ route('assign.managements') }}",
+                                        data: {
+                                            id_project: {{ $project->id }}
+                                        }
+                                    },
+                                    "columns": [
+                                        {
+                                            render: function (data, type, JsonResultRow, meta) {
+                                                return '<img src="' + JsonResultRow.users.picture + '" width="60px" style="border-radius: 100%;margin-right: auto;margin-left: auto;display: block"/>';
+                                            }
+                                        },
+                                        {
+                                            data: 'users.name',
+                                            render: function (data, type, JsonResultRow, meta) {
+                                                return JsonResultRow.users.name + ' ' + JsonResultRow.users.last_name + '' + JsonResultRow.users.second_last_name;
+                                            },
+                                            defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
+                                        },
+                                        {
+                                            data: 'company',
+                                            defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
+                                        },
+                                        {
+                                            data: 'users.email',
+                                            defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
+                                        },
+                                        {
+                                            render: function (data, type, JsonResultRow, meta) {
+                                                return `
                             <div class="form-group">
                                    <ul id="list_rating" class="list-inline" style="font-size: 20px">
                                         <li class="list-inline-item star"><i
@@ -2397,1033 +2563,1030 @@
                                      </ul>
                             </div>
                         `;
-                    }
-                },
-                {
-                    render: function (data, type, JsonResultRow, meta) {
-                        if (JsonResultRow.comment === null) {
-                            return "{{ __('nigun_valor_defecto') }}";
-                        }
-                        return `<div class="text-center"><a onclick='mostrarComentario("${JsonResultRow.comment}")' class="btn m-btn--pill btn-secondary"><i class="fa fa-envelope"></i></a></div>`;
-                    }
-                },
-                {
-                    render: function (data, type, JsonResultRow, meta) {
-                        return '<div class="text-center"><a href="/dashboard/profile-managament/' + JsonResultRow.users.slug + '" class="btn m-btn--pill btn-secondary"><i class="fa fa-eye"></i></a></div>'
-                    }
-                },
-            ],
-            "language": {
-                "sProcessing": "{{__('procesando')}}",
-                "sLengthMenu": "{{__('mostrar')}} _MENU_ {{__('registros')}}",
-                "sZeroRecords": "No se encontraron resultados",
-                "sEmptyTable": "{{__('nigun_dato_tabla')}}",
-                "sInfo": "{{__('mostrando_registros') }} _START_ {{__('from')}} _END_ {{__('total_de')}} _TOTAL_ {{__('registros')}}",
-                "sInfoEmpty": "{{ __('mostrando_registros_del_cero') }}",
-                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-                "sInfoPostFix": "",
-                "sSearch": "{{__('buscar')}}:",
-                "sUrl": "",
-                "sInfoThousands": ",",
-                "sLoadingRecords": "{{__('cargando')}}",
-                "oPaginate": {
-                    "sFirst": "Primero",
-                    "sLast": "Último",
-                    "sNext": "{{__('siguiente')}}",
-                    "sPrevious": "{{__('anterior')}}"
-                },
-                "oAria": {
-                    "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
-                    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-                }
-            }
-        });
-
-
-        $('#table_teams').DataTable({
-            "processing": true,
-            "serverSide": true,
-            "data": null,
-            "ajax": "{{ route('team-artist',$project->id) }}",
-            "columns": [
-                {
-                    data: 'name',
-                    defaultContent: '<span class="label label-danger text-center">{{ __('nigun_valor_defecto') }}</span>'
-                },
-                {
-                    data: 'role',
-                    defaultContent: '<span class="label label-danger text-center">{{ __('nigun_valor_defecto') }}</span>'
-                },
-            ],
-            "language": {
-                "sProcessing": "{{__('procesando')}}",
-                "sLengthMenu": "{{__('mostrar')}} _MENU_ {{__('registros')}}",
-                "sZeroRecords": "No se encontraron resultados",
-                "sEmptyTable": "{{__('nigun_dato_tabla')}}",
-                "sInfo": "{{__('mostrando_registros') }} _START_ {{__('from')}} _END_ {{__('total_de')}} _TOTAL_ {{__('registros')}}",
-                "sInfoEmpty": "{{ __('mostrando_registros_del_cero') }}",
-                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-                "sInfoPostFix": "",
-                "sSearch": "{{__('buscar')}}:",
-                "sUrl": "",
-                "sInfoThousands": ",",
-                "sLoadingRecords": "{{__('cargando')}}",
-                "oPaginate": {
-                    "sFirst": "Primero",
-                    "sLast": "Último",
-                    "sNext": "{{__('siguiente')}}",
-                    "sPrevious": "{{__('anterior')}}"
-                },
-                "oAria": {
-                    "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
-                    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-                }
-            }
-        });
-    </script>
-    <script>
-        // contorles para la actualización del audio
-        $('.update_audio').click(function () {
-
-            $(this).hide();
-            $('.cancel_audio').show();
-
-            $('.drop_audio').show();
-            $('.player').hide();
-
-
-        });
-        $('.cancel_audio').click(function () {
-            $(this).hide();
-            $('.update_audio').show();
-            $('.drop_audio').hide();
-            $('.player').show();
-
-
-        });
-
-        // controles actualizar documentos aspirante
-        $("input[name='aspirante[identificacionDoc]']").click(() => {
-            if ($('input:radio[name="aspirante[identificacionDoc]"]:checked').val() === '1') {
-                $("#image-docuemnt-aspirante").show();
-                $(".enviar_asp").show();
-                $("#pdf-docuemnt-aspirante").hide();
-            } else {
-                $("#image-docuemnt-aspirante").hide();
-                $(".enviar_asp").hide();
-                $("#pdf-docuemnt-aspirante").show();
-            }
-        });
-        $('.update_pdf_asp').click(function () {
-            $(this).hide();
-            $('.cancel_pdf_asp').show();
-            $(".enviar_asp").show();
-            $('.drop_pdf_asp').show();
-            $('.ver_pdf_aspirante').hide();
-
-
-        });
-        $('.cancel_pdf_asp').click(function () {
-            $(this).hide();
-            $('.update_pdf_asp').show();
-            $('.drop_pdf_asp').hide();
-            $(".enviar_asp").hide();
-            $('.ver_pdf_aspirante').show();
-
-
-        });
-
-        /* eventos para subir la imagen o pdf del aspirante */
-        new Dropzone('.file-image-document-aspirante-frente', {
-            url: '{{ route('upload.image.document') }}',
-            acceptedFiles: "image/*",
-            maxFiles: 1,
-            paramName: 'file',
-            headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            },
-            processing: function (file, response) {
-                $('body').loading({
-                    message: 'Subiendo documento...',
-                    start: true,
-                });
-            },
-            success: function (file, response) {
-                $("input[name='aspirante[urlImageDocumentFrente]']").val(response);
-                $('body').loading({
-
-                    start: false,
-                });
-            },
-            error: function (file, response) {
-                $('body').loading({
-                    start: false,
-                });
-                toastr.options = {
-                    "closeButton": false,
-                    "debug": false,
-                    "newestOnTop": false,
-                    "progressBar": false,
-                    "positionClass": "toast-top-right",
-                    "preventDuplicates": false,
-                    "onclick": null,
-                    "showDuration": "3000",
-                    "hideDuration": "1000",
-                    "timeOut": "5000",
-                    "extendedTimeOut": "1000",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut"
-                };
-
-                toastr.warning("El documento no se cargó correctamente, inténtalo más tarde", "Información");
-            }
-        });
-        new Dropzone('.file-image-document-aspirante-atras', {
-            url: '{{ route('upload.image.document') }}',
-            acceptedFiles: "image/*",
-            maxFiles: 1,
-            paramName: 'file',
-            headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            },
-            processing: function (file, response) {
-                $('body').loading({
-                    message: 'Subiendo documento...',
-                    start: true,
-                });
-            },
-            success: function (file, response) {
-                $("input[name='aspirante[urlImageDocumentAtras]']").val(response);
-                $('body').loading({
-
-                    start: false,
-                });
-            },
-            error: function (file, response) {
-                $('body').loading({
-                    start: false,
-                });
-                toastr.options = {
-                    "closeButton": false,
-                    "debug": false,
-                    "newestOnTop": false,
-                    "progressBar": false,
-                    "positionClass": "toast-top-right",
-                    "preventDuplicates": false,
-                    "onclick": null,
-                    "showDuration": "3000",
-                    "hideDuration": "1000",
-                    "timeOut": "5000",
-                    "extendedTimeOut": "1000",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut"
-                };
-
-                toastr.warning("El documento no se cargó correctamente, inténtalo más tarde", "Información");
-            }
-        });
-
-        var id =@json($artist->artists[0]);
-        var idAspirante = -1;
-        if (id.length != 0) {
-
-            idAspirante = id.user_id;
-        }
-
-        new Dropzone('.dropzone', {
-            url: '{{ route('cedula.pdf.aspirante.gestor') }}',
-            acceptedFiles: '.pdf',
-            maxFiles: 1,
-            paramName: 'pdf_cedula_name',
-            headers: {
-                'idAspirante': idAspirante,
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            },
-            addedfile: function (file, response) {
-                $('body').loading({
-                    message: 'Subiendo documento...',
-                    start: true,
-                });
-            },
-            success: function (file, response) {
-
-                $('#inputImagenesPostPlan').val(response);
-                toastr.options = {
-                    "closeButton": false,
-                    "debug": false,
-                    "newestOnTop": false,
-                    "progressBar": false,
-                    "positionClass": "toast-top-right",
-                    "preventDuplicates": false,
-                    "onclick": null,
-                    "showDuration": "3000",
-                    "hideDuration": "1000",
-                    "timeOut": "5000",
-                    "extendedTimeOut": "1000",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut"
-                };
-
-                toastr.success("El documento se actualizo correctamente", "Información");
-                setTimeout(function () {
-                    location.reload();
-                }, 3000);
-            },
-            error: function (file, response) {
-                $('body').loading({
-                    start: false,
-                });
-                toastr.options = {
-                    "closeButton": false,
-                    "debug": false,
-                    "newestOnTop": false,
-                    "progressBar": false,
-                    "positionClass": "toast-top-right",
-                    "preventDuplicates": false,
-                    "onclick": null,
-                    "showDuration": "3000",
-                    "hideDuration": "1000",
-                    "timeOut": "5000",
-                    "extendedTimeOut": "1000",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut"
-                };
-
-                toastr.warning("El documento no se cargó correctamente, inténtalo más tarde", "Información");
-            }
-
-        });
-        // evento ddel boton enviar imagenes aspirante
-        $('#btn_enviar_asp').click(function (e) {
-            e.preventDefault();
-
-            if ($("input[name='aspirante[urlImageDocumentAtras]']").val() != "" && $("input[name='aspirante[urlImageDocumentFrente]']").val() != "") {
-                $('#form_update_img').submit();
-                swal({
-                    "title": "",
-                    "text": 'Cargado correctamente',
-                    "type": "success",
-                    "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
-                }).then((result) => {
-                    if (result.value) {
-
-                        // document.location.reload();
-                    }
-                });
-            } else {
-                swal({
-                    "title": "",
-                    "text": 'Debe cargar las dos imagenes del documento',
-                    "type": "error",
-                    "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
-                }).then((result) => {
-                    // document.location.reload();
-                });
-            }
-
-
-        });
-
-    </script>
-
-    <script>
-        // controles de actualizar documentos del beneficiario
-        $("input[name='beneficiario[identificacionDoc]']").click(() => {
-            if ($('input:radio[name="beneficiario[identificacionDoc]"]:checked').val() === '1') {
-                $("#image-docuemnt-beneficiario").show();
-                $(".enviar_ben").show();
-                $("#pdf-docuemnt-beneficiario").hide();
-            } else {
-                $("#image-docuemnt-beneficiario").hide();
-                $(".enviar_ben").hide();
-                $("#pdf-docuemnt-beneficiario").show();
-            }
-        });
-        $('.update_pdf_ben').click(function () {
-            $(this).hide();
-            $('.cancel_pdf_ben').show();
-            $(".enviar_ben").show();
-            $('.drop_pdf_ben').show();
-            $('.ver_pdf-ben').hide();
-
-
-        });
-        $('.cancel_pdf_ben').click(function () {
-            $(this).hide();
-            $('.update_pdf_ben').show();
-            $('.drop_pdf_ben').hide();
-            $('.ver_pdf-ben').show();
-            $(".enviar_ben").hide();
-
-
-        });
-
-        // actualizar pdf beneficiario
-        new Dropzone('.dropzone-ben', {
-            url: '{{ route('cedula.pdf.beneficiario.gestor') }}',
-            acceptedFiles: '.pdf',
-            maxFiles: 1,
-            paramName: 'pdf_cedula_name',
-            headers: {
-                'idAspirante': idAspirante,
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            },
-            addedfile: function (file, response) {
-                $('body').loading({
-                    message: 'Subiendo documento...',
-                    start: true,
-                });
-            },
-            success: function (file, response) {
-
-                $('#inputImagenesPostPlan').val(response);
-                toastr.options = {
-                    "closeButton": false,
-                    "debug": false,
-                    "newestOnTop": false,
-                    "progressBar": false,
-                    "positionClass": "toast-top-right",
-                    "preventDuplicates": false,
-                    "onclick": null,
-                    "showDuration": "3000",
-                    "hideDuration": "1000",
-                    "timeOut": "5000",
-                    "extendedTimeOut": "1000",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut"
-                };
-
-                toastr.success("El documento se actualizo correctamente", "Información");
-                setTimeout(function () {
-                    location.reload();
-                }, 3000);
-
-            },
-            error: function (file, response) {
-                $('body').loading({
-                    start: false,
-                });
-                toastr.options = {
-                    "closeButton": false,
-                    "debug": false,
-                    "newestOnTop": false,
-                    "progressBar": false,
-                    "positionClass": "toast-top-right",
-                    "preventDuplicates": false,
-                    "onclick": null,
-                    "showDuration": "3000",
-                    "hideDuration": "1000",
-                    "timeOut": "5000",
-                    "extendedTimeOut": "1000",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut"
-                };
-
-                toastr.warning("El documento no se cargó correctamente, inténtalo más tarde", "Información");
-            }
-
-        });
-
-        /* eventos para subir la imagen o pdf del beneficiario */
-        new Dropzone('.file-image-document-beneficiario-frente', {
-            url: '{{ route('upload.image.document') }}',
-            acceptedFiles: "image/*",
-            maxFiles: 1,
-            paramName: 'file',
-            headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            },
-            processing: function (file, response) {
-                $('body').loading({
-                    message: 'Subiendo documento...',
-                    start: true,
-                });
-            },
-            success: function (file, response) {
-                $("input[name='beneficiario[urlImageDocumentFrente]']").val(response);
-                $('body').loading({
-
-                    start: false,
-                });
-            },
-            error: function (file, response) {
-                $('body').loading({
-                    start: false,
-                });
-                toastr.options = {
-                    "closeButton": false,
-                    "debug": false,
-                    "newestOnTop": false,
-                    "progressBar": false,
-                    "positionClass": "toast-top-right",
-                    "preventDuplicates": false,
-                    "onclick": null,
-                    "showDuration": "3000",
-                    "hideDuration": "1000",
-                    "timeOut": "5000",
-                    "extendedTimeOut": "1000",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut"
-                };
-
-                toastr.warning("El documento no se cargó correctamente, inténtalo más tarde", "Información");
-            }
-        });
-        new Dropzone('.file-image-document-beneficiario-atras', {
-            url: '{{ route('upload.image.document') }}',
-            acceptedFiles: "image/*",
-            maxFiles: 1,
-            paramName: 'file',
-            headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            },
-            processing: function (file, response) {
-                $('body').loading({
-                    message: 'Subiendo documento...',
-                    start: true,
-                });
-            },
-            success: function (file, response) {
-                $("input[name='beneficiario[urlImageDocumentAtras]']").val(response);
-                $('body').loading({
-
-                    start: false,
-                });
-            },
-            error: function (file, response) {
-                $('body').loading({
-                    start: false,
-                });
-                toastr.options = {
-                    "closeButton": false,
-                    "debug": false,
-                    "newestOnTop": false,
-                    "progressBar": false,
-                    "positionClass": "toast-top-right",
-                    "preventDuplicates": false,
-                    "onclick": null,
-                    "showDuration": "3000",
-                    "hideDuration": "1000",
-                    "timeOut": "5000",
-                    "extendedTimeOut": "1000",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut"
-                };
-
-                toastr.warning("El documento no se cargó correctamente, inténtalo más tarde", "Información");
-            }
-        });
-        // evento del boton enviar imagenes beneficiario
-        $('#btn_enviar_ben').click(function (e) {
-            e.preventDefault();
-
-            if ($("input[name='beneficiario[urlImageDocumentAtras]']").val() != "" && $("input[name='beneficiario[urlImageDocumentFrente]']").val() != "") {
-                $('#form_update_img_ben').submit();
-                swal({
-                    "title": "",
-                    "text": 'Cargado correctamente',
-                    "type": "success",
-                    "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
-                }).then((result) => {
-                    if (result.value) {
-
-                        document.location.reload();
-                    }
-                });
-            } else {
-                swal({
-                    "title": "",
-                    "text": 'Debe cargar las dos imagenes del documento',
-                    "type": "error",
-                    "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
-                }).then((result) => {
-                    // document.location.reload();
-                });
-            }
-
-
-        });
-    </script>
-
-    <script>
-        // controles para editar documentos de los grupos
-        function changeOptionDocument(element, member) {
-            // console.log($(element).val(),'element');
-            // console.log(member,'menber');
-            if ($(element).val() === '1') {
-                $(`#image-docuemnt-team${member}`).show();
-                $(`.enviar_team${member}`).show();
-                $(`#pdf-docuemnt-team${member}`).hide();
-            } else {
-                $(`#image-docuemnt-team${member}`).hide();
-                $(`#pdf-docuemnt-team${member}`).show();
-                $(`.enviar_team${member}`).hide();
-            }
-        }
-
-        $.each( @json($artist->artists[0]->teams), function (key, value) {
-
-            $('.update_pdf_team' + (key + 1)).click(function () {
-                $(this).hide();
-                $('.cancel_pdf_team' + (key + 1)).show();
-                $(".enviar_team" + (key + 1)).show();
-
-                $('.drop_pdf_team' + (key + 1)).show();
-                $('.pdfidentificacion' + (key + 1)).hide();
-
-
-            });
-            $('.cancel_pdf_team' + (key + 1)).click(function () {
-                $(this).hide();
-                $('.update_pdf_team' + (key + 1)).show();
-                $('.drop_pdf_team' + (key + 1)).hide();
-                $('.pdfidentificacion' + (key + 1)).show();
-                $(".enviar_team" + (key + 1)).hide();
-
-
-            });
-
-        });
-
-        // dropzone para actulizar pdf de un intrgrante del grupo
-        $.each( @json($artist->artists[0]->teams), function (key, value) {
-            // actualizar pdf team
-            new Dropzone('.dropzone-team' + (key + 1), {
-                url: '{{ route('cedula.pdf.team') }}',
-                acceptedFiles: '.pdf',
-                maxFiles: 1,
-                paramName: 'pdf_cedula_name',
-                headers: {
-                    'id': value.id,
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                },
-                addedfile: function (file, response) {
-                    $('body').loading({
-                        message: 'Subiendo documento...',
-                        start: true,
-                    });
-                },
-                success: function (file, response) {
-
-                    $('#inputImagenesPostPlan').val(response);
-                    // location.reload();
-                    toastr.options = {
-                        "closeButton": false,
-                        "debug": false,
-                        "newestOnTop": false,
-                        "progressBar": false,
-                        "positionClass": "toast-top-right",
-                        "preventDuplicates": false,
-                        "onclick": null,
-                        "showDuration": "3000",
-                        "hideDuration": "1000",
-                        "timeOut": "5000",
-                        "extendedTimeOut": "1000",
-                        "showEasing": "swing",
-                        "hideEasing": "linear",
-                        "showMethod": "fadeIn",
-                        "hideMethod": "fadeOut"
-                    };
-
-                    toastr.success("El documento se actualizo correctamente", "Información");
-                    setTimeout(function () {
-                        location.reload();
-                    }, 3000);
-                },
-                error: function (file, response) {
-                    $('body').loading({
-                        start: false,
-                    });
-                    toastr.options = {
-                        "closeButton": false,
-                        "debug": false,
-                        "newestOnTop": false,
-                        "progressBar": false,
-                        "positionClass": "toast-top-right",
-                        "preventDuplicates": false,
-                        "onclick": null,
-                        "showDuration": "3000",
-                        "hideDuration": "1000",
-                        "timeOut": "5000",
-                        "extendedTimeOut": "1000",
-                        "showEasing": "swing",
-                        "hideEasing": "linear",
-                        "showMethod": "fadeIn",
-                        "hideMethod": "fadeOut"
-                    };
-
-                    toastr.warning("El documento no se cargó correctamente, inténtalo más tarde", "Información");
-                }
-
-            });
-
-            /* eventos para subir la imagen del team */
-            new Dropzone('.file-image-document-team-frente' + (key + 1), {
-                url: '{{ route('upload.image.document') }}',
-                acceptedFiles: "image/*",
-                maxFiles: 1,
-                paramName: 'file',
-                headers: {
-
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                },
-                processing: function (file, response) {
-                    $('body').loading({
-                        message: 'Subiendo documento...',
-                        start: true,
-                    });
-                },
-                success: function (file, response) {
-                    $("input[name='team[urlImageDocumentFrente]" + (key + 1) + "']").val(response);
-                    $('body').loading({
-
-                        start: false,
-                    });
-                },
-                error: function (file, response) {
-                    $('body').loading({
-                        start: false,
-                    });
-                    toastr.options = {
-                        "closeButton": false,
-                        "debug": false,
-                        "newestOnTop": false,
-                        "progressBar": false,
-                        "positionClass": "toast-top-right",
-                        "preventDuplicates": false,
-                        "onclick": null,
-                        "showDuration": "3000",
-                        "hideDuration": "1000",
-                        "timeOut": "5000",
-                        "extendedTimeOut": "1000",
-                        "showEasing": "swing",
-                        "hideEasing": "linear",
-                        "showMethod": "fadeIn",
-                        "hideMethod": "fadeOut"
-                    };
-
-                    toastr.warning("El documento no se cargó correctamente, inténtalo más tarde", "Información");
-                }
-            });
-
-            new Dropzone('.file-image-document-team-atras' + (key + 1), {
-                url: '{{ route('upload.image.document') }}',
-                acceptedFiles: "image/*",
-                maxFiles: 1,
-                paramName: 'file',
-                headers: {
-
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                },
-                processing: function (file, response) {
-                    $('body').loading({
-                        message: 'Subiendo documento...',
-                        start: true,
-                    });
-                },
-                success: function (file, response) {
-                    $("input[name='team[urlImageDocumentAtras]" + (key + 1) + "']").val(response);
-                    $('body').loading({
-
-                        start: false,
-                    });
-                },
-                error: function (file, response) {
-                    $('body').loading({
-                        start: false,
-                    });
-                    toastr.options = {
-                        "closeButton": false,
-                        "debug": false,
-                        "newestOnTop": false,
-                        "progressBar": false,
-                        "positionClass": "toast-top-right",
-                        "preventDuplicates": false,
-                        "onclick": null,
-                        "showDuration": "3000",
-                        "hideDuration": "1000",
-                        "timeOut": "5000",
-                        "extendedTimeOut": "1000",
-                        "showEasing": "swing",
-                        "hideEasing": "linear",
-                        "showMethod": "fadeIn",
-                        "hideMethod": "fadeOut"
-                    };
-
-                    toastr.warning("El documento no se cargó correctamente, inténtalo más tarde", "Información");
-                }
-            });
-        });
-
-
-        // evento ddel boton enviar imagenes team
-
-        $.each( @json($artist->artists[0]->teams), function (key, value) {
-            $('#btn_enviar_team' + (key + 1)).click(function (e) {
-                e.preventDefault();
-
-
-                if ($("input[name='team[urlImageDocumentAtras]" + (key + 1) + "']").val() != "" && $("input[name='team[urlImageDocumentFrente]" + (key + 1) + "']").val() != "") {
-                    $('#form_update_img_team' + (key + 1)).submit();
-                    swal({
-                        "title": "",
-                        "text": 'Cargado correctamente',
-                        "type": "success",
-                        "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
-                    }).then((result) => {
-                        if (result.value) {
-
-                            //    document.location.reload();
-                        }
-                    });
-                } else {
-                    swal({
-                        "title": "",
-                        "text": 'Debe cargar las dos imagenes del documento',
-                        "type": "error",
-                        "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
-                    }).then((result) => {
-                        // document.location.reload();
-                    });
-                }
-
-
-            });
-        });
-
-        // controles actualizar soporte
-        $('.update_pdf_soporte').click(function () {
-            $(this).hide();
-            $('.cancel_pdf_soporte').show();
-
-            $('.drop_soporte').show();
-            $('.btn_pdf_soporte').hide();
-
-
-        });
-        $('.cancel_pdf_soporte').click(function () {
-            $(this).hide();
-            $('.update_pdf_soporte').show();
-            $('.drop_soporte').hide();
-            $('.btn_pdf_soporte').show();
-
-
-        });
-
-        new Dropzone('.dropzone-soporte', {
-            url: '{{ route('soporte.aspirante.gestor') }}',
-            acceptedFiles: '.pdf',
-            maxFiles: 1,
-            paramName: 'doc',
-            headers: {
-                'idAspirante': idAspirante,
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            },
-            addedfile: function (file, response) {
-                $('body').loading({
-                    message: 'Subiendo documento...',
-                    start: true,
-                });
-            },
-            success: function (file, response) {
-
-                $('#inputImagenesPostPlan').val(response);
-                toastr.options = {
-                    "closeButton": false,
-                    "debug": false,
-                    "newestOnTop": false,
-                    "progressBar": false,
-                    "positionClass": "toast-top-right",
-                    "preventDuplicates": false,
-                    "onclick": null,
-                    "showDuration": "3000",
-                    "hideDuration": "1000",
-                    "timeOut": "5000",
-                    "extendedTimeOut": "1000",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut"
-                };
-
-                toastr.success("El documento se actualizo correctamente", "Información");
-                setTimeout(function () {
-                    location.reload();
-                }, 3000);
-
-            },
-            error: function (file, response) {
-                $('body').loading({
-                    start: false,
-                });
-                toastr.options = {
-                    "closeButton": false,
-                    "debug": false,
-                    "newestOnTop": false,
-                    "progressBar": false,
-                    "positionClass": "toast-top-right",
-                    "preventDuplicates": false,
-                    "onclick": null,
-                    "showDuration": "3000",
-                    "hideDuration": "1000",
-                    "timeOut": "5000",
-                    "extendedTimeOut": "1000",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut"
-                };
-
-                toastr.warning("El documento no se cargó correctamente, inténtalo más tarde", "Información");
-            }
-
-        });
-
-
-
-
-
-    </script>
-
-
-
-@endsection
-@section('js.add-project')
-
-    <script>
-        var dropzone = new Dropzone('.dropzone-audio', {
-            url: '{{route('update.audio')}}',
-            acceptedFiles: '.mp3',
-            addRemoveLinks: true,
-            maxFiles: 1,
-            paramName: 'audio',
-            headers: {
-                'idproject':@json($project->id),
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            },
-            addedfile: function (file, response) {
-                $('body').loading({
-                    message: 'Subiendo canción...',
-                    start: true,
-                });
-                // this.success();
-            },
-            success: function (file, response) {
-
-                $("#erroresImagen").text('');
-                $('#inputDBAudioAddProject').val(response);
-                $('#img_add_proyect').attr('src', response);
-                $('.update_audio').show();
-                $('.drop_audio').hide();
-                $('.player').show();
-                $('.cancel_audio').hide();
-
-                toastr.options = {
-                    "closeButton": false,
-                    "debug": false,
-                    "newestOnTop": false,
-                    "progressBar": false,
-                    "positionClass": "toast-top-right",
-                    "preventDuplicates": false,
-                    "onclick": null,
-                    "showDuration": "3000",
-                    "hideDuration": "1000",
-                    "timeOut": "5000",
-                    "extendedTimeOut": "1000",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut"
-                };
-
-                toastr.success("El audio se actualizo correctamente", "Información");
-                window.location.reload();
-            },
-            error: function (file, e, i, o, u) {
-
-                if (file.accepted == false) {
-                    toastr.options = {
-                        "closeButton": false,
-                        "debug": false,
-                        "newestOnTop": false,
-                        "progressBar": false,
-                        "positionClass": "toast-top-right",
-                        "preventDuplicates": false,
-                        "onclick": null,
-                        "showDuration": "3000",
-                        "hideDuration": "1000",
-                        "timeOut": "5000",
-                        "extendedTimeOut": "1000",
-                        "showEasing": "swing",
-                        "hideEasing": "linear",
-                        "showMethod": "fadeIn",
-                        "hideMethod": "fadeOut"
-                    };
-
-                    toastr.warning("Formato de audio incorrecto, solo se acepta formato mp3", "Información");
-                    // alert('asi no pri')
-                } else {
-                    toastr.options = {
-                        "closeButton": false,
-                        "debug": false,
-                        "newestOnTop": false,
-                        "progressBar": false,
-                        "positionClass": "toast-top-right",
-                        "preventDuplicates": false,
-                        "onclick": null,
-                        "showDuration": "3000",
-                        "hideDuration": "1000",
-                        "timeOut": "5000",
-                        "extendedTimeOut": "1000",
-                        "showEasing": "swing",
-                        "hideEasing": "linear",
-                        "showMethod": "fadeIn",
-                        "hideMethod": "fadeOut"
-                    };
-
-                    toastr.warning("El audio no se cargó correctamente, inténtalo más tarde", "Información");
-                }
-
-
-                $('body').loading({
-                    start: false,
-                });
-
-
-                $("#erroresImagen").text('');
-                if (file.xhr.status === 413) {
-                    $("#erroresImagen").text('{{__("imagen_grande")}}');
-                    $(file.previewElement).addClass("dz-error").find('.dz-error-message').text('{{__("imagen_grande")}}');
-                    setTimeout(() => {
-                        dropzone.removeFile(file)
-                    }, 1000)
-                }
-            }
-        });
-        // dropzone.on("addedfile", function (file) {
-        //     file.previewElement.addEventListener("click", function () {
-        //         dropzone.removeFile(file);
-        //     });
-        // });
-        Dropzone.autoDiscover = false;
-
-
-    </script>
+                                            }
+                                        },
+                                        {
+                                            render: function (data, type, JsonResultRow, meta) {
+                                                if (JsonResultRow.comment === null) {
+                                                    return "{{ __('nigun_valor_defecto') }}";
+                                                }
+                                                return `<div class="text-center"><a onclick='mostrarComentario("${JsonResultRow.comment}")' class="btn m-btn--pill btn-secondary"><i class="fa fa-envelope"></i></a></div>`;
+                                            }
+                                        },
+                                        {
+                                            render: function (data, type, JsonResultRow, meta) {
+                                                return '<div class="text-center"><a href="/dashboard/profile-managament/' + JsonResultRow.users.slug + '" class="btn m-btn--pill btn-secondary"><i class="fa fa-eye"></i></a></div>'
+                                            }
+                                        },
+                                    ],
+                                    "language": {
+                                        "sProcessing": "{{__('procesando')}}",
+                                        "sLengthMenu": "{{__('mostrar')}} _MENU_ {{__('registros')}}",
+                                        "sZeroRecords": "No se encontraron resultados",
+                                        "sEmptyTable": "{{__('nigun_dato_tabla')}}",
+                                        "sInfo": "{{__('mostrando_registros') }} _START_ {{__('from')}} _END_ {{__('total_de')}} _TOTAL_ {{__('registros')}}",
+                                        "sInfoEmpty": "{{ __('mostrando_registros_del_cero') }}",
+                                        "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                                        "sInfoPostFix": "",
+                                        "sSearch": "{{__('buscar')}}:",
+                                        "sUrl": "",
+                                        "sInfoThousands": ",",
+                                        "sLoadingRecords": "{{__('cargando')}}",
+                                        "oPaginate": {
+                                            "sFirst": "Primero",
+                                            "sLast": "Último",
+                                            "sNext": "{{__('siguiente')}}",
+                                            "sPrevious": "{{__('anterior')}}"
+                                        },
+                                        "oAria": {
+                                            "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                                            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                                        }
+                                    }
+                                });
+
+
+                                $('#table_teams').DataTable({
+                                    "processing": true,
+                                    "serverSide": true,
+                                    "data": null,
+                                    "ajax": "{{ route('team-artist',$project->id) }}",
+                                    "columns": [
+                                        {
+                                            data: 'name',
+                                            defaultContent: '<span class="label label-danger text-center">{{ __('nigun_valor_defecto') }}</span>'
+                                        },
+                                        {
+                                            data: 'role',
+                                            defaultContent: '<span class="label label-danger text-center">{{ __('nigun_valor_defecto') }}</span>'
+                                        },
+                                    ],
+                                    "language": {
+                                        "sProcessing": "{{__('procesando')}}",
+                                        "sLengthMenu": "{{__('mostrar')}} _MENU_ {{__('registros')}}",
+                                        "sZeroRecords": "No se encontraron resultados",
+                                        "sEmptyTable": "{{__('nigun_dato_tabla')}}",
+                                        "sInfo": "{{__('mostrando_registros') }} _START_ {{__('from')}} _END_ {{__('total_de')}} _TOTAL_ {{__('registros')}}",
+                                        "sInfoEmpty": "{{ __('mostrando_registros_del_cero') }}",
+                                        "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                                        "sInfoPostFix": "",
+                                        "sSearch": "{{__('buscar')}}:",
+                                        "sUrl": "",
+                                        "sInfoThousands": ",",
+                                        "sLoadingRecords": "{{__('cargando')}}",
+                                        "oPaginate": {
+                                            "sFirst": "Primero",
+                                            "sLast": "Último",
+                                            "sNext": "{{__('siguiente')}}",
+                                            "sPrevious": "{{__('anterior')}}"
+                                        },
+                                        "oAria": {
+                                            "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                                            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                                        }
+                                    }
+                                });
+                            </script>
+                            <script>
+                                // contorles para la actualización del audio
+                                $('.update_audio').click(function () {
+
+                                    $(this).hide();
+                                    $('.cancel_audio').show();
+
+                                    $('.drop_audio').show();
+                                    $('.player').hide();
+
+
+                                });
+                                $('.cancel_audio').click(function () {
+                                    $(this).hide();
+                                    $('.update_audio').show();
+                                    $('.drop_audio').hide();
+                                    $('.player').show();
+
+
+                                });
+
+                                // controles actualizar documentos aspirante
+                                $("input[name='aspirante[identificacionDoc]']").click(() => {
+                                    if ($('input:radio[name="aspirante[identificacionDoc]"]:checked').val() === '1') {
+                                        $("#image-docuemnt-aspirante").show();
+                                        $(".enviar_asp").show();
+                                        $("#pdf-docuemnt-aspirante").hide();
+                                    } else {
+                                        $("#image-docuemnt-aspirante").hide();
+                                        $(".enviar_asp").hide();
+                                        $("#pdf-docuemnt-aspirante").show();
+                                    }
+                                });
+                                $('.update_pdf_asp').click(function () {
+                                    $(this).hide();
+                                    $('.cancel_pdf_asp').show();
+                                    $(".enviar_asp").show();
+                                    $('.drop_pdf_asp').show();
+                                    $('.ver_pdf_aspirante').hide();
+
+
+                                });
+                                $('.cancel_pdf_asp').click(function () {
+                                    $(this).hide();
+                                    $('.update_pdf_asp').show();
+                                    $('.drop_pdf_asp').hide();
+                                    $(".enviar_asp").hide();
+                                    $('.ver_pdf_aspirante').show();
+
+
+                                });
+
+                                /* eventos para subir la imagen o pdf del aspirante */
+                                new Dropzone('.file-image-document-aspirante-frente', {
+                                    url: '{{ route('upload.image.document') }}',
+                                    acceptedFiles: "image/*",
+                                    maxFiles: 1,
+                                    paramName: 'file',
+                                    headers: {
+                                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                    },
+                                    processing: function (file, response) {
+                                        $('body').loading({
+                                            message: 'Subiendo documento...',
+                                            start: true,
+                                        });
+                                    },
+                                    success: function (file, response) {
+                                        $("input[name='aspirante[urlImageDocumentFrente]']").val(response);
+                                        $('body').loading({
+
+                                            start: false,
+                                        });
+                                    },
+                                    error: function (file, response) {
+                                        $('body').loading({
+                                            start: false,
+                                        });
+                                        toastr.options = {
+                                            "closeButton": false,
+                                            "debug": false,
+                                            "newestOnTop": false,
+                                            "progressBar": false,
+                                            "positionClass": "toast-top-right",
+                                            "preventDuplicates": false,
+                                            "onclick": null,
+                                            "showDuration": "3000",
+                                            "hideDuration": "1000",
+                                            "timeOut": "5000",
+                                            "extendedTimeOut": "1000",
+                                            "showEasing": "swing",
+                                            "hideEasing": "linear",
+                                            "showMethod": "fadeIn",
+                                            "hideMethod": "fadeOut"
+                                        };
+
+                                        toastr.warning("El documento no se cargó correctamente, inténtalo más tarde", "Información");
+                                    }
+                                });
+                                new Dropzone('.file-image-document-aspirante-atras', {
+                                    url: '{{ route('upload.image.document') }}',
+                                    acceptedFiles: "image/*",
+                                    maxFiles: 1,
+                                    paramName: 'file',
+                                    headers: {
+                                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                    },
+                                    processing: function (file, response) {
+                                        $('body').loading({
+                                            message: 'Subiendo documento...',
+                                            start: true,
+                                        });
+                                    },
+                                    success: function (file, response) {
+                                        $("input[name='aspirante[urlImageDocumentAtras]']").val(response);
+                                        $('body').loading({
+
+                                            start: false,
+                                        });
+                                    },
+                                    error: function (file, response) {
+                                        $('body').loading({
+                                            start: false,
+                                        });
+                                        toastr.options = {
+                                            "closeButton": false,
+                                            "debug": false,
+                                            "newestOnTop": false,
+                                            "progressBar": false,
+                                            "positionClass": "toast-top-right",
+                                            "preventDuplicates": false,
+                                            "onclick": null,
+                                            "showDuration": "3000",
+                                            "hideDuration": "1000",
+                                            "timeOut": "5000",
+                                            "extendedTimeOut": "1000",
+                                            "showEasing": "swing",
+                                            "hideEasing": "linear",
+                                            "showMethod": "fadeIn",
+                                            "hideMethod": "fadeOut"
+                                        };
+
+                                        toastr.warning("El documento no se cargó correctamente, inténtalo más tarde", "Información");
+                                    }
+                                });
+
+                                var id =@json($artist->artists[0]);
+                                var idAspirante = -1;
+                                if (id.length != 0) {
+
+                                    idAspirante = id.user_id;
+                                }
+
+                                new Dropzone('.dropzone', {
+                                    url: '{{ route('cedula.pdf.aspirante.gestor') }}',
+                                    acceptedFiles: '.pdf',
+                                    maxFiles: 1,
+                                    paramName: 'pdf_cedula_name',
+                                    headers: {
+                                        'idAspirante': idAspirante,
+                                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                    },
+                                    addedfile: function (file, response) {
+                                        $('body').loading({
+                                            message: 'Subiendo documento...',
+                                            start: true,
+                                        });
+                                    },
+                                    success: function (file, response) {
+
+                                        $('#inputImagenesPostPlan').val(response);
+                                        toastr.options = {
+                                            "closeButton": false,
+                                            "debug": false,
+                                            "newestOnTop": false,
+                                            "progressBar": false,
+                                            "positionClass": "toast-top-right",
+                                            "preventDuplicates": false,
+                                            "onclick": null,
+                                            "showDuration": "3000",
+                                            "hideDuration": "1000",
+                                            "timeOut": "5000",
+                                            "extendedTimeOut": "1000",
+                                            "showEasing": "swing",
+                                            "hideEasing": "linear",
+                                            "showMethod": "fadeIn",
+                                            "hideMethod": "fadeOut"
+                                        };
+
+                                        toastr.success("El documento se actualizo correctamente", "Información");
+                                        setTimeout(function () {
+                                            location.reload();
+                                        }, 3000);
+                                    },
+                                    error: function (file, response) {
+                                        $('body').loading({
+                                            start: false,
+                                        });
+                                        toastr.options = {
+                                            "closeButton": false,
+                                            "debug": false,
+                                            "newestOnTop": false,
+                                            "progressBar": false,
+                                            "positionClass": "toast-top-right",
+                                            "preventDuplicates": false,
+                                            "onclick": null,
+                                            "showDuration": "3000",
+                                            "hideDuration": "1000",
+                                            "timeOut": "5000",
+                                            "extendedTimeOut": "1000",
+                                            "showEasing": "swing",
+                                            "hideEasing": "linear",
+                                            "showMethod": "fadeIn",
+                                            "hideMethod": "fadeOut"
+                                        };
+
+                                        toastr.warning("El documento no se cargó correctamente, inténtalo más tarde", "Información");
+                                    }
+
+                                });
+                                // evento ddel boton enviar imagenes aspirante
+                                $('#btn_enviar_asp').click(function (e) {
+                                    e.preventDefault();
+
+                                    if ($("input[name='aspirante[urlImageDocumentAtras]']").val() != "" && $("input[name='aspirante[urlImageDocumentFrente]']").val() != "") {
+                                        $('#form_update_img').submit();
+                                        swal({
+                                            "title": "",
+                                            "text": 'Cargado correctamente',
+                                            "type": "success",
+                                            "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
+                                        }).then((result) => {
+                                            if (result.value) {
+
+                                                // document.location.reload();
+                                            }
+                                        });
+                                    } else {
+                                        swal({
+                                            "title": "",
+                                            "text": 'Debe cargar las dos imagenes del documento',
+                                            "type": "error",
+                                            "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
+                                        }).then((result) => {
+                                            // document.location.reload();
+                                        });
+                                    }
+
+
+                                });
+
+                            </script>
+
+                            <script>
+                                // controles de actualizar documentos del beneficiario
+                                $("input[name='beneficiario[identificacionDoc]']").click(() => {
+                                    if ($('input:radio[name="beneficiario[identificacionDoc]"]:checked').val() === '1') {
+                                        $("#image-docuemnt-beneficiario").show();
+                                        $(".enviar_ben").show();
+                                        $("#pdf-docuemnt-beneficiario").hide();
+                                    } else {
+                                        $("#image-docuemnt-beneficiario").hide();
+                                        $(".enviar_ben").hide();
+                                        $("#pdf-docuemnt-beneficiario").show();
+                                    }
+                                });
+                                $('.update_pdf_ben').click(function () {
+                                    $(this).hide();
+                                    $('.cancel_pdf_ben').show();
+                                    $(".enviar_ben").show();
+                                    $('.drop_pdf_ben').show();
+                                    $('.ver_pdf-ben').hide();
+
+
+                                });
+                                $('.cancel_pdf_ben').click(function () {
+                                    $(this).hide();
+                                    $('.update_pdf_ben').show();
+                                    $('.drop_pdf_ben').hide();
+                                    $('.ver_pdf-ben').show();
+                                    $(".enviar_ben").hide();
+
+
+                                });
+
+                                // actualizar pdf beneficiario
+                                new Dropzone('.dropzone-ben', {
+                                    url: '{{ route('cedula.pdf.beneficiario.gestor') }}',
+                                    acceptedFiles: '.pdf',
+                                    maxFiles: 1,
+                                    paramName: 'pdf_cedula_name',
+                                    headers: {
+                                        'idAspirante': idAspirante,
+                                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                    },
+                                    addedfile: function (file, response) {
+                                        $('body').loading({
+                                            message: 'Subiendo documento...',
+                                            start: true,
+                                        });
+                                    },
+                                    success: function (file, response) {
+
+                                        $('#inputImagenesPostPlan').val(response);
+                                        toastr.options = {
+                                            "closeButton": false,
+                                            "debug": false,
+                                            "newestOnTop": false,
+                                            "progressBar": false,
+                                            "positionClass": "toast-top-right",
+                                            "preventDuplicates": false,
+                                            "onclick": null,
+                                            "showDuration": "3000",
+                                            "hideDuration": "1000",
+                                            "timeOut": "5000",
+                                            "extendedTimeOut": "1000",
+                                            "showEasing": "swing",
+                                            "hideEasing": "linear",
+                                            "showMethod": "fadeIn",
+                                            "hideMethod": "fadeOut"
+                                        };
+
+                                        toastr.success("El documento se actualizo correctamente", "Información");
+                                        setTimeout(function () {
+                                            location.reload();
+                                        }, 3000);
+
+                                    },
+                                    error: function (file, response) {
+                                        $('body').loading({
+                                            start: false,
+                                        });
+                                        toastr.options = {
+                                            "closeButton": false,
+                                            "debug": false,
+                                            "newestOnTop": false,
+                                            "progressBar": false,
+                                            "positionClass": "toast-top-right",
+                                            "preventDuplicates": false,
+                                            "onclick": null,
+                                            "showDuration": "3000",
+                                            "hideDuration": "1000",
+                                            "timeOut": "5000",
+                                            "extendedTimeOut": "1000",
+                                            "showEasing": "swing",
+                                            "hideEasing": "linear",
+                                            "showMethod": "fadeIn",
+                                            "hideMethod": "fadeOut"
+                                        };
+
+                                        toastr.warning("El documento no se cargó correctamente, inténtalo más tarde", "Información");
+                                    }
+
+                                });
+
+                                /* eventos para subir la imagen o pdf del beneficiario */
+                                new Dropzone('.file-image-document-beneficiario-frente', {
+                                    url: '{{ route('upload.image.document') }}',
+                                    acceptedFiles: "image/*",
+                                    maxFiles: 1,
+                                    paramName: 'file',
+                                    headers: {
+                                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                    },
+                                    processing: function (file, response) {
+                                        $('body').loading({
+                                            message: 'Subiendo documento...',
+                                            start: true,
+                                        });
+                                    },
+                                    success: function (file, response) {
+                                        $("input[name='beneficiario[urlImageDocumentFrente]']").val(response);
+                                        $('body').loading({
+
+                                            start: false,
+                                        });
+                                    },
+                                    error: function (file, response) {
+                                        $('body').loading({
+                                            start: false,
+                                        });
+                                        toastr.options = {
+                                            "closeButton": false,
+                                            "debug": false,
+                                            "newestOnTop": false,
+                                            "progressBar": false,
+                                            "positionClass": "toast-top-right",
+                                            "preventDuplicates": false,
+                                            "onclick": null,
+                                            "showDuration": "3000",
+                                            "hideDuration": "1000",
+                                            "timeOut": "5000",
+                                            "extendedTimeOut": "1000",
+                                            "showEasing": "swing",
+                                            "hideEasing": "linear",
+                                            "showMethod": "fadeIn",
+                                            "hideMethod": "fadeOut"
+                                        };
+
+                                        toastr.warning("El documento no se cargó correctamente, inténtalo más tarde", "Información");
+                                    }
+                                });
+                                new Dropzone('.file-image-document-beneficiario-atras', {
+                                    url: '{{ route('upload.image.document') }}',
+                                    acceptedFiles: "image/*",
+                                    maxFiles: 1,
+                                    paramName: 'file',
+                                    headers: {
+                                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                    },
+                                    processing: function (file, response) {
+                                        $('body').loading({
+                                            message: 'Subiendo documento...',
+                                            start: true,
+                                        });
+                                    },
+                                    success: function (file, response) {
+                                        $("input[name='beneficiario[urlImageDocumentAtras]']").val(response);
+                                        $('body').loading({
+
+                                            start: false,
+                                        });
+                                    },
+                                    error: function (file, response) {
+                                        $('body').loading({
+                                            start: false,
+                                        });
+                                        toastr.options = {
+                                            "closeButton": false,
+                                            "debug": false,
+                                            "newestOnTop": false,
+                                            "progressBar": false,
+                                            "positionClass": "toast-top-right",
+                                            "preventDuplicates": false,
+                                            "onclick": null,
+                                            "showDuration": "3000",
+                                            "hideDuration": "1000",
+                                            "timeOut": "5000",
+                                            "extendedTimeOut": "1000",
+                                            "showEasing": "swing",
+                                            "hideEasing": "linear",
+                                            "showMethod": "fadeIn",
+                                            "hideMethod": "fadeOut"
+                                        };
+
+                                        toastr.warning("El documento no se cargó correctamente, inténtalo más tarde", "Información");
+                                    }
+                                });
+                                // evento del boton enviar imagenes beneficiario
+                                $('#btn_enviar_ben').click(function (e) {
+                                    e.preventDefault();
+
+                                    if ($("input[name='beneficiario[urlImageDocumentAtras]']").val() != "" && $("input[name='beneficiario[urlImageDocumentFrente]']").val() != "") {
+                                        $('#form_update_img_ben').submit();
+                                        swal({
+                                            "title": "",
+                                            "text": 'Cargado correctamente',
+                                            "type": "success",
+                                            "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
+                                        }).then((result) => {
+                                            if (result.value) {
+
+                                                document.location.reload();
+                                            }
+                                        });
+                                    } else {
+                                        swal({
+                                            "title": "",
+                                            "text": 'Debe cargar las dos imagenes del documento',
+                                            "type": "error",
+                                            "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
+                                        }).then((result) => {
+                                            // document.location.reload();
+                                        });
+                                    }
+
+
+                                });
+                            </script>
+
+                            <script>
+                                // controles para editar documentos de los grupos
+                                function changeOptionDocument(element, member) {
+                                    // console.log($(element).val(),'element');
+                                    // console.log(member,'menber');
+                                    if ($(element).val() === '1') {
+                                        $(`#image-docuemnt-team${member}`).show();
+                                        $(`.enviar_team${member}`).show();
+                                        $(`#pdf-docuemnt-team${member}`).hide();
+                                    } else {
+                                        $(`#image-docuemnt-team${member}`).hide();
+                                        $(`#pdf-docuemnt-team${member}`).show();
+                                        $(`.enviar_team${member}`).hide();
+                                    }
+                                }
+
+                                $.each( @json($artist->artists[0]->teams), function (key, value) {
+
+                                    $('.update_pdf_team' + (key + 1)).click(function () {
+                                        $(this).hide();
+                                        $('.cancel_pdf_team' + (key + 1)).show();
+                                        $(".enviar_team" + (key + 1)).show();
+
+                                        $('.drop_pdf_team' + (key + 1)).show();
+                                        $('.pdfidentificacion' + (key + 1)).hide();
+
+
+                                    });
+                                    $('.cancel_pdf_team' + (key + 1)).click(function () {
+                                        $(this).hide();
+                                        $('.update_pdf_team' + (key + 1)).show();
+                                        $('.drop_pdf_team' + (key + 1)).hide();
+                                        $('.pdfidentificacion' + (key + 1)).show();
+                                        $(".enviar_team" + (key + 1)).hide();
+
+
+                                    });
+
+                                });
+
+                                // dropzone para actulizar pdf de un intrgrante del grupo
+                                $.each( @json($artist->artists[0]->teams), function (key, value) {
+                                    // actualizar pdf team
+                                    new Dropzone('.dropzone-team' + (key + 1), {
+                                        url: '{{ route('cedula.pdf.team') }}',
+                                        acceptedFiles: '.pdf',
+                                        maxFiles: 1,
+                                        paramName: 'pdf_cedula_name',
+                                        headers: {
+                                            'id': value.id,
+                                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                        },
+                                        addedfile: function (file, response) {
+                                            $('body').loading({
+                                                message: 'Subiendo documento...',
+                                                start: true,
+                                            });
+                                        },
+                                        success: function (file, response) {
+
+                                            $('#inputImagenesPostPlan').val(response);
+                                            // location.reload();
+                                            toastr.options = {
+                                                "closeButton": false,
+                                                "debug": false,
+                                                "newestOnTop": false,
+                                                "progressBar": false,
+                                                "positionClass": "toast-top-right",
+                                                "preventDuplicates": false,
+                                                "onclick": null,
+                                                "showDuration": "3000",
+                                                "hideDuration": "1000",
+                                                "timeOut": "5000",
+                                                "extendedTimeOut": "1000",
+                                                "showEasing": "swing",
+                                                "hideEasing": "linear",
+                                                "showMethod": "fadeIn",
+                                                "hideMethod": "fadeOut"
+                                            };
+
+                                            toastr.success("El documento se actualizo correctamente", "Información");
+                                            setTimeout(function () {
+                                                location.reload();
+                                            }, 3000);
+                                        },
+                                        error: function (file, response) {
+                                            $('body').loading({
+                                                start: false,
+                                            });
+                                            toastr.options = {
+                                                "closeButton": false,
+                                                "debug": false,
+                                                "newestOnTop": false,
+                                                "progressBar": false,
+                                                "positionClass": "toast-top-right",
+                                                "preventDuplicates": false,
+                                                "onclick": null,
+                                                "showDuration": "3000",
+                                                "hideDuration": "1000",
+                                                "timeOut": "5000",
+                                                "extendedTimeOut": "1000",
+                                                "showEasing": "swing",
+                                                "hideEasing": "linear",
+                                                "showMethod": "fadeIn",
+                                                "hideMethod": "fadeOut"
+                                            };
+
+                                            toastr.warning("El documento no se cargó correctamente, inténtalo más tarde", "Información");
+                                        }
+
+                                    });
+
+                                    /* eventos para subir la imagen del team */
+                                    new Dropzone('.file-image-document-team-frente' + (key + 1), {
+                                        url: '{{ route('upload.image.document') }}',
+                                        acceptedFiles: "image/*",
+                                        maxFiles: 1,
+                                        paramName: 'file',
+                                        headers: {
+
+                                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                        },
+                                        processing: function (file, response) {
+                                            $('body').loading({
+                                                message: 'Subiendo documento...',
+                                                start: true,
+                                            });
+                                        },
+                                        success: function (file, response) {
+                                            $("input[name='team[urlImageDocumentFrente]" + (key + 1) + "']").val(response);
+                                            $('body').loading({
+
+                                                start: false,
+                                            });
+                                        },
+                                        error: function (file, response) {
+                                            $('body').loading({
+                                                start: false,
+                                            });
+                                            toastr.options = {
+                                                "closeButton": false,
+                                                "debug": false,
+                                                "newestOnTop": false,
+                                                "progressBar": false,
+                                                "positionClass": "toast-top-right",
+                                                "preventDuplicates": false,
+                                                "onclick": null,
+                                                "showDuration": "3000",
+                                                "hideDuration": "1000",
+                                                "timeOut": "5000",
+                                                "extendedTimeOut": "1000",
+                                                "showEasing": "swing",
+                                                "hideEasing": "linear",
+                                                "showMethod": "fadeIn",
+                                                "hideMethod": "fadeOut"
+                                            };
+
+                                            toastr.warning("El documento no se cargó correctamente, inténtalo más tarde", "Información");
+                                        }
+                                    });
+
+                                    new Dropzone('.file-image-document-team-atras' + (key + 1), {
+                                        url: '{{ route('upload.image.document') }}',
+                                        acceptedFiles: "image/*",
+                                        maxFiles: 1,
+                                        paramName: 'file',
+                                        headers: {
+
+                                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                        },
+                                        processing: function (file, response) {
+                                            $('body').loading({
+                                                message: 'Subiendo documento...',
+                                                start: true,
+                                            });
+                                        },
+                                        success: function (file, response) {
+                                            $("input[name='team[urlImageDocumentAtras]" + (key + 1) + "']").val(response);
+                                            $('body').loading({
+
+                                                start: false,
+                                            });
+                                        },
+                                        error: function (file, response) {
+                                            $('body').loading({
+                                                start: false,
+                                            });
+                                            toastr.options = {
+                                                "closeButton": false,
+                                                "debug": false,
+                                                "newestOnTop": false,
+                                                "progressBar": false,
+                                                "positionClass": "toast-top-right",
+                                                "preventDuplicates": false,
+                                                "onclick": null,
+                                                "showDuration": "3000",
+                                                "hideDuration": "1000",
+                                                "timeOut": "5000",
+                                                "extendedTimeOut": "1000",
+                                                "showEasing": "swing",
+                                                "hideEasing": "linear",
+                                                "showMethod": "fadeIn",
+                                                "hideMethod": "fadeOut"
+                                            };
+
+                                            toastr.warning("El documento no se cargó correctamente, inténtalo más tarde", "Información");
+                                        }
+                                    });
+                                });
+
+
+                                // evento ddel boton enviar imagenes team
+
+                                $.each( @json($artist->artists[0]->teams), function (key, value) {
+                                    $('#btn_enviar_team' + (key + 1)).click(function (e) {
+                                        e.preventDefault();
+
+
+                                        if ($("input[name='team[urlImageDocumentAtras]" + (key + 1) + "']").val() != "" && $("input[name='team[urlImageDocumentFrente]" + (key + 1) + "']").val() != "") {
+                                            $('#form_update_img_team' + (key + 1)).submit();
+                                            swal({
+                                                "title": "",
+                                                "text": 'Cargado correctamente',
+                                                "type": "success",
+                                                "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
+                                            }).then((result) => {
+                                                if (result.value) {
+
+                                                    //    document.location.reload();
+                                                }
+                                            });
+                                        } else {
+                                            swal({
+                                                "title": "",
+                                                "text": 'Debe cargar las dos imagenes del documento',
+                                                "type": "error",
+                                                "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
+                                            }).then((result) => {
+                                                // document.location.reload();
+                                            });
+                                        }
+
+
+                                    });
+                                });
+
+                                // controles actualizar soporte
+                                $('.update_pdf_soporte').click(function () {
+                                    $(this).hide();
+                                    $('.cancel_pdf_soporte').show();
+
+                                    $('.drop_soporte').show();
+                                    $('.btn_pdf_soporte').hide();
+
+
+                                });
+                                $('.cancel_pdf_soporte').click(function () {
+                                    $(this).hide();
+                                    $('.update_pdf_soporte').show();
+                                    $('.drop_soporte').hide();
+                                    $('.btn_pdf_soporte').show();
+
+
+                                });
+
+                                new Dropzone('.dropzone-soporte', {
+                                    url: '{{ route('soporte.aspirante.gestor') }}',
+                                    acceptedFiles: '.pdf',
+                                    maxFiles: 1,
+                                    paramName: 'doc',
+                                    headers: {
+                                        'idAspirante': idAspirante,
+                                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                    },
+                                    addedfile: function (file, response) {
+                                        $('body').loading({
+                                            message: 'Subiendo documento...',
+                                            start: true,
+                                        });
+                                    },
+                                    success: function (file, response) {
+
+                                        $('#inputImagenesPostPlan').val(response);
+                                        toastr.options = {
+                                            "closeButton": false,
+                                            "debug": false,
+                                            "newestOnTop": false,
+                                            "progressBar": false,
+                                            "positionClass": "toast-top-right",
+                                            "preventDuplicates": false,
+                                            "onclick": null,
+                                            "showDuration": "3000",
+                                            "hideDuration": "1000",
+                                            "timeOut": "5000",
+                                            "extendedTimeOut": "1000",
+                                            "showEasing": "swing",
+                                            "hideEasing": "linear",
+                                            "showMethod": "fadeIn",
+                                            "hideMethod": "fadeOut"
+                                        };
+
+                                        toastr.success("El documento se actualizo correctamente", "Información");
+                                        setTimeout(function () {
+                                            location.reload();
+                                        }, 3000);
+
+                                    },
+                                    error: function (file, response) {
+                                        $('body').loading({
+                                            start: false,
+                                        });
+                                        toastr.options = {
+                                            "closeButton": false,
+                                            "debug": false,
+                                            "newestOnTop": false,
+                                            "progressBar": false,
+                                            "positionClass": "toast-top-right",
+                                            "preventDuplicates": false,
+                                            "onclick": null,
+                                            "showDuration": "3000",
+                                            "hideDuration": "1000",
+                                            "timeOut": "5000",
+                                            "extendedTimeOut": "1000",
+                                            "showEasing": "swing",
+                                            "hideEasing": "linear",
+                                            "showMethod": "fadeIn",
+                                            "hideMethod": "fadeOut"
+                                        };
+
+                                        toastr.warning("El documento no se cargó correctamente, inténtalo más tarde", "Información");
+                                    }
+
+                                });
+
+
+                            </script>
+
+
+
+                        @endsection
+                        @section('js.add-project')
+
+                            <script>
+                                var dropzone = new Dropzone('.dropzone-audio', {
+                                    url: '{{route('update.audio')}}',
+                                    acceptedFiles: '.mp3',
+                                    addRemoveLinks: true,
+                                    maxFiles: 1,
+                                    paramName: 'audio',
+                                    headers: {
+                                        'idproject':@json($project->id),
+                                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                    },
+                                    addedfile: function (file, response) {
+                                        $('body').loading({
+                                            message: 'Subiendo canción...',
+                                            start: true,
+                                        });
+                                        // this.success();
+                                    },
+                                    success: function (file, response) {
+
+                                        $("#erroresImagen").text('');
+                                        $('#inputDBAudioAddProject').val(response);
+                                        $('#img_add_proyect').attr('src', response);
+                                        $('.update_audio').show();
+                                        $('.drop_audio').hide();
+                                        $('.player').show();
+                                        $('.cancel_audio').hide();
+
+                                        toastr.options = {
+                                            "closeButton": false,
+                                            "debug": false,
+                                            "newestOnTop": false,
+                                            "progressBar": false,
+                                            "positionClass": "toast-top-right",
+                                            "preventDuplicates": false,
+                                            "onclick": null,
+                                            "showDuration": "3000",
+                                            "hideDuration": "1000",
+                                            "timeOut": "5000",
+                                            "extendedTimeOut": "1000",
+                                            "showEasing": "swing",
+                                            "hideEasing": "linear",
+                                            "showMethod": "fadeIn",
+                                            "hideMethod": "fadeOut"
+                                        };
+
+                                        toastr.success("El audio se actualizo correctamente", "Información");
+                                        window.location.reload();
+                                    },
+                                    error: function (file, e, i, o, u) {
+
+                                        if (file.accepted == false) {
+                                            toastr.options = {
+                                                "closeButton": false,
+                                                "debug": false,
+                                                "newestOnTop": false,
+                                                "progressBar": false,
+                                                "positionClass": "toast-top-right",
+                                                "preventDuplicates": false,
+                                                "onclick": null,
+                                                "showDuration": "3000",
+                                                "hideDuration": "1000",
+                                                "timeOut": "5000",
+                                                "extendedTimeOut": "1000",
+                                                "showEasing": "swing",
+                                                "hideEasing": "linear",
+                                                "showMethod": "fadeIn",
+                                                "hideMethod": "fadeOut"
+                                            };
+
+                                            toastr.warning("Formato de audio incorrecto, solo se acepta formato mp3", "Información");
+                                            // alert('asi no pri')
+                                        } else {
+                                            toastr.options = {
+                                                "closeButton": false,
+                                                "debug": false,
+                                                "newestOnTop": false,
+                                                "progressBar": false,
+                                                "positionClass": "toast-top-right",
+                                                "preventDuplicates": false,
+                                                "onclick": null,
+                                                "showDuration": "3000",
+                                                "hideDuration": "1000",
+                                                "timeOut": "5000",
+                                                "extendedTimeOut": "1000",
+                                                "showEasing": "swing",
+                                                "hideEasing": "linear",
+                                                "showMethod": "fadeIn",
+                                                "hideMethod": "fadeOut"
+                                            };
+
+                                            toastr.warning("El audio no se cargó correctamente, inténtalo más tarde", "Información");
+                                        }
+
+
+                                        $('body').loading({
+                                            start: false,
+                                        });
+
+
+                                        $("#erroresImagen").text('');
+                                        if (file.xhr.status === 413) {
+                                            $("#erroresImagen").text('{{__("imagen_grande")}}');
+                                            $(file.previewElement).addClass("dz-error").find('.dz-error-message').text('{{__("imagen_grande")}}');
+                                            setTimeout(() => {
+                                                dropzone.removeFile(file)
+                                            }, 1000)
+                                        }
+                                    }
+                                });
+                                // dropzone.on("addedfile", function (file) {
+                                //     file.previewElement.addEventListener("click", function () {
+                                //         dropzone.removeFile(file);
+                                //     });
+                                // });
+                                Dropzone.autoDiscover = false;
+
+
+                            </script>
 
 @endsection

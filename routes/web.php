@@ -266,6 +266,8 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'dashboard', 'middleware' =>
         Route::get('/projects-admin', 'Admin\ProjectsAdminController@index')->name('projects.admin');
         Route::put('/project-rejected-admin', 'Admin\ProjectsAdminController@rejected_project')->name('project.admin.rejected');
         Route::put('/project-finalist-admin', 'Admin\ProjectsAdminController@finalist_project')->name('project.admin.finalist');
+        Route::put('/project-sacar-cien', 'Admin\ProjectsAdminController@sacar_cien')->name('project.admin.sacar.cien');
+        Route::put('/project-agregar-tercera-curaduria', 'Admin\ProjectsAdminController@agregar_tercera_curaduria')->name('project.admin.agregar.tercera.curaduria');
         Route::put('/project-finalist-admin-yuri', 'Admin\ProjectsAdminController@finalist_project_yuri')->name('project.admin.finalist.yuri');
         Route::put('/project-pendiente-soporte-admin', 'Admin\ProjectsAdminController@pediente_soporte_project')->name('project.admin.pendiente.soporte');
         Route::post('/project-revision-admin', 'Admin\ProjectsAdminController@revision_project')->name('project.admin.revision');

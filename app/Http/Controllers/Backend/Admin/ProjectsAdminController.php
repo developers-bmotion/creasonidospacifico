@@ -201,6 +201,24 @@ class ProjectsAdminController extends Controller
     {
         $id = $request->get('idProject');
         $finalist = $request->get('finalist');
+//        $finalist_project = SecondStage::where('project_id', $id)->update([
+//            'finalist' => $finalist
+//        ]);
+        $project = Project::where('id', $id)->update([
+            'third_curaduria' => $finalist
+        ]);
+        // $project = Project::where('id', $id)->with('artists.users')->first();
+
+        // $artistSendEmail = \Mail::to($project->artists[0]->users->email)->send(new ArtistProjectRejected($project, $project->artists[0]->users->name));
+
+        alert()->success(__("Cambio exitoso"), __('Ok'))->autoClose(3000);
+
+        return back();
+    }
+
+    public function sacar_cien(Request $request){
+        $id = $request->get('idProject');
+        $finalist = $request->get('valSacarCien');
         $finalist_project = SecondStage::where('project_id', $id)->update([
             'finalist' => $finalist
         ]);
@@ -208,6 +226,17 @@ class ProjectsAdminController extends Controller
 
         // $artistSendEmail = \Mail::to($project->artists[0]->users->email)->send(new ArtistProjectRejected($project, $project->artists[0]->users->name));
 
+        alert()->success(__("Cambio exitoso"), __('Ok'))->autoClose(3000);
+
+        return back();
+    }
+
+    public function agregar_tercera_curaduria(Request $request){
+        $id = $request->get('idProject');
+        $valueAgregarTerceraCuraduria = $request->get('valAgregarTerceraCuraduria');
+        $finalist_project = Project::where('id', $id)->update([
+            'third_curaduria' => $valueAgregarTerceraCuraduria
+        ]);
         alert()->success(__("Cambio exitoso"), __('Ok'))->autoClose(3000);
 
         return back();

@@ -643,7 +643,7 @@ class DashboardAdminController extends Controller
                 ->whereHas('personType', function ($q) use($tipoPer){
                     $q->where('id', $tipoPer);
                 })->whereHas('projects', function ($q) use($idstatus){
-                    $q->where('finalist','<>',0);
+                    $q->where('third_curaduria','<>',0);
                 })->whereHas('projects.category', function ($q) use($category){
                     $q->where('category_id', $category);
                 })->with('projects.category','personType')->get();
@@ -651,7 +651,7 @@ class DashboardAdminController extends Controller
             }else{
                 if($category > 0){
                     $listRating = Artist::with('users','personType','documentType','city.departaments')->whereHas('projects', function ($q) use($idstatus){
-                        $q->where('finalist','<>',0);
+                        $q->where('third_curaduria','<>',0);
                     })->whereHas('projects.category', function ($q) use($category){
                         $q->where('category_id', $category);
 
@@ -664,7 +664,7 @@ class DashboardAdminController extends Controller
                     ->whereHas('personType', function ($q) use($tipoPer){
                         $q->where('id', $tipoPer);
                     })->whereHas('projects', function ($q) use($idstatus){
-                        $q->where('finalist','<>',0);
+                        $q->where('third_curaduria','<>',0);
 
                     })->with('projects.category','personType')->get();
                  }
@@ -676,7 +676,7 @@ class DashboardAdminController extends Controller
 
             if($category > 0){
                 $listRating = Artist::with('users','personType','documentType','city.departaments')->whereHas('projects', function ($q) use($idstatus){
-                    $q->where('finalist','<>',0);
+                    $q->where('third_curaduria','<>',0);
                 })->whereHas('projects.category', function ($q) use($category){
                     $q->where('category_id', $category);
 
@@ -687,7 +687,7 @@ class DashboardAdminController extends Controller
 
             $listRating = Artist::with('users','personType','projects.category','documentType','city.departaments')
             ->whereHas('projects', function($q){
-                $q->where('finalist','<>',0);
+                $q->where('third_curaduria','<>',0);
 
             })->get();
         }

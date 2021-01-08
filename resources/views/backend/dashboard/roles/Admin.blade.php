@@ -461,9 +461,9 @@
                     <li class="nav-item m-tabs__item">
                         <a class="nav-link m-tabs__link" id="tab_final" data-toggle="tab" href="#m_tabs_6_6" role="tab">100 Mejores</a>
                     </li>
-{{--                    <li class="nav-item m-tabs__item">--}}
-{{--                        <a class="nav-link m-tabs__link" id="tab_esc" data-toggle="tab" href="#m_tabs_6_5" role="tab">100 Mejores</a>--}}
-{{--                    </li>--}}
+                    <li class="nav-item m-tabs__item">
+                        <a class="nav-link m-tabs__link" id="tab_esc" data-toggle="tab" href="#m_tabs_6_5" role="tab">Tercera Curaduria</a>
+                    </li>
                     <li class="nav-item m-tabs__item">
                         <a class="nav-link m-tabs__link" id="tab_yuri" data-toggle="tab" href="#m_tabs_6_7" role="tab">Finalistas</a>
                     </li>
@@ -704,29 +704,29 @@
 
                     </div>
                     {{-- tab para finalistas  --}}
-{{--                    <div class="tab-pane" id="m_tabs_6_5" role="tabpanel">--}}
-{{--                        <div class="m-portlet__body">--}}
+                    <div class="tab-pane" id="m_tabs_6_5" role="tabpanel">
+                        <div class="m-portlet__body">
 
-{{--                            <table class="table table-striped- table-bordered table-hover table-checkable "--}}
-{{--                                   id="table_esc">--}}
-{{--                                <thead>--}}
-{{--                                <tr>--}}
-{{--                                    --}}{{-- <th>#</th> --}}
-{{--                                    <th>{{ __('Nombres y Apellidos') }}</th>--}}
-{{--                                    <th>{{ __('Actuara como') }}</th>--}}
-{{--                                    <th>Identificación</th>--}}
-{{--                                    <th>Edad</th>--}}
-{{--                                    <th>{{ __('Modalidad') }}</th>--}}
-{{--                                    <th>{{ __('Departamento de nacimiento') }}</th>--}}
-{{--                                    <th>{{ __('Ciudad de nacimiento') }}</th>--}}
-{{--                                    <th>{{ __('Calificación') }}</th>--}}
-{{--                                    <th>{{ __('Acciones') }}</th>--}}
-{{--                                </tr>--}}
-{{--                                </thead>--}}
-{{--                            </table>--}}
-{{--                        </div>--}}
+                            <table class="table table-striped- table-bordered table-hover table-checkable "
+                                   id="table_esc">
+                                <thead>
+                                <tr>
+                                    {{-- <th>#</th> --}}
+                                    <th>{{ __('Nombres y Apellidos') }}</th>
+                                    <th>{{ __('Actuara como') }}</th>
+                                    <th>Identificación</th>
+                                    <th>Edad</th>
+                                    <th>{{ __('Modalidad') }}</th>
+                                    <th>{{ __('Departamento de nacimiento') }}</th>
+                                    <th>{{ __('Ciudad de nacimiento') }}</th>
+                                    <th>{{ __('Calificación') }}</th>
+                                    <th>{{ __('Acciones') }}</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
 
-{{--                    </div>--}}
+                    </div>
                     <div class="tab-pane" id="m_tabs_6_6" role="tabpanel">
                         <div class="m-portlet__body">
 
