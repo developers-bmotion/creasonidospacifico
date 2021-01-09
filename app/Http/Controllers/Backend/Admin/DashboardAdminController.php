@@ -730,6 +730,110 @@ class DashboardAdminController extends Controller
     }
 
 
+    // ganadores
+    public function list_champions(Request $request){
+
+        $idstatus= 2;
+        $tipoPer=$request->input("tipoPerQualSec");
+        $category=$request->input("categoryQualSec");
+        $listRating="";
+
+        // inicio
+        if($tipoPer > 0){
+
+            if($category > 0){
+
+                $listRating = Artist::with('users','documentType','city.departaments')
+                ->whereHas('personType', function ($q) use($tipoPer){
+                    $q->where('id', $tipoPer);
+                })->whereHas('projects', function ($q) use($idstatus){
+                    $q->where('ganadores','<>',0);
+                })->whereHas('projects.category', function ($q) use($category){
+                    $q->where('category_id', $category);
+                })->with('projects.category','personType')->get();
+
+            }else{
+                if($category > 0){
+                    $listRating = Artist::with('users','personType','documentType','city.departaments')->whereHas('projects', function ($q) use($idstatus){
+                        $q->where('ganadores','<>',0);
+                    })->whereHas('projects.category', function ($q) use($category){
+                        $q->where('category_id', $category);
+
+                    })->with('projects.category')->get();
+
+                }else{
+
+                    // dd($tipoPer);
+                    $listRating = Artist::with('users','documentType','city.departaments')
+                    ->whereHas('personType', function ($q) use($tipoPer){
+                        $q->where('id', $tipoPer);
+                    })->whereHas('projects', function ($q) use($idstatus){
+                        $q->where('ganadores','<>',0);
+
+                    })->with('projects.category','personType')->get();
+                 }
+        }
+
+
+
+        }else{
+
+            if($category > 0){
+                $listRating = Artist::with('users','personType','documentType','city.departaments')->whereHas('projects', function ($q) use($idstatus){
+                    $q->where('ganadores','<>',0);
+                })->whereHas('projects.category', function ($q) use($category){
+                    $q->where('category_id', $category);
+
+                })->with('projects.category')->get();
+
+            }else{
+
+
+            $listRating = Artist::with('users','personType','projects.category','documentType','city.departaments')
+            ->whereHas('projects', function($q){
+                $q->where('ganadores','<>',0);
+
+            })->get();
+        }
+        }
+
+        // fin
+
+
+        // $listRating = Artist::with('users','personType','projects.category','documentType','city.departaments')
+        //     ->whereHas('projects', function($q){
+        //         $q->where('status',2);
+        //     })->get();
+
+        $aspirantRating = [];
+        // dd($listRating);
+        foreach ($listRating as $aspirants) {
+            // $suma= $second->trajectory;
+            array_push($aspirantRating, (object)[
+                'id' => $aspirants->id,
+                'names' => ucwords($aspirants->users->name),
+                'last_name' => ucwords($aspirants->users->last_name),
+                'act_like' => $aspirants->personType->name,
+                'category' => $aspirants->projects[0]->category->category,
+                'departament' => $aspirants->city->departaments->descripcion,
+                'city' => $aspirants->city->descripcion,
+                'id_project'=> $aspirants->projects[0]->id,
+                'slug'=> $aspirants->projects[0]->slug,
+                'identification'=> $aspirants->identification,
+                'fecha'=> $aspirants->byrthdate,
+                'rating' => Project::sumRatingChampion( $aspirants->projects[0]->id),
+            ]);
+        }
+
+        usort($aspirantRating, function ($a, $b) {
+            $diff = $b->rating - $a->rating;
+            return $diff;
+        });
+
+        return datatables()->of($aspirantRating)->toJson();
+    }
+
+
     public function showProyect (Request $request){
 
         $data = Project::select(array(

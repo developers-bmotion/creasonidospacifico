@@ -252,6 +252,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'dashboard', 'middleware' =>
         return datatables()->of($teams)->toJson();
     })->name('team-artist');
     Route::post('/add-review-yuri', 'Manage\ProjectsManageController@add_review_yuri')->name('add.review.yuri');
+    Route::post('/add-review-yuri-final', 'Manage\ProjectsManageController@add_review_yuri_final')->name('add.review.yuri.final');
     Route::get('/managements-admin', 'Admin\ManagementsController@index')->name('managements.admin');
     //RUTAS PARA EL ADMINISTRADOR DEL SISTEMA -------------------------------------------------------------------------------------------
 
@@ -297,6 +298,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'dashboard', 'middleware' =>
         Route::get("/list-ratings-second", "Admin\DashboardAdminController@ratings_second")->name("list.ratings.second");
         Route::get("/list-ratings-finalist", "Admin\DashboardAdminController@ratings_finalist")->name("list.ratings.finalist");
         Route::get("/list-finalist-yuri", "Admin\DashboardAdminController@ratings_yuri")->name("list.finalist.yuri");
+        Route::get("/list-champion", "Admin\DashboardAdminController@list_champions")->name("list.champion");
         Route::get("/list-finalist", "Admin\DashboardAdminController@list_finalist")->name("list.finalist");
         Route::post("/top-countries", "Admin\DashboardAdminController@showTopCountry")->name("admin.top_country");
 

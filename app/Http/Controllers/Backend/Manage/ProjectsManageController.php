@@ -106,6 +106,29 @@ class ProjectsManageController extends Controller
 
         return '{"status":200, "msg":"Propuesta musical calificada"}';
     }
+    public function add_review_yuri_final(Request $request){
+
+        // return $request;
+        // dd('holas');
+        $review = new LastCalification();
+        $review->project_id = $request->idProject;
+        $review->user_id = auth()->user()->id;
+        $review->musicality = $request->criterio_1; //musicalidad
+        $review->sonority = $request->criterio_2; //sonoridad:
+        $review->coloratura = $request->criterio_3; //coloratura:
+        $review->spokesperson = $request->criterio_4; //voceria del proyecto
+        $review->finalist = 2; //interes comercial del proyecto
+        $review->comment = $request->comment;
+        $review->save();
+
+        // return $request;
+
+        Project::where('id', $request->idProject)->update([
+            'ganadores' => 1
+        ]);
+
+        return '{"status":200, "msg":"Propuesta musical calificada"}';
+    }
 
     public function history_review($id){
         $reviews = Review::where('project_id', $id)->with('projects.category')->get();

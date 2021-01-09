@@ -36,13 +36,14 @@ class ShowProjectController extends Controller
         $qual = Review::with('users')->where("project_id","=", $project->id)->get();
         $qual_second= SecondStage::with('users')->where("project_id","=", $project->id)->first();
         $qual_yuri= LastCalification::with('users')->where("project_id","=", $project->id)->first();
+        $qual_champion= LastCalification::with('users')->where("project_id","=", $project->id)->where('finalist',2)->first();
         if (in_array('Admin', $rol)) {
             $review = Review::where("project_id","=", $project->id)->get();
             $asignado = count($review);
 
 
             // $currentRaing = $review->avg("rating");
-            return view('backend.projects.show-project', compact("asignado",'project','end_time','artist','team','country','qual','sumRating','qual_second','qual_yuri'));
+            return view('backend.projects.show-project', compact("asignado",'project','end_time','artist','team','country','qual','sumRating','qual_second','qual_yuri','qual_champion'));
             // return view('backend.projects.show-project', compact("asignado",'project','end_time','artist','country', "currentRaing",'location','team'));
         }else if(in_array('Subsanador', $rol)) {
             $review = Review::where("project_id","=", $project->id)->get();

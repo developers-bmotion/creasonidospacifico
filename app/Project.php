@@ -324,4 +324,22 @@ class Project extends Model
 
         return $valor;
     }
+    public static function sumRatingChampion($id)
+    {
+        $review = LastCalification::where('project_id', $id)->where('finalist',2)->first();
+        // dd($review);
+        $valor = 0;
+        // foreach ($review as $rating){
+            if($review){
+
+                $value = collect([$review->musicality, $review->sonority, $review->coloratura, $review->spokesperson])->sum();
+                $valor=round(($value/4), 2);
+            }
+        //     if($value > $valueMayor ){
+        //         $valueMayor =  $value;
+        //     }
+        // }
+
+        return $valor;
+    }
 }

@@ -105,7 +105,7 @@
                                     {{-- calificaciòn final  --}}
                                     @if($qual_yuri != null)
                                         {{-- @dd($qual_yuri) --}}
-                                        <h6>3. Calificación final:</h6>
+                                        <h6>3. Calificación:</h6>
                                         <br>
                                         <table style="text-align: center"
                                                class='my-table-admin my-table table-striped review_table'>
@@ -140,9 +140,46 @@
                                         <br>
                                         <hr>
                                     @endif
-                                    @if($qual_yuri != null)
+                                    @if($qual_champion != null)
+                                        {{-- @dd($qual_yuri) --}}
+                                        <h6>4. Calificación final:</h6>
+                                        <br>
+                                        <table style="text-align: center"
+                                               class='my-table-admin my-table table-striped review_table'>
+                                            <thead>
+                                            <tr>
+                                                <th scope='col'>Musicalidad</th>
+                                                <th scope='col'>Sonoridad</th>
+                                                <th scope='col'>Coloratura</th>
+                                                <th scope='col'>Vocería del proyecto</th>
+                                                <th scope='col'>Total</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody style='font-weight:500;'>
+                                            <tr>
+                                                <th>{{ $qual_champion->musicality }} </th>
+                                                <td>{{ $qual_champion->sonority }}</td>
+                                                <td>{{ $qual_champion->coloratura }}</td>
+                                                <td>{{ $qual_champion->spokesperson }}</td>
+                                                <td>{{ round(($qual_champion->musicality + $qual_champion->sonority + $qual_champion->coloratura + $qual_champion->spokesperson )/4, 2) }}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <br>
+                                        <h6>Observaciones:</h6>
+                                        <div>{!! $qual_champion->comment !!}</div>
+                                        <br>
+                                        <a href="{{ route('profile.curador',$qual_champion->users->slug)}}">
+
+                                            <span style="font-size:1.1rem;color:#739594;"
+                                                  class="font-weight-bold mb-3">Calificado por: {{ $qual_champion->users->name }}  {{ $qual_champion->users->last_name }}</span>
+                                        </a>
+                                        <br>
+                                        <hr>
+                                    @endif
+                                    @if($qual_champion != null)
                                         <span style="font-size:1.1rem;color:#739594;float:right;"
-                                              class="font-weight-bold mb-3">Calificación final: {{ round(($qual_yuri->musicality + $qual_yuri->sonority + $qual_yuri->coloratura + $qual_yuri->spokesperson )/4, 2) }}</span>
+                                              class="font-weight-bold mb-3">Calificación final: {{ round(($qual_champion->musicality + $qual_champion->sonority + $qual_champion->coloratura + $qual_champion->spokesperson )/4, 2) }}</span>
                                         {{-- <span style="font-size:1.1rem;color:#739594;float:right;"
                                             class="font-weight-bold mb-3">Calificación final: {{ round(($qual_second->melody_rhythm + $qual_second->originality + $qual_second->arrangements + $qual_second->lyric + $qual_second->trajectory +$qual_second->project_interest)/6, 2) }}</span> --}}
                                     @endif
@@ -353,10 +390,10 @@
                     @if(auth()->user()->roles[0]->rol == "Admin")
                         {{-- @dd($qual_second) --}}
                         @if( $project->status == 2 )
-                            @if($qual_yuri != null)
+                            @if($qual_champion != null)
 
                                 <span style="font-size:1.1rem;color:#739594;margin-top: 1.9rem;"
-                                      class="font-weight-bold">Calificación final: {{ round(($qual_yuri->musicality + $qual_yuri->sonority + $qual_yuri->coloratura + $qual_yuri->spokesperson )/4, 2) }}</span>
+                                      class="font-weight-bold">Calificación final: {{ round(($qual_champion->musicality + $qual_champion->sonority + $qual_champion->coloratura + $qual_champion->spokesperson )/4, 2) }}</span>
                             @endif
                         @endif
                     @endif
@@ -581,6 +618,8 @@
                                             @endif
                                         </form>
                                     @else
+
+
                                         <form method="post" action="{{ route('project.admin.finalist.yuri') }}"
                                               class="btn-subsanador ml-3" style="display: inline"
                                               id="frm_finalist_yuri">
@@ -588,8 +627,8 @@
                                             <br>
                                             @if($qual_yuri)
                                                 {{-- @dd($qual_second) --}}
-                                                @if($qual_yuri->finalist == 1)
-
+                                                @if($qual_yuri->finalist == 1 && $qual_champion == null)
+                                                    {{-- @dd($qual_yuri) --}}
 
                                                     <button id="btn_finalist_admin_yuri"
                                                             class="btn btn-danger m-btn m-btn--icon">
@@ -601,8 +640,38 @@
                                                     <input type="hidden" name="finalist" value="0">
                                                     <input type="hidden" class="idProject" name="idProject"
                                                            value="{{ $project->id }}">
+                                                           <button id="modal_calification"
+                                                            class="btn btn-success m-btn m-btn--icon">
+                                                <span>
+                                                    <i class="la la-close"></i>
+                                                    <span>Calificar propuesta</span>
+                                                </span>
+                                                    </button>
+                                                @elseif($qual_yuri->finalist == 1 && $qual_champion != null)
 
-
+                                                @if($project->ganadores == 1 )
+                                                <button id="btn_ganador"
+                                                            class="btn btn-danger m-btn m-btn--icon">
+                                                <span>
+                                                    <i class="la la-close"></i>
+                                                    <span>Quitar como ganador</span>
+                                                </span>
+                                                    </button>
+                                                    <input type="hidden" name="ganadores" value="0">
+                                                    <input type="hidden" class="idProject" name="idProject"
+                                                           value="{{ $project->id }}">
+                                                @else
+                                                <button id="btn_ganador"
+                                                class="btn btn-danger m-btn m-btn--icon">
+                                    <span>
+                                        <i class="la la-close"></i>
+                                        <span>Poner como ganador</span>
+                                    </span>
+                                        </button>
+                                        <input type="hidden" name="ganadores" value="1">
+                                        <input type="hidden" class="idProject" name="idProject"
+                                               value="{{ $project->id }}">
+                                                @endif
                                                 @else
                                                     <button id="btn_finalist_admin_yuri"
                                                             class="btn btn-success m-btn m-btn--icon">
@@ -2143,10 +2212,18 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar
                                         </button>
+                                        @if($qual_yuri != null)
+                                        {{-- @dd($qual_yuri); --}}
                                         <button type="button" class="btn btn-primary btn-send-rating"
-                                                id="btnSeendReview">Enviar
-                                            calificación
-                                        </button>
+                                                    id="btnSeendReview_final">Enviar
+                                                calificación
+                                            </button>
+                                        @else
+                                            <button type="button" class="btn btn-primary btn-send-rating"
+                                                    id="btnSeendReview">Enviar
+                                                calificación
+                                            </button>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -2204,6 +2281,91 @@
                                                     idProject = $('.idProject').val(),
                                                     token = '{{ csrf_token() }}',
                                                     url = "{{ route('add.review.yuri') }}";
+
+                                                let data = {
+                                                    __token: token,
+                                                    comment: mesage,
+                                                    idProject: idProject,
+                                                    criterio_1: cristerio1,
+                                                    criterio_2: cristerio2,
+                                                    criterio_3: cristerio3,
+                                                    criterio_4: cristerio4,
+                                                };
+                                                const success = function (r) {
+
+                                                    if (r.status === 200) {
+                                                        swal({
+                                                            "title": "",
+                                                            "text": r.msg,
+                                                            "type": "success",
+                                                            "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
+                                                        }).then((result) => {
+                                                            document.location.reload();
+                                                        });
+                                                    }
+                                                };
+                                                const error = function (e) {
+                                                    $('.modal.show').loading({
+                                                        start: false,
+                                                    });
+                                                    swal({
+                                                        "title": "",
+                                                        "text": "No se ha enviado su calificación.",
+                                                        "type": "error",
+                                                        "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
+                                                    });
+                                                };
+
+
+                                                ajax(url, data, success, "post", error, true, "#list_modal_manage");
+                                                /*$('body').loading({
+                                                    start: false,
+                                                });*/
+                                            } else {
+
+                                                swal({
+                                                    "title": "",
+                                                    "text": "Sra/Sr Curador, debe agregar un comentario.",
+                                                    "type": "error",
+                                                    "confirmButtonClass": "btn btn-secondary m-btn m-btn--wide"
+                                                });
+
+                                                $('.modal.show').loading({
+                                                    start: false,
+                                                });
+                                            }
+                                        }
+
+                                    });
+
+                                });
+                                $("#btnSeendReview_final").click(function () {
+                                    //
+                                    swal({
+                                        title: '¡Atención!',
+                                        text: "¿Esta seguro de enviar calificación?",
+                                        type: 'info',
+                                        showCancelButton: true,
+                                        confirmButtonText: 'Aceptar',
+                                        cancelButtonText: 'Cancelar',
+                                        reverseButtons: true
+                                    }).then(function (result) {
+                                        if (result.value) {
+                                            $('.modal.show').loading({
+                                                message: 'Enviando...',
+                                                start: true,
+                                            });
+
+                                            if ($('#m_summernote_1').summernote('code') !== "<p><br></p>" && $('#m_summernote_1').summernote('code') !== "") {
+                                                const
+                                                    mesage = $('#m_summernote_1').summernote('code'),
+                                                    cristerio1 = $('#criterio_1_input').val(),
+                                                    cristerio2 = $('#criterio_2_input').val(),
+                                                    cristerio3 = $('#criterio_3_input').val(),
+                                                    cristerio4 = $('#criterio_4_input').val(),
+                                                    idProject = $('.idProject').val(),
+                                                    token = '{{ csrf_token() }}',
+                                                    url = "{{ route('add.review.yuri.final') }}";
 
                                                 let data = {
                                                     __token: token,
@@ -2467,6 +2629,28 @@
                                 });
 
                                 $('#btn_finalist_admin_yuri').click(function (e) {
+                                    // alert();
+                                    e.preventDefault();
+                                    swal({
+                                        title: '¡Atención!',
+                                        text: "¿ Esta seguro de realizar la acción ?",
+                                        type: 'info',
+                                        showCancelButton: true,
+                                        confirmButtonText: 'Aceptar',
+                                        cancelButtonText: 'Cancelar',
+                                        reverseButtons: true
+                                    }).then(function (result) {
+                                        console.log(result);
+                                        if (result.value) {
+                                            // frm_finalist
+                                            $('#frm_finalist_yuri').submit();
+
+                                        }
+
+                                    });
+
+                                });
+                                $('#btn_ganador').click(function (e) {
                                     // alert();
                                     e.preventDefault();
                                     swal({

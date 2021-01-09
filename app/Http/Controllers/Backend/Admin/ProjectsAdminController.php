@@ -246,9 +246,18 @@ class ProjectsAdminController extends Controller
     {
         $id = $request->get('idProject');
         $finalist = $request->get('finalist');
-        $finalist_project = LastCalification::where('project_id', $id)->update([
-            'finalist' => $finalist
-        ]);
+        $ganador = $request->get('ganadores');
+        // dd($ganador);
+        if($ganador != null){
+            $finalist_project = Project::where('id', $id)->update([
+                'ganadores' => $ganador,
+            ]);
+        }else{
+
+            $finalist_project = LastCalification::where('project_id', $id)->update([
+                'finalist' => $finalist,
+            ]);
+        }
         // $project = Project::where('id', $id)->with('artists.users')->first();
 
         // $artistSendEmail = \Mail::to($project->artists[0]->users->email)->send(new ArtistProjectRejected($project, $project->artists[0]->users->name));
