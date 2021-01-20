@@ -787,6 +787,7 @@
                                     <th>{{ __('Nombres y Apellidos') }}</th>
                                     <th>{{ __('Actuara como') }}</th>
                                     <th>Identificación</th>
+                                    <th>Email</th>
                                     <th>Edad</th>
                                     <th>{{ __('Modalidad') }}</th>
                                     <th>{{ __('Departamento de nacimiento') }}</th>
@@ -2224,6 +2225,14 @@
 
                         data:'identification',
                     // defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
+
+
+
+                    },
+                    {
+
+                        data:'email',
+                        // defaultContent: '<span class="label label-danger text-center" style="color:red !important">{{ __('nigun_valor_defecto') }}</span>'
 
 
 

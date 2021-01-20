@@ -813,6 +813,7 @@ class DashboardAdminController extends Controller
                 'id' => $aspirants->id,
                 'names' => ucwords($aspirants->users->name),
                 'last_name' => ucwords($aspirants->users->last_name),
+                'email' => $aspirants->users->email,
                 'act_like' => $aspirants->personType->name,
                 'category' => $aspirants->projects[0]->category->category,
                 'departament' => $aspirants->city->departaments->descripcion,
