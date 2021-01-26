@@ -394,7 +394,7 @@
                                         {{--                                            </div>--}}
                                         {{--                                        </div>--}}
                                     </div>
-                                    <div class="col-12 col-md-4 col-lg-4 ">
+                                    <div class="col-12 col-md-12 col-lg-12 ">
                                         <h5 class="m-portlet__head-text" style="text-align: center;">
                                             Cantidad de aspirantes por ciudad o municipio
                                         </h5>
