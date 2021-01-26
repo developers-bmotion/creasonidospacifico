@@ -1257,7 +1257,19 @@
         $('#table_ciudades').DataTable({
             "processing": true,
             "order": [[2, "desc"]],
+            "pageLength": 3000,
             "pagingType": "simple_numbers",
+            "buttons": [
+                {
+                    extend: 'excelHtml5',
+                    filename:'Listas de aspirantes'
+                },
+                {
+                    extend: 'pdfHtml5',
+                    pageSize: "A3",
+                    filename:'Listas de aspirantes'
+                }
+            ],
             "ajax": '{{route('get.aspirants.cities')}}',
             "columns": [
                 {
