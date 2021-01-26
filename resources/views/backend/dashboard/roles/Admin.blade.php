@@ -1258,6 +1258,7 @@
             "processing": true,
             "order": [[2, "desc"]],
             "pageLength": 3000,
+            "dom": 'Bfrtip',
             "pagingType": "simple_numbers",
             "buttons": [
                 {
