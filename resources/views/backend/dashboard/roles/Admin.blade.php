@@ -394,7 +394,7 @@
                                         {{--                                            </div>--}}
                                         {{--                                        </div>--}}
                                     </div>
-                                    <div class="col-12 col-md-12 col-lg-12 ">
+                                    <div class="col-12 col-md-4 col-lg-4 ">
                                         <h5 class="m-portlet__head-text" style="text-align: center;">
                                             Cantidad de aspirantes por ciudad o municipio
                                         </h5>
@@ -1257,20 +1257,7 @@
         $('#table_ciudades').DataTable({
             "processing": true,
             "order": [[2, "desc"]],
-            "pageLength": 3000,
-            "dom": 'Bfrtip',
             "pagingType": "simple_numbers",
-            "buttons": [
-                {
-                    extend: 'excelHtml5',
-                    filename:'Listas de aspirantes'
-                },
-                {
-                    extend: 'pdfHtml5',
-                    pageSize: "A3",
-                    filename:'Listas de aspirantes'
-                }
-            ],
             "ajax": '{{route('get.aspirants.cities')}}',
             "columns": [
                 {
